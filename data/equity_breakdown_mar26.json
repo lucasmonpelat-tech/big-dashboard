@@ -1,0 +1,52 @@
+{
+  "asOf": "2026-03-31",
+  "source": "Maximus + iShares ACWI Factsheet (31-Mar-2026)",
+  "approved_by": "Lucas Monpelat (28-Apr-2026)",
+  "note": "Datos del slide oficial del factsheet. Redondeados a enteros con sum=100%. EXCLUIDO el cuadro P/E P/B P/S por orden de Lucas.",
+
+  "style": {
+    "title": "Distribución por Estilo",
+    "subtitle": "BIG vs BMK (ACWI)",
+    "rows": [
+      { "category": "Value",  "big": 46, "bmk": 28 },
+      { "category": "Growth", "big": 28, "bmk": 32 },
+      { "category": "Blend",  "big": 26, "bmk": 40 }
+    ],
+    "totals": { "big": 100, "bmk": 100 }
+  },
+
+  "sectorial": {
+    "title": "Distribución Sectorial",
+    "subtitle": "BIG vs ACWI",
+    "rows": [
+      { "category": "Financial",            "big": 28, "acwi": 17 },
+      { "category": "Industrials",          "big": 14, "acwi": 11 },
+      { "category": "Technology",           "big": 14, "acwi": 26 },
+      { "category": "Cons. Cyc.",           "big": 9,  "acwi": 9  },
+      { "category": "Health",               "big": 7,  "acwi": 9  },
+      { "category": "Utilities",            "big": 7,  "acwi": 3  },
+      { "category": "Basic Mat.",           "big": 6,  "acwi": 4  },
+      { "category": "Cons. Def.",           "big": 5,  "acwi": 5  },
+      { "category": "Comm. Serv.",          "big": 5,  "acwi": 9  },
+      { "category": "Other (RE + Energy)",  "big": 5,  "acwi": 7  }
+    ],
+    "totals": { "big": 100, "acwi": 100 },
+    "footnote": "Other: Real estate 1.33%, Energy 4.21% (BIG)"
+  },
+
+  "regional": {
+    "title": "Distribución Regional",
+    "subtitle": "BIG vs ACWI",
+    "rows": [
+      { "category": "North Am.",   "big": 63, "acwi": 66 },
+      { "category": "Latin Am.",   "big": 15, "acwi": 2  },
+      { "category": "Europe dev.", "big": 11, "acwi": 10 },
+      { "category": "UK",          "big": 6,  "acwi": 3  },
+      { "category": "Japan",       "big": 2,  "acwi": 5  },
+      { "category": "China",       "big": 1,  "acwi": 3  },
+      { "category": "Africa/ME",   "big": 1,  "acwi": 2  },
+      { "category": "Otros",       "big": 1,  "acwi": 9  }
+    ],
+    "totals": { "big": 100, "acwi": 100 }
+  }
+}

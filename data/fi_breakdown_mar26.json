@@ -1,0 +1,45 @@
+{
+  "asOf": "2026-03-31",
+  "source": "Maximus + Pershing + Bloomberg AGG",
+  "approved_by": "Lucas Monpelat (28-Apr-2026)",
+  "note": "Net exposure (BIG puede usar derivados, normalized to 100%)",
+
+  "sub_asset_class": {
+    "title": "Distribución por Sub-asset Class",
+    "subtitle": "BIG vs AGG (Bloomberg US Aggregate)",
+    "note": "Money Market / Cash combinado en US Treasury",
+    "rows": [
+      { "category": "US Treasury",            "big": 20, "agg": 45 },
+      { "category": "Govt-related",           "big": 3,  "agg": 5  },
+      { "category": "Govt Agency MBS",        "big": 7,  "agg": 20 },
+      { "category": "Securitized Non-Agency", "big": 20, "agg": 0  },
+      { "category": "Corporate IG",           "big": 25, "agg": 25 },
+      { "category": "Corporate HY",           "big": 13, "agg": 0  },
+      { "category": "EM Local + Hard",        "big": 15, "agg": 0  },
+      { "category": "Cat Bonds",              "big": 5,  "agg": 0  },
+      { "category": "Bank Loans",             "big": 5,  "agg": 0  }
+    ],
+    "totals": { "big": 113, "agg": 95 }
+  },
+
+  "credit_quality": {
+    "title": "Calidad Crediticia",
+    "subtitle": "BIG vs BMK (AGG)",
+    "rows": [
+      { "rating": "AAA", "big": 15.7, "bmk": 58.0 },
+      { "rating": "AA",  "big": 39.3, "bmk": 14.8 },
+      { "rating": "A",   "big": 6.0,  "bmk": 14.3 },
+      { "rating": "BBB", "big": 20.5, "bmk": 12.9 },
+      { "rating": "BB",  "big": 8.2,  "bmk": 0.0  },
+      { "rating": "B",   "big": 3.5,  "bmk": 0.0  },
+      { "rating": "CCC", "big": 6.8,  "bmk": 0.0  }
+    ],
+    "totals": { "big": 100, "bmk": 100 },
+    "summary": {
+      "big_ig": 81.5,
+      "big_hy": 18.5,
+      "bmk_ig": 100.0,
+      "bmk_hy": 0.0
+    }
+  }
+}

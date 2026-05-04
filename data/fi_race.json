@@ -1,0 +1,205 @@
+{
+  "refreshedAt": "2026-04-27T14:36:03.063432",
+  "inception": "2025-06-30",
+  "benchmark": "Bloomberg US Aggregate (via AGG ETF)",
+  "ust_reference": "10Y US Treasury (^TNX)",
+  "portfolio_metrics": {
+    "weighted_ytw": 6.48,
+    "weighted_duration": 4.04,
+    "weighted_maturity": 5.98,
+    "spread_vs_ust_10y": 2.13,
+    "total_fi_usd": 10432774.71,
+    "ust_10y_yield": 4.35
+  },
+  "stats": {
+    "latest_month": "2026-04",
+    "returns": {
+      "1M": {
+        "sleeve": 1.59,
+        "agg": 0.47,
+        "alpha": 1.12
+      },
+      "3M": {
+        "sleeve": 0.53,
+        "agg": 0.25,
+        "alpha": 0.28
+      },
+      "6M": {
+        "sleeve": 2.63,
+        "agg": 0.82,
+        "alpha": 1.81
+      },
+      "YTD": {
+        "sleeve": 1.29,
+        "agg": 0.5,
+        "alpha": 0.79
+      },
+      "SI": {
+        "sleeve": 6.36,
+        "agg": 3.53,
+        "alpha": 2.83
+      }
+    },
+    "annualized": {
+      "sleeve": 7.68,
+      "agg": 4.26,
+      "alpha": 3.42
+    }
+  },
+  "sleeve_index": {
+    "2025-06": 100.0,
+    "2025-07": 100.418,
+    "2025-08": 101.7741,
+    "2025-09": 102.6907,
+    "2025-10": 103.6353,
+    "2025-11": 104.3339,
+    "2025-12": 105.0,
+    "2026-01": 105.8003,
+    "2026-02": 106.735,
+    "2026-03": 104.6918,
+    "2026-04": 106.3577
+  },
+  "agg_index": {
+    "2025-06": 100.0,
+    "2025-07": 99.7361,
+    "2025-08": 100.9233,
+    "2025-09": 102.0604,
+    "2025-10": 102.6886,
+    "2025-11": 103.3106,
+    "2025-12": 103.0224,
+    "2026-01": 103.2802,
+    "2026-02": 104.9308,
+    "2026-03": 103.0477,
+    "2026-04": 103.5342
+  },
+  "sleeve_monthly_returns": {
+    "2025-06": 0.017584,
+    "2025-07": 0.00418,
+    "2025-08": 0.013505,
+    "2025-09": 0.009006,
+    "2025-10": 0.009199,
+    "2025-11": 0.006741,
+    "2025-12": 0.006384,
+    "2026-01": 0.007622,
+    "2026-02": 0.008835,
+    "2026-03": -0.019143,
+    "2026-04": 0.015913
+  },
+  "agg_monthly_returns": {
+    "2025-06": 0.014553286762450268,
+    "2025-07": -0.0026393407917975065,
+    "2025-08": 0.011903404543412321,
+    "2025-09": 0.011267789952225327,
+    "2025-10": 0.006154585490878439,
+    "2025-11": 0.006057041122642826,
+    "2025-12": -0.0027896788880913403,
+    "2026-01": 0.0025029785977550567,
+    "2026-02": 0.01598117600422211,
+    "2026-03": -0.01794551231174324,
+    "2026-04": 0.0047203953684893385
+  },
+  "holdings": [
+    {
+      "isin": "IE00BDT57R20",
+      "ticker": "PIMCO-LD",
+      "name": "PIMCO GIS Low Duration Income I",
+      "value_usd": 4022492.1,
+      "weight_pct": 38.56,
+      "si_return_pct": 5.45,
+      "ytd_return_pct": 0.94,
+      "contribution_pct": 2.1,
+      "ytd_contribution_pct": 0.36,
+      "ytw": 5.72,
+      "duration": 2.54,
+      "maturity": 3.86,
+      "rating": "AA",
+      "spread_vs_ust": 1.37,
+      "source": "baha:IE00BDT57R20"
+    },
+    {
+      "isin": "IE00B87KCF77",
+      "ticker": "PIMCO-INC",
+      "name": "PIMCO GIS Income I",
+      "value_usd": 2042878.87,
+      "weight_pct": 19.58,
+      "si_return_pct": 5.71,
+      "ytd_return_pct": 0.74,
+      "contribution_pct": 1.12,
+      "ytd_contribution_pct": 0.14,
+      "ytw": 6.05,
+      "duration": 5.15,
+      "maturity": 7.68,
+      "rating": "AA-",
+      "spread_vs_ust": 1.7,
+      "source": "baha:IE00B87KCF77"
+    },
+    {
+      "isin": "IE000OE87WX6",
+      "ticker": "MANIG",
+      "name": "Man GLG Global IG Opportunities",
+      "value_usd": 1868128.94,
+      "weight_pct": 17.91,
+      "si_return_pct": 5.5,
+      "ytd_return_pct": 1.28,
+      "contribution_pct": 0.99,
+      "ytd_contribution_pct": 0.23,
+      "ytw": 6.17,
+      "duration": 4.89,
+      "maturity": 5.5,
+      "rating": "BBB",
+      "spread_vs_ust": 1.82,
+      "source": "baha:IE000OE87WX6"
+    },
+    {
+      "isin": "IE00B29K0P99",
+      "ticker": "PIMCO-EM",
+      "name": "PIMCO GIS EM Local Bond I",
+      "value_usd": 1139861.8,
+      "weight_pct": 10.93,
+      "si_return_pct": 10.51,
+      "ytd_return_pct": 2.06,
+      "contribution_pct": 1.15,
+      "ytd_contribution_pct": 0.23,
+      "ytw": 8.22,
+      "duration": 6.72,
+      "maturity": 8.39,
+      "rating": "BBB",
+      "spread_vs_ust": 3.87,
+      "source": "baha:IE00B29K0P99"
+    },
+    {
+      "isin": "XS2324777171",
+      "ticker": "TGF",
+      "name": "Tenac Global Fund (TGF)",
+      "value_usd": 839581.12,
+      "weight_pct": 8.05,
+      "si_return_pct": 7.17,
+      "ytd_return_pct": 2.81,
+      "contribution_pct": 0.58,
+      "ytd_contribution_pct": 0.23,
+      "ytw": 8.67,
+      "duration": 5.17,
+      "maturity": 11.92,
+      "rating": "\u2014",
+      "spread_vs_ust": 4.32,
+      "source": "carry:8.67%/yr"
+    },
+    {
+      "isin": "LU2049315265",
+      "ticker": "SGCB",
+      "name": "Schroder GAIA Cat Bond C",
+      "value_usd": 519831.88,
+      "weight_pct": 4.98,
+      "si_return_pct": 8.13,
+      "ytd_return_pct": 1.57,
+      "contribution_pct": 0.4,
+      "ytd_contribution_pct": 0.08,
+      "ytw": 7.8,
+      "duration": 0.5,
+      "maturity": 2.5,
+      "rating": "BB+",
+      "spread_vs_ust": 3.45,
+      "source": "baha:LU2049315265"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local server logs
+*.log
+nohup.out
+
+# Sensitive (don't push)
+.env
+*.token
+credentials.json
+
+# Heavy data not needed for static dashboard
+factsheets/fi/*.pdf
+factsheets/fi/*.html
+data/acwi_holdings/acwi_holdings.csv
+
+# Handoffs (internal docs)
+handoffs/

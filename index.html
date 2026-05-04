@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pampa Capital — BIG Fund Dashboard</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #0D1B2A;
+            color: #E0E8F0;
+            min-height: 100vh;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: #1F3864;
+            border-bottom: 3px solid #D4AF37;
+            padding: 18px 32px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header-title {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #FFFFFF;
+            text-transform: uppercase;
+        }
+        .header-sub {
+            font-size: 12px;
+            color: #90CAF9;
+            margin-top: 3px;
+            letter-spacing: 0.5px;
+        }
+        .header-date {
+            font-size: 12px;
+            color: #90CAF9;
+            text-align: right;
+        }
+        .header-date .value { color: #D4AF37; font-weight: 700; font-size: 13px; }
+
+        /* ===== TAB NAVIGATION ===== */
+        .tabs-nav {
+            background: #0D1B2A;
+            padding: 0 32px;
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid #1F3864;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .tab-btn {
+            padding: 14px 20px;
+            background: transparent;
+            border: none;
+            color: #90CAF9;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.15s;
+            font-family: inherit;
+        }
+        .tab-btn:hover:not(.active) { color: #E0E8F0; background: #12243A; }
+        .tab-btn.active {
+            color: #D4AF37;
+            border-bottom-color: #D4AF37;
+        }
+        .tab-btn .tab-icon { margin-right: 6px; }
+
+        /* ===== MAIN ===== */
+        .main {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 24px 24px 48px;
+        }
+        .tab-section { display: none; }
+        .tab-section.active { display: block; }
+
+        /* ===== SECTION TITLE ===== */
+        .section-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #90CAF9;
+            margin: 32px 0 12px;
+            border-bottom: 1px solid #2E74B5;
+            padding-bottom: 6px;
+        }
+        .section-title:first-of-type { margin-top: 8px; }
+
+        /* ===== KPI CARDS ===== */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 14px;
+        }
+        .kpi-card {
+            background: #1A2A3D;
+            border: 1px solid #2E74B5;
+            border-radius: 8px;
+            padding: 14px 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        .kpi-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px; height: 100%;
+            background: #D4AF37;
+        }
+        .kpi-card.accent-blue::before { background: #64B5F6; }
+        .kpi-card.accent-green::before { background: #81C784; }
+        .kpi-card.accent-orange::before { background: #FFA726; }
+        .kpi-label {
+            font-size: 9.5px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            color: #90CAF9;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .kpi-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #FFFFFF;
+            line-height: 1.2;
+        }
+        .kpi-sub {
+            font-size: 10px;
+            color: #90CAF9;
+            margin-top: 3px;
+            font-style: italic;
+        }
+        .kpi-sub.positive { color: #81C784; font-weight: 600; }
+        .kpi-sub.negative { color: #EF5350; font-weight: 600; }
+
+        /* ===== ALLOCATION ===== */
+        .alloc-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+        }
+        .alloc-summary {
+            background: #1A2A3D;
+            border: 1px solid #2E74B5;
+            border-radius: 8px;
+            padding: 18px 20px;
+        }
+        .alloc-summary h3 {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #90CAF9;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #2E74B5;
+        }
+        .alloc-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(46,116,181,0.15);
+            font-size: 12px;
+        }
+        .alloc-row:last-child { border-bottom: none; }
+        .alloc-name { color: #E0E8F0; font-weight: 600; }
+        .alloc-val { color: #FFFFFF; font-weight: 700; }
+        .alloc-pct { color: #D4AF37; font-weight: 700; font-size: 13px; min-width: 60px; text-align: right; }
+        .alloc-bar {
+            width: 100%;
+            height: 6px;
+            background: #12243A;
+            border-radius: 3px;
+            margin-top: 6px;
+            overflow: hidden;
+        }
+        .alloc-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+
+        #alloc-chart { min-height: 360px; }
+
+        /* ===== TABLES SHARED ===== */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            background: #1A2A3D;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .data-table thead tr {
+            background: #1F3864;
+            color: #FFFFFF;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+        .data-table th, .data-table td {
+            padding: 7px 10px;
+            border-bottom: 1px solid rgba(46,116,181,0.2);
+            white-space: nowrap;
+        }
+        .data-table th { text-align: center; }
+        .data-table td { text-align: right; }
+        .data-table td.left { text-align: left; }
+        .data-table tr.sleeve-header {
+            background: #1F3864 !important;
+            color: #FFFFFF;
+            font-weight: 700;
+        }
+        .data-table tr.sleeve-header td { color: #FFFFFF; padding: 9px 10px; }
+        .data-table tr.sleeve-header td.left { letter-spacing: 1px; text-transform: uppercase; font-size: 11px; }
+        .data-table tr.sleeve-equity td:first-child { border-left: 3px solid #64B5F6; }
+        .data-table tr.sleeve-alts td:first-child { border-left: 3px solid #FFA726; }
+        .data-table tr.sleeve-fi td:first-child { border-left: 3px solid #81C784; }
+        .data-table tr.sleeve-cash td:first-child { border-left: 3px solid #CE93D8; }
+        .data-table tr.total-row {
+            background: #12243A !important;
+            font-weight: 700;
+            color: #D4AF37;
+        }
+        .data-table tr.total-row td { color: #D4AF37; font-size: 13px; padding: 10px; }
+        .data-table tbody tr:hover { filter: brightness(1.1); }
+        .data-table .note { font-size: 10px; color: #6B88A8; display: block; margin-top: 2px; font-family: 'Courier New', monospace; }
+
+        .perf-table tr.row-big { background: #112240; color: #D4AF37; font-weight: 700; }
+        .perf-table tr.row-bmk { background: #1A2A3D; color: #90CAF9; }
+        .perf-table tr.row-alpha { background: #0E2218; color: #81C784; font-weight: 700; }
+
+        /* ===== PILLS & BADGES ===== */
+        .currency-pill {
+            display: inline-block;
+            border-radius: 3px;
+            padding: 2px 7px;
+            font-size: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 1px 2px 1px 0;
+            font-weight: 700;
+        }
+        .tag { font-size: 9px; padding: 2px 6px; border-radius: 3px; margin-left: 5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .tag-live { background: #81C784; color: #0D1B2A; }
+        .tag-manual { background: #FFA726; color: #0D1B2A; }
+        .tag-na { background: #EF5350; color: #FFFFFF; }
+        .tag-auto { background: #64B5F6; color: #0D1B2A; }
+
+        .sleeve-badge {
+            display: inline-block;
+            font-size: 9px;
+            padding: 2px 7px;
+            border-radius: 3px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        .sleeve-badge.equity { background: rgba(100,181,246,0.18); color: #64B5F6; }
+        .sleeve-badge.alts   { background: rgba(255,167,38,0.18); color: #FFA726; }
+        .sleeve-badge.fi     { background: rgba(129,199,132,0.18); color: #81C784; }
+        .sleeve-badge.cash   { background: rgba(206,147,216,0.18); color: #CE93D8; }
+
+        /* ===== TRADE LOG ===== */
+        .trade-buy { color: #81C784; font-weight: 700; }
+        .trade-sell { color: #EF5350; font-weight: 700; }
+        .trade-status.winner { color: #81C784; font-weight: 700; }
+        .trade-status.loser { color: #EF5350; font-weight: 700; }
+        .trade-status.ongoing { color: #FFA726; font-weight: 700; }
+
+        /* ===== CHART CONTAINER ===== */
+        .chart-container {
+            background: #1A2A3D;
+            border: 1px solid #2E74B5;
+            border-radius: 8px;
+            padding: 8px;
+            margin-top: 4px;
+        }
+        #nav-chart, #currency-chart, #country-chart { min-height: 400px; }
+
+        /* ===== SUMMARY BOX ===== */
+        .summary-box {
+            background: #1A2A3D;
+            border: 1px solid #2E74B5;
+            border-radius: 8px;
+            padding: 18px 20px;
+            margin-bottom: 20px;
+        }
+        .summary-box h3 {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #90CAF9;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #2E74B5;
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+        }
+        .summary-item {
+            background: #12243A;
+            padding: 10px 14px;
+            border-radius: 6px;
+            border-left: 2px solid #D4AF37;
+        }
+        .summary-item .s-lbl {
+            font-size: 10px;
+            color: #90CAF9;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+        .summary-item .s-val {
+            font-size: 18px;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+        .summary-item .s-sub {
+            font-size: 10px;
+            color: #6B88A8;
+            margin-top: 2px;
+        }
+        .yield-total {
+            font-size: 32px;
+            font-weight: 700;
+            color: #81C784;
+            margin: 4px 0;
+        }
+
+        /* ===== INFO BOX ===== */
+        .info-box {
+            background: rgba(46,116,181,0.10);
+            border-left: 3px solid #64B5F6;
+            padding: 12px 16px;
+            font-size: 12px;
+            color: #E0E8F0;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            border-radius: 4px;
+        }
+        .info-box strong { color: #D4AF37; }
+
+        /* ===== BAR ROWS ===== */
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+        }
+        .bar-row .bar-label { width: 70px; text-align: right; font-weight: 700; }
+        .bar-row .bar-track {
+            flex: 1;
+            height: 16px;
+            background: #12243A;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .bar-row .bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 1s;
+        }
+        .bar-row .bar-value { width: 55px; text-align: right; color: #FFFFFF; font-weight: 700; }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 10px;
+            color: #4A6280;
+            letter-spacing: 0.5px;
+            padding: 20px 0;
+        }
+        .footer a { color: #90CAF9; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1200px) {
+            .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 900px) {
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .alloc-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .kpi-grid { grid-template-columns: 1fr; }
+            .main { padding: 16px 12px 32px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ======================= HEADER ======================= -->
+    <header class="header">
+        <div>
+            <h1 class="header-title">Pampa Capital · BIG Fund</h1>
+            <p class="header-sub">Balanced Income & Growth — Live Portfolio Dashboard</p>
+        </div>
+        <div class="header-date">
+            <p>NAV at: <span class="value" id="nav-date">19/04/2026</span></p>
+            <p>Positions: <span id="pos-date">13/04/2026</span></p>
+            <p>Updated: <span id="update-time">—</span></p>
+        </div>
+    </header>
+
+    <!-- ======================= TABS ======================= -->
+    <nav class="tabs-nav">
+        <button class="tab-btn active" data-tab="overview">📊 Overview</button>
+        <button class="tab-btn" data-tab="positions">💼 Positions</button>
+        <button class="tab-btn" data-tab="currency">💱 Currency</button>
+        <button class="tab-btn" data-tab="country">🌍 Geography</button>
+        <button class="tab-btn" data-tab="yield">💰 Yield</button>
+        <button class="tab-btn" data-tab="ytm">📈 YTM / FI</button>
+        <button class="tab-btn" data-tab="performance">📉 Performance</button>
+        <button class="tab-btn" data-tab="trades">📝 Trade Log</button>
+        <button class="tab-btn" data-tab="equity-race">🏁 Equity Race</button>
+        <button class="tab-btn" data-tab="fi-race">💎 FI Race</button>
+    </nav>
+
+    <!-- ======================= MAIN ======================= -->
+    <main class="main">
+
+        <!-- ================== TAB: OVERVIEW ================== -->
+        <section id="tab-overview" class="tab-section active">
+            <h2 class="section-title">Key Metrics (Lynk Official)</h2>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">NAV</div>
+                    <div class="kpi-value" id="kpi-nav">—</div>
+                    <div class="kpi-sub positive" id="kpi-nav-change">—</div>
+                </div>
+                <div class="kpi-card accent-blue">
+                    <div class="kpi-label">AUM (USD)</div>
+                    <div class="kpi-value" id="kpi-aum">—</div>
+                    <div class="kpi-sub">Lynk official</div>
+                </div>
+                <div class="kpi-card accent-green">
+                    <div class="kpi-label">Return YTD</div>
+                    <div class="kpi-value" id="kpi-ytd">—</div>
+                    <div class="kpi-sub" id="kpi-ytd-sub">—</div>
+                </div>
+                <div class="kpi-card accent-green">
+                    <div class="kpi-label">Return SI</div>
+                    <div class="kpi-value" id="kpi-si">—</div>
+                    <div class="kpi-sub" id="kpi-si-sub">—</div>
+                </div>
+                <div class="kpi-card accent-orange">
+                    <div class="kpi-label">Volatility</div>
+                    <div class="kpi-value" id="kpi-vol">—</div>
+                    <div class="kpi-sub" id="kpi-vol-sub">—</div>
+                </div>
+                <div class="kpi-card accent-orange">
+                    <div class="kpi-label">Days Since Launch</div>
+                    <div class="kpi-value" id="kpi-days">—</div>
+                    <div class="kpi-sub" id="kpi-days-sub">—</div>
+                </div>
+            </div>
+
+            <h2 class="section-title">BIG vs Benchmark 60/40 — Since Inception</h2>
+            <div class="info-box">
+                <strong>Since inception (27-Jun-2025):</strong> BIG Fund NAV via Lynk Markets. Benchmark 60/40 = 60% MSCI ACWI (ACWI ETF) + 40% Bloomberg US Aggregate (AGG ETF), monthly rebalance, via Yahoo Finance.
+                <br><span style="font-size:10px;color:#90CAF9;">⚠ Benchmark source: Yahoo proxy. TARGET: replace with Bahia feed when available.</span>
+            </div>
+            <table class="data-table perf-table" id="si-perf-table">
+                <thead>
+                    <tr>
+                        <th class="left">Strategy</th>
+                        <th>1W</th>
+                        <th>1M</th>
+                        <th>3M</th>
+                        <th>6M</th>
+                        <th>YTD</th>
+                        <th>Since Inception</th>
+                        <th>Annualized</th>
+                        <th>Vol</th>
+                        <th>Sharpe</th>
+                    </tr>
+                </thead>
+                <tbody id="si-perf-body"></tbody>
+            </table>
+
+            <h2 class="section-title">Asset Allocation</h2>
+            <div class="alloc-grid">
+                <div class="alloc-summary">
+                    <h3>Sleeve vs Target</h3>
+                    <div id="alloc-bars"></div>
+                </div>
+                <div class="chart-container">
+                    <div id="alloc-chart"></div>
+                </div>
+            </div>
+
+            <h2 class="section-title">NAV Evolution (Base 100 — Inception 27-Jun-2025)</h2>
+            <div class="chart-container">
+                <div id="nav-chart"></div>
+            </div>
+        </section>
+
+        <!-- ================== TAB: POSITIONS ================== -->
+        <section id="tab-positions" class="tab-section">
+            <div class="info-box">
+                <strong>Fuente:</strong> Pershing export (manual) + Alts manual tracking + live prices (Stooq) where available.
+                <span class="tag tag-live">LIVE</span> = fetched realtime from Stooq.
+                <span class="tag tag-manual">MANUAL</span> = NAV from factsheet or manager update.
+                <span class="tag tag-na">N/A</span> = illiquid / quarterly NAV.
+            </div>
+            <table class="data-table" id="positions-table">
+                <thead>
+                    <tr>
+                        <th class="left">Instrument</th>
+                        <th class="left">Ticker</th>
+                        <th class="left">Sleeve</th>
+                        <th>Value USD</th>
+                        <th>% Portfolio</th>
+                        <th>NAV / Price</th>
+                        <th>NAV Date</th>
+                        <th>TER</th>
+                        <th>Source</th>
+                    </tr>
+                </thead>
+                <tbody id="positions-body"></tbody>
+            </table>
+            <p class="section-title" style="margin-top: 32px;">Factsheet Links (Refresh Source)</p>
+            <div id="factsheet-links" style="font-size: 11px; color: #90CAF9;"></div>
+        </section>
+
+        <!-- ================== TAB: CURRENCY ================== -->
+        <section id="tab-currency" class="tab-section">
+            <div class="info-box">
+                <strong>Currency Exposure del portafolio:</strong> Exposición por moneda del <em>subyacente</em>, no la moneda de cotización.
+                Ejemplo: CSPX cotiza en USD → 100% USD. PIMCO EM Local Bond → BRL, MXN, INR, etc.
+            </div>
+
+            <div class="summary-box">
+                <h3>Currency Exposure Ponderada (Portfolio)</h3>
+                <div class="chart-container" style="margin-bottom: 16px; background: transparent; border: none;">
+                    <div id="currency-chart"></div>
+                </div>
+                <div id="currency-bars"></div>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th class="left">Instrument</th>
+                        <th>% Port.</th>
+                        <th class="left">Currency Exposure</th>
+                        <th class="left">Source</th>
+                    </tr>
+                </thead>
+                <tbody id="currency-tbody"></tbody>
+            </table>
+        </section>
+
+        <!-- ================== TAB: COUNTRY ================== -->
+        <section id="tab-country" class="tab-section">
+            <div class="info-box">
+                <strong>Geographic Exposure:</strong> Exposición por país del subyacente. Datos de factsheets más recientes.
+            </div>
+
+            <div class="summary-box">
+                <h3>Country Exposure Ponderada (Portfolio)</h3>
+                <div class="chart-container" style="margin-bottom: 16px; background: transparent; border: none;">
+                    <div id="country-chart"></div>
+                </div>
+                <div id="country-bars"></div>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th class="left">Instrument</th>
+                        <th>% Port.</th>
+                        <th class="left">Country Breakdown</th>
+                    </tr>
+                </thead>
+                <tbody id="country-tbody"></tbody>
+            </table>
+        </section>
+
+        <!-- ================== TAB: YIELD ================== -->
+        <section id="tab-yield" class="tab-section">
+            <div class="info-box">
+                <strong>Current Yield analysis:</strong> Yield pagado o estimado por cada fondo. Para PE ilíquido → N/A (retorno vía cap gain).
+                Yield ponderado del portafolio, comparado contra benchmark 60/40 (ACWI 60% / AGG 40%).
+            </div>
+
+            <div class="summary-box">
+                <h3>Portfolio Yield Summary</h3>
+                <div class="summary-grid" id="yield-summary-grid"></div>
+            </div>
+
+            <div class="summary-box">
+                <h3>Benchmark Yield (60/40)</h3>
+                <div class="summary-grid" id="yield-bmk-grid"></div>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th class="left">Instrument</th>
+                        <th>% Port.</th>
+                        <th class="left">Sleeve</th>
+                        <th>Yield</th>
+                        <th class="left">Type</th>
+                        <th>Contribution</th>
+                        <th class="left">Source / Note</th>
+                    </tr>
+                </thead>
+                <tbody id="yield-tbody"></tbody>
+            </table>
+        </section>
+
+        <!-- ================== TAB: YTM / FIXED INCOME ================== -->
+        <section id="tab-ytm" class="tab-section">
+            <div class="info-box">
+                <strong>YTM (Yield to Maturity) de Renta Fija:</strong> Calculado solo sobre los 6 fondos del sleeve FI. Incluye YTW, duración y vencimiento promedio ponderado (weighted por peso relativo dentro del sleeve RF).
+            </div>
+
+            <div class="summary-box">
+                <h3>YTM Ponderado — Sleeve Renta Fija</h3>
+                <div class="summary-grid" id="ytm-summary-grid"></div>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th class="left">Instrument</th>
+                        <th>% Portfolio</th>
+                        <th>% of FI Sleeve</th>
+                        <th>YTW</th>
+                        <th>Duration</th>
+                        <th>Maturity</th>
+                        <th>Rating</th>
+                        <th>YTM Contribution</th>
+                    </tr>
+                </thead>
+                <tbody id="ytm-tbody"></tbody>
+            </table>
+        </section>
+
+        <!-- ================== TAB: PERFORMANCE ================== -->
+        <section id="tab-performance" class="tab-section">
+            <div class="info-box">
+                <strong>Performance BIG vs Benchmark 60/40 (ACWI/AGG):</strong> Maximus data (Mar-2026). Track record 5Y aunque BIG inception sea Jun-2025 — refleja la track del sleeve/strategy replicada, validada por Maximus como proxy.
+            </div>
+
+            <div class="summary-box">
+                <h3>Performance Returns — Multi-Period</h3>
+                <table class="data-table perf-table" style="margin-bottom: 0;">
+                    <thead>
+                        <tr>
+                            <th class="left">Strategy</th>
+                            <th>1M</th>
+                            <th>3M</th>
+                            <th>6M</th>
+                            <th>YTD</th>
+                            <th>1Y</th>
+                            <th>3Y ann.</th>
+                            <th>5Y ann.</th>
+                        </tr>
+                    </thead>
+                    <tbody id="perf-returns-body"></tbody>
+                </table>
+            </div>
+
+            <div class="summary-box">
+                <h3>Risk & Capture Metrics</h3>
+                <div class="summary-grid" id="perf-risk-grid"></div>
+            </div>
+
+            <div class="summary-box">
+                <h3>NAV Evolution — Base 100 (Since Inception)</h3>
+                <div class="chart-container" style="background: transparent; border: none;">
+                    <div id="nav-chart-perf" style="min-height: 400px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================== TAB: TRADE LOG ================== -->
+        <section id="tab-trades" class="tab-section">
+            <div class="info-box">
+                <strong>Trade Log:</strong> Historial de trades ejecutados y propuestos. Status tracking para evaluar eficiencia post-trade.
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th class="left">Date</th>
+                        <th class="left">Instrument</th>
+                        <th class="left">Side</th>
+                        <th>Amount USD</th>
+                        <th class="left">Thesis</th>
+                        <th class="left">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="trades-body">
+                    <tr>
+                        <td class="left">16-Apr-2026</td>
+                        <td class="left">Berkshire Hathaway (BRK.B)</td>
+                        <td class="left"><span class="trade-sell">SELL</span></td>
+                        <td>$1,216,582</td>
+                        <td class="left" style="white-space: normal;">Rotation out of single-name concentration. Buffett succession + value drag.</td>
+                        <td class="left"><span class="trade-status winner">EXECUTED</span></td>
+                    </tr>
+                    <tr>
+                        <td class="left">16-Apr-2026</td>
+                        <td class="left">iShares Core S&P 500 (CSPX)</td>
+                        <td class="left"><span class="trade-buy">BUY</span></td>
+                        <td>$617,000</td>
+                        <td class="left" style="white-space: normal;">Re-deploy 50% of BRK into low-cost US beta.</td>
+                        <td class="left"><span class="trade-status winner">EXECUTED</span></td>
+                    </tr>
+                    <tr>
+                        <td class="left">16-Apr-2026</td>
+                        <td class="left">Thornburg Equity Income Builder</td>
+                        <td class="left"><span class="trade-buy">BUY</span></td>
+                        <td>$617,000</td>
+                        <td class="left" style="white-space: normal;">Re-deploy 50% of BRK into global dividend-quality equity.</td>
+                        <td class="left"><span class="trade-status winner">EXECUTED</span></td>
+                    </tr>
+                    <tr>
+                        <td class="left">Pending</td>
+                        <td class="left">Janus Henderson Global Small Cos</td>
+                        <td class="left"><span class="trade-sell">SELL</span></td>
+                        <td>$554,045</td>
+                        <td class="left" style="white-space: normal;">Eliminate sub-scale position. Fund Japan rotation.</td>
+                        <td class="left"><span class="trade-status ongoing">PROPOSED</span></td>
+                    </tr>
+                    <tr>
+                        <td class="left">Pending</td>
+                        <td class="left">Nomura Japan Strategic Value</td>
+                        <td class="left"><span class="trade-buy">BUY</span></td>
+                        <td>$500,000</td>
+                        <td class="left" style="white-space: normal;">1st entry Japan — BOJ normalization + TSE Reform + PBR<1.</td>
+                        <td class="left"><span class="trade-status ongoing">PROPOSED</span></td>
+                    </tr>
+                    <tr>
+                        <td class="left">Apr-2026</td>
+                        <td class="left">Flex-Lexington Partners Secondaries</td>
+                        <td class="left"><span class="trade-buy">BUY</span></td>
+                        <td>$500,000</td>
+                        <td class="left" style="white-space: normal;">Initial funding — secondaries fund. Cash debited, first NAV pending.</td>
+                        <td class="left"><span class="trade-status ongoing">IN TRANSIT</span></td>
+                    </tr>
+                    <tr>
+                        <td class="left">Pending (Jun-26)</td>
+                        <td class="left">Hamilton Lane Global Private Infra</td>
+                        <td class="left"><span class="trade-buy">BUY</span></td>
+                        <td>$500,000</td>
+                        <td class="left" style="white-space: normal;">Deploy available cash ($597K current) to private infra. Dealing date 01-Jul-2026. Will leave ~$97K residual cash.</td>
+                        <td class="left"><span class="trade-status ongoing">QUEUED</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ================== TAB: EQUITY RACE ================== -->
+        <section id="tab-equity-race" class="tab-section">
+            <div class="info-box" style="border-left-color: #D4AF37;">
+                <strong>🏁 La carrera REAL de Fer:</strong> Equity Sleeve de BIG vs <strong>MSCI ACWI</strong> — <em>TWR reconstruido</em> desde las 146 transacciones de Pershing (Jul-2025 → Mar-2026).<br>
+                <span style="font-size:11px;color:#FFA726;font-weight:700;">⚠️ Este es el performance REAL (flow-adjusted), no un backtest de pesos actuales.</span> Incluye el arrastre de BRK, Virtus US Small Cap y NB Real Estate que vendimos en Feb/Abr, más la rotación tardía a LatAm (4BRZ/ILF entraron en Feb).<br>
+                <span style="font-size:10px;color:#90CAF9;">📊 Fuentes: Transacciones Pershing · UCITS via baha.com · ACWI via Yahoo Finance</span>
+            </div>
+
+            <!-- Race KPIs -->
+            <div class="kpi-grid" style="grid-template-columns: repeat(5, 1fr);">
+                <div class="kpi-card">
+                    <div class="kpi-label">Equity Sleeve SI</div>
+                    <div class="kpi-value" id="er-sleeve-si">—</div>
+                    <div class="kpi-sub">BIG equity only</div>
+                </div>
+                <div class="kpi-card accent-blue">
+                    <div class="kpi-label">MSCI ACWI SI</div>
+                    <div class="kpi-value" id="er-acwi-si">—</div>
+                    <div class="kpi-sub">Benchmark</div>
+                </div>
+                <div class="kpi-card accent-green">
+                    <div class="kpi-label">Alpha SI</div>
+                    <div class="kpi-value" id="er-alpha-si">—</div>
+                    <div class="kpi-sub" id="er-alpha-status">—</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Annualized Alpha</div>
+                    <div class="kpi-value" id="er-alpha-ann">—</div>
+                    <div class="kpi-sub">anualizado</div>
+                </div>
+                <div class="kpi-card accent-orange">
+                    <div class="kpi-label">Equity AUM</div>
+                    <div class="kpi-value" id="er-aum">—</div>
+                    <div class="kpi-sub">9 holdings</div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Race Chart — Equity Sleeve vs ACWI (Base 100)</h2>
+            <div class="chart-container">
+                <div id="er-chart" style="min-height: 420px;"></div>
+            </div>
+
+            <h2 class="section-title">Multi-Period Returns</h2>
+            <table class="data-table perf-table">
+                <thead>
+                    <tr>
+                        <th class="left">Strategy</th>
+                        <th>1M</th>
+                        <th>3M</th>
+                        <th>6M</th>
+                        <th>YTD</th>
+                        <th>Since Inception</th>
+                        <th>Annualized</th>
+                    </tr>
+                </thead>
+                <tbody id="er-returns-body"></tbody>
+            </table>
+
+            <h2 class="section-title">Holding Contributions — Quién suma y quién resta</h2>
+            <div class="info-box" style="border-left-color:#D4AF37;">
+                <strong>Lectura:</strong> "Contribution" = peso × retorno. Los holdings que <span style="color:#81C784;font-weight:700;">superan ACWI SI</span> son winners; los que quedan <span style="color:#EF5350;font-weight:700;">debajo</span> son laggards candidatos a rotar.
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th class="left">Holding</th>
+                        <th class="left">Source</th>
+                        <th>Value USD</th>
+                        <th>Weight</th>
+                        <th>YTD Return</th>
+                        <th>SI Return</th>
+                        <th>vs ACWI</th>
+                        <th>YTD Contrib</th>
+                        <th>SI Contrib</th>
+                        <th class="left">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="er-holdings-body"></tbody>
+            </table>
+
+            <h2 class="section-title">🧠 Trade Ideas — Cómo ganarle más al ACWI</h2>
+            <div id="er-trade-ideas"></div>
+
+            <!-- ===== Style + Sectorial + Regional breakdown (cierre mensual) ===== -->
+            <h2 class="section-title" style="margin-top: 40px;">📊 Estilo · Sectorial · Regional — Cierre 31-Mar-2026</h2>
+            <div class="info-box" style="border-left-color: #D4AF37;">
+                <strong>Snapshot mensual:</strong> Composición detallada del Equity sleeve al cierre de mes vs benchmark <strong>MSCI ACWI</strong>. Datos para factsheet institucional. <span style="color:#90CAF9;font-size:11px;">Fuente: Maximus + iShares ACWI Factsheet (31-Mar-2026).</span>
+            </div>
+
+            <!-- Style breakdown - top horizontal -->
+            <div class="summary-box" style="margin-bottom: 20px;">
+                <h3>Distribución por Estilo (BIG vs BMK)</h3>
+                <div id="er-style-bars" style="margin-top: 10px;"></div>
+            </div>
+
+            <!-- Sectorial + Regional - 2 columns -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <!-- Sectorial -->
+                <div class="summary-box">
+                    <h3>Distribución Sectorial (%)</h3>
+                    <div id="er-sectorial-bars" style="margin-top: 10px;"></div>
+                </div>
+
+                <!-- Regional -->
+                <div class="summary-box">
+                    <h3>Distribución Regional (%)</h3>
+                    <div id="er-regional-bars" style="margin-top: 10px;"></div>
+                </div>
+            </div>
+
+            <!-- KPI summary at bottom -->
+            <div class="kpi-grid" style="grid-template-columns: repeat(4, 1fr); margin-top: 20px;">
+                <div class="kpi-card accent-green">
+                    <div class="kpi-label">BIG Value Tilt</div>
+                    <div class="kpi-value" id="er-kpi-value">—</div>
+                    <div class="kpi-sub">vs ACWI typical 28%</div>
+                </div>
+                <div class="kpi-card accent-orange">
+                    <div class="kpi-label">BIG LatAm Exposure</div>
+                    <div class="kpi-value" id="er-kpi-latam">—</div>
+                    <div class="kpi-sub">vs ACWI 1.5% (10x más)</div>
+                </div>
+                <div class="kpi-card accent-blue">
+                    <div class="kpi-label">BIG Financial Sector</div>
+                    <div class="kpi-value" id="er-kpi-fin">—</div>
+                    <div class="kpi-sub">vs ACWI 16.8%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Date / Source</div>
+                    <div class="kpi-value" style="font-size: 14px;">31-Mar-2026</div>
+                    <div class="kpi-sub">Maximus + ACWI Factsheet</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================== TAB: FI RACE ================== -->
+        <section id="tab-fi-race" class="tab-section">
+            <div class="info-box" style="border-left-color: #81C784;">
+                <strong>💎 La carrera de FI:</strong> Fixed Income Sleeve ($10.4M · 40% de BIG) vs <strong>Bloomberg US Aggregate (AGG)</strong>. Incluye métricas FI: <em>YTW · Duration · Maturity · Rating · Spread vs UST 10Y</em>.<br>
+                <span style="font-size:11px;color:#81C784;">📊 Fuentes: baha.com (5 UCITS) · Tenac carry YTW proxy · AGG & ^TNX via Yahoo Finance</span>
+            </div>
+
+            <!-- KPIs -->
+            <div class="kpi-grid" style="grid-template-columns: repeat(6, 1fr);">
+                <div class="kpi-card">
+                    <div class="kpi-label">FI Sleeve SI</div>
+                    <div class="kpi-value" id="fr-sleeve-si">—</div>
+                    <div class="kpi-sub">TWR flow-adj</div>
+                </div>
+                <div class="kpi-card accent-blue">
+                    <div class="kpi-label">AGG SI</div>
+                    <div class="kpi-value" id="fr-agg-si">—</div>
+                    <div class="kpi-sub">Bloomberg US Agg</div>
+                </div>
+                <div class="kpi-card accent-green">
+                    <div class="kpi-label">Alpha SI</div>
+                    <div class="kpi-value" id="fr-alpha-si">—</div>
+                    <div class="kpi-sub" id="fr-alpha-status">—</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Weighted YTW</div>
+                    <div class="kpi-value" id="fr-ytw">—</div>
+                    <div class="kpi-sub" id="fr-spread-ust">—</div>
+                </div>
+                <div class="kpi-card accent-orange">
+                    <div class="kpi-label">Duration</div>
+                    <div class="kpi-value" id="fr-dur">—</div>
+                    <div class="kpi-sub" id="fr-mat">—</div>
+                </div>
+                <div class="kpi-card accent-orange">
+                    <div class="kpi-label">FI AUM</div>
+                    <div class="kpi-value" id="fr-aum">—</div>
+                    <div class="kpi-sub">6 holdings</div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Race Chart — FI Sleeve vs AGG (Base 100)</h2>
+            <div class="chart-container">
+                <div id="fr-chart" style="min-height: 420px;"></div>
+            </div>
+
+            <h2 class="section-title">Multi-Period Returns</h2>
+            <table class="data-table perf-table">
+                <thead>
+                    <tr>
+                        <th class="left">Strategy</th>
+                        <th>1M</th>
+                        <th>3M</th>
+                        <th>6M</th>
+                        <th>YTD</th>
+                        <th>Since Inception</th>
+                        <th>Annualized</th>
+                    </tr>
+                </thead>
+                <tbody id="fr-returns-body"></tbody>
+            </table>
+
+            <h2 class="section-title">Holding Contributions — Métricas FI</h2>
+            <div class="info-box" style="border-left-color:#D4AF37;">
+                <strong>Lectura:</strong> YTW = yield to worst · Duration = sensibilidad a tasas · Spread vs UST = carry sobre Treasury 10Y · Contribution = peso × retorno.
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th class="left">Holding</th>
+                        <th class="left">Source</th>
+                        <th>Value USD</th>
+                        <th>Weight</th>
+                        <th>YTW</th>
+                        <th>Duration</th>
+                        <th>Maturity</th>
+                        <th>Rating</th>
+                        <th>Spread UST</th>
+                        <th>YTD Return</th>
+                        <th>SI Return</th>
+                        <th>YTD Contrib</th>
+                        <th>SI Contrib</th>
+                    </tr>
+                </thead>
+                <tbody id="fr-holdings-body"></tbody>
+            </table>
+
+            <h2 class="section-title">🧠 Trade Ideas — FI</h2>
+            <div id="fr-trade-ideas"></div>
+
+            <!-- ===== Sub-asset Class & Credit Quality breakdown (cierre mensual) ===== -->
+            <h2 class="section-title" style="margin-top: 40px;">📊 Sub-asset Class & Calidad Crediticia — Cierre 31-Mar-2026</h2>
+            <div class="info-box" style="border-left-color: #D4AF37;">
+                <strong>Snapshot mensual:</strong> Composición detallada del FI sleeve al cierre de mes vs benchmark <strong>AGG (Bloomberg US Aggregate)</strong>. Datos para factsheet institucional. <span style="color:#90CAF9;font-size:11px;">Fuente: Maximus + Pershing + Bloomberg AGG. Net exposure (BIG puede usar derivados).</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <!-- Sub-asset class -->
+                <div class="summary-box">
+                    <h3>Sub-asset Class (%)</h3>
+                    <div id="fr-subasset-bars" style="margin-top: 10px;"></div>
+                </div>
+
+                <!-- Credit quality -->
+                <div class="summary-box">
+                    <h3>Calidad Crediticia (%)</h3>
+                    <div id="fr-credit-bars" style="margin-top: 10px;"></div>
+                </div>
+            </div>
+
+            <!-- KPI summary at bottom -->
+            <div class="kpi-grid" style="grid-template-columns: repeat(4, 1fr); margin-top: 20px;">
+                <div class="kpi-card accent-green">
+                    <div class="kpi-label">BIG Investment Grade</div>
+                    <div class="kpi-value" id="fr-big-ig">—</div>
+                    <div class="kpi-sub">AAA + AA + A + BBB</div>
+                </div>
+                <div class="kpi-card accent-orange">
+                    <div class="kpi-label">BIG High Yield</div>
+                    <div class="kpi-value" id="fr-big-hy">—</div>
+                    <div class="kpi-sub">BB + B + CCC</div>
+                </div>
+                <div class="kpi-card accent-blue">
+                    <div class="kpi-label">BMK Investment Grade</div>
+                    <div class="kpi-value" id="fr-bmk-ig">—</div>
+                    <div class="kpi-sub">AGG = 100% IG</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Date / Source</div>
+                    <div class="kpi-value" style="font-size: 14px;">31-Mar-2026</div>
+                    <div class="kpi-sub">Maximus + Bloomberg</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <p>Pampa Capital — BIG Fund Dashboard · Internal Use Only · <a href="https://app.lynkmarkets.com/public/products/4w9aANBbvM" target="_blank">Lynk NAV Source</a></p>
+            <p style="margin-top:6px;">Generated automatically. Last refresh: <span id="footer-time">—</span> · Live prices: Stooq feed</p>
+        </footer>
+    </main>
+
+    <!-- Plotly -->
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script src="data/funds_metadata.js?v=20260429a"></script>
+    <script src="data/live_prices.js?v=20260429a"></script>
+    <script src="dashboard.js?v=20260429a"></script>
+</body>
+</html>
