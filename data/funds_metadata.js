@@ -40,7 +40,7 @@ const BIG_POSITIONS = [
 
     // ----- FIXED INCOME -----
     { isin: "IE00BDT57R20", ticker: "PIMCO-LD", name: "PIMCO GIS Low Duration Income I",       sleeve: "Fixed Income", value: 4022492.10, pct: 15.13, terInst: 0.55, terA: 1.45 },
-    { isin: "IE00B87KCF77", ticker: "PIMCO-INC",name: "PIMCO GIS Income I",                    sleeve: "Fixed Income", value: 2042878.87, pct: 7.68, terInst: 0.70, terA: 1.10 },
+    { isin: "IE00B87KCF77", ticker: "PIMCO-INC",name: "PIMCO GIS Income I",                    sleeve: "Fixed Income", value: 2042878.87, pct: 7.68, terInst: 0.55, terA: 1.10 },
     { isin: "IE000OE87WX6", ticker: "MANIG",    name: "Man GLG Global IG Opportunities",       sleeve: "Fixed Income", value: 1868128.94, pct: 7.03, terInst: 0.89, terA: 1.89 },
     { isin: "IE00B29K0P99", ticker: "PIMCO-EM", name: "PIMCO GIS EM Local Bond I",             sleeve: "Fixed Income", value: 1139861.80, pct: 4.29, terInst: null, terA: null },
     { isin: "XS2324777171", ticker: "TGF",      name: "Tenac Global Fund (TGF)",               sleeve: "Fixed Income", value: 839581.12,  pct: 3.16, terInst: 0.75, terA: 1.41 },
