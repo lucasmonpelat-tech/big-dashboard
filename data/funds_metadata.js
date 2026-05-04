@@ -44,7 +44,7 @@ const BIG_POSITIONS = [
     { isin: "IE000OE87WX6", ticker: "MANIG",    name: "Man GLG Global IG Opportunities",       sleeve: "Fixed Income", value: 1868128.94, pct: 7.03, terInst: 0.89, terA: 1.89 },
     { isin: "IE00B29K0P99", ticker: "PIMCO-EM", name: "PIMCO GIS EM Local Bond I",             sleeve: "Fixed Income", value: 1139861.80, pct: 4.29, terInst: 0.89, terA: null },
     { isin: "XS2324777171", ticker: "TGF",      name: "Tenac Global Fund (TGF)",               sleeve: "Fixed Income", value: 839581.12,  pct: 3.16, terInst: 0.75, terA: 1.41 },
-    { isin: "LU2049315265", ticker: "SGCB",     name: "Schroder GAIA Cat Bond Class C",        sleeve: "Fixed Income", value: 519831.88,  pct: 1.96, terInst: null, terA: null },
+    { isin: "LU2049315265", ticker: "SGCB",     name: "Schroder GAIA Cat Bond Class C",        sleeve: "Fixed Income", value: 519831.88,  pct: 1.96, terInst: 1.37, terA: null },
 
     // ----- CASH -----
     { isin: "CASH-USD",     ticker: "CASH",   name: "Cash USD",                                sleeve: "Cash",         value: 597371.84,  pct: 2.25, terInst: null, terA: null }
@@ -75,6 +75,7 @@ const FACTSHEET_LINKS = {
     "XS2324777171": "Tenac Global Fund - direct with Nico Dujovne",
     "KYG4737U1085": "https://www.hpspartners.com/lending",
     "IE00BG13YG49": "https://www.schroders.com/en-ch/ch/professional/funds/schroder-gaia-cat-bond/",
+    "LU2049315265": "https://www.schroders.com/es-es/es/inversores-particulares/centro-de-fondos/?language=es&location=es&channel=inversores-particulares&clientId=schdr&clientVersion=v1&externalId=SCHDR_F0000147B0&r=%2Ffund%2FSCHDR_F0000147B0%2F&fundName=Schroder-GAIA-Cat-Bond-C-Accumulation-USD",
     "US78462F1030": "https://www.thornburg.com/funds/equity-income-builder-fund/"
 };
 
