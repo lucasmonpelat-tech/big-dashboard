@@ -96,11 +96,11 @@ TER_DATA = {
     "US46438F1012": {"inst": 1.25, "a": None},
     "LU2659193242": {"inst": 0.40, "a": None},
     "IE00BDT57R20": {"inst": 0.55, "a": 1.45},
-    "IE00B87KCF77": {"inst": 0.70, "a": 1.10},
+    "IE00B87KCF77": {"inst": 0.55, "a": 1.10},
     "IE000OE87WX6": {"inst": 0.89, "a": 1.89},
-    "IE00B29K0P99": {"inst": None, "a": None},
+    "IE00B29K0P99": {"inst": 0.89, "a": None},
     "XS2324777171": {"inst": 0.75, "a": 1.41},
-    "LU2049315265": {"inst": None, "a": None},
+    "LU2049315265": {"inst": 1.37, "a": None},
     "KYG4737U1085": {"inst": 0.75, "a": None},
     "GCRED-I":      {"inst": 1.25, "a": None},
     "XS2658535526": {"inst": 1.25, "a": None},
@@ -150,10 +150,20 @@ def parse_pershing(xlsx_path):
     if header_row is None:
         raise ValueError("Could not find header row in Pershing export")
 
+    # Detect column layout (Pershing has changed format over time)
+    # New format (May 2026+): Description | SecID | MV | % | Price | Qty | ISIN | Maturity | PriceDate  (9 cols)
+    # Old format:             Description | CUSIP | MV | % | Price | Qty | Symbol | _ | %Asset | ISIN  (10+ cols)
+    header_vals = [c for c in ws[header_row] if c.value is not None]
+    new_format = any("ISIN" == str(c.value) for c in header_vals[:8])  # ISIN appears in first 8 cols
+    print(f"Detected {'NEW (9-col)' if new_format else 'OLD (10-col)'} Pershing format")
+
     # Parse positions
     positions = []
     for row in ws.iter_rows(min_row=header_row + 1, values_only=True):
-        desc, cusip, mv, pct, price, qty, symbol, _, pct_asset, isin, *_ = row
+        if new_format:
+            desc, cusip, mv, pct, price, qty, isin, maturity, price_date, *_ = row
+        else:
+            desc, cusip, mv, pct, price, qty, symbol, _u, pct_asset, isin, *_ = row
         if not desc or desc == "Disclaimer":
             break
         if mv is None:
