@@ -32,15 +32,16 @@ BIG_INCEPTION = date(2025, 6, 30)  # First Lynk NAV = 100
 # ---------------------------------------------------------------------
 EQUITY_HOLDINGS = [
     # (isin, ticker, name, value_usd, yahoo_ticker or None)
-    ("IE00B5BMR087", "CSPX",  "iShares Core S&P 500 UCITS",              2600167.68, "ACWI"),  # proxy via ACWI fails—use SPY as proxy for S&P500; but we have CSPX.L too
-    ("IE00BFMHRK20", "NBGMT", "NB Global Equity Megatrends I",           1241408.63, None),
-    ("LU1985812756", "MFSCV", "MFS Meridian Contrarian Value I1",        1179105.20, None),
-    ("IE00B6YCBF59", "THOR",  "Thornburg Equity Income Builder I",       610000.02,  None),
-    ("LU2940405447", "JHGSC", "Janus Henderson Global Smaller Cos F2",   567057.76,  None),
-    ("IE00BF4KN675", "LGLI",  "Lazard Global Listed Infrastructure A",   536360.01,  None),
-    ("DE000A0Q4R85", "4BRZ",  "iShares MSCI Brazil UCITS (DE)",          404488.18,  "EWZ"),   # EWZ as US-listed proxy for MSCI Brazil
-    ("US37950E2596", "ARGT",  "Global X MSCI Argentina ETF",             378480.00,  "ARGT"),
-    ("US4642873909", "ILF",   "iShares Latin America 40 ETF",            375600.00,  "ILF"),
+    # Values from Pershing May 5, 2026
+    ("IE00B5BMR087", "CSPX",  "iShares Core S&P 500 UCITS",              2657592.48, "ACWI"),  # proxy via ACWI fails—use SPY as proxy for S&P500; but we have CSPX.L too
+    ("IE00BFMHRK20", "NBGMT", "NB Global Equity Megatrends I",           1227372.60, None),
+    ("LU1985812756", "MFSCV", "MFS Meridian Contrarian Value I1",        1146067.83, None),
+    ("IE00B6YCBF59", "THOR",  "Thornburg Equity Income Builder I",       610432.34,  None),
+    ("LU2940405447", "JHGSC", "Janus Henderson Global Smaller Cos F2",   570389.10,  None),
+    ("IE00BF4KN675", "LGLI",  "Lazard Global Listed Infrastructure A",   535776.76,  None),
+    ("DE000A0Q4R85", "4BRZ",  "iShares MSCI Brazil UCITS (DE)",          383356.47,  "EWZ"),   # EWZ as US-listed proxy for MSCI Brazil
+    ("US37950E2596", "ARGT",  "Global X MSCI Argentina ETF",             359520.00,  "ARGT"),
+    ("US4642873909", "ILF",   "iShares Latin America 40 ETF",            357600.00,  "ILF"),
 ]
 
 # Override: for CSPX we want real S&P 500 tracking; use SPY (US-listed)
