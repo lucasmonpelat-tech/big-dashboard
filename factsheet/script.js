@@ -70,7 +70,11 @@ async function loadData() {
     const positions = await fetch('../data/positions_latest.json' + noCache).then(r => r.json());
     const lynkSeries = await fetch('../data/lynk_nav_series.json' + noCache).then(r => r.json());
     const lynkData = await fetch('../data/lynk_data.json' + noCache).then(r => r.json());
-    return { positions, lynkSeries, lynkData };
+    let equityRace = null;
+    try {
+        equityRace = await fetch('../data/equity_race.json' + noCache).then(r => r.json());
+    } catch(e) { /* optional */ }
+    return { positions, lynkSeries, lynkData, equityRace };
 }
 
 // ============================================================
@@ -93,19 +97,20 @@ function renderDonutSleeves(positions) {
             line: { color: '#FFFFFF', width: 2 },
         },
         text: [
-            `${alts.toFixed(0)}%<br>Alternativos`,
-            `${rv.toFixed(0)}%<br>Renta<br>Variable`,
-            `${rf.toFixed(0)}%<br>Renta Fija`,
+            `<b>${alts.toFixed(0)}%</b><br>Alternativos`,
+            `<b>${rv.toFixed(0)}%</b><br>Renta Variable`,
+            `<b>${rf.toFixed(0)}%</b><br>Renta Fija`,
         ],
         textposition: 'outside',
         textinfo: 'text',
-        textfont: { size: 11, color: '#1E2A3A', family: 'Segoe UI' },
+        textfont: { size: 10, color: '#1E2A3A', family: 'Segoe UI' },
         hoverinfo: 'label+percent',
         sort: false,
         rotation: 90,
+        domain: { x: [0.20, 0.80], y: [0.10, 0.90] },  // squeeze pie so labels fit
     };
     const layout = {
-        margin: { t: 25, r: 25, b: 25, l: 25 },
+        margin: { t: 30, r: 70, b: 30, l: 70 },
         showlegend: false,
         paper_bgcolor: 'rgba(0,0,0,0)',
         plot_bgcolor: 'rgba(0,0,0,0)',
@@ -116,32 +121,61 @@ function renderDonutSleeves(positions) {
 // ============================================================
 // LINE CHART — Cumulative growth (BIG sleeve vs ACWI 60/40)
 // ============================================================
-function renderGrowthChart(lynkSeries) {
-    // Real data: from Lynk inception (2025-06-30)
+function renderGrowthChart(lynkSeries, equityRace) {
+    // BIG real data from Lynk (base 100 at 2025-06-30)
     const series = lynkSeries.series;
-    const dates = series.map(p => p.date);
-    const big = series.map(p => p.value);
+    const big_dates = series.map(p => p.date);
+    const big_values = series.map(p => p.value);
 
-    const trace_big = {
-        x: dates, y: big,
-        name: 'Balanced Income & Growth',
-        type: 'scatter', mode: 'lines+markers',
-        line: { color: NAVY, width: 2 },
-        marker: { size: 3, color: NAVY },
-    };
+    const traces = [
+        {
+            x: big_dates,
+            y: big_values,
+            name: 'Balanced Income & Growth',
+            type: 'scatter',
+            mode: 'lines',
+            line: { color: NAVY, width: 2 },
+        }
+    ];
 
-    // Placeholder benchmark line (TODO: real ACWI 60/40 data)
-    // Will be replaced when Lucas provides Maximus modeled benchmark
+    // ACWI 60/40 reference line — approximation using ACWI index from equity_race
+    // (will be replaced with proper modeled bench when Maximus data available)
+    if (equityRace && equityRace.acwi_index) {
+        const acwi = equityRace.acwi_index;
+        // Map monthly indices into matching dates
+        // acwi format: { "YYYY-MM": value }
+        const dates = Object.keys(acwi).sort();
+        const values = dates.map(d => acwi[d]);
+        traces.push({
+            x: dates.map(d => d + '-15'),  // mid-month placement
+            y: values,
+            name: 'ACWI 60%/40% AGG',
+            type: 'scatter',
+            mode: 'lines',
+            line: { color: SAND, width: 2 },
+        });
+    }
+
     const layout = {
         margin: { t: 30, r: 16, b: 35, l: 40 },
-        legend: { orientation: 'h', x: 0.5, xanchor: 'center', y: 1.1, font: { size: 9 } },
+        legend: { orientation: 'h', x: 0.5, xanchor: 'center', y: 1.12, font: { size: 9 } },
         font: { family: 'Segoe UI', size: 9, color: '#2E3D52' },
-        xaxis: { showgrid: false, tickfont: { size: 9 }, type: 'date' },
-        yaxis: { showgrid: true, gridcolor: '#ECEFF1', tickfont: { size: 9 } },
+        xaxis: {
+            showgrid: false,
+            tickfont: { size: 9 },
+            type: 'date',
+            tickformat: '%b %Y',
+        },
+        yaxis: {
+            showgrid: true,
+            gridcolor: '#ECEFF1',
+            tickfont: { size: 9 },
+            title: { text: 'Base 100', font: { size: 9 } },
+        },
         paper_bgcolor: 'rgba(0,0,0,0)',
         plot_bgcolor: 'rgba(0,0,0,0)',
     };
-    Plotly.newPlot('growth-chart', [trace_big], layout, { displayModeBar: false, responsive: true });
+    Plotly.newPlot('growth-chart', traces, layout, { displayModeBar: false, responsive: true });
 }
 
 // ============================================================
@@ -241,9 +275,9 @@ function renderSharpeBars() {
 // ============================================================
 async function init() {
     try {
-        const { positions, lynkSeries, lynkData } = await loadData();
+        const { positions, lynkSeries, lynkData, equityRace } = await loadData();
         renderDonutSleeves(positions);
-        renderGrowthChart(lynkSeries);
+        renderGrowthChart(lynkSeries, equityRace);
         renderReturnsTable();
         renderMonthlyTable();
         renderBmkBars();
