@@ -833,6 +833,12 @@ async function renderEquityRace() {
         const r2 = await fetch('data/equity_sleeve_real.json' + noCache);
         if (r2.ok) realData = await r2.json();
     } catch(e) { /* fallback to backtest */ }
+    // Try to load real holding contributions
+    let realContribs = null;
+    try {
+        const r3 = await fetch('data/equity_contributions_real.json' + noCache);
+        if (r3.ok) realContribs = await r3.json();
+    } catch(e) { /* table simply won't render */ }
 
     const stats = data.stats || {};
     const returns = stats.returns || {};
@@ -1078,6 +1084,59 @@ async function renderEquityRace() {
     </tr>`;
 
     document.getElementById('er-holdings-body').innerHTML = holdingsRows + acwiRow;
+
+    // ============================================================
+    // REAL TWR HOLDING CONTRIBUTIONS (from Pershing transactions)
+    // ============================================================
+    if (realContribs && realContribs.holdings && realContribs.holdings.length) {
+        const statusColor = {
+            winner:  '#81C784',
+            lagging: '#FFA726',
+            loser:   '#EF5350',
+            closed:  '#90A4AE',
+        };
+        const statusBadge = {
+            winner:  '🏆 Winner',
+            lagging: '⚠️ Lagging',
+            loser:   '🔴 Loser',
+            closed:  '⚰️ Closed',
+        };
+        const fmtSigned = (v, suffix='%') => {
+            if (v == null) return '—';
+            const c = v >= 0 ? '#81C784' : '#EF5350';
+            const sign = v >= 0 ? '+' : '';
+            return `<span style="color:${c};">${sign}${v.toFixed(2)}${suffix}</span>`;
+        };
+        const fmtContrib = v => {
+            if (v == null) return '—';
+            const c = v >= 0 ? '#81C784' : '#EF5350';
+            const sign = v >= 0 ? '+' : '';
+            return `<strong style="color:${c};">${sign}${v.toFixed(2)}pp</strong>`;
+        };
+        document.getElementById('er-real-source').innerHTML =
+            `Source: <strong>${realContribs.source}</strong> · Period: ${realContribs.period_start} → ${realContribs.period_end} · ` +
+            `Total contribution: <strong>${(realContribs.total_contribution_pp >= 0 ? '+' : '')}${realContribs.total_contribution_pp.toFixed(2)}pp</strong>`;
+        const realRows = realContribs.holdings.map(h => `
+            <tr>
+                <td class="left"><strong>${h.name}</strong><br><span style="font-size:10px;color:#6B88A8;">${h.ticker}</span></td>
+                <td class="left" style="font-size:11px;color:#90CAF9;">${h.period_start.slice(0,7)} → ${h.period_end.slice(0,7)}</td>
+                <td>${h.months_held}</td>
+                <td>${h.avg_weight_pct.toFixed(2)}%</td>
+                <td>${fmtSigned(h.twr_pct)}</td>
+                <td>${fmtContrib(h.contribution_pp)}</td>
+                <td class="left"><span style="color:${statusColor[h.status]};font-weight:700;">${statusBadge[h.status]}</span></td>
+            </tr>
+        `).join('');
+        const totalRow = `<tr style="border-top:2px solid #1F3864;">
+            <td class="left" colspan="5"><strong>TOTAL Sleeve TWR</strong></td>
+            <td>${fmtContrib(realContribs.total_contribution_pp)}</td>
+            <td></td>
+        </tr>`;
+        document.getElementById('er-real-body').innerHTML = realRows + totalRow;
+    } else {
+        document.getElementById('er-real-body').innerHTML =
+            '<tr><td colspan="7" style="padding:20px;text-align:center;color:#FFA726;">Real TWR contributions not available. Run: <code>python scripts/holding_contributions_real.py --sleeve equity</code></td></tr>';
+    }
 
     // Trade Ideas generation
     const winners = sorted.filter(h => (h.si_return_pct || 0) - acwi_ref >= 3);

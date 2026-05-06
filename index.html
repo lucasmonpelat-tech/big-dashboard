@@ -828,9 +828,29 @@
                 <tbody id="er-returns-body"></tbody>
             </table>
 
-            <h2 class="section-title">Holding Contributions — Quién suma y quién resta</h2>
+            <h2 class="section-title">🎯 Holding Contributions REAL — Con historia de Pershing</h2>
+            <div class="info-box" style="border-left-color:#81C784;">
+                <strong>Real TWR:</strong> contribución calculada con los pesos REALES mes a mes (compras/ventas del custodio Pershing). Aparecen también las posiciones <span style="color:#FFA726;font-weight:700;">cerradas</span> (BRK.B, NBRE, Virtus, Wellington) con su drag/contribución durante el tiempo que estuvieron.
+            </div>
+            <div id="er-real-source" style="font-size:11px;color:#90CAF9;margin-bottom:8px;"></div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th class="left">Holding</th>
+                        <th class="left">Período</th>
+                        <th>Meses</th>
+                        <th>Peso Avg</th>
+                        <th>TWR Real</th>
+                        <th>Contrib Real (pp)</th>
+                        <th class="left">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="er-real-body"></tbody>
+            </table>
+
+            <h2 class="section-title">Holding Contributions — Quién suma y quién resta (Backtest)</h2>
             <div class="info-box" style="border-left-color:#D4AF37;">
-                <strong>Lectura:</strong> "Contribution" = peso × retorno. Los holdings que <span style="color:#81C784;font-weight:700;">superan ACWI SI</span> son winners; los que quedan <span style="color:#EF5350;font-weight:700;">debajo</span> son laggards candidatos a rotar.
+                <strong>Backtest:</strong> "Contribution" = peso ACTUAL × retorno histórico (asume que tuviste los pesos de hoy desde el día 1). Los holdings que <span style="color:#81C784;font-weight:700;">superan ACWI SI</span> son winners; los que quedan <span style="color:#EF5350;font-weight:700;">debajo</span> son laggards candidatos a rotar.
             </div>
             <table class="data-table">
                 <thead>
