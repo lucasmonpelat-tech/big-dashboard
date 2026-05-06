@@ -13,26 +13,26 @@ const NEGATIVE = '#A8554F';
 // (will be replaced as Lucas provides values)
 // ============================================================
 const APRIL_2026 = {
-    // Returns table (page 1)
+    // Returns table (page 1) — Maximus Apr 2026
     big: {
-        '1m': null,    // pending
-        '3m': null,
-        '6m': null,
-        'ytd': 1.39,    // from Lynk
-        '1y': null,
-        '3y': null,
-        '5y': null,
-        'inicio': 4.80,  // approx Lynk SI
+        '1m': 2.2,      // April real (Lucas confirmed)
+        '3m': -0.98,
+        '6m': 0.82,
+        'ytd': 1.0,     // computed from Q1 + April +2.21
+        '1y': 7.75,
+        '3y': 10.91,
+        '5y': 6.53,
+        'inicio': 8.7,  // mantener marzo (sin cambio)
     },
     bench: {
-        '1m': null,
-        '3m': null,
-        '6m': null,
-        'ytd': null,
-        '1y': null,
-        '3y': null,
-        '5y': null,
-        'inicio': null,
+        '1m': 5.48,
+        '3m': 3.71,
+        '6m': 5.75,
+        'ytd': 4.62,
+        '1y': 18.76,
+        '3y': 13.70,
+        '5y': 6.99,
+        'inicio': 8.2,  // mantener marzo (sin cambio)
     },
     // Monthly returns table — historical modeled + real Lynk
     monthly: {
@@ -40,25 +40,25 @@ const APRIL_2026 = {
         2023: { values: [4.0, -1.8, 2.6, 0.8, -1.1, 3.1, 1.3, -0.5, -1.9, 0.0, 3.8, 2.9], total: 13.6 },
         2024: { values: [1.1, 2.2, 2.2, -2.5, 2.5, 0.5, 2.6, 2.1, 1.2, -0.7, 3.4, -2.0], total: 12.5 },
         2025: { values: [2.4, 1.2, 0.1, 0.9, 1.6, 1.9, 0.5, 1.8, 1.6, 0.4, 0.3, 0.1], total: 13.4 },
-        2026: { values: [1.6, 0.6, -3.3, null, null, null, null, null, null, null, null, null], total: 1.39 },
+        2026: { values: [1.6, 0.6, -3.3, 2.2, null, null, null, null, null, null, null, null], total: 1.0 },
     },
-    // Benchmark comparativo bars (BIG vs ACWI 60/40)
+    // Benchmark comparativo bars (BIG vs ACWI 60/40) — Maximus Apr 2026
     bmk_bars: {
         labels: ['Ret. 3 años', 'Ret. 5 años', 'Vol. 3 años', 'Vol. 5 años', 'Máximo Drawdown 3 años', 'Máximo Drawdown 5 años'],
-        big:    [null, null, null, null, null, null],     // pending
-        bench:  [null, null, null, null, null, null],
+        big:    [10.91, 6.53, 5.65, 7.11, -3.32, -13.48],
+        bench:  [13.70, 6.99, 8.57, 9.68, -9.94, -21.11],
     },
     sharpe_bars: {
         labels: ['Sharpe 3 años', 'Sharpe 5 años'],
-        big:    [null, null],
-        bench:  [null, null],
+        big:    [1.18, 0.42],
+        bench:  [1.11, 0.35],
     },
-    // Sleeve weights for donut (page 1)
+    // Sleeve weights for donut (page 1) — Maximus-style bucketing
+    // RV / RF (incl Cash) / Alts (incl Derivados)
     sleeve_weights: {
-        renta_variable: null,    // computed from Pershing
-        alternativos: null,
-        renta_fija: null,
-        cash: null,
+        renta_variable: 29,
+        renta_fija: 40,
+        alternativos: 31,
     },
 };
 
@@ -77,39 +77,35 @@ async function loadData() {
 // DONUT — Sleeve weights
 // ============================================================
 function renderDonutSleeves(positions) {
-    const totals = { Equity: 0, Alternatives: 0, 'Fixed Income': 0, Cash: 0 };
-    const grand = positions.total_aum;
-    positions.positions.forEach(p => { totals[p.sleeve] = (totals[p.sleeve] || 0) + p.value; });
-    const rv = totals.Equity / grand * 100;
-    const alts = totals.Alternatives / grand * 100;
-    const rf = totals['Fixed Income'] / grand * 100;
-    const cash = totals.Cash / grand * 100;
-    APRIL_2026.sleeve_weights = { renta_variable: rv, alternativos: alts, renta_fija: rf, cash: cash };
+    // Use manual Maximus-style bucketing for factsheet (RV / RF+Cash / Alts+Deriv)
+    const w = APRIL_2026.sleeve_weights;
+    const rv = w.renta_variable;
+    const rf = w.renta_fija;
+    const alts = w.alternativos;
 
     const trace = {
         type: 'pie',
         hole: 0.55,
-        labels: ['Renta Variable', 'Alternativos', 'Renta Fija', 'Cash'],
-        values: [rv, alts, rf, cash],
+        labels: ['Alternativos', 'Renta Variable', 'Renta Fija'],
+        values: [alts, rv, rf],
         marker: {
-            colors: ['#7B8C9E', '#1F3864', '#34495E', '#9DA8B5'],
+            colors: ['#1F3864', '#7B8C9E', '#34495E'],
             line: { color: '#FFFFFF', width: 2 },
         },
         text: [
-            `${rv.toFixed(0)}%<br>Renta<br>Variable`,
             `${alts.toFixed(0)}%<br>Alternativos`,
+            `${rv.toFixed(0)}%<br>Renta<br>Variable`,
             `${rf.toFixed(0)}%<br>Renta Fija`,
-            `${cash.toFixed(0)}%<br>Cash`,
         ],
         textposition: 'outside',
         textinfo: 'text',
-        textfont: { size: 10, color: '#1E2A3A', family: 'Segoe UI' },
+        textfont: { size: 11, color: '#1E2A3A', family: 'Segoe UI' },
         hoverinfo: 'label+percent',
         sort: false,
-        rotation: -45,
+        rotation: 90,
     };
     const layout = {
-        margin: { t: 10, r: 10, b: 10, l: 10 },
+        margin: { t: 25, r: 25, b: 25, l: 25 },
         showlegend: false,
         paper_bgcolor: 'rgba(0,0,0,0)',
         plot_bgcolor: 'rgba(0,0,0,0)',
