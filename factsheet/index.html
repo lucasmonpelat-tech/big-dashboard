@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>BIG Factsheet — Abril 2026</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- PAGE 1 -->
+<!-- ============================================================ -->
+<section class="page">
+
+    <header class="page-header">
+        <div class="logo-block">BIG</div>
+        <div class="header-right">
+            <div class="title">Balanced Income &amp; Growth (BIG)</div>
+            <div class="date"><span class="month">Abril</span> 2026</div>
+        </div>
+    </header>
+
+    <h1 class="objective-title">Objetivo y Características de BIG</h1>
+    <p class="objective-text">
+        BIG representa una evolución en la gestión de patrimonios, diseñada para inversores exigentes que buscan superar los límites del modelo tradicional 60/40.
+        Combina una diversificación real entre renta fija, renta variable y activos alternativos, con acceso exclusivo a estrategias sofisticadas dentro del universo de
+        inversiones alternativas. Esta integración inteligente permite construir un portafolio más eficiente, con una mejor relación riesgo-retorno, mayor estabilidad y
+        exposición a oportunidades únicas que no están disponibles en los vehículos tradicionales.
+    </p>
+
+    <div class="two-col">
+        <div class="col">
+            <div class="section-bar">Portafolio (tipo de activos)</div>
+            <div id="donut-sleeves" class="chart-box" style="height:280px;"></div>
+        </div>
+        <div class="col col-wide">
+            <div class="section-bar">Rendimiento acumulado*</div>
+            <div id="growth-chart" class="chart-box" style="height:280px;"></div>
+            <div class="chart-footnote">*Rendimientos pasados no predicen retornos futuros.</div>
+        </div>
+    </div>
+
+    <div class="section-bar">Rentabilidades (%)</div>
+    <table class="returns-table" id="returns-table">
+        <thead>
+            <tr>
+                <th class="left">&nbsp;</th>
+                <th>1 mes</th><th>3 meses</th><th>6 meses</th><th>YTD</th>
+                <th>1 año</th><th>3 años</th><th>5 años</th><th>Inicio</th>
+            </tr>
+        </thead>
+        <tbody id="returns-tbody">
+            <!-- filled by JS -->
+        </tbody>
+    </table>
+
+    <div class="section-bar">Rendimiento mensual (%)</div>
+    <table class="monthly-table" id="monthly-table">
+        <thead>
+            <tr>
+                <th class="left">Año</th>
+                <th>Ene</th><th>Feb</th><th>Mar</th><th>Abr</th>
+                <th>May</th><th>Jun</th><th>Jul</th><th>Ago</th>
+                <th>Sep</th><th>Oct</th><th>Nov</th><th>Dic</th>
+                <th>Año</th>
+            </tr>
+        </thead>
+        <tbody id="monthly-tbody">
+            <!-- filled by JS -->
+        </tbody>
+    </table>
+    <div class="chart-footnote">*El fondo comenzó su operación en julio 2025. Los retornos pasados se encuentran modelados en base a rendimientos históricos.</div>
+
+    <div class="section-bar">Benchmark comparativo</div>
+    <div class="two-col">
+        <div class="col col-wide">
+            <div id="bmk-bars" class="chart-box" style="height:240px;"></div>
+        </div>
+        <div class="col">
+            <div id="sharpe-bars" class="chart-box" style="height:240px;"></div>
+        </div>
+    </div>
+
+    <footer class="page-footer">
+        <span>Para más información: <a href="mailto:info@pampa-capital.com">info@pampa-capital.com</a> (Comercial)</span>
+        <span class="footer-mid">Pampa Capital AM &nbsp;|&nbsp; Estrictamente Confidencial</span>
+        <span class="footer-right">Abril 2026</span>
+    </footer>
+
+</section>
+
+<!-- Page 2 + 3 placeholder while we build them -->
+<section class="page">
+    <header class="page-header">
+        <div class="logo-block">BIG</div>
+        <div class="header-right">
+            <div class="title">Balanced Income &amp; Growth (BIG)</div>
+            <div class="date"><span class="month">Abril</span> 2026</div>
+        </div>
+    </header>
+    <p style="padding:80px;text-align:center;color:#888;">PAGE 2 — to build (FI stats, equity stats, credit quality, sectors, currency, alts pie, regional pie, fund data box, logos)</p>
+</section>
+
+<section class="page">
+    <header class="page-header">
+        <div class="logo-block">BIG</div>
+        <div class="header-right">
+            <div class="title">Balanced Income &amp; Growth (BIG)</div>
+            <div class="date"><span class="month">Abril</span> 2026</div>
+        </div>
+    </header>
+    <h1 class="objective-title" style="font-size:32px;">Disclaimer</h1>
+    <p style="padding:0 30px;text-align:center;color:#888;">PAGE 3 — disclaimer (just text, will fill in)</p>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>

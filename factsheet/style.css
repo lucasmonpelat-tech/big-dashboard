@@ -1,0 +1,184 @@
+/* ============================================================
+   BIG Factsheet — Print-Ready Styles
+   Designed to mirror the March 2026 PDF aesthetic
+   Page size: A4 portrait (210 × 297 mm) at 96dpi
+   ============================================================ */
+
+@page {
+    size: A4;
+    margin: 0;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0; padding: 0;
+    background: #E8EAEC;
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    color: #1E2A3A;
+}
+
+/* Each section.page = one A4 sheet */
+.page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 0;
+    margin: 8mm auto;
+    background: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    page-break-after: always;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Banner — dark navy with diamond pattern */
+.page-header {
+    background: #0D1B2A;
+    background-image:
+        linear-gradient(135deg, rgba(255,255,255,0.05) 25%, transparent 25%),
+        linear-gradient(225deg, rgba(255,255,255,0.05) 25%, transparent 25%);
+    background-size: 22px 22px;
+    color: #FFFFFF;
+    padding: 12px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo-block {
+    font-weight: 800;
+    font-size: 32px;
+    letter-spacing: 2px;
+    color: #FFFFFF;
+    background: rgba(0,0,0,0);
+    padding: 4px 8px;
+    border: 0;
+}
+.header-right { text-align: right; }
+.header-right .title {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.header-right .date {
+    font-size: 13px;
+    margin-top: 2px;
+    color: #C8D3DF;
+}
+.header-right .month {
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+/* Section title bar — beige/sand banner */
+.section-bar {
+    background: #C9A87E;
+    color: #1E2A3A;
+    font-weight: 700;
+    font-size: 11px;
+    padding: 4px 12px;
+    margin-top: 6px;
+    margin-bottom: 4px;
+    letter-spacing: 0.3px;
+}
+
+/* Page footer — navy with diamond pattern */
+.page-footer {
+    background: #0D1B2A;
+    background-image:
+        linear-gradient(135deg, rgba(255,255,255,0.05) 25%, transparent 25%),
+        linear-gradient(225deg, rgba(255,255,255,0.05) 25%, transparent 25%);
+    background-size: 22px 22px;
+    color: #C8D3DF;
+    padding: 10px 25px;
+    font-size: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+}
+.page-footer a { color: #C8D3DF; text-decoration: underline; }
+.footer-mid { flex: 1; text-align: center; }
+
+/* Objective text */
+.objective-title {
+    font-size: 18px;
+    color: #1E2A3A;
+    font-weight: 600;
+    margin: 16px 25px 6px;
+}
+.objective-text {
+    font-size: 10px;
+    line-height: 1.45;
+    color: #2E3D52;
+    margin: 0 25px 12px;
+}
+
+/* Two-column layout */
+.two-col {
+    display: flex;
+    gap: 12px;
+    margin: 0 25px;
+}
+.col { flex: 1; }
+.col-wide { flex: 1.6; }
+
+.chart-box {
+    background: #FFFFFF;
+    padding: 4px;
+}
+.chart-footnote {
+    font-size: 8.5px;
+    color: #6B7B8A;
+    text-align: right;
+    margin: 2px 6px 0;
+    font-style: italic;
+}
+
+/* Returns table */
+.returns-table, .monthly-table {
+    width: calc(100% - 50px);
+    margin: 0 25px;
+    border-collapse: collapse;
+    font-size: 10px;
+}
+.returns-table thead th, .monthly-table thead th {
+    background: #F5F0E5;
+    color: #1E2A3A;
+    font-weight: 700;
+    padding: 5px 6px;
+    text-align: center;
+    border-bottom: 1px solid #C9A87E;
+}
+.returns-table th.left, .monthly-table th.left,
+.returns-table td.left, .monthly-table td.left {
+    text-align: left;
+    padding-left: 10px;
+}
+.returns-table tbody td, .monthly-table tbody td {
+    padding: 5px 6px;
+    text-align: center;
+    border-bottom: 1px solid #ECEFF1;
+}
+.returns-table tbody tr.row-big td, .monthly-table tbody tr.row-big td {
+    font-weight: 700;
+    color: #1E2A3A;
+}
+.returns-table tbody tr.row-bmk td, .monthly-table tbody tr.row-bmk td {
+    color: #6B7B8A;
+}
+.monthly-table tbody td.year-cell {
+    font-weight: 700;
+}
+.monthly-table tbody td.empty { color: #C8D3DF; }
+.monthly-table tbody td.year-total { font-weight: 700; color: #1E2A3A; }
+
+/* Print-specific */
+@media print {
+    html, body { background: #FFFFFF; }
+    .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+    }
+    .page:last-child { page-break-after: auto; }
+}
