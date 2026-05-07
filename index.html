@@ -431,6 +431,7 @@
         <button class="tab-btn" data-tab="trades">📝 Trade Log</button>
         <button class="tab-btn" data-tab="equity-race">🏁 Equity Race</button>
         <button class="tab-btn" data-tab="fi-race">💎 FI Race</button>
+        <button class="tab-btn" data-tab="data-health">🩺 Data Health</button>
     </nav>
 
     <!-- ======================= MAIN ======================= -->
@@ -1058,6 +1059,40 @@
                     <div class="kpi-sub">Maximus + Bloomberg</div>
                 </div>
             </div>
+        </section>
+
+        <!-- ========================================
+             TAB: DATA HEALTH
+             Lineage + status of every data source
+             ======================================== -->
+        <section id="tab-data-health" class="tab-section">
+            <h2 class="section-title">🩺 Data Health — Source Lineage & Status</h2>
+            <div class="info-box" style="border-left-color:#64B5F6;">
+                <strong>Objetivo:</strong> ver de dónde sale cada métrica del HTML, frecuencia esperada de refresh, y status de cada fuente.
+                <br>🟢 LIVE / 🟡 OK / 🟠 NEEDS REFRESH / 🔴 STALE
+            </div>
+
+            <div id="dh-summary" style="margin: 16px 0; display:flex; gap:12px;"></div>
+
+            <h3 style="color:#D4AF37; margin-top:20px;">📑 Catálogo de Fuentes</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th class="left">Fuente</th>
+                        <th class="left">Categoría</th>
+                        <th class="left">Tabs que alimenta</th>
+                        <th>Última refresh</th>
+                        <th>Days ago</th>
+                        <th>Expected freq</th>
+                        <th class="left">Status</th>
+                        <th class="left">Refresh method</th>
+                    </tr>
+                </thead>
+                <tbody id="dh-tbody"></tbody>
+            </table>
+
+            <h3 style="color:#D4AF37; margin-top:20px;">🚨 TODOs (refrescar primary sources)</h3>
+            <div id="dh-todos"></div>
         </section>
 
         <!-- FOOTER -->

@@ -1707,4 +1707,111 @@ function updateTime() {
     renderEquityBreakdown();
     renderFIRace();
     renderFIBreakdown();
+    renderDataHealth();
 })();
+
+// ==============================================================
+// DATA HEALTH — Lineage + status of every data source
+// ==============================================================
+async function renderDataHealth() {
+    let catalog;
+    try {
+        const r = await fetch('data/data_health_catalog.json?_=' + Date.now());
+        if (!r.ok) throw new Error('no catalog');
+        catalog = await r.json();
+    } catch (e) {
+        console.warn('data_health_catalog.json not available', e);
+        return;
+    }
+
+    // Helper: get last-modified date from a JSON file (via its content asOf/refreshedAt fields)
+    async function probeFileDate(path) {
+        if (!path || path.startsWith('(') || path.includes('funds_metadata.js') || path.includes('live_prices.js')) {
+            // Static JS modules — use their git mtime via fetch HEAD or just assume recent
+            try {
+                const r = await fetch(path + '?_=' + Date.now(), { method: 'HEAD' });
+                const lm = r.headers.get('last-modified');
+                if (lm) return new Date(lm);
+            } catch (e) {}
+            return null;
+        }
+        try {
+            const r = await fetch(path + '?_=' + Date.now());
+            if (!r.ok) return null;
+            const d = await r.json();
+            // Try multiple fields
+            const fields = ['asOf', 'refreshedAt', 'refreshed_at', 'as_of', 'lastUpdate', 'extractedAt'];
+            for (const f of fields) {
+                if (d[f]) return new Date(d[f]);
+            }
+            // Try Last-Modified header
+            const lm = r.headers.get('last-modified');
+            if (lm) return new Date(lm);
+        } catch (e) {}
+        return null;
+    }
+
+    // Status calculation
+    function statusOf(daysAgo, expectedDays) {
+        if (daysAgo == null) return { code: 'unknown', label: '⚪ Unknown', color: '#90A4AE' };
+        if (daysAgo <= 1) return { code: 'live', label: '🟢 LIVE', color: '#81C784' };
+        if (daysAgo <= expectedDays) return { code: 'ok', label: '🟢 OK', color: '#81C784' };
+        if (daysAgo <= expectedDays * 1.5) return { code: 'needs_refresh', label: '🟠 NEEDS REFRESH', color: '#FFA726' };
+        return { code: 'stale', label: '🔴 STALE', color: '#EF5350' };
+    }
+
+    const now = new Date();
+    const rows = [];
+    const todos = [];
+    let counts = { live: 0, ok: 0, needs_refresh: 0, stale: 0, unknown: 0, deprecated: 0 };
+
+    for (const src of catalog.sources) {
+        // Get most recent date from any of the source's files
+        let mostRecent = null;
+        for (const f of src.files) {
+            const d = await probeFileDate(f);
+            if (d && (!mostRecent || d > mostRecent)) mostRecent = d;
+        }
+        const daysAgo = mostRecent ? Math.floor((now - mostRecent) / (1000 * 60 * 60 * 24)) : null;
+        const status = src.deprecated
+            ? { code: 'deprecated', label: '⚰️ DEPRECATED', color: '#90A4AE' }
+            : statusOf(daysAgo, src.expected_frequency_days);
+        counts[status.code] = (counts[status.code] || 0) + 1;
+
+        rows.push(`
+            <tr>
+                <td class="left"><strong>${src.name}</strong><br><span style="font-size:10px;color:#90CAF9;">${src.source_type}</span></td>
+                <td class="left">${src.category}</td>
+                <td class="left" style="font-size:10px;color:#E0E8F0;">${src.feeds_tabs.join(', ')}</td>
+                <td>${mostRecent ? mostRecent.toISOString().slice(0, 10) : '—'}</td>
+                <td><strong style="color:${daysAgo > src.expected_frequency_days ? '#EF5350' : '#81C784'};">${daysAgo != null ? daysAgo + 'd' : '—'}</strong></td>
+                <td>${src.expected_frequency_days}d</td>
+                <td class="left"><span style="color:${status.color};font-weight:700;">${status.label}</span></td>
+                <td class="left" style="font-size:10px;color:#90CAF9;">${src.refresh_method}</td>
+            </tr>
+        `);
+
+        if (src.deprecated || status.code === 'stale' || status.code === 'needs_refresh') {
+            todos.push(`<li><strong>${src.name}</strong> ${src.deprecated ? `→ ${src.deprecated_reason || 'deprecated'}` : `→ ${daysAgo}d sin refresh (expected ${src.expected_frequency_days}d)`}</li>`);
+        }
+    }
+
+    // Summary cards
+    const summaryCard = (label, count, color) => `
+        <div style="flex:1; background:#12243A; padding:12px; border-radius:6px; border-left:3px solid ${color};">
+            <div style="font-size:11px; color:#90CAF9; margin-bottom:4px;">${label}</div>
+            <div style="font-size:24px; font-weight:700; color:${color};">${count}</div>
+        </div>
+    `;
+    document.getElementById('dh-summary').innerHTML =
+        summaryCard('🟢 LIVE/OK', (counts.live || 0) + (counts.ok || 0), '#81C784') +
+        summaryCard('🟠 NEEDS REFRESH', counts.needs_refresh || 0, '#FFA726') +
+        summaryCard('🔴 STALE', counts.stale || 0, '#EF5350') +
+        summaryCard('⚰️ DEPRECATED', counts.deprecated || 0, '#90A4AE') +
+        summaryCard('⚪ UNKNOWN', counts.unknown || 0, '#607D8B');
+
+    document.getElementById('dh-tbody').innerHTML = rows.join('');
+    document.getElementById('dh-todos').innerHTML = todos.length
+        ? `<ul style="color:#FFA726;">${todos.join('')}</ul>`
+        : '<p style="color:#81C784;">✅ Todas las fuentes al día</p>';
+}

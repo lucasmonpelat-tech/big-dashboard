@@ -1,0 +1,165 @@
+{
+  "_description": "Catálogo de fuentes de datos del dashboard. Cada entry define source, refresh expectations, y file paths para auto-detect staleness.",
+  "_lastUpdate": "2026-05-07",
+
+  "sources": [
+    {
+      "id": "lynk_nav",
+      "name": "Lynk NAV oficial",
+      "category": "Performance",
+      "source_url": "https://app.lynkmarkets.com/public/products/4w9aANBbvM",
+      "source_type": "web_public",
+      "refresh_method": "Chrome MCP (on-demand) o Playwright cron",
+      "expected_frequency_days": 1,
+      "files": ["data/lynk_data.json", "data/lynk_nav_series.json"],
+      "feeds_tabs": ["Overview", "Performance"],
+      "feeds_metrics": ["NAV", "AUM", "YTD", "SI", "Annualized", "Volatility", "Sharpe"]
+    },
+    {
+      "id": "pershing_positions",
+      "name": "Pershing Positions",
+      "category": "Holdings",
+      "source_url": "Lucas Excel — Positions_JXD101380.xlsx",
+      "source_type": "manual_excel",
+      "refresh_method": "scripts/pershing_parser.py <xlsx>",
+      "expected_frequency_days": 7,
+      "files": ["data/positions_latest.json"],
+      "feeds_tabs": ["Positions", "Currency", "Geography", "Yield", "YTM/FI"],
+      "feeds_metrics": ["Holdings list", "Sleeve weights", "Total AUM"]
+    },
+    {
+      "id": "pershing_transactions",
+      "name": "Pershing Transactions (TWR)",
+      "category": "Performance",
+      "source_url": "Lucas Excel — Transactions_JXD101380 History.xlsx",
+      "source_type": "manual_excel",
+      "refresh_method": "scripts/portfolio_reconstructor.py <xlsx> + scripts/holding_contributions_real.py",
+      "expected_frequency_days": 31,
+      "files": ["data/equity_sleeve_real.json", "data/equity_contributions_real.json"],
+      "feeds_tabs": ["Equity Race", "Trade Log"],
+      "feeds_metrics": ["Sleeve real TWR", "Per-holding contributions", "Trade log"]
+    },
+    {
+      "id": "stooq_etf_prices",
+      "name": "Stooq ETF prices (live)",
+      "category": "Prices",
+      "source_url": "https://stooq.com/q/l/",
+      "source_type": "api_csv",
+      "refresh_method": "Auto in dashboard.js (every page open)",
+      "expected_frequency_days": 1,
+      "files": ["(in-memory)"],
+      "feeds_tabs": ["Positions", "Currency", "Geography", "Performance"],
+      "feeds_metrics": ["CSPX, ILF, ARGT, GLD, IBIT, 4BRZ, BPCC, HLEND, GCRED prices"]
+    },
+    {
+      "id": "baha_ucits_prices",
+      "name": "baha.com UCITS prices",
+      "category": "Prices",
+      "source_url": "https://www.baha.com/instruments/<ISIN>",
+      "source_type": "web_login",
+      "refresh_method": "Chrome MCP (on-demand)",
+      "expected_frequency_days": 7,
+      "files": ["data/live_prices.js (MANUAL_NAV section)"],
+      "feeds_tabs": ["Positions", "Performance"],
+      "feeds_metrics": ["PIMCO/Man/Schroder/Tenac NAVs"]
+    },
+    {
+      "id": "baha_monthly_returns",
+      "name": "baha.com monthly returns",
+      "category": "Performance",
+      "source_url": "https://www.baha.com/instruments/<ISIN>",
+      "source_type": "web_login",
+      "refresh_method": "Chrome MCP (on-demand, mensual al cierre)",
+      "expected_frequency_days": 31,
+      "files": ["data/baha/<ISIN>.json"],
+      "feeds_tabs": ["Equity Race", "FI Race"],
+      "feeds_metrics": ["Per-fund monthly returns history"]
+    },
+    {
+      "id": "pimco_factsheets",
+      "name": "PIMCO factsheets (YTW/Dur/Venc)",
+      "category": "Fixed Income",
+      "source_url": "https://www.pimco.com/sg/en/investments/gis/<fund>/inst-usd-accumulation",
+      "source_type": "web_public",
+      "refresh_method": "Chrome MCP (trimestral, ~15 días post-cierre Q)",
+      "expected_frequency_days": 90,
+      "files": ["data/funds_metadata.js (FI_METRICS, CURRENT_YIELDS)"],
+      "feeds_tabs": ["YTM/FI", "Yield"],
+      "feeds_metrics": ["YTW per fund", "Effective Duration", "Effective Maturity", "Current Yield"]
+    },
+    {
+      "id": "ft_com_tearsheets",
+      "name": "FT.com fund tearsheets",
+      "category": "Equity Composition",
+      "source_url": "https://markets.ft.com/data/funds/tearsheet/summary?s=<ISIN>:USD",
+      "source_type": "web_public",
+      "refresh_method": "Chrome MCP (mensual)",
+      "expected_frequency_days": 31,
+      "files": ["data/equity_breakdown_apr26.json (regional, sectorial pending)"],
+      "feeds_tabs": ["Equity Race"],
+      "feeds_metrics": ["Regional breakdown", "Sectorial breakdown", "Style box"]
+    },
+    {
+      "id": "yahoo_benchmarks",
+      "name": "Yahoo Finance ACWI / AGG benchmarks",
+      "category": "Performance",
+      "source_url": "yfinance Python lib",
+      "source_type": "api",
+      "refresh_method": "scripts/equity_race.py + scripts/fi_race.py",
+      "expected_frequency_days": 31,
+      "files": ["data/equity_race.json", "data/fi_race.json"],
+      "feeds_tabs": ["Equity Race", "FI Race"],
+      "feeds_metrics": ["ACWI index", "AGG index", "Multi-period returns vs benchmark"]
+    },
+    {
+      "id": "manual_alts_navs",
+      "name": "Manual NAVs Privates (Carlyle, Flex, etc.)",
+      "category": "Holdings",
+      "source_url": "Email / contacto directo con managers",
+      "source_type": "manual_email",
+      "refresh_method": "Lucas pasa el NAV cuando lo recibe",
+      "expected_frequency_days": 31,
+      "files": ["data/funds_metadata.js (BIG_POSITIONS values)"],
+      "feeds_tabs": ["Positions"],
+      "feeds_metrics": ["Carlyle, Flex-Lex, NB PE, BPCC, HLEND, GCRED, Tenac NAVs"]
+    },
+    {
+      "id": "currency_exposure_per_fund",
+      "name": "CURRENCY_EXPOSURE per fund",
+      "category": "Composition",
+      "source_url": "Per-fund factsheets (FX exposure section)",
+      "source_type": "web_login",
+      "refresh_method": "Chrome MCP — TODO refresh (last update ~6 meses)",
+      "expected_frequency_days": 90,
+      "files": ["data/funds_metadata.js (CURRENCY_EXPOSURE)"],
+      "feeds_tabs": ["Currency"],
+      "feeds_metrics": ["FX exposure per fund (USD/EUR/GBP/etc)"]
+    },
+    {
+      "id": "country_exposure_per_fund",
+      "name": "COUNTRY_EXPOSURE per fund",
+      "category": "Composition",
+      "source_url": "Per-fund factsheets (country/region section)",
+      "source_type": "web_public",
+      "refresh_method": "FT.com Chrome MCP (mensual)",
+      "expected_frequency_days": 90,
+      "files": ["data/funds_metadata.js (COUNTRY_EXPOSURE)"],
+      "feeds_tabs": ["Geography"],
+      "feeds_metrics": ["Country exposure per fund"]
+    },
+    {
+      "id": "fi_breakdown",
+      "name": "FI Breakdown (credit quality, sub-asset class)",
+      "category": "Fixed Income",
+      "source_url": "PIMCO/Man/Schroder factsheets",
+      "source_type": "web_public",
+      "refresh_method": "Chrome MCP per-fund × pesos BIG",
+      "expected_frequency_days": 31,
+      "files": ["data/fi_breakdown_apr26.json"],
+      "feeds_tabs": ["FI Race"],
+      "feeds_metrics": ["Credit quality", "Sub-asset class", "FI regional"],
+      "deprecated": true,
+      "deprecated_reason": "Maximus-derived. Rebuild from primary sources pendiente."
+    }
+  ]
+}
