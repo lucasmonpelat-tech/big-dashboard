@@ -1499,16 +1499,16 @@ async function renderFIRace() {
 }
 
 // ==============================================================
-// EQUITY BREAKDOWN — Style + Sectorial + Regional (Mar-2026 cierre)
+// EQUITY BREAKDOWN — Style + Sectorial + Regional (Apr-2026 cierre, Maximus)
 // ==============================================================
 async function renderEquityBreakdown() {
     let data;
     try {
-        const r = await fetch('data/equity_breakdown_mar26.json?_=' + Date.now());
+        const r = await fetch('data/equity_breakdown_apr26.json?_=' + Date.now());
         if (!r.ok) throw new Error('no data');
         data = await r.json();
     } catch(e) {
-        console.warn('equity_breakdown_mar26.json not available', e);
+        console.warn('equity_breakdown_apr26.json not available', e);
         return;
     }
 
@@ -1577,16 +1577,16 @@ async function renderEquityBreakdown() {
 }
 
 // ==============================================================
-// FI BREAKDOWN — Sub-asset class & Credit Quality (Mar-2026 cierre)
+// FI BREAKDOWN — Sub-asset class & Credit Quality (Apr-2026 cierre, Maximus)
 // ==============================================================
 async function renderFIBreakdown() {
     let data;
     try {
-        const r = await fetch('data/fi_breakdown_mar26.json?_=' + Date.now());
+        const r = await fetch('data/fi_breakdown_apr26.json?_=' + Date.now());
         if (!r.ok) throw new Error('no data');
         data = await r.json();
     } catch(e) {
-        console.warn('fi_breakdown_mar26.json not available', e);
+        console.warn('fi_breakdown_apr26.json not available', e);
         return;
     }
 

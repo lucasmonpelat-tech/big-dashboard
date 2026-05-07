@@ -1,0 +1,53 @@
+{
+  "asOf": "2026-04-30",
+  "source": "Maximus snapshot 2026-05-06 (refleja cierre abril, post-rotación BRK.B)",
+  "approved_by": "Lucas Monpelat (Maximus oficial)",
+  "note": "Datos al cierre de Abril 2026. Refleja la rotación de BRK.B → CSPX/THOR ejecutada el 16-Abr-2026.",
+
+  "style": {
+    "title": "Distribución por Estilo",
+    "subtitle": "BIG vs BMK (ACWI)",
+    "rows": [
+      { "category": "Value",  "big": 32, "bmk": 28 },
+      { "category": "Growth", "big": 38, "bmk": 32 },
+      { "category": "Blend",  "big": 30, "bmk": 40 }
+    ],
+    "totals": { "big": 100, "bmk": 100 }
+  },
+
+  "sectorial": {
+    "title": "Distribución Sectorial",
+    "subtitle": "BIG vs ACWI",
+    "rows": [
+      { "category": "Technology",   "big": 19, "acwi": 29 },
+      { "category": "Industrials",  "big": 16, "acwi": 11 },
+      { "category": "Financial",    "big": 13, "acwi": 16 },
+      { "category": "Cons. Cyc.",   "big": 11, "acwi": 11 },
+      { "category": "Health",       "big": 9,  "acwi": 9  },
+      { "category": "Comm. Serv.",  "big": 9,  "acwi": 9  },
+      { "category": "Utilities",    "big": 7,  "acwi": 2  },
+      { "category": "Basic Mat.",   "big": 6,  "acwi": 4  },
+      { "category": "Cons. Def.",   "big": 5,  "acwi": 5  },
+      { "category": "Energy",       "big": 5,  "acwi": 4  },
+      { "category": "Real estate",  "big": 2,  "acwi": 2  }
+    ],
+    "totals": { "big": 102, "acwi": 102 },
+    "footnote": "Maximus values: BIG sums to 100 with rounding. Real estate 1.75% (BIG)."
+  },
+
+  "regional": {
+    "title": "Distribución Regional",
+    "subtitle": "BIG vs ACWI",
+    "rows": [
+      { "category": "North Am.",   "big": 59, "acwi": 66 },
+      { "category": "Europe dev.", "big": 15, "acwi": 11 },
+      { "category": "Latin Am.",   "big": 13, "acwi": 1  },
+      { "category": "UK",          "big": 7,  "acwi": 4  },
+      { "category": "Japan",       "big": 5,  "acwi": 6  },
+      { "category": "Asia dev.",   "big": 2,  "acwi": 4  },
+      { "category": "Otros",       "big": 1,  "acwi": 8  }
+    ],
+    "totals": { "big": 102, "acwi": 100 },
+    "footnote": "BIG sums to 100% with rounding. Total LatAm includes BRL/MXN/AR mix."
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "asOf": "2026-04-30",
+  "source": "Maximus snapshot 2026-05-06 (refleja cierre abril)",
+  "approved_by": "Lucas Monpelat (Maximus oficial)",
+  "note": "Calidad crediticia y exposiciones FI al cierre de Abril 2026.",
+
+  "fi_stats": {
+    "title": "Estadísticas Renta Fija",
+    "rows": [
+      { "metric": "YTW (%)",     "big": 6.95, "bmk": 3.71 },
+      { "metric": "Duración",    "big": 4.64, "bmk": 6.21 },
+      { "metric": "Vencimiento", "big": 6.69, "bmk": 8.36 }
+    ]
+  },
+
+  "sub_asset_class": {
+    "title": "Distribución por Sub-asset Class (Sectorial FI)",
+    "subtitle": "BIG vs AGG (Bloomberg US Aggregate)",
+    "note": "Money Market incluye Cash/equivalentes. Derivados negativos = sleeve corto en duration via futuros (PIMCO).",
+    "rows": [
+      { "category": "Securitized",     "big": 42, "agg": 12 },
+      { "category": "Money market",    "big": 36, "agg": 1  },
+      { "category": "Corporate",       "big": 31, "agg": 25 },
+      { "category": "Government",      "big": 22, "agg": 63 },
+      { "category": "Derivatives",     "big": -32, "agg": 0 }
+    ],
+    "totals": { "big": 100, "agg": 100 }
+  },
+
+  "credit_quality": {
+    "title": "Calidad Crediticia",
+    "subtitle": "BIG vs BMK (AGG)",
+    "rows": [
+      { "rating": "AAA", "big": 15.8, "bmk": 10.7 },
+      { "rating": "AA",  "big": 37.2, "bmk": 36.4 },
+      { "rating": "A",   "big": 6.9,  "bmk": 26.7 },
+      { "rating": "BBB", "big": 20.7, "bmk": 11.3 },
+      { "rating": "BB",  "big": 8.7,  "bmk": 0.3  },
+      { "rating": "B",   "big": 3.6,  "bmk": 0.0  },
+      { "rating": "CCC", "big": 6.6,  "bmk": 0.0  },
+      { "rating": "NR",  "big": 0.5,  "bmk": 14.3 }
+    ],
+    "totals": { "big": 100, "bmk": 100 },
+    "summary": {
+      "big_ig": 81.1,
+      "big_hy": 18.9,
+      "bmk_ig": 85.1,
+      "bmk_hy": 0.3
+    }
+  },
+
+  "regional": {
+    "title": "Distribución Regional FI",
+    "subtitle": "BIG vs ACWI 60%/40% AGG",
+    "rows": [
+      { "category": "North Am.",    "big": 35.9, "bmk": 44.9 },
+      { "category": "Europe dev.",  "big": 22.4, "bmk": 4.5  },
+      { "category": "Latin Am.",    "big": 17.5, "bmk": 1.1  },
+      { "category": "UK",           "big": 11.1, "bmk": 0.0  },
+      { "category": "Asia emerg.",  "big": 12.7, "bmk": 3.5  },
+      { "category": "Africa/ME",    "big": 5.7,  "bmk": 0.0  },
+      { "category": "Australasia",  "big": 5.6,  "bmk": 0.0  },
+      { "category": "Europe emrg.", "big": 4.3,  "bmk": 0.0  },
+      { "category": "Japan",        "big": -1.3, "bmk": 8.4  },
+      { "category": "China",        "big": 0.0,  "bmk": 0.5  },
+      { "category": "Others",       "big": -0.4, "bmk": 0.0  }
+    ],
+    "totals": { "big": 100, "bmk": 100 },
+    "footnote": "Valores negativos = posiciones cortas via derivativos (PIMCO sleeve)."
+  }
+}
