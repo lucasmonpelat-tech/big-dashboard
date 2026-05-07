@@ -1,8 +1,9 @@
 {
   "asOf": "2026-04-30",
-  "source": "Maximus snapshot 2026-05-06 (refleja cierre abril, post-rotación BRK.B)",
-  "approved_by": "Lucas Monpelat (Maximus oficial)",
-  "note": "Datos al cierre de Abril 2026. Refleja la rotación de BRK.B → CSPX/THOR ejecutada el 16-Abr-2026.",
+  "source": "DEPRECATED — Maximus snapshot. NEEDS REBUILD FROM PRIMARY: per-fund factsheets × Pershing weights",
+  "deprecated": true,
+  "todo": "Reconstruir desde factsheets directos: CSPX (S&P sectors), MFSCV (MFS), NBGMT (NB), THOR (Thornburg), JHGSC (Janus), LGLI (Lazard), 4BRZ (iShares), ARGT (Global X), ILF (iShares) ponderado por pesos BIG",
+  "note": "Datos al cierre de Abril 2026. Refleja la rotación de BRK.B → CSPX/THOR ejecutada el 16-Abr-2026. NO usar como source of truth — usar mientras se rebuilda desde primarias.",
 
   "style": {
     "title": "Distribución por Estilo",

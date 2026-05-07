@@ -132,25 +132,31 @@ const CURRENT_YIELD = {
     "LU2659193242": { y: null, t: "N/A — illiquid PE",    n: "NB PE — return via cap gain",   m: false },
     "XS2658535526": { y: 9.4,  t: "Distribution Rate",    n: "Barings BPCC — email datum",    m: true  },
     "FLEX-LEX":     { y: null, t: "N/A — illiquid PE",    n: "Flex-Lex — secondaries",        m: false },
-    "IE00B87KCF77": { y: 6.3,  t: "Current Yield",        n: "PIMCO Income factsheet",        m: false },
-    "IE00BDT57R20": { y: 5.9,  t: "Current Yield",        n: "PIMCO Low Dur factsheet",       m: false },
-    "IE000OE87WX6": { y: 6.2,  t: "Current Yield",        n: "Man IG Opp — YTW",              m: false },
-    "XS2324777171": { y: null, t: "Manual",               n: "⚠ Ask Nico Dujovne",            m: true  },
-    "IE00B29K0P99": { y: 8.2,  t: "Current Yield",        n: "PIMCO EM Local — YTW",          m: false },
-    "IE00BG13YG49": { y: 7.8,  t: "Current Yield",        n: "Schroder Cat Bond — Libor+5%",  m: false },
+    "IE00B87KCF77": { y: 4.38, t: "Current Yield",        n: "PIMCO website 31-Mar",          m: false },
+    "IE00BDT57R20": { y: 4.05, t: "Current Yield",        n: "PIMCO website 31-Mar",          m: false },
+    "IE000OE87WX6": { y: 6.20, t: "Current Yield",        n: "Man GLG factsheet (verify)",    m: false },
+    "XS2324777171": { y: 8.00, t: "Current Yield",        n: "Tenac/Nico Dujovne (verify)",   m: true  },
+    "IE00B29K0P99": { y: 6.21, t: "Current Yield",        n: "PIMCO website 31-Mar",          m: false },
+    "LU2049315265": { y: 7.80, t: "Current Yield",        n: "Schroder factsheet (verify)",   m: false },
     "CASH-USD":     { y: 4.3,  t: "Money Market",         n: "Fed Funds estimate",            m: false }
 };
 
 // ============================================================
-// FIXED INCOME YTM / DURATION / MATURITY (Maximus Mar-2026)
+// FIXED INCOME YTM / DURATION / MATURITY
+// Source priority: per-fund factsheet directo (PIMCO website, etc.)
+// NUNCA usar Maximus — solo primary sources
+// asOf indica cuándo se refrescó cada fondo
 // ============================================================
 const FI_METRICS = {
-    "IE00BDT57R20": { name: "PIMCO GIS Low Duration Income I",   ytw: 5.72, dur: 2.54, venc: 3.86,  rating: "AA"   },
-    "IE00B87KCF77": { name: "PIMCO GIS Income I",                ytw: 6.05, dur: 5.15, venc: 7.68,  rating: "AA-"  },
-    "IE000OE87WX6": { name: "Man GLG Global IG Opps",            ytw: 6.17, dur: 4.89, venc: 5.50,  rating: "BBB"  },
-    "IE00B29K0P99": { name: "PIMCO GIS EM Local Bond I",         ytw: 8.22, dur: 6.72, venc: 8.39,  rating: "BBB"  },
-    "XS2324777171": { name: "Tenac Global Fund (TGF)",           ytw: 8.67, dur: 5.17, venc: 11.92, rating: "—"    },
-    "IE00BG13YG49": { name: "Schroder GAIA Cat Bond",            ytw: 7.80, dur: 0.50, venc: 2.50,  rating: "BB+"  }
+    // PIMCO funds — directo de pimco.com (snapshot 31-Mar-2026, próx update ~10-15-May para abril)
+    "IE00BDT57R20": { name: "PIMCO GIS Low Duration Income I",   ytw: 6.39, dur: 2.78, venc: 4.04,  rating: "AA",   src: "PIMCO website",  asOf: "2026-03-31" },
+    "IE00B87KCF77": { name: "PIMCO GIS Income I",                ytw: 6.90, dur: 6.25, venc: 9.27,  rating: "AA-",  src: "PIMCO website",  asOf: "2026-03-31" },
+    "IE00B29K0P99": { name: "PIMCO GIS EM Local Bond I",         ytw: 8.94, dur: 5.63, venc: 7.32,  rating: "BBB",  src: "PIMCO website",  asOf: "2026-03-31" },
+
+    // Man GLG, Schroder, Tenac — TODO: refrescar desde factsheet directo
+    "IE000OE87WX6": { name: "Man GLG Global IG Opps",            ytw: 7.10, dur: 5.76, venc: 5.50,  rating: "BBB",  src: "Man factsheet (verify)", asOf: "2026-03-31" },
+    "LU2049315265": { name: "Schroder GAIA Cat Bond Class C",    ytw: 5.12, dur: 4.03, venc: 8.19,  rating: "BBB+", src: "Schroder factsheet (verify)", asOf: "2026-03-31" },
+    "XS2324777171": { name: "Tenac Global Fund (TGF)",           ytw: 8.67, dur: 5.17, venc: 11.92, rating: "—",    src: "Manual (Nico Dujovne)", asOf: "2026-04-30" }
 };
 
 // ============================================================

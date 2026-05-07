@@ -1,8 +1,9 @@
 {
   "asOf": "2026-04-30",
-  "source": "Maximus snapshot 2026-05-06 (refleja cierre abril)",
-  "approved_by": "Lucas Monpelat (Maximus oficial)",
-  "note": "Calidad crediticia y exposiciones FI al cierre de Abril 2026.",
+  "source": "DEPRECATED — Maximus snapshot. NEEDS REBUILD FROM PRIMARY: per-fund FI factsheets × Pershing weights",
+  "deprecated": true,
+  "todo": "Reconstruir desde factsheets directos: PIMCO Income/LD/EM (PIMCO website), Man GLG, Schroder Cat Bond, Tenac (manual). Cada uno con su credit quality, sector, regional breakdown, ponderado por pesos BIG",
+  "note": "Datos al cierre de Abril 2026. NO usar como source of truth — usar mientras se rebuilda desde primarias.",
 
   "fi_stats": {
     "title": "Estadísticas Renta Fija",
