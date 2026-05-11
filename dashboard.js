@@ -1138,7 +1138,6 @@ async function renderEquityRace() {
                 <td>${h.months_held}</td>
                 <td>${fmtUsdNeutral(h.cash_in_usd)}</td>
                 <td>${fmtUsdNeutral(h.cash_out_usd)}</td>
-                <td>${fmtUsd(h.net_pnl_usd)}</td>
                 <td>${fmtPct(h.mwr_pct)}</td>
                 <td>${fmtPct(h.acwi_period_return_pct)}</td>
                 <td>${fmtPp(h.alpha_mwr_pp)}</td>
@@ -1146,17 +1145,15 @@ async function renderEquityRace() {
                 <td class="left"><span style="color:${statusColor[h.status]};font-weight:700;">${statusBadge[h.status]}</span></td>
             </tr>
         `).join('');
-        const totalPnl = realContribs.holdings.reduce((a,h) => a + (h.net_pnl_usd || 0), 0);
         const totalRow = `<tr style="border-top:2px solid #1F3864;">
-            <td class="left" colspan="5"><strong>TOTAL Net PnL</strong></td>
-            <td>${fmtUsd(totalPnl)}</td>
-            <td colspan="4" style="text-align:right;color:#90CAF9;">Total Contrib sleeve:</td>
+            <td class="left" colspan="8" style="text-align:right;color:#90CAF9;">Total Contrib sleeve:</td>
             <td>${fmtPp(realContribs.total_contribution_pp)}</td>
+            <td></td>
         </tr>`;
         document.getElementById('er-real-body').innerHTML = realRows + totalRow;
     } else {
         document.getElementById('er-real-body').innerHTML =
-            '<tr><td colspan="11" style="padding:20px;text-align:center;color:#FFA726;">Real TWR contributions not available. Run: <code>python scripts/holding_contributions_real.py --sleeve equity</code></td></tr>';
+            '<tr><td colspan="10" style="padding:20px;text-align:center;color:#FFA726;">Real TWR contributions not available. Run: <code>python scripts/holding_contributions_real.py --sleeve equity</code></td></tr>';
     }
 
     // Trade Ideas generation
