@@ -134,29 +134,44 @@ def compute_contributions(sleeve_real_path: Path, sleeve_key: str):
         contrib_pp = weighted_contrib * 100
 
         # ============================================================
-        # MONEY-WEIGHTED RETURN — Return on Net Capital Deployed
-        # Net Capital = Buys - Sells (lo que REALMENTE pusiste de capital propio)
-        # Net Gain = (Sells + Final MV) - Buys
-        # MWR % = Net Gain / Net Capital × 100
+        # MONEY-WEIGHTED RETURN — Modified Dietz (estándar institucional)
+        # Considera el TIMING de cada compra/venta para computar avg capital
+        #
+        # MWR = (V_end + W_total - D_total) / (Σ D_i × w_i - Σ W_i × w_i)
+        # donde w_i = (T - t_i) / T = tiempo restante en período al hacer flow
         # ============================================================
         cash_in = 0.0          # total compras
         sells_received = 0.0   # total ventas (NO incluye MV final)
+        deposits_t = []        # (month_idx, amount) for each buy
+        withdrawals_t = []     # (month_idx, amount) for each sell
         prev_qty = 0.0
         for i, p in enumerate(points):
             qty_change = p["qty"] - prev_qty
             if qty_change > 0:
-                cash_in += qty_change * p["price"]
+                amt = qty_change * p["price"]
+                cash_in += amt
+                deposits_t.append((i, amt))
             elif qty_change < 0:
-                sells_received += abs(qty_change) * p["price"]
+                amt = abs(qty_change) * p["price"]
+                sells_received += amt
+                withdrawals_t.append((i, amt))
             prev_qty = p["qty"]
 
         final_qty = points[-1]["qty"]
         final_mv = final_qty * points[-1]["price"] if final_qty > 0 else 0
         cash_out = sells_received + final_mv
 
-        net_capital = cash_in - sells_received   # capital NETO desplegado
         net_pnl_usd = cash_out - cash_in
-        mwr_pct = ((net_pnl_usd / net_capital) * 100) if net_capital > 0 else None
+
+        # Modified Dietz: weight cash flows by time remaining
+        n_periods = len(points) - 1
+        if n_periods <= 0:
+            mwr_pct = None
+        else:
+            weighted_buys = sum(amt * (n_periods - t) / n_periods for t, amt in deposits_t)
+            weighted_sells = sum(amt * (n_periods - t) / n_periods for t, amt in withdrawals_t)
+            avg_capital = weighted_buys - weighted_sells  # V_begin = 0
+            mwr_pct = (net_pnl_usd / avg_capital * 100) if avg_capital > 0 else None
 
         # ACWI period return for same exact months
         acwi_period_return_pct = None
