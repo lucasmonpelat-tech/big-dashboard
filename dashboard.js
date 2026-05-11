@@ -1090,52 +1090,73 @@ async function renderEquityRace() {
     // ============================================================
     if (realContribs && realContribs.holdings && realContribs.holdings.length) {
         const statusColor = {
-            winner:  '#81C784',
-            lagging: '#FFA726',
-            loser:   '#EF5350',
-            closed:  '#90A4AE',
+            outperform:          '#81C784',
+            outperform_closed:   '#A5D6A7',
+            underperform:        '#EF5350',
+            underperform_closed: '#FFAB91',
+            neutral:             '#90A4AE',
+            neutral_closed:      '#B0BEC5',
+            unknown:             '#607D8B',
         };
         const statusBadge = {
-            winner:  '🏆 Winner',
-            lagging: '⚠️ Lagging',
-            loser:   '🔴 Loser',
-            closed:  '⚰️ Closed',
+            outperform:          '🏆 OUTPERFORM',
+            outperform_closed:   '🏆 OUTPERFORM (cerrado)',
+            underperform:        '🔴 UNDERPERFORM',
+            underperform_closed: '🔴 UNDERPERFORM (cerrado)',
+            neutral:             '⚪ NEUTRAL',
+            neutral_closed:      '⚪ NEUTRAL (cerrado)',
+            unknown:             '⚪ —',
         };
-        const fmtSigned = (v, suffix='%') => {
+        const fmtPct = (v, decimals=2) => {
             if (v == null) return '—';
             const c = v >= 0 ? '#81C784' : '#EF5350';
             const sign = v >= 0 ? '+' : '';
-            return `<span style="color:${c};">${sign}${v.toFixed(2)}${suffix}</span>`;
+            return `<span style="color:${c};">${sign}${v.toFixed(decimals)}%</span>`;
         };
-        const fmtContrib = v => {
+        const fmtPp = (v, decimals=2) => {
             if (v == null) return '—';
             const c = v >= 0 ? '#81C784' : '#EF5350';
             const sign = v >= 0 ? '+' : '';
-            return `<strong style="color:${c};">${sign}${v.toFixed(2)}pp</strong>`;
+            return `<strong style="color:${c};">${sign}${v.toFixed(decimals)}pp</strong>`;
+        };
+        const fmtUsd = (v) => {
+            if (v == null) return '—';
+            const c = v >= 0 ? '#81C784' : '#EF5350';
+            const sign = v >= 0 ? '+' : '';
+            return `<span style="color:${c};font-family:'Courier New',monospace;">${sign}$${Math.abs(v).toLocaleString('en-US', {maximumFractionDigits: 0})}</span>`;
+        };
+        const fmtUsdNeutral = (v) => {
+            if (v == null) return '—';
+            return `<span style="color:#E0E8F0;font-family:'Courier New',monospace;">$${v.toLocaleString('en-US', {maximumFractionDigits: 0})}</span>`;
         };
         document.getElementById('er-real-source').innerHTML =
-            `Source: <strong>${realContribs.source}</strong> · Period: ${realContribs.period_start} → ${realContribs.period_end} · ` +
-            `Total contribution: <strong>${(realContribs.total_contribution_pp >= 0 ? '+' : '')}${realContribs.total_contribution_pp.toFixed(2)}pp</strong>`;
+            `Source: <strong>${realContribs.source}</strong> · Period: ${realContribs.period_start} → ${realContribs.period_end}`;
         const realRows = realContribs.holdings.map(h => `
             <tr>
                 <td class="left"><strong>${h.name}</strong><br><span style="font-size:10px;color:#6B88A8;">${h.ticker}</span></td>
                 <td class="left" style="font-size:11px;color:#90CAF9;">${h.period_start.slice(0,7)} → ${h.period_end.slice(0,7)}</td>
                 <td>${h.months_held}</td>
-                <td>${h.avg_weight_pct.toFixed(2)}%</td>
-                <td>${fmtSigned(h.twr_pct)}</td>
-                <td>${fmtContrib(h.contribution_pp)}</td>
+                <td>${fmtUsdNeutral(h.cash_in_usd)}</td>
+                <td>${fmtUsdNeutral(h.cash_out_usd)}</td>
+                <td>${fmtUsd(h.net_pnl_usd)}</td>
+                <td>${fmtPct(h.mwr_pct)}</td>
+                <td>${fmtPct(h.acwi_period_return_pct)}</td>
+                <td>${fmtPp(h.alpha_mwr_pp)}</td>
+                <td>${fmtPp(h.contribution_pp)}</td>
                 <td class="left"><span style="color:${statusColor[h.status]};font-weight:700;">${statusBadge[h.status]}</span></td>
             </tr>
         `).join('');
+        const totalPnl = realContribs.holdings.reduce((a,h) => a + (h.net_pnl_usd || 0), 0);
         const totalRow = `<tr style="border-top:2px solid #1F3864;">
-            <td class="left" colspan="5"><strong>TOTAL Sleeve TWR</strong></td>
-            <td>${fmtContrib(realContribs.total_contribution_pp)}</td>
-            <td></td>
+            <td class="left" colspan="5"><strong>TOTAL Net PnL</strong></td>
+            <td>${fmtUsd(totalPnl)}</td>
+            <td colspan="4" style="text-align:right;color:#90CAF9;">Total Contrib sleeve:</td>
+            <td>${fmtPp(realContribs.total_contribution_pp)}</td>
         </tr>`;
         document.getElementById('er-real-body').innerHTML = realRows + totalRow;
     } else {
         document.getElementById('er-real-body').innerHTML =
-            '<tr><td colspan="7" style="padding:20px;text-align:center;color:#FFA726;">Real TWR contributions not available. Run: <code>python scripts/holding_contributions_real.py --sleeve equity</code></td></tr>';
+            '<tr><td colspan="11" style="padding:20px;text-align:center;color:#FFA726;">Real TWR contributions not available. Run: <code>python scripts/holding_contributions_real.py --sleeve equity</code></td></tr>';
     }
 
     // Trade Ideas generation

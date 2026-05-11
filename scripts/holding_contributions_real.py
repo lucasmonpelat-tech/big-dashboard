@@ -54,23 +54,27 @@ NAME_BY_TICKER = {
 }
 
 
-def status_from_contribution(contrib_pp: float, is_closed: bool) -> str:
-    """Classify holding by contribution magnitude."""
-    if is_closed:
-        return "closed"
-    if contrib_pp >= 1.0:
-        return "winner"
-    if contrib_pp >= 0:
-        return "lagging"
-    return "loser"
+def status_from_alpha(alpha_pp: float, is_closed: bool) -> str:
+    """Classify holding by alpha vs ACWI during holding period."""
+    suffix = "_closed" if is_closed else ""
+    if alpha_pp is None:
+        return "unknown"
+    if alpha_pp > 0:
+        return "outperform" + suffix
+    if alpha_pp < 0:
+        return "underperform" + suffix
+    return "neutral" + suffix
 
 
 def status_emoji(status: str) -> str:
     return {
-        "winner":  "[W] Winner",
-        "lagging": "[~] Lagging",
-        "loser":   "[L] Loser",
-        "closed":  "[X] Closed",
+        "outperform":         "[+] OUTPERFORM",
+        "outperform_closed":  "[+/X] OUTPERFORM (cerrado)",
+        "underperform":       "[-] UNDERPERFORM",
+        "underperform_closed":"[-/X] UNDERPERFORM (cerrado)",
+        "neutral":            "[=] NEUTRAL",
+        "neutral_closed":     "[=/X] NEUTRAL (cerrado)",
+        "unknown":            "[?] UNKNOWN",
     }.get(status, "")
 
 
@@ -81,6 +85,13 @@ def compute_contributions(sleeve_real_path: Path, sleeve_key: str):
     months = [pt["date"] for pt in series]
     if len(months) < 2:
         raise ValueError(f"Need at least 2 month-end points; got {len(months)}")
+
+    # Build ACWI index lookup: date -> index value
+    # Note: ACWI series only available for equity sleeve comparison
+    acwi_by_date = {}
+    if "acwi_index_series" in data:
+        for pt in data["acwi_index_series"]:
+            acwi_by_date[pt["date"]] = pt.get("index", pt.get("price"))
 
     # Build per-ticker timeline
     by_ticker = defaultdict(list)
@@ -100,40 +111,70 @@ def compute_contributions(sleeve_real_path: Path, sleeve_key: str):
     for ticker, points in by_ticker.items():
         if len(points) < 1:
             continue
-        # If only 1 point, contribution is 0 (just entered or just exited)
         period_start = points[0]["month"]
         period_end = points[-1]["month"]
         is_closed = period_end != final_month
 
-        # Compute cumulative price return + weighted contribution
         cum_factor = 1.0
         weighted_contrib = 0.0
-        weight_sum = 0.0
-        n_months_for_return = 0
         for i in range(1, len(points)):
             prev = points[i - 1]
             curr = points[i]
-            # Price return (handles in-month buys imperfectly but acceptable)
-            if prev["price"] and prev["price"] > 0:
-                ret = (curr["price"] / prev["price"]) - 1
-            else:
-                ret = 0
+            ret = (curr["price"] / prev["price"]) - 1 if prev["price"] and prev["price"] > 0 else 0
             cum_factor *= (1 + ret)
-            n_months_for_return += 1
-            # Weight at start of month
             if prev["sleeve_mv"] and prev["sleeve_mv"] > 0:
                 w = prev["mv"] / prev["sleeve_mv"]
                 weighted_contrib += w * ret
-                weight_sum += w
 
-        # Avg weight (across all months held)
         avg_weight = sum(
             p["mv"] / p["sleeve_mv"] for p in points if p["sleeve_mv"] and p["sleeve_mv"] > 0
         ) / len(points) if len(points) > 0 else 0
 
         twr_pct = (cum_factor - 1) * 100
         contrib_pp = weighted_contrib * 100
-        status = status_from_contribution(contrib_pp, is_closed)
+
+        # ============================================================
+        # MONEY-WEIGHTED RETURN — considera todas las buys/sells reales
+        # cash_in  = $ que pusiste vía compras
+        # cash_out = $ que sacaste vía ventas + MV final si todavía activo
+        # MWR % = (cash_out - cash_in) / cash_in × 100
+        # ============================================================
+        cash_in = 0.0
+        cash_out = 0.0
+        prev_qty = 0.0
+        for i, p in enumerate(points):
+            qty_change = p["qty"] - prev_qty
+            if qty_change > 0:
+                cash_in += qty_change * p["price"]
+            elif qty_change < 0:
+                cash_out += abs(qty_change) * p["price"]
+            prev_qty = p["qty"]
+        # Si el activo todavía está → contabilizar MV final como cash_out potencial
+        final_qty = points[-1]["qty"]
+        if final_qty > 0 and not is_closed:
+            cash_out += final_qty * points[-1]["price"]
+        elif is_closed:
+            # Activo cerrado: aproximar la venta final usando el último precio conocido
+            cash_out += final_qty * points[-1]["price"] if final_qty > 0 else 0
+            # Si qty caía a 0 al cierre, ya capturado en qty_change negativos
+        mwr_pct = ((cash_out - cash_in) / cash_in * 100) if cash_in > 0 else None
+        net_pnl_usd = cash_out - cash_in
+
+        # ACWI period return for same exact months
+        acwi_period_return_pct = None
+        alpha_pp_twr = None
+        alpha_pp_mwr = None
+        if acwi_by_date:
+            acwi_start = acwi_by_date.get(period_start)
+            acwi_end = acwi_by_date.get(period_end)
+            if acwi_start and acwi_end and acwi_start > 0:
+                acwi_period_return_pct = (acwi_end / acwi_start - 1) * 100
+                alpha_pp_twr = twr_pct - acwi_period_return_pct
+                if mwr_pct is not None:
+                    alpha_pp_mwr = mwr_pct - acwi_period_return_pct
+
+        # Status based on MONEY-WEIGHTED alpha (lo que pidió Lucas)
+        status = status_from_alpha(alpha_pp_mwr if alpha_pp_mwr is not None else alpha_pp_twr, is_closed)
 
         contributions.append({
             "ticker": ticker,
@@ -142,6 +183,13 @@ def compute_contributions(sleeve_real_path: Path, sleeve_key: str):
             "period_end": period_end,
             "months_held": len(points),
             "twr_pct": round(twr_pct, 2),
+            "mwr_pct": round(mwr_pct, 2) if mwr_pct is not None else None,
+            "net_pnl_usd": round(net_pnl_usd, 0),
+            "cash_in_usd": round(cash_in, 0),
+            "cash_out_usd": round(cash_out, 0),
+            "acwi_period_return_pct": round(acwi_period_return_pct, 2) if acwi_period_return_pct is not None else None,
+            "alpha_twr_pp": round(alpha_pp_twr, 2) if alpha_pp_twr is not None else None,
+            "alpha_mwr_pp": round(alpha_pp_mwr, 2) if alpha_pp_mwr is not None else None,
             "avg_weight_pct": round(avg_weight * 100, 2),
             "contribution_pp": round(contrib_pp, 2),
             "is_closed": is_closed,
@@ -150,33 +198,40 @@ def compute_contributions(sleeve_real_path: Path, sleeve_key: str):
             "final_mv_usd": round(points[-1]["mv"], 2) if not is_closed else 0,
         })
 
-    # Sort by contribution descending
-    contributions.sort(key=lambda c: -c["contribution_pp"])
+    # Sort by Money-Weighted alpha vs ACWI descending (most outperformers first)
+    contributions.sort(key=lambda c: -(c["alpha_mwr_pp"] if c["alpha_mwr_pp"] is not None else -999))
     return contributions, data
 
 
 def print_report(sleeve_label: str, contributions: list, src_data: dict):
-    print(f"\n{'=' * 100}")
-    print(f"{sleeve_label.upper()} SLEEVE — REAL TWR CONTRIBUTIONS")
+    print(f"\n{'=' * 150}")
+    print(f"{sleeve_label.upper()} SLEEVE — REAL MONEY-WEIGHTED RETURN + ALPHA vs ACWI")
     print(f"Source: {src_data.get('source', 'Pershing transactions')}")
     print(f"Period: {contributions[0]['period_start']} -> {max(c['period_end'] for c in contributions)}")
-    print(f"{'=' * 100}")
-    print(f"{'Status':12s} {'Ticker':10s} {'Months':>7s} {'AvgWeight':>10s} {'TWR%':>9s} {'Contrib pp':>11s}  Period")
-    print("-" * 100)
+    print(f"{'=' * 150}")
+    print(f"{'Status':32s} {'Ticker':10s} {'Months':>7s} {'$ In':>12s} {'$ Out':>12s} {'NetPnL':>11s} {'MWR%':>8s} {'TWR%':>8s} {'ACWI':>8s} {'Alpha(MWR)':>11s}")
+    print("-" * 150)
     for c in contributions:
+        mwr_str = f"{c['mwr_pct']:>+7.2f}%" if c['mwr_pct'] is not None else "    —  "
+        acwi_str = f"{c['acwi_period_return_pct']:>+7.2f}%" if c['acwi_period_return_pct'] is not None else "    —  "
+        alpha_str = f"{c['alpha_mwr_pp']:>+9.2f}pp" if c['alpha_mwr_pp'] is not None else "    —     "
         print(
-            f"{c['status_label']:14s} "
+            f"{c['status_label']:32s} "
             f"{c['ticker']:10s} "
             f"{c['months_held']:>7d} "
-            f"{c['avg_weight_pct']:>9.2f}% "
-            f"{c['twr_pct']:>+8.2f}% "
-            f"{c['contribution_pp']:>+10.2f}pp "
-            f"{c['period_start']} -> {c['period_end']}"
+            f"${c['cash_in_usd']:>10,.0f} "
+            f"${c['cash_out_usd']:>10,.0f} "
+            f"${c['net_pnl_usd']:>+9,.0f} "
+            f"{mwr_str} "
+            f"{c['twr_pct']:>+7.2f}% "
+            f"{acwi_str} "
+            f"{alpha_str}"
         )
 
     total_contrib = sum(c["contribution_pp"] for c in contributions)
-    print("-" * 100)
-    print(f"{'TOTAL':14s} {'':10s} {'':>7s} {'':>10s} {'':>9s} {total_contrib:>+10.2f}pp")
+    total_pnl = sum(c["net_pnl_usd"] for c in contributions)
+    print("-" * 150)
+    print(f"TOTAL contrib sleeve: {total_contrib:+.2f}pp | TOTAL net PnL: ${total_pnl:+,.0f}")
 
 
 def main():
