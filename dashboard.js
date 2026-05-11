@@ -1033,57 +1033,9 @@ async function renderEquityRace() {
     };
     Plotly.newPlot('er-chart', traces, layout, { responsive: true, displaylogo: false });
 
-    // Holdings table sorted by SI contribution
+    // (Backtest holdings table removed — using REAL TWR table only)
     const sorted = [...holdings].sort((a, b) => (b.contribution_pct || -999) - (a.contribution_pct || -999));
     const acwi_ref = siRet.acwi || 0;
-    const fmtPct = (v, withSign = true) => {
-        if (v == null) return '—';
-        const color = v >= 0 ? '#81C784' : '#EF5350';
-        const sign = withSign && v >= 0 ? '+' : '';
-        return `<span style="color:${color};font-weight:700;">${sign}${v.toFixed(2)}%</span>`;
-    };
-    const fmtContrib = v => {
-        if (v == null) return '—';
-        const color = v >= 0 ? '#D4AF37' : '#EF5350';
-        const sign = v >= 0 ? '+' : '';
-        return `<span style="color:${color};font-weight:700;">${sign}${v.toFixed(2)}pp</span>`;
-    };
-    const holdingsRows = sorted.map(h => {
-        const rel = h.si_return_pct != null ? h.si_return_pct - acwi_ref : null;
-        const winStatus = rel == null ? '—' : rel >= 3 ? '<span style="color:#81C784;font-weight:700;">🏆 Winner</span>' : rel >= 0 ? '<span style="color:#81C784;">✅ OK</span>' : rel >= -5 ? '<span style="color:#FFA726;">⚠️ Lagging</span>' : '<span style="color:#EF5350;font-weight:700;">🔴 Loser</span>';
-        const relColor = rel == null ? '#6B88A8' : rel >= 0 ? '#81C784' : '#EF5350';
-        const relTxt = rel == null ? '—' : (rel >= 0 ? '+' : '') + rel.toFixed(2) + 'pp';
-        return `<tr>
-            <td class="left"><strong>${h.name}</strong></td>
-            <td class="left" style="font-size:10px;color:#90CAF9;">${h.source}</td>
-            <td>$${(h.value_usd/1000).toFixed(0)}K</td>
-            <td>${h.weight_pct.toFixed(1)}%</td>
-            <td>${fmtPct(h.ytd_return_pct)}</td>
-            <td>${fmtPct(h.si_return_pct)}</td>
-            <td style="color:${relColor};font-weight:700;">${relTxt}</td>
-            <td>${fmtContrib(h.ytd_contribution_pct)}</td>
-            <td>${fmtContrib(h.contribution_pct)}</td>
-            <td class="left">${winStatus}</td>
-        </tr>`;
-    }).join('');
-
-    // Benchmark reference row (ACWI) — appended at bottom
-    const acwiYtd = returns.YTD?.acwi;
-    const acwiSi = returns.SI?.acwi;
-    const acwiRow = `<tr style="background:#12243A;border-top:2px solid #64B5F6;">
-        <td class="left"><strong style="color:#64B5F6;">MSCI ACWI <span style="font-size:10px;opacity:0.8;">(Benchmark)</span></strong></td>
-        <td class="left" style="font-size:10px;color:#90CAF9;">Yahoo:ACWI</td>
-        <td style="color:#6B88A8;">—</td>
-        <td style="color:#6B88A8;">—</td>
-        <td>${fmtPct(acwiYtd)}</td>
-        <td>${fmtPct(acwiSi)}</td>
-        <td style="color:#6B88A8;">0.00pp</td>
-        <td style="color:#6B88A8;">—</td>
-        <td style="color:#6B88A8;">—</td>
-        <td class="left"><span style="color:#64B5F6;font-weight:700;">🎯 Benchmark</span></td>
-    </tr>`;
-
-    document.getElementById('er-holdings-body').innerHTML = holdingsRows + acwiRow;
 
     // ============================================================
     // REAL TWR HOLDING CONTRIBUTIONS (from Pershing transactions)
