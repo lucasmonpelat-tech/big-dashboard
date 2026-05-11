@@ -1136,8 +1136,6 @@ async function renderEquityRace() {
                 <td class="left"><strong>${h.name}</strong><br><span style="font-size:10px;color:#6B88A8;">${h.ticker}</span></td>
                 <td class="left" style="font-size:11px;color:#90CAF9;">${h.period_start.slice(0,7)} → ${h.period_end.slice(0,7)}</td>
                 <td>${h.months_held}</td>
-                <td>${fmtUsdNeutral(h.cash_in_usd)}</td>
-                <td>${fmtUsdNeutral(h.cash_out_usd)}</td>
                 <td>${fmtPct(h.mwr_pct)}</td>
                 <td>${fmtPct(h.acwi_period_return_pct)}</td>
                 <td>${fmtPct(h.alpha_mwr_pp)}</td>
@@ -1147,7 +1145,7 @@ async function renderEquityRace() {
         document.getElementById('er-real-body').innerHTML = realRows;
     } else {
         document.getElementById('er-real-body').innerHTML =
-            '<tr><td colspan="9" style="padding:20px;text-align:center;color:#FFA726;">Real TWR contributions not available. Run: <code>python scripts/holding_contributions_real.py --sleeve equity</code></td></tr>';
+            '<tr><td colspan="7" style="padding:20px;text-align:center;color:#FFA726;">Real TWR contributions not available. Run: <code>python scripts/holding_contributions_real.py --sleeve equity</code></td></tr>';
     }
 
     // Trade Ideas generation
