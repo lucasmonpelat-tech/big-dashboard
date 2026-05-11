@@ -134,31 +134,29 @@ def compute_contributions(sleeve_real_path: Path, sleeve_key: str):
         contrib_pp = weighted_contrib * 100
 
         # ============================================================
-        # MONEY-WEIGHTED RETURN — considera todas las buys/sells reales
-        # cash_in  = $ que pusiste vía compras
-        # cash_out = $ que sacaste vía ventas + MV final si todavía activo
-        # MWR % = (cash_out - cash_in) / cash_in × 100
+        # MONEY-WEIGHTED RETURN — Return on Net Capital Deployed
+        # Net Capital = Buys - Sells (lo que REALMENTE pusiste de capital propio)
+        # Net Gain = (Sells + Final MV) - Buys
+        # MWR % = Net Gain / Net Capital × 100
         # ============================================================
-        cash_in = 0.0
-        cash_out = 0.0
+        cash_in = 0.0          # total compras
+        sells_received = 0.0   # total ventas (NO incluye MV final)
         prev_qty = 0.0
         for i, p in enumerate(points):
             qty_change = p["qty"] - prev_qty
             if qty_change > 0:
                 cash_in += qty_change * p["price"]
             elif qty_change < 0:
-                cash_out += abs(qty_change) * p["price"]
+                sells_received += abs(qty_change) * p["price"]
             prev_qty = p["qty"]
-        # Si el activo todavía está → contabilizar MV final como cash_out potencial
+
         final_qty = points[-1]["qty"]
-        if final_qty > 0 and not is_closed:
-            cash_out += final_qty * points[-1]["price"]
-        elif is_closed:
-            # Activo cerrado: aproximar la venta final usando el último precio conocido
-            cash_out += final_qty * points[-1]["price"] if final_qty > 0 else 0
-            # Si qty caía a 0 al cierre, ya capturado en qty_change negativos
-        mwr_pct = ((cash_out - cash_in) / cash_in * 100) if cash_in > 0 else None
+        final_mv = final_qty * points[-1]["price"] if final_qty > 0 else 0
+        cash_out = sells_received + final_mv
+
+        net_capital = cash_in - sells_received   # capital NETO desplegado
         net_pnl_usd = cash_out - cash_in
+        mwr_pct = ((net_pnl_usd / net_capital) * 100) if net_capital > 0 else None
 
         # ACWI period return for same exact months
         acwi_period_return_pct = None
