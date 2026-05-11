@@ -223,9 +223,13 @@ def get_current_mv(ticker):
     return None
 
 
-def compute_returns(aggregates, acwi_prices, today=None):
-    """For each ticker, compute Return, ACWI Return, Alpha."""
-    today = today or date.today()
+def compute_returns(aggregates, acwi_prices, calculation_date=None):
+    """For each ticker, compute Return, ACWI Return, Alpha.
+
+    For active positions: MV and ACWI both measured at calculation_date
+    (to ensure consistent time point for fair comparison).
+    """
+    calc_date = calculation_date or date.today()
     results = []
 
     for ticker, agg in aggregates.items():
@@ -238,7 +242,7 @@ def compute_returns(aggregates, acwi_prices, today=None):
             end_value = 0  # nothing remaining
             total_proceeds = agg["total_sell_usd"]
         else:
-            end_date = today  # today as "hypothetical sell"
+            end_date = calc_date  # use calculation_date (matches ACWI end date)
             current_mv = get_current_mv(ticker) or 0
             end_value = current_mv
             total_proceeds = agg["total_sell_usd"] + current_mv
@@ -312,6 +316,28 @@ def main():
     aggregates = aggregate_by_ticker(trades)
     print(f"Equity tickers: {len(aggregates)}")
 
+    # Determine calculation_date from positions_latest.json (so MV and ACWI match)
+    pos_file = ROOT / "data" / "positions_latest.json"
+    calc_date = date.today()
+    if pos_file.exists():
+        with open(pos_file) as f:
+            pos = json.load(f)
+        as_of_str = pos.get("as_of", "")
+        # Parse "May 5, 2026 9:35 AM EDT"
+        try:
+            calc_date = datetime.strptime(as_of_str.split(" 9")[0].split(" ")[0] + " " + as_of_str.split(" ")[1].rstrip(',') + " " + as_of_str.split(" ")[2], "%b %d %Y").date()
+        except Exception:
+            try:
+                # Try alternative parse
+                import re as _re
+                m = _re.search(r"(\w+)\s+(\d+),\s+(\d+)", as_of_str)
+                if m:
+                    months = {'Jan':1,'Feb':2,'Mar':3,'Apr':4,'May':5,'Jun':6,'Jul':7,'Aug':8,'Sep':9,'Oct':10,'Nov':11,'Dec':12}
+                    calc_date = date(int(m.group(3)), months[m.group(1)], int(m.group(2)))
+            except Exception:
+                pass
+    print(f"Calculation date: {calc_date} (matches MV and ACWI end)")
+
     # Collect all relevant dates for ACWI fetch
     all_dates = set()
     for agg in aggregates.values():
@@ -319,12 +345,12 @@ def main():
             all_dates.add(agg["first_buy_date"])
         if agg["last_trade_date"]:
             all_dates.add(agg["last_trade_date"])
-    all_dates.add(date.today())
+    all_dates.add(calc_date)
 
     acwi_prices = fetch_acwi_prices(list(all_dates))
     print(f"ACWI prices fetched: {len(acwi_prices)} days")
 
-    results = compute_returns(aggregates, acwi_prices)
+    results = compute_returns(aggregates, acwi_prices, calculation_date=calc_date)
 
     # Add status
     for r in results:
