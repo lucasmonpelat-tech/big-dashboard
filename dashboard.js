@@ -1140,20 +1140,14 @@ async function renderEquityRace() {
                 <td>${fmtUsdNeutral(h.cash_out_usd)}</td>
                 <td>${fmtPct(h.mwr_pct)}</td>
                 <td>${fmtPct(h.acwi_period_return_pct)}</td>
-                <td>${fmtPp(h.alpha_mwr_pp)}</td>
-                <td>${fmtPp(h.contribution_pp)}</td>
+                <td>${fmtPct(h.alpha_mwr_pp)}</td>
                 <td class="left"><span style="color:${statusColor[h.status]};font-weight:700;">${statusBadge[h.status]}</span></td>
             </tr>
         `).join('');
-        const totalRow = `<tr style="border-top:2px solid #1F3864;">
-            <td class="left" colspan="8" style="text-align:right;color:#90CAF9;">Total Contrib sleeve:</td>
-            <td>${fmtPp(realContribs.total_contribution_pp)}</td>
-            <td></td>
-        </tr>`;
-        document.getElementById('er-real-body').innerHTML = realRows + totalRow;
+        document.getElementById('er-real-body').innerHTML = realRows;
     } else {
         document.getElementById('er-real-body').innerHTML =
-            '<tr><td colspan="10" style="padding:20px;text-align:center;color:#FFA726;">Real TWR contributions not available. Run: <code>python scripts/holding_contributions_real.py --sleeve equity</code></td></tr>';
+            '<tr><td colspan="9" style="padding:20px;text-align:center;color:#FFA726;">Real TWR contributions not available. Run: <code>python scripts/holding_contributions_real.py --sleeve equity</code></td></tr>';
     }
 
     // Trade Ideas generation
