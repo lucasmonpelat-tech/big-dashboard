@@ -1142,6 +1142,56 @@ async function renderEquityRace() {
     `;
     document.getElementById('er-trade-ideas').innerHTML = ideasHTML;
 
+    // ============================================================
+    // ACWI TOP 10 LOOKTHROUGH OVERLAP
+    // ============================================================
+    try {
+        const ovResp = await fetch('data/acwi_overlap.json?_=' + Date.now());
+        if (ovResp.ok) {
+            const ovData = await ovResp.json();
+            const summary = ovData.summary;
+            const summaryCard = (label, val, color, sub = '') => `
+                <div style="flex:1; background:#12243A; padding:14px; border-radius:6px; border-left:3px solid ${color};">
+                    <div style="font-size:11px; color:#90CAF9; margin-bottom:4px;">${label}</div>
+                    <div style="font-size:22px; font-weight:700; color:${color};">${val}</div>
+                    ${sub ? `<div style="font-size:10px; color:#90CAF9; margin-top:4px;">${sub}</div>` : ''}
+                </div>
+            `;
+            document.getElementById('er-overlap-summary').innerHTML =
+                summaryCard('🌐 ACWI Top 10 weight', summary.total_acwi_top10.toFixed(1) + '%', '#64B5F6', 'NVDA + AAPL + MSFT + ...') +
+                summaryCard('🎯 BIG exposure (lookthrough)', summary.total_big_top10_exposure.toFixed(1) + '%', '#D4AF37', 'via CSPX + UCITS funds') +
+                summaryCard('⚠️ Diff (BIG − ACWI)', (summary.diff_pp >= 0 ? '+' : '') + summary.diff_pp.toFixed(1) + 'pp', summary.diff_pp >= 0 ? '#81C784' : '#EF5350',
+                    summary.diff_pp < 0 ? 'BIG UNDERWEIGHT — explica gran parte del underperformance' : 'BIG OVERWEIGHT');
+
+            const ovRows = ovData.overlap.map((h, idx) => {
+                const diffColor = h.diff_pp >= 0 ? '#81C784' : '#EF5350';
+                const diffSign = h.diff_pp >= 0 ? '+' : '';
+                return `
+                    <tr>
+                        <td>${idx + 1}</td>
+                        <td class="left"><strong>${h.ticker}</strong></td>
+                        <td class="left" style="font-size:11px;">${h.name}</td>
+                        <td class="left" style="font-size:10px;color:#90CAF9;">${h.sector}</td>
+                        <td><strong style="color:#64B5F6;">${h.weight_acwi.toFixed(2)}%</strong></td>
+                        <td><strong style="color:#D4AF37;">${h.weight_big.toFixed(2)}%</strong></td>
+                        <td><strong style="color:${diffColor};">${diffSign}${h.diff_pp.toFixed(2)}pp</strong></td>
+                    </tr>
+                `;
+            }).join('');
+            const totalRow = `<tr style="border-top:2px solid #1F3864;background:#12243A;">
+                <td colspan="4" class="left"><strong>TOTAL TOP 10</strong></td>
+                <td><strong style="color:#64B5F6;">${summary.total_acwi_top10.toFixed(2)}%</strong></td>
+                <td><strong style="color:#D4AF37;">${summary.total_big_top10_exposure.toFixed(2)}%</strong></td>
+                <td><strong style="color:${summary.diff_pp >= 0 ? '#81C784' : '#EF5350'};">${summary.diff_pp >= 0 ? '+' : ''}${summary.diff_pp.toFixed(2)}pp</strong></td>
+            </tr>`;
+            document.getElementById('er-overlap-body').innerHTML = ovRows + totalRow;
+        }
+    } catch(e) {
+        console.warn('acwi_overlap.json not available', e);
+        document.getElementById('er-overlap-body').innerHTML =
+            '<tr><td colspan="7" style="padding:20px;text-align:center;color:#FFA726;">Run: <code>python scripts/acwi_overlap.py</code></td></tr>';
+    }
+
     // Generate specific trade recommendations based on REAL data
     const tradeRecs = [];
     const realGap = realPeriods ? realPeriods.SI.alpha : alpha_si;

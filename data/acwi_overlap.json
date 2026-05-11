@@ -1,0 +1,241 @@
+{
+  "refreshedAt": "2026-05-12",
+  "source": "ACWI holdings (iShares ACWI factsheet 24-Apr) + fund_holdings_top10.json (CSPX exact, UCITS estimates)",
+  "method": "BIG_exposure[stock] = \u03a3 (fund_weight_in_BIG \u00d7 stock_weight_in_fund / 100)",
+  "summary": {
+    "total_acwi_top10": 24.75,
+    "total_big_top10_exposure": 5.01,
+    "diff_pp": -19.74
+  },
+  "overlap": [
+    {
+      "ticker": "NVDA",
+      "name": "NVIDIA CORP",
+      "sector": "Information Technology",
+      "location": "United States",
+      "weight_acwi": 5.13,
+      "weight_big": 0.979,
+      "diff_pp": -4.151,
+      "contributors": [
+        {
+          "fund": "CSPX",
+          "fund_weight_in_big": 9.98,
+          "stock_weight_in_fund": 7.5,
+          "contribution": 0.749
+        },
+        {
+          "fund": "NBGMT",
+          "fund_weight_in_big": 4.61,
+          "stock_weight_in_fund": 5.0,
+          "contribution": 0.231
+        }
+      ]
+    },
+    {
+      "ticker": "AAPL",
+      "name": "APPLE INC",
+      "sector": "Information Technology",
+      "location": "United States",
+      "weight_acwi": 4.04,
+      "weight_big": 0.89,
+      "diff_pp": -3.15,
+      "contributors": [
+        {
+          "fund": "CSPX",
+          "fund_weight_in_big": 9.98,
+          "stock_weight_in_fund": 6.5,
+          "contribution": 0.649
+        },
+        {
+          "fund": "NBGMT",
+          "fund_weight_in_big": 4.61,
+          "stock_weight_in_fund": 4.0,
+          "contribution": 0.184
+        },
+        {
+          "fund": "THOR",
+          "fund_weight_in_big": 2.29,
+          "stock_weight_in_fund": 2.5,
+          "contribution": 0.057
+        }
+      ]
+    },
+    {
+      "ticker": "MSFT",
+      "name": "MICROSOFT CORP",
+      "sector": "Information Technology",
+      "location": "United States",
+      "weight_acwi": 3.04,
+      "weight_big": 1.015,
+      "diff_pp": -2.025,
+      "contributors": [
+        {
+          "fund": "CSPX",
+          "fund_weight_in_big": 9.98,
+          "stock_weight_in_fund": 6.0,
+          "contribution": 0.599
+        },
+        {
+          "fund": "NBGMT",
+          "fund_weight_in_big": 4.61,
+          "stock_weight_in_fund": 4.5,
+          "contribution": 0.207
+        },
+        {
+          "fund": "MFSCV",
+          "fund_weight_in_big": 4.3,
+          "stock_weight_in_fund": 3.0,
+          "contribution": 0.129
+        },
+        {
+          "fund": "THOR",
+          "fund_weight_in_big": 2.29,
+          "stock_weight_in_fund": 3.5,
+          "contribution": 0.08
+        }
+      ]
+    },
+    {
+      "ticker": "AMZN",
+      "name": "AMAZON.COM INC",
+      "sector": "Consumer Discretionary",
+      "location": "United States",
+      "weight_acwi": 2.58,
+      "weight_big": 0.537,
+      "diff_pp": -2.042,
+      "contributors": [
+        {
+          "fund": "CSPX",
+          "fund_weight_in_big": 9.98,
+          "stock_weight_in_fund": 4.0,
+          "contribution": 0.399
+        },
+        {
+          "fund": "NBGMT",
+          "fund_weight_in_big": 4.61,
+          "stock_weight_in_fund": 3.0,
+          "contribution": 0.138
+        }
+      ]
+    },
+    {
+      "ticker": "GOOGL",
+      "name": "ALPHABET INC CLASS A",
+      "sector": "Communication",
+      "location": "United States",
+      "weight_acwi": 2.03,
+      "weight_big": 0.498,
+      "diff_pp": -1.532,
+      "contributors": [
+        {
+          "fund": "CSPX",
+          "fund_weight_in_big": 9.98,
+          "stock_weight_in_fund": 2.3,
+          "contribution": 0.23
+        },
+        {
+          "fund": "NBGMT",
+          "fund_weight_in_big": 4.61,
+          "stock_weight_in_fund": 3.5,
+          "contribution": 0.161
+        },
+        {
+          "fund": "MFSCV",
+          "fund_weight_in_big": 4.3,
+          "stock_weight_in_fund": 2.5,
+          "contribution": 0.107
+        }
+      ]
+    },
+    {
+      "ticker": "AVGO",
+      "name": "BROADCOM INC",
+      "sector": "Information Technology",
+      "location": "United States",
+      "weight_acwi": 1.93,
+      "weight_big": 0.319,
+      "diff_pp": -1.611,
+      "contributors": [
+        {
+          "fund": "CSPX",
+          "fund_weight_in_big": 9.98,
+          "stock_weight_in_fund": 2.5,
+          "contribution": 0.25
+        },
+        {
+          "fund": "NBGMT",
+          "fund_weight_in_big": 4.61,
+          "stock_weight_in_fund": 1.5,
+          "contribution": 0.069
+        }
+      ]
+    },
+    {
+      "ticker": "2330",
+      "name": "TAIWAN SEMICONDUCTOR MANUFACTURING",
+      "sector": "Information Technology",
+      "location": "Taiwan",
+      "weight_acwi": 1.74,
+      "weight_big": 0,
+      "diff_pp": -1.74,
+      "contributors": []
+    },
+    {
+      "ticker": "GOOG",
+      "name": "ALPHABET INC CLASS C",
+      "sector": "Communication",
+      "location": "United States",
+      "weight_acwi": 1.69,
+      "weight_big": 0.19,
+      "diff_pp": -1.5,
+      "contributors": [
+        {
+          "fund": "CSPX",
+          "fund_weight_in_big": 9.98,
+          "stock_weight_in_fund": 1.9,
+          "contribution": 0.19
+        }
+      ]
+    },
+    {
+      "ticker": "META",
+      "name": "META PLATFORMS INC CLASS A",
+      "sector": "Communication",
+      "location": "United States",
+      "weight_acwi": 1.49,
+      "weight_big": 0.385,
+      "diff_pp": -1.105,
+      "contributors": [
+        {
+          "fund": "CSPX",
+          "fund_weight_in_big": 9.98,
+          "stock_weight_in_fund": 2.7,
+          "contribution": 0.269
+        },
+        {
+          "fund": "NBGMT",
+          "fund_weight_in_big": 4.61,
+          "stock_weight_in_fund": 2.5,
+          "contribution": 0.115
+        }
+      ]
+    },
+    {
+      "ticker": "TSLA",
+      "name": "TESLA INC",
+      "sector": "Consumer Discretionary",
+      "location": "United States",
+      "weight_acwi": 1.08,
+      "weight_big": 0.2,
+      "diff_pp": -0.88,
+      "contributors": [
+        {
+          "fund": "CSPX",
+          "fund_weight_in_big": 9.98,
+          "stock_weight_in_fund": 2.0,
+          "contribution": 0.2
+        }
+      ]
+    }
+  ]
+}
