@@ -1,0 +1,23 @@
+{
+  "refreshedAt": "2026-05-12T12:40:48.791076",
+  "source": "aggregate_breakdowns.py from per-fund factsheet JSONs",
+  "method": "Weighted regional exposure across equity sleeve",
+  "funds_with_data": [
+    "MFSCV"
+  ],
+  "funds_missing": [
+    "CSPX",
+    "NBGMT",
+    "THOR",
+    "JHGSC",
+    "LGLI",
+    "4BRZ",
+    "ARGT",
+    "ILF"
+  ],
+  "coverage_pct": 14.6,
+  "regions": {
+    "United Kingdom": 3.25,
+    "United States": 2.16
+  }
+}

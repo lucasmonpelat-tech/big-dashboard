@@ -1,0 +1,103 @@
+{
+  "refreshedAt": "2026-05-12T12:40:48.791402",
+  "source": "aggregate_breakdowns.py from per-fund factsheet JSONs",
+  "summary": {
+    "total_acwi_top10": 24.75,
+    "total_big_top10_exposure": 0.14,
+    "diff_pp": -24.61
+  },
+  "overlap": [
+    {
+      "ticker": "NVDA",
+      "name": "NVIDIA CORP",
+      "weight_acwi": 5.13,
+      "weight_big": 0,
+      "diff_pp": -5.13,
+      "contributors": []
+    },
+    {
+      "ticker": "AAPL",
+      "name": "APPLE INC",
+      "weight_acwi": 4.04,
+      "weight_big": 0,
+      "diff_pp": -4.04,
+      "contributors": []
+    },
+    {
+      "ticker": "MSFT",
+      "name": "MICROSOFT CORP",
+      "weight_acwi": 3.04,
+      "weight_big": 0,
+      "diff_pp": -3.04,
+      "contributors": []
+    },
+    {
+      "ticker": "AMZN",
+      "name": "AMAZON.COM INC",
+      "weight_acwi": 2.58,
+      "weight_big": 0,
+      "diff_pp": -2.58,
+      "contributors": []
+    },
+    {
+      "ticker": "GOOGL",
+      "name": "ALPHABET INC CLASS A",
+      "weight_acwi": 2.03,
+      "weight_big": 0,
+      "diff_pp": -2.03,
+      "contributors": []
+    },
+    {
+      "ticker": "AVGO",
+      "name": "BROADCOM INC",
+      "weight_acwi": 1.93,
+      "weight_big": 0.076,
+      "diff_pp": -1.854,
+      "contributors": [
+        {
+          "fund": "THOR",
+          "weight": 3.3,
+          "contribution": 0.076
+        }
+      ]
+    },
+    {
+      "ticker": "2330",
+      "name": "TAIWAN SEMICONDUCTOR MANUFACTURING",
+      "weight_acwi": 1.74,
+      "weight_big": 0.06,
+      "diff_pp": -1.68,
+      "contributors": [
+        {
+          "fund": "THOR",
+          "weight": 2.6,
+          "contribution": 0.06
+        }
+      ]
+    },
+    {
+      "ticker": "GOOG",
+      "name": "ALPHABET INC CLASS C",
+      "weight_acwi": 1.69,
+      "weight_big": 0,
+      "diff_pp": -1.69,
+      "contributors": []
+    },
+    {
+      "ticker": "META",
+      "name": "META PLATFORMS INC CLASS A",
+      "weight_acwi": 1.49,
+      "weight_big": 0,
+      "diff_pp": -1.49,
+      "contributors": []
+    },
+    {
+      "ticker": "TSLA",
+      "name": "TESLA INC",
+      "weight_acwi": 1.08,
+      "weight_big": 0,
+      "diff_pp": -1.08,
+      "contributors": []
+    }
+  ]
+}

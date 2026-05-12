@@ -1,0 +1,34 @@
+{
+  "refreshedAt": "2026-05-12T12:40:48.790569",
+  "source": "aggregate_breakdowns.py from per-fund factsheet JSONs",
+  "method": "Weighted sector exposure across equity sleeve",
+  "funds_with_data": [
+    "MFSCV",
+    "THOR",
+    "ILF"
+  ],
+  "funds_missing": [
+    "CSPX",
+    "NBGMT",
+    "JHGSC",
+    "LGLI",
+    "4BRZ",
+    "ARGT"
+  ],
+  "coverage_pct": 26.9,
+  "sectors": {
+    "Financials": 5.09,
+    "Industrials": 4.25,
+    "Health Care": 3.25,
+    "Materials": 2.71,
+    "Consumer Staples": 2.6,
+    "Consumer Discretionary": 2.27,
+    "Energy": 1.47,
+    "Communication Services": 1.42,
+    "Utilities": 1.2,
+    "Technology": 0.86,
+    "Information Technology": 0.86,
+    "Real Estate": 0.03,
+    "Real estate": 0.03
+  }
+}
