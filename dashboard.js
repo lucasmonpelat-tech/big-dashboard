@@ -25,29 +25,25 @@ function formatNum(v, dec = 2) {
 }
 function colorFor(val) { return val >= 0 ? "#81C784" : "#EF5350"; }
 
-// Wrap a long string into N lines max (smart break on space)
-function wrapName(name, maxCharsPerLine = 22, maxLines = 2) {
+// Wrap a long string into multiple lines at word boundaries.
+// Shows the FULL name — no truncation, adds extra lines if needed.
+function wrapName(name, maxCharsPerLine = 24) {
     if (!name) return '';
     if (name.length <= maxCharsPerLine) return name;
     const words = name.split(' ');
     const lines = [];
     let current = '';
     for (const w of words) {
-        if ((current + ' ' + w).trim().length > maxCharsPerLine && current) {
-            lines.push(current.trim());
+        if (!current) {
             current = w;
-            if (lines.length >= maxLines - 1) break;
+        } else if ((current + ' ' + w).length > maxCharsPerLine) {
+            lines.push(current);
+            current = w;
         } else {
-            current = (current + ' ' + w).trim();
+            current = current + ' ' + w;
         }
     }
-    // Append remainder
-    if (current && lines.length < maxLines) lines.push(current.trim());
-    // If words remained after maxLines, truncate with ellipsis
-    if (lines.length === maxLines) {
-        // collect leftovers into the last line if any
-        // Not strictly needed for our names since most fit in 2 lines
-    }
+    if (current) lines.push(current);
     return lines.join('<br>');
 }
 
@@ -375,7 +371,7 @@ function renderPositions(livePrices) {
         const trace = {
             type: 'pie',
             hole: 0.4,
-            labels: pieData.map(h => `<b>${wrapName(h.name, 22, 2)}</b><br>${h.pct_sleeve.toFixed(1)}%`),
+            labels: pieData.map(h => `<b>${wrapName(h.name, 24)}</b><br>${h.pct_sleeve.toFixed(1)}%`),
             values: pieData.map(h => h.pct_sleeve),
             customdata: pieData.map(h => [h.name, h.value_usd / 1000, h.pct_fund, h.ticker]),
             hovertemplate:
@@ -398,11 +394,11 @@ function renderPositions(livePrices) {
         };
 
         const layout = {
-            height: 500,
+            height: 540,
             paper_bgcolor: 'rgba(0,0,0,0)',
             plot_bgcolor: 'rgba(0,0,0,0)',
             font: { family: 'Segoe UI', color: '#E0E8F0' },
-            margin: { t: 50, b: 50, l: 140, r: 140 },
+            margin: { t: 60, b: 60, l: 170, r: 170 },
             showlegend: false,
             annotations: [{
                 text: `<b>Alternatives</b><br><span style="font-size:13px">$${(altTotal/1e6).toFixed(2)}M</span><br><span style="font-size:10px;color:#FFB74D">100%</span>`,
@@ -940,7 +936,7 @@ async function renderEquityRace() {
         const trace = {
             type: 'pie',
             hole: 0.4,
-            labels: pieData.map(h => `<b>${wrapName(h.name, 22, 2)}</b><br>${h.pct_sleeve.toFixed(1)}%`),
+            labels: pieData.map(h => `<b>${wrapName(h.name, 24)}</b><br>${h.pct_sleeve.toFixed(1)}%`),
             values: pieData.map(h => h.pct_sleeve),
             customdata: pieData.map(h => [h.name, h.value_usd / 1000, h.pct_fund, h.ticker]),
             hovertemplate:
@@ -963,11 +959,11 @@ async function renderEquityRace() {
         };
 
         const layout = {
-            height: 500,
+            height: 540,
             paper_bgcolor: 'rgba(0,0,0,0)',
             plot_bgcolor: 'rgba(0,0,0,0)',
             font: { family: 'Segoe UI', color: '#E0E8F0' },
-            margin: { t: 50, b: 50, l: 140, r: 140 },
+            margin: { t: 60, b: 60, l: 170, r: 170 },
             showlegend: false,
             annotations: [{
                 text: `<b>Equity</b><br><span style="font-size:13px">$${(eqTotal/1e6).toFixed(2)}M</span><br><span style="font-size:10px;color:#90CAF9">100%</span>`,
@@ -1463,7 +1459,7 @@ async function renderFIRace() {
         const trace = {
             type: 'pie',
             hole: 0.4,
-            labels: pieData.map(h => `<b>${wrapName(h.name, 22, 2)}</b><br>${h.pct_sleeve.toFixed(1)}%`),
+            labels: pieData.map(h => `<b>${wrapName(h.name, 24)}</b><br>${h.pct_sleeve.toFixed(1)}%`),
             values: pieData.map(h => h.pct_sleeve),
             customdata: pieData.map(h => [h.name, h.value_usd / 1000, h.pct_fund, h.ticker]),
             hovertemplate:
@@ -1486,11 +1482,11 @@ async function renderFIRace() {
         };
 
         const layout = {
-            height: 500,
+            height: 540,
             paper_bgcolor: 'rgba(0,0,0,0)',
             plot_bgcolor: 'rgba(0,0,0,0)',
             font: { family: 'Segoe UI', color: '#E0E8F0' },
-            margin: { t: 50, b: 50, l: 140, r: 140 },
+            margin: { t: 60, b: 60, l: 170, r: 170 },
             showlegend: false,
             annotations: [{
                 text: `<b>Fixed Income</b><br><span style="font-size:13px">$${(fiTotal/1e6).toFixed(2)}M</span><br><span style="font-size:10px;color:#A5D6A7">100%</span>`,
@@ -2069,7 +2065,7 @@ async function renderAltsRace() {
         const trace = {
             type: 'pie',
             hole: 0.4,
-            labels: pieData.map(h => `<b>${wrapName(h.name, 22, 2)}</b><br>${(h.weight_pct).toFixed(1)}%`),
+            labels: pieData.map(h => `<b>${wrapName(h.name, 24)}</b><br>${(h.weight_pct).toFixed(1)}%`),
             values: pieData.map(h => h.weight_pct),
             customdata: pieData.map(h => [h.name, h.value_usd/1000, h.ticker, h.sub_class, subClassEmoji[h.sub_class] || '']),
             hovertemplate:
@@ -2088,11 +2084,11 @@ async function renderAltsRace() {
             rotation: 90,
         };
         const layout = {
-            height: 500,
+            height: 540,
             paper_bgcolor: 'rgba(0,0,0,0)',
             plot_bgcolor: 'rgba(0,0,0,0)',
             font: { family: 'Segoe UI', color: '#E0E8F0' },
-            margin: { t: 50, b: 50, l: 140, r: 140 },
+            margin: { t: 60, b: 60, l: 170, r: 170 },
             showlegend: false,
             annotations: [{
                 text: `<b>Alternatives</b><br><span style="font-size:13px">$${(total/1e6).toFixed(2)}M</span><br><span style="font-size:10px;color:#FFB74D">100%</span>`,
