@@ -818,6 +818,78 @@ async function renderEquityRace() {
     let realData;
     let data;
     const noCache = '?_=' + Date.now();  // prevent stale JSON
+
+    // ============================================================
+    // EQUITY PIE CHART — composición % de cada fondo en el sleeve
+    // ============================================================
+    try {
+        const posResp = await fetch('data/positions_latest.json' + noCache);
+        const posData = await posResp.json();
+        const equityHoldings = posData.positions.filter(p => p.sleeve === 'Equity');
+        const eqTotal = equityHoldings.reduce((a, h) => a + h.value, 0);
+
+        // Compute % of equity sleeve
+        const pieData = equityHoldings.map(h => ({
+            ticker: h.ticker,
+            name: h.name,
+            value_usd: h.value,
+            pct_sleeve: h.value / eqTotal * 100,
+            pct_fund: h.pct,
+        })).sort((a, b) => b.pct_sleeve - a.pct_sleeve);
+
+        // Color palette: Navy + Gold + complementary
+        const colors = [
+            '#1F3864', '#D4AF37', '#5B9BD5', '#A78768', '#7B8C9E',
+            '#2E74B5', '#E5BF47', '#90A4AE', '#C9A87E'
+        ];
+
+        const trace = {
+            type: 'pie',
+            hole: 0.4,
+            labels: pieData.map(h => `<b>${h.ticker}</b><br>${h.pct_sleeve.toFixed(1)}%`),
+            values: pieData.map(h => h.pct_sleeve),
+            customdata: pieData.map(h => [h.name, h.value_usd / 1000, h.pct_fund]),
+            hovertemplate:
+                '<b>%{customdata[0]}</b><br>' +
+                '<b>%{label}</b><br>' +
+                'En sleeve: %{value:.2f}%<br>' +
+                'En fondo BIG: %{customdata[2]:.2f}%<br>' +
+                'MV: $%{customdata[1]:,.0f}K<extra></extra>',
+            marker: {
+                colors: colors.slice(0, pieData.length),
+                line: { color: '#0D1B2A', width: 2 },
+            },
+            textposition: 'outside',
+            textinfo: 'label',
+            textfont: { size: 11, color: '#E0E8F0', family: 'Segoe UI' },
+            outsidetextfont: { size: 11, color: '#E0E8F0' },
+            automargin: true,
+            pull: pieData.map((_, i) => i === 0 ? 0.04 : 0),  // emphasize largest
+            sort: false,
+            rotation: 90,
+        };
+
+        const layout = {
+            height: 420,
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: { family: 'Segoe UI', color: '#E0E8F0' },
+            margin: { t: 30, b: 30, l: 80, r: 80 },
+            showlegend: false,
+            annotations: [{
+                text: `<b>Equity</b><br><span style="font-size:13px">$${(eqTotal/1e6).toFixed(2)}M</span><br><span style="font-size:10px;color:#90CAF9">100%</span>`,
+                x: 0.5, y: 0.5,
+                font: { size: 16, color: '#D4AF37' },
+                showarrow: false,
+            }],
+        };
+        Plotly.newPlot('er-pie-equity', [trace], layout, { responsive: true, displaylogo: false });
+    } catch (e) {
+        console.warn('Failed to render equity pie chart', e);
+        document.getElementById('er-pie-equity').innerHTML =
+            '<div style="padding:40px;text-align:center;color:#FFA726;">No se pudo cargar positions_latest.json</div>';
+    }
+
     try {
         const r = await fetch('data/equity_race.json' + noCache);
         if (!r.ok) throw new Error('no data');
