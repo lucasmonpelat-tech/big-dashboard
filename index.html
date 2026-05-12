@@ -422,7 +422,6 @@
     <!-- ======================= TABS ======================= -->
     <nav class="tabs-nav">
         <button class="tab-btn active" data-tab="overview">📊 Overview</button>
-        <button class="tab-btn" data-tab="positions">💼 Positions</button>
         <button class="tab-btn" data-tab="currency">💱 Currency</button>
         <button class="tab-btn" data-tab="country">🌍 Geography</button>
         <button class="tab-btn" data-tab="yield">💰 Yield</button>
@@ -512,26 +511,14 @@
             <div class="chart-container">
                 <div id="nav-chart"></div>
             </div>
-        </section>
 
-        <!-- ================== TAB: POSITIONS ================== -->
-        <section id="tab-positions" class="tab-section">
+            <h2 class="section-title">💼 Detalle de Posiciones</h2>
             <div class="info-box">
                 <strong>Fuente:</strong> Pershing export (manual) + Alts manual tracking + live prices (Stooq) where available.
                 <span class="tag tag-live">LIVE</span> = fetched realtime from Stooq.
                 <span class="tag tag-manual">MANUAL</span> = NAV from factsheet or manager update.
                 <span class="tag tag-na">N/A</span> = illiquid / quarterly NAV.
             </div>
-
-            <h2 class="section-title">🥧 Composición del Alternatives Sleeve — Peso de cada fondo</h2>
-            <div class="info-box" style="border-left-color: #FFA726;">
-                <strong>Pie chart de los fondos Alternatives</strong> ponderado por su peso dentro del sleeve (100%). Carlyle es la posición core de Private Equity.
-            </div>
-            <div class="chart-container">
-                <div id="pos-pie-alts" style="min-height: 540px;"></div>
-            </div>
-
-            <h2 class="section-title">Detalle de posiciones</h2>
             <table class="data-table" id="positions-table">
                 <thead>
                     <tr>
