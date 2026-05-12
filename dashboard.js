@@ -1955,8 +1955,251 @@ function updateTime() {
     renderEquityBreakdown();
     renderFIRace();
     renderFIBreakdown();
+    renderAltsRace();
     renderDataHealth();
 })();
+
+// ==============================================================
+// ALTS RACE — BIG Alts Sleeve vs 60/40 and HFRX
+// ==============================================================
+async function renderAltsRace() {
+    const noCache = '?_=' + Date.now();
+    let data;
+    try {
+        const r = await fetch('data/alts_race.json' + noCache);
+        if (!r.ok) throw new Error('no data');
+        data = await r.json();
+    } catch(e) {
+        console.warn('alts_race.json not available', e);
+        const el = document.getElementById('ar-chart');
+        if (el) el.innerHTML = '<div style="padding:40px;text-align:center;color:#EF5350;">Alts data not available. Run: <code>python scripts/alts_race.py</code></div>';
+        return;
+    }
+
+    const stats6040 = data.stats_vs_6040 || {};
+    const statsHfrx = data.stats_vs_hfrx || {};
+    const r6040 = stats6040.returns || {};
+    const rHfrx = statsHfrx.returns || {};
+    const ann6040 = stats6040.annualized || {};
+    const annHfrx = statsHfrx.annualized || {};
+    const holdings = data.holdings || [];
+    const pm = data.portfolio_metrics || {};
+
+    const fmtSigned = (v, unit='%') => v == null ? '—' : (v >= 0 ? '+' : '') + v.toFixed(2) + unit;
+
+    // KPIs
+    const si6040 = r6040.SI || {};
+    const siHfrx = rHfrx.SI || {};
+    document.getElementById('ar-sleeve-si').textContent = fmtSigned(si6040.sleeve);
+    document.getElementById('ar-6040-si').textContent = fmtSigned(si6040.bmk6040);
+    const alphaEl = document.getElementById('ar-alpha-si');
+    alphaEl.textContent = fmtSigned(si6040.alpha, 'pp');
+    alphaEl.style.color = (si6040.alpha || 0) >= 0 ? '#81C784' : '#EF5350';
+    document.getElementById('ar-alpha-status').innerHTML = (si6040.alpha || 0) >= 0
+        ? '<span style="color:#81C784;font-weight:700;">🏆 GANANDO vs 60/40</span>'
+        : '<span style="color:#EF5350;font-weight:700;">🔴 PERDIENDO vs 60/40</span>';
+    document.getElementById('ar-hfrx-si').textContent = fmtSigned(siHfrx.hfrx);
+    const alphaHfrxEl = document.getElementById('ar-alpha-hfrx');
+    alphaHfrxEl.textContent = fmtSigned(siHfrx.alpha, 'pp');
+    alphaHfrxEl.style.color = (siHfrx.alpha || 0) >= 0 ? '#81C784' : '#EF5350';
+    document.getElementById('ar-aum').textContent = pm.total_alts_usd ? '$' + (pm.total_alts_usd / 1e6).toFixed(2) + 'M' : '—';
+
+    // Returns table
+    const fmtRet = v => {
+        if (v == null) return '<span style="color:#6B88A8;">—</span>';
+        const color = v >= 0 ? '#81C784' : '#EF5350';
+        return `<span style="color:${color};">${v >= 0 ? '+' : ''}${v.toFixed(2)}%</span>`;
+    };
+    const fmtAlpha = v => {
+        if (v == null) return '<span style="color:#6B88A8;">—</span>';
+        const color = v >= 0 ? '#81C784' : '#EF5350';
+        return `<strong style="color:${color};">${v >= 0 ? '+' : ''}${v.toFixed(2)}pp</strong>`;
+    };
+
+    document.getElementById('ar-returns-body').innerHTML = `
+        <tr class="row-big">
+            <td class="left"><strong>BIG Alts Sleeve</strong></td>
+            <td>${fmtRet(r6040['1M']?.sleeve)}</td>
+            <td>${fmtRet(r6040['3M']?.sleeve)}</td>
+            <td>${fmtRet(r6040['6M']?.sleeve)}</td>
+            <td>${fmtRet(r6040.YTD?.sleeve)}</td>
+            <td>${fmtRet(r6040.SI?.sleeve)}</td>
+            <td>${fmtRet(ann6040.sleeve)}</td>
+        </tr>
+        <tr class="row-bmk">
+            <td class="left">60/40 (60% ACWI + 40% AGG)</td>
+            <td>${fmtRet(r6040['1M']?.bmk6040)}</td>
+            <td>${fmtRet(r6040['3M']?.bmk6040)}</td>
+            <td>${fmtRet(r6040['6M']?.bmk6040)}</td>
+            <td>${fmtRet(r6040.YTD?.bmk6040)}</td>
+            <td>${fmtRet(r6040.SI?.bmk6040)}</td>
+            <td>${fmtRet(ann6040.bmk6040)}</td>
+        </tr>
+        <tr class="row-bmk">
+            <td class="left">HFRX HF (QAI proxy)</td>
+            <td>${fmtRet(rHfrx['1M']?.hfrx)}</td>
+            <td>${fmtRet(rHfrx['3M']?.hfrx)}</td>
+            <td>${fmtRet(rHfrx['6M']?.hfrx)}</td>
+            <td>${fmtRet(rHfrx.YTD?.hfrx)}</td>
+            <td>${fmtRet(rHfrx.SI?.hfrx)}</td>
+            <td>${fmtRet(annHfrx.hfrx)}</td>
+        </tr>
+        <tr class="row-alpha">
+            <td class="left"><strong>Alpha vs 60/40</strong></td>
+            <td>${fmtAlpha(r6040['1M']?.alpha)}</td>
+            <td>${fmtAlpha(r6040['3M']?.alpha)}</td>
+            <td>${fmtAlpha(r6040['6M']?.alpha)}</td>
+            <td>${fmtAlpha(r6040.YTD?.alpha)}</td>
+            <td>${fmtAlpha(r6040.SI?.alpha)}</td>
+            <td>${fmtAlpha(ann6040.alpha)}</td>
+        </tr>
+    `;
+
+    // Pie chart (Alts sleeve composition)
+    try {
+        const total = holdings.reduce((a, h) => a + h.value_usd, 0);
+        const pieData = [...holdings].sort((a, b) => b.value_usd - a.value_usd);
+        const colors = ['#E65100', '#FFA726', '#D4AF37', '#FB8C00', '#A78768', '#1F3864', '#5B9BD5', '#FFB74D'];
+        const subClassEmoji = {
+            'private_equity': '🏛️',
+            'private_credit': '💵',
+            'crypto': '₿',
+            'commodity': '🥇',
+        };
+        const trace = {
+            type: 'pie',
+            hole: 0.4,
+            labels: pieData.map(h => `<b>${wrapName(h.name, 22, 2)}</b><br>${(h.weight_pct).toFixed(1)}%`),
+            values: pieData.map(h => h.weight_pct),
+            customdata: pieData.map(h => [h.name, h.value_usd/1000, h.ticker, h.sub_class, subClassEmoji[h.sub_class] || '']),
+            hovertemplate:
+                '<b>%{customdata[0]}</b> (%{customdata[2]})<br>' +
+                '%{customdata[4]} %{customdata[3]}<br>' +
+                'En sleeve Alts: %{value:.2f}%<br>' +
+                'MV: $%{customdata[1]:,.0f}K<extra></extra>',
+            marker: { colors: colors.slice(0, pieData.length), line: { color: '#0D1B2A', width: 2 } },
+            textposition: 'outside',
+            textinfo: 'label',
+            textfont: { size: 10, color: '#E0E8F0' },
+            outsidetextfont: { size: 10, color: '#E0E8F0' },
+            automargin: true,
+            pull: pieData.map((_, i) => i === 0 ? 0.04 : 0),
+            sort: false,
+            rotation: 90,
+        };
+        const layout = {
+            height: 500,
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: { family: 'Segoe UI', color: '#E0E8F0' },
+            margin: { t: 50, b: 50, l: 140, r: 140 },
+            showlegend: false,
+            annotations: [{
+                text: `<b>Alternatives</b><br><span style="font-size:13px">$${(total/1e6).toFixed(2)}M</span><br><span style="font-size:10px;color:#FFB74D">100%</span>`,
+                x: 0.5, y: 0.5,
+                font: { size: 14, color: '#D4AF37' },
+                showarrow: false,
+            }],
+        };
+        Plotly.newPlot('ar-pie-alts', [trace], layout, { responsive: true, displaylogo: false });
+    } catch (e) {
+        console.warn('Failed to render Alts race pie', e);
+    }
+
+    // Race chart
+    const sleeveKeys = Object.keys(data.sleeve_index).sort();
+    const bmkKeys = Object.keys(data.bmk6040_index).sort();
+    const hfrxKeys = Object.keys(data.hfrx_index || {}).sort();
+    const traces = [
+        {
+            x: sleeveKeys.map(k => k + '-15'),
+            y: sleeveKeys.map(k => data.sleeve_index[k]),
+            name: 'BIG Alts Sleeve',
+            type: 'scatter', mode: 'lines+markers',
+            line: { color: '#FFA726', width: 3 },
+            marker: { size: 6, color: '#FFA726' },
+            hovertemplate: '%{x|%b %Y}<br>Alts: <b>%{y:.2f}</b><extra></extra>'
+        },
+        {
+            x: bmkKeys.map(k => k + '-15'),
+            y: bmkKeys.map(k => data.bmk6040_index[k]),
+            name: '60/40 (60 ACWI + 40 AGG)',
+            type: 'scatter', mode: 'lines+markers',
+            line: { color: '#64B5F6', width: 2.5, dash: 'dot' },
+            marker: { size: 5, color: '#64B5F6' },
+            hovertemplate: '%{x|%b %Y}<br>60/40: <b>%{y:.2f}</b><extra></extra>'
+        },
+        {
+            x: hfrxKeys.map(k => k + '-15'),
+            y: hfrxKeys.map(k => data.hfrx_index[k]),
+            name: 'HFRX HF (QAI)',
+            type: 'scatter', mode: 'lines+markers',
+            line: { color: '#CE93D8', width: 2, dash: 'dash' },
+            marker: { size: 4, color: '#CE93D8' },
+            hovertemplate: '%{x|%b %Y}<br>HFRX: <b>%{y:.2f}</b><extra></extra>'
+        }
+    ];
+    const layout = {
+        paper_bgcolor: '#1A2A3D',
+        plot_bgcolor: '#12243A',
+        font: { color: '#FFB74D', family: 'Segoe UI, Arial', size: 11 },
+        margin: { t: 30, r: 24, b: 48, l: 60 },
+        legend: { orientation: 'h', x: 0, y: 1.08, bgcolor: 'rgba(0,0,0,0)', font: { size: 13, color: '#ECEFF1' } },
+        xaxis: { gridcolor: '#1F3864', linecolor: '#2E74B5', tickfont: { size: 10 }, type: 'date' },
+        yaxis: { gridcolor: '#1F3864', linecolor: '#2E74B5', tickfont: { size: 10 }, title: { text: 'Base 100', font: { size: 11 } } },
+        hovermode: 'x unified',
+        hoverlabel: { bgcolor: '#1F3864', bordercolor: '#2E74B5', font: { color: '#FFF' } }
+    };
+    Plotly.newPlot('ar-chart', traces, layout, { responsive: true, displaylogo: false });
+
+    // Holdings table
+    const subClassLabel = {
+        'private_equity': '🏛️ Private Equity',
+        'private_credit': '💵 Private Credit',
+        'crypto': '₿ Crypto',
+        'commodity': '🥇 Commodity',
+    };
+    const sorted = [...holdings].sort((a, b) => (b.contribution_pct || -999) - (a.contribution_pct || -999));
+    document.getElementById('ar-holdings-body').innerHTML = sorted.map(h => `
+        <tr>
+            <td class="left"><strong>${h.name}</strong> <span style="font-size:10px;color:#90CAF9;">(${h.ticker})</span></td>
+            <td class="left">${subClassLabel[h.sub_class] || h.sub_class}</td>
+            <td class="left" style="font-size:10px;color:#90CAF9;">${h.source}</td>
+            <td>$${(h.value_usd / 1000).toFixed(0)}K</td>
+            <td>${h.weight_pct.toFixed(1)}%</td>
+            <td>${fmtRet(h.ytd_return_pct)}</td>
+            <td>${fmtRet(h.si_return_pct)}</td>
+            <td>${fmtAlpha(h.ytd_contribution_pct)}</td>
+            <td>${fmtAlpha(h.contribution_pct)}</td>
+        </tr>
+    `).join('');
+
+    // Sub-class bars
+    const subBreak = pm.sub_class_breakdown_pct || {};
+    const subOrder = ['private_equity', 'private_credit', 'crypto', 'commodity'];
+    const subColors = { 'private_equity': '#1F3864', 'private_credit': '#5B9BD5', 'crypto': '#FFB74D', 'commodity': '#D4AF37' };
+    const subTraces = [{
+        type: 'bar',
+        orientation: 'h',
+        x: subOrder.map(s => subBreak[s] || 0),
+        y: subOrder.map(s => subClassLabel[s] || s),
+        marker: { color: subOrder.map(s => subColors[s]) },
+        text: subOrder.map(s => `${(subBreak[s] || 0).toFixed(1)}%`),
+        textposition: 'auto',
+        hovertemplate: '%{y}<br>%{x:.2f}% del sleeve<extra></extra>',
+    }];
+    const subLayout = {
+        height: 240,
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        font: { color: '#E0E8F0' },
+        margin: { t: 20, b: 30, l: 160, r: 30 },
+        xaxis: { ticksuffix: '%', gridcolor: '#1F3864' },
+        yaxis: { automargin: true },
+        showlegend: false,
+    };
+    Plotly.newPlot('ar-subclass-bars', subTraces, subLayout, { responsive: true, displaylogo: false });
+}
 
 // ==============================================================
 // DATA HEALTH — Lineage + status of every data source
