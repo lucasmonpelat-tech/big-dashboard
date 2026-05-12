@@ -86,12 +86,15 @@ def main():
 
         # Skip manual sources
         if "manual" in source_type:
-            results["skipped"].append(f"{ticker} (manual email — not automatable)")
+            results["skipped"].append(f"{ticker} (manual drop or email)")
+            continue
+        if "skip" in source_type:
+            results["skipped"].append(f"{ticker} (price only via Stooq)")
             continue
 
         # Skip Chrome MCP sources (PIMCO etc. - need browser session)
         if "chrome_mcp" in source_type:
-            results["skipped"].append(f"{ticker} (Chrome MCP only — anti-bot blocked)")
+            results["skipped"].append(f"{ticker} (Chrome MCP only — run separately)")
             continue
 
         # Replace date pattern if present

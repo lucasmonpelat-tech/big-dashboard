@@ -1,27 +1,27 @@
 {
   "_description": "Catálogo de URLs de factsheets para cada fondo BIG. Para download automatizado mensual.",
   "_lastUpdate": "2026-05-12",
-  "_pattern_notes": {
-    "swissfunddata": "URL pattern: https://swissfunddata.ch/sfdpub/docs/fsm-{fund_id}-{YYYYMMDD}-en.pdf donde YYYYMMDD = último día del mes/trimestre",
-    "ishares_csv": "iShares ETFs tienen download de holdings CSV directo. URL pattern varía por país (uk/us)",
-    "pimco": "PIMCO requiere navegación browser (anti-bot). URL del fondo + extract via Chrome MCP",
-    "privates": "Carlyle/NB PE/Flex/HPS/GCRED/BPCC son fondos privados. Factsheets llegan por email mensual/trimestral — NO URL pública"
+  "_coverage_summary": {
+    "equity_automated": ["NBGMT", "MFSCV", "THOR", "ILF", "CSPX", "4BRZ", "JHGSC"],
+    "equity_pending_url": ["LGLI"],
+    "equity_manual_or_skip": ["ARGT"],
+    "fi_chrome_mcp": ["PIMCO-LD", "PIMCO-INC", "PIMCO-EM"],
+    "fi_pending_url": ["MANIG", "SGCB"],
+    "fi_manual": ["TGF"],
+    "alts_manual": ["CALP", "NBPEA", "FLEX", "HLEND", "BPCC", "GCRED"],
+    "alts_skip_price_only": ["IBIT", "GLD"]
   },
 
   "funds": {
-    "_______________________EQUITY_______________________": "",
-
     "CSPX": {
       "name": "iShares Core S&P 500 UCITS",
       "isin": "IE00B5BMR087",
       "sleeve": "Equity",
-      "factsheet_url": "https://www.ishares.com/uk/individual/en/literature/fact-sheet/cspx-ishares-core-sp-500-ucits-etf-fund-fact-sheet-en-uk.pdf",
-      "holdings_csv_url": "https://www.ishares.com/uk/individual/en/products/253743/ishares-sp-500-b-ucits-etf-acc-fund/1521577893200.ajax?fileType=csv&fileName=CSPX_holdings&dataType=fund",
-      "source_type": "ishares_direct",
-      "needs_verification": true,
+      "factsheet_url": "https://www.blackrock.com/americas-offshore/en/literature/fact-sheet/cspx-ishares-core-s-p-500-ucits-etf-fund-fact-sheet-en-lm.pdf",
+      "source_type": "blackrock_americas_offshore",
+      "verified": "2026-03-31",
       "refresh_frequency_days": 30
     },
-
     "NBGMT": {
       "name": "NB Global Equity Megatrends I",
       "isin": "IE00BFMHRK20",
@@ -29,10 +29,9 @@
       "factsheet_url": "https://swissfunddata.ch/sfdpub/docs/fsm-8350_84_01-{YYYYMMDD}-en.pdf",
       "url_pattern_date": "previous_month_end",
       "source_type": "swissfunddata",
-      "verified_2026-03-31": true,
+      "verified": "2026-03-31",
       "refresh_frequency_days": 30
     },
-
     "MFSCV": {
       "name": "MFS Meridian Contrarian Value I1",
       "isin": "LU1985812756",
@@ -40,73 +39,65 @@
       "factsheet_url": "https://swissfunddata.ch/sfdpub/docs/fsm-5901_48_01-{YYYYMMDD}-en.pdf",
       "url_pattern_date": "previous_month_end",
       "source_type": "swissfunddata",
-      "verified_2026-03-31": true,
+      "verified": "2026-03-31",
       "refresh_frequency_days": 30
     },
-
     "THOR": {
       "name": "Thornburg Equity Income Builder I",
       "isin": "IE00B6YCBF59",
       "sleeve": "Equity",
       "factsheet_url": "https://thornburg.wmcubehk.com/fund-document/fs-thornburg-investment-income-builder-fund-en.pdf",
       "source_type": "thornburg_wmcube",
-      "note": "Mismo URL cada mes — file gets overwritten. Verify date inside PDF (suele ser ~1 mes lag)",
-      "verified_2026-01-31": true,
+      "note": "Same URL every month, content overwritten by Thornburg",
+      "verified": "2026-01-31",
       "refresh_frequency_days": 30
     },
-
     "JHGSC": {
-      "name": "Janus Henderson Global Smaller Companies Fund F2",
+      "name": "Janus Henderson Global Smaller Cos F2",
       "isin": "LU2940405447",
       "sleeve": "Equity",
-      "factsheet_url": "https://swissfunddata.ch/sfdpub/docs/fsm-XXXX_XX_XX-{YYYYMMDD}-en.pdf",
-      "source_type": "swissfunddata",
-      "needs_verification": true,
-      "note": "Verify swissfunddata fund_id buscando JHGSC en swissfunddata.ch",
+      "factsheet_url": "https://cdn.janushenderson.com/webdocs/HHFGSC_LU2940405447_MAR191_M_{YYYYMMDD}_XX%28EN-LU%29.pdf",
+      "url_pattern_date": "previous_month_end",
+      "source_type": "janus_cdn",
+      "verified": "2026-03-31",
       "refresh_frequency_days": 30
     },
-
     "LGLI": {
       "name": "Lazard Global Listed Infrastructure A",
       "isin": "IE00BF4KN675",
       "sleeve": "Equity",
-      "factsheet_url": "https://swissfunddata.ch/sfdpub/docs/fsm-XXXX_XX_XX-{YYYYMMDD}-en.pdf",
-      "source_type": "swissfunddata",
-      "needs_verification": true,
+      "factsheet_url": "MANUAL_DROP — drop PDF in factsheets/equity/ as LGLI_YYYYMMDD.pdf",
+      "source_type": "manual_drop",
+      "note": "Direct Lazard URL not found yet. KIDs/KIIDs exist but not monthly factsheet. TODO: search more.",
       "refresh_frequency_days": 30
     },
-
     "ILF": {
       "name": "iShares Latin America 40 ETF",
       "isin": "US4642873909",
       "sleeve": "Equity",
       "factsheet_url": "https://www.ishares.com/us/literature/fact-sheet/ilf-ishares-latin-america-40-etf-fund-fact-sheet-en-us.pdf",
-      "holdings_csv_url": "https://www.ishares.com/us/products/239654/ishares-latin-america-40-etf/1467271812596.ajax?fileType=csv&fileName=ILF_holdings&dataType=fund",
       "source_type": "ishares_us",
+      "verified": "2026-03-31",
       "refresh_frequency_days": 30
     },
-
     "4BRZ": {
-      "name": "iShares MSCI Brazil UCITS (DE) Acc",
+      "name": "iShares MSCI Brazil UCITS (DE)",
       "isin": "DE000A0Q4R85",
       "sleeve": "Equity",
-      "factsheet_url": "https://www.ishares.com/de/individual/de/literature/fact-sheet/4brz-ishares-msci-brazil-ucits-etf-de-fund-fact-sheet-de.pdf",
-      "source_type": "ishares_de",
-      "needs_verification": true,
+      "factsheet_url": "https://www.blackrock.com/americas-offshore/en/literature/fact-sheet/4brz-ishares-msci-brazil-ucits-etf-de-fund-fact-sheet-en-lm.pdf",
+      "source_type": "blackrock_americas_offshore",
+      "verified": "2026-03-31",
       "refresh_frequency_days": 30
     },
-
     "ARGT": {
       "name": "Global X MSCI Argentina ETF",
       "isin": "US37950E2596",
       "sleeve": "Equity",
-      "factsheet_url": "https://www.globalxetfs.com/content/files/Global-X-MSCI-Argentina-ETF-ARGT-fact-sheet.pdf",
-      "source_type": "globalx",
-      "needs_verification": true,
+      "factsheet_url": "MANUAL_DROP — small position (1.35%), drop manually or skip",
+      "source_type": "manual_drop",
+      "note": "Global X factsheet URL not found via search. ARGT is small position with limited overlap with ACWI top 10 (mostly Mercado Libre etc).",
       "refresh_frequency_days": 30
     },
-
-    "_______________________FIXED INCOME_______________________": "",
 
     "PIMCO-LD": {
       "name": "PIMCO GIS Low Duration Income I",
@@ -114,141 +105,58 @@
       "sleeve": "Fixed Income",
       "factsheet_url": "https://www.pimco.com/sg/en/investments/gis/low-duration-income-fund/inst-usd-accumulation",
       "source_type": "pimco_chrome_mcp",
-      "note": "PIMCO bloqueado por anti-bot. Acceso via Chrome MCP (verified work for YTW/Dur/Venc/CurYld)",
-      "verified_2026-03-31": true,
+      "note": "PIMCO requires Chrome MCP (anti-bot blocks Playwright headless). Run via Claude with Chrome MCP session.",
       "refresh_frequency_days": 90
     },
-
     "PIMCO-INC": {
       "name": "PIMCO GIS Income I",
       "isin": "IE00B87KCF77",
       "sleeve": "Fixed Income",
       "factsheet_url": "https://www.pimco.com/sg/en/investments/gis/income-fund/inst-usd-accumulation",
       "source_type": "pimco_chrome_mcp",
-      "verified_2026-03-31": true,
       "refresh_frequency_days": 90
     },
-
     "PIMCO-EM": {
       "name": "PIMCO GIS EM Local Bond I",
       "isin": "IE00B29K0P99",
       "sleeve": "Fixed Income",
       "factsheet_url": "https://www.pimco.com/gb/en/investments/gis/emerging-local-bond-fund/inst-usd-accumulation",
       "source_type": "pimco_chrome_mcp",
-      "verified_2026-03-31": true,
       "refresh_frequency_days": 90
     },
-
     "MANIG": {
       "name": "Man GLG Global Investment Grade Opportunities IYV",
       "isin": "IE000OE87WX6",
       "sleeve": "Fixed Income",
-      "factsheet_url": "TODO: search swissfunddata or man.com",
-      "source_type": "swissfunddata_or_man",
-      "needs_verification": true,
+      "factsheet_url": "MANUAL_DROP — Man GLG factsheet URL not found, drop manually",
+      "source_type": "manual_drop",
       "refresh_frequency_days": 30
     },
-
     "TGF": {
       "name": "Tenac Global Fund",
       "isin": "XS2324777171",
       "sleeve": "Fixed Income",
-      "factsheet_url": "MANUAL — direct contact Nico Dujovne",
+      "factsheet_url": "MANUAL — Nico Dujovne email",
       "source_type": "manual_email",
-      "note": "Tenac es manager directo. Factsheet llega por email/Dropbox. Pedirle a Nico mensualmente.",
       "refresh_frequency_days": 30
     },
-
     "SGCB": {
       "name": "Schroder GAIA Cat Bond Class C",
       "isin": "LU2049315265",
       "sleeve": "Fixed Income",
-      "factsheet_url": "https://www.schroders.com/es-es/es/inversores-particulares/centro-de-fondos/?language=es&location=es&channel=inversores-particulares&clientId=schdr&clientVersion=v1&externalId=SCHDR_F0000147B0&r=/fund/SCHDR_F0000147B0/&fundName=Schroder-GAIA-Cat-Bond-C-Accumulation-USD",
-      "source_type": "schroders_chrome_mcp",
-      "needs_verification": true,
+      "factsheet_url": "MANUAL_DROP — Schroders URL requires session, drop manually",
+      "source_type": "manual_drop",
       "refresh_frequency_days": 30
     },
 
-    "_______________________ALTERNATIVES_______________________": "",
+    "CALP": {"name": "Carlyle AlpInvest", "isin": "LU2837777825", "sleeve": "Alternatives", "factsheet_url": "MANUAL_EMAIL", "source_type": "manual_email", "refresh_frequency_days": 90},
+    "NBPEA": {"name": "NB Global Private Equity Access", "isin": "LU2659193242", "sleeve": "Alternatives", "factsheet_url": "MANUAL_EMAIL", "source_type": "manual_email", "refresh_frequency_days": 90},
+    "FLEX": {"name": "Flex-Lexington Partners", "isin": "FLEX-LEX", "sleeve": "Alternatives", "factsheet_url": "MANUAL_EMAIL", "source_type": "manual_email", "refresh_frequency_days": 90},
+    "HLEND": {"name": "HPS Corporate Lending", "isin": "KYG4737U1085", "sleeve": "Alternatives", "factsheet_url": "MANUAL_EMAIL", "source_type": "manual_email", "refresh_frequency_days": 30},
+    "BPCC": {"name": "Barings Private Credit", "isin": "XS2658535526", "sleeve": "Alternatives", "factsheet_url": "MANUAL_EMAIL", "source_type": "manual_email", "refresh_frequency_days": 30},
+    "GCRED": {"name": "Golub Capital Private Credit", "isin": "GCRED-I", "sleeve": "Alternatives", "factsheet_url": "MANUAL_EMAIL", "source_type": "manual_email", "refresh_frequency_days": 30},
 
-    "CALP": {
-      "name": "Carlyle AlpInvest Private Markets",
-      "isin": "LU2837777825",
-      "sleeve": "Alternatives",
-      "factsheet_url": "MANUAL — direct contact Carlyle (sales)",
-      "source_type": "manual_email",
-      "note": "Private Equity. Factsheet quarterly. Manual NAV update.",
-      "refresh_frequency_days": 90
-    },
-
-    "NBPEA": {
-      "name": "NB Global Private Equity Access Fund LI",
-      "isin": "LU2659193242",
-      "sleeve": "Alternatives",
-      "factsheet_url": "https://www.nb.com/en/latam/products/private-equity",
-      "source_type": "nb_chrome_mcp",
-      "note": "NB website Vercel-protected. Quarterly factsheet.",
-      "refresh_frequency_days": 90
-    },
-
-    "FLEX": {
-      "name": "Flex-Lexington Partners Secondaries",
-      "isin": "FLEX-LEX",
-      "sleeve": "Alternatives",
-      "factsheet_url": "MANUAL — direct contact Flex-Lexington",
-      "source_type": "manual_email",
-      "note": "Secondaries fund. IN_TRANSIT actualmente. Factsheet via email cuando se invierta.",
-      "refresh_frequency_days": 90
-    },
-
-    "IBIT": {
-      "name": "iShares Bitcoin Trust",
-      "isin": "US46438F1012",
-      "sleeve": "Alternatives",
-      "factsheet_url": "https://www.blackrock.com/cl/productos/333011/ishares-bitcoin-trust-etf",
-      "source_type": "blackrock",
-      "note": "Solo precio diario relevante (no holdings ni breakdown). Stooq feed OK.",
-      "refresh_frequency_days": 30
-    },
-
-    "GLD": {
-      "name": "SPDR Gold Shares",
-      "isin": "US78463V1070",
-      "sleeve": "Alternatives",
-      "factsheet_url": "https://www.spdrgoldshares.com/usa/gld/",
-      "source_type": "spdr",
-      "note": "Solo precio diario relevante. Stooq feed OK.",
-      "refresh_frequency_days": 30
-    },
-
-    "HLEND": {
-      "name": "HPS Corporate Lending Fund (HLEND)",
-      "isin": "KYG4737U1085",
-      "sleeve": "Alternatives",
-      "factsheet_url": "https://www.hpspartners.com/lending",
-      "source_type": "manual_email",
-      "note": "Private Credit. Factsheet mensual por email. Distribution rate ~9% APR.",
-      "refresh_frequency_days": 30
-    },
-
-    "BPCC": {
-      "name": "Barings Private Credit Corporation",
-      "isin": "XS2658535526",
-      "sleeve": "Alternatives",
-      "factsheet_url": "MANUAL — email Barings",
-      "source_type": "manual_email",
-      "note": "Private Credit (ETN). Factsheet por email.",
-      "refresh_frequency_days": 30
-    },
-
-    "GCRED": {
-      "name": "Golub Capital Private Credit (GCRED)",
-      "isin": "GCRED-I",
-      "sleeve": "Alternatives",
-      "factsheet_url": "https://gcredbdc.com/resources/",
-      "source_type": "golub_web",
-      "needs_verification": true,
-      "refresh_frequency_days": 30
-    }
+    "IBIT": {"name": "iShares Bitcoin Trust", "isin": "US46438F1012", "sleeve": "Alternatives", "factsheet_url": "SKIP — price only via Stooq", "source_type": "skip_etf_price_only"},
+    "GLD": {"name": "SPDR Gold Shares", "isin": "US78463V1070", "sleeve": "Alternatives", "factsheet_url": "SKIP — price only via Stooq", "source_type": "skip_etf_price_only"}
   }
 }

@@ -1,59 +1,94 @@
 {
-  "refreshedAt": "2026-05-12T12:40:48.791402",
+  "refreshedAt": "2026-05-12T14:40:39.844482",
   "source": "aggregate_breakdowns.py from per-fund factsheet JSONs",
   "summary": {
     "total_acwi_top10": 24.75,
-    "total_big_top10_exposure": 0.14,
-    "diff_pp": -24.61
+    "total_big_top10_exposure": 3.95,
+    "diff_pp": -20.8
   },
   "overlap": [
     {
       "ticker": "NVDA",
       "name": "NVIDIA CORP",
       "weight_acwi": 5.13,
-      "weight_big": 0,
-      "diff_pp": -5.13,
-      "contributors": []
+      "weight_big": 0.782,
+      "diff_pp": -4.348,
+      "contributors": [
+        {
+          "fund": "CSPX",
+          "weight": 7.84,
+          "contribution": 0.782
+        }
+      ]
     },
     {
       "ticker": "AAPL",
       "name": "APPLE INC",
       "weight_acwi": 4.04,
-      "weight_big": 0,
-      "diff_pp": -4.04,
-      "contributors": []
+      "weight_big": 0.643,
+      "diff_pp": -3.397,
+      "contributors": [
+        {
+          "fund": "CSPX",
+          "weight": 6.44,
+          "contribution": 0.643
+        }
+      ]
     },
     {
       "ticker": "MSFT",
       "name": "MICROSOFT CORP",
       "weight_acwi": 3.04,
-      "weight_big": 0,
-      "diff_pp": -3.04,
-      "contributors": []
+      "weight_big": 0.489,
+      "diff_pp": -2.551,
+      "contributors": [
+        {
+          "fund": "CSPX",
+          "weight": 4.9,
+          "contribution": 0.489
+        }
+      ]
     },
     {
       "ticker": "AMZN",
       "name": "AMAZON.COM INC",
       "weight_acwi": 2.58,
-      "weight_big": 0,
-      "diff_pp": -2.58,
-      "contributors": []
+      "weight_big": 0.418,
+      "diff_pp": -2.162,
+      "contributors": [
+        {
+          "fund": "CSPX",
+          "weight": 4.19,
+          "contribution": 0.418
+        }
+      ]
     },
     {
       "ticker": "GOOGL",
       "name": "ALPHABET INC CLASS A",
       "weight_acwi": 2.03,
-      "weight_big": 0,
-      "diff_pp": -2.03,
-      "contributors": []
+      "weight_big": 0.361,
+      "diff_pp": -1.669,
+      "contributors": [
+        {
+          "fund": "CSPX",
+          "weight": 3.62,
+          "contribution": 0.361
+        }
+      ]
     },
     {
       "ticker": "AVGO",
       "name": "BROADCOM INC",
       "weight_acwi": 1.93,
-      "weight_big": 0.076,
-      "diff_pp": -1.854,
+      "weight_big": 0.395,
+      "diff_pp": -1.535,
       "contributors": [
+        {
+          "fund": "CSPX",
+          "weight": 3.2,
+          "contribution": 0.319
+        },
         {
           "fund": "THOR",
           "weight": 3.3,
@@ -79,25 +114,48 @@
       "ticker": "GOOG",
       "name": "ALPHABET INC CLASS C",
       "weight_acwi": 1.69,
-      "weight_big": 0,
-      "diff_pp": -1.69,
-      "contributors": []
+      "weight_big": 0.361,
+      "diff_pp": -1.329,
+      "contributors": [
+        {
+          "fund": "CSPX",
+          "weight": 3.62,
+          "contribution": 0.361
+        }
+      ]
     },
     {
       "ticker": "META",
       "name": "META PLATFORMS INC CLASS A",
       "weight_acwi": 1.49,
-      "weight_big": 0,
-      "diff_pp": -1.49,
-      "contributors": []
+      "weight_big": 0.263,
+      "diff_pp": -1.227,
+      "contributors": [
+        {
+          "fund": "CSPX",
+          "weight": 2.16,
+          "contribution": 0.216
+        },
+        {
+          "fund": "JHGSC",
+          "weight": 2.21,
+          "contribution": 0.047
+        }
+      ]
     },
     {
       "ticker": "TSLA",
       "name": "TESLA INC",
       "weight_acwi": 1.08,
-      "weight_big": 0,
-      "diff_pp": -1.08,
-      "contributors": []
+      "weight_big": 0.174,
+      "diff_pp": -0.906,
+      "contributors": [
+        {
+          "fund": "CSPX",
+          "weight": 1.74,
+          "contribution": 0.174
+        }
+      ]
     }
   ]
 }
