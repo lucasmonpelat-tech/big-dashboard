@@ -1244,7 +1244,19 @@ async function renderEquityRace() {
         };
         document.getElementById('er-real-source').innerHTML =
             `Source: <strong>${realContribs.source}</strong> · Period: ${realContribs.period_start} → ${realContribs.period_end}`;
-        const realRows = realContribs.holdings.map(h => `
+
+        // Ordenar: UNDERPERFORM CERRADO al final, el resto por alpha desc
+        const statusRank = (s) => s === 'underperform_closed' ? 1 : 0;
+        const sortedHoldings = [...realContribs.holdings].sort((a, b) => {
+            const rA = statusRank(a.status);
+            const rB = statusRank(b.status);
+            if (rA !== rB) return rA - rB;            // closed-undp van al final
+            const alphaA = a.alpha_mwr_pp ?? -999;
+            const alphaB = b.alpha_mwr_pp ?? -999;
+            return alphaB - alphaA;                   // mejor alpha primero
+        });
+
+        const realRows = sortedHoldings.map(h => `
             <tr>
                 <td class="left"><strong>${h.name}</strong><br><span style="font-size:10px;color:#6B88A8;">${h.ticker}</span></td>
                 <td class="left" style="font-size:11px;color:#90CAF9;">${h.period_start.slice(0,7)} → ${h.period_end.slice(0,7)}</td>
