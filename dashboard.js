@@ -25,6 +25,32 @@ function formatNum(v, dec = 2) {
 }
 function colorFor(val) { return val >= 0 ? "#81C784" : "#EF5350"; }
 
+// Wrap a long string into N lines max (smart break on space)
+function wrapName(name, maxCharsPerLine = 22, maxLines = 2) {
+    if (!name) return '';
+    if (name.length <= maxCharsPerLine) return name;
+    const words = name.split(' ');
+    const lines = [];
+    let current = '';
+    for (const w of words) {
+        if ((current + ' ' + w).trim().length > maxCharsPerLine && current) {
+            lines.push(current.trim());
+            current = w;
+            if (lines.length >= maxLines - 1) break;
+        } else {
+            current = (current + ' ' + w).trim();
+        }
+    }
+    // Append remainder
+    if (current && lines.length < maxLines) lines.push(current.trim());
+    // If words remained after maxLines, truncate with ellipsis
+    if (lines.length === maxLines) {
+        // collect leftovers into the last line if any
+        // Not strictly needed for our names since most fit in 2 lines
+    }
+    return lines.join('<br>');
+}
+
 function computeSleeveTotals(positions) {
     const totals = { Equity: 0, Alternatives: 0, "Fixed Income": 0, Cash: 0 };
     positions.forEach(p => { if (totals[p.sleeve] !== undefined) totals[p.sleeve] += p.value; });
@@ -349,12 +375,11 @@ function renderPositions(livePrices) {
         const trace = {
             type: 'pie',
             hole: 0.4,
-            labels: pieData.map(h => `<b>${h.ticker}</b><br>${h.pct_sleeve.toFixed(1)}%`),
+            labels: pieData.map(h => `<b>${wrapName(h.name, 22, 2)}</b><br>${h.pct_sleeve.toFixed(1)}%`),
             values: pieData.map(h => h.pct_sleeve),
-            customdata: pieData.map(h => [h.name, h.value_usd / 1000, h.pct_fund]),
+            customdata: pieData.map(h => [h.name, h.value_usd / 1000, h.pct_fund, h.ticker]),
             hovertemplate:
-                '<b>%{customdata[0]}</b><br>' +
-                '<b>%{label}</b><br>' +
+                '<b>%{customdata[0]}</b> (%{customdata[3]})<br>' +
                 'En sleeve Alts: %{value:.2f}%<br>' +
                 'En fondo BIG: %{customdata[2]:.2f}%<br>' +
                 'MV: $%{customdata[1]:,.0f}K<extra></extra>',
@@ -364,8 +389,8 @@ function renderPositions(livePrices) {
             },
             textposition: 'outside',
             textinfo: 'label',
-            textfont: { size: 11, color: '#E0E8F0', family: 'Segoe UI' },
-            outsidetextfont: { size: 11, color: '#E0E8F0' },
+            textfont: { size: 10, color: '#E0E8F0', family: 'Segoe UI' },
+            outsidetextfont: { size: 10, color: '#E0E8F0' },
             automargin: true,
             pull: pieData.map((_, i) => i === 0 ? 0.04 : 0),
             sort: false,
@@ -373,11 +398,11 @@ function renderPositions(livePrices) {
         };
 
         const layout = {
-            height: 420,
+            height: 500,
             paper_bgcolor: 'rgba(0,0,0,0)',
             plot_bgcolor: 'rgba(0,0,0,0)',
             font: { family: 'Segoe UI', color: '#E0E8F0' },
-            margin: { t: 30, b: 30, l: 80, r: 80 },
+            margin: { t: 50, b: 50, l: 140, r: 140 },
             showlegend: false,
             annotations: [{
                 text: `<b>Alternatives</b><br><span style="font-size:13px">$${(altTotal/1e6).toFixed(2)}M</span><br><span style="font-size:10px;color:#FFB74D">100%</span>`,
@@ -915,13 +940,12 @@ async function renderEquityRace() {
         const trace = {
             type: 'pie',
             hole: 0.4,
-            labels: pieData.map(h => `<b>${h.ticker}</b><br>${h.pct_sleeve.toFixed(1)}%`),
+            labels: pieData.map(h => `<b>${wrapName(h.name, 22, 2)}</b><br>${h.pct_sleeve.toFixed(1)}%`),
             values: pieData.map(h => h.pct_sleeve),
-            customdata: pieData.map(h => [h.name, h.value_usd / 1000, h.pct_fund]),
+            customdata: pieData.map(h => [h.name, h.value_usd / 1000, h.pct_fund, h.ticker]),
             hovertemplate:
-                '<b>%{customdata[0]}</b><br>' +
-                '<b>%{label}</b><br>' +
-                'En sleeve: %{value:.2f}%<br>' +
+                '<b>%{customdata[0]}</b> (%{customdata[3]})<br>' +
+                'En sleeve Equity: %{value:.2f}%<br>' +
                 'En fondo BIG: %{customdata[2]:.2f}%<br>' +
                 'MV: $%{customdata[1]:,.0f}K<extra></extra>',
             marker: {
@@ -930,8 +954,8 @@ async function renderEquityRace() {
             },
             textposition: 'outside',
             textinfo: 'label',
-            textfont: { size: 11, color: '#E0E8F0', family: 'Segoe UI' },
-            outsidetextfont: { size: 11, color: '#E0E8F0' },
+            textfont: { size: 10, color: '#E0E8F0', family: 'Segoe UI' },
+            outsidetextfont: { size: 10, color: '#E0E8F0' },
             automargin: true,
             pull: pieData.map((_, i) => i === 0 ? 0.04 : 0),  // emphasize largest
             sort: false,
@@ -939,11 +963,11 @@ async function renderEquityRace() {
         };
 
         const layout = {
-            height: 420,
+            height: 500,
             paper_bgcolor: 'rgba(0,0,0,0)',
             plot_bgcolor: 'rgba(0,0,0,0)',
             font: { family: 'Segoe UI', color: '#E0E8F0' },
-            margin: { t: 30, b: 30, l: 80, r: 80 },
+            margin: { t: 50, b: 50, l: 140, r: 140 },
             showlegend: false,
             annotations: [{
                 text: `<b>Equity</b><br><span style="font-size:13px">$${(eqTotal/1e6).toFixed(2)}M</span><br><span style="font-size:10px;color:#90CAF9">100%</span>`,
@@ -1439,12 +1463,11 @@ async function renderFIRace() {
         const trace = {
             type: 'pie',
             hole: 0.4,
-            labels: pieData.map(h => `<b>${h.ticker}</b><br>${h.pct_sleeve.toFixed(1)}%`),
+            labels: pieData.map(h => `<b>${wrapName(h.name, 22, 2)}</b><br>${h.pct_sleeve.toFixed(1)}%`),
             values: pieData.map(h => h.pct_sleeve),
-            customdata: pieData.map(h => [h.name, h.value_usd / 1000, h.pct_fund]),
+            customdata: pieData.map(h => [h.name, h.value_usd / 1000, h.pct_fund, h.ticker]),
             hovertemplate:
-                '<b>%{customdata[0]}</b><br>' +
-                '<b>%{label}</b><br>' +
+                '<b>%{customdata[0]}</b> (%{customdata[3]})<br>' +
                 'En sleeve FI: %{value:.2f}%<br>' +
                 'En fondo BIG: %{customdata[2]:.2f}%<br>' +
                 'MV: $%{customdata[1]:,.0f}K<extra></extra>',
@@ -1454,8 +1477,8 @@ async function renderFIRace() {
             },
             textposition: 'outside',
             textinfo: 'label',
-            textfont: { size: 11, color: '#E0E8F0', family: 'Segoe UI' },
-            outsidetextfont: { size: 11, color: '#E0E8F0' },
+            textfont: { size: 10, color: '#E0E8F0', family: 'Segoe UI' },
+            outsidetextfont: { size: 10, color: '#E0E8F0' },
             automargin: true,
             pull: pieData.map((_, i) => i === 0 ? 0.04 : 0),
             sort: false,
@@ -1463,11 +1486,11 @@ async function renderFIRace() {
         };
 
         const layout = {
-            height: 420,
+            height: 500,
             paper_bgcolor: 'rgba(0,0,0,0)',
             plot_bgcolor: 'rgba(0,0,0,0)',
             font: { family: 'Segoe UI', color: '#E0E8F0' },
-            margin: { t: 30, b: 30, l: 80, r: 80 },
+            margin: { t: 50, b: 50, l: 140, r: 140 },
             showlegend: false,
             annotations: [{
                 text: `<b>Fixed Income</b><br><span style="font-size:13px">$${(fiTotal/1e6).toFixed(2)}M</span><br><span style="font-size:10px;color:#A5D6A7">100%</span>`,
