@@ -425,7 +425,6 @@
         <button class="tab-btn" data-tab="currency">💱 Currency</button>
         <button class="tab-btn" data-tab="country">🌍 Geography</button>
         <button class="tab-btn" data-tab="yield">💰 Yield</button>
-        <button class="tab-btn" data-tab="ytm">📈 YTM / FI</button>
         <button class="tab-btn" data-tab="performance">📉 Performance</button>
         <button class="tab-btn" data-tab="trades">📝 Trade Log</button>
         <button class="tab-btn" data-tab="equity-race">🏁 Equity Race</button>
@@ -623,34 +622,6 @@
                     </tr>
                 </thead>
                 <tbody id="yield-tbody"></tbody>
-            </table>
-        </section>
-
-        <!-- ================== TAB: YTM / FIXED INCOME ================== -->
-        <section id="tab-ytm" class="tab-section">
-            <div class="info-box">
-                <strong>YTM (Yield to Maturity) de Renta Fija:</strong> Calculado solo sobre los 6 fondos del sleeve FI. Incluye YTW, duración y vencimiento promedio ponderado (weighted por peso relativo dentro del sleeve RF).
-            </div>
-
-            <div class="summary-box">
-                <h3>YTM Ponderado — Sleeve Renta Fija</h3>
-                <div class="summary-grid" id="ytm-summary-grid"></div>
-            </div>
-
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th class="left">Instrument</th>
-                        <th>% Portfolio</th>
-                        <th>% of FI Sleeve</th>
-                        <th>YTW</th>
-                        <th>Duration</th>
-                        <th>Maturity</th>
-                        <th>Rating</th>
-                        <th>YTM Contribution</th>
-                    </tr>
-                </thead>
-                <tbody id="ytm-tbody"></tbody>
             </table>
         </section>
 

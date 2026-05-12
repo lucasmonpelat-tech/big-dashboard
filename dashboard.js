@@ -674,79 +674,6 @@ function renderYield() {
 }
 
 // ==============================================================
-// YTM / FIXED INCOME TAB
-// ==============================================================
-function renderYTM() {
-    const fiPositions = BIG_POSITIONS.filter(p => p.sleeve === "Fixed Income");
-    const totalRFpct = fiPositions.reduce((a, p) => a + p.pct, 0);
-    let wtdYTM = 0, wtdDur = 0, wtdVenc = 0;
-    fiPositions.forEach(p => {
-        const m = FI_METRICS[p.isin];
-        if (!m) return;
-        const wt = p.pct / totalRFpct;
-        wtdYTM += wt * m.ytw;
-        wtdDur += wt * m.dur;
-        wtdVenc += wt * m.venc;
-    });
-
-    document.getElementById('ytm-summary-grid').innerHTML = `
-        <div class="summary-item" style="border-left-color:#81C784;">
-            <div class="s-lbl">Weighted YTM</div>
-            <div class="yield-total">${wtdYTM.toFixed(2)}%</div>
-            <div class="s-sub">weighted avg across FI funds</div>
-        </div>
-        <div class="summary-item">
-            <div class="s-lbl">Weighted Duration</div>
-            <div class="s-val" style="color:#64B5F6;">${wtdDur.toFixed(2)} yrs</div>
-            <div class="s-sub">interest rate sensitivity</div>
-        </div>
-        <div class="summary-item">
-            <div class="s-lbl">Weighted Maturity</div>
-            <div class="s-val" style="color:#64B5F6;">${wtdVenc.toFixed(2)} yrs</div>
-            <div class="s-sub">average time to maturity</div>
-        </div>
-        <div class="summary-item">
-            <div class="s-lbl">FI Sleeve Weight</div>
-            <div class="s-val" style="color:#D4AF37;">${totalRFpct.toFixed(2)}%</div>
-            <div class="s-sub">of total BIG</div>
-        </div>
-    `;
-
-    let html = '';
-    fiPositions.forEach(p => {
-        const m = FI_METRICS[p.isin];
-        if (!m) return;
-        const wt = p.pct / totalRFpct;
-        const contrib = (wt * m.ytw).toFixed(3);
-        html += `
-            <tr class="sleeve-fi">
-                <td class="left"><strong>${p.name}</strong><span class="note">${p.isin}</span></td>
-                <td>${formatPct(p.pct)}</td>
-                <td>${formatPct(wt * 100)}</td>
-                <td><strong style="color:#81C784;">${m.ytw.toFixed(2)}%</strong></td>
-                <td>${m.dur.toFixed(2)}</td>
-                <td>${m.venc.toFixed(2)}</td>
-                <td><span class="sleeve-badge fi">${m.rating}</span></td>
-                <td>${contrib}%</td>
-            </tr>
-        `;
-    });
-    html += `
-        <tr class="total-row">
-            <td class="left"><strong>TOTAL FI PONDERADO</strong></td>
-            <td>${totalRFpct.toFixed(2)}%</td>
-            <td>100.00%</td>
-            <td><strong>${wtdYTM.toFixed(2)}%</strong></td>
-            <td>${wtdDur.toFixed(2)}</td>
-            <td>${wtdVenc.toFixed(2)}</td>
-            <td>—</td>
-            <td>${wtdYTM.toFixed(3)}%</td>
-        </tr>
-    `;
-    document.getElementById('ytm-tbody').innerHTML = html;
-}
-
-// ==============================================================
 // PERFORMANCE TAB
 // ==============================================================
 function renderPerformance() {
@@ -1889,7 +1816,6 @@ function updateTime() {
     renderCurrency();
     renderCountry();
     renderYield();
-    renderYTM();
     renderPerformance();
     renderEquityRace();
     renderEquityBreakdown();
