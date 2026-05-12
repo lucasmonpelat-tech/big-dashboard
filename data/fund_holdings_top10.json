@@ -1,11 +1,11 @@
 {
   "_description": "Top 10 holdings per BIG equity fund. Used for lookthrough analysis vs ACWI top 10.",
   "_lastUpdate": "2026-05-12",
-  "_status": "CSPX is exact (S&P 500 weights public). UCITS funds (NBGMT, MFSCV, THOR, JHGSC, LGLI) are ESTIMATES based on typical sector tilt + factsheet info — REFRESH from each fund factsheet to get exact weights.",
+  "_status": "VERIFICADO desde factsheets oficiales: CSPX (S&P 500 weights), NBGMT (Mar-2026 swissfunddata), MFSCV (Mar-2026 swissfunddata), THOR (Jan-2026 wmcube). Others by mandate.",
 
   "CSPX": {
     "name": "iShares Core S&P 500 UCITS",
-    "source": "S&P 500 index weights (Bloomberg/public, ~May 2026)",
+    "source": "S&P 500 index weights (public, ~May 2026)",
     "isin": "IE00B5BMR087",
     "top_holdings": {
       "NVDA":  7.50,
@@ -23,7 +23,7 @@
 
   "ILF": {
     "name": "iShares Latin America 40 ETF",
-    "source": "iShares ILF factsheet (LatAm only — no ACWI top 10 names)",
+    "source": "iShares ILF (LatAm only — no ACWI top 10 names)",
     "isin": "US4642873909",
     "top_holdings": {
       "_note": "No tiene exposure a ACWI top 10 (sin US/tech mega-caps)"
@@ -32,7 +32,7 @@
 
   "4BRZ": {
     "name": "iShares MSCI Brazil UCITS (DE)",
-    "source": "iShares 4BRZ factsheet (Brazil only)",
+    "source": "iShares 4BRZ (Brazil only)",
     "isin": "DE000A0Q4R85",
     "top_holdings": {
       "_note": "No tiene exposure a ACWI top 10 (puro Brasil)"
@@ -41,7 +41,7 @@
 
   "ARGT": {
     "name": "Global X MSCI Argentina ETF",
-    "source": "Global X factsheet (Argentina only)",
+    "source": "Global X (Argentina only)",
     "isin": "US37950E2596",
     "top_holdings": {
       "_note": "No tiene exposure a ACWI top 10 (puro Argentina)"
@@ -50,45 +50,74 @@
 
   "NBGMT": {
     "name": "NB Global Equity Megatrends I",
-    "source": "ESTIMATE (NB factsheet top 10 typical). VERIFICAR.",
+    "source": "VERIFICADO: NB factsheet 31-Mar-2026 via swissfunddata.ch. Active Share 97.02% vs MSCI ACWI.",
     "isin": "IE00BFMHRK20",
-    "verify_needed": true,
+    "_as_of": "2026-03-31",
     "top_holdings": {
-      "NVDA":  5.00,
-      "MSFT":  4.50,
-      "AAPL":  4.00,
-      "GOOGL": 3.50,
-      "AMZN":  3.00,
-      "META":  2.50,
-      "AVGO":  1.50
+      "GOOGL": 3.62
+    },
+    "_factsheet_top10": {
+      "Amdocs":           4.95,
+      "Expedia":          4.90,
+      "Perrigo":          4.75,
+      "NICE":             4.62,
+      "Uber":             4.61,
+      "Delta_Air_Lines":  4.61,
+      "Charles_River":    4.60,
+      "Shift4_Payments":  4.59,
+      "Pets_At_Home":     4.45,
+      "Alibaba_ADR":      4.37
     }
   },
 
   "MFSCV": {
     "name": "MFS Meridian Contrarian Value I1",
-    "source": "ESTIMATE (MFS factsheet typical — value tilt, low tech). VERIFICAR.",
+    "source": "VERIFICADO: MFS factsheet 31-Mar-2026 via swissfunddata.ch. Active Share 97% vs MSCI World.",
     "isin": "LU1985812756",
-    "verify_needed": true,
+    "_as_of": "2026-03-31",
     "top_holdings": {
-      "MSFT":  3.00,
-      "GOOGL": 2.50
+      "_note": "NO tiene NINGUNO de ACWI top 10. Top 10: IMCD, Michelin, Campari, DHL, Becton Dickinson, Howden Joinery, Cenovus, Zalando, Veolia, Medtronic."
+    },
+    "_factsheet_top10": {
+      "IMCD":            "see factsheet",
+      "Michelin":        "see factsheet",
+      "Campari":         "see factsheet",
+      "Deutsche_Post":   "see factsheet",
+      "Becton_Dickinson":"see factsheet",
+      "Howden_Joinery":  "see factsheet",
+      "Cenovus_Energy":  "see factsheet",
+      "Zalando":         "see factsheet",
+      "Veolia":          "see factsheet",
+      "Medtronic":       "see factsheet"
     }
   },
 
   "THOR": {
     "name": "Thornburg Equity Income Builder I",
-    "source": "ESTIMATE (Thornburg factsheet typical — equity income tilt). VERIFICAR.",
+    "source": "VERIFICADO: Thornburg factsheet 31-Jan-2026 via thornburg.wmcubehk.com. Active Share 91.7% vs MSCI World.",
     "isin": "IE00B6YCBF59",
-    "verify_needed": true,
+    "_as_of": "2026-01-31",
     "top_holdings": {
-      "MSFT":  3.50,
-      "AAPL":  2.50
+      "AVGO": 3.30,
+      "2330": 2.60
+    },
+    "_factsheet_top10": {
+      "Orange":          4.6,
+      "ATT":             4.5,
+      "Broadcom_AVGO":   3.3,
+      "BNP_Paribas":     3.0,
+      "NN_Group":        2.9,
+      "Roche":           2.8,
+      "Samsung":         2.7,
+      "TSM_Taiwan":      2.6,
+      "Enel":            2.6,
+      "TotalEnergies":   2.6
     }
   },
 
   "JHGSC": {
     "name": "Janus Henderson Global Smaller Cos F2",
-    "source": "Janus factsheet — small caps, NO mega-caps",
+    "source": "Janus factsheet — small caps, NO mega-caps en top 10 ACWI",
     "isin": "LU2940405447",
     "top_holdings": {
       "_note": "No tiene exposure a ACWI top 10 (es small/mid cap)"
