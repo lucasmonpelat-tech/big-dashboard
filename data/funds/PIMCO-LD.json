@@ -3,11 +3,26 @@
   "isin": "IE00BDT57R20",
   "name": "PIMCO GIS Low Duration Income I",
   "sleeve": "Fixed Income",
-  "source": "https://www.pimco.com/sg/en/investments/gis/low-duration-income-fund/inst-usd-accumulation",
+  "source": "PIMCO website via Chrome MCP",
   "parsed_at": "2026-05-12",
-  "fi_metrics": {},
-  "top_holdings": null,
-  "sectors": null,
-  "regions": null,
-  "as_of_factsheet": null
+  "as_of_factsheet": "2026-04-30",
+  "fi_metrics": {
+    "ytw": 6.23,
+    "current_yield": 4.09,
+    "duration": 2.7,
+    "maturity": 3.81,
+    "underlying_portfolio_yield": 3.54
+  },
+  "countries": {
+    "United States": 94.09,
+    "Japan": 1.92,
+    "Brazil": 1.27,
+    "Mexico": 1.08,
+    "South Africa": 0.98,
+    "Turkey": 0.93,
+    "India": 0.54,
+    "Israel": -0.4,
+    "Canada": -0.41,
+    "Singapore": -0.61
+  }
 }

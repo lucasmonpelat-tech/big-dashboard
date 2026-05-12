@@ -1,15 +1,22 @@
 {
-  "refreshedAt": "2026-05-12T14:40:39.845180",
+  "refreshedAt": "2026-05-12T14:48:09.780364",
   "source": "aggregate_breakdowns.py from per-fund factsheet JSONs",
   "method": "Weighted FI metrics (YTW/Dur/Venc/CurYld) across FI sleeve",
-  "funds_with_data": [],
-  "funds_missing": [
+  "funds_with_data": [
     "PIMCO-LD",
     "PIMCO-INC",
+    "PIMCO-EM"
+  ],
+  "funds_missing": [
     "MANIG",
-    "PIMCO-EM",
     "TGF",
     "SGCB"
   ],
-  "metrics": {}
+  "metrics": {
+    "ytw": 4.69,
+    "current_yield": 3.12,
+    "duration": 2.84,
+    "maturity": 4.08,
+    "underlying_portfolio_yield": 2.15
+  }
 }
