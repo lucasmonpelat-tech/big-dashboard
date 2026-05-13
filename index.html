@@ -426,7 +426,6 @@
         <button class="tab-btn" data-tab="country">🌍 Geography</button>
         <button class="tab-btn" data-tab="yield">💰 Yield</button>
         <button class="tab-btn" data-tab="performance">📉 Performance</button>
-        <button class="tab-btn" data-tab="trades">📝 Trade Log</button>
         <button class="tab-btn" data-tab="equity-race">🏁 Equity Race</button>
         <button class="tab-btn" data-tab="fi-race">💎 FI Race</button>
         <button class="tab-btn" data-tab="alts-race">🏆 Alts Race</button>
@@ -661,83 +660,6 @@
                     <div id="nav-chart-perf" style="min-height: 400px;"></div>
                 </div>
             </div>
-        </section>
-
-        <!-- ================== TAB: TRADE LOG ================== -->
-        <section id="tab-trades" class="tab-section">
-            <div class="info-box">
-                <strong>Trade Log:</strong> Historial de trades ejecutados y propuestos. Status tracking para evaluar eficiencia post-trade.
-            </div>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th class="left">Date</th>
-                        <th class="left">Instrument</th>
-                        <th class="left">Side</th>
-                        <th>Amount USD</th>
-                        <th class="left">Thesis</th>
-                        <th class="left">Status</th>
-                    </tr>
-                </thead>
-                <tbody id="trades-body">
-                    <tr>
-                        <td class="left">16-Apr-2026</td>
-                        <td class="left">Berkshire Hathaway (BRK.B)</td>
-                        <td class="left"><span class="trade-sell">SELL</span></td>
-                        <td>$1,216,582</td>
-                        <td class="left" style="white-space: normal;">Rotation out of single-name concentration. Buffett succession + value drag.</td>
-                        <td class="left"><span class="trade-status winner">EXECUTED</span></td>
-                    </tr>
-                    <tr>
-                        <td class="left">16-Apr-2026</td>
-                        <td class="left">iShares Core S&P 500 (CSPX)</td>
-                        <td class="left"><span class="trade-buy">BUY</span></td>
-                        <td>$617,000</td>
-                        <td class="left" style="white-space: normal;">Re-deploy 50% of BRK into low-cost US beta.</td>
-                        <td class="left"><span class="trade-status winner">EXECUTED</span></td>
-                    </tr>
-                    <tr>
-                        <td class="left">16-Apr-2026</td>
-                        <td class="left">Thornburg Equity Income Builder</td>
-                        <td class="left"><span class="trade-buy">BUY</span></td>
-                        <td>$617,000</td>
-                        <td class="left" style="white-space: normal;">Re-deploy 50% of BRK into global dividend-quality equity.</td>
-                        <td class="left"><span class="trade-status winner">EXECUTED</span></td>
-                    </tr>
-                    <tr>
-                        <td class="left">Pending</td>
-                        <td class="left">Janus Henderson Global Small Cos</td>
-                        <td class="left"><span class="trade-sell">SELL</span></td>
-                        <td>$554,045</td>
-                        <td class="left" style="white-space: normal;">Eliminate sub-scale position. Fund Japan rotation.</td>
-                        <td class="left"><span class="trade-status ongoing">PROPOSED</span></td>
-                    </tr>
-                    <tr>
-                        <td class="left">Pending</td>
-                        <td class="left">Nomura Japan Strategic Value</td>
-                        <td class="left"><span class="trade-buy">BUY</span></td>
-                        <td>$500,000</td>
-                        <td class="left" style="white-space: normal;">1st entry Japan — BOJ normalization + TSE Reform + PBR<1.</td>
-                        <td class="left"><span class="trade-status ongoing">PROPOSED</span></td>
-                    </tr>
-                    <tr>
-                        <td class="left">Apr-2026</td>
-                        <td class="left">Flex-Lexington Partners Secondaries</td>
-                        <td class="left"><span class="trade-buy">BUY</span></td>
-                        <td>$500,000</td>
-                        <td class="left" style="white-space: normal;">Initial funding — secondaries fund. Cash debited, first NAV pending.</td>
-                        <td class="left"><span class="trade-status ongoing">IN TRANSIT</span></td>
-                    </tr>
-                    <tr>
-                        <td class="left">Pending (Jun-26)</td>
-                        <td class="left">Hamilton Lane Global Private Infra</td>
-                        <td class="left"><span class="trade-buy">BUY</span></td>
-                        <td>$500,000</td>
-                        <td class="left" style="white-space: normal;">Deploy available cash ($597K current) to private infra. Dealing date 01-Jul-2026. Will leave ~$97K residual cash.</td>
-                        <td class="left"><span class="trade-status ongoing">QUEUED</span></td>
-                    </tr>
-                </tbody>
-            </table>
         </section>
 
         <!-- ================== TAB: EQUITY RACE ================== -->
