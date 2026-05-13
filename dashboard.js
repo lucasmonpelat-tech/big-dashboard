@@ -426,29 +426,6 @@ function renderCurrency() {
     const tsum = Object.values(totals).reduce((a, b) => a + b, 0);
     const sorted = Object.entries(totals).sort((a, b) => b[1] - a[1]);
 
-    // Plotly donut chart
-    const data = [{
-        type: 'pie',
-        labels: sorted.map(([c]) => c),
-        values: sorted.map(([_, v]) => v),
-        hole: 0.5,
-        textposition: 'outside',
-        textinfo: 'label+percent',
-        marker: {
-            colors: sorted.map(([c]) => CUR_COLORS[c] || '#666'),
-            line: { color: '#0D1B2A', width: 1.5 }
-        },
-        hovertemplate: '<b>%{label}</b><br>%{value:.2f}%<extra></extra>'
-    }];
-    const layout = {
-        paper_bgcolor: 'transparent',
-        plot_bgcolor: 'transparent',
-        font: { color: '#E0E8F0', family: 'Segoe UI, Arial, sans-serif', size: 12 },
-        margin: { t: 20, r: 20, b: 20, l: 20 },
-        showlegend: false
-    };
-    Plotly.newPlot('currency-chart', data, layout, { displayModeBar: false, responsive: true });
-
     // Bar rows
     const bars = document.getElementById('currency-bars');
     bars.innerHTML = sorted.map(([c, v]) => `
