@@ -1,0 +1,20 @@
+# BIG Dashboard — Python dependencies
+# Pin only major versions, let pip resolve minor
+
+# Web scraping & browser automation
+playwright>=1.40
+
+# HTTP / data fetching
+requests>=2.31
+yfinance>=0.2.40
+beautifulsoup4>=4.12
+
+# PDF parsing (factsheet pipeline)
+pypdf>=4.0
+
+# Excel parsing (Pershing positions / transactions)
+openpyxl>=3.1
+pandas>=2.0
+
+# Date utilities
+python-dateutil>=2.9
