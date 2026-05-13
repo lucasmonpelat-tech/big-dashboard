@@ -432,7 +432,7 @@ function renderCurrency() {
         <div class="bar-row">
             <div class="bar-label" style="color:${CUR_COLORS[c] || '#888'};">${c}</div>
             <div class="bar-track"><div class="bar-fill" style="width:${((v / tsum) * 100).toFixed(1)}%; background:${CUR_COLORS[c] || '#888'};"></div></div>
-            <div class="bar-value">${((v / tsum) * 100).toFixed(2)}%</div>
+            <div class="bar-value">${((v / tsum) * 100).toFixed(1)}%</div>
         </div>
     `).join('');
 
