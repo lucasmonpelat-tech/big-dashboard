@@ -46,7 +46,6 @@ const MANUAL_NAV = {
     "IE00B29K0P99": { nav: 17.98,    date: "2026-05-05", src: "baha" },
     "LU2049315265": { nav: 2115.78,  date: "2026-05-05", src: "baha" },
     "XS2324777171": { nav: 110.50,   date: "2026-03-28", src: "Tenac (manager)" },
-    "IE00BG13YG49": { nav: 118.44,   date: "2026-03-31", src: "Schroders" },
     "LU2837777825": { nav: null,     date: "2026-03-31", src: "Carlyle (quarterly)" },
     "LU2659193242": { nav: null,     date: "2026-03-31", src: "NB PE (quarterly)" },
     "XS2658535526": { nav: null,     date: "2026-03-31", src: "Barings (quarterly)" },

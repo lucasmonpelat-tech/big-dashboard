@@ -540,8 +540,12 @@
         <!-- ================== TAB: CURRENCY ================== -->
         <section id="tab-currency" class="tab-section">
             <div class="info-box">
-                <strong>Currency Exposure del portafolio:</strong> Exposición por moneda del <em>subyacente</em>, no la moneda de cotización.
-                Ejemplo: CSPX cotiza en USD → 100% USD. PIMCO EM Local Bond → BRL, MXN, INR, etc.
+                <strong>Currency Exposure del portafolio:</strong> Exposición efectiva al inversor <em>post-hedging</em>, no la moneda nominal del subyacente.<br>
+                <span style="font-size:11px;color:#90CAF9;">
+                    • Fondos FI <strong>USD-hedged</strong> (PIMCO Income, PIMCO LD, Man GLG IG Opps, Schroder Cat Bond, Tenac) → 100% USD aunque inviertan globalmente.<br>
+                    • PIMCO EM Local Bond → <strong>NO hedge por diseño</strong> (objetivo del mandate es EM local FX).<br>
+                    • Equity ETFs → exposición de las acciones subyacentes (CSPX = 100% USD, 4BRZ = 97% BRL, etc.).
+                </span>
             </div>
 
             <div class="summary-box">

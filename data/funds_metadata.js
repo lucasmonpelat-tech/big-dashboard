@@ -74,7 +74,6 @@ const FACTSHEET_LINKS = {
     "XS2658535526": "Email from Barings (private credit)",
     "XS2324777171": "Tenac Global Fund - direct with Nico Dujovne",
     "KYG4737U1085": "https://www.hpspartners.com/lending",
-    "IE00BG13YG49": "https://www.schroders.com/en-ch/ch/professional/funds/schroder-gaia-cat-bond/",
     "LU2049315265": "https://www.schroders.com/es-es/es/inversores-particulares/centro-de-fondos/?language=es&location=es&channel=inversores-particulares&clientId=schdr&clientVersion=v1&externalId=SCHDR_F0000147B0&r=%2Ffund%2FSCHDR_F0000147B0%2F&fundName=Schroder-GAIA-Cat-Bond-C-Accumulation-USD",
     "US78462F1030": "https://www.thornburg.com/funds/equity-income-builder-fund/"
 };
@@ -101,12 +100,20 @@ const CURRENCY_EXPOSURE = {
     "LU2659193242": { exposures: [{c:"USD",p:60},{c:"EUR",p:30},{c:"GBP",p:10}], note: "NB PE — global multi-currency", src: "NB docs" },
     "XS2658535526": { exposures: [{c:"USD",p:100}], note: "Barings — USD corporate lending", src: "Manager email" },
     "FLEX-LEX":     { exposures: [{c:"USD",p:80},{c:"EUR",p:15},{c:"GBP",p:5}], note: "Flex-Lexington — secondaries PE global", src: "Flex-Lex docs" },
-    "IE00B87KCF77": { exposures: [{c:"USD",p:75},{c:"EUR",p:12},{c:"GBP",p:7},{c:"OTHER",p:6}], note: "PIMCO Income — global FI, USD-hedged", src: "PIMCO factsheet" },
-    "IE00BDT57R20": { exposures: [{c:"USD",p:95},{c:"OTHER",p:5}], note: "PIMCO Low Duration — USD-hedged", src: "PIMCO factsheet" },
-    "IE000OE87WX6": { exposures: [{c:"USD",p:70},{c:"EUR",p:18},{c:"GBP",p:8},{c:"OTHER",p:4}], note: "Man IG Opp — USD-hedged class", src: "Man docs" },
-    "XS2324777171": { exposures: [{c:"USD",p:100}], note: "Tenac — USD fund, ⚠ confirm with Nico", src: "⚠ Confirm with Nico" },
-    "IE00B29K0P99": { exposures: [{c:"BRL",p:18},{c:"MXN",p:16},{c:"IDR",p:10},{c:"INR",p:9},{c:"ZAR",p:8},{c:"CLP",p:7},{c:"COP",p:6},{c:"USD",p:12},{c:"OTHER",p:14}], note: "PIMCO EM Local — EM local currency bonds", src: "PIMCO factsheet" },
-    "IE00BG13YG49": { exposures: [{c:"USD",p:100}], note: "Schroder GAIA Cat Bond — USD insurance-linked", src: "Schroder factsheet" },
+    // PIMCO Income I (Acc USD): fondo USD-base con hedging FX a nivel mandate
+    // de TODA exposición no-USD. Investor net exposure = 100% USD.
+    "IE00B87KCF77": { exposures: [{c:"USD",p:100}], note: "PIMCO Income I — 100% USD (hedge FX mandate-level, todo no-USD vuelve a USD)", src: "PIMCO Income KIID + factsheet (USD-hedged share class)" },
+    // PIMCO Low Duration Income I: idem — USD-base + mandate-level FX hedge
+    "IE00BDT57R20": { exposures: [{c:"USD",p:100}], note: "PIMCO Low Duration Income I — 100% USD (hedge FX mandate-level)", src: "PIMCO LD KIID + factsheet" },
+    // Man GLG Global IG Opps IYV USD: clase USD-hedged. Lucas confirma.
+    // Bench oficial: ICE BofA Global Large Cap Corporate Index (USD Hedged).
+    "IE000OE87WX6": { exposures: [{c:"USD",p:100}], note: "Man GLG IG Opps IYV USD — 100% USD (clase USD-hedged, bench USD-hedged)", src: "Man docs + Lucas confirma" },
+    // Tenac Global Fund: pendiente confirmar share class con Nico Dujovne
+    "XS2324777171": { exposures: [{c:"USD",p:100}], note: "Tenac TGF — asumido USD class, ⚠ confirmar share class con Nico", src: "⚠ Pendiente confirmar Nico" },
+    // PIMCO EM Local Bond: NO HEDGEADO por diseño — el mandate es retorno EM local FX
+    "IE00B29K0P99": { exposures: [{c:"BRL",p:18},{c:"MXN",p:16},{c:"IDR",p:10},{c:"INR",p:9},{c:"ZAR",p:8},{c:"CLP",p:7},{c:"COP",p:6},{c:"USD",p:12},{c:"OTHER",p:14}], note: "PIMCO EM Local Bond I — EM local currencies (NO hedge por diseño del mandate)", src: "PIMCO EM Local factsheet 30-Apr-26" },
+    // Schroder GAIA Cat Bond Class C: cat bonds emitidos en USD nativamente. ISIN correcto LU2049315265
+    "LU2049315265": { exposures: [{c:"USD",p:100}], note: "Schroder GAIA Cat Bond C — 100% USD (cat bonds emitidos en USD nativamente)", src: "Schroder GAIA prospectus" },
     "CASH-USD":     { exposures: [{c:"USD",p:100}], note: "Cash USD", src: "Pershing" }
 };
 
@@ -236,7 +243,7 @@ const COUNTRY_EXPOSURE = {
     "IE000OE87WX6": [{c:"US",p:55},{c:"UK",p:10},{c:"DE",p:8},{c:"FR",p:6},{c:"OTHER",p:21}],
     "XS2324777171": [{c:"US",p:40},{c:"UK",p:15},{c:"LatAm",p:15},{c:"EU",p:20},{c:"OTHER",p:10}],
     "IE00B29K0P99": [{c:"BR",p:16},{c:"MX",p:14},{c:"ID",p:9},{c:"IN",p:9},{c:"ZA",p:8},{c:"CL",p:7},{c:"PL",p:6},{c:"OTHER",p:31}],
-    "IE00BG13YG49": [{c:"US",p:80},{c:"JP",p:5},{c:"EU",p:10},{c:"OTHER",p:5}],
+    "LU2049315265": [{c:"US",p:80},{c:"JP",p:5},{c:"EU",p:10},{c:"OTHER",p:5}],
     "CASH-USD":     [{c:"US",p:100}]
 };
 
