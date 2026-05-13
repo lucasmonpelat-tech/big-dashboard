@@ -485,40 +485,13 @@ function renderCountry() {
     });
     const tsum = Object.values(totals).reduce((a, b) => a + b, 0);
     const sorted = Object.entries(totals).sort((a, b) => b[1] - a[1]);
-    const top10 = sorted.slice(0, 10);
-    const rest = sorted.slice(10);
-    const restTotal = rest.reduce((a, [_, v]) => a + v, 0);
-    const chartLabels = top10.map(([c]) => c).concat(restTotal > 0 ? ['OTHER'] : []);
-    const chartValues = top10.map(([_, v]) => v).concat(restTotal > 0 ? [restTotal] : []);
-
-    const data = [{
-        type: 'pie',
-        labels: chartLabels,
-        values: chartValues,
-        hole: 0.5,
-        textposition: 'outside',
-        textinfo: 'label+percent',
-        marker: {
-            colors: chartLabels.map(c => COUNTRY_COLORS[c] || '#666'),
-            line: { color: '#0D1B2A', width: 1.5 }
-        },
-        hovertemplate: '<b>%{label}</b><br>%{value:.2f}%<extra></extra>'
-    }];
-    const layout = {
-        paper_bgcolor: 'transparent',
-        plot_bgcolor: 'transparent',
-        font: { color: '#E0E8F0', family: 'Segoe UI, Arial, sans-serif', size: 12 },
-        margin: { t: 20, r: 20, b: 20, l: 20 },
-        showlegend: false
-    };
-    Plotly.newPlot('country-chart', data, layout, { displayModeBar: false, responsive: true });
 
     const bars = document.getElementById('country-bars');
     bars.innerHTML = sorted.slice(0, 15).map(([c, v]) => `
         <div class="bar-row">
             <div class="bar-label" style="color:${COUNTRY_COLORS[c] || '#888'};">${c}</div>
             <div class="bar-track"><div class="bar-fill" style="width:${((v / tsum) * 100).toFixed(1)}%; background:${COUNTRY_COLORS[c] || '#888'};"></div></div>
-            <div class="bar-value">${((v / tsum) * 100).toFixed(2)}%</div>
+            <div class="bar-value">${((v / tsum) * 100).toFixed(1)}%</div>
         </div>
     `).join('');
 
