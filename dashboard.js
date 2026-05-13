@@ -1140,10 +1140,10 @@ async function renderEquityRace() {
                 </div>
             `;
             document.getElementById('er-overlap-summary').innerHTML =
-                summaryCard('🌐 ACWI Top 10 weight', summary.total_acwi_top10.toFixed(1) + '%', '#64B5F6', 'NVDA + AAPL + MSFT + ...') +
-                summaryCard('🎯 BIG exposure (lookthrough)', summary.total_big_top10_exposure.toFixed(1) + '%', '#D4AF37', 'via CSPX + UCITS funds') +
+                summaryCard('🌐 ACWI Top 10 weight', summary.total_acwi_top10.toFixed(1) + '%', '#64B5F6', '% del ACWI (100% equity)') +
+                summaryCard('🎯 BIG Equity lookthrough', summary.total_big_top10_exposure.toFixed(1) + '%', '#D4AF37', '% del Equity Sleeve (100%, apples-to-apples)') +
                 summaryCard('⚠️ Diff (BIG − ACWI)', (summary.diff_pp >= 0 ? '+' : '') + summary.diff_pp.toFixed(1) + 'pp', summary.diff_pp >= 0 ? '#81C784' : '#EF5350',
-                    summary.diff_pp < 0 ? 'BIG UNDERWEIGHT — explica gran parte del underperformance' : 'BIG OVERWEIGHT');
+                    summary.diff_pp < 0 ? 'BIG UNDERWEIGHT en megacaps — explica parte del alpha vs ACWI' : 'BIG OVERWEIGHT');
 
             const ovRows = ovData.overlap.map((h, idx) => {
                 const diffColor = h.diff_pp >= 0 ? '#81C784' : '#EF5350';

@@ -84,7 +84,11 @@ def compute_overlap():
     equity_positions, total_aum = read_positions()
     fund_holdings = read_fund_holdings()
 
-    # For each ACWI top 10 stock, sum BIG exposure across all funds
+    # APPLES-TO-APPLES vs ACWI: pesar dentro del Equity Sleeve (100%), no sobre BIG total.
+    # ACWI es 100% equity, asi que la comparacion correcta es contra el Equity Sleeve.
+    total_equity_value = sum(p["value"] for p in equity_positions)
+
+    # For each ACWI top 10 stock, sum BIG-equity exposure across all funds
     overlap = []
     total_acwi_top10 = sum(h["weight_acwi"] for h in acwi_top10)
     total_big_exposure = 0
@@ -96,7 +100,8 @@ def compute_overlap():
 
         for pos in equity_positions:
             fund_ticker = pos["ticker"]
-            fund_weight_in_big = pos.get("pct", 0)  # % of TOTAL BIG
+            # % del fondo DENTRO DEL EQUITY SLEEVE (100%), no sobre BIG total
+            fund_weight_in_equity = pos["value"] / total_equity_value * 100
 
             # Get this fund's holdings
             fund_data = fund_holdings.get(fund_ticker, {})
@@ -110,13 +115,13 @@ def compute_overlap():
             if not isinstance(stock_weight_in_fund, (int, float)):
                 continue
 
-            # Contribution to BIG = fund_weight × stock_weight_in_fund / 100
-            contribution = fund_weight_in_big * stock_weight_in_fund / 100
+            # Contribution to Equity Sleeve = fund_weight_in_equity × stock_weight_in_fund / 100
+            contribution = fund_weight_in_equity * stock_weight_in_fund / 100
             if contribution > 0:
                 big_exposure += contribution
                 contributors.append({
                     "fund": fund_ticker,
-                    "fund_weight_in_big": fund_weight_in_big,
+                    "fund_weight_in_equity_sleeve": round(fund_weight_in_equity, 2),
                     "stock_weight_in_fund": stock_weight_in_fund,
                     "contribution": round(contribution, 3),
                 })
