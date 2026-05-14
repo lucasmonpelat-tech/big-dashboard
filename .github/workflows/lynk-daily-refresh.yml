@@ -69,5 +69,18 @@ jobs:
 
           git add data/lynk_data.json data/lynk_nav_series.json
           git commit -m "chore(lynk): auto-refresh NAV daily ($(date -u +%Y-%m-%d))"
-          git push origin main
-          echo "✓ Pushed updated Lynk data."
+
+          # Rebase sobre el ultimo main por si se movio (re-runs, pushes concurrentes).
+          # Reintenta hasta 3 veces ante carrera de pushes.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort; echo "rebase fallo"; exit 1; }
+            if git push origin HEAD:main; then
+              echo "✓ Pushed updated Lynk data (intento $attempt)."
+              exit 0
+            fi
+            echo "push rechazado (intento $attempt) — reintentando..."
+            sleep 3
+          done
+          echo "ERROR: no se pudo pushear tras 3 intentos"
+          exit 1
