@@ -1569,11 +1569,11 @@ async function renderFIRace() {
 async function renderEquityBreakdown() {
     let data;
     try {
-        const r = await fetch('data/equity_breakdown_apr26.json?_=' + Date.now());
+        const r = await fetch('data/equity_breakdown_latest.json?_=' + Date.now());
         if (!r.ok) throw new Error('no data');
         data = await r.json();
     } catch(e) {
-        console.warn('equity_breakdown_apr26.json not available', e);
+        console.warn('equity_breakdown_latest.json not available', e);
         return;
     }
 
@@ -1647,11 +1647,11 @@ async function renderEquityBreakdown() {
 async function renderFIBreakdown() {
     let data;
     try {
-        const r = await fetch('data/fi_breakdown_apr26.json?_=' + Date.now());
+        const r = await fetch('data/fi_breakdown_latest.json?_=' + Date.now());
         if (!r.ok) throw new Error('no data');
         data = await r.json();
     } catch(e) {
-        console.warn('fi_breakdown_apr26.json not available', e);
+        console.warn('fi_breakdown_latest.json not available', e);
         return;
     }
 

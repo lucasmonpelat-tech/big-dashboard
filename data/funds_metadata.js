@@ -73,9 +73,10 @@ const FACTSHEET_LINKS = {
     "IE00B29K0P99": "https://www.pimco.com/gb/en/investments/gis/emerging-local-bond-fund/inst-usd-accumulation",
     "XS2658535526": "Email from Barings (private credit)",
     "XS2324777171": "Tenac Global Fund - direct with Nico Dujovne",
+    "FLEX-LEX":     "Flex-Lexington Partners Secondaries - direct with manager (private)",
     "KYG4737U1085": "https://www.hpspartners.com/lending",
     "LU2049315265": "https://www.schroders.com/es-es/es/inversores-particulares/centro-de-fondos/?language=es&location=es&channel=inversores-particulares&clientId=schdr&clientVersion=v1&externalId=SCHDR_F0000147B0&r=%2Ffund%2FSCHDR_F0000147B0%2F&fundName=Schroder-GAIA-Cat-Bond-C-Accumulation-USD",
-    "US78462F1030": "https://www.thornburg.com/funds/equity-income-builder-fund/"
+    "IE00B6YCBF59": "https://www.thornburg.com/funds/equity-income-builder-fund/"
 };
 
 // ============================================================
@@ -84,7 +85,7 @@ const FACTSHEET_LINKS = {
 // ============================================================
 const CURRENCY_EXPOSURE = {
     "IE00B5BMR087": { exposures: [{c:"USD",p:100}], note: "S&P 500 — 100% USD equities", src: "BlackRock factsheet" },
-    "US78462F1030": { exposures: [{c:"USD",p:58},{c:"EUR",p:18},{c:"GBP",p:9},{c:"JPY",p:6},{c:"OTHER",p:9}], note: "Thornburg EIB — global dividend equities", src: "Thornburg factsheet" },
+    "IE00B6YCBF59": { exposures: [{c:"USD",p:58},{c:"EUR",p:18},{c:"GBP",p:9},{c:"JPY",p:6},{c:"OTHER",p:9}], note: "Thornburg EIB — global dividend equities", src: "Thornburg factsheet" },
     "US4642873909": { exposures: [{c:"BRL",p:24},{c:"MXN",p:22},{c:"CLP",p:12},{c:"COP",p:10},{c:"ARS",p:9},{c:"PEN",p:7},{c:"USD",p:16}], note: "ILF — LatAm currency mix", src: "iShares factsheet" },
     "US37950E2596": { exposures: [{c:"ARS",p:55},{c:"USD",p:45}], note: "ARGT — Argentine ADRs & locals", src: "Global X docs" },
     "DE000A0Q4R85": { exposures: [{c:"BRL",p:97},{c:"USD",p:3}], note: "4BRZ — near full BRL exposure", src: "BlackRock factsheet" },
@@ -123,7 +124,7 @@ const CURRENCY_EXPOSURE = {
 // ============================================================
 const CURRENT_YIELD = {
     "IE00B5BMR087": { y: 1.3,  t: "Dividend Yield",       n: "S&P 500 dividend yield",        m: false },
-    "US78462F1030": { y: 4.2,  t: "Distribution Yield",   n: "Thornburg EIB — dividend-focused", m: false },
+    "IE00B6YCBF59": { y: 4.2,  t: "Distribution Yield",   n: "Thornburg EIB — dividend-focused", m: false },
     "US4642873909": { y: 3.6,  t: "Distribution Yield",   n: "ILF factsheet",                 m: false },
     "US37950E2596": { y: 1.5,  t: "Distribution Yield",   n: "Global X ARGT docs",            m: false },
     "DE000A0Q4R85": { y: 2.8,  t: "Distribution Yield",   n: "BlackRock 4BRZ factsheet",      m: false },
@@ -222,7 +223,7 @@ const CUR_COLORS = {
 // ============================================================
 const COUNTRY_EXPOSURE = {
     "IE00B5BMR087": [{c:"US",p:100}],
-    "US78462F1030": [{c:"US",p:55},{c:"DE",p:8},{c:"UK",p:7},{c:"TW",p:6},{c:"CH",p:5},{c:"NL",p:4},{c:"FR",p:3},{c:"JP",p:4},{c:"OTHER",p:8}],
+    "IE00B6YCBF59": [{c:"US",p:55},{c:"DE",p:8},{c:"UK",p:7},{c:"TW",p:6},{c:"CH",p:5},{c:"NL",p:4},{c:"FR",p:3},{c:"JP",p:4},{c:"OTHER",p:8}],
     "US4642873909": [{c:"BR",p:56},{c:"MX",p:22},{c:"CL",p:8},{c:"CO",p:4},{c:"PE",p:4},{c:"AR",p:4},{c:"OTHER",p:2}],
     "US37950E2596": [{c:"AR",p:100}],
     "DE000A0Q4R85": [{c:"BR",p:100}],
@@ -252,7 +253,7 @@ const COUNTRY_EXPOSURE = {
 // ============================================================
 const SECTOR_EXPOSURE = {
     "IE00B5BMR087": [{s:"Technology",p:32},{s:"Financials",p:14},{s:"Healthcare",p:12},{s:"Cons.Disc",p:10},{s:"Industrials",p:9},{s:"Comm.Services",p:9},{s:"Cons.Staples",p:6},{s:"Energy",p:3},{s:"Utilities",p:2},{s:"Materials",p:2},{s:"Real Estate",p:1}],
-    "US78462F1030": [{s:"Financials",p:22},{s:"Healthcare",p:16},{s:"Cons.Staples",p:13},{s:"Industrials",p:11},{s:"Technology",p:10},{s:"Energy",p:9},{s:"Comm.Services",p:7},{s:"Cons.Disc",p:6},{s:"Utilities",p:3},{s:"Materials",p:3}],
+    "IE00B6YCBF59": [{s:"Financials",p:22},{s:"Healthcare",p:16},{s:"Cons.Staples",p:13},{s:"Industrials",p:11},{s:"Technology",p:10},{s:"Energy",p:9},{s:"Comm.Services",p:7},{s:"Cons.Disc",p:6},{s:"Utilities",p:3},{s:"Materials",p:3}],
     "US4642873909": [{s:"Financials",p:30},{s:"Materials",p:18},{s:"Cons.Staples",p:13},{s:"Energy",p:10},{s:"Industrials",p:8},{s:"Comm.Services",p:7},{s:"Cons.Disc",p:6},{s:"Utilities",p:5},{s:"Technology",p:3}],
     "IE00BFMHRK20": [{s:"Technology",p:35},{s:"Healthcare",p:18},{s:"Cons.Disc",p:14},{s:"Industrials",p:12},{s:"Financials",p:8},{s:"Cons.Staples",p:5},{s:"Comm.Services",p:5},{s:"Materials",p:3}],
     "LU1985812756": [{s:"Financials",p:22},{s:"Healthcare",p:17},{s:"Industrials",p:14},{s:"Cons.Staples",p:12},{s:"Technology",p:10},{s:"Energy",p:8},{s:"Cons.Disc",p:8},{s:"Utilities",p:4},{s:"Materials",p:3},{s:"Real Estate",p:2}],

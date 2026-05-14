@@ -9,15 +9,29 @@ echo.
 
 cd /d "C:\Users\lmonp\OneDrive\Desktop\Code\big-dashboard"
 
-echo [1/4] Verificando cambios pendientes...
+echo [1/5] Validando consistencia de datos...
+python scripts\validate_data.py
+if errorlevel 1 (
+    echo.
+    echo ------------------------------------------------------------
+    echo   DEPLOY ABORTADO - el validador encontro errores de datos
+    echo   Revisa los [X] de arriba antes de deployar.
+    echo ------------------------------------------------------------
+    echo.
+    pause
+    exit /b 1
+)
+echo.
+
+echo [2/5] Verificando cambios pendientes...
 git status --short
 echo.
 
-echo [2/4] Agregando archivos...
+echo [3/5] Agregando archivos...
 git add .
 echo.
 
-echo [3/4] Creando commit...
+echo [4/5] Creando commit...
 for /f "delims=" %%a in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd_HH:mm"') do set DATETIME=%%a
 
 git commit -m "update: %DATETIME%"
@@ -32,7 +46,7 @@ if errorlevel 1 (
 )
 echo.
 
-echo [4/4] Pusheando a GitHub...
+echo [5/5] Pusheando a GitHub...
 git push
 if errorlevel 1 (
     echo.

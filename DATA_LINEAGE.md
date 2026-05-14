@@ -75,7 +75,7 @@
 - **Refresh:** Mensual
 - **Provee:** Regional breakdown, sector breakdown, top holdings, fund summary stats
 - **Para todos los UCITS:** NBGMT, MFSCV, THOR, JHGSC, LGLI
-- **Files generados:** Alimenta `data/equity_breakdown_apr26.json`
+- **Files generados:** Alimenta `data/equity_breakdown_latest.json`
 - **Refresh:** Chrome MCP on-demand
 
 ### 7. **iShares website**
@@ -163,7 +163,7 @@
 | Sleeve TWR REAL | Pershing transactions | equity_sleeve_real.json | Mensual | 🟡 (27-Apr) |
 | Real Holding Contributions | Computed from above | equity_contributions_real.json | Mensual | 🟡 (6-May) |
 | Backtest contributions | computed | live | Live | 🟢 |
-| Equity Breakdown (style/sector/regional) | FT.com per fund | equity_breakdown_apr26.json | Mensual | 🟢 (regional 7-May PRIMARY; sectorial pending) |
+| Equity Breakdown (style/sector/regional) | FT.com per fund | equity_breakdown_latest.json | Mensual | 🟢 (regional 7-May PRIMARY; sectorial pending) |
 
 ### Tab: 💎 FI Race
 | Métrica | Source | File | Refresh | Status |
@@ -171,7 +171,7 @@
 | FI sleeve vs AGG | yfinance + baha | fi_race.json | Mensual | 🟢 (5-May) |
 | FI Sleeve REAL TWR | NO existe | — | — | 🔴 NEEDS BUILD |
 | FI Holding Contributions REAL | NO existe | — | — | 🔴 NEEDS BUILD |
-| FI Breakdown | factsheets | fi_breakdown_apr26.json | Mensual | 🔴 STALE (Maximus deprecated, rebuild pending) |
+| FI Breakdown | factsheets | fi_breakdown_latest.json | Mensual | 🔴 STALE (Maximus deprecated, rebuild pending) |
 
 ---
 

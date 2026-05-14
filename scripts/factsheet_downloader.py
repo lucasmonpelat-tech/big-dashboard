@@ -43,7 +43,7 @@ FACTSHEET_PAGES = {
     "IE000OE87WX6_MANIG":     "https://www.man.com/",
     "IE00B29K0P99_PIMCO_EM":  "https://www.pimco.com/gb/en/investments/gis/emerging-local-bond-fund/",
     "LU2049315265_SGCB":      "https://www.schroders.com/en-ch/ch/professional/funds/schroder-gaia-cat-bond/",
-    "US78462F1030_THOR":      "https://www.thornburg.com/funds/equity-income-builder-fund/",
+    "IE00B6YCBF59_THOR":      "https://www.thornburg.com/funds/equity-income-builder-fund/",
 }
 
 

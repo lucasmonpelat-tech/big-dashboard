@@ -1,6 +1,6 @@
 {
   "_description": "Catálogo de fuentes de datos del dashboard. Cada entry define source, refresh expectations, y file paths para auto-detect staleness.",
-  "_lastUpdate": "2026-05-07",
+  "_lastUpdate": "2026-05-14",
 
   "sources": [
     {
@@ -24,7 +24,7 @@
       "refresh_method": "scripts/pershing_parser.py <xlsx>",
       "expected_frequency_days": 7,
       "files": ["data/positions_latest.json"],
-      "feeds_tabs": ["Positions", "Currency", "Geography", "Yield", "YTM/FI"],
+      "feeds_tabs": ["Overview", "Currency", "Geography", "Yield"],
       "feeds_metrics": ["Holdings list", "Sleeve weights", "Total AUM"]
     },
     {
@@ -36,8 +36,8 @@
       "refresh_method": "scripts/portfolio_reconstructor.py <xlsx> + scripts/holding_contributions_real.py",
       "expected_frequency_days": 31,
       "files": ["data/equity_sleeve_real.json", "data/equity_contributions_real.json"],
-      "feeds_tabs": ["Equity Race", "Trade Log"],
-      "feeds_metrics": ["Sleeve real TWR", "Per-holding contributions", "Trade log"]
+      "feeds_tabs": ["Equity Race"],
+      "feeds_metrics": ["Sleeve real TWR", "Per-holding contributions"]
     },
     {
       "id": "stooq_etf_prices",
@@ -84,7 +84,7 @@
       "refresh_method": "Chrome MCP (trimestral, ~15 días post-cierre Q)",
       "expected_frequency_days": 90,
       "files": ["data/funds_metadata.js (FI_METRICS, CURRENT_YIELDS)"],
-      "feeds_tabs": ["YTM/FI", "Yield"],
+      "feeds_tabs": ["FI Race", "Yield"],
       "feeds_metrics": ["YTW per fund", "Effective Duration", "Effective Maturity", "Current Yield"]
     },
     {
@@ -95,7 +95,7 @@
       "source_type": "web_public",
       "refresh_method": "Chrome MCP (mensual)",
       "expected_frequency_days": 31,
-      "files": ["data/equity_breakdown_apr26.json (regional, sectorial pending)"],
+      "files": ["data/equity_breakdown_latest.json (regional, sectorial pending)"],
       "feeds_tabs": ["Equity Race"],
       "feeds_metrics": ["Regional breakdown", "Sectorial breakdown", "Style box"]
     },
@@ -155,7 +155,7 @@
       "source_type": "web_public",
       "refresh_method": "Chrome MCP per-fund × pesos BIG",
       "expected_frequency_days": 31,
-      "files": ["data/fi_breakdown_apr26.json"],
+      "files": ["data/fi_breakdown_latest.json"],
       "feeds_tabs": ["FI Race"],
       "feeds_metrics": ["Credit quality", "Sub-asset class", "FI regional"],
       "deprecated": true,
