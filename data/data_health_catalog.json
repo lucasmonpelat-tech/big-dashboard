@@ -9,7 +9,7 @@
       "category": "Performance",
       "source_url": "https://app.lynkmarkets.com/public/products/4w9aANBbvM",
       "source_type": "web_public",
-      "refresh_method": "Chrome MCP (on-demand) o Playwright cron",
+      "refresh_method": "GitHub Actions cron — automatico diario 02:00 UTC (.github/workflows/lynk-daily-refresh.yml)",
       "expected_frequency_days": 1,
       "files": ["data/lynk_data.json", "data/lynk_nav_series.json"],
       "feeds_tabs": ["Overview", "Performance"],
