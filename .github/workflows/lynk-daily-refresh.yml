@@ -1,0 +1,73 @@
+name: 🔄 Lynk NAV Daily Refresh
+
+on:
+  # Runs every day at 02:00 UTC (~23:00 ART). After US close, before BA morning.
+  schedule:
+    - cron: '0 2 * * *'
+  # Manual trigger from the Actions tab
+  workflow_dispatch:
+
+# Need write to push the updated JSON back to main
+permissions:
+  contents: write
+
+jobs:
+  refresh-lynk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Playwright Chromium
+        run: |
+          playwright install --with-deps chromium
+
+      - name: Run Lynk refresher (NAV / AUM / KPIs)
+        env:
+          LYNK_EMAIL: ${{ secrets.LYNK_EMAIL || 'lucas.monpelat@pampa-capital.com' }}
+        run: |
+          python scripts/lynk_refresher.py --email "$LYNK_EMAIL"
+
+      - name: Run Lynk NAV series extractor (full history)
+        env:
+          LYNK_EMAIL: ${{ secrets.LYNK_EMAIL || 'lucas.monpelat@pampa-capital.com' }}
+        run: |
+          python scripts/lynk_nav_extractor.py --email "$LYNK_EMAIL"
+        continue-on-error: true  # Don't fail if extractor has issues — main NAV refresher already ran
+
+      - name: Show updated data
+        run: |
+          echo "=== lynk_data.json ==="
+          cat data/lynk_data.json || echo "(missing)"
+          echo ""
+          echo "=== lynk_nav_series.json (head) ==="
+          head -c 500 data/lynk_nav_series.json || echo "(missing)"
+          echo ""
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet data/lynk_data.json data/lynk_nav_series.json; then
+            echo "No changes to Lynk data — skipping commit."
+            exit 0
+          fi
+
+          git add data/lynk_data.json data/lynk_nav_series.json
+          git commit -m "chore(lynk): auto-refresh NAV daily ($(date -u +%Y-%m-%d))"
+          git push origin main
+          echo "✓ Pushed updated Lynk data."
