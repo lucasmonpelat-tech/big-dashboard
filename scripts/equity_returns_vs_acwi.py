@@ -152,8 +152,25 @@ def aggregate_by_ticker(trades):
         qty_sold = sum(t["qty"] for t in sells)
         qty_remaining = qty_bought - qty_sold
 
-        first_buy_date = buys[0]["date"] if buys else None
-        first_buy_price = buys[0]["price"] if buys else None  # Anchor para buy-and-hold race
+        # Anchor para buy-and-hold race: primer buy que sea >=25% del total.
+        # Skipea "test buys" chicos (ej: $10K test antes de una big buy de $840K).
+        # Si ningun buy individual cruza el 25%, fallback al primer buy cronologico.
+        ANCHOR_THRESHOLD_PCT = 25.0
+        first_buy_date = None
+        first_buy_price = None
+        if buys:
+            threshold_amt = total_buy_usd * ANCHOR_THRESHOLD_PCT / 100
+            for t in buys:  # buys ya esta ordenado por fecha
+                amt = t["qty"] * t["price"]
+                if amt >= threshold_amt:
+                    first_buy_date = t["date"]
+                    first_buy_price = t["price"]
+                    break
+            # Fallback: si ningun buy llega al 25%, usar el primero cronologico
+            if first_buy_date is None:
+                first_buy_date = buys[0]["date"]
+                first_buy_price = buys[0]["price"]
+
         last_sell_date = sells[-1]["date"] if sells else None
         last_sell_price = sells[-1]["price"] if sells else None
         last_trade_date = ts_sorted[-1]["date"]
