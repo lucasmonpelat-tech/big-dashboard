@@ -158,21 +158,15 @@ const CURRENT_YIELD = {
 
 // ============================================================
 // FIXED INCOME YTM / DURATION / MATURITY
-// Source priority: per-fund factsheet directo (PIMCO website, etc.)
-// NUNCA usar Maximus — solo primary sources
-// asOf indica cuándo se refrescó cada fondo
+//
+// SINGLE SOURCE OF TRUTH: data/funds/<TICKER>.json (campo fi_metrics).
+// Antes vivian aca como FI_METRICS pero se duplicaban con los JSONs
+// y con scripts/fi_race.py. Refactorizado el 2026-05-15.
+//
+// Para acceder a estos valores en el frontend, hace fetch al JSON del fondo.
+// Para refrescar valores: editar el JSON correspondiente, bumpear as_of_factsheet.
 // ============================================================
-const FI_METRICS = {
-    // PIMCO funds — directo de pimco.com (snapshot 31-Mar-2026, próx update ~10-15-May para abril)
-    "IE00BDT57R20": { name: "PIMCO GIS Low Duration Income I",   ytw: 6.39, dur: 2.78, venc: 4.04,  rating: "AA",   src: "PIMCO website",  asOf: "2026-03-31" },
-    "IE00B87KCF77": { name: "PIMCO GIS Income I",                ytw: 6.90, dur: 6.25, venc: 9.27,  rating: "AA-",  src: "PIMCO website",  asOf: "2026-03-31" },
-    "IE00B29K0P99": { name: "PIMCO GIS EM Local Bond I",         ytw: 8.94, dur: 5.63, venc: 7.32,  rating: "BBB",  src: "PIMCO website",  asOf: "2026-03-31" },
-
-    // Man GLG, Schroder, Tenac — TODO: refrescar desde factsheet directo
-    "IE000OE87WX6": { name: "Man GLG Global IG Opps",            ytw: 7.10, dur: 5.76, venc: 5.50,  rating: "BBB",  src: "Man factsheet (verify)", asOf: "2026-03-31" },
-    "LU2049315265": { name: "Schroder GAIA Cat Bond Class C",    ytw: 5.12, dur: 4.03, venc: 8.19,  rating: "BBB+", src: "Schroder factsheet (verify)", asOf: "2026-03-31" },
-    "XS2324777171": { name: "Tenac Global Fund (TGF)",           ytw: 8.67, dur: 5.17, venc: 11.92, rating: "—",    src: "Manual (Nico Dujovne)", asOf: "2026-04-30" }
-};
+// const FI_METRICS = {} — moved to data/funds/*.json
 
 // ============================================================
 // PORTFOLIO PERFORMANCE (Maximus Mar-2026)

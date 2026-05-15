@@ -22,17 +22,45 @@ ROOT = Path(__file__).parent.parent
 BIG_INCEPTION = date(2025, 6, 30)
 
 # ===============================================================
-# Current FI Sleeve holdings (from current portfolio)
+# Current FI Sleeve holdings — SINGLE SOURCE OF TRUTH
+# Carga desde:
+#   - positions_latest.json   -> isin, ticker, value_usd
+#   - data/funds/<TICKER>.json -> name, fi_metrics {ytw, duration, maturity, rating}
+# DATA_SOURCE mapea ticker -> metodo de retorno mensual (baha JSON o carry proxy).
 # ===============================================================
-FI_HOLDINGS = [
-    # (isin, ticker, name, value_usd, data_source, ytw, duration, maturity, rating)
-    ("IE00BDT57R20", "PIMCO-LD",  "PIMCO GIS Low Duration Income I",   4022492.10, "baha",  5.72, 2.54,  3.86, "AA"),
-    ("IE00B87KCF77", "PIMCO-INC", "PIMCO GIS Income I",                 2042878.87, "baha",  6.05, 5.15,  7.68, "AA-"),
-    ("IE000OE87WX6", "MANIG",     "Man GLG Global IG Opportunities",    1868128.94, "baha",  6.17, 4.89,  5.50, "BBB"),
-    ("IE00B29K0P99", "PIMCO-EM",  "PIMCO GIS EM Local Bond I",          1139861.80, "baha",  8.22, 6.72,  8.39, "BBB"),
-    ("XS2324777171", "TGF",       "Tenac Global Fund (TGF)",             839581.12, "carry", 8.67, 5.17, 11.92, "—"),  # carry proxy
-    ("LU2049315265", "SGCB",      "Schroder GAIA Cat Bond C",            519831.88, "baha",  7.80, 0.50,  2.50, "BB+"),
-]
+DATA_SOURCE = {
+    # Funds que NO tienen serie de returns en data/baha/ usan carry (ytw/12).
+    "TGF": "carry",  # Tenac no publica serie publica
+}  # default = "baha"
+
+
+def _load_fi_holdings():
+    positions = json.loads((ROOT / "data" / "positions_latest.json").read_text(encoding="utf-8"))["positions"]
+    fi_positions = [p for p in positions if p["sleeve"] == "Fixed Income"]
+    holdings = []
+    for p in fi_positions:
+        ticker = p["ticker"]
+        fpath = ROOT / "data" / "funds" / f"{ticker}.json"
+        if not fpath.exists():
+            print(f"WARN: data/funds/{ticker}.json no existe — saltando {ticker}")
+            continue
+        fd = json.loads(fpath.read_text(encoding="utf-8"))
+        fm = fd.get("fi_metrics", {})
+        holdings.append((
+            p["isin"],
+            ticker,
+            fd.get("name", p["name"]),
+            p["value"],
+            DATA_SOURCE.get(ticker, "baha"),
+            fm.get("ytw") or 0,
+            fm.get("duration") or 0,
+            fm.get("maturity") or 0,
+            fm.get("rating", "—"),
+        ))
+    return holdings
+
+
+FI_HOLDINGS = _load_fi_holdings()
 
 SPANISH_MONTHS = {'ene':1,'feb':2,'mar':3,'abr':4,'may':5,'jun':6,'jul':7,'ago':8,'sep':9,'oct':10,'nov':11,'dic':12}
 

@@ -116,7 +116,11 @@ async function renderAllFreshness() {
         } catch (e) { return null; }
     }
 
-    const [navSeries, eqRace, eqContrib, eqSleeveReal, eqBreakdown, acwiOverlap, fiRace, fiBreakdown, altsRace] = await Promise.all([
+    // FI metrics ahora viven en data/funds/<TICKER>.json (single source).
+    // Calculo el asOf mas viejo entre los 6 FI funds.
+    const FI_TICKERS = ['PIMCO-LD', 'PIMCO-INC', 'PIMCO-EM', 'MANIG', 'SGCB', 'TGF'];
+
+    const [navSeries, eqRace, eqContrib, eqSleeveReal, eqBreakdown, acwiOverlap, fiRace, fiBreakdown, altsRace, ...fiFundDates] = await Promise.all([
         fileDate('data/lynk_nav_series.json', 'refreshedAt'),
         fileDate('data/equity_race.json', 'refreshedAt'),
         fileDate('data/equity_contributions_real.json', 'refreshedAt'),
@@ -126,15 +130,20 @@ async function renderAllFreshness() {
         fileDate('data/fi_race.json', 'refreshedAt'),
         fileDate('data/fi_breakdown_latest.json', 'asOf'),
         fileDate('data/alts_race.json', 'refreshedAt'),
+        ...FI_TICKERS.map(t => fileDate(`data/funds/${t}.json`, 'as_of_factsheet')),
     ]);
+
+    // FI Metrics: el asOf mas viejo entre los 6 FI funds
+    const validFiDates = fiFundDates.filter(Boolean);
+    const fiMetricsOldest = validFiDates.length
+        ? validFiDates.reduce((min, d) => d < min ? d : min, validFiDates[0])
+        : null;
 
     const lynkDate = (window.LYNK_DATA && window.LYNK_DATA.refreshedAt) || null;
     const posDate  = typeof POSITIONS_AS_OF !== 'undefined' ? POSITIONS_AS_OF : null;
     const metaDate = typeof METADATA_LAST_REVIEW !== 'undefined' ? METADATA_LAST_REVIEW : null;
     // Manual NAVs (UCITS) — la mas vieja en el dict MANUAL_NAV (de live_prices.js)
     const manualNavOldest = (typeof MANUAL_NAV !== 'undefined') ? oldestDate(MANUAL_NAV, 'date') : null;
-    // FI_METRICS — la mas vieja entre los asOf por fondo
-    const fiMetricsOldest = (typeof FI_METRICS !== 'undefined') ? oldestDate(FI_METRICS, 'asOf') : null;
 
     renderFreshness('fresh-overview', [
         freshBadge('NAV Lynk', lynkDate, 1),

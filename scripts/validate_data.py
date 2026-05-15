@@ -143,7 +143,7 @@ def main():
         ("CURRENCY_EXPOSURE", big_isins, "todos los fondos", "error"),
         ("CURRENT_YIELD", big_isins, "todos los fondos", "error"),
         ("COUNTRY_EXPOSURE", big_isins, "todos los fondos", "error"),
-        ("FI_METRICS", fi_isins, "solo Fixed Income", "error"),
+        # FI_METRICS migrado a data/funds/<TICKER>.json — chequeado abajo en check separado.
         # SECTOR_EXPOSURE: hoy no se consume en dashboard.js (data muerta) + incompleta.
         # Lo dejamos como warning hasta que se decida usarlo o limpiarlo.
         ("SECTOR_EXPOSURE", equity_isins, "solo Equity", "warning"),
@@ -177,6 +177,35 @@ def main():
         flag = {"OK": "[OK]   ", "ERROR": "[ERROR]", "WARNING": "[WARN] "}[status]
         print(f"  {flag} {dict_name:20s} {len(keys):2d} keys  "
               f"(orphans: {len(orphans)}, missing: {len(missing)})")
+
+    # ---- 2b: FI_METRICS migrado a data/funds/<TICKER>.json ----
+    print("\n" + "-" * 70)
+    print("  2b — FI metrics en data/funds/*.json (single source de YTW/Dur/Maturity)")
+    print("-" * 70)
+    funds_dir = ROOT / "data" / "funds"
+    fi_funds = [p for p in positions if p["sleeve"] == "Fixed Income"]
+    fi_missing_json = []
+    fi_missing_metrics = []
+    for fp in fi_funds:
+        fpath = funds_dir / f"{fp['ticker']}.json"
+        if not fpath.exists():
+            fi_missing_json.append(fp["ticker"])
+            errors.append(f"data/funds/{fp['ticker']}.json no existe (FI fund {fp['isin']})")
+            continue
+        try:
+            d = json.loads(fpath.read_text(encoding="utf-8"))
+            fm = d.get("fi_metrics", {})
+            for required in ["ytw", "duration", "maturity"]:
+                if fm.get(required) is None:
+                    fi_missing_metrics.append(f"{fp['ticker']}.json falta fi_metrics.{required}")
+                    errors.append(f"data/funds/{fp['ticker']}.json: falta fi_metrics.{required}")
+        except Exception as e:
+            errors.append(f"data/funds/{fp['ticker']}.json: error de parse — {e}")
+
+    if fi_missing_json or fi_missing_metrics:
+        print(f"  [ERROR] {len(fi_funds)} FI funds — {len(fi_missing_json)} sin JSON, {len(fi_missing_metrics)} sin metricas completas")
+    else:
+        print(f"  [OK]    {len(fi_funds)} FI funds — todos tienen JSON con fi_metrics completas (ytw/duration/maturity)")
 
     # ---- 3: DUAL SOURCE — BIG_POSITIONS vs positions_latest.json ----
     print("\n" + "-" * 70)
