@@ -657,7 +657,7 @@
         <section id="tab-performance" class="tab-section">
             <div class="freshness-bar" id="fresh-performance"></div>
             <div class="info-box">
-                <strong>Performance BIG vs Benchmark 60/40 (ACWI/AGG):</strong> Maximus data (Mar-2026). Track record 5Y aunque BIG inception sea Jun-2025 — refleja la track del sleeve/strategy replicada, validada por Maximus como proxy.
+                <strong>Performance BIG vs Benchmark 60/40 (ACWI/AGG):</strong> Multi-period returns computados desde la serie NAV oficial de Lynk (auto-refresh diario) vs benchmark 60% MSCI ACWI + 40% AGG. <strong>Risk metrics más abajo</strong> usan track record 5Y del strategy replicado (Maximus, válido como proxy).
             </div>
 
             <div class="summary-box">
@@ -670,13 +670,15 @@
                             <th>3M</th>
                             <th>6M</th>
                             <th>YTD</th>
-                            <th>1Y</th>
-                            <th>3Y ann.</th>
-                            <th>5Y ann.</th>
+                            <th>Since Inception</th>
+                            <th>Annualized</th>
                         </tr>
                     </thead>
                     <tbody id="perf-returns-body"></tbody>
                 </table>
+                <div style="font-size:10px;color:#6B88A8;margin-top:8px;font-style:italic;">
+                    BIG inception: 30-Jun-2025. Periodos > inception (1Y, 3Y, 5Y) reemplazados por Since Inception + Annualized.
+                </div>
             </div>
 
             <div class="summary-box">

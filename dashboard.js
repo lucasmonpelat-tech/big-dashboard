@@ -763,41 +763,150 @@ function renderYield() {
 // ==============================================================
 // PERFORMANCE TAB
 // ==============================================================
-function renderPerformance() {
-    const b = PORT_PERF_DETAIL.big;
+async function renderPerformance() {
+    const b = PORT_PERF_DETAIL.big;   // Para risk metrics (vol/sharpe/dd/capture) — Maximus
     const k = PORT_PERF_DETAIL.bmk;
-    const fmt = v => v >= 0 ? `<span style="color:#81C784;">+${v.toFixed(2)}%</span>` : `<span style="color:#EF5350;">${v.toFixed(2)}%</span>`;
+    const fmt = v => v == null ? '<span style="color:#6B88A8;">—</span>'
+        : (v >= 0 ? `<span style="color:#81C784;">+${v.toFixed(2)}%</span>`
+                   : `<span style="color:#EF5350;">${v.toFixed(2)}%</span>`);
+
+    // ===== Computar multi-period returns desde fuentes auto-refresh =====
+    // BIG: lynk_nav_series.json (cron diario)
+    // 60/40: alts_race.json bmk6040_index (60% ACWI + 40% AGG, mensual base 100)
+    let bigSeries = null, bmk6040 = null;
+    try {
+        const [r1, r2] = await Promise.all([
+            fetch('data/lynk_nav_series.json?_=' + Date.now()),
+            fetch('data/alts_race.json?_=' + Date.now()),
+        ]);
+        if (r1.ok) bigSeries = (await r1.json()).series;  // [{date, value}, ...]
+        if (r2.ok) bmk6040 = (await r2.json()).bmk6040_index;  // {"YYYY-MM": index}
+    } catch (e) { console.warn('Performance: error fetching data', e); }
+
+    function findClosestBig(targetISO) {
+        // Devuelve el NAV mas cercano (mismo dia o el siguiente trading day)
+        if (!bigSeries) return null;
+        for (const p of bigSeries) {
+            if (p.date >= targetISO) return p.value;
+        }
+        return null;
+    }
+
+    function bigReturnFrom(startISO) {
+        if (!bigSeries || !bigSeries.length) return null;
+        const startNav = findClosestBig(startISO);
+        const endNav = bigSeries[bigSeries.length - 1].value;
+        if (!startNav || !endNav) return null;
+        return (endNav / startNav - 1) * 100;
+    }
+
+    function bmkReturnFrom(startMonthYM) {
+        // Find closest bmk6040 month at or after startMonthYM
+        if (!bmk6040) return null;
+        const months = Object.keys(bmk6040).sort();
+        const startMonth = months.find(m => m >= startMonthYM);
+        const endMonth = months[months.length - 1];
+        if (!startMonth || !endMonth) return null;
+        return (bmk6040[endMonth] / bmk6040[startMonth] - 1) * 100;
+    }
+
+    function isoNDaysAgo(days) {
+        const d = bigSeries && bigSeries.length ? new Date(bigSeries[bigSeries.length - 1].date) : new Date();
+        d.setDate(d.getDate() - days);
+        return d.toISOString().slice(0, 10);
+    }
+
+    // Fechas para cada periodo
+    const latestDate = bigSeries && bigSeries.length ? bigSeries[bigSeries.length - 1].date : new Date().toISOString().slice(0,10);
+    const latestYear = parseInt(latestDate.slice(0, 4));
+    const ytdStart = `${latestYear - 1}-12-31`;
+    const ytdMonth = `${latestYear - 1}-12`;
+
+    const periods = [
+        { label: '1M',  startDate: isoNDaysAgo(30),  startMonth: null },  // monthly bmk: use 1M back
+        { label: '3M',  startDate: isoNDaysAgo(90),  startMonth: null },
+        { label: '6M',  startDate: isoNDaysAgo(180), startMonth: null },
+        { label: 'YTD', startDate: ytdStart, startMonth: ytdMonth },
+    ];
+
+    // BIG returns
+    const bigReturns = {};
+    periods.forEach(p => { bigReturns[p.label] = bigReturnFrom(p.startDate); });
+    // Since Inception + Annualized
+    const inceptionISO = bigSeries && bigSeries.length ? bigSeries[0].date : null;
+    const inceptionNav = bigSeries && bigSeries.length ? bigSeries[0].value : null;
+    const latestNav = bigSeries && bigSeries.length ? bigSeries[bigSeries.length - 1].value : null;
+    const siReturn = (inceptionNav && latestNav) ? (latestNav / inceptionNav - 1) * 100 : null;
+    let annualized = null;
+    if (siReturn != null && inceptionISO) {
+        const days = (new Date(latestDate) - new Date(inceptionISO)) / 86400000;
+        const years = days / 365.25;
+        if (years > 0) annualized = (Math.pow(1 + siReturn/100, 1/years) - 1) * 100;
+    }
+    bigReturns.SI = siReturn;
+    bigReturns.ANN = annualized;
+
+    // 60/40 returns — para 1M/3M/6M, derivar el mes correspondiente
+    function monthNAgo(monthsBack) {
+        const d = new Date(latestDate);
+        d.setMonth(d.getMonth() - monthsBack);
+        return d.toISOString().slice(0, 7);  // YYYY-MM
+    }
+    const bmkReturns = {
+        '1M':  bmkReturnFrom(monthNAgo(1)),
+        '3M':  bmkReturnFrom(monthNAgo(3)),
+        '6M':  bmkReturnFrom(monthNAgo(6)),
+        'YTD': bmkReturnFrom(ytdMonth),
+    };
+    if (bmk6040) {
+        const months = Object.keys(bmk6040).sort();
+        const firstM = months[0];
+        const lastM = months[months.length - 1];
+        if (firstM && lastM) {
+            const bmkSi = (bmk6040[lastM] / bmk6040[firstM] - 1) * 100;
+            bmkReturns.SI = bmkSi;
+            // Annualized bmk
+            if (inceptionISO) {
+                const days = (new Date(latestDate) - new Date(inceptionISO)) / 86400000;
+                const years = days / 365.25;
+                if (years > 0) bmkReturns.ANN = (Math.pow(1 + bmkSi/100, 1/years) - 1) * 100;
+            }
+        }
+    }
+
+    // Alpha
+    const alpha = (label) => {
+        const a = bigReturns[label], c = bmkReturns[label];
+        return (a != null && c != null) ? a - c : null;
+    };
 
     document.getElementById('perf-returns-body').innerHTML = `
         <tr class="row-big">
             <td class="left"><strong>BIG Fund</strong></td>
-            <td>${fmt(b.m1)}</td>
-            <td>${fmt(b.m3)}</td>
-            <td>${fmt(b.m6)}</td>
-            <td>${fmt(b.ytd)}</td>
-            <td>${fmt(b.y1)}</td>
-            <td>${fmt(b.y3)}</td>
-            <td>${fmt(b.y5)}</td>
+            <td>${fmt(bigReturns['1M'])}</td>
+            <td>${fmt(bigReturns['3M'])}</td>
+            <td>${fmt(bigReturns['6M'])}</td>
+            <td>${fmt(bigReturns.YTD)}</td>
+            <td>${fmt(bigReturns.SI)}</td>
+            <td>${fmt(bigReturns.ANN)}</td>
         </tr>
         <tr class="row-bmk">
             <td class="left">Benchmark 60/40 (ACWI/AGG)</td>
-            <td>${fmt(k.m1)}</td>
-            <td>${fmt(k.m3)}</td>
-            <td>${fmt(k.m6)}</td>
-            <td>${fmt(k.ytd)}</td>
-            <td>${fmt(k.y1)}</td>
-            <td>${fmt(k.y3)}</td>
-            <td>${fmt(k.y5)}</td>
+            <td>${fmt(bmkReturns['1M'])}</td>
+            <td>${fmt(bmkReturns['3M'])}</td>
+            <td>${fmt(bmkReturns['6M'])}</td>
+            <td>${fmt(bmkReturns.YTD)}</td>
+            <td>${fmt(bmkReturns.SI)}</td>
+            <td>${fmt(bmkReturns.ANN)}</td>
         </tr>
         <tr class="row-alpha">
             <td class="left"><strong>Alpha</strong></td>
-            <td>${fmt(b.m1 - k.m1)}</td>
-            <td>${fmt(b.m3 - k.m3)}</td>
-            <td>${fmt(b.m6 - k.m6)}</td>
-            <td>${fmt(b.ytd - k.ytd)}</td>
-            <td>${fmt(b.y1 - k.y1)}</td>
-            <td>${fmt(b.y3 - k.y3)}</td>
-            <td>${fmt(b.y5 - k.y5)}</td>
+            <td>${fmt(alpha('1M'))}</td>
+            <td>${fmt(alpha('3M'))}</td>
+            <td>${fmt(alpha('6M'))}</td>
+            <td>${fmt(alpha('YTD'))}</td>
+            <td>${fmt(alpha('SI'))}</td>
+            <td>${fmt(alpha('ANN'))}</td>
         </tr>
     `;
 
