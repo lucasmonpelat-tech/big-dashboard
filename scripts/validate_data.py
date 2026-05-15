@@ -144,9 +144,7 @@ def main():
         ("CURRENT_YIELD", big_isins, "todos los fondos", "error"),
         ("COUNTRY_EXPOSURE", big_isins, "todos los fondos", "error"),
         # FI_METRICS migrado a data/funds/<TICKER>.json — chequeado abajo en check separado.
-        # SECTOR_EXPOSURE: hoy no se consume en dashboard.js (data muerta) + incompleta.
-        # Lo dejamos como warning hasta que se decida usarlo o limpiarlo.
-        ("SECTOR_EXPOSURE", equity_isins, "solo Equity", "warning"),
+        # SECTOR_EXPOSURE: borrado el 2026-05-15 (era data muerta).
     ]
 
     print("\n" + "-" * 70)
@@ -247,7 +245,7 @@ def main():
     print("\n" + "-" * 70)
     print("  4 — Sumas de exposicion (~100% por fondo)")
     print("-" * 70)
-    for dict_name in ["CURRENCY_EXPOSURE", "COUNTRY_EXPOSURE", "SECTOR_EXPOSURE"]:
+    for dict_name in ["CURRENCY_EXPOSURE", "COUNTRY_EXPOSURE"]:
         block = extract_block(text, dict_name)
         sums = extract_exposure_sums(block)
         bad = {k: v for k, v in sums.items() if abs(v - 100) > SUM_TOLERANCE}

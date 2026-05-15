@@ -250,13 +250,11 @@ const COUNTRY_EXPOSURE = {
 };
 
 // ============================================================
-// SECTOR EXPOSURE (underlying, equity sleeve only)
+// SECTOR EXPOSURE — REMOVIDO el 2026-05-15
+//
+// Era data muerta: nunca se consumio en dashboard.js, era incompleto
+// (solo 6 de 9 equity funds). Si en el futuro se necesita sector
+// breakdown del equity sleeve, ya lo tenemos en data/equity_breakdown_latest.json
+// (que SI alimenta el tab Equity Race con datos de FT.com primary).
 // ============================================================
-const SECTOR_EXPOSURE = {
-    "IE00B5BMR087": [{s:"Technology",p:32},{s:"Financials",p:14},{s:"Healthcare",p:12},{s:"Cons.Disc",p:10},{s:"Industrials",p:9},{s:"Comm.Services",p:9},{s:"Cons.Staples",p:6},{s:"Energy",p:3},{s:"Utilities",p:2},{s:"Materials",p:2},{s:"Real Estate",p:1}],
-    "IE00B6YCBF59": [{s:"Financials",p:22},{s:"Healthcare",p:16},{s:"Cons.Staples",p:13},{s:"Industrials",p:11},{s:"Technology",p:10},{s:"Energy",p:9},{s:"Comm.Services",p:7},{s:"Cons.Disc",p:6},{s:"Utilities",p:3},{s:"Materials",p:3}],
-    "US4642873909": [{s:"Financials",p:30},{s:"Materials",p:18},{s:"Cons.Staples",p:13},{s:"Energy",p:10},{s:"Industrials",p:8},{s:"Comm.Services",p:7},{s:"Cons.Disc",p:6},{s:"Utilities",p:5},{s:"Technology",p:3}],
-    "IE00BFMHRK20": [{s:"Technology",p:35},{s:"Healthcare",p:18},{s:"Cons.Disc",p:14},{s:"Industrials",p:12},{s:"Financials",p:8},{s:"Cons.Staples",p:5},{s:"Comm.Services",p:5},{s:"Materials",p:3}],
-    "LU1985812756": [{s:"Financials",p:22},{s:"Healthcare",p:17},{s:"Industrials",p:14},{s:"Cons.Staples",p:12},{s:"Technology",p:10},{s:"Energy",p:8},{s:"Cons.Disc",p:8},{s:"Utilities",p:4},{s:"Materials",p:3},{s:"Real Estate",p:2}],
-    "IE00BF4KN675": [{s:"Utilities",p:40},{s:"Industrials",p:35},{s:"Real Estate",p:15},{s:"Energy",p:7},{s:"Comm.Services",p:3}]
-};
+// const SECTOR_EXPOSURE = {} — removido (ver historia git pre-2026-05-15)
