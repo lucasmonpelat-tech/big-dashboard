@@ -1240,47 +1240,8 @@ async function renderEquityRace() {
             '<tr><td colspan="7" style="padding:20px;text-align:center;color:#FFA726;">Real TWR contributions not available. Run: <code>python scripts/holding_contributions_real.py --sleeve equity</code></td></tr>';
     }
 
-    // Trade Ideas generation
-    const winners = sorted.filter(h => (h.si_return_pct || 0) - acwi_ref >= 3);
-    const losers = sorted.filter(h => (h.si_return_pct || 0) - acwi_ref <= -5);
-    const neutral = sorted.filter(h => {
-        const diff = (h.si_return_pct || 0) - acwi_ref;
-        return diff > -5 && diff < 3;
-    });
-
-    const ideasHTML = `
-        <div class="summary-box" style="border-left: 4px solid #EF5350;">
-            <h3>🔴 LAGGARDS — candidatos a rotar</h3>
-            ${losers.length === 0 ? '<p style="color:#81C784;">No hay laggards significativos hoy. Equity sleeve bien balanceado.</p>' : losers.map(h => `
-                <div class="alloc-row" style="padding: 10px 0;">
-                    <div style="flex:1;">
-                        <strong>${h.name}</strong>
-                        <span style="font-size: 11px; color: #EF5350;"> · ${((h.si_return_pct || 0) - acwi_ref).toFixed(2)}pp vs ACWI</span>
-                        <br><span style="font-size: 11px; color: #90CAF9;">Peso: ${h.weight_pct.toFixed(1)}% · Valor: $${(h.value_usd/1000).toFixed(0)}K · Return SI: ${(h.si_return_pct >= 0 ? '+' : '') + h.si_return_pct.toFixed(2)}%</span>
-                    </div>
-                </div>
-            `).join('')}
-        </div>
-
-        <div class="summary-box" style="border-left: 4px solid #81C784;">
-            <h3>🏆 WINNERS — mantener o aumentar</h3>
-            ${winners.length === 0 ? '<p style="color:#90CAF9;">Ningún holding superó ACWI por más de +3pp.</p>' : winners.map(h => `
-                <div class="alloc-row" style="padding: 10px 0;">
-                    <div style="flex:1;">
-                        <strong>${h.name}</strong>
-                        <span style="font-size: 11px; color: #81C784;"> · +${((h.si_return_pct || 0) - acwi_ref).toFixed(2)}pp vs ACWI</span>
-                        <br><span style="font-size: 11px; color: #90CAF9;">Peso: ${h.weight_pct.toFixed(1)}% · Valor: $${(h.value_usd/1000).toFixed(0)}K · Return SI: ${(h.si_return_pct >= 0 ? '+' : '') + h.si_return_pct.toFixed(2)}%</span>
-                    </div>
-                </div>
-            `).join('')}
-        </div>
-
-        <div class="summary-box" style="border-left: 4px solid #D4AF37;">
-            <h3>💡 Mis recomendaciones de trade (pensadas)</h3>
-            <div id="er-trade-recommendations"></div>
-        </div>
-    `;
-    document.getElementById('er-trade-ideas').innerHTML = ideasHTML;
+    // (Trade Ideas section removed el 2026-05-15 — Lucas quiere ordenar la
+    // info primero antes de tener recomendaciones automaticas.)
 
     // ============================================================
     // ACWI TOP 10 LOOKTHROUGH OVERLAP
@@ -1332,78 +1293,8 @@ async function renderEquityRace() {
             '<tr><td colspan="7" style="padding:20px;text-align:center;color:#FFA726;">Run: <code>python scripts/acwi_overlap.py</code></td></tr>';
     }
 
-    // Generate specific trade recommendations based on REAL data
-    const tradeRecs = [];
-    const realGap = realPeriods ? realPeriods.SI.alpha : alpha_si;
-
-    // Primera idea CRITICA: la realidad del gap
-    if (realGap !== null && realGap < -3) {
-        tradeRecs.push({
-            action: '🚨 CONTEXTO',
-            target: `Gap real vs ACWI: ${realGap.toFixed(2)}pp desde inception`,
-            size: `Perdemos ${Math.abs(realGap).toFixed(2)}pp reales — NO es el backtest optimista`,
-            rationale: `La historia real del sleeve tuvo arrastre de BRK (~$2.2M), Virtus US Small Cap y NB Real Estate (vendidos Feb), más una rotación tardía a LatAm (ILF/4BRZ entraron Feb, ~2 meses de contribución).`,
-            impact: 'Para recuperar el gap necesitamos +5.72pp incremental sobre ACWI en los próximos meses. Trades abajo.',
-            color: '#EF5350'
-        });
-    }
-
-    if (losers.length > 0) {
-        const worst = losers[losers.length - 1];
-        tradeRecs.push({
-            action: 'CERRAR / REDUCIR',
-            target: worst.name,
-            size: `$${(worst.value_usd/1000).toFixed(0)}K (${worst.weight_pct.toFixed(1)}% del sleeve)`,
-            rationale: `Peor laggard: ${((worst.si_return_pct || 0) - acwi_ref).toFixed(2)}pp vs ACWI desde inception. No está agregando alpha.`,
-            impact: `Alpha esperado si se reemplaza por ACWI directo: aprox +${(((acwi_ref - worst.si_return_pct) * worst.weight_pct)/100).toFixed(2)}pp al sleeve total`,
-            color: '#EF5350'
-        });
-    }
-    // Look for NB Megatrends specifically
-    const nbgmt = holdings.find(h => h.ticker === 'NBGMT');
-    if (nbgmt && (nbgmt.si_return_pct || 0) - acwi_ref < -3) {
-        tradeRecs.push({
-            action: 'RECORTAR',
-            target: `${nbgmt.name}`,
-            size: `de ${nbgmt.weight_pct.toFixed(1)}% → ~8% (liberar ~$${((nbgmt.weight_pct - 8) * 7890).toFixed(0)}K aprox)`,
-            rationale: `Duplica exposure tech/growth con CSPX. Underperform vs ACWI ${((nbgmt.si_return_pct || 0) - acwi_ref).toFixed(2)}pp. TER 0.75% no justificado cuando CSPX va 0.07%.`,
-            impact: 'Rotar a CSPX o Nomura Japan recovery-play.',
-            color: '#FFA726'
-        });
-    }
-    tradeRecs.push({
-        action: 'AGREGAR',
-        target: 'Nomura Japan Strategic Value',
-        size: '$500K (1.9% BIG / 6.3% equity sleeve)',
-        rationale: 'BIG tiene 0% Japan directo. ACWI tiene ~6% Japan. Gap estructural. Nomura flagship con Alpha 2.99 a 3Y, Beta 0.93.',
-        impact: 'Cubre un underweight geográfico + trade asimétrico (BOJ normalización + TSE Reform). Funding: Janus cierre.',
-        color: '#64B5F6'
-    });
-
-    // Winner that could justify top-up
-    if (winners.length > 0) {
-        const bestWinner = winners[0];
-        if (bestWinner.weight_pct < 10) {
-            tradeRecs.push({
-                action: 'EVALUAR TOP-UP',
-                target: bestWinner.name,
-                size: `actual ${bestWinner.weight_pct.toFixed(1)}% del sleeve · considerar +2-3pp si tesis sigue`,
-                rationale: `Winner claro: +${((bestWinner.si_return_pct || 0) - acwi_ref).toFixed(2)}pp vs ACWI SI. Tesis vigente (LatAm / EM / value).`,
-                impact: `Con peso 8-10%, contribución podría escalar a +3-4pp del sleeve.`,
-                color: '#81C784'
-            });
-        }
-    }
-
-    document.getElementById('er-trade-recommendations').innerHTML = tradeRecs.map((t, i) => `
-        <div style="background: #12243A; border-left: 3px solid ${t.color}; padding: 12px 16px; margin-bottom: 12px; border-radius: 4px;">
-            <div style="font-size: 11px; font-weight: 700; color: ${t.color}; letter-spacing: 1px;">IDEA ${i+1} — ${t.action}</div>
-            <div style="font-size: 15px; font-weight: 700; color: #FFFFFF; margin: 4px 0;">${t.target}</div>
-            <div style="font-size: 11px; color: #90CAF9;">${t.size}</div>
-            <div style="font-size: 12px; color: #E0E8F0; margin-top: 6px; line-height: 1.5;"><strong>Razón:</strong> ${t.rationale}</div>
-            <div style="font-size: 12px; color: #D4AF37; margin-top: 4px; line-height: 1.5;"><strong>Impacto esperado:</strong> ${t.impact}</div>
-        </div>
-    `).join('');
+    // (Specific trade recommendations removed el 2026-05-15 — info primero,
+    // recomendaciones automaticas despues cuando este todo bien ordenado.)
 }
 
 // ==============================================================
@@ -1677,67 +1568,7 @@ async function renderFIRace() {
     </tr>`;
     document.getElementById('fr-holdings-body').innerHTML = holdingsRows + aggRow;
 
-    // Trade Ideas
-    const topSpread = sorted.filter(h => h.spread_vs_ust >= 5);
-    const lowSpread = sorted.filter(h => h.spread_vs_ust < 3);
-    const tradeRecs = [];
-
-    // Context card
-    tradeRecs.push({
-        action: '✅ CONTEXTO',
-        target: `FI Sleeve GANANDO +${siRet.alpha ? siRet.alpha.toFixed(2) : '—'}pp vs AGG SI`,
-        size: `YTW ponderado ${pm.weighted_ytw}% vs UST 10Y ${pm.ust_10y_yield}% = spread +${pm.spread_vs_ust_10y}pp`,
-        rationale: 'FI sleeve performando arriba del benchmark. Diseño de 38.6% Low Duration (defensivo) + 10.9% EM Local (high carry) + 5% Cat Bond (uncorrelated) funciona.',
-        impact: 'La estrategia FI está generando alpha. Mantener composición o ajustar en los márgenes.',
-        color: '#81C784'
-    });
-
-    if (topSpread.length > 0) {
-        const best = topSpread[0];
-        tradeRecs.push({
-            action: '🏆 MANTENER/AUMENTAR',
-            target: best.name,
-            size: `Peso ${best.weight_pct.toFixed(1)}% · YTW ${best.ytw.toFixed(2)}% · Spread UST +${best.spread_vs_ust}pp`,
-            rationale: `Mayor spread del sleeve (${best.spread_vs_ust}pp sobre UST 10Y). Aporta carry alto. SI return: ${best.si_return_pct >= 0 ? '+' : ''}${best.si_return_pct}%.`,
-            impact: 'Si aumentamos peso de este holding: más carry, pero también más riesgo crediticio. Evaluar.',
-            color: '#81C784'
-        });
-    }
-
-    // Duration consideration
-    if (pm.weighted_duration < 4) {
-        tradeRecs.push({
-            action: '⚖️ EVALUAR',
-            target: 'Aumentar Duration (actualmente ' + pm.weighted_duration.toFixed(2) + 'y)',
-            size: 'Duration corta expone menos a tasas bajando. Si Fed corta, vamos a capturar menos upside.',
-            rationale: 'PIMCO LD (dur 2.54) es 38.6% del sleeve. Si expectativa es Fed cutting cycle, vale considerar rotar parte a PIMCO Income (dur 5.15) o Man GLG (dur 4.89).',
-            impact: 'Duration 4.5-5y capturaría mejor un rally de bonos si hay recortes de tasas.',
-            color: '#FFA726'
-        });
-    }
-
-    // EM allocation
-    const em = sorted.find(h => h.ticker === 'PIMCO-EM');
-    if (em && em.si_return_pct > 8) {
-        tradeRecs.push({
-            action: '🔍 MONITOREAR',
-            target: em.name,
-            size: `Peso actual ${em.weight_pct.toFixed(1)}%, SI return +${em.si_return_pct}%, YTW ${em.ytw}%`,
-            rationale: 'EM Local Bond fue el winner absoluto con +10.51% SI. El carry de 8.22% es el más alto. Riesgo: USD fortalecimiento o EM sell-off.',
-            impact: 'Mantener peso actual. Si USD se debilita o Fed dovish, considerar top-up.',
-            color: '#64B5F6'
-        });
-    }
-
-    document.getElementById('fr-trade-ideas').innerHTML = tradeRecs.map((t, i) => `
-        <div style="background: #12243A; border-left: 3px solid ${t.color}; padding: 12px 16px; margin-bottom: 12px; border-radius: 4px;">
-            <div style="font-size: 11px; font-weight: 700; color: ${t.color}; letter-spacing: 1px;">IDEA ${i+1} — ${t.action}</div>
-            <div style="font-size: 15px; font-weight: 700; color: #FFFFFF; margin: 4px 0;">${t.target}</div>
-            <div style="font-size: 11px; color: #90CAF9;">${t.size}</div>
-            <div style="font-size: 12px; color: #E0E8F0; margin-top: 6px; line-height: 1.5;"><strong>Razón:</strong> ${t.rationale}</div>
-            <div style="font-size: 12px; color: #D4AF37; margin-top: 4px; line-height: 1.5;"><strong>Impacto esperado:</strong> ${t.impact}</div>
-        </div>
-    `).join('');
+    // (FI Trade Ideas section removed el 2026-05-15 — info primero, ideas despues.)
 }
 
 // ==============================================================
