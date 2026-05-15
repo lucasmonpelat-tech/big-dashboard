@@ -47,6 +47,96 @@ function wrapName(name, maxCharsPerLine = 24) {
     return lines.join('<br>');
 }
 
+// ==============================================================
+// FRESHNESS — banner de "qué tan fresca está la data" por tab
+// ==============================================================
+function daysSince(isoDate) {
+    if (!isoDate) return null;
+    const d = new Date(isoDate);
+    if (isNaN(d.getTime())) return null;
+    return Math.floor((Date.now() - d.getTime()) / 86400000);
+}
+
+// Semáforo: verde si dentro del SLA, naranja si lo excede hasta 1.5x, rojo si más.
+function freshnessLevel(daysAgo, expectedDays) {
+    if (daysAgo == null) return { icon: '⚪', color: '#90A4AE' };
+    if (daysAgo <= Math.max(expectedDays, 1)) return { icon: '🟢', color: '#81C784' };
+    if (daysAgo <= expectedDays * 1.5) return { icon: '🟠', color: '#FFA726' };
+    return { icon: '🔴', color: '#EF5350' };
+}
+
+// Un badge: "🟢 NAV Lynk hoy". label=nombre visible, isoDate=fecha interna, expectedDays=SLA.
+function freshBadge(label, isoDate, expectedDays) {
+    const days = daysSince(isoDate);
+    const lvl = freshnessLevel(days, expectedDays);
+    const dateStr = isoDate ? new Date(isoDate).toISOString().slice(0, 10) : '—';
+    const ageStr = days == null ? 'sin fecha' : (days <= 0 ? 'hoy' : days + 'd');
+    return `<span class="fresh-badge" title="${label} — actualizado ${dateStr} (SLA ${expectedDays}d)">`
+         + `${lvl.icon} <strong>${label}</strong> `
+         + `<span style="color:${lvl.color}">${ageStr}</span></span>`;
+}
+
+function renderFreshness(containerId, badges) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    el.innerHTML = badges.filter(Boolean).join('<span class="fresh-sep">·</span>');
+}
+
+// Llena los 8 banners de frescura. Se llama al final del init.
+async function renderAllFreshness() {
+    const noCache = '?_=' + Date.now();
+    async function fileDate(path, field) {
+        try {
+            const r = await fetch(path + noCache);
+            if (!r.ok) return null;
+            const d = await r.json();
+            return d[field] || null;
+        } catch (e) { return null; }
+    }
+
+    const [navSeries, eqRace, eqContrib, fiRace, altsRace] = await Promise.all([
+        fileDate('data/lynk_nav_series.json', 'refreshedAt'),
+        fileDate('data/equity_race.json', 'refreshedAt'),
+        fileDate('data/equity_contributions_real.json', 'refreshedAt'),
+        fileDate('data/fi_race.json', 'refreshedAt'),
+        fileDate('data/alts_race.json', 'refreshedAt'),
+    ]);
+
+    const lynkDate = (window.LYNK_DATA && window.LYNK_DATA.refreshedAt) || null;
+    const posDate  = typeof POSITIONS_AS_OF !== 'undefined' ? POSITIONS_AS_OF : null;
+    const metaDate = typeof METADATA_LAST_REVIEW !== 'undefined' ? METADATA_LAST_REVIEW : null;
+
+    renderFreshness('fresh-overview', [
+        freshBadge('NAV Lynk', lynkDate, 1),
+        freshBadge('Posiciones Pershing', posDate, 7),
+    ]);
+    renderFreshness('fresh-currency', [
+        freshBadge('Posiciones Pershing', posDate, 7),
+        freshBadge('Currency exposure (factsheets)', metaDate, 90),
+    ]);
+    renderFreshness('fresh-geography', [
+        freshBadge('Posiciones Pershing', posDate, 7),
+        freshBadge('Country exposure (factsheets)', metaDate, 90),
+    ]);
+    renderFreshness('fresh-yield', [
+        freshBadge('Posiciones Pershing', posDate, 7),
+        freshBadge('Current yield (factsheets)', metaDate, 90),
+    ]);
+    renderFreshness('fresh-performance', [
+        freshBadge('Serie NAV Lynk', navSeries, 1),
+    ]);
+    renderFreshness('fresh-equity-race', [
+        freshBadge('Equity Race (Yahoo+baha)', eqRace, 31),
+        freshBadge('Contribuciones REAL (Pershing trans)', eqContrib, 31),
+    ]);
+    renderFreshness('fresh-fi-race', [
+        freshBadge('FI Race (baha+Yahoo)', fiRace, 31),
+    ]);
+    renderFreshness('fresh-alts-race', [
+        freshBadge('Alts Race (proxies)', altsRace, 31),
+    ]);
+}
+
 function computeSleeveTotals(positions) {
     const totals = { Equity: 0, Alternatives: 0, "Fixed Income": 0, Cash: 0 };
     positions.forEach(p => { if (totals[p.sleeve] !== undefined) totals[p.sleeve] += p.value; });
@@ -1755,6 +1845,7 @@ function updateTime() {
             if (L.returnAnnualized !== null) window.LYNK_DATA.returnAnnualized = L.returnAnnualized;
             if (L.volatility !== null) window.LYNK_DATA.volatility = L.volatility;
             if (L.sharpe !== null) window.LYNK_DATA.sharpe = L.sharpe;
+            if (L.refreshedAt) window.LYNK_DATA.refreshedAt = L.refreshedAt;
             console.log("Lynk data loaded:", L.refreshedAt);
         }
     } catch(e) {
@@ -1773,6 +1864,7 @@ function updateTime() {
     renderFIBreakdown();
     renderAltsRace();
     renderDataHealth();
+    renderAllFreshness();
 })();
 
 // ==============================================================

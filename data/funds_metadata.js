@@ -51,6 +51,13 @@ const BIG_POSITIONS = [
 ];
 
 // ============================================================
+// DATA FRESHNESS MARKERS — para el banner de frescura de cada tab.
+// Bumpear cuando se refresca la data subyacente.
+// ============================================================
+const POSITIONS_AS_OF = "2026-05-05";       // Fecha del export Pershing (positions_latest.json as_of)
+const METADATA_LAST_REVIEW = "2026-05-14";  // CURRENCY/COUNTRY/CURRENT_YIELD/FI_METRICS — ultima revision dicts
+
+// ============================================================
 // FACTSHEET LINKS (for refresh automation / manual review)
 // ============================================================
 const FACTSHEET_LINKS = {

@@ -17,7 +17,7 @@ External alts (NOT in Pershing) must be maintained manually via EXTERNAL_ALTS di
 import openpyxl
 import json
 import sys
-from datetime import datetime
+from datetime import datetime, date
 from pathlib import Path
 
 # External alternatives that don't appear in Pershing custodian
@@ -229,8 +229,8 @@ def recalc_percentages(positions):
     return positions, total
 
 
-def emit_js_array(positions):
-    """Emit BIG_POSITIONS JavaScript literal."""
+def emit_js_array(positions, as_of=None):
+    """Emit BIG_POSITIONS JavaScript literal + POSITIONS_AS_OF marker."""
     sleeve_order = ["Equity", "Alternatives", "Fixed Income", "Cash"]
     positions.sort(key=lambda p: (sleeve_order.index(p["sleeve"]), -p["value"]))
     lines = ["const BIG_POSITIONS = ["]
@@ -244,6 +244,11 @@ def emit_js_array(positions):
             f'terInst: {ter_inst}, terA: {ter_a} }},'
         )
     lines.append("];")
+    if as_of:
+        # ISO date para el banner de frescura del dashboard
+        lines.append("")
+        lines.append('// Bumpear POSITIONS_AS_OF al pegar este array en funds_metadata.js')
+        lines.append(f'const POSITIONS_AS_OF = "{as_of}";')
     return "\n".join(lines)
 
 
@@ -270,7 +275,14 @@ def main():
     print(f"TOTAL AUM (Pershing + External): ${total_aum:,.2f}")
     print(f"{'='*60}\n")
 
-    js_array = emit_js_array(all_positions)
+    # ISO date para POSITIONS_AS_OF (intenta parsear data["as_of"], fallback a hoy)
+    try:
+        from dateutil import parser as _dtparser
+        as_of_iso = _dtparser.parse(data["as_of"]).date().isoformat()
+    except Exception:
+        as_of_iso = date.today().isoformat()
+
+    js_array = emit_js_array(all_positions, as_of=as_of_iso)
     print(js_array)
 
     # Save JSON traceability

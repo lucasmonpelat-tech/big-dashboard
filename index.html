@@ -355,6 +355,33 @@
         }
         .info-box strong { color: #D4AF37; }
 
+        /* ===== FRESHNESS BAR ===== */
+        .freshness-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2px 0;
+            background: #12243A;
+            border: 1px solid #1F3864;
+            border-radius: 6px;
+            padding: 7px 14px;
+            margin-bottom: 16px;
+            font-size: 11px;
+            color: #90CAF9;
+        }
+        .freshness-bar::before {
+            content: "FRESCURA DE DATOS";
+            font-weight: 700;
+            color: #6B88A8;
+            margin-right: 12px;
+            letter-spacing: 0.8px;
+            font-size: 10px;
+        }
+        .freshness-bar:empty { display: none; }
+        .fresh-badge { white-space: nowrap; }
+        .fresh-badge strong { color: #E0E8F0; font-weight: 600; }
+        .fresh-sep { margin: 0 12px; color: #2E74B5; }
+
         /* ===== BAR ROWS ===== */
         .bar-row {
             display: flex;
@@ -437,6 +464,7 @@
 
         <!-- ================== TAB: OVERVIEW ================== -->
         <section id="tab-overview" class="tab-section active">
+            <div class="freshness-bar" id="fresh-overview"></div>
             <h2 class="section-title">Key Metrics (Lynk Official)</h2>
             <div class="kpi-grid">
                 <div class="kpi-card">
@@ -539,6 +567,7 @@
 
         <!-- ================== TAB: CURRENCY ================== -->
         <section id="tab-currency" class="tab-section">
+            <div class="freshness-bar" id="fresh-currency"></div>
             <div class="info-box">
                 <strong>Currency Exposure del portafolio:</strong> Exposición efectiva al inversor <em>post-hedging</em>, no la moneda nominal del subyacente.<br>
                 <span style="font-size:11px;color:#90CAF9;">
@@ -568,6 +597,7 @@
 
         <!-- ================== TAB: COUNTRY ================== -->
         <section id="tab-country" class="tab-section">
+            <div class="freshness-bar" id="fresh-geography"></div>
             <div class="info-box">
                 <strong>Geographic Exposure:</strong> Exposición por país del subyacente. Datos de factsheets más recientes.
             </div>
@@ -591,6 +621,7 @@
 
         <!-- ================== TAB: YIELD ================== -->
         <section id="tab-yield" class="tab-section">
+            <div class="freshness-bar" id="fresh-yield"></div>
             <div class="info-box">
                 <strong>Current Yield analysis:</strong> Yield pagado o estimado por cada fondo. Para PE ilíquido → N/A (retorno vía cap gain).
                 Yield ponderado del portafolio, comparado contra benchmark 60/40 (ACWI 60% / AGG 40%).
@@ -624,6 +655,7 @@
 
         <!-- ================== TAB: PERFORMANCE ================== -->
         <section id="tab-performance" class="tab-section">
+            <div class="freshness-bar" id="fresh-performance"></div>
             <div class="info-box">
                 <strong>Performance BIG vs Benchmark 60/40 (ACWI/AGG):</strong> Maximus data (Mar-2026). Track record 5Y aunque BIG inception sea Jun-2025 — refleja la track del sleeve/strategy replicada, validada por Maximus como proxy.
             </div>
@@ -662,6 +694,7 @@
 
         <!-- ================== TAB: EQUITY RACE ================== -->
         <section id="tab-equity-race" class="tab-section">
+            <div class="freshness-bar" id="fresh-equity-race"></div>
             <div class="info-box" style="border-left-color: #D4AF37;">
                 <strong>🏁 La carrera REAL de Fer:</strong> Equity Sleeve de BIG vs <strong>MSCI ACWI</strong> — <em>TWR reconstruido</em> desde las 146 transacciones de Pershing (Jul-2025 → Mar-2026).<br>
                 <span style="font-size:11px;color:#FFA726;font-weight:700;">⚠️ Este es el performance REAL (flow-adjusted), no un backtest de pesos actuales.</span> Incluye el arrastre de BRK, Virtus US Small Cap y NB Real Estate que vendimos en Feb/Abr, más la rotación tardía a LatAm (4BRZ/ILF entraron en Feb).<br>
@@ -824,6 +857,7 @@
 
         <!-- ================== TAB: FI RACE ================== -->
         <section id="tab-fi-race" class="tab-section">
+            <div class="freshness-bar" id="fresh-fi-race"></div>
             <div class="info-box" style="border-left-color: #81C784;">
                 <strong>💎 La carrera de FI:</strong> Fixed Income Sleeve ($10.4M · 40% de BIG) vs <strong>Bloomberg US Aggregate (AGG)</strong>. Incluye métricas FI: <em>YTW · Duration · Maturity · Rating · Spread vs UST 10Y</em>.<br>
                 <span style="font-size:11px;color:#81C784;">📊 Fuentes: baha.com (5 UCITS) · Tenac carry YTW proxy · AGG & ^TNX via Yahoo Finance</span>
@@ -967,6 +1001,7 @@
 
         <!-- ================== TAB: ALTERNATIVES RACE ================== -->
         <section id="tab-alts-race" class="tab-section">
+            <div class="freshness-bar" id="fresh-alts-race"></div>
             <div class="info-box" style="border-left-color: #FFA726;">
                 <strong>🏆 La carrera de Alternatives:</strong> Alts Sleeve ($7.7M · 29% de BIG) vs <strong>60/40 Blend (60% ACWI + 40% AGG)</strong> y <strong>HFRX Global HF</strong>.<br>
                 <span style="font-size:11px;color:#FFA726;">📊 Fuentes: IBIT/GLD live (Yahoo) · PE proxy (PSP 70% + carry 30%) · PC carry @ 9.5%/yr · privates no publican monthly NAV público</span>
