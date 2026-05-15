@@ -66,7 +66,13 @@ function freshnessLevel(daysAgo, expectedDays) {
 }
 
 // Un badge: "🟢 NAV Lynk hoy". label=nombre visible, isoDate=fecha interna, expectedDays=SLA.
-function freshBadge(label, isoDate, expectedDays) {
+// options.deprecated=true → fuerza badge rojo con "DEPRECATED" en lugar de la edad.
+function freshBadge(label, isoDate, expectedDays, options = {}) {
+    if (options.deprecated) {
+        const dateStr = isoDate ? new Date(isoDate).toISOString().slice(0, 10) : '—';
+        return `<span class="fresh-badge" title="${label} — fuente DEPRECATED (${dateStr}). Rebuild pendiente desde primary.">`
+             + `🔴 <strong>${label}</strong> <span style="color:#EF5350">DEPRECATED</span></span>`;
+    }
     const days = daysSince(isoDate);
     const lvl = freshnessLevel(days, expectedDays);
     const dateStr = isoDate ? new Date(isoDate).toISOString().slice(0, 10) : '—';
@@ -74,6 +80,22 @@ function freshBadge(label, isoDate, expectedDays) {
     return `<span class="fresh-badge" title="${label} — actualizado ${dateStr} (SLA ${expectedDays}d)">`
          + `${lvl.icon} <strong>${label}</strong> `
          + `<span style="color:${lvl.color}">${ageStr}</span></span>`;
+}
+
+// Devuelve la fecha mas vieja (min) de un dict { isin: {date|asOf: "..."} }
+function oldestDate(dict, field) {
+    if (!dict) return null;
+    let oldest = null;
+    for (const k of Object.keys(dict)) {
+        const v = dict[k];
+        if (!v || typeof v !== 'object') continue;
+        const dStr = v[field];
+        if (!dStr) continue;
+        const d = new Date(dStr);
+        if (isNaN(d.getTime())) continue;
+        if (!oldest || d < oldest) oldest = d;
+    }
+    return oldest ? oldest.toISOString().slice(0, 10) : null;
 }
 
 function renderFreshness(containerId, badges) {
@@ -94,21 +116,30 @@ async function renderAllFreshness() {
         } catch (e) { return null; }
     }
 
-    const [navSeries, eqRace, eqContrib, fiRace, altsRace] = await Promise.all([
+    const [navSeries, eqRace, eqContrib, eqSleeveReal, eqBreakdown, acwiOverlap, fiRace, fiBreakdown, altsRace] = await Promise.all([
         fileDate('data/lynk_nav_series.json', 'refreshedAt'),
         fileDate('data/equity_race.json', 'refreshedAt'),
         fileDate('data/equity_contributions_real.json', 'refreshedAt'),
+        fileDate('data/equity_sleeve_real.json', 'refreshedAt'),
+        fileDate('data/equity_breakdown_latest.json', 'asOf'),
+        fileDate('data/acwi_overlap.json', 'refreshedAt'),
         fileDate('data/fi_race.json', 'refreshedAt'),
+        fileDate('data/fi_breakdown_latest.json', 'asOf'),
         fileDate('data/alts_race.json', 'refreshedAt'),
     ]);
 
     const lynkDate = (window.LYNK_DATA && window.LYNK_DATA.refreshedAt) || null;
     const posDate  = typeof POSITIONS_AS_OF !== 'undefined' ? POSITIONS_AS_OF : null;
     const metaDate = typeof METADATA_LAST_REVIEW !== 'undefined' ? METADATA_LAST_REVIEW : null;
+    // Manual NAVs (UCITS) — la mas vieja en el dict MANUAL_NAV (de live_prices.js)
+    const manualNavOldest = (typeof MANUAL_NAV !== 'undefined') ? oldestDate(MANUAL_NAV, 'date') : null;
+    // FI_METRICS — la mas vieja entre los asOf por fondo
+    const fiMetricsOldest = (typeof FI_METRICS !== 'undefined') ? oldestDate(FI_METRICS, 'asOf') : null;
 
     renderFreshness('fresh-overview', [
         freshBadge('NAV Lynk', lynkDate, 1),
         freshBadge('Posiciones Pershing', posDate, 7),
+        freshBadge('NAVs manuales UCITS', manualNavOldest, 14),
     ]);
     renderFreshness('fresh-currency', [
         freshBadge('Posiciones Pershing', posDate, 7),
@@ -128,9 +159,14 @@ async function renderAllFreshness() {
     renderFreshness('fresh-equity-race', [
         freshBadge('Equity Race (Yahoo+baha)', eqRace, 31),
         freshBadge('Contribuciones REAL (Pershing trans)', eqContrib, 31),
+        freshBadge('Sleeve REAL TWR', eqSleeveReal, 31),
+        freshBadge('Equity Breakdown (style/sector/regional)', eqBreakdown, 31),
+        freshBadge('ACWI Top 10 Overlap', acwiOverlap, 31),
     ]);
     renderFreshness('fresh-fi-race', [
         freshBadge('FI Race (baha+Yahoo)', fiRace, 31),
+        freshBadge('FI Metrics (YTW/Dur/Maturity)', fiMetricsOldest, 90),
+        freshBadge('FI Breakdown', fiBreakdown, 31, { deprecated: true }),
     ]);
     renderFreshness('fresh-alts-race', [
         freshBadge('Alts Race (proxies)', altsRace, 31),
