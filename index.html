@@ -1096,6 +1096,22 @@
             <div class="chart-container">
                 <div id="ar-subclass-bars" style="min-height: 240px;"></div>
             </div>
+
+            <!-- Concentration + Liquidity -->
+            <h2 class="section-title">🔒 Concentration & Liquidity Profile</h2>
+            <div class="info-box" style="border-left-color:#FFA726;">
+                <strong>Lectura:</strong> concentración por holding + liquidez del sleeve. Los privates tienen lockups y redemption windows distintos — clave para gestionar liquidez del fondo total.
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="summary-box">
+                    <h3 style="margin-bottom: 12px;">📊 Concentration ranking</h3>
+                    <div id="ar-concentration"></div>
+                </div>
+                <div class="summary-box">
+                    <h3 style="margin-bottom: 12px;">🔒 Liquidity buckets</h3>
+                    <div id="ar-liquidity"></div>
+                </div>
+            </div>
         </section>
 
         <!-- ========================================

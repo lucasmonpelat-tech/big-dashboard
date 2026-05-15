@@ -1,0 +1,66 @@
+name: 📸 Monthly Snapshot
+
+on:
+  # El 15 de cada mes a las 04:00 UTC (~01:00 ART). Snapshotea el mes anterior
+  # para que la data este ya refrescada (factsheets / Pershing settled).
+  schedule:
+    - cron: '0 4 15 * *'
+  # Manual: opcionalmente especificar el mes
+  workflow_dispatch:
+    inputs:
+      month:
+        description: "Mes a snapshotear (YYYY-MM). Vacio = mes anterior."
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Take snapshot
+        run: |
+          MONTH_ARG=""
+          if [ -n "${{ inputs.month }}" ]; then
+            MONTH_ARG="--month ${{ inputs.month }}"
+          fi
+          python scripts/take_snapshot.py $MONTH_ARG
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet --cached data/snapshots/ && git diff --quiet data/snapshots/; then
+            echo "No hay cambios al snapshot — skipping commit."
+            exit 0
+          fi
+
+          git add data/snapshots/
+          git commit -m "chore(snapshot): monthly snapshot $(date -u +%Y-%m-%d)"
+
+          # Push robusto (fetch + rebase + reintento) — mismo patron que Lynk/Stooq
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort; echo "rebase fallo"; exit 1; }
+            if git push origin HEAD:main; then
+              echo "✓ Snapshot pusheado (intento $attempt)."
+              exit 0
+            fi
+            echo "push rechazado (intento $attempt) — reintentando..."
+            sleep 3
+          done
+          echo "ERROR: no se pudo pushear tras 3 intentos"
+          exit 1

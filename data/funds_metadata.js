@@ -157,6 +157,30 @@ const CURRENT_YIELD = {
 };
 
 // ============================================================
+// ALTS LIQUIDITY PROFILE (per holding)
+// Categorias: daily | quarterly | annual | long_lock
+// notice = dias de notice required pre-redemption
+// gate = max % redimible por window (null = sin gate)
+// ============================================================
+const ALTS_LIQUIDITY = {
+    // Daily — ETFs cotizados
+    "US46438F1012": { profile: "daily",     ticker: "IBIT",  redemption: "Daily (ETF listado)" },
+    "US78463V1070": { profile: "daily",     ticker: "GLD",   redemption: "Daily (ETF listado)" },
+
+    // Quarterly — interval funds / evergreen BDCs con redemption windows
+    "KYG4737U1085": { profile: "quarterly", ticker: "HLEND", redemption: "Quarterly windows + 5% gate (HPS)" },
+    "XS2658535526": { profile: "quarterly", ticker: "BPCC",  redemption: "Quarterly windows + 5% gate (Barings)" },
+    "GCRED-I":      { profile: "quarterly", ticker: "GCRED", redemption: "Quarterly windows (Golub)" },
+
+    // Annual / soft-lock — private equity feeders
+    "LU2659193242": { profile: "annual",    ticker: "NBPEA", redemption: "Semi-anual / 1y soft-lock (NB PE)" },
+    "FLEX-LEX":     { profile: "annual",    ticker: "FLEX",  redemption: "1-3y lock + annual exits (Flex-Lex)" },
+
+    // Long-lock — illiquid PE with multi-year hard lock
+    "LU2837777825": { profile: "long_lock", ticker: "CALP",  redemption: "1y soft-lock + 5y hard-lock (Carlyle)" },
+};
+
+// ============================================================
 // FIXED INCOME YTM / DURATION / MATURITY
 //
 // SINGLE SOURCE OF TRUTH: data/funds/<TICKER>.json (campo fi_metrics).

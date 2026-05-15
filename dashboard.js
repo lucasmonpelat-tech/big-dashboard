@@ -2176,6 +2176,88 @@ async function renderAltsRace() {
         showlegend: false,
     };
     Plotly.newPlot('ar-subclass-bars', subTraces, subLayout, { responsive: true, displaylogo: false });
+
+    // ============================================================
+    // CONCENTRATION RANKING + LIQUIDITY BUCKETS
+    // ============================================================
+    try {
+        // Holdings vienen de fi/alts data + positions_latest. Uso BIG_POSITIONS
+        // para tener pesos al dia y matchear ISINs con ALTS_LIQUIDITY.
+        const altsPos = (typeof BIG_POSITIONS !== 'undefined' ? BIG_POSITIONS : [])
+            .filter(p => p.sleeve === 'Alternatives');
+        const altsTotal = altsPos.reduce((a, p) => a + p.value, 0);
+
+        // ----- Concentration ranking -----
+        const sortedByMV = [...altsPos].sort((a, b) => b.value - a.value);
+        const concEl = document.getElementById('ar-concentration');
+        if (concEl) {
+            const top1 = sortedByMV[0];
+            const top1PctSleeve = top1 ? (top1.value / altsTotal * 100) : 0;
+            const top3PctSleeve = sortedByMV.slice(0, 3).reduce((a, p) => a + p.value, 0) / altsTotal * 100;
+            const headerAlert = top1PctSleeve >= 30
+                ? `<div style="font-size:11px;color:#EF5350;margin-bottom:10px;">🔴 Alta concentración: <strong>${top1.ticker}</strong> es ${top1PctSleeve.toFixed(1)}% del sleeve</div>`
+                : top1PctSleeve >= 20
+                    ? `<div style="font-size:11px;color:#FFA726;margin-bottom:10px;">🟠 Concentración moderada: top-1 = ${top1PctSleeve.toFixed(1)}%</div>`
+                    : `<div style="font-size:11px;color:#81C784;margin-bottom:10px;">🟢 Concentración baja: top-1 = ${top1PctSleeve.toFixed(1)}%</div>`;
+            const top3Note = `<div style="font-size:11px;color:#90CAF9;margin-bottom:12px;">Top 3 = ${top3PctSleeve.toFixed(1)}% del sleeve</div>`;
+            const rows = sortedByMV.map((p, i) => {
+                const pctSleeve = p.value / altsTotal * 100;
+                const barW = (pctSleeve / top1PctSleeve * 100).toFixed(1);
+                const color = pctSleeve >= 30 ? '#EF5350' : pctSleeve >= 20 ? '#FFA726' : '#81C784';
+                return `
+                    <div style="margin-bottom: 8px;">
+                        <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;">
+                            <span style="color:#E0E8F0;"><strong>${i+1}.</strong> ${p.ticker}</span>
+                            <span style="color:${color};font-weight:700;">${pctSleeve.toFixed(1)}%</span>
+                        </div>
+                        <div style="height:6px;background:#0D1B2A;border-radius:3px;overflow:hidden;">
+                            <div style="height:100%;width:${barW}%;background:${color};"></div>
+                        </div>
+                    </div>`;
+            }).join('');
+            concEl.innerHTML = headerAlert + top3Note + rows;
+        }
+
+        // ----- Liquidity buckets -----
+        const profileMeta = {
+            daily:     { label: 'Daily (líquido)',      color: '#81C784', icon: '🟢', order: 1 },
+            quarterly: { label: 'Quarterly windows',    color: '#FFD54F', icon: '🟡', order: 2 },
+            annual:    { label: 'Annual / soft-lock',   color: '#FFA726', icon: '🟠', order: 3 },
+            long_lock: { label: 'Long-lock (1y+)',      color: '#EF5350', icon: '🔴', order: 4 },
+            unknown:   { label: 'Sin clasificar',       color: '#90A4AE', icon: '⚪', order: 5 },
+        };
+        const buckets = { daily: [], quarterly: [], annual: [], long_lock: [], unknown: [] };
+        for (const p of altsPos) {
+            const liq = (typeof ALTS_LIQUIDITY !== 'undefined' && ALTS_LIQUIDITY[p.isin]) || null;
+            const profile = liq ? liq.profile : 'unknown';
+            buckets[profile].push({ ...p, redemption: liq ? liq.redemption : '?' });
+        }
+        const liqEl = document.getElementById('ar-liquidity');
+        if (liqEl) {
+            const html = Object.keys(buckets)
+                .filter(k => buckets[k].length > 0)
+                .sort((a, b) => profileMeta[a].order - profileMeta[b].order)
+                .map(k => {
+                    const meta = profileMeta[k];
+                    const items = buckets[k];
+                    const totalMV = items.reduce((a, p) => a + p.value, 0);
+                    const pctSleeve = totalMV / altsTotal * 100;
+                    const tickers = items.map(p => p.ticker).join(', ');
+                    return `
+                        <div style="margin-bottom: 14px; padding: 10px; background:#0D1B2A; border-left: 3px solid ${meta.color}; border-radius: 4px;">
+                            <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                                <span style="font-size:12px;font-weight:700;color:${meta.color};">${meta.icon} ${meta.label}</span>
+                                <span style="font-size:13px;color:#E0E8F0;font-weight:700;">${pctSleeve.toFixed(1)}% · $${(totalMV/1e6).toFixed(2)}M</span>
+                            </div>
+                            <div style="font-size:11px;color:#90CAF9;">${tickers}</div>
+                            ${items.length === 1 ? `<div style="font-size:10px;color:#6B88A8;margin-top:3px;font-style:italic;">${items[0].redemption}</div>` : ''}
+                        </div>`;
+                }).join('');
+            liqEl.innerHTML = html;
+        }
+    } catch (e) {
+        console.warn('Failed to render concentration/liquidity panel', e);
+    }
 }
 
 // ==============================================================
