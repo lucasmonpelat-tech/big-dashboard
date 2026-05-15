@@ -1,11 +1,40 @@
 """
 holding_contributions_real.py
 =============================
-Computes REAL TWR contributions per holding using Pershing transaction history.
+DEPRECATED el 2026-05-15.
 
-Reads:    data/{sleeve}_sleeve_real.json (sleeve_series_{sleeve} block per month)
-Outputs:  data/{sleeve}_contributions_real.json
+Implementaba Modified Dietz TWR + per-holding contributions. Lucas decidio que
+la metodologia mas util para "the race" es buy-and-hold price return (asset
+return desde primer buy vs ACWI mismo periodo, sin time-weighting de flows).
 
+La nueva metodologia esta en: scripts/equity_returns_vs_acwi.py
+Ambos escribian al MISMO archivo (data/equity_contributions_real.json) lo cual
+era una fuente de bugs (se pisaban segun cual se corria ultimo).
+
+Este script ya no se ejecuta — sale con error claro si lo corres.
+La logica queda como referencia historica por si se decide volver a Modified Dietz.
+"""
+
+import sys
+print("=" * 70)
+print("DEPRECATED desde 2026-05-15")
+print("=" * 70)
+print("Este script (Modified Dietz TWR) fue reemplazado por:")
+print("  scripts/equity_returns_vs_acwi.py")
+print()
+print("La nueva metodologia es 'buy-and-hold price race':")
+print("  Asset Return = (end_price - first_buy_price) / first_buy_price")
+print("  ACWI Return en la misma ventana")
+print("  Alpha = Asset - ACWI")
+print()
+print("Si necesitas Modified Dietz, mira el codigo abajo de este bloque o")
+print("revisa el historial git previo a este commit.")
+sys.exit(1)
+
+# === Codigo Modified Dietz original (preservado solo como referencia) ===
+
+"""
+... (original docstring continued below for reference)
 For each holding:
   - period_start / period_end (real holding window)
   - months_held
@@ -13,11 +42,7 @@ For each holding:
   - avg_weight_pct: avg weight in the sleeve while held
   - contribution_pp: weighted contribution to sleeve TWR
   - is_closed: True if the position was fully sold
-  - status: 🏆 winner / ⚠️ lagging / 🔴 loser / ⚰️ closed
-
-Usage:
-    python scripts/holding_contributions_real.py
-    (processes equity by default; pass --sleeve fi for fixed income once available)
+  - status: winner / lagging / loser / closed
 """
 
 import argparse

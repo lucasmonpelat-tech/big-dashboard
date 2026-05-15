@@ -1,20 +1,23 @@
 """
 equity_returns_vs_acwi.py
 =========================
-Calcula el RETORNO REAL de cada equity holding usando la metodología Lucas:
+"Buy-and-hold price race" — la carrera del activo desde la primera compra:
 
 Para cada activo:
-  Return = (Σ Sells $ + MV_actual_si_activo - Σ Buys $) / Σ Buys $
+  Asset Return = (Precio HOY − Precio PRIMER buy) / Precio PRIMER buy
+  ACWI Return  = (ACWI HOY − ACWI EN fecha del primer buy) / ACWI EN fecha del primer buy
+  Alpha = Asset Return − ACWI Return
 
-Compara vs ACWI:
-  ACWI Return = (ACWI_precio_última_venta_o_hoy / ACWI_precio_primera_compra) - 1
-  Alpha = Return - ACWI Return
+Para holdings CERRADOS: "HOY" se reemplaza por la fecha del último sell, y "precio HOY"
+por el precio del último sell.
 
-Trabaja a TRADE-LEVEL (precios y fechas reales de Pershing), NO con snapshots aproximados.
+NO depende de DCA / size de los buys subsiguientes — mide la decisión de elegir el
+activo en una ventana de tiempo dada, vs el benchmark en esa misma ventana.
+
+Trabaja a TRADE-LEVEL (precios y fechas reales de Pershing).
 
 Usage:
     python scripts/equity_returns_vs_acwi.py
-    (lee Transactions_JXD101380 History Analisis Equity Race.xlsx desde Dropbox)
 """
 
 import openpyxl
@@ -150,6 +153,9 @@ def aggregate_by_ticker(trades):
         qty_remaining = qty_bought - qty_sold
 
         first_buy_date = buys[0]["date"] if buys else None
+        first_buy_price = buys[0]["price"] if buys else None  # Anchor para buy-and-hold race
+        last_sell_date = sells[-1]["date"] if sells else None
+        last_sell_price = sells[-1]["price"] if sells else None
         last_trade_date = ts_sorted[-1]["date"]
 
         aggregates[ticker] = {
@@ -161,6 +167,9 @@ def aggregate_by_ticker(trades):
             "qty_sold": qty_sold,
             "qty_remaining": qty_remaining,
             "first_buy_date": first_buy_date,
+            "first_buy_price": first_buy_price,
+            "last_sell_date": last_sell_date,
+            "last_sell_price": last_sell_price,
             "last_trade_date": last_trade_date,
             "is_closed": qty_remaining < 0.01,
             "avg_buy_price": (total_buy_usd / qty_bought) if qty_bought > 0 else None,
@@ -224,37 +233,45 @@ def get_current_mv(ticker):
 
 
 def compute_returns(aggregates, acwi_prices, calculation_date=None):
-    """For each ticker, compute Return, ACWI Return, Alpha.
+    """Buy-and-hold price race: para cada activo, compara el retorno del PRECIO
+    desde primer buy hasta hoy (o last sell si esta cerrado) contra ACWI en la
+    misma ventana.
 
-    For active positions: MV and ACWI both measured at calculation_date
-    (to ensure consistent time point for fair comparison).
+    Asset Return = (end_price - first_buy_price) / first_buy_price
+    ACWI Return  = (acwi_end - acwi_start) / acwi_start
+    Alpha = Asset - ACWI
+
+    NO depende de DCA / size de buys subsiguientes — mide la decision de elegir
+    el activo en una ventana de tiempo dada.
     """
     calc_date = calculation_date or date.today()
     results = []
 
     for ticker, agg in aggregates.items():
-        first_buy = agg["first_buy_date"]
+        first_buy_date = agg["first_buy_date"]
+        first_buy_price = agg["first_buy_price"]
         is_closed = agg["is_closed"]
 
-        # End date and end cash flow
+        # End date + end price segun open/closed
         if is_closed:
-            end_date = agg["last_trade_date"]  # last sell
-            end_value = 0  # nothing remaining
-            total_proceeds = agg["total_sell_usd"]
+            end_date = agg["last_sell_date"]
+            end_price = agg["last_sell_price"]
+            current_mv = 0
         else:
-            end_date = calc_date  # use calculation_date (matches ACWI end date)
+            end_date = calc_date
             current_mv = get_current_mv(ticker) or 0
-            end_value = current_mv
-            total_proceeds = agg["total_sell_usd"] + current_mv
+            qty_rem = agg["qty_remaining"]
+            # current_price = MV / qty_remaining (works for ETFs y UCITS uniformemente)
+            end_price = (current_mv / qty_rem) if qty_rem > 0 else None
 
-        # Return % using Lucas's formula
-        if agg["total_buy_usd"] > 0:
-            return_pct = (total_proceeds - agg["total_buy_usd"]) / agg["total_buy_usd"] * 100
+        # ===== Asset return (buy-and-hold price race) =====
+        if first_buy_price and end_price and first_buy_price > 0:
+            return_pct = (end_price - first_buy_price) / first_buy_price * 100
         else:
             return_pct = None
 
-        # ACWI return for same period
-        acwi_start = acwi_price_at_or_before(acwi_prices, first_buy)
+        # ===== ACWI return en la misma ventana =====
+        acwi_start = acwi_price_at_or_before(acwi_prices, first_buy_date)
         acwi_end = acwi_price_at_or_before(acwi_prices, end_date)
         if acwi_start and acwi_end and acwi_start > 0:
             acwi_return_pct = (acwi_end / acwi_start - 1) * 100
@@ -263,12 +280,17 @@ def compute_returns(aggregates, acwi_prices, calculation_date=None):
 
         alpha_pct = (return_pct - acwi_return_pct) if (return_pct is not None and acwi_return_pct is not None) else None
 
+        # Total proceeds para info (lo que entro como cash, no es input del return)
+        total_proceeds = agg["total_sell_usd"] + current_mv
+
         results.append({
             "ticker": ticker,
             "name": NAME_BY_TICKER.get(ticker, ticker),
             "is_closed": is_closed,
-            "first_buy_date": first_buy.isoformat() if first_buy else None,
+            "first_buy_date": first_buy_date.isoformat() if first_buy_date else None,
+            "first_buy_price": round(first_buy_price, 4) if first_buy_price else None,
             "end_date": end_date.isoformat() if end_date else None,
+            "end_price": round(end_price, 4) if end_price else None,
             "n_buys": agg["n_buys"],
             "n_sells": agg["n_sells"],
             "qty_bought": round(agg["qty_bought"], 2),
@@ -276,7 +298,7 @@ def compute_returns(aggregates, acwi_prices, calculation_date=None):
             "qty_remaining": round(agg["qty_remaining"], 2),
             "total_buy_usd": round(agg["total_buy_usd"], 2),
             "total_sell_usd": round(agg["total_sell_usd"], 2),
-            "current_mv_usd": round(end_value, 2) if not is_closed else 0,
+            "current_mv_usd": round(current_mv, 2) if not is_closed else 0,
             "total_proceeds_usd": round(total_proceeds, 2),
             "avg_buy_price": round(agg["avg_buy_price"], 4) if agg["avg_buy_price"] else None,
             "avg_sell_price": round(agg["avg_sell_price"], 4) if agg["avg_sell_price"] else None,
@@ -388,7 +410,7 @@ def main():
     out = {
         "refreshedAt": datetime.now().isoformat(),
         "source": f"Pershing transactions (trade-level) — {xlsx.name}",
-        "method": "Lucas methodology: Return = (Sells + MV_actual - Buys) / Buys. ACWI return = price change first_buy_date to last_sell_date (or today).",
+        "method": "Buy-and-hold price race: Asset Return = (end_price - first_buy_price) / first_buy_price. ACWI Return = same window. Alpha = Asset - ACWI.",
         "holdings": results,
     }
     out_path = ROOT / "data" / "equity_returns_vs_acwi.json"
@@ -430,8 +452,8 @@ def main():
 
     dashboard_out = {
         "refreshedAt": datetime.now().isoformat(),
-        "source": "Lucas methodology: trade-level return vs ACWI (transactions Pershing)",
-        "method": "Return = (Sells + MV - Buys) / Buys. Alpha = Return - ACWI price return (first_buy → last_sell or today)",
+        "source": "Buy-and-hold price race vs ACWI (transactions Pershing)",
+        "method": "Asset Return = (end_price - first_buy_price) / first_buy_price. ACWI Return = same window. Alpha = Asset - ACWI. End = today if open / last sell if closed.",
         "period_start": min(r["first_buy_date"] for r in results if r["first_buy_date"]),
         "period_end": max(r["end_date"] for r in results if r["end_date"]),
         "total_contribution_pp": None,
