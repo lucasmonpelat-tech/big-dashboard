@@ -1,0 +1,224 @@
+{
+  "refreshedAt": "2026-05-05T16:47:46.434438",
+  "inception": "2025-06-30",
+  "benchmark": "MSCI ACWI (via ACWI ETF - Yahoo)",
+  "stats": {
+    "latest_month": "2026-05",
+    "returns": {
+      "1M": {
+        "sleeve": 0.26,
+        "acwi": 0.63,
+        "alpha": -0.37
+      },
+      "3M": {
+        "sleeve": 1.87,
+        "acwi": 3.47,
+        "alpha": -1.6
+      },
+      "6M": {
+        "sleeve": 9.07,
+        "acwi": 8.74,
+        "alpha": 0.33
+      },
+      "YTD": {
+        "sleeve": 8.38,
+        "acwi": 7.78,
+        "alpha": 0.6
+      },
+      "SI": {
+        "sleeve": 19.7,
+        "acwi": 19.62,
+        "alpha": 0.08
+      }
+    },
+    "annualized": {
+      "sleeve": 21.68,
+      "acwi": 21.59,
+      "alpha": 0.09
+    }
+  },
+  "sleeve_index": {
+    "2025-06": 100.0,
+    "2025-07": 100.5423,
+    "2025-08": 103.7333,
+    "2025-09": 105.7711,
+    "2025-10": 108.6557,
+    "2025-11": 109.7482,
+    "2025-12": 110.4516,
+    "2026-01": 115.6764,
+    "2026-02": 117.5009,
+    "2026-03": 110.8354,
+    "2026-04": 119.3971,
+    "2026-05": 119.7024
+  },
+  "acwi_index": {
+    "2025-06": 100.0,
+    "2025-07": 101.0575,
+    "2025-08": 103.7636,
+    "2025-09": 107.4961,
+    "2025-10": 109.9611,
+    "2025-11": 110.0078,
+    "2025-12": 110.99,
+    "2026-01": 114.1356,
+    "2026-02": 115.6103,
+    "2026-03": 108.5425,
+    "2026-04": 118.8736,
+    "2026-05": 119.6227
+  },
+  "sleeve_monthly_returns": {
+    "2025-06": 0.046621,
+    "2025-07": 0.005423,
+    "2025-08": 0.031738,
+    "2025-09": 0.019644,
+    "2025-10": 0.027273,
+    "2025-11": 0.010054,
+    "2025-12": 0.006409,
+    "2026-01": 0.047304,
+    "2026-02": 0.015773,
+    "2026-03": -0.056728,
+    "2026-04": 0.077248,
+    "2026-05": 0.002556
+  },
+  "acwi_monthly_returns": {
+    "2025-06": 0.048064799784780066,
+    "2025-07": 0.010575403576084996,
+    "2025-08": 0.026777474037295246,
+    "2025-09": 0.03597121638249767,
+    "2025-10": 0.022931162418637463,
+    "2025-11": 0.00042430757749323256,
+    "2025-12": 0.00892855005587223,
+    "2026-01": 0.028341185604305208,
+    "2026-02": 0.012920995758161524,
+    "2026-03": -0.06113454652677752,
+    "2026-04": 0.09517958107746871,
+    "2026-05": 0.006301978839681421
+  },
+  "holdings": [
+    {
+      "isin": "IE00B5BMR087",
+      "ticker": "CSPX",
+      "name": "iShares Core S&P 500 UCITS",
+      "value_usd": 2657592.48,
+      "weight_pct": 33.86,
+      "si_return_pct": 18.26,
+      "ytd_return_pct": 6.54,
+      "contribution_pct": 6.18,
+      "ytd_contribution_pct": 2.21,
+      "source": "Yahoo:SPY (proxy)",
+      "months_counted": 11,
+      "ytd_months_counted": 5
+    },
+    {
+      "isin": "IE00BFMHRK20",
+      "ticker": "NBGMT",
+      "name": "NB Global Equity Megatrends I",
+      "value_usd": 1227372.6,
+      "weight_pct": 15.64,
+      "si_return_pct": 9.67,
+      "ytd_return_pct": 2.88,
+      "contribution_pct": 1.51,
+      "ytd_contribution_pct": 0.45,
+      "source": "baha:IE00BFMHRK20",
+      "months_counted": 11,
+      "ytd_months_counted": 5
+    },
+    {
+      "isin": "LU1985812756",
+      "ticker": "MFSCV",
+      "name": "MFS Meridian Contrarian Value I1",
+      "value_usd": 1146067.83,
+      "weight_pct": 14.6,
+      "si_return_pct": 13.87,
+      "ytd_return_pct": 6.55,
+      "contribution_pct": 2.03,
+      "ytd_contribution_pct": 0.96,
+      "source": "baha:LU1985812756",
+      "months_counted": 11,
+      "ytd_months_counted": 5
+    },
+    {
+      "isin": "IE00B6YCBF59",
+      "ticker": "THOR",
+      "name": "Thornburg Equity Income Builder I",
+      "value_usd": 610432.34,
+      "weight_pct": 7.78,
+      "si_return_pct": 30.43,
+      "ytd_return_pct": 14.15,
+      "contribution_pct": 2.37,
+      "ytd_contribution_pct": 1.1,
+      "source": "baha:IE00B6YCBF59",
+      "months_counted": 11,
+      "ytd_months_counted": 5
+    },
+    {
+      "isin": "LU2940405447",
+      "ticker": "JHGSC",
+      "name": "Janus Henderson Global Smaller Cos F2",
+      "value_usd": 570389.1,
+      "weight_pct": 7.27,
+      "si_return_pct": 24.89,
+      "ytd_return_pct": 11.1,
+      "contribution_pct": 1.81,
+      "ytd_contribution_pct": 0.81,
+      "source": "baha:LU2940405447",
+      "months_counted": 11,
+      "ytd_months_counted": 5
+    },
+    {
+      "isin": "IE00BF4KN675",
+      "ticker": "LGLI",
+      "name": "Lazard Global Listed Infrastructure A",
+      "value_usd": 535776.76,
+      "weight_pct": 6.83,
+      "si_return_pct": 15.57,
+      "ytd_return_pct": 9.91,
+      "contribution_pct": 1.06,
+      "ytd_contribution_pct": 0.68,
+      "source": "baha:IE00BF4KN675",
+      "months_counted": 11,
+      "ytd_months_counted": 5
+    },
+    {
+      "isin": "DE000A0Q4R85",
+      "ticker": "4BRZ",
+      "name": "iShares MSCI Brazil UCITS (DE)",
+      "value_usd": 383356.47,
+      "weight_pct": 4.88,
+      "si_return_pct": 42.45,
+      "ytd_return_pct": 24.98,
+      "contribution_pct": 2.07,
+      "ytd_contribution_pct": 1.22,
+      "source": "Yahoo:EWZ",
+      "months_counted": 11,
+      "ytd_months_counted": 5
+    },
+    {
+      "isin": "US37950E2596",
+      "ticker": "ARGT",
+      "name": "Global X MSCI Argentina ETF",
+      "value_usd": 359520.0,
+      "weight_pct": 4.58,
+      "si_return_pct": 7.06,
+      "ytd_return_pct": -1.52,
+      "contribution_pct": 0.32,
+      "ytd_contribution_pct": -0.07,
+      "source": "Yahoo:ARGT",
+      "months_counted": 11,
+      "ytd_months_counted": 5
+    },
+    {
+      "isin": "US4642873909",
+      "ticker": "ILF",
+      "name": "iShares Latin America 40 ETF",
+      "value_usd": 357600.0,
+      "weight_pct": 4.56,
+      "si_return_pct": 42.23,
+      "ytd_return_pct": 19.54,
+      "contribution_pct": 1.93,
+      "ytd_contribution_pct": 0.89,
+      "source": "Yahoo:ILF",
+      "months_counted": 11,
+      "ytd_months_counted": 5
+    }
+  ]
+}

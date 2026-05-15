@@ -1,0 +1,40 @@
+{
+  "ticker": "PIMCO-INC",
+  "isin": "IE00B87KCF77",
+  "name": "PIMCO GIS Income I",
+  "sleeve": "Fixed Income",
+  "source": "PIMCO website via Chrome MCP",
+  "parsed_at": "2026-05-12",
+  "as_of_factsheet": "2026-04-30",
+  "fi_metrics": {
+    "ytw": 7.0,
+    "current_yield": 4.57,
+    "duration": 6.29,
+    "maturity": 9.33,
+    "underlying_portfolio_yield": 4.02,
+    "rating": "AA-"
+  },
+  "countries": {
+    "United States": 91.57,
+    "Japan": 2.79,
+    "Brazil": 2.1,
+    "Mexico": 1.78,
+    "South Africa": 1.51,
+    "India": 1.06,
+    "Turkey": 0.99,
+    "Canada": -0.8,
+    "Israel": -0.84,
+    "Singapore": -1.22
+  },
+  "sector_duration_contribution": {
+    "Government Related": 1.88,
+    "Agency MBS": 2.37,
+    "ABS": 0.02,
+    "CMBS": 0.01,
+    "Non US RMBS": 0.0,
+    "Non-Agency MBS": 0.24,
+    "Investment Grade Credit": 0.66,
+    "High Yield Credit": 0.05,
+    "Bank Loan": 0.0
+  }
+}

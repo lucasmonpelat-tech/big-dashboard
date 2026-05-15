@@ -1,0 +1,71 @@
+{
+  "asOf": "2026-04-30",
+  "source": "PRIMARY: FT.com tearsheet por fondo × Pershing weights (5-May)",
+  "method": "Para cada equity holding: regional/sectorial extraído de FT.com fund tearsheet (que toma datos directo del fund manager), ponderado por peso BIG. NO usa Maximus.",
+  "verification": {
+    "marzo_japan": 1.5,
+    "abril_japan": 1.5,
+    "delta": "0pp - matches marzo (sanity check OK)",
+    "rotation_impact": "BRK.B salió 16-Abr (era 100% US). CSPX entró (100% US). THOR entró (40% Eurozone). Net: -5pp NA, +2pp Europe."
+  },
+
+  "style": {
+    "title": "Distribución por Estilo",
+    "subtitle": "BIG vs BMK (ACWI) — TODO: validar desde Morningstar style box per fund",
+    "_pending_primary": true,
+    "rows": [
+      { "category": "Value",  "big": 32, "bmk": 28 },
+      { "category": "Growth", "big": 38, "bmk": 32 },
+      { "category": "Blend",  "big": 30, "bmk": 40 }
+    ],
+    "totals": { "big": 100, "bmk": 100 }
+  },
+
+  "sectorial": {
+    "title": "Distribución Sectorial",
+    "subtitle": "BIG vs ACWI — TODO: rebuild from FT.com sector data per fund",
+    "_pending_primary": true,
+    "rows": [
+      { "category": "Technology",   "big": 19, "acwi": 26 },
+      { "category": "Industrials",  "big": 16, "acwi": 11 },
+      { "category": "Financial",    "big": 13, "acwi": 17 },
+      { "category": "Cons. Cyc.",   "big": 11, "acwi": 9  },
+      { "category": "Health",       "big": 9,  "acwi": 9  },
+      { "category": "Comm. Serv.",  "big": 9,  "acwi": 9  },
+      { "category": "Utilities",    "big": 7,  "acwi": 3  },
+      { "category": "Basic Mat.",   "big": 6,  "acwi": 4  },
+      { "category": "Cons. Def.",   "big": 5,  "acwi": 5  },
+      { "category": "Energy",       "big": 5,  "acwi": 5  },
+      { "category": "Real estate",  "big": 2,  "acwi": 2  }
+    ],
+    "totals": { "big": 102, "acwi": 100 },
+    "footnote": "Pendiente refresh desde FT.com per-fund sector × pesos BIG"
+  },
+
+  "regional": {
+    "title": "Distribución Regional",
+    "subtitle": "BIG vs ACWI — Computado PRIMARY (FT.com per fund × weights)",
+    "method": "Sumatoria por fondo: peso_sleeve × region_pct_factsheet. Asia Developed asignado a Others (conservador). Japan = MFSCV 3.62% + JHGSC 13.16% × pesos.",
+    "rows": [
+      { "category": "N. America",   "big": 58, "acwi": 66 },
+      { "category": "LatAm",        "big": 14, "acwi": 1  },
+      { "category": "Europe dev.",  "big": 13, "acwi": 11 },
+      { "category": "UK",           "big": 6,  "acwi": 4  },
+      { "category": "Japan",        "big": 2,  "acwi": 5  },
+      { "category": "Otros",        "big": 7,  "acwi": 13 }
+    ],
+    "totals": { "big": 100, "acwi": 100 },
+    "footnote": "Otros incluye Asia EM (NBGMT 7%), Australasia (JHGSC 5%), Asia Dev (THOR/LGLI), Africa/ME, China, otros. Sanity check vs marzo: NA -5pp (BRK.B salió), Europe +2pp (THOR entró), Japan +0.5pp consistente.",
+    "primary_sources": {
+      "CSPX":  "iShares Core S&P 500 — 100% US (definición)",
+      "NBGMT": "FT.com tearsheet IE00BFMHRK20 — US 78.4 / UK 4.8 / Asia EM 7.4 / ME 4.4 / Other 2.8",
+      "MFSCV": "FT.com tearsheet LU1985812756 — Eurozone 43.6 / UK 19.5 / US 18.6 / Canada 7.6 / Japan 3.6 / Other 3.2",
+      "THOR":  "FT.com tearsheet IE00B6YCBF59 — Eurozone 40 / US 24 / Europe ex-Euro 7 / Asia Dev 7 / UK 6 / Other 6",
+      "JHGSC": "FT.com tearsheet LU2940405447 — US 60.9 / Japan 13.2 / Eurozone 7.4 / Australasia 4.6 / UK 4.4 / Other 6.4",
+      "LGLI":  "FT.com tearsheet IE00BF4KN675 — Eurozone 39.4 / US 23.7 / UK 20.2 / Canada 4.3 / Asia Dev 3.6 / Other 5",
+      "4BRZ":  "iShares MSCI Brazil — 100% Brazil",
+      "ARGT":  "Global X MSCI Argentina — 100% Argentina",
+      "ILF":   "iShares LatAm 40 — Brazil ~58 / Mexico ~22 / Chile ~7 / others"
+    }
+  }
+}
