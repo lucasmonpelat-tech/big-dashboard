@@ -1856,7 +1856,10 @@ async function renderFIBreakdown() {
     const s = cq.summary;
     document.getElementById('fr-big-ig').textContent = s.big_ig + '%';
     document.getElementById('fr-big-hy').textContent = s.big_hy + '%';
-    document.getElementById('fr-bmk-ig').textContent = s.bmk_ig + '%';
+    // AGG = 100% IG por definicion del index. La data Maximus deprecated metia
+    // 14.3% como "NR" pero para AGG, NR son Treasuries + Agency MBS (= AAA implicito).
+    // Hardcodeamos a 100 hasta rebuildear fi_breakdown desde primary.
+    document.getElementById('fr-bmk-ig').textContent = '100%';
 }
 
 // ==============================================================
