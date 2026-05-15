@@ -63,12 +63,19 @@ SECURITY_MAP = {
     "G5896H580": ("Fixed Income", "MANIG",     "IE000OE87WX6", None),
     "L8147L735": ("Fixed Income", "SGCB",      "LU2049315265", None),
     "L9690L577": ("Fixed Income", "WELL",      "LU-WELL",      None),  # Wellington Credit (closed)
-    "G7151GAA7": ("Fixed Income", "BPCC",      "XS2658535526", None),  # Barings (parValue)
+    "G7151GAA7": ("Alternatives", "BPCC",      "XS2658535526", None),  # Barings Private Credit (parValue) — Alts en positions_latest.json
     "G5478EAA2": ("Fixed Income", "TGF",       "XS2324777171", None),  # Tenac (parValue)
 
     # CASH / MMF
     "L4060F300": ("Cash", "FMM1", "LU-FMM1", None),
     "L4058R662": ("Cash", "FMM2", "LU-FMM2", None),
+}
+
+# Symbols tradeados como bond parValue: qty = face value, price = per 100 of par.
+# MV verdadero = qty * price / 100 (no qty * price).
+PAR_VALUE_SYMS = {
+    "G5478EAA2",  # TGF (Tenac)
+    "G7151GAA7",  # BPCC (Barings)
 }
 
 
@@ -110,8 +117,31 @@ def parse_transactions(xlsx_path: Path):
         if not is_trade:
             continue
 
-        # Skip cancels (they'd double-count a non-executed trade)
+        # Cancels son reversiones explicitas de un trade previo (ej: Buy ejecutado por
+        # error -> Cancel Buy lo revierte, y luego un Correct Buy es el trade verdadero).
+        # Parsearlos como trade opuesto para que original + cancel se compensen y solo
+        # quede el Correct.
         if typ_s.startswith("Cancel"):
+            m = cancels.match(typ_s)
+            if not m:
+                continue
+            action_word, qty_raw, sym, price = m.groups()
+            trade_date = date_cell if isinstance(date_cell, datetime) else None
+            if not trade_date:
+                continue
+            # Cancel Buy -> reversa una compra: qty baja, cash vuelve -> SELL
+            # Cancel Sell -> reversa una venta: qty sube, cash sale -> BUY
+            side = "SELL" if action_word == "Buy" else "BUY"
+            trades.append({
+                "date": trade_date.date(),
+                "side": side,
+                "sym": sym.strip(),
+                "qty": abs(float(qty_raw)),
+                "price": float(price),
+                "net_usd": float(net_base) if net_base else 0,
+                "desc": "CANCEL: " + (desc or "")[:40],
+                "raw_type": typ_s,
+            })
             continue
 
         action = None
@@ -191,7 +221,9 @@ def month_end_dates(start: date, end: date):
         else:
             next_y, next_m = y, m + 1
         last_day = date(next_y, next_m, 1) - timedelta(days=1)
-        if last_day > end:
+        # Cortamos cuando salimos del mes-de-end. Asi incluimos el month-end del
+        # mes que contiene end (ej: si end=2026-04-21, incluye 2026-04-30).
+        if (last_day.year, last_day.month) > (end.year, end.month):
             break
         if last_day >= start:
             yield last_day
@@ -284,6 +316,166 @@ UCITS_ANCHOR_NAV = {
 }
 
 
+def _build_sleeve_series(sleeve_name, month_ends, timelines, yahoo_cache, ucits_nav_cache):
+    """Construye serie de MV mes-a-mes para un sleeve dado."""
+    sleeve_series = []
+    for me_date in month_ends:
+        total_mv = 0.0
+        holdings_at_date = []
+        for sym, meta in SECURITY_MAP.items():
+            sleeve, ticker, isin, yf_ticker = meta
+            if sleeve != sleeve_name:
+                continue
+            if sym not in timelines:
+                continue
+            qty = qty_at_date(timelines[sym], me_date)
+            if qty <= 0.0001:
+                continue
+            price = None
+            if yf_ticker and sym in yahoo_cache:
+                yc = yahoo_cache[sym]
+                for d_offset in range(0, 10):
+                    check_d = me_date - timedelta(days=d_offset)
+                    key = check_d.isoformat()
+                    if key in yc:
+                        price = yc[key]
+                        break
+            elif sym in ucits_nav_cache:
+                month_key = f"{me_date.year}-{me_date.month:02d}"
+                price = ucits_nav_cache[sym].get(month_key)
+            if price is None:
+                # Fallback: ultimo trade price conocido
+                for t in reversed(timelines[sym]):
+                    if t["date"] <= me_date:
+                        price = t["trade_price"]
+                        break
+            if price is None:
+                continue
+            # Bonos parValue: qty = face value, price = per 100 of par -> MV = qty * price / 100
+            mv = qty * price / 100 if sym in PAR_VALUE_SYMS else qty * price
+            total_mv += mv
+            holdings_at_date.append({
+                "ticker": ticker, "qty": qty, "price": price, "mv": mv,
+            })
+        sleeve_series.append({
+            "date": me_date.isoformat(),
+            "mv_usd": total_mv,
+            "holdings": holdings_at_date,
+        })
+    return sleeve_series
+
+
+def _compute_sleeve_output(sleeve_name, benchmark_ticker, bmk_key, output_filename,
+                            trades, timelines, month_ends, yahoo_cache, ucits_nav_cache,
+                            unknown, first_date, last_date):
+    """Calcula MV series + TWR + benchmark para un sleeve y escribe el JSON."""
+    print(f"\n{'#' * 90}")
+    print(f"#  {sleeve_name.upper()} SLEEVE")
+    print(f"{'#' * 90}")
+
+    sleeve_series = _build_sleeve_series(sleeve_name, month_ends, timelines, yahoo_cache, ucits_nav_cache)
+
+    # Print summary
+    print(f"\n{'=' * 90}")
+    print(f"{'Date':12s} | {'Total ' + sleeve_name + ' MV':>22s} | {'Holdings':>10s} | Composition")
+    print('=' * 90)
+    for pt in sleeve_series:
+        comp = ", ".join(f"{h['ticker']}:${h['mv']/1000:.0f}K" for h in sorted(pt["holdings"], key=lambda x: -x["mv"])[:6])
+        print(f"{pt['date']:12s} | ${pt['mv_usd']:>20,.0f} | {len(pt['holdings']):>10d} | {comp}")
+
+    # Flows by month (filter por sleeve)
+    flows_by_month = defaultdict(float)
+    for t in trades:
+        if t.get("sleeve") != sleeve_name:
+            continue
+        month_key = f"{t['date'].year}-{t['date'].month:02d}"
+        flow_in = -(t["net_usd"] or 0)
+        flows_by_month[month_key] += flow_in
+
+    # TWR series
+    print(f"\n{'=' * 90}")
+    print(f"{sleeve_name.upper()} SLEEVE TWR CALCULATION")
+    print('=' * 90)
+    print(f"{'Date':12s} | {'MV End':>14s} | {'Flow In':>14s} | {'TWR %':>8s} | {'Cum Index':>10s}")
+    cum_index = 100.0
+    twr_series = []
+    prev_mv = None
+    for pt in sleeve_series:
+        me_date = pt["date"]
+        mv = pt["mv_usd"]
+        month_key = me_date[:7]
+        flow = flows_by_month.get(month_key, 0)
+        twr = (mv - flow) / prev_mv - 1 if (prev_mv is not None and prev_mv > 0) else 0
+        cum_index *= (1 + twr)
+        print(f"{me_date:12s} | ${mv:>12,.0f} | ${flow:>12,.0f} | {twr*100:>+7.2f}% | {cum_index:>10.2f}")
+        twr_series.append({"date": me_date, "mv_usd": mv, "flow_in": flow, "twr": twr, "index": round(cum_index, 4)})
+        prev_mv = mv
+
+    # Benchmark
+    print(f"\n{'=' * 90}\nFETCHING {benchmark_ticker} BENCHMARK")
+    bmk_daily = fetch_yahoo_daily(benchmark_ticker, first_date - timedelta(days=5), last_date + timedelta(days=5))
+    bmk_by_month = {}
+    for me_date in month_ends:
+        for d_offset in range(0, 10):
+            check = (me_date - timedelta(days=d_offset)).isoformat()
+            if check in bmk_daily:
+                bmk_by_month[me_date.isoformat()] = bmk_daily[check]
+                break
+
+    bmk_index_series = []
+    if twr_series:
+        bmk_base = bmk_by_month.get(twr_series[0]["date"])
+        if bmk_base:
+            for pt in twr_series:
+                bmk_val = bmk_by_month.get(pt["date"])
+                if bmk_val:
+                    bmk_index_series.append({
+                        "date": pt["date"],
+                        "price": bmk_val,
+                        "index": round(bmk_val / bmk_base * 100, 4),
+                    })
+
+    if twr_series and bmk_index_series:
+        final_sleeve = twr_series[-1]["index"]
+        final_bmk = bmk_index_series[-1]["index"]
+        print(f"\n{'=' * 90}")
+        print(f"SI {sleeve_name.upper()} TWR:   {final_sleeve - 100:+.2f}%")
+        print(f"SI {benchmark_ticker}:         {final_bmk - 100:+.2f}%")
+        print(f"ALPHA SI:        {final_sleeve - final_bmk:+.2f}pp")
+        status = "GANANDO" if final_sleeve > final_bmk else "PERDIENDO"
+        print(f"STATUS:          {status}")
+
+    sleeve_key = "fi" if sleeve_name == "Fixed Income" else sleeve_name.lower()
+    out = {
+        "refreshedAt": datetime.now().isoformat(),
+        "source": "Reconstructed from Pershing Transactions export",
+        "sleeve": sleeve_name,
+        "benchmark": benchmark_ticker,
+        "first_trade_date": first_date.isoformat(),
+        "last_trade_date": last_date.isoformat(),
+        "n_trades": len(trades),
+        "unknown_securities": unknown,
+        f"sleeve_series_{sleeve_key}": sleeve_series,
+        "twr_series": twr_series,
+        bmk_key: bmk_index_series,
+        f"{sleeve_key}_flows_by_month": dict(flows_by_month),
+        "timelines_summary": {
+            sym: {
+                "ticker": SECURITY_MAP[sym][1] if sym in SECURITY_MAP else "?",
+                "sleeve": SECURITY_MAP[sym][0] if sym in SECURITY_MAP else "?",
+                "last_qty": timelines[sym][-1]["qty_after"],
+                "n_trades": len(timelines[sym]),
+            } for sym in timelines
+        },
+    }
+
+    out_path = ROOT / "data" / output_filename
+    with open(out_path, "w") as f:
+        json.dump(out, f, indent=2, default=str)
+    print(f"\nSaved: {out_path}")
+    return out
+
+
 def main():
     if len(sys.argv) > 1:
         xlsx = Path(sys.argv[1])
@@ -294,14 +486,12 @@ def main():
     trades = parse_transactions(xlsx)
     print(f"  Parsed {len(trades)} trades")
 
-    # Check unique securities
     all_syms = set(t["sym"] for t in trades)
     print(f"  Unique securities: {len(all_syms)}")
     unknown = [s for s in all_syms if s not in SECURITY_MAP]
     if unknown:
         print(f"  WARNING — unknown securities: {unknown}")
 
-    # Group trades by sleeve
     trades_by_sleeve = defaultdict(list)
     for t in trades:
         meta = SECURITY_MAP.get(t["sym"])
@@ -315,207 +505,58 @@ def main():
     for sl in ["Equity", "Alternatives", "Fixed Income", "Cash"]:
         print(f"  {sl}: {len(trades_by_sleeve[sl])} trades")
 
-    # Build position timelines
     timelines = build_positions_over_time(trades)
-
-    # Build month-end valuation for equity only
     first_date = min(t["date"] for t in trades)
     last_date = max(t["date"] for t in trades)
     print(f"\n  Period: {first_date} to {last_date}")
 
-    # Pre-fetch Yahoo prices for equity ETFs
+    # Pre-fetch caches para Equity + Fixed Income
+    SLEEVES_OF_INTEREST = {"Equity", "Fixed Income"}
+
     yahoo_cache = {}
     for sym, meta in SECURITY_MAP.items():
         sleeve, ticker, isin, yf_ticker = meta
-        if sleeve != "Equity" or not yf_ticker:
+        if sleeve not in SLEEVES_OF_INTEREST or not yf_ticker:
             continue
         print(f"  Fetching {yf_ticker} (for {ticker})...")
         yahoo_cache[sym] = fetch_yahoo_daily(yf_ticker, first_date - timedelta(days=10), last_date + timedelta(days=5))
 
-    # Build UCITS NAV series (equity only)
     ucits_nav_cache = {}
     for sym, meta in SECURITY_MAP.items():
         sleeve, ticker, isin, yf_ticker = meta
-        if sleeve != "Equity" or yf_ticker:
+        if sleeve not in SLEEVES_OF_INTEREST or yf_ticker:
             continue
         if isin in UCITS_ANCHOR_NAV:
             nav, anchor_m = UCITS_ANCHOR_NAV[isin]
             ucits_nav_cache[sym] = build_ucits_nav_series(isin, nav, anchor_m)
             print(f"  UCITS NAV series for {ticker}: {len(ucits_nav_cache[sym])} months")
 
-    # Compute month-end equity sleeve MV
-    # Include month-ends PLUS today's date (to reflect latest data)
     month_ends = list(month_end_dates(first_date, last_date))
     today_date = date.today()
-    # If today is after last month_end, add today as final data point (partial month)
     if month_ends and today_date > month_ends[-1]:
         month_ends.append(today_date)
-    sleeve_series = []
 
-    for me_date in month_ends:
-        total_mv = 0.0
-        holdings_at_date = []
-        for sym, meta in SECURITY_MAP.items():
-            sleeve, ticker, isin, yf_ticker = meta
-            if sleeve != "Equity":
-                continue
-            if sym not in timelines:
-                continue
-            qty = qty_at_date(timelines[sym], me_date)
-            if qty <= 0.0001:
-                continue
-            # Get price at me_date
-            price = None
-            if yf_ticker and sym in yahoo_cache:
-                yc = yahoo_cache[sym]
-                # Find latest price on or before me_date
-                for d_offset in range(0, 10):
-                    check_d = me_date - timedelta(days=d_offset)
-                    key = check_d.isoformat()
-                    if key in yc:
-                        price = yc[key]
-                        break
-            elif sym in ucits_nav_cache:
-                month_key = f"{me_date.year}-{me_date.month:02d}"
-                price = ucits_nav_cache[sym].get(month_key)
-            if price is None:
-                # Fallback: use last known trade price
-                for t in reversed(timelines[sym]):
-                    if t["date"] <= me_date:
-                        price = t["trade_price"]
-                        break
-            if price is None:
-                continue
-            mv = qty * price
-            total_mv += mv
-            holdings_at_date.append({
-                "ticker": ticker,
-                "qty": qty,
-                "price": price,
-                "mv": mv,
-            })
-        sleeve_series.append({
-            "date": me_date.isoformat(),
-            "mv_usd": total_mv,
-            "holdings": holdings_at_date,
-        })
+    # Equity vs ACWI
+    _compute_sleeve_output(
+        sleeve_name="Equity",
+        benchmark_ticker="ACWI",
+        bmk_key="acwi_index_series",
+        output_filename="equity_sleeve_real.json",
+        trades=trades, timelines=timelines, month_ends=month_ends,
+        yahoo_cache=yahoo_cache, ucits_nav_cache=ucits_nav_cache,
+        unknown=unknown, first_date=first_date, last_date=last_date,
+    )
 
-    # Print summary table
-    print("\n" + "=" * 90)
-    print(f"{'Date':12s} | {'Total Equity MV':>18s} | {'Holdings':>10s} | Composition")
-    print("=" * 90)
-    for pt in sleeve_series:
-        comp = ", ".join(f"{h['ticker']}:${h['mv']/1000:.0f}K" for h in sorted(pt["holdings"], key=lambda x: -x["mv"])[:6])
-        print(f"{pt['date']:12s} | ${pt['mv_usd']:>16,.0f} | {len(pt['holdings']):>10d} | {comp}")
-
-    # ================================================================
-    # Compute TWR (Time-Weighted Return) — flow-adjusted monthly returns
-    # For each month:
-    #   TWR_m = (MV_end - Net_Flows_In_during_m) / MV_start
-    # Net_Flows_In: positive when equity sleeve receives cash (new buys),
-    #               negative when sleeve loses cash (sells going to other sleeves)
-    # ================================================================
-    # Compute monthly net flows for equity sleeve
-    equity_flows_by_month = defaultdict(float)
-    for t in trades:
-        if t.get("sleeve") != "Equity":
-            continue
-        month_key = f"{t['date'].year}-{t['date'].month:02d}"
-        # t["net_usd"]: negative for BUY (money spent), positive for SELL
-        # Flow_In for equity sleeve = -net_usd (buy = +flow, sell = -flow)
-        flow_in = -(t["net_usd"] or 0)
-        equity_flows_by_month[month_key] += flow_in
-
-    print("\n" + "=" * 90)
-    print("EQUITY SLEEVE TWR CALCULATION")
-    print("=" * 90)
-    print(f"{'Date':12s} | {'MV End':>14s} | {'Flow In':>14s} | {'TWR %':>8s} | {'Cum Index':>10s}")
-    cum_index = 100.0
-    twr_series = []
-    prev_mv = None
-    for pt in sleeve_series:
-        me_date = pt["date"]
-        mv = pt["mv_usd"]
-        month_key = me_date[:7]
-        flow = equity_flows_by_month.get(month_key, 0)
-        if prev_mv is not None and prev_mv > 0:
-            twr = (mv - flow) / prev_mv - 1
-        else:
-            twr = 0
-        cum_index *= (1 + twr)
-        print(f"{me_date:12s} | ${mv:>12,.0f} | ${flow:>12,.0f} | {twr*100:>+7.2f}% | {cum_index:>10.2f}")
-        twr_series.append({"date": me_date, "mv_usd": mv, "flow_in": flow, "twr": twr, "index": round(cum_index, 4)})
-        prev_mv = mv
-
-    # Fetch ACWI benchmark same period
-    print("\n" + "=" * 90)
-    print("FETCHING ACWI FOR COMPARISON")
-    acwi_daily = fetch_yahoo_daily("ACWI", first_date - timedelta(days=5), last_date + timedelta(days=5))
-    acwi_by_month = {}
-    for me_date in month_ends:
-        for d_offset in range(0, 10):
-            check = (me_date - timedelta(days=d_offset)).isoformat()
-            if check in acwi_daily:
-                acwi_by_month[me_date.isoformat()] = acwi_daily[check]
-                break
-
-    # ACWI index base 100 aligned to first sleeve index date
-    first_idx_date = twr_series[0]["date"]
-    acwi_base = acwi_by_month.get(first_idx_date)
-    acwi_index_series = []
-    if acwi_base:
-        for pt in twr_series:
-            acwi_val = acwi_by_month.get(pt["date"])
-            if acwi_val:
-                acwi_index_series.append({
-                    "date": pt["date"],
-                    "price": acwi_val,
-                    "index": round(acwi_val / acwi_base * 100, 4),
-                })
-
-    print("\n" + "=" * 90)
-    print("SLEEVE vs ACWI (TWR-adjusted, flow-normalized)")
-    print("=" * 90)
-    print(f"{'Date':12s} | {'Sleeve':>10s} | {'ACWI':>10s} | {'Alpha':>10s}")
-    for s_pt, a_pt in zip(twr_series, acwi_index_series):
-        alpha = s_pt["index"] - a_pt["index"]
-        print(f"{s_pt['date']:12s} | {s_pt['index']:>10.2f} | {a_pt['index']:>10.2f} | {alpha:>+10.2f}pp")
-
-    if twr_series and acwi_index_series:
-        final_sleeve = twr_series[-1]["index"]
-        final_acwi = acwi_index_series[-1]["index"]
-        print("\n" + "=" * 90)
-        print(f"SI SLEEVE TWR:   {final_sleeve - 100:+.2f}%")
-        print(f"SI ACWI:         {final_acwi - 100:+.2f}%")
-        print(f"ALPHA SI:        {final_sleeve - final_acwi:+.2f}pp")
-        status = "🏆 GANANDO" if final_sleeve > final_acwi else "🔴 PERDIENDO"
-        print(f"STATUS:          {status}")
-
-    out = {
-        "refreshedAt": datetime.now().isoformat(),
-        "source": "Reconstructed from Pershing Transactions export",
-        "first_trade_date": first_date.isoformat(),
-        "last_trade_date": last_date.isoformat(),
-        "n_trades": len(trades),
-        "unknown_securities": unknown,
-        "sleeve_series_equity": sleeve_series,
-        "twr_series": twr_series,
-        "acwi_index_series": acwi_index_series,
-        "equity_flows_by_month": dict(equity_flows_by_month),
-        "timelines_summary": {
-            sym: {
-                "ticker": SECURITY_MAP[sym][1] if sym in SECURITY_MAP else "?",
-                "sleeve": SECURITY_MAP[sym][0] if sym in SECURITY_MAP else "?",
-                "last_qty": timelines[sym][-1]["qty_after"],
-                "n_trades": len(timelines[sym]),
-            } for sym in timelines
-        },
-    }
-
-    out_path = ROOT / "data" / "equity_sleeve_real.json"
-    with open(out_path, "w") as f:
-        json.dump(out, f, indent=2, default=str)
-    print(f"\nSaved: {out_path}")
+    # Fixed Income vs AGG
+    _compute_sleeve_output(
+        sleeve_name="Fixed Income",
+        benchmark_ticker="AGG",
+        bmk_key="agg_index_series",
+        output_filename="fi_sleeve_real.json",
+        trades=trades, timelines=timelines, month_ends=month_ends,
+        yahoo_cache=yahoo_cache, ucits_nav_cache=ucits_nav_cache,
+        unknown=unknown, first_date=first_date, last_date=last_date,
+    )
 
 
 if __name__ == "__main__":

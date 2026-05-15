@@ -120,7 +120,7 @@ async function renderAllFreshness() {
     // Calculo el asOf mas viejo entre los 6 FI funds.
     const FI_TICKERS = ['PIMCO-LD', 'PIMCO-INC', 'PIMCO-EM', 'MANIG', 'SGCB', 'TGF'];
 
-    const [navSeries, eqRace, eqContrib, eqSleeveReal, eqBreakdown, acwiOverlap, fiRace, fiBreakdown, altsRace, ...fiFundDates] = await Promise.all([
+    const [navSeries, eqRace, eqContrib, eqSleeveReal, eqBreakdown, acwiOverlap, fiRace, fiSleeveReal, fiBreakdown, altsRace, ...fiFundDates] = await Promise.all([
         fileDate('data/lynk_nav_series.json', 'refreshedAt'),
         fileDate('data/equity_race.json', 'refreshedAt'),
         fileDate('data/equity_contributions_real.json', 'refreshedAt'),
@@ -128,6 +128,7 @@ async function renderAllFreshness() {
         fileDate('data/equity_breakdown_latest.json', 'asOf'),
         fileDate('data/acwi_overlap.json', 'refreshedAt'),
         fileDate('data/fi_race.json', 'refreshedAt'),
+        fileDate('data/fi_sleeve_real.json', 'refreshedAt'),
         fileDate('data/fi_breakdown_latest.json', 'asOf'),
         fileDate('data/alts_race.json', 'refreshedAt'),
         ...FI_TICKERS.map(t => fileDate(`data/funds/${t}.json`, 'as_of_factsheet')),
@@ -174,6 +175,7 @@ async function renderAllFreshness() {
     ]);
     renderFreshness('fresh-fi-race', [
         freshBadge('FI Race (baha+Yahoo)', fiRace, 31),
+        freshBadge('FI Sleeve REAL TWR (Pershing trans)', fiSleeveReal, 31),
         freshBadge('FI Metrics (YTW/Dur/Maturity)', fiMetricsOldest, 90),
         freshBadge('FI Breakdown', fiBreakdown, 31, { deprecated: true }),
     ]);
@@ -1389,6 +1391,13 @@ async function renderEquityRace() {
 async function renderFIRace() {
     const noCache = '?_=' + Date.now();
 
+    // Load REAL TWR (from Pershing transactions) — flow-adjusted, no backtest
+    let fiReal = null;
+    try {
+        const rr = await fetch('data/fi_sleeve_real.json' + noCache);
+        if (rr.ok) fiReal = await rr.json();
+    } catch (e) { /* sigue sin REAL si no esta */ }
+
     // ============================================================
     // FI PIE CHART — composición % de cada fondo en el sleeve
     // ============================================================
@@ -1565,6 +1574,18 @@ async function renderFIRace() {
             hovertemplate: '%{x|%b %Y}<br>AGG: <b>%{y:.2f}</b><extra></extra>'
         }
     ];
+    // Agregar la serie REAL TWR (flow-adjusted desde transactions Pershing)
+    if (fiReal && fiReal.twr_series && fiReal.twr_series.length) {
+        traces.push({
+            x: fiReal.twr_series.map(p => p.date),
+            y: fiReal.twr_series.map(p => p.index),
+            name: 'BIG FI Sleeve REAL TWR',
+            type: 'scatter', mode: 'lines+markers',
+            line: { color: '#D4AF37', width: 3 },
+            marker: { size: 6, color: '#D4AF37', symbol: 'diamond' },
+            hovertemplate: '%{x|%b %Y}<br>REAL TWR: <b>%{y:.2f}</b><extra></extra>'
+        });
+    }
     const layout = {
         paper_bgcolor: '#1A2A3D',
         plot_bgcolor: '#12243A',
