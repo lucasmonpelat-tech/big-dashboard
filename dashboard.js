@@ -120,7 +120,7 @@ async function renderAllFreshness() {
     // Calculo el asOf mas viejo entre los 6 FI funds.
     const FI_TICKERS = ['PIMCO-LD', 'PIMCO-INC', 'PIMCO-EM', 'MANIG', 'SGCB', 'TGF'];
 
-    const [navSeries, eqRace, eqContrib, eqSleeveReal, eqBreakdown, acwiOverlap, fiRace, fiSleeveReal, fiBreakdown, altsRace, ...fiFundDates] = await Promise.all([
+    const [navSeries, eqRace, eqContrib, eqSleeveReal, eqBreakdown, acwiOverlap, fiRace, fiSleeveReal, fiBreakdown, altsRace, bmk6040Date, ...fiFundDates] = await Promise.all([
         fileDate('data/lynk_nav_series.json', 'refreshedAt'),
         fileDate('data/equity_race.json', 'refreshedAt'),
         fileDate('data/equity_contributions_real.json', 'refreshedAt'),
@@ -131,6 +131,7 @@ async function renderAllFreshness() {
         fileDate('data/fi_sleeve_real.json', 'refreshedAt'),
         fileDate('data/fi_breakdown_latest.json', 'asOf'),
         fileDate('data/alts_race.json', 'refreshedAt'),
+        fileDate('data/bmk_6040.json', 'refreshedAt'),
         ...FI_TICKERS.map(t => fileDate(`data/funds/${t}.json`, 'as_of_factsheet')),
     ]);
 
@@ -165,6 +166,7 @@ async function renderAllFreshness() {
     ]);
     renderFreshness('fresh-performance', [
         freshBadge('Serie NAV Lynk', navSeries, 1),
+        freshBadge('Benchmark 60/40 (ACWI+AGG)', bmk6040Date, 1),
     ]);
     renderFreshness('fresh-equity-race', [
         freshBadge('Equity Race (Yahoo+baha)', eqRace, 31),
@@ -232,88 +234,13 @@ function renderOverview() {
     renderAllocBars();
     renderAllocChart();
     renderNavChart('nav-chart');
-    renderSIPerformance();
+    // renderSIPerformance() removido el 2026-05-15 — redundante con el tab Performance
 }
 
-// ==============================================================
-// SINCE-INCEPTION PERFORMANCE TABLE (Overview tab)
-// ==============================================================
-async function renderSIPerformance() {
-    const L = window.LYNK_DATA;
-    let bmk = null;
-    try {
-        const r = await fetch('data/bmk_6040.json');
-        if (r.ok) bmk = await r.json();
-    } catch(e) { console.warn("bmk_6040.json not found", e); }
-
-    const tbody = document.getElementById('si-perf-body');
-    if (!tbody) return;
-
-    const fmt = v => {
-        if (v === null || v === undefined) return '<span style="color:#6B88A8;">—</span>';
-        if (v >= 0) return `<span style="color:#81C784;">+${v.toFixed(2)}%</span>`;
-        return `<span style="color:#EF5350;">${v.toFixed(2)}%</span>`;
-    };
-
-    // BIG values (Lynk — limited periods)
-    const bigYTD = L.returnYTD;
-    const bigSI = L.returnSI;
-    const bigAnn = L.returnAnnualized;
-    const bigVol = L.volatility;
-    const bigSharpe = L.sharpe;
-
-    // Benchmark values (from bmk_6040.json, calculated)
-    const bmk_1w   = bmk ? bmk.periods.returns["1W"]   : null;
-    const bmk_1m   = bmk ? bmk.periods.returns["1M"]   : null;
-    const bmk_3m   = bmk ? bmk.periods.returns["3M"]   : null;
-    const bmk_6m   = bmk ? bmk.periods.returns["6M"]   : null;
-    const bmk_ytd  = bmk ? bmk.periods.returns["YTD"]  : null;
-    const bmk_si   = bmk ? bmk.periods.returns["SI"]   : null;
-    const bmk_ann  = bmk ? bmk.periods.returns["Annualized"] : null;
-    const bmk_vol  = bmk ? bmk.periods.volatility      : null;
-    const bmk_shrp = bmk ? bmk.periods.sharpe_approx   : null;
-
-    const alpha = (a, b) => (a != null && b != null) ? a - b : null;
-
-    tbody.innerHTML = `
-        <tr class="row-big">
-            <td class="left"><strong>BIG Fund (Lynk)</strong></td>
-            <td>${fmt(null)}</td>
-            <td>${fmt(null)}</td>
-            <td>${fmt(null)}</td>
-            <td>${fmt(null)}</td>
-            <td>${fmt(bigYTD)}</td>
-            <td>${fmt(bigSI)}</td>
-            <td>${fmt(bigAnn)}</td>
-            <td>${bigVol.toFixed(2)}%</td>
-            <td>${bigSharpe.toFixed(2)}</td>
-        </tr>
-        <tr class="row-bmk">
-            <td class="left">60/40 (ACWI/AGG Yahoo)</td>
-            <td>${fmt(bmk_1w)}</td>
-            <td>${fmt(bmk_1m)}</td>
-            <td>${fmt(bmk_3m)}</td>
-            <td>${fmt(bmk_6m)}</td>
-            <td>${fmt(bmk_ytd)}</td>
-            <td>${fmt(bmk_si)}</td>
-            <td>${fmt(bmk_ann)}</td>
-            <td>${bmk_vol ? bmk_vol.toFixed(2) + '%' : '—'}</td>
-            <td>${bmk_shrp != null ? bmk_shrp.toFixed(2) : '—'}</td>
-        </tr>
-        <tr class="row-alpha">
-            <td class="left"><strong>Alpha (BIG − BMK)</strong></td>
-            <td>${fmt(null)}</td>
-            <td>${fmt(null)}</td>
-            <td>${fmt(null)}</td>
-            <td>${fmt(null)}</td>
-            <td>${fmt(alpha(bigYTD, bmk_ytd))}</td>
-            <td>${fmt(alpha(bigSI, bmk_si))}</td>
-            <td>${fmt(alpha(bigAnn, bmk_ann))}</td>
-            <td>${bmk_vol ? (bigVol - bmk_vol).toFixed(2) + 'pp' : '—'}</td>
-            <td>${bmk_shrp != null ? (bigSharpe - bmk_shrp).toFixed(2) : '—'}</td>
-        </tr>
-    `;
-}
+// renderSIPerformance() removido el 2026-05-15 — la tabla del Overview era
+// redundante con el tab Performance + usaba fuente 60/40 distinta (bmk_6040.json)
+// generando inconsistencias. Toda la performance ahora vive en el tab Performance,
+// que tambien usa bmk_6040.json (single source de 60/40).
 
 function renderAllocBars() {
     const { totals, total } = computeSleeveTotals(BIG_POSITIONS);
@@ -772,15 +699,15 @@ async function renderPerformance() {
 
     // ===== Computar multi-period returns desde fuentes auto-refresh =====
     // BIG: lynk_nav_series.json (cron diario)
-    // 60/40: alts_race.json bmk6040_index (60% ACWI + 40% AGG, mensual base 100)
-    let bigSeries = null, bmk6040 = null;
+    // 60/40: bmk_6040.json (SINGLE SOURCE — el mismo que usa el NAV chart del Overview)
+    let bigSeries = null, bmk6040Data = null;
     try {
         const [r1, r2] = await Promise.all([
             fetch('data/lynk_nav_series.json?_=' + Date.now()),
-            fetch('data/alts_race.json?_=' + Date.now()),
+            fetch('data/bmk_6040.json?_=' + Date.now()),
         ]);
         if (r1.ok) bigSeries = (await r1.json()).series;  // [{date, value}, ...]
-        if (r2.ok) bmk6040 = (await r2.json()).bmk6040_index;  // {"YYYY-MM": index}
+        if (r2.ok) bmk6040Data = await r2.json();  // tiene periods.returns + series
     } catch (e) { console.warn('Performance: error fetching data', e); }
 
     function findClosestBig(targetISO) {
@@ -798,16 +725,6 @@ async function renderPerformance() {
         const endNav = bigSeries[bigSeries.length - 1].value;
         if (!startNav || !endNav) return null;
         return (endNav / startNav - 1) * 100;
-    }
-
-    function bmkReturnFrom(startMonthYM) {
-        // Find closest bmk6040 month at or after startMonthYM
-        if (!bmk6040) return null;
-        const months = Object.keys(bmk6040).sort();
-        const startMonth = months.find(m => m >= startMonthYM);
-        const endMonth = months[months.length - 1];
-        if (!startMonth || !endMonth) return null;
-        return (bmk6040[endMonth] / bmk6040[startMonth] - 1) * 100;
     }
 
     function isoNDaysAgo(days) {
@@ -846,32 +763,16 @@ async function renderPerformance() {
     bigReturns.SI = siReturn;
     bigReturns.ANN = annualized;
 
-    // 60/40 returns — para 1M/3M/6M, derivar el mes correspondiente
-    function monthNAgo(monthsBack) {
-        const d = new Date(latestDate);
-        d.setMonth(d.getMonth() - monthsBack);
-        return d.toISOString().slice(0, 7);  // YYYY-MM
-    }
-    const bmkReturns = {
-        '1M':  bmkReturnFrom(monthNAgo(1)),
-        '3M':  bmkReturnFrom(monthNAgo(3)),
-        '6M':  bmkReturnFrom(monthNAgo(6)),
-        'YTD': bmkReturnFrom(ytdMonth),
-    };
-    if (bmk6040) {
-        const months = Object.keys(bmk6040).sort();
-        const firstM = months[0];
-        const lastM = months[months.length - 1];
-        if (firstM && lastM) {
-            const bmkSi = (bmk6040[lastM] / bmk6040[firstM] - 1) * 100;
-            bmkReturns.SI = bmkSi;
-            // Annualized bmk
-            if (inceptionISO) {
-                const days = (new Date(latestDate) - new Date(inceptionISO)) / 86400000;
-                const years = days / 365.25;
-                if (years > 0) bmkReturns.ANN = (Math.pow(1 + bmkSi/100, 1/years) - 1) * 100;
-            }
-        }
+    // 60/40 returns — todos pre-calculados en bmk_6040.json (single source de 60/40)
+    const bmkReturns = {};
+    if (bmk6040Data && bmk6040Data.periods && bmk6040Data.periods.returns) {
+        const r = bmk6040Data.periods.returns;
+        bmkReturns['1M']  = r['1M'];
+        bmkReturns['3M']  = r['3M'];
+        bmkReturns['6M']  = r['6M'];
+        bmkReturns.YTD    = r['YTD'];
+        bmkReturns.SI     = r['SI'];
+        bmkReturns.ANN    = r['Annualized'];
     }
 
     // Alpha
