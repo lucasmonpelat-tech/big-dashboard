@@ -2182,39 +2182,109 @@ async function renderDataHealth() {
         return;
     }
 
-    // Helper: get last-modified date from a JSON file (via its content asOf/refreshedAt fields)
-    async function probeFileDate(path) {
-        if (!path || path.startsWith('(') || path.includes('funds_metadata.js') || path.includes('live_prices.js')) {
-            // Static JS modules — use their git mtime via fetch HEAD or just assume recent
-            try {
-                const r = await fetch(path + '?_=' + Date.now(), { method: 'HEAD' });
-                const lm = r.headers.get('last-modified');
-                if (lm) return new Date(lm);
-            } catch (e) {}
+    // ============================================================
+    // Resolver fecha de freshness segun el "freshness_source" del catalogo
+    // ============================================================
+    async function getSourceDate(src) {
+        const fs = src.freshness_source;
+        const field = src.freshness_field;
+
+        // 1) JSON file — leer la fecha del primer file que matchee
+        if (fs === 'json_file') {
+            for (const path of (src.files || [])) {
+                try {
+                    const r = await fetch(path + '?_=' + Date.now());
+                    if (!r.ok) continue;
+                    const d = await r.json();
+                    if (field && d[field]) return new Date(d[field]);
+                    for (const f of ['asOf', 'refreshedAt', 'refreshed_at', 'as_of', 'lastUpdate']) {
+                        if (d[f]) return new Date(d[f]);
+                    }
+                } catch (e) {}
+            }
             return null;
         }
-        try {
-            const r = await fetch(path + '?_=' + Date.now());
-            if (!r.ok) return null;
-            const d = await r.json();
-            // Try multiple fields
-            const fields = ['asOf', 'refreshedAt', 'refreshed_at', 'as_of', 'lastUpdate', 'extractedAt'];
-            for (const f of fields) {
-                if (d[f]) return new Date(d[f]);
+
+        // 2) Metadata constant — POSITIONS_AS_OF o METADATA_LAST_REVIEW en JS
+        if (fs === 'metadata_constant') {
+            if (field === 'METADATA_LAST_REVIEW' && typeof METADATA_LAST_REVIEW !== 'undefined') {
+                return new Date(METADATA_LAST_REVIEW);
             }
-            // Try Last-Modified header
-            const lm = r.headers.get('last-modified');
-            if (lm) return new Date(lm);
-        } catch (e) {}
+            if (field === 'POSITIONS_AS_OF' && typeof POSITIONS_AS_OF !== 'undefined') {
+                return new Date(POSITIONS_AS_OF);
+            }
+            return null;
+        }
+
+        // 3) funds_dir_oldest — el min as_of_factsheet en data/funds/*.json
+        if (fs === 'funds_dir_oldest') {
+            let oldest = null;
+            for (const path of (src.files || [])) {
+                try {
+                    const r = await fetch(path + '?_=' + Date.now());
+                    if (!r.ok) continue;
+                    const d = await r.json();
+                    const dateStr = d[field || 'as_of_factsheet'];
+                    if (!dateStr) continue;
+                    const dt = new Date(dateStr);
+                    if (!oldest || dt < oldest) oldest = dt;
+                } catch (e) {}
+            }
+            return oldest;
+        }
+
+        // 4) live_prices oldest — el min date en MANUAL_NAV dict (live_prices.js)
+        if (fs === 'live_prices_oldest') {
+            if (typeof MANUAL_NAV === 'undefined') return null;
+            let oldest = null;
+            for (const isin of Object.keys(MANUAL_NAV)) {
+                const dStr = MANUAL_NAV[isin] && MANUAL_NAV[isin].date;
+                if (!dStr) continue;
+                const dt = new Date(dStr);
+                if (!oldest || dt < oldest) oldest = dt;
+            }
+            return oldest;
+        }
+
+        // 5) Sin date tracking — manual o live
         return null;
     }
 
-    // Status calculation
-    function statusOf(daysAgo, expectedDays) {
-        if (daysAgo == null) return { code: 'unknown', label: '⚪ Unknown', color: '#90A4AE' };
-        if (daysAgo <= 1) return { code: 'live', label: '🟢 LIVE', color: '#81C784' };
-        if (daysAgo <= expectedDays) return { code: 'ok', label: '🟢 OK', color: '#81C784' };
-        if (daysAgo <= expectedDays * 1.5) return { code: 'needs_refresh', label: '🟠 NEEDS REFRESH', color: '#FFA726' };
+    // ============================================================
+    // Status calculation con soporte market-aware
+    // ============================================================
+    function statusOf(src, sourceDate) {
+        if (src.deprecated) {
+            return { code: 'deprecated', label: '🪦 DEPRECATED', color: '#90A4AE' };
+        }
+        if (src.freshness_source === 'live_always_ok') {
+            return { code: 'live', label: '🟢 LIVE', color: '#81C784' };
+        }
+        if (src.freshness_source === 'manual_no_tracking') {
+            return { code: 'unknown', label: '⚪ Sin tracking', color: '#90A4AE' };
+        }
+        if (sourceDate == null) {
+            return { code: 'unknown', label: '⚪ Unknown', color: '#90A4AE' };
+        }
+
+        // Market-aware: compara contra ultimo close US esperado (skip weekends)
+        if (src.treat_as_market_data) {
+            const lastClose = lastExpectedClose();  // reusamos la funcion del banner
+            if (sourceDate >= lastClose) {
+                return { code: 'ok', label: '🟢 Al cierre', color: '#81C784' };
+            }
+            const behindDays = Math.floor((lastClose - sourceDate) / 86400000);
+            if (behindDays <= 2) return { code: 'needs_refresh', label: `🟠 ${behindDays}d behind`, color: '#FFA726' };
+            return { code: 'stale', label: `🔴 ${behindDays}d STALE`, color: '#EF5350' };
+        }
+
+        // Calendar-day SLA
+        const now = new Date();
+        // Math.max para evitar -1d por timezone
+        const daysAgo = Math.max(0, Math.floor((now - sourceDate) / 86400000));
+        const sla = src.expected_frequency_days || 31;
+        if (daysAgo <= sla) return { code: 'ok', label: '🟢 OK', color: '#81C784' };
+        if (daysAgo <= sla * 1.5) return { code: 'needs_refresh', label: '🟠 NEEDS REFRESH', color: '#FFA726' };
         return { code: 'stale', label: '🔴 STALE', color: '#EF5350' };
     }
 
@@ -2224,33 +2294,52 @@ async function renderDataHealth() {
     let counts = { live: 0, ok: 0, needs_refresh: 0, stale: 0, unknown: 0, deprecated: 0 };
 
     for (const src of catalog.sources) {
-        // Get most recent date from any of the source's files
-        let mostRecent = null;
-        for (const f of src.files) {
-            const d = await probeFileDate(f);
-            if (d && (!mostRecent || d > mostRecent)) mostRecent = d;
-        }
-        const daysAgo = mostRecent ? Math.floor((now - mostRecent) / (1000 * 60 * 60 * 24)) : null;
-        const status = src.deprecated
-            ? { code: 'deprecated', label: '⚰️ DEPRECATED', color: '#90A4AE' }
-            : statusOf(daysAgo, src.expected_frequency_days);
+        const sourceDate = await getSourceDate(src);
+        const status = statusOf(src, sourceDate);
         counts[status.code] = (counts[status.code] || 0) + 1;
+
+        // Calcular days display (market vs calendar)
+        let daysDisplay = '—';
+        let dateDisplay = sourceDate ? sourceDate.toISOString().slice(0, 10) : '—';
+        if (sourceDate) {
+            if (src.treat_as_market_data) {
+                const lastClose = lastExpectedClose();
+                if (sourceDate >= lastClose) {
+                    daysDisplay = 'al cierre';
+                } else {
+                    const behind = Math.floor((lastClose - sourceDate) / 86400000);
+                    daysDisplay = `${behind}d behind`;
+                }
+            } else {
+                const days = Math.max(0, Math.floor((now - sourceDate) / 86400000));
+                daysDisplay = days === 0 ? 'hoy' : `${days}d`;
+            }
+        }
+
+        const freqDisplay = src.treat_as_market_data
+            ? 'market'
+            : (src.expected_frequency_days ? `${src.expected_frequency_days}d` : '—');
+
+        const feedsTabs = (src.feeds_tabs && src.feeds_tabs.length) ? src.feeds_tabs.join(', ') : '—';
 
         rows.push(`
             <tr>
                 <td class="left"><strong>${src.name}</strong><br><span style="font-size:10px;color:#90CAF9;">${src.source_type}</span></td>
                 <td class="left">${src.category}</td>
-                <td class="left" style="font-size:10px;color:#E0E8F0;">${src.feeds_tabs.join(', ')}</td>
-                <td>${mostRecent ? mostRecent.toISOString().slice(0, 10) : '—'}</td>
-                <td><strong style="color:${daysAgo > src.expected_frequency_days ? '#EF5350' : '#81C784'};">${daysAgo != null ? daysAgo + 'd' : '—'}</strong></td>
-                <td>${src.expected_frequency_days}d</td>
+                <td class="left" style="font-size:10px;color:#E0E8F0;">${feedsTabs}</td>
+                <td>${dateDisplay}</td>
+                <td><strong style="color:${status.color};">${daysDisplay}</strong></td>
+                <td>${freqDisplay}</td>
                 <td class="left"><span style="color:${status.color};font-weight:700;">${status.label}</span></td>
                 <td class="left" style="font-size:10px;color:#90CAF9;">${src.refresh_method}</td>
             </tr>
         `);
 
-        if (src.deprecated || status.code === 'stale' || status.code === 'needs_refresh') {
-            todos.push(`<li><strong>${src.name}</strong> ${src.deprecated ? `→ ${src.deprecated_reason || 'deprecated'}` : `→ ${daysAgo}d sin refresh (expected ${src.expected_frequency_days}d)`}</li>`);
+        if (status.code === 'deprecated' || status.code === 'stale' || status.code === 'needs_refresh') {
+            const reason = src.deprecated
+                ? `→ ${src.deprecated_reason || 'deprecated'}`
+                : `→ ${daysDisplay} (esperado ${freqDisplay})`;
+            todos.push(`<li><strong>${src.name}</strong> ${reason}</li>`);
         }
     }
 
