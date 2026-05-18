@@ -316,12 +316,21 @@ UCITS_ANCHOR_NAV = {
 }
 
 
-def _build_sleeve_series(sleeve_name, month_ends, timelines, yahoo_cache, ucits_nav_cache):
-    """Construye serie de MV mes-a-mes para un sleeve dado."""
+def _build_sleeve_series(sleeve_name, month_ends, timelines, yahoo_cache, ucits_nav_cache,
+                          pershing_override_by_ticker=None):
+    """Construye serie de MV mes-a-mes para un sleeve dado.
+
+    pershing_override_by_ticker: dict {ticker: {"value": MV_USD, "qty": qty}} del
+    positions_latest.json — si se pasa, se usa SOLO para el ultimo me_date.
+    Esto evita proxys Yahoo (ej. EWZ para 4BRZ) y refleja el MV real del custodio.
+    """
     sleeve_series = []
+    last_me = month_ends[-1] if month_ends else None
+    override = pershing_override_by_ticker or {}
     for me_date in month_ends:
         total_mv = 0.0
         holdings_at_date = []
+        is_last = (me_date == last_me)
         for sym, meta in SECURITY_MAP.items():
             sleeve, ticker, isin, yf_ticker = meta
             if sleeve != sleeve_name:
@@ -331,6 +340,21 @@ def _build_sleeve_series(sleeve_name, month_ends, timelines, yahoo_cache, ucits_
             qty = qty_at_date(timelines[sym], me_date)
             if qty <= 0.0001:
                 continue
+
+            # Pershing override SOLO para el ultimo punto (MV USD directo del custodio).
+            if is_last and ticker in override:
+                ovr = override[ticker]
+                mv = ovr["value"]
+                # price implicito = MV / qty (para mantener formato y trazabilidad)
+                ovr_qty = ovr.get("qty") or qty
+                price = mv / ovr_qty if ovr_qty else 0
+                total_mv += mv
+                holdings_at_date.append({
+                    "ticker": ticker, "qty": ovr_qty, "price": price, "mv": mv,
+                    "source": "pershing_positions",
+                })
+                continue
+
             price = None
             if yf_ticker and sym in yahoo_cache:
                 yc = yahoo_cache[sym]
@@ -367,13 +391,17 @@ def _build_sleeve_series(sleeve_name, month_ends, timelines, yahoo_cache, ucits_
 
 def _compute_sleeve_output(sleeve_name, benchmark_ticker, bmk_key, output_filename,
                             trades, timelines, month_ends, yahoo_cache, ucits_nav_cache,
-                            unknown, first_date, last_date):
+                            unknown, first_date, last_date,
+                            pershing_override_by_ticker=None):
     """Calcula MV series + TWR + benchmark para un sleeve y escribe el JSON."""
     print(f"\n{'#' * 90}")
     print(f"#  {sleeve_name.upper()} SLEEVE")
     print(f"{'#' * 90}")
 
-    sleeve_series = _build_sleeve_series(sleeve_name, month_ends, timelines, yahoo_cache, ucits_nav_cache)
+    sleeve_series = _build_sleeve_series(
+        sleeve_name, month_ends, timelines, yahoo_cache, ucits_nav_cache,
+        pershing_override_by_ticker=pershing_override_by_ticker,
+    )
 
     # Print summary
     print(f"\n{'=' * 90}")
@@ -542,6 +570,21 @@ def main():
     if month_ends and today_date > month_ends[-1]:
         month_ends.append(today_date)
 
+    # Cargar positions_latest.json para override del ultimo punto (MV USD del custodio).
+    # Evita proxys Yahoo (ej. EWZ para 4BRZ) y refleja la valuacion real Pershing.
+    pershing_override = {}
+    positions_path = ROOT / "data" / "positions_latest.json"
+    if positions_path.exists():
+        try:
+            pl = json.load(open(positions_path))
+            for pos in pl.get("positions", []):
+                t = pos.get("ticker")
+                if t:
+                    pershing_override[t] = {"value": pos.get("value"), "qty": pos.get("qty")}
+            print(f"\n  Pershing override loaded: {len(pershing_override)} positions @ {pl.get('as_of','?')}")
+        except Exception as e:
+            print(f"\n  Pershing override skipped: {e}")
+
     # Equity vs ACWI
     _compute_sleeve_output(
         sleeve_name="Equity",
@@ -551,6 +594,7 @@ def main():
         trades=trades, timelines=timelines, month_ends=month_ends,
         yahoo_cache=yahoo_cache, ucits_nav_cache=ucits_nav_cache,
         unknown=unknown, first_date=first_date, last_date=last_date,
+        pershing_override_by_ticker=pershing_override,
     )
 
     # Fixed Income vs AGG
@@ -562,6 +606,7 @@ def main():
         trades=trades, timelines=timelines, month_ends=month_ends,
         yahoo_cache=yahoo_cache, ucits_nav_cache=ucits_nav_cache,
         unknown=unknown, first_date=first_date, last_date=last_date,
+        pershing_override_by_ticker=pershing_override,
     )
 
 
