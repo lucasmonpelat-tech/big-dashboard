@@ -2419,9 +2419,7 @@ async function renderDataHealth() {
     document.getElementById('dh-summary').innerHTML =
         summaryCard('🟢 LIVE/OK', (counts.live || 0) + (counts.ok || 0), '#81C784') +
         summaryCard('🟠 NEEDS REFRESH', counts.needs_refresh || 0, '#FFA726') +
-        summaryCard('🔴 STALE', counts.stale || 0, '#EF5350') +
-        summaryCard('⚰️ DEPRECATED', counts.deprecated || 0, '#90A4AE') +
-        summaryCard('⚪ UNKNOWN', counts.unknown || 0, '#607D8B');
+        summaryCard('🔴 STALE', counts.stale || 0, '#EF5350');
 
     document.getElementById('dh-tbody').innerHTML = rows.join('');
     document.getElementById('dh-todos').innerHTML = todos.length
