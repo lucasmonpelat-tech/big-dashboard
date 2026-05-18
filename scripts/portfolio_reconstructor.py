@@ -51,7 +51,7 @@ SECURITY_MAP = {
     "GLD":       ("Alternatives", "GLD",   "US78463V1070", "GLD"),
     "IBIT":      ("Alternatives", "IBIT",  "US46438F1012", "IBIT"),
     "L6712R194": ("Alternatives", "NBPEA", "LU2659193242", None),  # NB PE Access (closed Apr-21)
-    "L4R58Q111": ("Alternatives", "FLEX",  "LU2XXX",       None),  # Franklin Lex PE (new)
+    "L4R58Q111": ("Alternatives", "FLEX",  "LU2966298809", None),  # Franklin Lexington PE Secondaries I
     "L4680C117": ("Alternatives", "HLGPIF","LU2XXX",       None),  # Hamilton Lane Infra (new)
     "449LP0055": ("Alternatives", "HLEND", "KYG4737U1085", None),  # HPS Corporate Lending
     "379LP0083": ("Alternatives", "GCRED", "GCRED-I",      None),  # Golub Capital
@@ -61,6 +61,7 @@ SECURITY_MAP = {
     "G7S11T150": ("Fixed Income", "PIMCO-LD",  "IE00BDT57R20", None),
     "G7097Y503": ("Fixed Income", "PIMCO-EM",  "IE00B29K0P99", None),
     "G5896H580": ("Fixed Income", "MANIG",     "IE000OE87WX6", None),
+    "G594CD616": ("Fixed Income", "MANEM",     "IE00089T5MA6", None),  # Man EM Corporate Credit Alt IV (entry position May-2026)
     "L8147L735": ("Fixed Income", "SGCB",      "LU2049315265", None),
     "L9690L577": ("Fixed Income", "WELL",      "LU-WELL",      None),  # Wellington Credit (closed)
     "G7151GAA7": ("Alternatives", "BPCC",      "XS2658535526", None),  # Barings Private Credit (parValue) — Alts en positions_latest.json

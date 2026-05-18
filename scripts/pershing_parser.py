@@ -32,16 +32,9 @@ EXTERNAL_ALTS = [
         "ter": 1.00,
         "source": "Manual (last reported by Carlyle)"
     },
-    {
-        "isin": "FLEX-LEX",
-        "ticker": "FLEX",
-        "name": "Flex-Lexington Partners Secondaries (in transit)",
-        "sleeve": "Alternatives",
-        "value": 500000.00,  # Cash debited, position NAV pending first valuation
-        "ter": None,
-        "source": "Cash debited — NAV pending (secondaries fund)",
-        "status": "IN_TRANSIT"
-    },
+    # FLEX (Franklin Lexington PE Secondaries) ya esta en Pershing desde May-2026
+    # con ISIN LU2966298809 / CUSIP L4R58Q111 — se quito de external alts para
+    # evitar duplicado. Ver ISIN_TO_SLEEVE / CUSIP_TO_META.
     # Hamilton Lane Infrastructure — NOT YET funded (queued for Jun-26 cycle)
     # Do NOT include until cash actually debits.
 ]
@@ -64,6 +57,7 @@ ISIN_TO_SLEEVE = {
     "US78463V1070": {"sleeve": "Alternatives", "ticker": "GLD"},
     "US46438F1012": {"sleeve": "Alternatives", "ticker": "IBIT"},
     "LU2659193242": {"sleeve": "Alternatives", "ticker": "NBPEA"},
+    "LU2966298809": {"sleeve": "Alternatives", "ticker": "FLEX", "name": "Franklin Lexington PE Secondaries I"},
 
     # Fixed Income
     "IE00BDT57R20": {"sleeve": "Fixed Income", "ticker": "PIMCO-LD"},
@@ -72,6 +66,7 @@ ISIN_TO_SLEEVE = {
     "IE00B29K0P99": {"sleeve": "Fixed Income", "ticker": "PIMCO-EM"},
     "XS2324777171": {"sleeve": "Fixed Income", "ticker": "TGF"},
     "LU2049315265": {"sleeve": "Fixed Income", "ticker": "SGCB"},
+    "IE00089T5MA6": {"sleeve": "Fixed Income", "ticker": "MANEM"},
 }
 
 CUSIP_TO_META = {
@@ -129,6 +124,8 @@ SHORT_NAME = {
     "KYG4737U1085": "HPS Corporate Lending Fund",
     "GCRED-I":      "Golub Capital Private Credit",
     "XS2658535526": "Barings Private Credit Corporation (BPCC)",
+    "LU2966298809": "Franklin Lexington PE Secondaries I",
+    "IE00089T5MA6": "Man EM Corporate Credit Alt IV",
     "CASH-USD":     "Cash USD",
 }
 
