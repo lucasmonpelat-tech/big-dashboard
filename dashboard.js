@@ -57,6 +57,21 @@ function daysSince(isoDate) {
     return Math.floor((Date.now() - d.getTime()) / 86400000);
 }
 
+// Para market data: devuelve el ultimo close US esperado (skip weekends).
+// Si hoy es weekend o lunes pre-cron, el ultimo close esperado es viernes.
+function lastExpectedClose() {
+    const today = new Date();
+    const wd = today.getDay(); // 0=dom, 1=lun, ..., 6=sab
+    const offsetDays = (wd === 0) ? 2          // domingo -> viernes (2 dias atras)
+                     : (wd === 6) ? 1          // sabado -> viernes
+                     : (wd === 1) ? 3          // lunes pre-cron -> viernes
+                     : 1;                       // martes-viernes -> dia anterior
+    const lastClose = new Date(today);
+    lastClose.setDate(today.getDate() - offsetDays);
+    lastClose.setHours(0, 0, 0, 0);
+    return lastClose;
+}
+
 // Semáforo: verde si dentro del SLA, naranja si lo excede hasta 1.5x, rojo si más.
 function freshnessLevel(daysAgo, expectedDays) {
     if (daysAgo == null) return { icon: '⚪', color: '#90A4AE' };
@@ -65,19 +80,50 @@ function freshnessLevel(daysAgo, expectedDays) {
     return { icon: '🔴', color: '#EF5350' };
 }
 
+// Para fuentes market data: si data >= lastExpectedClose -> verde (no penalizar weekend)
+function marketFreshnessLevel(isoDate) {
+    if (!isoDate) return { icon: '⚪', color: '#90A4AE' };
+    const d = new Date(isoDate);
+    if (isNaN(d.getTime())) return { icon: '⚪', color: '#90A4AE' };
+    const lastClose = lastExpectedClose();
+    if (d >= lastClose) return { icon: '🟢', color: '#81C784' };
+    const days = Math.floor((lastClose - d) / 86400000);
+    if (days <= 2) return { icon: '🟠', color: '#FFA726' };
+    return { icon: '🔴', color: '#EF5350' };
+}
+
 // Un badge: "🟢 NAV Lynk hoy". label=nombre visible, isoDate=fecha interna, expectedDays=SLA.
-// options.deprecated=true → fuerza badge rojo con "DEPRECATED" en lugar de la edad.
+// options.deprecated=true → badge rojo con "DEPRECATED"
+// options.market=true → usa marketFreshnessLevel (skip weekends)
 function freshBadge(label, isoDate, expectedDays, options = {}) {
     if (options.deprecated) {
         const dateStr = isoDate ? new Date(isoDate).toISOString().slice(0, 10) : '—';
         return `<span class="fresh-badge" title="${label} — fuente DEPRECATED (${dateStr}). Rebuild pendiente desde primary.">`
              + `🔴 <strong>${label}</strong> <span style="color:#EF5350">DEPRECATED</span></span>`;
     }
-    const days = daysSince(isoDate);
-    const lvl = freshnessLevel(days, expectedDays);
     const dateStr = isoDate ? new Date(isoDate).toISOString().slice(0, 10) : '—';
-    const ageStr = days == null ? 'sin fecha' : (days <= 0 ? 'hoy' : days + 'd');
-    return `<span class="fresh-badge" title="${label} — actualizado ${dateStr} (SLA ${expectedDays}d)">`
+    let lvl, ageStr, titleSuffix;
+    if (options.market) {
+        // Market data: si data >= last close esperado -> al cierre
+        lvl = marketFreshnessLevel(isoDate);
+        if (lvl.icon === '🟢') {
+            ageStr = 'al cierre';
+            titleSuffix = ` (market data, ultimo close esperado: ${lastExpectedClose().toISOString().slice(0,10)})`;
+        } else {
+            const lastClose = lastExpectedClose();
+            const dt = isoDate ? new Date(isoDate) : null;
+            const behind = dt ? Math.floor((lastClose - dt) / 86400000) : null;
+            ageStr = behind != null ? `${behind}d behind` : 'sin fecha';
+            titleSuffix = ` (market data, deberia estar al cierre ${lastExpectedClose().toISOString().slice(0,10)})`;
+        }
+    } else {
+        // Calendar-day SLA
+        const days = daysSince(isoDate);
+        lvl = freshnessLevel(days, expectedDays);
+        ageStr = days == null ? 'sin fecha' : (days <= 0 ? 'hoy' : days + 'd');
+        titleSuffix = ` (SLA ${expectedDays}d)`;
+    }
+    return `<span class="fresh-badge" title="${label} — actualizado ${dateStr}${titleSuffix}">`
          + `${lvl.icon} <strong>${label}</strong> `
          + `<span style="color:${lvl.color}">${ageStr}</span></span>`;
 }
@@ -148,7 +194,7 @@ async function renderAllFreshness() {
     const manualNavOldest = (typeof MANUAL_NAV !== 'undefined') ? oldestDate(MANUAL_NAV, 'date') : null;
 
     renderFreshness('fresh-overview', [
-        freshBadge('NAV Lynk', lynkDate, 1),
+        freshBadge('NAV Lynk', lynkDate, 1, { market: true }),
         freshBadge('Posiciones Pershing', posDate, 7),
         freshBadge('NAVs manuales UCITS', manualNavOldest, 14),
     ]);
@@ -165,8 +211,8 @@ async function renderAllFreshness() {
         freshBadge('Current yield (factsheets)', metaDate, 90),
     ]);
     renderFreshness('fresh-performance', [
-        freshBadge('Serie NAV Lynk', navSeries, 1),
-        freshBadge('Benchmark 60/40 (ACWI+AGG)', bmk6040Date, 1),
+        freshBadge('Serie NAV Lynk', navSeries, 1, { market: true }),
+        freshBadge('Benchmark 60/40 (ACWI+AGG)', bmk6040Date, 1, { market: true }),
     ]);
     renderFreshness('fresh-equity-race', [
         freshBadge('Equity Race (Yahoo+baha)', eqRace, 31),
