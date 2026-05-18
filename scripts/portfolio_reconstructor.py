@@ -413,7 +413,10 @@ def _compute_sleeve_output(sleeve_name, benchmark_ticker, bmk_key, output_filena
 
     # Benchmark
     print(f"\n{'=' * 90}\nFETCHING {benchmark_ticker} BENCHMARK")
-    bmk_daily = fetch_yahoo_daily(benchmark_ticker, first_date - timedelta(days=5), last_date + timedelta(days=5))
+    # Mismo end_fetch que yahoo_cache: extender hasta hoy para que el bmk llegue
+    # al today_date appended en month_ends.
+    bmk_end = max(last_date, date.today()) + timedelta(days=5)
+    bmk_daily = fetch_yahoo_daily(benchmark_ticker, first_date - timedelta(days=5), bmk_end)
     bmk_by_month = {}
     for me_date in month_ends:
         for d_offset in range(0, 10):
@@ -508,7 +511,10 @@ def main():
     timelines = build_positions_over_time(trades)
     first_date = min(t["date"] for t in trades)
     last_date = max(t["date"] for t in trades)
-    print(f"\n  Period: {first_date} to {last_date}")
+    # Extender hasta hoy para que ACWI/AGG benchmarks y precios live lleguen al
+    # mismo punto que today_date (sino el cuadro Multi-Period queda con bench stale).
+    end_fetch = max(last_date, date.today()) + timedelta(days=5)
+    print(f"\n  Period: {first_date} to {last_date}  (fetch hasta {end_fetch})")
 
     # Pre-fetch caches para Equity + Fixed Income
     SLEEVES_OF_INTEREST = {"Equity", "Fixed Income"}
@@ -519,7 +525,7 @@ def main():
         if sleeve not in SLEEVES_OF_INTEREST or not yf_ticker:
             continue
         print(f"  Fetching {yf_ticker} (for {ticker})...")
-        yahoo_cache[sym] = fetch_yahoo_daily(yf_ticker, first_date - timedelta(days=10), last_date + timedelta(days=5))
+        yahoo_cache[sym] = fetch_yahoo_daily(yf_ticker, first_date - timedelta(days=10), end_fetch)
 
     ucits_nav_cache = {}
     for sym, meta in SECURITY_MAP.items():
