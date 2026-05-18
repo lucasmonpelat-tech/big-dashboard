@@ -1,4 +1,4 @@
-name: 💹 Stooq ETF Prices + 60/40 Benchmark Daily Refresh
+name: 💹 Stooq ETF Prices Daily Refresh
 
 on:
   # Runs every day at 02:30 UTC (~23:30 ART). 30 min despues del cron Lynk.
@@ -11,9 +11,9 @@ permissions:
   contents: write
 
 jobs:
-  refresh-stooq-bmk:
+  refresh-stooq:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 5
 
     steps:
       - name: Checkout
@@ -25,39 +25,33 @@ jobs:
           python-version: '3.12'
           cache: 'pip'
 
-      - name: Install dependencies (requests + yfinance)
+      - name: Install dependencies (solo requests, sin Playwright)
         run: |
           python -m pip install --upgrade pip
-          pip install requests yfinance pandas
+          pip install requests
 
-      - name: Run Stooq price refresher (ETFs: CSPX, ILF, ARGT, GLD, IBIT, 4BRZ, etc.)
+      - name: Run Stooq price refresher
         run: |
           python scripts/price_refresher.py
 
-      - name: Run 60/40 benchmark refresher (ACWI + AGG via Yahoo)
+      - name: Show updated prices
         run: |
-          python scripts/bmk_refresher.py
-
-      - name: Show updated data
-        run: |
-          echo "=== live_prices.json (head) ==="
-          head -c 600 data/live_prices.json || echo "(missing)"
+          echo "=== live_prices.json (snippet) ==="
+          head -c 800 data/live_prices.json || echo "(missing)"
           echo ""
-          echo "=== bmk_6040.json (periods) ==="
-          python -c "import json; print(json.dumps(json.load(open('data/bmk_6040.json'))['periods'], indent=2))" || echo "(missing)"
 
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          if git diff --quiet data/live_prices.json data/bmk_6040.json; then
-            echo "No changes — skipping commit."
+          if git diff --quiet data/live_prices.json; then
+            echo "No changes a live_prices.json — skipping commit."
             exit 0
           fi
 
-          git add data/live_prices.json data/bmk_6040.json
-          git commit -m "chore(daily): auto-refresh Stooq prices + 60/40 benchmark ($(date -u +%Y-%m-%d))"
+          git add data/live_prices.json
+          git commit -m "chore(stooq): auto-refresh ETF prices ($(date -u +%Y-%m-%d))"
 
           # Rebase sobre el ultimo main por si se movio (Lynk corre 30 min antes,
           # pueden chocar pushes). Reintenta hasta 3 veces.
@@ -65,7 +59,7 @@ jobs:
             git fetch origin main
             git rebase origin/main || { git rebase --abort; echo "rebase fallo"; exit 1; }
             if git push origin HEAD:main; then
-              echo "✓ Pushed updated daily data (intento $attempt)."
+              echo "✓ Pushed updated Stooq prices (intento $attempt)."
               exit 0
             fi
             echo "push rechazado (intento $attempt) — reintentando..."
