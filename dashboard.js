@@ -2331,9 +2331,9 @@ async function renderDataHealth() {
     function subDivider(freq) {
         const m = FREQ_LABELS[freq] || { label: freq.toUpperCase(), color: '#6B88A8', emoji: '·' };
         return `
-            <tr style="background:#12243A;border-left:3px solid ${m.color};">
-                <td colspan="8" style="padding:6px 14px;font-size:10px;font-weight:600;letter-spacing:1.5px;color:${m.color};">
-                    ${m.emoji} ${m.label}
+            <tr style="background:#12243A;">
+                <td colspan="8" style="text-align:center;padding:8px 14px;font-size:11px;font-weight:700;letter-spacing:2px;color:${m.color};border-top:1px solid ${m.color}33;border-bottom:1px solid ${m.color}33;">
+                    ${m.emoji} ${m.label} ${m.emoji}
                 </td>
             </tr>
         `;
