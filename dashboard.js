@@ -2293,40 +2293,71 @@ async function renderDataHealth() {
     const todos = [];
     let counts = { live: 0, ok: 0, needs_refresh: 0, stale: 0, unknown: 0, deprecated: 0 };
 
-    // Separar fuentes en auto vs manual + reordenar (auto primero)
-    const autoSources = catalog.sources.filter(s => s.automation === 'auto');
-    const manualSources = catalog.sources.filter(s => s.automation !== 'auto');
-    const orderedSources = [...autoSources, ...manualSources];
+    // Agrupar fuentes por automation -> frequency_group
+    // Orden: auto/daily, auto/monthly, manual/weekly, manual/monthly, manual/quarterly, manual/on_demand
+    const FREQ_ORDER = ['daily', 'weekly', 'monthly', 'quarterly', 'on_demand'];
+    const FREQ_LABELS = {
+        daily:     { label: 'DIARIAS',      color: '#81C784', emoji: '🟢' },
+        weekly:    { label: 'SEMANALES',    color: '#FFE082', emoji: '🟡' },
+        monthly:   { label: 'MENSUALES',    color: '#FFA726', emoji: '🟠' },
+        quarterly: { label: 'TRIMESTRALES', color: '#CE93D8', emoji: '🟣' },
+        on_demand: { label: 'ON-DEMAND',    color: '#90A4AE', emoji: '⚫' },
+    };
 
-    // Header para la seccion AUTO (al inicio)
-    if (autoSources.length) {
-        rows.push(`
+    function sortKey(s) {
+        const automationOrder = s.automation === 'auto' ? 0 : 1;
+        const freqOrder = FREQ_ORDER.indexOf(s.frequency_group || 'on_demand');
+        return [automationOrder, freqOrder === -1 ? 99 : freqOrder];
+    }
+    const orderedSources = [...catalog.sources].sort((a, b) => {
+        const [a1, a2] = sortKey(a);
+        const [b1, b2] = sortKey(b);
+        return a1 - b1 || a2 - b2;
+    });
+
+    // Helpers para insertar dividers
+    function bigDivider(emoji, text, color) {
+        return `
+            <tr style="background:transparent;"><td colspan="8" style="padding:0;border:none;height:18px;"></td></tr>
             <tr class="divider-row" style="background:#0D1B2A;border-top:2px solid #1F3864;border-bottom:2px solid #1F3864;">
-                <td colspan="8" style="text-align:center;padding:10px;font-size:11px;font-weight:700;letter-spacing:2px;color:#81C784;">
-                    🤖 FUENTES AUTOMÁTICAS (cron diario, sin intervención)
+                <td colspan="8" style="text-align:center;padding:10px;font-size:11px;font-weight:700;letter-spacing:2px;color:${color};">
+                    ${emoji} ${text}
                 </td>
             </tr>
-            <tr style="background:transparent;"><td colspan="8" style="padding:0;border:none;height:8px;"></td></tr>
-        `);
+            <tr style="background:transparent;"><td colspan="8" style="padding:0;border:none;height:6px;"></td></tr>
+        `;
     }
 
-    // Helper: si esta es la primera manual, insertar divisor antes
-    let insertedDivider = false;
-    const firstManualId = manualSources.length ? manualSources[0].id : null;
+    function subDivider(freq) {
+        const m = FREQ_LABELS[freq] || { label: freq.toUpperCase(), color: '#6B88A8', emoji: '·' };
+        return `
+            <tr style="background:#12243A;border-left:3px solid ${m.color};">
+                <td colspan="8" style="padding:6px 14px;font-size:10px;font-weight:600;letter-spacing:1.5px;color:${m.color};">
+                    ${m.emoji} ${m.label}
+                </td>
+            </tr>
+        `;
+    }
+
+    let prevAutomation = null;
+    let prevFrequency = null;
 
     for (const src of orderedSources) {
-        // Insertar divisor antes de la primera manual
-        if (src.id === firstManualId && !insertedDivider) {
-            rows.push(`
-                <tr style="background:transparent;"><td colspan="8" style="padding:0;border:none;height:18px;"></td></tr>
-                <tr class="divider-row" style="background:#0D1B2A;border-top:2px solid #1F3864;border-bottom:2px solid #1F3864;">
-                    <td colspan="8" style="text-align:center;padding:10px;font-size:11px;font-weight:700;letter-spacing:2px;color:#FFA726;">
-                        🔧 FUENTES MANUALES (Lucas refresh)
-                    </td>
-                </tr>
-                <tr style="background:transparent;"><td colspan="8" style="padding:0;border:none;height:8px;"></td></tr>
-            `);
-            insertedDivider = true;
+        // Inserta big divider cuando cambia automation
+        if (src.automation !== prevAutomation) {
+            if (src.automation === 'auto') {
+                rows.push(bigDivider('🤖', 'FUENTES AUTOMÁTICAS (cron, sin intervención)', '#81C784'));
+            } else {
+                rows.push(bigDivider('🔧', 'FUENTES MANUALES (Lucas refresh)', '#FFA726'));
+            }
+            prevAutomation = src.automation;
+            prevFrequency = null;  // reset para que dispare el sub-divider tambien
+        }
+
+        // Inserta sub-divider cuando cambia frequency dentro del mismo automation
+        if (src.frequency_group !== prevFrequency) {
+            rows.push(subDivider(src.frequency_group || 'on_demand'));
+            prevFrequency = src.frequency_group;
         }
 
         const sourceDate = await getSourceDate(src);
