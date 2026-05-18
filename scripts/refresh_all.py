@@ -24,7 +24,7 @@ scripts = [
     ("Benchmark 60/40 (Yahoo)","bmk_refresher.py",   []),
     ("Lynk NAV summary",      "lynk_refresher.py",  []),
     ("Lynk NAV series (chart)","lynk_nav_extractor.py", []),
-    ("Factsheets",            "factsheet_downloader.py", []),
+    ("Factsheets",            "download_factsheets.py", []),
 ]
 
 for label, script, args in scripts:

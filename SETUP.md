@@ -48,7 +48,7 @@ big-dashboard/
 ├── scripts/
 │   ├── price_refresher.py   Fetches Stooq quotes, writes live_prices.json
 │   ├── lynk_refresher.py    Scrapes Lynk with Playwright, writes lynk_data.json
-│   ├── factsheet_downloader.py  Downloads manager PDFs
+│   ├── download_factsheets.py   Downloads manager PDFs (URLs en data/factsheet_urls.json)
 │   └── refresh_all.py       Runs all 3 in sequence
 ├── factsheets/              Downloaded PDFs per run
 ├── .claude/
@@ -142,7 +142,7 @@ git push
 | Sleeve | Source | Frequency | Script |
 |---|---|---|---|
 | ETFs (CSPX, 4BRZ, ILF, ARGT, GLD, IBIT) | Stooq CSV | Daily | `price_refresher.py` |
-| UCITS funds (PIMCO, MFS, NB, Man, Schroder) | Factsheets | Monthly | `factsheet_downloader.py` + manual NAV update |
+| UCITS funds (PIMCO, MFS, NB, Man, Schroder) | Factsheets | Monthly | `download_factsheets.py` + manual NAV update |
 | Private Alts (Carlyle, NB PE, HLEND, BPCC, Golub, Flex) | Manager emails | Quarterly | Manual |
 | Lynk NAV (BIG fund product) | app.lynkmarkets.com | Daily | `lynk_refresher.py` |
 | Maximus performance data | Maximus/LATAM ConsultUs | Monthly | Manual (update PORT_PERF_DETAIL in metadata) |
@@ -185,5 +185,6 @@ git push
 → Need local HTTP server for JSON fetches. Run `python -m http.server 8000` instead of opening `index.html` directly.
 
 ### "Factsheet download fails for X"
-→ Some managers lock factsheets behind login. Add to `FACTSHEET_PAGES` in
-`factsheet_downloader.py` and note as "manual review".
+→ Some managers lock factsheets behind login. Edit the entry in
+`data/factsheet_urls.json` and change `factsheet_url` to `"MANUAL_DROP — ..."`
+so the script skipea ese fondo y se baja manual.
