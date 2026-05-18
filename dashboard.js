@@ -2293,7 +2293,42 @@ async function renderDataHealth() {
     const todos = [];
     let counts = { live: 0, ok: 0, needs_refresh: 0, stale: 0, unknown: 0, deprecated: 0 };
 
-    for (const src of catalog.sources) {
+    // Separar fuentes en auto vs manual + reordenar (auto primero)
+    const autoSources = catalog.sources.filter(s => s.automation === 'auto');
+    const manualSources = catalog.sources.filter(s => s.automation !== 'auto');
+    const orderedSources = [...autoSources, ...manualSources];
+
+    // Header para la seccion AUTO (al inicio)
+    if (autoSources.length) {
+        rows.push(`
+            <tr class="divider-row" style="background:#0D1B2A;border-top:2px solid #1F3864;border-bottom:2px solid #1F3864;">
+                <td colspan="8" style="text-align:center;padding:10px;font-size:11px;font-weight:700;letter-spacing:2px;color:#81C784;">
+                    🤖 FUENTES AUTOMÁTICAS (cron diario, sin intervención)
+                </td>
+            </tr>
+            <tr style="background:transparent;"><td colspan="8" style="padding:0;border:none;height:8px;"></td></tr>
+        `);
+    }
+
+    // Helper: si esta es la primera manual, insertar divisor antes
+    let insertedDivider = false;
+    const firstManualId = manualSources.length ? manualSources[0].id : null;
+
+    for (const src of orderedSources) {
+        // Insertar divisor antes de la primera manual
+        if (src.id === firstManualId && !insertedDivider) {
+            rows.push(`
+                <tr style="background:transparent;"><td colspan="8" style="padding:0;border:none;height:18px;"></td></tr>
+                <tr class="divider-row" style="background:#0D1B2A;border-top:2px solid #1F3864;border-bottom:2px solid #1F3864;">
+                    <td colspan="8" style="text-align:center;padding:10px;font-size:11px;font-weight:700;letter-spacing:2px;color:#FFA726;">
+                        🔧 FUENTES MANUALES (Lucas refresh)
+                    </td>
+                </tr>
+                <tr style="background:transparent;"><td colspan="8" style="padding:0;border:none;height:8px;"></td></tr>
+            `);
+            insertedDivider = true;
+        }
+
         const sourceDate = await getSourceDate(src);
         const status = statusOf(src, sourceDate);
         counts[status.code] = (counts[status.code] || 0) + 1;

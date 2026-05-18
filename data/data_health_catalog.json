@@ -5,12 +5,12 @@
     "freshness_source": "Cómo el render obtiene la fecha de última actualización: 'json_file' (lee refreshedAt/asOf del JSON), 'metadata_constant' (POSITIONS_AS_OF o METADATA_LAST_REVIEW en JS), 'live_always_ok' (sources en vivo sin persistencia: Stooq), 'manual_no_tracking' (Lucas tracking, sin date persistente), 'funds_dir_oldest' (min as_of_factsheet en data/funds/*.json)",
     "treat_as_market_data": "Si true, evalúa frescura vs último close US esperado (skip weekends). Si false/undefined, calendar days."
   },
-
   "sources": [
     {
       "id": "lynk_nav",
       "name": "Lynk NAV oficial",
       "category": "Performance",
+      "automation": "auto",
       "source_url": "https://app.lynkmarkets.com/public/products/4w9aANBbvM",
       "source_type": "web_public",
       "refresh_method": "GitHub Actions cron — automatico diario 02:00 UTC (.github/workflows/lynk-daily-refresh.yml)",
@@ -18,14 +18,29 @@
       "treat_as_market_data": true,
       "freshness_source": "json_file",
       "freshness_field": "refreshedAt",
-      "files": ["data/lynk_data.json", "data/lynk_nav_series.json"],
-      "feeds_tabs": ["Overview", "Performance"],
-      "feeds_metrics": ["NAV", "AUM", "YTD", "SI", "Annualized", "Volatility", "Sharpe"]
+      "files": [
+        "data/lynk_data.json",
+        "data/lynk_nav_series.json"
+      ],
+      "feeds_tabs": [
+        "Overview",
+        "Performance"
+      ],
+      "feeds_metrics": [
+        "NAV",
+        "AUM",
+        "YTD",
+        "SI",
+        "Annualized",
+        "Volatility",
+        "Sharpe"
+      ]
     },
     {
       "id": "bmk_6040",
       "name": "Benchmark 60/40 (ACWI+AGG)",
       "category": "Performance",
+      "automation": "auto",
       "source_url": "Yahoo Finance (ACWI ETF + AGG ETF, monthly rebalance)",
       "source_type": "api",
       "refresh_method": "scripts/bmk_refresher.py — Stooq daily cron 02:30 UTC (workflow extendido pendiente push por PAT scope)",
@@ -33,14 +48,23 @@
       "treat_as_market_data": true,
       "freshness_source": "json_file",
       "freshness_field": "refreshedAt",
-      "files": ["data/bmk_6040.json"],
-      "feeds_tabs": ["Overview", "Performance"],
-      "feeds_metrics": ["60/40 daily index", "Multi-period returns benchmark"]
+      "files": [
+        "data/bmk_6040.json"
+      ],
+      "feeds_tabs": [
+        "Overview",
+        "Performance"
+      ],
+      "feeds_metrics": [
+        "60/40 daily index",
+        "Multi-period returns benchmark"
+      ]
     },
     {
       "id": "stooq_etf_prices",
       "name": "Stooq ETF prices (live)",
       "category": "Prices",
+      "automation": "auto",
       "source_url": "https://stooq.com/q/l/",
       "source_type": "api_csv",
       "refresh_method": "Auto in dashboard.js (every page open) + cron diario 02:30 UTC para snapshot persistente",
@@ -48,189 +72,320 @@
       "treat_as_market_data": true,
       "freshness_source": "json_file",
       "freshness_field": "refreshedAt",
-      "files": ["data/live_prices.json"],
-      "feeds_tabs": ["Overview", "Currency", "Geography", "Performance"],
-      "feeds_metrics": ["CSPX, ILF, ARGT, GLD, IBIT, 4BRZ prices (6 de 10 tickers funcionan)"]
+      "files": [
+        "data/live_prices.json"
+      ],
+      "feeds_tabs": [
+        "Overview",
+        "Currency",
+        "Geography",
+        "Performance"
+      ],
+      "feeds_metrics": [
+        "CSPX, ILF, ARGT, GLD, IBIT, 4BRZ prices (6 de 10 tickers funcionan)"
+      ]
     },
     {
       "id": "pershing_positions",
       "name": "Pershing Positions",
       "category": "Holdings",
+      "automation": "manual",
       "source_url": "Lucas Excel — Positions_JXD101380.xlsx",
       "source_type": "manual_excel",
       "refresh_method": "scripts/pershing_parser.py <xlsx> — Lucas exporta semanalmente",
       "expected_frequency_days": 7,
       "freshness_source": "json_file",
       "freshness_field": "refreshed_at",
-      "files": ["data/positions_latest.json"],
-      "feeds_tabs": ["Overview", "Currency", "Geography", "Yield"],
-      "feeds_metrics": ["Holdings list", "Sleeve weights", "Total AUM"]
+      "files": [
+        "data/positions_latest.json"
+      ],
+      "feeds_tabs": [
+        "Overview",
+        "Currency",
+        "Geography",
+        "Yield"
+      ],
+      "feeds_metrics": [
+        "Holdings list",
+        "Sleeve weights",
+        "Total AUM"
+      ]
     },
     {
       "id": "pershing_transactions",
       "name": "Pershing Transactions (TWR REAL)",
       "category": "Performance",
+      "automation": "manual",
       "source_url": "Lucas Excel — Transactions_JXD101380 History.xlsx",
       "source_type": "manual_excel",
       "refresh_method": "scripts/portfolio_reconstructor.py + scripts/equity_returns_vs_acwi.py",
       "expected_frequency_days": 31,
       "freshness_source": "json_file",
       "freshness_field": "refreshedAt",
-      "files": ["data/equity_sleeve_real.json", "data/fi_sleeve_real.json", "data/equity_contributions_real.json"],
-      "feeds_tabs": ["Equity Race", "FI Race"],
-      "feeds_metrics": ["Equity Sleeve TWR REAL", "FI Sleeve TWR REAL", "Buy-and-hold price race per holding"]
+      "files": [
+        "data/equity_sleeve_real.json",
+        "data/fi_sleeve_real.json",
+        "data/equity_contributions_real.json"
+      ],
+      "feeds_tabs": [
+        "Equity Race",
+        "FI Race"
+      ],
+      "feeds_metrics": [
+        "Equity Sleeve TWR REAL",
+        "FI Sleeve TWR REAL",
+        "Buy-and-hold price race per holding"
+      ]
     },
     {
       "id": "race_charts",
       "name": "Race charts mensuales (Equity/FI/Alts)",
       "category": "Performance",
+      "automation": "manual",
       "source_url": "yfinance (ACWI, AGG, QAI) + baha monthly returns",
       "source_type": "api",
       "refresh_method": "scripts/equity_race.py + fi_race.py + alts_race.py (manual mensual al cierre)",
       "expected_frequency_days": 31,
       "freshness_source": "json_file",
       "freshness_field": "refreshedAt",
-      "files": ["data/equity_race.json", "data/fi_race.json", "data/alts_race.json"],
-      "feeds_tabs": ["Equity Race", "FI Race", "Alts Race"],
-      "feeds_metrics": ["Race chart base 100", "Multi-period returns", "Holdings contributions backtest"]
+      "files": [
+        "data/equity_race.json",
+        "data/fi_race.json",
+        "data/alts_race.json"
+      ],
+      "feeds_tabs": [
+        "Equity Race",
+        "FI Race",
+        "Alts Race"
+      ],
+      "feeds_metrics": [
+        "Race chart base 100",
+        "Multi-period returns",
+        "Holdings contributions backtest"
+      ]
     },
     {
       "id": "acwi_overlap",
       "name": "ACWI Top 10 Overlap (lookthrough)",
       "category": "Composition",
+      "automation": "manual",
       "source_url": "ACWI holdings CSV + per-fund top 10 holdings",
       "source_type": "computed",
       "refresh_method": "scripts/acwi_overlap.py (manual al cierre mensual)",
       "expected_frequency_days": 31,
       "freshness_source": "json_file",
       "freshness_field": "refreshedAt",
-      "files": ["data/acwi_overlap.json"],
-      "feeds_tabs": ["Equity Race"],
-      "feeds_metrics": ["BIG Equity vs ACWI top 10 weights"]
+      "files": [
+        "data/acwi_overlap.json"
+      ],
+      "feeds_tabs": [
+        "Equity Race"
+      ],
+      "feeds_metrics": [
+        "BIG Equity vs ACWI top 10 weights"
+      ]
     },
     {
       "id": "fi_metrics_per_fund",
       "name": "FI Metrics per fund (YTW/Duration/Maturity)",
       "category": "Fixed Income",
+      "automation": "manual",
       "source_url": "PIMCO website + Man GLG factsheet + Schroder + Tenac email",
       "source_type": "web_public",
       "refresh_method": "PIMCO: Chrome MCP trimestral (~15 días post-cierre Q). Otros: manual.",
       "expected_frequency_days": 90,
       "freshness_source": "funds_dir_oldest",
       "freshness_field": "as_of_factsheet",
-      "files": ["data/funds/PIMCO-LD.json", "data/funds/PIMCO-INC.json", "data/funds/PIMCO-EM.json", "data/funds/MANIG.json", "data/funds/SGCB.json", "data/funds/TGF.json"],
-      "feeds_tabs": ["FI Race", "Yield"],
-      "feeds_metrics": ["YTW per fund", "Effective Duration", "Effective Maturity", "Current Yield", "Rating"]
+      "files": [
+        "data/funds/PIMCO-LD.json",
+        "data/funds/PIMCO-INC.json",
+        "data/funds/PIMCO-EM.json",
+        "data/funds/MANIG.json",
+        "data/funds/SGCB.json",
+        "data/funds/TGF.json"
+      ],
+      "feeds_tabs": [
+        "FI Race",
+        "Yield"
+      ],
+      "feeds_metrics": [
+        "YTW per fund",
+        "Effective Duration",
+        "Effective Maturity",
+        "Current Yield",
+        "Rating"
+      ]
     },
     {
       "id": "baha_monthly_returns",
       "name": "baha.com monthly returns",
       "category": "Performance",
+      "automation": "manual",
       "source_url": "https://www.baha.com/instruments/<ISIN>",
       "source_type": "web_login",
       "refresh_method": "Chrome MCP (on-demand, mensual al cierre)",
       "expected_frequency_days": 31,
       "freshness_source": "manual_no_tracking",
-      "files": ["data/baha/<ISIN>.json"],
-      "feeds_tabs": ["Equity Race", "FI Race"],
-      "feeds_metrics": ["Per-fund monthly returns history (feed para race scripts)"]
+      "files": [
+        "data/baha/<ISIN>.json"
+      ],
+      "feeds_tabs": [
+        "Equity Race",
+        "FI Race"
+      ],
+      "feeds_metrics": [
+        "Per-fund monthly returns history (feed para race scripts)"
+      ]
     },
     {
       "id": "manual_ucits_nav",
       "name": "Manual UCITS NAVs (baha + factsheets)",
       "category": "Prices",
+      "automation": "manual",
       "source_url": "baha.com + factsheets",
       "source_type": "manual",
       "refresh_method": "Chrome MCP on-demand → live_prices.js MANUAL_NAV section",
       "expected_frequency_days": 7,
       "freshness_source": "live_prices_oldest",
       "freshness_field": "date",
-      "files": ["data/live_prices.js (MANUAL_NAV)"],
-      "feeds_tabs": ["Overview"],
-      "feeds_metrics": ["UCITS NAVs fallback cuando Stooq no disponible"]
+      "files": [
+        "data/live_prices.js (MANUAL_NAV)"
+      ],
+      "feeds_tabs": [
+        "Overview"
+      ],
+      "feeds_metrics": [
+        "UCITS NAVs fallback cuando Stooq no disponible"
+      ]
     },
     {
       "id": "manual_alts_navs",
       "name": "Manual NAVs Privates (Carlyle, Flex, etc.)",
       "category": "Holdings",
+      "automation": "manual",
       "source_url": "Email / contacto directo con managers",
       "source_type": "manual_email",
       "refresh_method": "Lucas pasa el NAV cuando lo recibe (quarterly mostly)",
       "expected_frequency_days": 90,
       "freshness_source": "manual_no_tracking",
-      "files": ["data/funds_metadata.js (BIG_POSITIONS values)"],
-      "feeds_tabs": ["Overview"],
-      "feeds_metrics": ["Carlyle, Flex-Lex, NB PE, BPCC, HLEND, GCRED, Tenac NAVs"]
+      "files": [
+        "data/funds_metadata.js (BIG_POSITIONS values)"
+      ],
+      "feeds_tabs": [
+        "Overview"
+      ],
+      "feeds_metrics": [
+        "Carlyle, Flex-Lex, NB PE, BPCC, HLEND, GCRED, Tenac NAVs"
+      ]
     },
     {
       "id": "currency_exposure_per_fund",
       "name": "Currency Exposure per fund",
       "category": "Composition",
+      "automation": "manual",
       "source_url": "Per-fund factsheets (FX exposure section)",
       "source_type": "web_login",
       "refresh_method": "Manual edit en funds_metadata.js — bumpear METADATA_LAST_REVIEW",
       "expected_frequency_days": 90,
       "freshness_source": "metadata_constant",
       "freshness_field": "METADATA_LAST_REVIEW",
-      "files": ["data/funds_metadata.js (CURRENCY_EXPOSURE dict)"],
-      "feeds_tabs": ["Currency"],
-      "feeds_metrics": ["FX exposure per fund (post-hedging)"]
+      "files": [
+        "data/funds_metadata.js (CURRENCY_EXPOSURE dict)"
+      ],
+      "feeds_tabs": [
+        "Currency"
+      ],
+      "feeds_metrics": [
+        "FX exposure per fund (post-hedging)"
+      ]
     },
     {
       "id": "country_exposure_per_fund",
       "name": "Country Exposure per fund",
       "category": "Composition",
+      "automation": "manual",
       "source_url": "Per-fund factsheets (country/region section)",
       "source_type": "web_public",
       "refresh_method": "Manual edit — FT.com Chrome MCP mensual",
       "expected_frequency_days": 90,
       "freshness_source": "metadata_constant",
       "freshness_field": "METADATA_LAST_REVIEW",
-      "files": ["data/funds_metadata.js (COUNTRY_EXPOSURE dict)"],
-      "feeds_tabs": ["Geography"],
-      "feeds_metrics": ["Country exposure per fund"]
+      "files": [
+        "data/funds_metadata.js (COUNTRY_EXPOSURE dict)"
+      ],
+      "feeds_tabs": [
+        "Geography"
+      ],
+      "feeds_metrics": [
+        "Country exposure per fund"
+      ]
     },
     {
       "id": "current_yield_per_fund",
       "name": "Current Yield per fund",
       "category": "Yield",
+      "automation": "manual",
       "source_url": "Per-fund factsheets",
       "source_type": "web_public",
       "refresh_method": "Manual edit — bumpear METADATA_LAST_REVIEW al actualizar",
       "expected_frequency_days": 90,
       "freshness_source": "metadata_constant",
       "freshness_field": "METADATA_LAST_REVIEW",
-      "files": ["data/funds_metadata.js (CURRENT_YIELD dict)"],
-      "feeds_tabs": ["Yield"],
-      "feeds_metrics": ["Distribution / Current yield per fund"]
+      "files": [
+        "data/funds_metadata.js (CURRENT_YIELD dict)"
+      ],
+      "feeds_tabs": [
+        "Yield"
+      ],
+      "feeds_metrics": [
+        "Distribution / Current yield per fund"
+      ]
     },
     {
       "id": "equity_breakdown",
       "name": "Equity Breakdown (style/sector/regional)",
       "category": "Equity Composition",
+      "automation": "manual",
       "source_url": "FT.com fund tearsheets",
       "source_type": "web_public",
       "refresh_method": "Chrome MCP mensual — escribe data/equity_breakdown_latest.json",
       "expected_frequency_days": 31,
       "freshness_source": "json_file",
       "freshness_field": "asOf",
-      "files": ["data/equity_breakdown_latest.json"],
-      "feeds_tabs": ["Equity Race"],
-      "feeds_metrics": ["Style box BIG vs MSCI World", "Sectorial BIG vs ACWI", "Regional BIG vs ACWI"]
+      "files": [
+        "data/equity_breakdown_latest.json"
+      ],
+      "feeds_tabs": [
+        "Equity Race"
+      ],
+      "feeds_metrics": [
+        "Style box BIG vs MSCI World",
+        "Sectorial BIG vs ACWI",
+        "Regional BIG vs ACWI"
+      ]
     },
     {
       "id": "fi_breakdown",
       "name": "FI Breakdown (credit quality, sub-asset class)",
       "category": "Fixed Income",
+      "automation": "manual",
       "source_url": "PIMCO/Man/Schroder factsheets",
       "source_type": "web_public",
       "refresh_method": "Chrome MCP per-fund × pesos BIG (rebuild pendiente desde primary)",
       "expected_frequency_days": 31,
       "freshness_source": "json_file",
       "freshness_field": "asOf",
-      "files": ["data/fi_breakdown_latest.json"],
-      "feeds_tabs": ["FI Race"],
-      "feeds_metrics": ["Credit quality", "Sub-asset class", "FI regional"],
+      "files": [
+        "data/fi_breakdown_latest.json"
+      ],
+      "feeds_tabs": [
+        "FI Race"
+      ],
+      "feeds_metrics": [
+        "Credit quality",
+        "Sub-asset class",
+        "FI regional"
+      ],
       "deprecated": true,
       "deprecated_reason": "Maximus-derived. Rebuild from primary sources pendiente."
     },
@@ -238,14 +393,19 @@
       "id": "monthly_snapshots",
       "name": "Monthly Snapshots (history)",
       "category": "Archive",
+      "automation": "auto",
       "source_url": "scripts/take_snapshot.py",
       "source_type": "computed",
       "refresh_method": "GitHub Actions workflow día 15 de cada mes (local, pendiente push)",
       "expected_frequency_days": 31,
       "freshness_source": "snapshots_dir_latest",
-      "files": ["data/snapshots/<YYYY-MM>/"],
+      "files": [
+        "data/snapshots/<YYYY-MM>/"
+      ],
       "feeds_tabs": [],
-      "feeds_metrics": ["Análisis retrospectivo: cómo estaba el portfolio en mes X"]
+      "feeds_metrics": [
+        "Análisis retrospectivo: cómo estaba el portfolio en mes X"
+      ]
     }
   ]
 }
