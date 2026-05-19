@@ -1002,6 +1002,86 @@ async function renderPerformance() {
 }
 
 // ==============================================================
+// MONTHLY BREAKDOWN — Equity Sleeve mes a mes con notas explicativas
+// ==============================================================
+// Notas mensuales — Lucas las edita aca cuando quiere. Key = "YYYY-MM" del fin
+// de mes (mismo formato que twr_series). Generadas inicialmente por agent
+// research el 2026-05-19. Bumpear cuando haya nuevo mes cerrado.
+const EQUITY_MONTHLY_NOTES = {
+    "2025-08": "Alpha por rotacion value/small-cap post-Jackson Hole (Powell senalo recortes): BRK.B y MFSCV value tilt + NBGMT megatrends superaron al S&P large-cap (+1.9%) que quedo rezagado vs small caps (+7%).",
+    "2025-09": "Underperform por regreso del rally AI/Mag7 (S&P +8.1% Q3 liderado por tech): BRK.B siguio arrastrando post-anuncio retiro Buffett (mayo) y la sub-ponderacion en hyperscalers vs ACWI costo caro.",
+    "2025-10": "Peor mes relativo: tensiones US-China generaron rotacion, pero non-US y EM aguantaron mejor que el sleeve. BRK.B y [posiblemente NBRE] cedieron mientras ACWI capturo resiliencia internacional (+30% YTD).",
+    "2025-11": "Alpha por entrada de Virtus US Small Cap justo cuando Russell 2000 desperto (Fed senalo equilibrio); ACWI plano por valuaciones tech estiradas y rotacion a defensivos, value tilt de BIG capturo el shift.",
+    "2025-12": "Santa rally concentradisimo en AI hyperscalers (Nvidia +37% YTD, top 30 AI = 44% S&P cap): la sub-ponderacion estructural en Mag7 vs CSPX/ACWI le costo al sleeve el cierre de ano.",
+};
+
+function renderEquityMonthlyBreakdown(twrSeries, acwiSeries) {
+    const tbody = document.getElementById('er-monthly-body');
+    if (!tbody || !twrSeries || twrSeries.length < 2) return;
+
+    // Alinear ACWI por fecha (mismo approach que computeMultiPeriodReturns)
+    const acwiByDate = Object.fromEntries(acwiSeries.map(p => [p.date, p.index]));
+
+    // Calcular return mensual: (index[i] / index[i-1] - 1) * 100
+    // El twr_series ya tiene el campo `twr` (mensual ajustado por flujos) pero
+    // recalculamos para consistencia y para el ACWI (que no tiene `twr`).
+    const rows = [];
+    for (let i = 1; i < twrSeries.length; i++) {
+        const prev = twrSeries[i - 1];
+        const curr = twrSeries[i];
+        // Solo mostrar puntos fin de mes (skip el today_date intra-mes)
+        const isMonthEnd = curr.date.endsWith('-31') || curr.date.endsWith('-30')
+            || curr.date.endsWith('-29') || curr.date.endsWith('-28');
+        if (!isMonthEnd) continue;
+
+        const bigRet = (curr.index / prev.index - 1) * 100;
+        const acwiCurr = acwiByDate[curr.date];
+        const acwiPrev = acwiByDate[prev.date];
+        if (acwiCurr == null || acwiPrev == null) continue;
+        const acwiRet = (acwiCurr / acwiPrev - 1) * 100;
+        const alpha = bigRet - acwiRet;
+
+        // Key para la nota: YYYY-MM del mes corriente
+        const ym = curr.date.slice(0, 7);
+        const note = EQUITY_MONTHLY_NOTES[ym] || '<span style="color:#6B88A8;font-style:italic;">— sin nota —</span>';
+
+        rows.push({ date: curr.date, ym, bigRet, acwiRet, alpha, note });
+    }
+
+    if (rows.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#6B88A8;">No hay meses fin-de-mes en la serie.</td></tr>';
+        return;
+    }
+
+    // Helpers de formato
+    const monthLabel = (dateStr) => {
+        const d = new Date(dateStr);
+        const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+        return `${months[d.getMonth()]}-${d.getFullYear()}`;
+    };
+    const fmtPct = (v) => {
+        const sign = v >= 0 ? '+' : '';
+        const color = v >= 0 ? '#81C784' : '#EF5350';
+        return `<span style="color:${color};font-weight:600;">${sign}${v.toFixed(2)}%</span>`;
+    };
+    const fmtAlpha = (v) => {
+        const sign = v >= 0 ? '+' : '';
+        const color = v >= 0 ? '#81C784' : '#EF5350';
+        return `<strong style="color:${color};">${sign}${v.toFixed(2)}pp</strong>`;
+    };
+
+    tbody.innerHTML = rows.map(r => `
+        <tr>
+            <td class="left"><strong>${monthLabel(r.date)}</strong></td>
+            <td>${fmtPct(r.bigRet)}</td>
+            <td>${fmtPct(r.acwiRet)}</td>
+            <td>${fmtAlpha(r.alpha)}</td>
+            <td class="left" style="font-size:11px;color:#90CAF9;max-width:500px;line-height:1.4;">${r.note}</td>
+        </tr>
+    `).join('');
+}
+
+// ==============================================================
 // EQUITY RACE TAB — Uses REAL TWR data from Pershing transaction history
 // ==============================================================
 async function renderEquityRace() {
@@ -1169,8 +1249,13 @@ async function renderEquityRace() {
         realPeriods = computeMultiPeriodReturns(
             realData.twr_series,
             realData.acwi_index_series,
-            { benchKey: 'acwi', toleranceDays: 7 }
+            { benchKey: 'acwi', toleranceDays: 31 }  // serie monthly
         );
+    }
+
+    // Render Monthly Breakdown table (mes a mes con notas)
+    if (realData && realData.twr_series && realData.acwi_index_series) {
+        renderEquityMonthlyBreakdown(realData.twr_series, realData.acwi_index_series);
     }
 
     const R = realPeriods || {
