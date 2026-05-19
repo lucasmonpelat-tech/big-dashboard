@@ -192,6 +192,10 @@ def main():
             continue
         try:
             d = json.loads(fpath.read_text(encoding="utf-8"))
+            # Skip fi_metrics validation para fondos pendientes de factsheet
+            # (posiciones piloto recien abiertas). Marcador: as_of_factsheet == null.
+            if d.get("as_of_factsheet") is None:
+                continue
             fm = d.get("fi_metrics", {})
             for required in ["ytw", "duration", "maturity"]:
                 if fm.get(required) is None:

@@ -226,19 +226,32 @@ def recalc_percentages(positions):
     return positions, total
 
 
-def emit_js_array(positions, as_of=None):
+def emit_js_array(positions, as_of=None, with_sleeve_comments=False):
     """Emit BIG_POSITIONS JavaScript literal + POSITIONS_AS_OF marker."""
     sleeve_order = ["Equity", "Alternatives", "Fixed Income", "Cash"]
     positions.sort(key=lambda p: (sleeve_order.index(p["sleeve"]), -p["value"]))
+    SLEEVE_COMMENTS = {
+        "Equity": "    // ----- EQUITY -----",
+        "Alternatives": "    // ----- ALTERNATIVES (mix of Pershing + external) -----",
+        "Fixed Income": "    // ----- FIXED INCOME -----",
+        "Cash": "    // ----- CASH -----",
+    }
     lines = ["const BIG_POSITIONS = ["]
+    last_sleeve = None
     for p in positions:
+        if with_sleeve_comments and p["sleeve"] != last_sleeve:
+            if last_sleeve is not None:
+                lines.append("")
+            lines.append(SLEEVE_COMMENTS.get(p["sleeve"], f"    // ----- {p['sleeve'].upper()} -----"))
+            last_sleeve = p["sleeve"]
         ter_inst = "null" if p["ter_inst"] is None else f"{p['ter_inst']:.2f}"
         ter_a = "null" if p["ter_a"] is None else f"{p['ter_a']:.2f}"
+        status = ', status: "IN_TRANSIT"' if p.get("status") == "IN_TRANSIT" else ""
         lines.append(
             f'    {{ isin: "{p["isin"]}", ticker: "{p["ticker"]}", '
             f'name: "{p["name"]}", sleeve: "{p["sleeve"]}", '
             f'value: {p["value"]:.2f}, pct: {p["pct"]:.2f}, '
-            f'terInst: {ter_inst}, terA: {ter_a} }},'
+            f'terInst: {ter_inst}, terA: {ter_a}{status} }},'
         )
     lines.append("];")
     if as_of:
@@ -247,6 +260,54 @@ def emit_js_array(positions, as_of=None):
         lines.append('// Bumpear POSITIONS_AS_OF al pegar este array en funds_metadata.js')
         lines.append(f'const POSITIONS_AS_OF = "{as_of}";')
     return "\n".join(lines)
+
+
+def write_to_funds_metadata(positions, as_of_iso, pershing_total, ext_total, total_aum):
+    """Sobrescribe BIG_POSITIONS + POSITIONS_AS_OF + header comment en funds_metadata.js.
+
+    Esto permite refrescar TODAS las tabs del dashboard (Currency, Geography, Yield,
+    Overview-Alloc) corriendo solo el parser — sin copy-paste manual. Single source
+    of truth: positions_latest.json (JSON) + funds_metadata.js (BIG_POSITIONS) quedan
+    siempre sincronizados.
+    """
+    import re
+    fm_path = Path(__file__).parent.parent / "data" / "funds_metadata.js"
+    txt = fm_path.read_text(encoding="utf-8")
+
+    # 1. Generar nuevo bloque BIG_POSITIONS con comentarios por sleeve
+    new_block = emit_js_array(list(positions), as_of=None, with_sleeve_comments=True)
+
+    # Quitar la coma final del ultimo item para mantener JSON-like clean
+    # (JS la tolera, pero queda mas prolijo)
+    new_block = re.sub(r',(\s*\];)', r'\1', new_block, count=1)
+
+    # 2. Reemplazar el bloque viejo (regex multiline)
+    pattern_block = re.compile(r'const BIG_POSITIONS = \[.*?\];', re.DOTALL)
+    if not pattern_block.search(txt):
+        raise ValueError("BIG_POSITIONS block not found in funds_metadata.js")
+    txt = pattern_block.sub(new_block, txt, count=1)
+
+    # 3. Reemplazar POSITIONS_AS_OF
+    txt = re.sub(
+        r'const POSITIONS_AS_OF = "[^"]*"',
+        f'const POSITIONS_AS_OF = "{as_of_iso}"',
+        txt, count=1,
+    )
+
+    # 4. Actualizar el comment header (// POSITIONS — Pershing export ... + // Total AUM: ...)
+    header_pat = re.compile(
+        r'(// POSITIONS — Pershing export )[^\n]+(\n// Total AUM: )[^\n]+',
+        re.MULTILINE,
+    )
+    new_header_repl = (
+        rf'\g<1>{as_of_iso}'
+        rf'\g<2>${total_aum:,.2f} '
+        rf'(Pershing ${pershing_total/1e6:.2f}M + External Alts ${ext_total/1e6:.2f}M)'
+    )
+    txt, n_header = header_pat.subn(new_header_repl, txt, count=1)
+
+    fm_path.write_text(txt, encoding="utf-8")
+    return fm_path
 
 
 def main():
@@ -279,8 +340,10 @@ def main():
     except Exception:
         as_of_iso = date.today().isoformat()
 
-    js_array = emit_js_array(all_positions, as_of=as_of_iso)
+    js_array = emit_js_array(list(all_positions), as_of=as_of_iso)
     print(js_array)
+
+    ext_total = sum(e["value"] for e in ext)
 
     # Save JSON traceability
     out = Path(__file__).parent.parent / "data" / "positions_latest.json"
@@ -289,11 +352,24 @@ def main():
             "as_of": data["as_of"],
             "refreshed_at": datetime.now().isoformat(),
             "pershing_total": data["pershing_total"],
-            "external_alts_total": sum(e["value"] for e in ext),
+            "external_alts_total": ext_total,
             "total_aum": total_aum,
             "positions": all_positions,
         }, f, indent=2)
     print(f"\nJSON written to: {out}")
+
+    # Sobrescribir BIG_POSITIONS + POSITIONS_AS_OF + header en funds_metadata.js
+    # Esto sincroniza las 4 tabs (Currency/Geography/Yield/Overview-Alloc) en una
+    # sola pasada — no mas copy-paste manual.
+    try:
+        fm_path = write_to_funds_metadata(
+            all_positions, as_of_iso,
+            data["pershing_total"], ext_total, total_aum,
+        )
+        print(f"funds_metadata.js updated: {fm_path}")
+    except Exception as e:
+        print(f"WARNING: no se pudo actualizar funds_metadata.js: {e}")
+        print("  -> copiar/pegar el bloque BIG_POSITIONS manualmente.")
 
 
 if __name__ == "__main__":
