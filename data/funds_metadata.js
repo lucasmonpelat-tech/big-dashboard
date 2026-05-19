@@ -197,8 +197,11 @@ const ALTS_LIQUIDITY = {
 // const FI_METRICS = {} — moved to data/funds/*.json
 
 // ============================================================
-// PORTFOLIO PERFORMANCE (Maximus Mar-2026)
+// PORTFOLIO PERFORMANCE (Maximus backtest — Risk & Capture Metrics)
+// Bumpear MAXIMUS_AS_OF cuando rehagas el factsheet mensual.
+// SLA: 90 dias. Despues de ese plazo el badge se pone rojo.
 // ============================================================
+const MAXIMUS_AS_OF = "2026-03-31";  // Ultima actualizacion del backtest Maximus
 const PORT_PERF_DETAIL = {
     big: {
         m1: -3.32, m3: -1.20, m6: -0.88, ytd: -1.20, y1: 6.87, y3: 10.57, y5: 6.60,

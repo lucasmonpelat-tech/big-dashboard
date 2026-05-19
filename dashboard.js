@@ -857,6 +857,17 @@ async function renderPerformance() {
         </tr>
     `;
 
+    // Disclaimer: Risk & Capture Metrics vienen del backtest Maximus.
+    // Bumpear MAXIMUS_AS_OF en funds_metadata.js al rehacer el factsheet mensual.
+    const maximusDate = typeof MAXIMUS_AS_OF !== 'undefined' ? MAXIMUS_AS_OF : null;
+    const disclaimerEl = document.getElementById('perf-risk-disclaimer');
+    if (disclaimerEl && maximusDate) {
+        const badge = freshBadge('Maximus backtest', maximusDate, 90);
+        disclaimerEl.innerHTML =
+            `Fuente: <strong>Maximus backtest</strong> (track record 5Y del strategy replicado). ` +
+            `Se actualiza al rehacer el factsheet mensual. ` + badge;
+    }
+
     document.getElementById('perf-risk-grid').innerHTML = `
         <div class="summary-item">
             <div class="s-lbl">Volatility 3Y</div>
