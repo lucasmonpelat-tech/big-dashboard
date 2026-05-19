@@ -1013,6 +1013,10 @@ const EQUITY_MONTHLY_NOTES = {
     "2025-10": "Peor mes. Tensiones US-China, ACWI capturo resiliencia internacional (+30% YTD), BIG no.",
     "2025-11": "Alpha por entrada de Virtus US Small Cap justo cuando Russell 2000 desperto. Rotacion value capturada.",
     "2025-12": "Santa rally en AI hyperscalers (Nvidia +37% YTD). Sub-pond Mag7 vs CSPX/ACWI costo el cierre de ano.",
+    "2026-01": "Drag por entrada tardia a LatAm (4BRZ+ARGT 5.5%) y peso US large-cap; rotacion a value/EM ya en marcha sin BIG capturarla.",
+    "2026-02": "Alpha leve: LatAm rally historico (Arg +27%, ILF flows record) capturado parcial via 4BRZ/ARGT/ILF/LGLI; value tilt ayudo.",
+    "2026-03": "Alpha defensivo en selloff -6%: value tilt (NBGMT+MFSCV 33%) y BRK.B residual cushionearon vs equal-weight.",
+    "2026-04": "Drag fuerte: rally tech/AI +9% lider por semis; BIG sin BRK.B (Q1 sale), pesado en value/LatAm sin growth puro.",
 };
 
 function renderEquityMonthlyBreakdown(twrSeries, acwiSeries) {
