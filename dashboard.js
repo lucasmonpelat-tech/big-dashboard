@@ -92,6 +92,93 @@ function marketFreshnessLevel(isoDate) {
     return { icon: '🔴', color: '#EF5350' };
 }
 
+/**
+ * UNIFIED MULTI-PERIOD RETURNS — fecha-based, NO asume 1 punto = 1 mes.
+ *
+ * Calcula retornos 1M/3M/6M/YTD/SI/ANN para un sleeve + benchmark alineados
+ * por fecha. Es la fuente UNICA de verdad para todas las tablas Multi-Period
+ * (Performance, Equity Race, FI Race, Alts Race). Previene el bug clasico de
+ * "YTD agarra un anchor random" que paso el 18-may con ACWI 5.75% vs 9.09%.
+ *
+ * @param {Array<{date,index}>} sleeveSeries
+ * @param {Array<{date,index}>} benchSeries
+ * @param {Object} options
+ *   - toleranceDays: ventana para buscar punto cercano al anchor target (default 7)
+ *   - periods: subset de ['1M','3M','6M','YTD','SI','ANN'] (default todos)
+ *   - benchKey: nombre del campo benchmark en el output (default 'bench')
+ * @returns {Object} ej. { '1M': {sleeve, bench, alpha}, ... }
+ *   alpha = sleeve - bench (en puntos porcentuales)
+ */
+function computeMultiPeriodReturns(sleeveSeries, benchSeries, options = {}) {
+    // toleranceDays default 31: funciona para series monthly (Equity/FI Sleeve TWR)
+    // y daily (Lynk NAV). Para periodos cortos (1M/3M) en series monthly el algoritmo
+    // agarra el month-end mas cercano al target, no genera "ruido" porque siempre
+    // elige el minimo de |fecha - target|.
+    const tolerance = (options.toleranceDays || 31) * 86400000;
+    const periods = options.periods || ['1M', '3M', '6M', 'YTD', 'SI', 'ANN'];
+    const benchKey = options.benchKey || 'bench';
+    const result = {};
+    if (!sleeveSeries || !sleeveSeries.length || !benchSeries || !benchSeries.length) {
+        for (const p of periods) result[p] = { sleeve: null, [benchKey]: null, alpha: null };
+        return result;
+    }
+    const sortedS = [...sleeveSeries].sort((a, b) => a.date.localeCompare(b.date));
+    const sortedB = [...benchSeries].sort((a, b) => a.date.localeCompare(b.date));
+    const lastS = sortedS[sortedS.length - 1];
+    const lastB = sortedB[sortedB.length - 1];
+    const lastDate = new Date(lastS.date);
+    const round2 = (x) => Math.round(x * 100) / 100;
+    function findClosest(series, targetISO) {
+        const target = new Date(targetISO).getTime();
+        let best = null, bestDiff = Infinity;
+        for (const p of series) {
+            const diff = Math.abs(new Date(p.date).getTime() - target);
+            if (diff < bestDiff && diff <= tolerance) {
+                bestDiff = diff;
+                best = p;
+            }
+        }
+        return best;
+    }
+    function emptyRow() { return { sleeve: null, [benchKey]: null, alpha: null }; }
+    for (const label of periods) {
+        let row = emptyRow();
+        if (label === 'SI') {
+            const sleeveR = (lastS.index / sortedS[0].index - 1) * 100;
+            const benchR = (lastB.index / sortedB[0].index - 1) * 100;
+            row = { sleeve: round2(sleeveR), [benchKey]: round2(benchR), alpha: round2(sleeveR - benchR) };
+        } else if (label === 'ANN') {
+            const days = (lastDate - new Date(sortedS[0].date)) / 86400000;
+            const years = days / 365.25;
+            if (years > 0) {
+                const sleeveAnn = (Math.pow(lastS.index / sortedS[0].index, 1 / years) - 1) * 100;
+                const benchAnn  = (Math.pow(lastB.index / sortedB[0].index, 1 / years) - 1) * 100;
+                row = { sleeve: round2(sleeveAnn), [benchKey]: round2(benchAnn), alpha: round2(sleeveAnn - benchAnn) };
+            }
+        } else {
+            // 1M / 3M / 6M / YTD: por fecha objetivo
+            let targetISO = null;
+            if (label === 'YTD') {
+                targetISO = `${lastDate.getFullYear() - 1}-12-31`;
+            } else {
+                const monthsBack = { '1M': 1, '3M': 3, '6M': 6 }[label];
+                const d = new Date(lastDate);
+                d.setMonth(d.getMonth() - monthsBack);
+                targetISO = d.toISOString().slice(0, 10);
+            }
+            const sStart = findClosest(sortedS, targetISO);
+            const bStart = findClosest(sortedB, targetISO);
+            if (sStart && bStart) {
+                const sleeveR = (lastS.index / sStart.index - 1) * 100;
+                const benchR = (lastB.index / bStart.index - 1) * 100;
+                row = { sleeve: round2(sleeveR), [benchKey]: round2(benchR), alpha: round2(sleeveR - benchR) };
+            }
+        }
+        result[label] = row;
+    }
+    return result;
+}
+
 // Un badge: "🟢 NAV Lynk hoy". label=nombre visible, isoDate=fecha interna, expectedDays=SLA.
 // options.deprecated=true → badge rojo con "DEPRECATED"
 // options.market=true → usa marketFreshnessLevel (skip weekends)
@@ -1073,64 +1160,17 @@ async function renderEquityRace() {
         const sign = v >= 0 ? '+' : '';
         return `<strong style="color:${color};">${sign}${v.toFixed(2)}pp</strong>`;
     };
-    // Compute real multi-period returns from TWR series
+    // Compute real multi-period returns from TWR series usando la funcion unificada
+    // computeMultiPeriodReturns (fecha-based, YTD anchor = ${y-1}-12-31, tolerance 7d).
+    // Reemplaza la implementacion vieja que usaba indices (rompia con puntos intra-mes
+    // y el YTD agarraba un anchor random, generando el bug ACWI 5.75% vs 9.09%).
     let realPeriods = null;
     if (realData && realData.twr_series && realData.acwi_index_series && realData.acwi_index_series.length > 0) {
-        const s = realData.twr_series;
-        const a = realData.acwi_index_series;
-        // ACWI puede tener menos puntos que twr_series (ej: ultimo punto de twr es
-        // el dia de hoy pero Yahoo no tiene precio ACWI fresh para hoy). Alineamos
-        // por fecha — para cada twr point, buscamos el ACWI mismo dia o el ultimo previo.
-        const acwiByDate = Object.fromEntries(a.map(p => [p.date, p.index]));
-        const acwiDates = a.map(p => p.date);
-        const acwiAt = (date) => {
-            if (acwiByDate[date] != null) return acwiByDate[date];
-            // fallback: ultimo ACWI <= date
-            let best = null;
-            for (const d of acwiDates) {
-                if (d <= date) best = acwiByDate[d];
-                else break;
-            }
-            return best;
-        };
-        const n = s.length;
-        const getIdx = offset => n - 1 - offset >= 0 ? n - 1 - offset : null;
-        const latest_s = s[n-1].index;
-        const latest_a = acwiAt(s[n-1].date);
-        if (latest_a != null) {
-            const period = (back) => {
-                const i = getIdx(back);
-                if (i === null) return {sleeve: null, acwi: null, alpha: null};
-                const a_i = acwiAt(s[i].date);
-                if (a_i == null) return {sleeve: null, acwi: null, alpha: null};
-                const ss = (latest_s / s[i].index - 1) * 100;
-                const aa = (latest_a / a_i - 1) * 100;
-                return {sleeve: Math.round(ss*100)/100, acwi: Math.round(aa*100)/100, alpha: Math.round((ss-aa)*100)/100};
-            };
-            // Find YTD (first month of current year)
-            const latestDate = new Date(s[n-1].date);
-            const ytdIdx = s.findIndex(p => new Date(p.date).getFullYear() === latestDate.getFullYear()) - 1;
-            const ytd_a_i = ytdIdx >= 0 ? acwiAt(s[ytdIdx].date) : null;
-            const ytd = (ytdIdx >= 0 && ytd_a_i != null) ? {
-                sleeve: Math.round((latest_s / s[ytdIdx].index - 1) * 10000) / 100,
-                acwi: Math.round((latest_a / ytd_a_i - 1) * 10000) / 100,
-            } : {sleeve: null, acwi: null};
-            ytd.alpha = (ytd.sleeve !== null && ytd.acwi !== null) ? Math.round((ytd.sleeve - ytd.acwi)*100)/100 : null;
-            // Since inception
-            const si = {sleeve: Math.round((latest_s - 100)*100)/100, acwi: Math.round((latest_a - 100)*100)/100};
-            si.alpha = Math.round((si.sleeve - si.acwi)*100)/100;
-            // Annualized
-            const months = n - 1;
-            const ann_s = months > 0 ? Math.round(((Math.pow(latest_s/100, 12/months) - 1) * 10000))/100 : null;
-            const ann_a = months > 0 ? Math.round(((Math.pow(latest_a/100, 12/months) - 1) * 10000))/100 : null;
-            const ann_alpha = (ann_s !== null && ann_a !== null) ? Math.round((ann_s - ann_a)*100)/100 : null;
-
-            realPeriods = {
-                '1M': period(1), '3M': period(3), '6M': period(6),
-                'YTD': ytd, 'SI': si,
-                'ANN': {sleeve: ann_s, acwi: ann_a, alpha: ann_alpha}
-            };
-        }
+        realPeriods = computeMultiPeriodReturns(
+            realData.twr_series,
+            realData.acwi_index_series,
+            { benchKey: 'acwi', toleranceDays: 7 }
+        );
     }
 
     const R = realPeriods || {
