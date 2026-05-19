@@ -1008,11 +1008,11 @@ async function renderPerformance() {
 // de mes (mismo formato que twr_series). Generadas inicialmente por agent
 // research el 2026-05-19. Bumpear cuando haya nuevo mes cerrado.
 const EQUITY_MONTHLY_NOTES = {
-    "2025-08": "Alpha por rotacion value/small-cap post-Jackson Hole (Powell senalo recortes): BRK.B y MFSCV value tilt + NBGMT megatrends superaron al S&P large-cap (+1.9%) que quedo rezagado vs small caps (+7%).",
-    "2025-09": "Underperform por regreso del rally AI/Mag7 (S&P +8.1% Q3 liderado por tech): BRK.B siguio arrastrando post-anuncio retiro Buffett (mayo) y la sub-ponderacion en hyperscalers vs ACWI costo caro.",
-    "2025-10": "Peor mes relativo: tensiones US-China generaron rotacion, pero non-US y EM aguantaron mejor que el sleeve. BRK.B y [posiblemente NBRE] cedieron mientras ACWI capturo resiliencia internacional (+30% YTD).",
-    "2025-11": "Alpha por entrada de Virtus US Small Cap justo cuando Russell 2000 desperto (Fed senalo equilibrio); ACWI plano por valuaciones tech estiradas y rotacion a defensivos, value tilt de BIG capturo el shift.",
-    "2025-12": "Santa rally concentradisimo en AI hyperscalers (Nvidia +37% YTD, top 30 AI = 44% S&P cap): la sub-ponderacion estructural en Mag7 vs CSPX/ACWI le costo al sleeve el cierre de ano.",
+    "2025-08": "Rotacion value/small-cap post-Jackson Hole. BRK.B + MFSCV value tilt + NBGMT le ganaron al S&P large-cap.",
+    "2025-09": "Rally AI/Mag7 (S&P +8.1% Q3). BRK.B arrastro post-retiro Buffett y la sub-pond en hyperscalers costo caro.",
+    "2025-10": "Peor mes. Tensiones US-China, ACWI capturo resiliencia internacional (+30% YTD), BIG no.",
+    "2025-11": "Alpha por entrada de Virtus US Small Cap justo cuando Russell 2000 desperto. Rotacion value capturada.",
+    "2025-12": "Santa rally en AI hyperscalers (Nvidia +37% YTD). Sub-pond Mag7 vs CSPX/ACWI costo el cierre de ano.",
 };
 
 function renderEquityMonthlyBreakdown(twrSeries, acwiSeries) {
@@ -1076,7 +1076,7 @@ function renderEquityMonthlyBreakdown(twrSeries, acwiSeries) {
             <td>${fmtPct(r.bigRet)}</td>
             <td>${fmtPct(r.acwiRet)}</td>
             <td>${fmtAlpha(r.alpha)}</td>
-            <td class="left" style="font-size:11px;color:#90CAF9;max-width:500px;line-height:1.4;">${r.note}</td>
+            <td class="left" style="font-size:12px;color:#E8F4FF;line-height:1.5;">${r.note}</td>
         </tr>
     `).join('');
 }
