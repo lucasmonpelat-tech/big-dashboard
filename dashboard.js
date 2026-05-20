@@ -2201,12 +2201,22 @@ async function renderAltsRace() {
         'crypto': '₿ Crypto',
         'commodity': '🥇 Commodity',
     };
-    const sorted = [...holdings].sort((a, b) => (b.contribution_pct || -999) - (a.contribution_pct || -999));
+    // Source + fecha de valuacion (transparencia del lag de privates)
+    const srcDate = (h) => {
+        const vd = h.valuation_date || '';
+        let label, color;
+        if (vd === 'live') { label = 'live (al 18-may)'; color = '#81C784'; }
+        else if (vd) { label = `val ${vd}`; color = (vd >= '2026-04') ? '#81C784' : '#FFA726'; }
+        else { label = ''; color = '#90CAF9'; }
+        return `<span style="color:${color};font-weight:600;">${label}</span>`
+             + `<br><span style="font-size:9px;color:#6B88A8;">${h.source || ''}</span>`;
+    };
+    const sorted = [...holdings].sort((a, b) => (b.ytd_contribution_pct || -999) - (a.ytd_contribution_pct || -999));
     document.getElementById('ar-holdings-body').innerHTML = sorted.map(h => `
         <tr>
             <td class="left"><strong>${h.name}</strong> <span style="font-size:10px;color:#90CAF9;">(${h.ticker})</span></td>
             <td class="left">${subClassLabel[h.sub_class] || h.sub_class}</td>
-            <td class="left" style="font-size:10px;color:#90CAF9;">${h.source}</td>
+            <td class="left" style="font-size:10px;">${srcDate(h)}</td>
             <td>$${(h.value_usd / 1000).toFixed(0)}K</td>
             <td>${h.weight_pct.toFixed(1)}%</td>
             <td>${fmtRet(h.ytd_return_pct)}</td>
@@ -2453,12 +2463,25 @@ function renderAltsHoldingsBreakdown(altsData) {
         return `<strong style="color:${color};">${sign}${v.toFixed(2)}pp</strong>`;
     };
     const fmtMoney = (v) => '$' + (v >= 0 ? '' : '−') + Math.abs(v / 1e6).toFixed(2) + 'M';
-    const fmtSource = (s) => {
-        if (!s) return '—';
-        if (s.toLowerCase().includes('yahoo')) return '<span style="color:#81C784;">Yahoo (real)</span>';
-        if (s.toLowerCase().includes('proxy')) return `<span style="color:#FFA726;">⚠️ ${s}</span>`;
-        if (s.toLowerCase().includes('manager')) return `<span style="color:#FFA726;">Manager (TBD)</span>`;
-        return s;
+    // Fuente + fecha de valuacion. Verde = dato live/real fresco, naranja = NAV
+    // con lag (privates trimestrales). Muestra la fecha de valuacion real.
+    const fmtSourceDate = (h) => {
+        const src = h.source || '';
+        const vd = h.valuation_date || '';
+        let dateLabel, color;
+        if (vd === 'live') {
+            dateLabel = 'live (al 18-may)';
+            color = '#81C784';  // verde — dato fresco diario
+        } else if (vd) {
+            dateLabel = `val ${vd}`;
+            // Si la valuacion es vieja (no es del mes corriente) -> naranja
+            color = (vd >= '2026-04') ? '#81C784' : '#FFA726';
+        } else {
+            dateLabel = '';
+            color = '#90CAF9';
+        }
+        return `<span style="color:${color};font-weight:600;">${dateLabel}</span>`
+             + `<br><span style="font-size:10px;color:#6B88A8;">${src}</span>`;
     };
 
     tbody.innerHTML = sorted.map(h => `
@@ -2470,7 +2493,7 @@ function renderAltsHoldingsBreakdown(altsData) {
             <td>${h.value_usd != null ? fmtMoney(h.value_usd) : '—'}</td>
             <td>${fmtPct(h.ytd_return_pct)}</td>
             <td>${fmtContrib(h.ytd_contribution_pct)}</td>
-            <td class="left" style="font-size:11px;">${fmtSource(h.source)}</td>
+            <td class="left" style="font-size:11px;">${fmtSourceDate(h)}</td>
         </tr>
     `).join('');
 

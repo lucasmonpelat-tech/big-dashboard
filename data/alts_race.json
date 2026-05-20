@@ -32,7 +32,7 @@
         "alpha": -5.67
       },
       "YTD": {
-        "sleeve": -1.3,
+        "sleeve": 1.69,
         "bmk6040": 5.38,
         "alpha": -6.68
       },
@@ -148,11 +148,12 @@
       "value_usd": 2722180,
       "weight_pct": 35.45,
       "si_return_pct": -2.79,
-      "ytd_return_pct": -4.96,
+      "ytd_return_pct": 3.33,
       "contribution_pct": -0.99,
-      "ytd_contribution_pct": -1.76,
+      "ytd_contribution_pct": 1.24,
       "assumed_annual_pct": 12.0,
-      "source": "PE proxy (PSP 70% + carry 30% @ 12.0%)"
+      "source": "Carlyle AlpInvest statement (NAV)",
+      "valuation_date": "2025-12-31"
     },
     {
       "isin": "US46438F1012",
@@ -162,11 +163,12 @@
       "value_usd": 917806,
       "weight_pct": 11.95,
       "si_return_pct": -25.5,
-      "ytd_return_pct": -8.16,
+      "ytd_return_pct": -11.95,
       "contribution_pct": -3.05,
-      "ytd_contribution_pct": -0.98,
+      "ytd_contribution_pct": -1.32,
       "assumed_annual_pct": null,
-      "source": "yahoo:IBIT"
+      "source": "Yahoo Finance (precio diario)",
+      "valuation_date": "live"
     },
     {
       "isin": "LU2659193242",
@@ -176,11 +178,12 @@
       "value_usd": 856505,
       "weight_pct": 11.15,
       "si_return_pct": -2.79,
-      "ytd_return_pct": -4.96,
+      "ytd_return_pct": 5.61,
       "contribution_pct": -0.31,
-      "ytd_contribution_pct": -0.55,
+      "ytd_contribution_pct": 0.64,
       "assumed_annual_pct": 12.0,
-      "source": "PE proxy (PSP 70% + carry 30% @ 12.0%)"
+      "source": "iCapital / Pershing (NAV mensual)",
+      "valuation_date": "2026-01-31"
     },
     {
       "isin": "US78463V1070",
@@ -190,11 +193,12 @@
       "value_usd": 843935,
       "weight_pct": 10.99,
       "si_return_pct": 40.91,
-      "ytd_return_pct": 8.38,
+      "ytd_return_pct": 7.19,
       "contribution_pct": 4.5,
-      "ytd_contribution_pct": 0.92,
+      "ytd_contribution_pct": 1.03,
       "assumed_annual_pct": null,
-      "source": "yahoo:GLD"
+      "source": "Yahoo Finance (precio diario)",
+      "valuation_date": "live"
     },
     {
       "isin": "KYG4737U1085",
@@ -204,11 +208,12 @@
       "value_usd": 753336,
       "weight_pct": 9.81,
       "si_return_pct": 8.67,
-      "ytd_return_pct": 3.85,
+      "ytd_return_pct": 0.37,
       "contribution_pct": 0.85,
-      "ytd_contribution_pct": 0.38,
+      "ytd_contribution_pct": 0.04,
       "assumed_annual_pct": 9.5,
-      "source": "PC carry @ 9.5%/yr"
+      "source": "iCapital HPS (NAV trimestral)",
+      "valuation_date": "2025-12-31"
     },
     {
       "isin": "XS2658535526",
@@ -218,11 +223,12 @@
       "value_usd": 590010,
       "weight_pct": 7.68,
       "si_return_pct": 8.67,
-      "ytd_return_pct": 3.85,
+      "ytd_return_pct": 1.48,
       "contribution_pct": 0.67,
-      "ytd_contribution_pct": 0.3,
+      "ytd_contribution_pct": 0.12,
       "assumed_annual_pct": 9.5,
-      "source": "PC carry @ 9.5%/yr"
+      "source": "Pershing ETN (precio)",
+      "valuation_date": "2026-05-18"
     },
     {
       "isin": "FLEX-LEX",
@@ -232,11 +238,12 @@
       "value_usd": 500000,
       "weight_pct": 6.51,
       "si_return_pct": -2.79,
-      "ytd_return_pct": -4.96,
+      "ytd_return_pct": null,
       "contribution_pct": -0.18,
-      "ytd_contribution_pct": -0.32,
+      "ytd_contribution_pct": 0.0,
       "assumed_annual_pct": 12.0,
-      "source": "PE proxy (PSP 70% + carry 30% @ 12.0%)"
+      "source": "manual (entro abr-26, sin YTD aun)",
+      "valuation_date": "2026-04-21"
     },
     {
       "isin": "GCRED-I",
@@ -246,11 +253,13 @@
       "value_usd": 496055,
       "weight_pct": 6.46,
       "si_return_pct": 8.67,
-      "ytd_return_pct": 3.85,
+      "ytd_return_pct": -0.83,
       "contribution_pct": 0.56,
-      "ytd_contribution_pct": 0.25,
+      "ytd_contribution_pct": -0.06,
       "assumed_annual_pct": 9.5,
-      "source": "PC carry @ 9.5%/yr"
+      "source": "iCapital Golub (NAV trimestral)",
+      "valuation_date": "2025-12-31"
     }
-  ]
+  ],
+  "_alts_ytd_real_note": "YTD 2026 reconstruido desde statements reales (Carlyle dic + Pershing dic/feb). Reemplaza proxy PSP+carry. Actualizado 2026-05-20."
 }
