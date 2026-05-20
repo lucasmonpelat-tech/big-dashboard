@@ -2311,7 +2311,111 @@ async function renderAltsRace() {
 // ==============================================================
 // DATA HEALTH — Lineage + status of every data source
 // ==============================================================
+// ==============================================================
+// SLEEVE TWR AUDIT — verifica que TWR reportado coincida con la formula
+// (MV_end - flow) / MV_start - 1 mes a mes. Util para validar visualmente
+// que el YTD desglosado tenga sentido.
+// ==============================================================
+async function renderSleeveTwrAudit() {
+    const tbody = document.getElementById('dh-sleeve-audit-equity');
+    const tfoot = document.getElementById('dh-sleeve-audit-equity-foot');
+    if (!tbody) return;
+
+    let data;
+    try {
+        const r = await fetch('data/equity_sleeve_real.json?_=' + Date.now());
+        if (!r.ok) throw new Error('no data');
+        data = await r.json();
+    } catch (e) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#6B88A8;">No se pudo cargar equity_sleeve_real.json</td></tr>';
+        return;
+    }
+
+    const twr = data.twr_series || [];
+    if (twr.length < 2) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#6B88A8;">Serie TWR vacia</td></tr>';
+        return;
+    }
+
+    const fmtMoney = (v) => '$' + (v >= 0 ? '' : '−') + Math.abs(v / 1e6).toFixed(2) + 'M';
+    const fmtFlow  = (v) => (v >= 0 ? '+' : '−') + '$' + Math.abs(v / 1e3).toFixed(0) + 'K';
+    const fmtPct   = (v) => (v >= 0 ? '+' : '') + (v * 100).toFixed(2) + '%';
+    const monthLabel = (d) => {
+        const dt = new Date(d);
+        const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+        return `${months[dt.getMonth()]}-${String(dt.getFullYear()).slice(2)}`;
+    };
+
+    // Verificacion: la formula recalculada deberia coincidir con el TWR del JSON
+    // dentro de ~10 bps (tolerancia para rounding de Modified Dietz simplificado).
+    const TOL = 0.001;  // 10 bps
+    const rows = [];
+    let allMatch = true;
+    for (let i = 1; i < twr.length; i++) {
+        const prev = twr[i - 1];
+        const curr = twr[i];
+        const mvStart = prev.mv_usd;
+        const flow = curr.flow_in || 0;
+        const mvEnd = curr.mv_usd;
+        const twrReported = curr.twr;
+        const twrCalc = (mvEnd - flow) / mvStart - 1;
+        const diff = Math.abs(twrCalc - twrReported);
+        const match = diff < TOL;
+        if (!match) allMatch = false;
+        rows.push({
+            date: curr.date,
+            mvStart, flow, mvEnd,
+            twrReported, twrCalc, match, diff,
+        });
+    }
+
+    // Compound YTD (solo meses con date >= 2026-01-01)
+    const ytdRows = rows.filter(r => r.date >= '2026-01-01');
+    let compoundYtd = 1;
+    ytdRows.forEach(r => { compoundYtd *= (1 + r.twrReported); });
+    compoundYtd -= 1;
+
+    tbody.innerHTML = rows.map(r => {
+        const formulaStr = `(${fmtMoney(r.mvEnd)} − ${fmtFlow(r.flow)}) / ${fmtMoney(r.mvStart)} − 1 = ${fmtPct(r.twrCalc)}`;
+        const matchIcon = r.match
+            ? '<span style="color:#81C784;font-weight:700;font-size:16px;">✓</span>'
+            : `<span style="color:#EF5350;font-weight:700;font-size:16px;">✗ (${(r.diff*10000).toFixed(0)}bps)</span>`;
+        const flowColor = r.flow >= 0 ? '#81C784' : '#EF5350';
+        const twrColor = r.twrReported >= 0 ? '#81C784' : '#EF5350';
+        return `
+            <tr>
+                <td class="left"><strong>${monthLabel(r.date)}</strong></td>
+                <td>${fmtMoney(r.mvStart)}</td>
+                <td style="color:${flowColor};">${fmtFlow(r.flow)}</td>
+                <td style="color:${twrColor};font-weight:600;">${fmtPct(r.twrReported)}</td>
+                <td>${fmtMoney(r.mvEnd)}</td>
+                <td style="font-size:11px;color:#90CAF9;font-family:monospace;">${formulaStr}</td>
+                <td style="text-align:center;">${matchIcon}</td>
+            </tr>
+        `;
+    }).join('');
+
+    // Footer: compound YTD + status global
+    const compoundColor = compoundYtd >= 0 ? '#81C784' : '#EF5350';
+    const statusBadge = allMatch
+        ? '<span style="color:#81C784;font-weight:700;">✓ Todos los meses validados</span>'
+        : '<span style="color:#EF5350;font-weight:700;">✗ Hay meses con bug — revisar</span>';
+    if (tfoot) {
+        tfoot.innerHTML = `
+            <tr style="border-top:2px solid #D4AF37;">
+                <td class="left" colspan="3"><strong>YTD 2026 (compound de meses 2026)</strong></td>
+                <td style="color:${compoundColor};font-weight:700;font-size:14px;">${fmtPct(compoundYtd)}</td>
+                <td colspan="2" style="font-size:11px;color:#6B88A8;">Producto de (1+TWR) de cada mes 2026</td>
+                <td style="text-align:center;">${statusBadge}</td>
+            </tr>
+        `;
+    }
+}
+
 async function renderDataHealth() {
+    // Render audit de cadena TWR mes a mes (al final del tab)
+    renderSleeveTwrAudit();
+
     let catalog;
     try {
         const r = await fetch('data/data_health_catalog.json?_=' + Date.now());

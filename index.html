@@ -1143,6 +1143,27 @@
 
             <h3 style="color:#D4AF37; margin-top:20px;">🚨 TODOs (refrescar primary sources)</h3>
             <div id="dh-todos"></div>
+
+            <!-- ============= SLEEVE TWR AUDIT — verificacion mes a mes ============= -->
+            <h3 style="color:#D4AF37; margin-top:30px;">🔍 Sleeve TWR Audit — Equity</h3>
+            <div class="info-box" style="border-left-color:#81C784;">
+                <strong>Cadena del cálculo TWR mes a mes:</strong> para cada mes mostramos MV inicio + flujo neto + MV fin, y verificamos que el TWR reportado coincida con la fórmula <em>(MV_end − flow) / MV_start − 1</em>. <strong>Útil para validar que el YTD desglosado tenga sentido</strong>. Verde ✓ = match, Rojo ✗ = bug detectado.
+            </div>
+            <table class="data-table perf-table">
+                <thead>
+                    <tr>
+                        <th class="left">Mes</th>
+                        <th>MV inicio</th>
+                        <th>+ Flujo</th>
+                        <th>TWR mes (JSON)</th>
+                        <th>MV fin</th>
+                        <th>Verificación (fórmula)</th>
+                        <th>Match</th>
+                    </tr>
+                </thead>
+                <tbody id="dh-sleeve-audit-equity"></tbody>
+                <tfoot id="dh-sleeve-audit-equity-foot"></tfoot>
+            </table>
         </section>
 
         <!-- FOOTER -->
