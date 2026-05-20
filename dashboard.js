@@ -1007,6 +1007,16 @@ async function renderPerformance() {
 // Notas mensuales — Lucas las edita aca cuando quiere. Key = "YYYY-MM" del fin
 // de mes (mismo formato que twr_series). Generadas inicialmente por agent
 // research el 2026-05-19. Bumpear cuando haya nuevo mes cerrado.
+// Notas FI mensuales 2026 — generadas por agent research el 2026-05-20.
+// Lucas las edita aca cuando quiere. Bumpear con cada mes que cierre.
+const FI_MONTHLY_NOTES = {
+    "2026-01": "AGG flat: 10Y anclo en 4.15%, IG spreads en minimos de 30 anos (71bp). BIG FI +0.43% — corta duracion limito upside.",
+    "2026-02": "10Y bajo a 4.08% pre-shock Iran fin de mes. PIMCO-INC y carry IG impulsaron BIG FI +0.91%, batiendo AGG holgado.",
+    "2026-03": "Shock petrolero (Brent +55%) y CPI +0.9% m/m dispararon yields. BIG FI -2.06% pero corta duracion PIMCO-LD amortiguo vs AGG.",
+    "2026-04": "AGG +0.26%, EM +0.41%, IG +0.38%. PIMCO-EM (USD debil) y entrada de SGCB cat bonds llevaron BIG FI a +1.62%, alpha fuerte.",
+    "2026-05": "Selloff global: 10Y a 4.7%, CPI max 3 anos, oil shock Hormuz. BIG FI -0.38% — short duration y MANIG IG hedged contuvieron perdida.",
+};
+
 const EQUITY_MONTHLY_NOTES = {
     "2025-08": "Rotacion value/small-cap post-Jackson Hole. BRK.B + MFSCV value tilt + NBGMT le ganaron al S&P large-cap.",
     "2025-09": "Rally AI/Mag7 (S&P +8.1% Q3). BRK.B arrastro post-retiro Buffett y la sub-pond en hyperscalers costo caro.",
@@ -1079,6 +1089,66 @@ function renderEquityMonthlyBreakdown(twrSeries, acwiSeries) {
             <td class="left"><strong>${monthLabel(r.date)}</strong></td>
             <td>${fmtPct(r.bigRet)}</td>
             <td>${fmtPct(r.acwiRet)}</td>
+            <td>${fmtAlpha(r.alpha)}</td>
+            <td class="left" style="font-size:12px;color:#E8F4FF;line-height:1.5;">${r.note}</td>
+        </tr>
+    `).join('');
+}
+
+// ==============================================================
+// FI Monthly Breakdown — mes a mes 2026 (BIG FI TWR vs AGG)
+// ==============================================================
+function renderFIMonthlyBreakdown(twrSeries, aggSeries) {
+    const tbody = document.getElementById('fr-monthly-body');
+    if (!tbody || !twrSeries || twrSeries.length < 2) return;
+
+    const aggByDate = Object.fromEntries(aggSeries.map(p => [p.date, p.index]));
+    const rows = [];
+    for (let i = 1; i < twrSeries.length; i++) {
+        const prev = twrSeries[i - 1];
+        const curr = twrSeries[i];
+        // Solo mostrar meses 2026 (Lucas pidio focus en YTD corriente)
+        if (!curr.date.startsWith('2026-')) continue;
+        const bigRet = (curr.index / prev.index - 1) * 100;
+        const aggCurr = aggByDate[curr.date];
+        const aggPrev = aggByDate[prev.date];
+        if (aggCurr == null || aggPrev == null) continue;
+        const aggRet = (aggCurr / aggPrev - 1) * 100;
+        const alpha = bigRet - aggRet;
+        const ym = curr.date.slice(0, 7);
+        let note = FI_MONTHLY_NOTES[ym] || '<span style="color:#6B88A8;font-style:italic;">— sin nota —</span>';
+        // Marcar si es punto intra-mes (parcial)
+        const isMonthEnd = curr.date.endsWith('-31') || curr.date.endsWith('-30')
+            || curr.date.endsWith('-29') || curr.date.endsWith('-28');
+        if (!isMonthEnd) {
+            note = `<span style="color:#FFA726;">[parcial al ${curr.date.slice(8)}]</span> ${note}`;
+        }
+        rows.push({ date: curr.date, ym, bigRet, aggRet, alpha, note, isMonthEnd });
+    }
+    if (rows.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#6B88A8;">Sin meses 2026 en la serie.</td></tr>';
+        return;
+    }
+    const monthLabel = (dateStr) => {
+        const d = new Date(dateStr);
+        const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+        return `${months[d.getMonth()]}-${d.getFullYear()}`;
+    };
+    const fmtPct = (v) => {
+        const sign = v >= 0 ? '+' : '';
+        const color = v >= 0 ? '#81C784' : '#EF5350';
+        return `<span style="color:${color};font-weight:600;">${sign}${v.toFixed(2)}%</span>`;
+    };
+    const fmtAlpha = (v) => {
+        const sign = v >= 0 ? '+' : '';
+        const color = v >= 0 ? '#81C784' : '#EF5350';
+        return `<strong style="color:${color};">${sign}${v.toFixed(2)}pp</strong>`;
+    };
+    tbody.innerHTML = rows.map(r => `
+        <tr>
+            <td class="left"><strong>${monthLabel(r.date)}${r.isMonthEnd ? '' : ' ⏳'}</strong></td>
+            <td>${fmtPct(r.bigRet)}</td>
+            <td>${fmtPct(r.aggRet)}</td>
             <td>${fmtAlpha(r.alpha)}</td>
             <td class="left" style="font-size:12px;color:#E8F4FF;line-height:1.5;">${r.note}</td>
         </tr>
@@ -1658,6 +1728,11 @@ async function renderFIRace() {
             <td>${fmtAlpha(ann.alpha)}</td>
         </tr>
     `;
+
+    // Render Monthly Breakdown FI (mes a mes 2026 con notas)
+    if (fiReal && fiReal.twr_series && fiReal.agg_index_series) {
+        renderFIMonthlyBreakdown(fiReal.twr_series, fiReal.agg_index_series);
+    }
 
     // Chart
     const sleeveKeys = Object.keys(data.sleeve_index).sort();
