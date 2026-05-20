@@ -2317,7 +2317,7 @@ async function renderAltsRace() {
 // que el YTD desglosado tenga sentido.
 // ==============================================================
 async function renderSleeveTwrAudit() {
-    // Renderiza ambas tablas: Equity y FI. Misma estructura, distintos JSONs.
+    // Renderiza tablas audit: Equity, FI (con TWR + flow), Alts (solo return + index).
     await renderSleeveTwrAuditOne({
         jsonPath: 'data/equity_sleeve_real.json',
         tbodyId: 'dh-sleeve-audit-equity',
@@ -2330,6 +2330,79 @@ async function renderSleeveTwrAudit() {
         tfootId: 'dh-sleeve-audit-fi-foot',
         sleeveLabel: 'Fixed Income',
     });
+    await renderAltsAudit();
+}
+
+// Audit Alts — estructura distinta: no hay MV+flow auditable, solo returns
+// mensuales reportados por managers (privates corren por NAVs trimestrales).
+async function renderAltsAudit() {
+    const tbody = document.getElementById('dh-sleeve-audit-alts');
+    const tfoot = document.getElementById('dh-sleeve-audit-alts-foot');
+    if (!tbody) return;
+
+    let data;
+    try {
+        const r = await fetch('data/alts_race.json?_=' + Date.now());
+        if (!r.ok) throw new Error('no data');
+        data = await r.json();
+    } catch (e) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#6B88A8;">No se pudo cargar alts_race.json</td></tr>';
+        return;
+    }
+
+    const smr = data.sleeve_monthly_returns || {};
+    const si = data.sleeve_index || {};
+    const monthsAll = Object.keys(smr).sort();
+    const months2026 = monthsAll.filter(m => m.startsWith('2026-'));
+
+    if (months2026.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#6B88A8;">Sin datos 2026 en alts_race</td></tr>';
+        return;
+    }
+
+    const fmtPct = (v) => (v >= 0 ? '+' : '') + (v * 100).toFixed(2) + '%';
+    const monthLabel = (m) => {
+        const [y, mm] = m.split('-');
+        const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+        return `${months[parseInt(mm) - 1]}-${y.slice(2)}`;
+    };
+
+    let compoundYtd = 1;
+    const rows = months2026.map(m => {
+        const ret = smr[m];
+        const idx = si[m];
+        compoundYtd *= (1 + ret);
+        return { month: m, ret, idx };
+    });
+    compoundYtd -= 1;
+
+    tbody.innerHTML = rows.map(r => {
+        const color = r.ret >= 0 ? '#81C784' : '#EF5350';
+        // Notas placeholder — Lucas las edita despues si quiere
+        const isCurrent = r.month === months2026[months2026.length - 1];
+        const note = isCurrent
+            ? '<span style="color:#FFA726;">Mes corriente (parcial)</span>'
+            : '<span style="color:#6B88A8;font-style:italic;">— sin nota —</span>';
+        return `
+            <tr>
+                <td class="left"><strong>${monthLabel(r.month)}</strong></td>
+                <td style="color:${color};font-weight:600;">${fmtPct(r.ret)}</td>
+                <td>${r.idx != null ? r.idx.toFixed(4) : '—'}</td>
+                <td class="left" style="font-size:12px;color:#E8F4FF;">${note}</td>
+            </tr>
+        `;
+    }).join('');
+
+    const compoundColor = compoundYtd >= 0 ? '#81C784' : '#EF5350';
+    if (tfoot) {
+        tfoot.innerHTML = `
+            <tr style="border-top:2px solid #D4AF37;">
+                <td class="left"><strong>YTD 2026 (compound)</strong></td>
+                <td style="color:${compoundColor};font-weight:700;font-size:14px;">${fmtPct(compoundYtd)}</td>
+                <td colspan="2" style="font-size:11px;color:#6B88A8;">Producto de (1+return) de cada mes 2026</td>
+            </tr>
+        `;
+    }
 }
 
 async function renderSleeveTwrAuditOne(cfg) {
