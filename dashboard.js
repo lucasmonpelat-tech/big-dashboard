@@ -2317,17 +2317,33 @@ async function renderAltsRace() {
 // que el YTD desglosado tenga sentido.
 // ==============================================================
 async function renderSleeveTwrAudit() {
-    const tbody = document.getElementById('dh-sleeve-audit-equity');
-    const tfoot = document.getElementById('dh-sleeve-audit-equity-foot');
+    // Renderiza ambas tablas: Equity y FI. Misma estructura, distintos JSONs.
+    await renderSleeveTwrAuditOne({
+        jsonPath: 'data/equity_sleeve_real.json',
+        tbodyId: 'dh-sleeve-audit-equity',
+        tfootId: 'dh-sleeve-audit-equity-foot',
+        sleeveLabel: 'Equity',
+    });
+    await renderSleeveTwrAuditOne({
+        jsonPath: 'data/fi_sleeve_real.json',
+        tbodyId: 'dh-sleeve-audit-fi',
+        tfootId: 'dh-sleeve-audit-fi-foot',
+        sleeveLabel: 'Fixed Income',
+    });
+}
+
+async function renderSleeveTwrAuditOne(cfg) {
+    const tbody = document.getElementById(cfg.tbodyId);
+    const tfoot = document.getElementById(cfg.tfootId);
     if (!tbody) return;
 
     let data;
     try {
-        const r = await fetch('data/equity_sleeve_real.json?_=' + Date.now());
+        const r = await fetch(cfg.jsonPath + '?_=' + Date.now());
         if (!r.ok) throw new Error('no data');
         data = await r.json();
     } catch (e) {
-        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#6B88A8;">No se pudo cargar equity_sleeve_real.json</td></tr>';
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:#6B88A8;">No se pudo cargar ${cfg.jsonPath}</td></tr>`;
         return;
     }
 
