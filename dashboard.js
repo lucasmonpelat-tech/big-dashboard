@@ -2478,6 +2478,77 @@ async function renderAltsAudit() {
             </tr>
         `;
     }
+
+    // Render detalle por holding YTD breakdown
+    renderAltsHoldingsBreakdown(data);
+}
+
+// Detalle por holding de Alts — quien tiro el YTD del sleeve
+function renderAltsHoldingsBreakdown(altsData) {
+    const tbody = document.getElementById('dh-alts-holdings-body');
+    const tfoot = document.getElementById('dh-alts-holdings-foot');
+    if (!tbody) return;
+
+    const holdings = altsData.holdings || [];
+    if (holdings.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:#6B88A8;">Sin holdings</td></tr>';
+        return;
+    }
+
+    // Ordenar por contribucion YTD ascendente (mas negativa primero = quien mas tiro)
+    const sorted = [...holdings].sort((a, b) => (a.ytd_contribution_pct || 0) - (b.ytd_contribution_pct || 0));
+
+    const fmtPct = (v) => {
+        if (v == null) return '<span style="color:#6B88A8;">—</span>';
+        const sign = v >= 0 ? '+' : '';
+        const color = v >= 0 ? '#81C784' : '#EF5350';
+        return `<span style="color:${color};font-weight:600;">${sign}${v.toFixed(2)}%</span>`;
+    };
+    const fmtContrib = (v) => {
+        if (v == null) return '<span style="color:#6B88A8;">—</span>';
+        const sign = v >= 0 ? '+' : '';
+        const color = v >= 0 ? '#81C784' : '#EF5350';
+        return `<strong style="color:${color};">${sign}${v.toFixed(2)}pp</strong>`;
+    };
+    const fmtMoney = (v) => '$' + (v >= 0 ? '' : '−') + Math.abs(v / 1e6).toFixed(2) + 'M';
+    const fmtSource = (s) => {
+        if (!s) return '—';
+        if (s.toLowerCase().includes('yahoo')) return '<span style="color:#81C784;">Yahoo (real)</span>';
+        if (s.toLowerCase().includes('proxy')) return `<span style="color:#FFA726;">⚠️ ${s}</span>`;
+        if (s.toLowerCase().includes('manager')) return `<span style="color:#FFA726;">Manager (TBD)</span>`;
+        return s;
+    };
+
+    tbody.innerHTML = sorted.map(h => `
+        <tr>
+            <td class="left"><strong>${h.ticker || '?'}</strong></td>
+            <td class="left">${h.name || '—'}</td>
+            <td class="left" style="font-size:11px;color:#90CAF9;">${(h.sub_class || '').replace(/_/g, ' ')}</td>
+            <td>${h.weight_pct != null ? h.weight_pct.toFixed(1) + '%' : '—'}</td>
+            <td>${h.value_usd != null ? fmtMoney(h.value_usd) : '—'}</td>
+            <td>${fmtPct(h.ytd_return_pct)}</td>
+            <td>${fmtContrib(h.ytd_contribution_pct)}</td>
+            <td class="left" style="font-size:11px;">${fmtSource(h.source)}</td>
+        </tr>
+    `).join('');
+
+    // Footer: suma de contribuciones = YTD sleeve total
+    const totalContrib = holdings.reduce((acc, h) => acc + (h.ytd_contribution_pct || 0), 0);
+    const totalWeight = holdings.reduce((acc, h) => acc + (h.weight_pct || 0), 0);
+    const totalValue = holdings.reduce((acc, h) => acc + (h.value_usd || 0), 0);
+    const totalColor = totalContrib >= 0 ? '#81C784' : '#EF5350';
+    if (tfoot) {
+        tfoot.innerHTML = `
+            <tr style="border-top:2px solid #D4AF37;">
+                <td class="left" colspan="3"><strong>TOTAL Alts Sleeve</strong></td>
+                <td><strong>${totalWeight.toFixed(1)}%</strong></td>
+                <td><strong>${fmtMoney(totalValue)}</strong></td>
+                <td><span style="color:#6B88A8;">weighted</span></td>
+                <td><strong style="color:${totalColor};font-size:14px;">${totalContrib >= 0 ? '+' : ''}${totalContrib.toFixed(2)}pp</strong></td>
+                <td class="left" style="font-size:11px;color:#6B88A8;">Suma contribuciones = YTD sleeve</td>
+            </tr>
+        `;
+    }
 }
 
 async function renderSleeveTwrAuditOne(cfg) {
