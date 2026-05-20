@@ -2348,12 +2348,16 @@ async function renderSleeveTwrAudit() {
 
     // Verificacion: la formula recalculada deberia coincidir con el TWR del JSON
     // dentro de ~10 bps (tolerancia para rounding de Modified Dietz simplificado).
+    // FILTRO: solo mostrar meses 2026 (Lucas no quiere ver historia 2025 aca).
+    const YTD_YEAR_FILTER = '2026-';
     const TOL = 0.001;  // 10 bps
     const rows = [];
     let allMatch = true;
     for (let i = 1; i < twr.length; i++) {
         const prev = twr[i - 1];
         const curr = twr[i];
+        // Filtrar solo meses 2026
+        if (!curr.date.startsWith(YTD_YEAR_FILTER)) continue;
         const mvStart = prev.mv_usd;
         const flow = curr.flow_in || 0;
         const mvEnd = curr.mv_usd;
@@ -2369,10 +2373,9 @@ async function renderSleeveTwrAudit() {
         });
     }
 
-    // Compound YTD (solo meses con date >= 2026-01-01)
-    const ytdRows = rows.filter(r => r.date >= '2026-01-01');
+    // Compound YTD (todos los rows ya son del 2026)
     let compoundYtd = 1;
-    ytdRows.forEach(r => { compoundYtd *= (1 + r.twrReported); });
+    rows.forEach(r => { compoundYtd *= (1 + r.twrReported); });
     compoundYtd -= 1;
 
     tbody.innerHTML = rows.map(r => {
