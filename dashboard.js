@@ -2076,32 +2076,20 @@ async function renderAltsRace() {
         return;
     }
 
+    // Lucas pidio quitar benchmarks del tab Alts Race (privates iliquidos no son
+    // comparables con indices liquidos). Solo extraemos r6040 para obtener los
+    // returns del sleeve mismo (SI / YTD / multi-period), ignoramos bmk6040/hfrx.
     const stats6040 = data.stats_vs_6040 || {};
-    const statsHfrx = data.stats_vs_hfrx || {};
     const r6040 = stats6040.returns || {};
-    const rHfrx = statsHfrx.returns || {};
     const ann6040 = stats6040.annualized || {};
-    const annHfrx = statsHfrx.annualized || {};
     const holdings = data.holdings || [];
     const pm = data.portfolio_metrics || {};
 
     const fmtSigned = (v, unit='%') => v == null ? '—' : (v >= 0 ? '+' : '') + v.toFixed(2) + unit;
 
-    // KPIs
+    // KPIs (solo Alts Sleeve SI + AUM — sin benchmarks)
     const si6040 = r6040.SI || {};
-    const siHfrx = rHfrx.SI || {};
     document.getElementById('ar-sleeve-si').textContent = fmtSigned(si6040.sleeve);
-    document.getElementById('ar-6040-si').textContent = fmtSigned(si6040.bmk6040);
-    const alphaEl = document.getElementById('ar-alpha-si');
-    alphaEl.textContent = fmtSigned(si6040.alpha, 'pp');
-    alphaEl.style.color = (si6040.alpha || 0) >= 0 ? '#81C784' : '#EF5350';
-    document.getElementById('ar-alpha-status').innerHTML = (si6040.alpha || 0) >= 0
-        ? '<span style="color:#81C784;font-weight:700;">🏆 GANANDO vs 60/40</span>'
-        : '<span style="color:#EF5350;font-weight:700;">🔴 PERDIENDO vs 60/40</span>';
-    document.getElementById('ar-hfrx-si').textContent = fmtSigned(siHfrx.hfrx);
-    const alphaHfrxEl = document.getElementById('ar-alpha-hfrx');
-    alphaHfrxEl.textContent = fmtSigned(siHfrx.alpha, 'pp');
-    alphaHfrxEl.style.color = (siHfrx.alpha || 0) >= 0 ? '#81C784' : '#EF5350';
     document.getElementById('ar-aum').textContent = pm.total_alts_usd ? '$' + (pm.total_alts_usd / 1e6).toFixed(2) + 'M' : '—';
 
     // Returns table
@@ -2116,6 +2104,7 @@ async function renderAltsRace() {
         return `<strong style="color:${color};">${v >= 0 ? '+' : ''}${v.toFixed(2)}pp</strong>`;
     };
 
+    // Tabla solo con BIG Alts Sleeve — sin filas BMK/Alpha (Lucas quito benchmarks)
     document.getElementById('ar-returns-body').innerHTML = `
         <tr class="row-big">
             <td class="left"><strong>BIG Alts Sleeve</strong></td>
@@ -2125,33 +2114,6 @@ async function renderAltsRace() {
             <td>${fmtRet(r6040.YTD?.sleeve)}</td>
             <td>${fmtRet(r6040.SI?.sleeve)}</td>
             <td>${fmtRet(ann6040.sleeve)}</td>
-        </tr>
-        <tr class="row-bmk">
-            <td class="left">60/40 (60% ACWI + 40% AGG)</td>
-            <td>${fmtRet(r6040['1M']?.bmk6040)}</td>
-            <td>${fmtRet(r6040['3M']?.bmk6040)}</td>
-            <td>${fmtRet(r6040['6M']?.bmk6040)}</td>
-            <td>${fmtRet(r6040.YTD?.bmk6040)}</td>
-            <td>${fmtRet(r6040.SI?.bmk6040)}</td>
-            <td>${fmtRet(ann6040.bmk6040)}</td>
-        </tr>
-        <tr class="row-bmk">
-            <td class="left">HFRX HF (QAI proxy)</td>
-            <td>${fmtRet(rHfrx['1M']?.hfrx)}</td>
-            <td>${fmtRet(rHfrx['3M']?.hfrx)}</td>
-            <td>${fmtRet(rHfrx['6M']?.hfrx)}</td>
-            <td>${fmtRet(rHfrx.YTD?.hfrx)}</td>
-            <td>${fmtRet(rHfrx.SI?.hfrx)}</td>
-            <td>${fmtRet(annHfrx.hfrx)}</td>
-        </tr>
-        <tr class="row-alpha">
-            <td class="left"><strong>Alpha vs 60/40</strong></td>
-            <td>${fmtAlpha(r6040['1M']?.alpha)}</td>
-            <td>${fmtAlpha(r6040['3M']?.alpha)}</td>
-            <td>${fmtAlpha(r6040['6M']?.alpha)}</td>
-            <td>${fmtAlpha(r6040.YTD?.alpha)}</td>
-            <td>${fmtAlpha(r6040.SI?.alpha)}</td>
-            <td>${fmtAlpha(ann6040.alpha)}</td>
         </tr>
     `;
 
@@ -2206,10 +2168,8 @@ async function renderAltsRace() {
         console.warn('Failed to render Alts race pie', e);
     }
 
-    // Race chart
+    // Race chart — solo Alts Sleeve (sin benchmarks por pedido de Lucas)
     const sleeveKeys = Object.keys(data.sleeve_index).sort();
-    const bmkKeys = Object.keys(data.bmk6040_index).sort();
-    const hfrxKeys = Object.keys(data.hfrx_index || {}).sort();
     const traces = [
         {
             x: sleeveKeys.map(k => k + '-15'),
@@ -2219,24 +2179,6 @@ async function renderAltsRace() {
             line: { color: '#FFA726', width: 3 },
             marker: { size: 6, color: '#FFA726' },
             hovertemplate: '%{x|%b %Y}<br>Alts: <b>%{y:.2f}</b><extra></extra>'
-        },
-        {
-            x: bmkKeys.map(k => k + '-15'),
-            y: bmkKeys.map(k => data.bmk6040_index[k]),
-            name: '60/40 (60 ACWI + 40 AGG)',
-            type: 'scatter', mode: 'lines+markers',
-            line: { color: '#64B5F6', width: 2.5, dash: 'dot' },
-            marker: { size: 5, color: '#64B5F6' },
-            hovertemplate: '%{x|%b %Y}<br>60/40: <b>%{y:.2f}</b><extra></extra>'
-        },
-        {
-            x: hfrxKeys.map(k => k + '-15'),
-            y: hfrxKeys.map(k => data.hfrx_index[k]),
-            name: 'HFRX HF (QAI)',
-            type: 'scatter', mode: 'lines+markers',
-            line: { color: '#CE93D8', width: 2, dash: 'dash' },
-            marker: { size: 4, color: '#CE93D8' },
-            hovertemplate: '%{x|%b %Y}<br>HFRX: <b>%{y:.2f}</b><extra></extra>'
         }
     ];
     const layout = {
