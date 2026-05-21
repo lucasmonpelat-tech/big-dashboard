@@ -3,8 +3,7 @@ name: 🔄 Lynk NAV Daily Refresh
 on:
   # Runs every day at 02:00 UTC (~23:00 ART). After US close, before BA morning.
   schedule:
-    - cron: '0 2 * * *'
-  # Manual trigger from the Actions tab
+    - cron: '0 16 * * *'  # Manual trigger from the Actions tab
   workflow_dispatch:
 
 # Need write to push the updated JSON back to main
