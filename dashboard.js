@@ -879,22 +879,22 @@ async function renderPerformance() {
         { label: 'YTD', startDate: ytdStart, startMonth: ytdMonth },
     ];
 
-    // BIG returns
+    // BIG returns — POLITICA: el performance del FONDO BIG TOTAL sale de LYNK
+    // (estructurador oficial de la nota), NO se recalcula. Lynk publica
+    // YTD / SI / Annualized oficiales en lynk_data.json -> usamos esos directo
+    // para que el dashboard matchee EXACTO la app de Lynk.
+    // 1M / 3M / 6M: Lynk no los publica, los derivamos de la serie del NAV
+    // oficial de Lynk (lynk_nav_series.json) — mismo NAV, solo otro periodo.
     const bigReturns = {};
-    periods.forEach(p => { bigReturns[p.label] = bigReturnFrom(p.startDate); });
-    // Since Inception + Annualized
-    const inceptionISO = bigSeries && bigSeries.length ? bigSeries[0].date : null;
-    const inceptionNav = bigSeries && bigSeries.length ? bigSeries[0].value : null;
-    const latestNav = bigSeries && bigSeries.length ? bigSeries[bigSeries.length - 1].value : null;
-    const siReturn = (inceptionNav && latestNav) ? (latestNav / inceptionNav - 1) * 100 : null;
-    let annualized = null;
-    if (siReturn != null && inceptionISO) {
-        const days = (new Date(latestDate) - new Date(inceptionISO)) / 86400000;
-        const years = days / 365.25;
-        if (years > 0) annualized = (Math.pow(1 + siReturn/100, 1/years) - 1) * 100;
-    }
-    bigReturns.SI = siReturn;
-    bigReturns.ANN = annualized;
+    periods.forEach(p => {
+        if (p.label === 'YTD') return;  // YTD viene de Lynk (abajo)
+        bigReturns[p.label] = bigReturnFrom(p.startDate);
+    });
+    // YTD / SI / Annualized: numeros OFICIALES de Lynk (no recalculados)
+    const L = (typeof LYNK_DATA !== 'undefined') ? LYNK_DATA : {};
+    bigReturns.YTD = (L.returnYTD != null) ? L.returnYTD : bigReturnFrom(ytdStart);
+    bigReturns.SI  = (L.returnSI != null) ? L.returnSI : null;
+    bigReturns.ANN = (L.returnAnnualized != null) ? L.returnAnnualized : null;
 
     // 60/40 returns — todos pre-calculados en bmk_6040.json (single source de 60/40)
     const bmkReturns = {};
