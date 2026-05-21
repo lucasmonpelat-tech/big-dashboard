@@ -201,6 +201,24 @@ def main():
                 if fm.get(required) is None:
                     fi_missing_metrics.append(f"{fp['ticker']}.json falta fi_metrics.{required}")
                     errors.append(f"data/funds/{fp['ticker']}.json: falta fi_metrics.{required}")
+
+            # ---- Check de plausibilidad para CAT BONDS / ILS ----
+            # Los cat bonds son floating-rate (SOFR+spread) -> duration de tasa ~0,
+            # weighted avg life ~2-3y, sin rating crediticio tradicional. Si un cat
+            # bond reporta duration de bono tradicional (>1.5y) o rating IG, es
+            # señal de datos placeholder/cruzados (paso con SGCB: dur 4.03 / BBB+).
+            name_l = (d.get("name") or "").lower()
+            is_cat = d.get("is_cat_bond") or "cat bond" in name_l or "ils" in name_l or "insurance-linked" in name_l
+            if is_cat:
+                dur = fm.get("duration")
+                if dur is not None and dur > 1.5:
+                    errors.append(f"data/funds/{fp['ticker']}.json: CAT BOND con duration {dur}y (>1.5) — "
+                                  f"implausible, los cat bonds son floating (dur ~0). Verificar factsheet real.")
+                rating = (fm.get("rating") or "").upper()
+                IG = {"AAA", "AA+", "AA", "AA-", "A+", "A", "A-", "BBB+", "BBB", "BBB-"}
+                if rating in IG:
+                    errors.append(f"data/funds/{fp['ticker']}.json: CAT BOND con rating IG '{rating}' — "
+                                  f"implausible, los cat bonds son sub-IG/sin rating (usar 'NR'). Verificar factsheet.")
         except Exception as e:
             errors.append(f"data/funds/{fp['ticker']}.json: error de parse — {e}")
 
