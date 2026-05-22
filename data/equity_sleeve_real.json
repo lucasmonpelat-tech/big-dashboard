@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-05-22T15:38:35.855763",
+  "refreshedAt": "2026-05-22T16:08:43.160353",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -496,13 +496,13 @@
     },
     {
       "date": "2026-05-22",
-      "mv_usd": 8040471.917966401,
+      "mv_usd": 8049992.2859664,
       "holdings": [
         {
           "ticker": "CSPX",
           "qty": 3408.0,
-          "price": 796.929,
-          "mv": 2715934.032,
+          "price": 796.8,
+          "mv": 2715494.4,
           "source": "daily_close"
         },
         {
@@ -520,6 +520,13 @@
           "source": "daily_close"
         },
         {
+          "ticker": "THOR",
+          "qty": 14410.584,
+          "price": 43.14,
+          "mv": 621672.5937600001,
+          "source": "daily_close"
+        },
+        {
           "ticker": "JHGSC",
           "qty": 10410.46,
           "price": 54.4,
@@ -534,17 +541,10 @@
           "source": "daily_close"
         },
         {
-          "ticker": "THOR",
-          "qty": 14410.584,
-          "price": 43.14,
-          "mv": 621672.5937600001,
-          "source": "daily_close"
-        },
-        {
-          "ticker": "ILF",
-          "qty": 10000.0,
-          "price": 35.03,
-          "mv": 350300.0,
+          "ticker": "ARGT",
+          "qty": 4000.0,
+          "price": 92.06,
+          "mv": 368240.0,
           "source": "daily_close"
         },
         {
@@ -555,10 +555,10 @@
           "source": "daily_close"
         },
         {
-          "ticker": "ARGT",
-          "qty": 4000.0,
-          "price": 90.07,
-          "mv": 360280.0,
+          "ticker": "ILF",
+          "qty": 10000.0,
+          "price": 35.23,
+          "mv": 352299.99999999994,
           "source": "daily_close"
         }
       ]
@@ -637,10 +637,10 @@
     },
     {
       "date": "2026-05-22",
-      "mv_usd": 8040471.917966401,
+      "mv_usd": 8049992.2859664,
       "flow_in": 0,
-      "twr": 0.05948596248768667,
-      "index": 114.2838
+      "twr": 0.060740453064437316,
+      "index": 114.4191
     }
   ],
   "acwi_index_series": [
@@ -696,8 +696,8 @@
     },
     {
       "date": "2026-05-22",
-      "price": 156.375,
-      "index": 121.3827
+      "price": 156.215,
+      "index": 121.2585
     }
   ],
   "equity_flows_by_month": {
@@ -887,5 +887,6 @@
       "last_qty": 532000.0,
       "n_trades": 2
     }
-  }
+  },
+  "_daily_refresh_note": "Punto 2026-05-22 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing May 18, 2026 1:57 PM EDT."
 }
