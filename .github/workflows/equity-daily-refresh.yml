@@ -1,0 +1,51 @@
+name: 📈 Equity Daily NAV Refresh
+
+on:
+  # 16:00 UTC = 13:00 ART
+  schedule:
+    - cron: '0 16 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-equity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright yfinance requests pandas
+          playwright install --with-deps chromium
+      - name: Baha NAV refresher (UCITS) - needs secrets
+        env:
+          BAHA_EMAIL: ${{ secrets.BAHA_EMAIL }}
+          BAHA_PASSWORD: ${{ secrets.BAHA_PASSWORD }}
+        run: python scripts/baha_nav_refresher.py
+        continue-on-error: true
+      - name: Stooq prices (ETFs)
+        run: python scripts/price_refresher.py
+        continue-on-error: true
+      - name: Recalc equity daily NAV
+        run: python scripts/refresh_equity_daily.py
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/ucits_daily_nav.json data/equity_sleeve_real.json data/live_prices.json
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git commit -m "chore(equity): daily NAV refresh ($(date -u +%Y-%m-%d))"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort; exit 1; }
+            if git push origin HEAD:main; then exit 0; fi
+            sleep 3
+          done
+          exit 1
