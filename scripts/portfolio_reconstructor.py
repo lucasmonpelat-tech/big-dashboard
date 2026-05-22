@@ -318,16 +318,20 @@ UCITS_ANCHOR_NAV = {
 
 
 def _build_sleeve_series(sleeve_name, month_ends, timelines, yahoo_cache, ucits_nav_cache,
-                          pershing_override_by_ticker=None):
+                          pershing_override_by_ticker=None, daily_price_by_ticker=None):
     """Construye serie de MV mes-a-mes para un sleeve dado.
 
     pershing_override_by_ticker: dict {ticker: {"value": MV_USD, "qty": qty}} del
-    positions_latest.json — si se pasa, se usa SOLO para el ultimo me_date.
-    Esto evita proxys Yahoo (ej. EWZ para 4BRZ) y refleja el MV real del custodio.
+    positions_latest.json — se usa SOLO para el ultimo me_date.
+
+    daily_price_by_ticker: dict {ticker: precio_cierre_anterior} (UCITS de baha +
+    ETFs de Stooq). Si se pasa, el ULTIMO punto recalcula MV = qty * precio_fresco
+    en vez de usar el MV congelado del Pershing -> permite YTD al cierre anterior.
     """
     sleeve_series = []
     last_me = month_ends[-1] if month_ends else None
     override = pershing_override_by_ticker or {}
+    daily_px = daily_price_by_ticker or {}
     for me_date in month_ends:
         total_mv = 0.0
         holdings_at_date = []
@@ -342,17 +346,24 @@ def _build_sleeve_series(sleeve_name, month_ends, timelines, yahoo_cache, ucits_
             if qty <= 0.0001:
                 continue
 
-            # Pershing override SOLO para el ultimo punto (MV USD directo del custodio).
+            # Pershing override SOLO para el ultimo punto.
             if is_last and ticker in override:
                 ovr = override[ticker]
-                mv = ovr["value"]
-                # price implicito = MV / qty (para mantener formato y trazabilidad)
                 ovr_qty = ovr.get("qty") or qty
-                price = mv / ovr_qty if ovr_qty else 0
+                # Si hay precio FRESCO del cierre anterior (baha/Stooq), recalcular
+                # MV = qty * precio_fresco. Sino, usar el MV congelado del Pershing.
+                if ticker in daily_px and daily_px[ticker]:
+                    price = daily_px[ticker]
+                    mv = ovr_qty * price / 100 if sym in PAR_VALUE_SYMS else ovr_qty * price
+                    src = "daily_close"
+                else:
+                    mv = ovr["value"]
+                    price = mv / ovr_qty if ovr_qty else 0
+                    src = "pershing_positions"
                 total_mv += mv
                 holdings_at_date.append({
                     "ticker": ticker, "qty": ovr_qty, "price": price, "mv": mv,
-                    "source": "pershing_positions",
+                    "source": src,
                 })
                 continue
 
@@ -393,7 +404,7 @@ def _build_sleeve_series(sleeve_name, month_ends, timelines, yahoo_cache, ucits_
 def _compute_sleeve_output(sleeve_name, benchmark_ticker, bmk_key, output_filename,
                             trades, timelines, month_ends, yahoo_cache, ucits_nav_cache,
                             unknown, first_date, last_date,
-                            pershing_override_by_ticker=None):
+                            pershing_override_by_ticker=None, daily_price_by_ticker=None):
     """Calcula MV series + TWR + benchmark para un sleeve y escribe el JSON."""
     print(f"\n{'#' * 90}")
     print(f"#  {sleeve_name.upper()} SLEEVE")
@@ -402,6 +413,7 @@ def _compute_sleeve_output(sleeve_name, benchmark_ticker, bmk_key, output_filena
     sleeve_series = _build_sleeve_series(
         sleeve_name, month_ends, timelines, yahoo_cache, ucits_nav_cache,
         pershing_override_by_ticker=pershing_override_by_ticker,
+        daily_price_by_ticker=daily_price_by_ticker,
     )
 
     # Print summary
@@ -586,6 +598,29 @@ def main():
         except Exception as e:
             print(f"\n  Pershing override skipped: {e}")
 
+    # Cargar precios FRESCOS del cierre anterior para el punto "today":
+    #   - UCITS: data/ucits_daily_nav.json (baha)
+    #   - ETFs:  data/live_prices.json (Stooq)
+    # Permite que el ultimo punto del sleeve use precio del cierre anterior
+    # (YTD live) en vez del MV congelado del Pershing.
+    daily_price = {}
+    try:
+        ud = json.load(open(ROOT / "data" / "ucits_daily_nav.json"))
+        for isin, rec in ud.get("navs", {}).items():
+            if rec.get("ticker") and rec.get("nav"):
+                daily_price[rec["ticker"]] = rec["nav"]
+    except Exception as e:
+        print(f"  ucits_daily_nav skipped: {e}")
+    try:
+        lp = json.load(open(ROOT / "data" / "live_prices.json"))
+        px = lp.get("prices", lp)
+        for tk, rec in px.items():
+            if isinstance(rec, dict) and rec.get("price"):
+                daily_price.setdefault(tk, rec["price"])
+    except Exception as e:
+        print(f"  live_prices skipped: {e}")
+    print(f"  Daily close prices loaded: {len(daily_price)} tickers -> {sorted(daily_price)}")
+
     # Equity vs ACWI
     _compute_sleeve_output(
         sleeve_name="Equity",
@@ -596,6 +631,7 @@ def main():
         yahoo_cache=yahoo_cache, ucits_nav_cache=ucits_nav_cache,
         unknown=unknown, first_date=first_date, last_date=last_date,
         pershing_override_by_ticker=pershing_override,
+        daily_price_by_ticker=daily_price,
     )
 
     # Fixed Income vs AGG
@@ -608,6 +644,7 @@ def main():
         yahoo_cache=yahoo_cache, ucits_nav_cache=ucits_nav_cache,
         unknown=unknown, first_date=first_date, last_date=last_date,
         pershing_override_by_ticker=pershing_override,
+        daily_price_by_ticker=daily_price,
     )
 
 

@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-05-18T17:07:15.549813",
+  "refreshedAt": "2026-05-22T15:38:35.855763",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -136,13 +136,13 @@
     },
     {
       "date": "2025-10-31",
-      "mv_usd": 8477897.746749273,
+      "mv_usd": 8477897.943404546,
       "holdings": [
         {
           "ticker": "CSPX",
           "qty": 3222.0,
-          "price": 678.1983032226562,
-          "mv": 2185154.9329833984
+          "price": 678.1983642578125,
+          "mv": 2185155.129638672
         },
         {
           "ticker": "BRK.B",
@@ -495,71 +495,71 @@
       ]
     },
     {
-      "date": "2026-05-18",
-      "mv_usd": 7991866.49,
+      "date": "2026-05-22",
+      "mv_usd": 8040471.917966401,
       "holdings": [
         {
           "ticker": "CSPX",
           "qty": 3408.0,
-          "price": 799.13,
-          "mv": 2723435.04,
-          "source": "pershing_positions"
+          "price": 796.929,
+          "mv": 2715934.032,
+          "source": "daily_close"
         },
         {
           "ticker": "NBGMT",
           "qty": 58050.998,
-          "price": 23.229999939019134,
-          "mv": 1348524.68,
-          "source": "pershing_positions"
+          "price": 23.37,
+          "mv": 1356651.82326,
+          "source": "daily_close"
         },
         {
           "ticker": "MFSCV",
           "qty": 4063.638,
-          "price": 282.6499998277406,
-          "mv": 1148587.28,
-          "source": "pershing_positions"
+          "price": 290.86,
+          "mv": 1181949.74868,
+          "source": "daily_close"
         },
         {
           "ticker": "JHGSC",
           "qty": 10410.46,
-          "price": 54.65000009605724,
-          "mv": 568931.64,
-          "source": "pershing_positions"
+          "price": 54.4,
+          "mv": 566329.024,
+          "source": "daily_close"
         },
         {
           "ticker": "LGLI",
           "qty": 26511.134,
-          "price": 19.822299943865097,
-          "mv": 525511.65,
-          "source": "pershing_positions"
+          "price": 20.0796,
+          "mv": 532332.9662664,
+          "source": "daily_close"
         },
         {
           "ticker": "THOR",
           "qty": 14410.584,
-          "price": 43.15000002775737,
-          "mv": 621816.7,
-          "source": "pershing_positions"
+          "price": 43.14,
+          "mv": 621672.5937600001,
+          "source": "daily_close"
         },
         {
           "ticker": "ILF",
           "qty": 10000.0,
-          "price": 34.75,
-          "mv": 347500.0,
-          "source": "pershing_positions"
+          "price": 35.03,
+          "mv": 350300.0,
+          "source": "daily_close"
         },
         {
           "ticker": "4BRZ",
           "qty": 6979.0,
-          "price": 50.5,
-          "mv": 352439.5,
-          "source": "pershing_positions"
+          "price": 50.87,
+          "mv": 355021.73,
+          "source": "daily_close"
         },
         {
           "ticker": "ARGT",
           "qty": 4000.0,
-          "price": 88.78,
-          "mv": 355120.0,
-          "source": "pershing_positions"
+          "price": 90.07,
+          "mv": 360280.0,
+          "source": "daily_close"
         }
       ]
     }
@@ -588,16 +588,16 @@
     },
     {
       "date": "2025-10-31",
-      "mv_usd": 8477897.746749273,
+      "mv_usd": 8477897.943404546,
       "flow_in": 318130.77,
-      "twr": -0.0059464552292347594,
+      "twr": -0.0059464312719486045,
       "index": 105.4965
     },
     {
       "date": "2025-11-30",
       "mv_usd": 6096374.533429292,
       "flow_in": -2498347.57,
-      "twr": 0.013779873285781674,
+      "twr": 0.013779849769910202,
       "index": 106.9502
     },
     {
@@ -636,11 +636,11 @@
       "index": 107.8672
     },
     {
-      "date": "2026-05-18",
-      "mv_usd": 7991866.49,
+      "date": "2026-05-22",
+      "mv_usd": 8040471.917966401,
       "flow_in": 0,
-      "twr": 0.053081267694083945,
-      "index": 113.593
+      "twr": 0.05948596248768667,
+      "index": 114.2838
     }
   ],
   "acwi_index_series": [
@@ -695,9 +695,9 @@
       "index": 117.6296
     },
     {
-      "date": "2026-05-18",
-      "price": 154.35000610351562,
-      "index": 119.8108
+      "date": "2026-05-22",
+      "price": 156.375,
+      "index": 121.3827
     }
   ],
   "equity_flows_by_month": {
