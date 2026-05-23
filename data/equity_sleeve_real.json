@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-05-22T19:50:43.944785",
+  "refreshedAt": "2026-05-23T12:46:34.253936",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -495,8 +495,8 @@
       ]
     },
     {
-      "date": "2026-05-22",
-      "mv_usd": 8071224.4459664,
+      "date": "2026-05-23",
+      "mv_usd": 8071944.4459664,
       "holdings": [
         {
           "ticker": "CSPX",
@@ -543,8 +543,8 @@
         {
           "ticker": "ARGT",
           "qty": 4000.0,
-          "price": 90.32,
-          "mv": 361280.0,
+          "price": 90.4,
+          "mv": 361600.0,
           "source": "daily_close"
         },
         {
@@ -557,8 +557,8 @@
         {
           "ticker": "ILF",
           "qty": 10000.0,
-          "price": 34.89,
-          "mv": 348900.0,
+          "price": 34.93,
+          "mv": 349300.0,
           "source": "daily_close"
         }
       ]
@@ -636,11 +636,11 @@
       "index": 107.8672
     },
     {
-      "date": "2026-05-22",
-      "mv_usd": 8071224.4459664,
+      "date": "2026-05-23",
+      "mv_usd": 8071944.4459664,
       "flow_in": 0,
-      "twr": 0.06353819624453938,
-      "index": 114.7209
+      "twr": 0.06363307001572771,
+      "index": 114.7311
     }
   ],
   "acwi_index_series": [
@@ -695,9 +695,9 @@
       "index": 117.6296
     },
     {
-      "date": "2026-05-22",
-      "price": 156.02,
-      "index": 121.1071
+      "date": "2026-05-23",
+      "price": 155.99,
+      "index": 121.0838
     }
   ],
   "equity_flows_by_month": {
@@ -888,5 +888,5 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-05-22 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing May 18, 2026 1:57 PM EDT."
+  "_daily_refresh_note": "Punto 2026-05-23 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing May 18, 2026 1:57 PM EDT."
 }
