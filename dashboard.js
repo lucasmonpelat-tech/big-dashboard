@@ -1666,6 +1666,103 @@ async function renderEquityRace() {
 }
 
 // ==============================================================
+// NORMALIZED PERFORMANCE FI — estilo Koyfin (sleeve vs indices FI, base 100)
+// Indices on/off por defecto. AGG + LQD visibles, HYG + EMB ocultos.
+// ==============================================================
+const FI_NORM_DEFAULT_ON = { 'AGG': true, 'LQD': true, 'HYG': false, 'EMB': false };
+
+async function renderFINormalizedPerformance(twrSeries) {
+    const chartEl = document.getElementById('fi-norm-chart');
+    const togglesEl = document.getElementById('fi-norm-toggles');
+    if (!chartEl) return;
+
+    let bench;
+    try {
+        const r = await fetch('data/fi_bench_indices.json?_=' + Date.now());
+        if (!r.ok) throw new Error('no data');
+        bench = await r.json();
+    } catch (e) {
+        chartEl.innerHTML = '<div style="padding:40px;text-align:center;color:#FFA726;">' +
+            'Datos de índices FI no disponibles. Corré: <code>python scripts/fi_bench_indices_refresher.py</code></div>';
+        return;
+    }
+
+    // Sleeve trace (siempre visible, dorado)
+    const sleeveTrace = {
+        x: twrSeries.map(p => p.date),
+        y: twrSeries.map(p => p.index),
+        name: 'BIG FI Sleeve',
+        type: 'scatter', mode: 'lines+markers',
+        line: { color: '#D4AF37', width: 3.5 },
+        marker: { size: 7, color: '#D4AF37' },
+        hovertemplate: '%{x|%b %Y}<br><b>BIG FI</b>: %{y:.2f}<extra></extra>',
+    };
+
+    // Un trace por indice; visibilidad inicial segun FI_NORM_DEFAULT_ON
+    const idxKeys = Object.keys(bench.indices || {});
+    const benchTraces = idxKeys.map(k => {
+        const idx = bench.indices[k];
+        const on = FI_NORM_DEFAULT_ON[k] !== false;
+        return {
+            x: idx.series.map(p => p.date),
+            y: idx.series.map(p => p.index),
+            name: idx.name,
+            type: 'scatter', mode: 'lines+markers',
+            line: { color: idx.color || '#90A4AE', width: 2, dash: 'dot' },
+            marker: { size: 5, color: idx.color || '#90A4AE' },
+            visible: on ? true : 'legendonly',
+            hovertemplate: '%{x|%b %Y}<br><b>' + idx.name + '</b>: %{y:.2f}<extra></extra>',
+        };
+    });
+
+    const traces = [sleeveTrace, ...benchTraces];
+    const layout = {
+        paper_bgcolor: '#1A2A3D', plot_bgcolor: '#12243A',
+        font: { color: '#90CAF9', family: 'Segoe UI, Arial', size: 11 },
+        margin: { t: 30, r: 24, b: 48, l: 60 },
+        legend: { orientation: 'h', x: 0, y: 1.08, bgcolor: 'rgba(0,0,0,0)', font: { size: 12, color: '#ECEFF1' } },
+        xaxis: { gridcolor: '#1F3864', linecolor: '#2E74B5', tickfont: { size: 10 }, type: 'date' },
+        yaxis: { gridcolor: '#1F3864', linecolor: '#2E74B5', tickfont: { size: 10 }, title: { text: 'Base 100 (Inception 31-Jul-2025)', font: { size: 11 } } },
+        hovermode: 'x unified',
+        hoverlabel: { bgcolor: '#1F3864', bordercolor: '#2E74B5', font: { color: '#FFF' } },
+    };
+    Plotly.newPlot('fi-norm-chart', traces, layout, { responsive: true, displaylogo: false });
+
+    // Chips de selección — toggle de visibilidad por índice (trace index = k+1)
+    if (togglesEl) {
+        const ytd = (series) => {
+            const a = series.find(p => p.date === '2025-12-31');
+            const last = series[series.length - 1];
+            return (a && last) ? ((last.index / a.index - 1) * 100) : null;
+        };
+        togglesEl.innerHTML = idxKeys.map((k, i) => {
+            const idx = bench.indices[k];
+            const on = FI_NORM_DEFAULT_ON[k] !== false;
+            const y = ytd(idx.series);
+            const ytdStr = y == null ? '' : ` ${y >= 0 ? '+' : ''}${y.toFixed(1)}%`;
+            return `<button class="norm-chip" data-trace="${i + 1}" data-on="${on}" style="` +
+                `border:1.5px solid ${idx.color};border-radius:16px;padding:4px 12px;cursor:pointer;` +
+                `font-size:12px;font-weight:600;font-family:'Segoe UI';transition:all .15s;` +
+                `background:${on ? idx.color : 'transparent'};color:${on ? '#0D1B2A' : idx.color};">` +
+                `${idx.name}<span style="font-weight:400;opacity:.85;">${ytdStr}</span></button>`;
+        }).join('');
+
+        togglesEl.querySelectorAll('.norm-chip').forEach(btn => {
+            btn.onclick = () => {
+                const traceIdx = parseInt(btn.getAttribute('data-trace'), 10);
+                const isOn = btn.getAttribute('data-on') === 'true';
+                const newOn = !isOn;
+                Plotly.restyle('fi-norm-chart', { visible: newOn ? true : 'legendonly' }, [traceIdx]);
+                btn.setAttribute('data-on', String(newOn));
+                const color = btn.style.borderColor;
+                btn.style.background = newOn ? color : 'transparent';
+                btn.style.color = newOn ? '#0D1B2A' : color;
+            };
+        });
+    }
+}
+
+// ==============================================================
 // FI RACE TAB
 // ==============================================================
 async function renderFIRace() {
@@ -1883,6 +1980,11 @@ async function renderFIRace() {
         hoverlabel: { bgcolor: '#1F3864', bordercolor: '#2E74B5', font: { color: '#FFF' } }
     };
     Plotly.newPlot('fr-chart', traces, layout, { responsive: true, displaylogo: false });
+
+    // Normalized Performance FI chart (estilo Koyfin) — sleeve vs indices FI seleccionables
+    if (fiReal && fiReal.twr_series) {
+        renderFINormalizedPerformance(fiReal.twr_series);
+    }
 
     // Holdings table
     const sorted = [...holdings].sort((a, b) => (b.contribution_pct || -999) - (a.contribution_pct || -999));

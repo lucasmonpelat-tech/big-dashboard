@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-05-22T15:38:36.129116",
+  "refreshedAt": "2026-05-23T09:39:32.687948",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Fixed Income",
   "benchmark": "AGG",
@@ -339,50 +339,50 @@
       ]
     },
     {
-      "date": "2026-05-22",
+      "date": "2026-05-23",
       "mv_usd": 10325849.75,
       "holdings": [
-        {
-          "ticker": "PIMCO-INC",
-          "qty": 101032.585,
-          "price": 19.890000043055416,
-          "mv": 2009538.12,
-          "source": "pershing_positions"
-        },
         {
           "ticker": "PIMCO-LD",
           "qty": 288350.688,
           "price": 13.86999999112192,
           "mv": 3999424.04,
-          "source": "pershing_positions"
+          "source": "pershing_frozen"
         },
         {
-          "ticker": "PIMCO-EM",
-          "qty": 61949.011,
-          "price": 17.910000048265502,
-          "mv": 1109506.79,
-          "source": "pershing_positions"
+          "ticker": "PIMCO-INC",
+          "qty": 101032.585,
+          "price": 19.890000043055416,
+          "mv": 2009538.12,
+          "source": "pershing_frozen"
         },
         {
           "ticker": "MANIG",
           "qty": 15027.986,
           "price": 123.99999973382992,
           "mv": 1863470.26,
-          "source": "pershing_positions"
+          "source": "pershing_frozen"
         },
         {
-          "ticker": "SGCB",
-          "qty": 246.15,
-          "price": 2116.0400162502538,
-          "mv": 520863.25,
-          "source": "pershing_positions"
+          "ticker": "PIMCO-EM",
+          "qty": 61949.011,
+          "price": 17.910000048265502,
+          "mv": 1109506.79,
+          "source": "pershing_frozen"
         },
         {
           "ticker": "TGF",
           "qty": 532000.0,
           "price": 1.5470813721804513,
           "mv": 823047.29,
-          "source": "pershing_positions"
+          "source": "pershing_frozen"
+        },
+        {
+          "ticker": "SGCB",
+          "qty": 246.15,
+          "price": 2116.0400162502538,
+          "mv": 520863.25,
+          "source": "pershing_frozen"
         }
       ]
     }
@@ -459,7 +459,7 @@
       "index": 105.001
     },
     {
-      "date": "2026-05-22",
+      "date": "2026-05-23",
       "mv_usd": 10325849.75,
       "flow_in": 0,
       "twr": -0.00377900273580134,
@@ -518,9 +518,9 @@
       "index": 103.4948
     },
     {
-      "date": "2026-05-22",
-      "price": 98.3550033569336,
-      "index": 103.06
+      "date": "2026-05-23",
+      "price": 98.44,
+      "index": 103.1491
     }
   ],
   "fi_flows_by_month": {
@@ -709,5 +709,6 @@
       "last_qty": 532000.0,
       "n_trades": 2
     }
-  }
+  },
+  "_daily_refresh_note": "Punto 2026-05-23 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing May 18, 2026 1:57 PM EDT."
 }

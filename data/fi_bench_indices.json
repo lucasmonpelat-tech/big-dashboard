@@ -1,0 +1,256 @@
+{
+  "_description": "Series base-100 de indices FI de referencia alineadas a la grilla y fecha base del FI sleeve. Alimenta el grafico Normalized Performance.",
+  "refreshedAt": "2026-05-23T09:39:35.462042",
+  "source": "Yahoo Finance via fi_bench_indices_refresher.py",
+  "base_date": "2025-07-31",
+  "indices": {
+    "AGG": {
+      "name": "Bloomberg US Aggregate",
+      "ticker": "AGG",
+      "color": "#64B5F6",
+      "series": [
+        {
+          "date": "2025-07-31",
+          "price": 95.4347,
+          "index": 100.0
+        },
+        {
+          "date": "2025-08-31",
+          "price": 96.5707,
+          "index": 101.1904
+        },
+        {
+          "date": "2025-09-30",
+          "price": 97.6588,
+          "index": 102.3305
+        },
+        {
+          "date": "2025-10-31",
+          "price": 98.2599,
+          "index": 102.9604
+        },
+        {
+          "date": "2025-11-30",
+          "price": 98.8551,
+          "index": 103.584
+        },
+        {
+          "date": "2025-12-31",
+          "price": 98.5793,
+          "index": 103.295
+        },
+        {
+          "date": "2026-01-31",
+          "price": 98.826,
+          "index": 103.5535
+        },
+        {
+          "date": "2026-02-28",
+          "price": 100.4054,
+          "index": 105.2085
+        },
+        {
+          "date": "2026-03-31",
+          "price": 98.6036,
+          "index": 103.3205
+        },
+        {
+          "date": "2026-04-30",
+          "price": 98.77,
+          "index": 103.4949
+        },
+        {
+          "date": "2026-05-23",
+          "price": 98.44,
+          "index": 103.1491
+        }
+      ]
+    },
+    "HYG": {
+      "name": "iShares HY Corp",
+      "ticker": "HYG",
+      "color": "#EF5350",
+      "series": [
+        {
+          "date": "2025-07-31",
+          "price": 76.549,
+          "index": 100.0
+        },
+        {
+          "date": "2025-08-31",
+          "price": 77.3951,
+          "index": 101.1053
+        },
+        {
+          "date": "2025-09-30",
+          "price": 78.0808,
+          "index": 102.0011
+        },
+        {
+          "date": "2025-10-31",
+          "price": 78.0721,
+          "index": 101.9897
+        },
+        {
+          "date": "2025-11-30",
+          "price": 78.6548,
+          "index": 102.7509
+        },
+        {
+          "date": "2025-12-31",
+          "price": 79.0422,
+          "index": 103.2571
+        },
+        {
+          "date": "2026-01-31",
+          "price": 79.5226,
+          "index": 103.8846
+        },
+        {
+          "date": "2026-02-28",
+          "price": 79.5216,
+          "index": 103.8833
+        },
+        {
+          "date": "2026-03-31",
+          "price": 78.7633,
+          "index": 102.8926
+        },
+        {
+          "date": "2026-04-30",
+          "price": 79.961,
+          "index": 104.4573
+        },
+        {
+          "date": "2026-05-23",
+          "price": 79.91,
+          "index": 104.3907
+        }
+      ]
+    },
+    "LQD": {
+      "name": "iShares IG Corp",
+      "ticker": "LQD",
+      "color": "#81C784",
+      "series": [
+        {
+          "date": "2025-07-31",
+          "price": 105.0799,
+          "index": 100.0
+        },
+        {
+          "date": "2025-08-31",
+          "price": 106.1765,
+          "index": 101.0436
+        },
+        {
+          "date": "2025-09-30",
+          "price": 108.1697,
+          "index": 102.9404
+        },
+        {
+          "date": "2025-10-31",
+          "price": 108.3314,
+          "index": 103.0943
+        },
+        {
+          "date": "2025-11-30",
+          "price": 109.3401,
+          "index": 104.0542
+        },
+        {
+          "date": "2025-12-31",
+          "price": 108.5338,
+          "index": 103.2869
+        },
+        {
+          "date": "2026-01-31",
+          "price": 108.9081,
+          "index": 103.6431
+        },
+        {
+          "date": "2026-02-28",
+          "price": 110.4088,
+          "index": 105.0712
+        },
+        {
+          "date": "2026-03-31",
+          "price": 108.1202,
+          "index": 102.8933
+        },
+        {
+          "date": "2026-04-30",
+          "price": 108.425,
+          "index": 103.1834
+        },
+        {
+          "date": "2026-05-23",
+          "price": 108.37,
+          "index": 103.131
+        }
+      ]
+    },
+    "EMB": {
+      "name": "iShares EM USD Bonds",
+      "ticker": "EMB",
+      "color": "#BA68C8",
+      "series": [
+        {
+          "date": "2025-07-31",
+          "price": 88.9977,
+          "index": 100.0
+        },
+        {
+          "date": "2025-08-31",
+          "price": 90.5964,
+          "index": 101.7964
+        },
+        {
+          "date": "2025-09-30",
+          "price": 92.0194,
+          "index": 103.3953
+        },
+        {
+          "date": "2025-10-31",
+          "price": 93.8375,
+          "index": 105.4382
+        },
+        {
+          "date": "2025-11-30",
+          "price": 94.3036,
+          "index": 105.9618
+        },
+        {
+          "date": "2025-12-31",
+          "price": 94.6019,
+          "index": 106.2971
+        },
+        {
+          "date": "2026-01-31",
+          "price": 94.8967,
+          "index": 106.6283
+        },
+        {
+          "date": "2026-02-28",
+          "price": 96.441,
+          "index": 108.3636
+        },
+        {
+          "date": "2026-03-31",
+          "price": 93.075,
+          "index": 104.5814
+        },
+        {
+          "date": "2026-04-30",
+          "price": 95.39,
+          "index": 107.1826
+        },
+        {
+          "date": "2026-05-23",
+          "price": 95.17,
+          "index": 106.9354
+        }
+      ]
+    }
+  }
+}
