@@ -39,14 +39,14 @@ def load_daily_prices():
     """{ticker: precio_cierre_anterior} de baha (UCITS) + Stooq (ETFs)."""
     px = {}
     try:
-        ud = json.load(open(ROOT / "data" / "ucits_daily_nav.json"))
+        ud = json.load(open(ROOT / "data" / "ucits_daily_nav.json", encoding="utf-8"))
         for rec in ud.get("navs", {}).values():
             if rec.get("ticker") and rec.get("nav"):
                 px[rec["ticker"]] = rec["nav"]
     except Exception as e:
         print(f"  ucits_daily_nav skipped: {e}")
     try:
-        lp = json.load(open(ROOT / "data" / "live_prices.json"))
+        lp = json.load(open(ROOT / "data" / "live_prices.json", encoding="utf-8"))
         prices = lp.get("prices", lp)
         for tk, rec in prices.items():
             if isinstance(rec, dict) and rec.get("price"):
@@ -70,7 +70,7 @@ def fetch_agg_close():
 
 def main():
     print(f"[{datetime.now().isoformat()}] Refresh FI daily...")
-    data = json.load(open(SLEEVE_FILE))
+    data = json.load(open(SLEEVE_FILE, encoding="utf-8"))
     twr = data["twr_series"]
     agg = data["agg_index_series"]
     sleeve = data["sleeve_series_fi"]
@@ -82,7 +82,7 @@ def main():
     print(f"  Precios cierre anterior: {len(daily_px)} tickers")
 
     # qty actual de cada FI holding (Pershing positions_latest)
-    pl = json.load(open(ROOT / "data" / "positions_latest.json"))
+    pl = json.load(open(ROOT / "data" / "positions_latest.json", encoding="utf-8"))
     fi_qty = {p["ticker"]: p.get("qty") for p in pl["positions"] if p["sleeve"] == "Fixed Income"}
 
     # Indice del ultimo sleeve point para fallback (price/mv frozen)
@@ -126,11 +126,28 @@ def main():
         anchor = twr[-2]           # ultimo punto es un "today" previo -> lo reemplazamos
         append_new = False
 
+    # FIX: compute flow_in entre anchor y today comparando qty (Modified Dietz, flow al final).
+    # Sin esto, los buy/sell intra-mes inflan/desinflan el TWR. Ej en May 2026: MANEM +176sh
+    # agregaba ~$20K spurious. Mismo fix que refresh_equity_daily.py.
+    anchor_sleeve = next((s for s in sleeve if s["date"] == anchor["date"]), None)
+    anchor_holdings = {h["ticker"]: h for h in (anchor_sleeve or {}).get("holdings", [])}
+    flow_in = 0.0
+    for tk, qty_today in fi_qty.items():
+        if not qty_today or qty_today <= 0:
+            continue
+        qty_anchor = (anchor_holdings.get(tk) or {}).get("qty") or 0
+        delta = qty_today - qty_anchor
+        if abs(delta) > 0.001:
+            px = daily_px.get(tk) or (anchor_holdings.get(tk) or {}).get("price") or 0
+            flow_in += delta * px
+    if abs(flow_in) > 1:
+        print(f"  flow_in detectado desde {anchor['date']}: ${flow_in:+,.0f}")
+
     mv_anchor = anchor["mv_usd"]
-    twr_today = (mv_today / mv_anchor - 1) if mv_anchor else 0
+    twr_today = ((mv_today - flow_in) / mv_anchor - 1) if mv_anchor else 0
     index_today = anchor["index"] * (1 + twr_today)
 
-    new_twr_point = {"date": today_iso, "mv_usd": mv_today, "flow_in": 0,
+    new_twr_point = {"date": today_iso, "mv_usd": mv_today, "flow_in": round(flow_in, 2),
                      "twr": twr_today, "index": round(index_today, 4)}
     new_sleeve_point = {"date": today_iso, "mv_usd": mv_today, "holdings": holdings_today}
 
