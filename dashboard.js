@@ -1336,7 +1336,8 @@ async function renderEquityRace() {
         data = await r.json();
     } catch(e) {
         console.warn('equity_race.json not available', e);
-        document.getElementById('er-chart').innerHTML =
+        const fallbackEl = document.getElementById('er-norm-chart') || document.getElementById('er-pie-equity');
+        if (fallbackEl) fallbackEl.innerHTML =
             '<div style="padding:40px;text-align:center;color:#EF5350;">Data not available. Run: <code>python scripts/equity_race.py</code></div>';
         return;
     }
@@ -1464,65 +1465,8 @@ async function renderEquityRace() {
         </tr>
     `;
 
-    // Race chart — use REAL TWR series if available
-    let traces;
-    if (realData && realData.twr_series) {
-        const r_s = realData.twr_series;
-        const r_a = realData.acwi_index_series;
-        traces = [
-            {
-                x: r_s.map(p => p.date),
-                y: r_s.map(p => p.index),
-                name: 'BIG Equity Sleeve (TWR real)',
-                type: 'scatter', mode: 'lines+markers',
-                line: { color: '#D4AF37', width: 3 },
-                marker: { size: 7, color: '#D4AF37' },
-                hovertemplate: '%{x|%b %Y}<br>Sleeve: <b>%{y:.2f}</b><extra></extra>'
-            },
-            {
-                x: r_a.map(p => p.date),
-                y: r_a.map(p => p.index),
-                name: 'MSCI ACWI',
-                type: 'scatter', mode: 'lines+markers',
-                line: { color: '#64B5F6', width: 2.5, dash: 'dot' },
-                marker: { size: 6, color: '#64B5F6' },
-                hovertemplate: '%{x|%b %Y}<br>ACWI: <b>%{y:.2f}</b><extra></extra>'
-            }
-        ];
-    } else {
-        const sleeveKeys = Object.keys(data.sleeve_index).sort();
-        const acwiKeys = Object.keys(data.acwi_index).sort();
-        traces = [
-            {
-                x: sleeveKeys.map(k => k + '-15'),
-                y: sleeveKeys.map(k => data.sleeve_index[k]),
-                name: 'BIG Equity Sleeve (backtest)',
-                type: 'scatter', mode: 'lines+markers',
-                line: { color: '#D4AF37', width: 3 },
-                marker: { size: 6, color: '#D4AF37' },
-            },
-            {
-                x: acwiKeys.map(k => k + '-15'),
-                y: acwiKeys.map(k => data.acwi_index[k]),
-                name: 'MSCI ACWI',
-                type: 'scatter', mode: 'lines+markers',
-                line: { color: '#64B5F6', width: 2.5, dash: 'dot' },
-                marker: { size: 5, color: '#64B5F6' },
-            }
-        ];
-    }
-    const layout = {
-        paper_bgcolor: '#1A2A3D',
-        plot_bgcolor: '#12243A',
-        font: { color: '#90CAF9', family: 'Segoe UI, Arial', size: 11 },
-        margin: { t: 30, r: 24, b: 48, l: 60 },
-        legend: { orientation: 'h', x: 0, y: 1.08, bgcolor: 'rgba(0,0,0,0)', font: { size: 13, color: '#ECEFF1' } },
-        xaxis: { gridcolor: '#1F3864', linecolor: '#2E74B5', tickfont: { size: 10 }, type: 'date' },
-        yaxis: { gridcolor: '#1F3864', linecolor: '#2E74B5', tickfont: { size: 10 }, title: { text: 'Base 100 (Inception 31-Jul-2025)', font: { size: 11 } } },
-        hovermode: 'x unified',
-        hoverlabel: { bgcolor: '#1F3864', bordercolor: '#2E74B5', font: { color: '#FFF' } }
-    };
-    Plotly.newPlot('er-chart', traces, layout, { responsive: true, displaylogo: false });
+    // Race Chart "er-chart" eliminado 2026-05-26 — el Normalized Performance abajo
+    // cubre la misma comparación BIG vs ACWI y agrega S&P 500, Nasdaq, MSCI World.
 
     // Normalized Performance chart (estilo Koyfin) — sleeve vs indices seleccionables
     if (realData && realData.twr_series) {
