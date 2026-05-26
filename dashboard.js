@@ -1795,7 +1795,8 @@ async function renderFIRace() {
         data = await r.json();
     } catch(e) {
         console.warn('fi_race.json not available', e);
-        document.getElementById('fr-chart').innerHTML =
+        const fallbackEl = document.getElementById('fi-norm-chart') || document.getElementById('fr-pie-fi');
+        if (fallbackEl) fallbackEl.innerHTML =
             '<div style="padding:40px;text-align:center;color:#EF5350;">FI data not available. Run: <code>python scripts/fi_race.py</code></div>';
         return;
     }
@@ -1877,53 +1878,8 @@ async function renderFIRace() {
         renderFIMonthlyBreakdown(fiReal.twr_series, fiReal.agg_index_series);
     }
 
-    // Chart
-    const sleeveKeys = Object.keys(data.sleeve_index).sort();
-    const aggKeys = Object.keys(data.agg_index).sort();
-    const traces = [
-        {
-            x: sleeveKeys.map(k => k + '-15'),
-            y: sleeveKeys.map(k => data.sleeve_index[k]),
-            name: 'BIG FI Sleeve',
-            type: 'scatter', mode: 'lines+markers',
-            line: { color: '#81C784', width: 3 },
-            marker: { size: 6, color: '#81C784' },
-            hovertemplate: '%{x|%b %Y}<br>Sleeve: <b>%{y:.2f}</b><extra></extra>'
-        },
-        {
-            x: aggKeys.map(k => k + '-15'),
-            y: aggKeys.map(k => data.agg_index[k]),
-            name: 'AGG Benchmark',
-            type: 'scatter', mode: 'lines+markers',
-            line: { color: '#64B5F6', width: 2.5, dash: 'dot' },
-            marker: { size: 5, color: '#64B5F6' },
-            hovertemplate: '%{x|%b %Y}<br>AGG: <b>%{y:.2f}</b><extra></extra>'
-        }
-    ];
-    // Agregar la serie REAL TWR (flow-adjusted desde transactions Pershing)
-    if (fiReal && fiReal.twr_series && fiReal.twr_series.length) {
-        traces.push({
-            x: fiReal.twr_series.map(p => p.date),
-            y: fiReal.twr_series.map(p => p.index),
-            name: 'BIG FI Sleeve REAL TWR',
-            type: 'scatter', mode: 'lines+markers',
-            line: { color: '#D4AF37', width: 3 },
-            marker: { size: 6, color: '#D4AF37', symbol: 'diamond' },
-            hovertemplate: '%{x|%b %Y}<br>REAL TWR: <b>%{y:.2f}</b><extra></extra>'
-        });
-    }
-    const layout = {
-        paper_bgcolor: '#1A2A3D',
-        plot_bgcolor: '#12243A',
-        font: { color: '#90CAF9', family: 'Segoe UI, Arial', size: 11 },
-        margin: { t: 30, r: 24, b: 48, l: 60 },
-        legend: { orientation: 'h', x: 0, y: 1.08, bgcolor: 'rgba(0,0,0,0)', font: { size: 13, color: '#ECEFF1' } },
-        xaxis: { gridcolor: '#1F3864', linecolor: '#2E74B5', tickfont: { size: 10 }, type: 'date' },
-        yaxis: { gridcolor: '#1F3864', linecolor: '#2E74B5', tickfont: { size: 10 }, title: { text: 'Base 100', font: { size: 11 } } },
-        hovermode: 'x unified',
-        hoverlabel: { bgcolor: '#1F3864', bordercolor: '#2E74B5', font: { color: '#FFF' } }
-    };
-    Plotly.newPlot('fr-chart', traces, layout, { responsive: true, displaylogo: false });
+    // Race Chart "fr-chart" eliminado 2026-05-26 — el Normalized Performance abajo
+    // cubre la misma comparación BIG FI vs AGG (mismo patron que Equity Race chart removal).
 
     // Normalized Performance FI chart (estilo Koyfin) — sleeve vs indices FI seleccionables
     if (fiReal && fiReal.twr_series) {
