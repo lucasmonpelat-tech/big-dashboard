@@ -42,7 +42,8 @@ INDICES = {
     "SP500":     {"ticker": "^GSPC", "name": "S&P 500",     "color": "#EF5350"},
     "ACWI":      {"ticker": "ACWI",  "name": "MSCI ACWI",   "color": "#64B5F6"},
     "NASDAQ100": {"ticker": "^NDX",  "name": "Nasdaq 100",  "color": "#BA68C8"},
-    "MSCIWORLD": {"ticker": "URTH",  "name": "MSCI World",  "color": "#4DB6AC"},
+    # MSCI World removido 2026-05-26: redundante con ACWI (la diferencia es ~11% EM
+    # que el sleeve BIG sí toma — comparar contra MSCI World es castigarse en años EM+).
 }
 
 

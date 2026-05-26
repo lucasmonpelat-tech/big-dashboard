@@ -1159,7 +1159,7 @@ function renderFIMonthlyBreakdown(twrSeries, aggSeries) {
 // NORMALIZED PERFORMANCE — estilo Koyfin (sleeve vs indices, base 100)
 // Indices on/off por defecto. SP500 + ACWI visibles, resto ocultos.
 // ==============================================================
-const NORM_DEFAULT_ON = { 'SP500': true, 'ACWI': true, 'NASDAQ100': false, 'MSCIWORLD': false };
+const NORM_DEFAULT_ON = { 'SP500': true, 'ACWI': true, 'NASDAQ100': false };
 
 async function renderNormalizedPerformance(twrSeries) {
     const chartEl = document.getElementById('er-norm-chart');
