@@ -29,7 +29,7 @@ const BIG_POSITIONS = [
     { isin: "US4642873909", ticker: "ILF", name: "iShares Latin America 40 ETF", sleeve: "Equity", value: 347500.00, pct: 1.31, terInst: 0.59, terA: null },
 
     // ----- ALTERNATIVES (mix of Pershing + external) -----
-    { isin: "LU2837777825", ticker: "CALP", name: "Carlyle AlpInvest Private Markets", sleeve: "Alternatives", value: 2722180.00, pct: 10.26, terInst: 1.00, terA: null },
+    { isin: "LU2827810776", ticker: "CALP", name: "Carlyle AlpInvest Private Markets", sleeve: "Alternatives", value: 2722180.00, pct: 10.26, terInst: 1.00, terA: null },
     { isin: "US46438F1012", ticker: "IBIT", name: "iShares Bitcoin Trust", sleeve: "Alternatives", value: 876869.00, pct: 3.31, terInst: 1.25, terA: null },
     { isin: "LU2659193242", ticker: "NBPEA", name: "NB Global Private Equity Access Fund LI", sleeve: "Alternatives", value: 856505.24, pct: 3.23, terInst: 0.40, terA: null },
     { isin: "US78463V1070", ticker: "GLD", name: "SPDR Gold Shares", sleeve: "Alternatives", value: 849795.65, pct: 3.20, terInst: 0.25, terA: null },
@@ -73,7 +73,7 @@ const FACTSHEET_LINKS = {
     "US78463V1070": "https://www.spdrgoldshares.com/usa/gld/",
     "US46438F1012": "https://www.blackrock.com/cl/productos/333011/ishares-bitcoin-trust-etf",
     "GCRED-I":      "https://gcredbdc.com/resources/",
-    "LU2837777825": "https://www.carlyle.com/caps-sicav",
+    "LU2827810776": "https://www.carlyle.com/caps-sicav",
     "LU2659193242": "https://www.nb.com/latam/products/private-equity",
     "IE00B87KCF77": "https://www.pimco.com/sg/en/investments/gis/income-fund/inst-usd-accumulation",
     "IE00BDT57R20": "https://www.pimco.com/sg/en/investments/gis/low-duration-income-fund/inst-usd-accumulation",
@@ -106,7 +106,7 @@ const CURRENCY_EXPOSURE = {
     "US46438F1012": { exposures: [{c:"BTC",p:100}], note: "IBIT — Bitcoin, digital asset", src: "BlackRock IBIT" },
     "GCRED-I":      { exposures: [{c:"USD",p:100}], note: "GCRED — mid-market USD loans, floating rate", src: "GCRED docs" },
     "KYG4737U1085": { exposures: [{c:"USD",p:100}], note: "HLEND — USD corporate lending", src: "Investment policy" },
-    "LU2837777825": { exposures: [{c:"USD",p:65},{c:"EUR",p:25},{c:"GBP",p:10}], note: "Carlyle — global PE multi-currency", src: "Carlyle CAPS SICAV" },
+    "LU2827810776": { exposures: [{c:"USD",p:65},{c:"EUR",p:25},{c:"GBP",p:10}], note: "Carlyle — global PE multi-currency", src: "Carlyle CAPS SICAV" },
     "LU2659193242": { exposures: [{c:"USD",p:60},{c:"EUR",p:30},{c:"GBP",p:10}], note: "NB PE — global multi-currency", src: "NB docs" },
     "XS2658535526": { exposures: [{c:"USD",p:100}], note: "Barings — USD corporate lending", src: "Manager email" },
     "LU2966298809":     { exposures: [{c:"USD",p:80},{c:"EUR",p:15},{c:"GBP",p:5}], note: "Flex-Lexington — secondaries PE global", src: "Flex-Lex docs" },
@@ -146,7 +146,7 @@ const CURRENT_YIELD = {
     "US46438F1012": { y: 0,    t: "N/A",                  n: "IBIT — no yield (BTC)",         m: false },
     "GCRED-I":      { y: 10.5, t: "Distribution Rate",    n: "GCRED — ~SOFR+5.5% floating",   m: false },
     "KYG4737U1085": { y: 9.1,  t: "Distribution Rate",    n: "HLEND — estimated",             m: true  },
-    "LU2837777825": { y: null, t: "N/A — illiquid PE",    n: "Carlyle — return via cap gain", m: false },
+    "LU2827810776": { y: null, t: "N/A — illiquid PE",    n: "Carlyle — return via cap gain", m: false },
     "LU2659193242": { y: null, t: "N/A — illiquid PE",    n: "NB PE — return via cap gain",   m: false },
     "XS2658535526": { y: 9.4,  t: "Distribution Rate",    n: "Barings BPCC — email datum",    m: true  },
     "LU2966298809":     { y: null, t: "N/A — illiquid PE",    n: "Flex-Lex — secondaries",        m: false },
@@ -181,7 +181,7 @@ const ALTS_LIQUIDITY = {
     "LU2966298809":     { profile: "annual",    ticker: "FLEX",  redemption: "1-3y lock + annual exits (Flex-Lex)" },
 
     // Long-lock — illiquid PE with multi-year hard lock
-    "LU2837777825": { profile: "long_lock", ticker: "CALP",  redemption: "1y soft-lock + 5y hard-lock (Carlyle)" },
+    "LU2827810776": { profile: "long_lock", ticker: "CALP",  redemption: "1y soft-lock + 5y hard-lock (Carlyle)" },
 };
 
 // ============================================================
@@ -267,7 +267,7 @@ const COUNTRY_EXPOSURE = {
     "US46438F1012": [{c:"GLOBAL",p:100}],
     "GCRED-I":      [{c:"US",p:100}],
     "KYG4737U1085": [{c:"US",p:90},{c:"UK",p:7},{c:"OTHER",p:3}],
-    "LU2837777825": [{c:"US",p:55},{c:"UK",p:15},{c:"FR",p:10},{c:"DE",p:8},{c:"OTHER",p:12}],
+    "LU2827810776": [{c:"US",p:55},{c:"UK",p:15},{c:"FR",p:10},{c:"DE",p:8},{c:"OTHER",p:12}],
     "LU2659193242": [{c:"US",p:50},{c:"UK",p:18},{c:"FR",p:10},{c:"DE",p:8},{c:"OTHER",p:14}],
     "XS2658535526": [{c:"US",p:90},{c:"UK",p:5},{c:"OTHER",p:5}],
     "LU2966298809":     [{c:"US",p:60},{c:"UK",p:15},{c:"FR",p:10},{c:"DE",p:8},{c:"OTHER",p:7}],

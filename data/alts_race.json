@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-05-12T14:59:27.066986",
+  "refreshedAt": "2026-05-26T12:37:51.373158",
   "inception": "2025-06-30",
   "benchmark_primary": "60/40 blend (60% ACWI + 40% AGG)",
   "benchmark_secondary": "HFRX Global HF proxy (QAI ETF)",
@@ -141,19 +141,19 @@
   },
   "holdings": [
     {
-      "isin": "LU2837777825",
+      "isin": "LU2827810776",
       "ticker": "CALP",
       "name": "Carlyle AlpInvest Private Markets",
       "sub_class": "private_equity",
-      "value_usd": 2722180,
+      "value_usd": 2722181,
       "weight_pct": 35.45,
-      "si_return_pct": -2.79,
+      "si_return_pct": 45.8,
       "ytd_return_pct": 3.33,
       "contribution_pct": -0.99,
       "ytd_contribution_pct": 1.24,
       "assumed_annual_pct": 12.0,
-      "source": "Carlyle AlpInvest statement (NAV)",
-      "valuation_date": "2025-12-31"
+      "source": "Carlyle AlpInvest statement (NAV) \u2014 2026-02-27",
+      "valuation_date": "2026-02-27"
     },
     {
       "isin": "US46438F1012",
@@ -261,5 +261,6 @@
       "valuation_date": "2025-12-31"
     }
   ],
-  "_alts_ytd_real_note": "YTD 2026 reconstruido desde statements reales (Carlyle dic + Pershing dic/feb). Reemplaza proxy PSP+carry. Actualizado 2026-05-20."
+  "_alts_ytd_real_note": "YTD 2026 reconstruido desde statements reales (Carlyle dic + Pershing dic/feb). Reemplaza proxy PSP+carry. Actualizado 2026-05-20.",
+  "_calp_correction_note": "2026-05-23: corregidos ISIN (LU2827810776), valuation_date (2026-02-27) y si_return_pct (45.80) segun statement Mar-26 (Period End 27-Feb-2026)"
 }

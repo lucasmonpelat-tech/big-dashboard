@@ -1,0 +1,22 @@
+{
+  "_description": "Source of truth para CALP (Carlyle AlpInvest) \u2014 unico holding Alts cuya valuation llega por fuera de Pershing. Cada entry es un statement; el ultimo por 'as_of' manda. Alimenta alts_race.json en refresh_alts_daily.py.",
+  "refreshedAt": "2026-05-26T12:37:51.373158",
+  "source": "Statements oficiales Carlyle AlpInvest (PDF)",
+  "statements": {
+    "CALP": [
+      {
+        "as_of": "2026-02-27",
+        "isin": "LU2827810776",
+        "fund_name": "Carlyle AlpInvest PM Sub-Fund - I - Class B1",
+        "shares": 186706.497,
+        "nav_per_share": 14.58,
+        "mv_usd": 2722180.73,
+        "ytd_return_pct": 3.33,
+        "si_return_pct": 45.8,
+        "since_inception_date": "2024-06-28",
+        "source_doc": "Statement Carlyle  Mar 26.pdf",
+        "notes": "YTD vs 31-Dec-2025 NAV 14.11. Suscripcion unica 29-Aug-2025 $2.5M @ 13.39."
+      }
+    ]
+  }
+}
