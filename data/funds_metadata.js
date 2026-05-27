@@ -225,19 +225,22 @@ const PORT_PERF_DETAIL = {
 };
 
 // ============================================================
-// LYNK LIVE DATA (manual refresh from lynkmarkets.com)
-// Last refresh: 19-Apr-2026
+// LYNK LIVE DATA — SOLO valores estaticos (isin, inception, url).
+// Los numeros (nav/aum/returns) los sobreescribe dashboard.js leyendo
+// data/lynk_data.json (cron diario lynk_refresher.py 13:00 ART).
+// Si el fetch falla, los campos quedan null -> dashboard muestra "—".
+// Last sync to lynk_data.json: 2026-05-27 (NAV 105.198, YTD 1.37%)
 // ============================================================
 window.LYNK_DATA = {
-    nav: 105.394,
-    change24h: -0.14,  // from Lynk page
-    aum: 26422629.18,  // from Lynk Apr 26
-    returnYTD: 1.57,
-    returnSI: 5.40,
-    returnAnnualized: 6.64,
-    volatility: 4.96,
-    sharpe: 0.43,
-    lastUpdate: "2026-04-26",
+    nav: 105.198,
+    change24h: 0.10,
+    aum: 26518282.14,
+    returnYTD: 1.37,
+    returnSI: 5.20,
+    returnAnnualized: 5.82,
+    volatility: 5.41,
+    sharpe: 0.24,
+    lastUpdate: "2026-05-26",
     inception: "2025-06-30",
     isin: "XS3037627794",
     url: "https://app.lynkmarkets.com/public/products/4w9aANBbvM"
