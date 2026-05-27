@@ -219,6 +219,23 @@ def main():
         else:
             h["weight_pct"] = round(h["value_usd"] / total_active * 100, 2)
 
+    # Recalcular YTD del sleeve via weighted holding contribution real (de statements).
+    # Esto sobreescribe el sleeve_index proxy que tenia spikes irreales (-5%/+5%
+    # mensuales que no reflejan el comportamiento de illiquidos PE/PC).
+    # Source of truth: statements (Carlyle + iCapital) + live prices (IBIT/GLD/BPCC).
+    #
+    # NOTA: 1M/3M/6M y SI se mantienen del sleeve_index proxy (a pesar de ser
+    # imperfectos). Para fixearlos hay que reconstruir el sleeve_index mensual desde
+    # los monthly returns por holding -- en el roadmap pero requiere historial MV
+    # por holding (que no tenemos pre-Q1 2026 para todos).
+    ytd_weighted = sum(
+        (h["value_usd"] / total_active) * (h.get("ytd_return_pct") or 0)
+        for h in active
+    )
+    stats = ar.setdefault("stats_vs_6040", {})
+    returns = stats.setdefault("returns", {})
+    returns.setdefault("YTD", {})["sleeve"] = round(ytd_weighted, 2)
+
     ar["refreshedAt"] = datetime.now().isoformat()
     ar["_daily_refresh_note"] = (
         f"Refresh diario {today_iso}: "
