@@ -1,0 +1,127 @@
+{
+  "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
+  "refreshedAt": "2026-05-27T12:38:57.997639",
+  "as_of_date": "2026-05-27",
+  "ytd_anchor": "2025-12-31",
+  "days_ytd": 147,
+  "sleeves": [
+    {
+      "name": "Equity",
+      "value_usd": 8075214.8,
+      "weight_pct": 30.33,
+      "ytd_pct": 5.84,
+      "contribution_pp": 1.772
+    },
+    {
+      "name": "Fixed Income",
+      "value_usd": 10374989.48,
+      "weight_pct": 38.97,
+      "ytd_pct": 0.48,
+      "contribution_pp": 0.188
+    },
+    {
+      "name": "Alternatives",
+      "value_usd": 7868601.59,
+      "weight_pct": 29.56,
+      "ytd_pct": 0.65,
+      "contribution_pp": 0.193
+    },
+    {
+      "name": "Cash",
+      "value_usd": 303961.17,
+      "weight_pct": 1.14,
+      "ytd_pct": 2.13,
+      "contribution_pp": 0.024
+    }
+  ],
+  "gross_reconstructed_pct": 2.177,
+  "mgmt_fee_pp": -0.725,
+  "mgmt_fee_rate_annual_pct": 1.8,
+  "net_reconstructed_pct": 1.452,
+  "lynk_ytd_pct": 1.37,
+  "lynk_refreshed_at": "2026-05-26T18:15:42.476876",
+  "residual_pp": 0.082,
+  "alts_detail": [
+    {
+      "ticker": "CALP",
+      "name": "Carlyle AlpInvest Private Markets",
+      "value_usd": 2722180.73,
+      "weight_pct": 34.59,
+      "ytd_pct": 3.33,
+      "contribution_pp": 1.152,
+      "source": "Carlyle statement (2026-02-27)",
+      "valuation_date": "2026-02-27"
+    },
+    {
+      "ticker": "HLGPI",
+      "name": "Hamilton Lane Global Private Infrastructure Fund",
+      "value_usd": 1100000.0,
+      "weight_pct": 13.98,
+      "ytd_pct": 0,
+      "contribution_pp": 0.0,
+      "source": "Pershing (pending confirm — trade 2026-05-26)",
+      "valuation_date": "2026-05-26"
+    },
+    {
+      "ticker": "IBIT",
+      "name": "iShares Bitcoin Trust",
+      "value_usd": 869085.84,
+      "weight_pct": 11.04,
+      "ytd_pct": -11.95,
+      "contribution_pp": -1.32,
+      "source": "Stooq cierre 2026-05-26",
+      "valuation_date": "2026-05-26"
+    },
+    {
+      "ticker": "GLD",
+      "name": "SPDR Gold Shares",
+      "value_usd": 842490.0,
+      "weight_pct": 10.71,
+      "ytd_pct": 7.19,
+      "contribution_pp": 0.77,
+      "source": "Stooq cierre 2026-05-26",
+      "valuation_date": "2026-05-26"
+    },
+    {
+      "ticker": "HLEND",
+      "name": "HPS Corporate Lending Fund",
+      "value_usd": 755225.89,
+      "weight_pct": 9.6,
+      "ytd_pct": 0.62,
+      "contribution_pp": 0.06,
+      "source": "iCapital statement (2026-03-31)",
+      "valuation_date": "2026-03-31"
+    },
+    {
+      "ticker": "BPCC",
+      "name": "Barings Private Credit Corporation",
+      "value_usd": 590009.64,
+      "weight_pct": 7.5,
+      "ytd_pct": 1.48,
+      "contribution_pp": 0.111,
+      "source": "Pershing T-1 (2026-05-22)",
+      "valuation_date": "2026-05-22"
+    },
+    {
+      "ticker": "FLEX",
+      "name": "Flex-Lexington Partners Secondaries",
+      "value_usd": 499999.99,
+      "weight_pct": 6.35,
+      "ytd_pct": 0,
+      "contribution_pp": 0.0,
+      "source": "Pershing T-1 (2026-03-31)",
+      "valuation_date": "2026-03-31"
+    },
+    {
+      "ticker": "GCRED",
+      "name": "Golub Capital Private Credit",
+      "value_usd": 490583.01,
+      "weight_pct": 6.23,
+      "ytd_pct": -1.92,
+      "contribution_pp": -0.12,
+      "source": "iCapital statement (2026-03-31)",
+      "valuation_date": "2026-03-31"
+    }
+  ],
+  "total_aum": 26622767.04
+}

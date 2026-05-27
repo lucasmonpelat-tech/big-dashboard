@@ -2639,6 +2639,8 @@ async function renderSleeveTwrAuditOne(cfg) {
 }
 
 async function renderDataHealth() {
+    // Atribucion YTD (peso x retorno por sleeve) — arriba del tab
+    renderAttributionYTD();
     // Render audit de cadena TWR mes a mes (al final del tab)
     renderSleeveTwrAudit();
 
@@ -2895,4 +2897,127 @@ async function renderDataHealth() {
     document.getElementById('dh-todos').innerHTML = todos.length
         ? `<ul style="color:#FFA726;">${todos.join('')}</ul>`
         : '<p style="color:#81C784;">✅ Todas las fuentes al día</p>';
+}
+
+// ==============================================================
+// ATRIBUCION YTD — cuadro "peso x retorno por sleeve" en Data Health
+// Lee data/attribution_ytd.json (generado diario por scripts/compute_attribution.py)
+// ==============================================================
+async function renderAttributionYTD() {
+    const container = document.getElementById('dh-attribution-container');
+    if (!container) return;
+
+    let d;
+    try {
+        const r = await fetch('data/attribution_ytd.json?_=' + Date.now());
+        if (!r.ok) throw new Error('no data');
+        d = await r.json();
+    } catch (e) {
+        container.innerHTML = '<div style="padding:20px;color:#FFA726;">Atribución YTD no disponible. Corré: <code>python scripts/compute_attribution.py</code></div>';
+        return;
+    }
+
+    // Helpers de formato
+    const fmtPct = (v, dec = 2) => {
+        if (v == null) return '—';
+        const sign = v >= 0 ? '+' : '';
+        const color = v >= 0 ? '#81C784' : '#EF5350';
+        return `<span style="color:${color};font-weight:600;">${sign}${v.toFixed(dec)}%</span>`;
+    };
+    const fmtPp = (v, dec = 3) => {
+        if (v == null) return '—';
+        const sign = v >= 0 ? '+' : '';
+        const color = v >= 0 ? '#81C784' : '#EF5350';
+        return `<strong style="color:${color};">${sign}${v.toFixed(dec)}pp</strong>`;
+    };
+    const fmtMoney = (v) => '$' + (v / 1e6).toFixed(2) + 'M';
+
+    // Semáforo del residuo
+    const absRes = Math.abs(d.residual_pp || 0);
+    let resBadge, resColor;
+    if (absRes <= 0.20) { resBadge = '🟢 OK'; resColor = '#81C784'; }
+    else if (absRes <= 0.50) { resBadge = '🟡 ACEPTABLE'; resColor = '#FFA726'; }
+    else { resBadge = '🔴 INVESTIGAR'; resColor = '#EF5350'; }
+
+    // Tabla principal — sleeves
+    const sleeveRows = d.sleeves.map(s => `
+        <tr>
+            <td class="left"><strong>${s.name}</strong></td>
+            <td>${fmtMoney(s.value_usd)}</td>
+            <td>${s.weight_pct.toFixed(2)}%</td>
+            <td>${fmtPct(s.ytd_pct)}</td>
+            <td>${fmtPp(s.contribution_pp)}</td>
+        </tr>
+    `).join('');
+
+    // Footer — reconciliacion
+    const summary = `
+        <tr style="border-top:2px solid #D4AF37;">
+            <td class="left" colspan="4"><strong>GROSS reconstruido</strong> (suma contribuciones)</td>
+            <td>${fmtPp(d.gross_reconstructed_pct, 3)}</td>
+        </tr>
+        <tr>
+            <td class="left" colspan="4" style="color:#90CAF9;">− Mgmt fee Lynk ${d.mgmt_fee_rate_annual_pct}% × ${d.days_ytd}/365</td>
+            <td>${fmtPp(d.mgmt_fee_pp, 3)}</td>
+        </tr>
+        <tr style="background:rgba(212,175,55,0.08);">
+            <td class="left" colspan="4"><strong>NET reconstruido</strong> (= gross − fee)</td>
+            <td>${fmtPp(d.net_reconstructed_pct, 3)}</td>
+        </tr>
+        <tr style="background:rgba(100,181,246,0.08);">
+            <td class="left" colspan="4"><strong>LYNK YTD oficial</strong> (estructurador)</td>
+            <td>${fmtPp(d.lynk_ytd_pct, 3)}</td>
+        </tr>
+        <tr style="border-top:1px solid ${resColor};">
+            <td class="left" colspan="4"><strong>RESIDUO</strong> (= NET − Lynk) <span style="color:${resColor};font-weight:700;">${resBadge}</span></td>
+            <td><strong style="color:${resColor};font-size:14px;">${(d.residual_pp >= 0 ? '+' : '') + d.residual_pp.toFixed(3)}pp</strong></td>
+        </tr>
+    `;
+
+    // Alts detail (collapsible)
+    const altsRows = (d.alts_detail || []).map(h => `
+        <tr>
+            <td class="left">${h.ticker}</td>
+            <td>${fmtMoney(h.value_usd)}</td>
+            <td>${h.weight_pct.toFixed(2)}%</td>
+            <td>${fmtPct(h.ytd_pct)}</td>
+            <td>${fmtPp(h.contribution_pp, 3)}</td>
+            <td class="left" style="font-size:11px;color:#90CAF9;">${h.valuation_date || ''} · ${(h.source || '').substring(0,40)}</td>
+        </tr>
+    `).join('');
+
+    container.innerHTML = `
+        <table class="data-table perf-table" style="margin-top:8px;">
+            <thead>
+                <tr>
+                    <th class="left">Sleeve</th>
+                    <th>MV</th>
+                    <th>Weight</th>
+                    <th>YTD return</th>
+                    <th>Contribución</th>
+                </tr>
+            </thead>
+            <tbody>${sleeveRows}${summary}</tbody>
+        </table>
+        <details style="margin-top:14px;">
+            <summary style="color:#D4AF37;cursor:pointer;font-weight:600;">📊 Detalle Alts holding-level (qué tiró el Alts YTD)</summary>
+            <table class="data-table" style="margin-top:8px;">
+                <thead>
+                    <tr>
+                        <th class="left">Ticker</th>
+                        <th>MV</th>
+                        <th>Weight (Alts)</th>
+                        <th>YTD return</th>
+                        <th>Contrib (a sleeve)</th>
+                        <th class="left">Fuente / Val date</th>
+                    </tr>
+                </thead>
+                <tbody>${altsRows}</tbody>
+            </table>
+        </details>
+        <div style="margin-top:10px;font-size:11px;color:#6B88A8;">
+            Computado: ${d.refreshedAt.substring(0,16).replace('T',' ')} · YTD anchor ${d.ytd_anchor} (${d.days_ytd} días) · AUM ${fmtMoney(d.total_aum)}
+            <br>Lynk last refresh: ${(d.lynk_refreshed_at || '').substring(0,16).replace('T',' ')}
+        </div>
+    `;
 }
