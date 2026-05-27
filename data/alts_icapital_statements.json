@@ -1,0 +1,119 @@
+{
+  "_description": "Source of truth para holdings Alts via iCapital (HLEND HPS Corporate Lending + GCRED Golub Capital Private Credit). Cada array es la historia mensual del NAV. El ultimo entry manda. Alimenta refresh_alts_daily.py.",
+  "refreshedAt": "2026-05-27T12:02:22.249497",
+  "source": "Statements oficiales BNY/iCapital (PDF) — extraidos automaticamente desde scripts/parse_factsheet o manual",
+  "statements": {
+    "HLEND": [
+      {
+        "as_of": "2025-10-31",
+        "shares": 672.7601,
+        "nav_per_share": 1100.9903,
+        "mv_usd": 740702.36,
+        "mtd_return_pct": 0.78,
+        "ytd_return_pct": 0.78,
+        "source_doc": "Statement-Oct-2025.pdf"
+      },
+      {
+        "as_of": "2025-11-30",
+        "shares": 672.7601,
+        "nav_per_share": 1109.5128,
+        "mv_usd": 746435.96,
+        "mtd_return_pct": 0.77,
+        "ytd_return_pct": 1.56,
+        "source_doc": "Statement-Nov-2025.pdf"
+      },
+      {
+        "as_of": "2025-12-31",
+        "shares": 672.7601,
+        "nav_per_share": 1115.6077,
+        "mv_usd": 750536.38,
+        "mtd_return_pct": 0.55,
+        "ytd_return_pct": 2.11,
+        "source_doc": "Statement-Dec-2025.pdf"
+      },
+      {
+        "as_of": "2026-01-31",
+        "shares": 672.7601,
+        "nav_per_share": 1123.8904,
+        "mv_usd": 756108.61,
+        "mtd_return_pct": 0.74,
+        "ytd_return_pct": 0.74,
+        "source_doc": "Statement-Jan-2026.pdf"
+      },
+      {
+        "as_of": "2026-02-28",
+        "shares": 672.7601,
+        "nav_per_share": 1119.7686,
+        "mv_usd": 753335.66,
+        "mtd_return_pct": -0.37,
+        "ytd_return_pct": 0.37,
+        "source_doc": "Statement-Feb-2026.pdf"
+      },
+      {
+        "as_of": "2026-03-31",
+        "shares": 672.7601,
+        "nav_per_share": 1122.5783,
+        "mv_usd": 755225.89,
+        "mtd_return_pct": 0.25,
+        "ytd_return_pct": 0.62,
+        "source_doc": "Statement-Mar-2026.pdf"
+      }
+    ],
+    "GCRED": [
+      {
+        "as_of": "2025-10-31",
+        "shares": 432.1639,
+        "nav_per_share": 1141.2585,
+        "mv_usd": 493210.73,
+        "mtd_return_pct": 0.66,
+        "ytd_return_pct": 0.66,
+        "source_doc": "Statement-Oct-2025.pdf"
+      },
+      {
+        "as_of": "2025-11-30",
+        "shares": 432.1639,
+        "nav_per_share": 1149.3284,
+        "mv_usd": 496698.25,
+        "mtd_return_pct": 0.71,
+        "ytd_return_pct": 1.37,
+        "source_doc": "Statement-Nov-2025.pdf"
+      },
+      {
+        "as_of": "2025-12-31",
+        "shares": 432.1639,
+        "nav_per_share": 1157.3905,
+        "mv_usd": 500182.39,
+        "mtd_return_pct": 0.7,
+        "ytd_return_pct": 2.08,
+        "source_doc": "Statement-Dec-2025.pdf"
+      },
+      {
+        "as_of": "2026-01-31",
+        "shares": 432.1639,
+        "nav_per_share": 1160.3991,
+        "mv_usd": 501482.61,
+        "mtd_return_pct": 0.26,
+        "ytd_return_pct": 0.26,
+        "source_doc": "Statement-Jan-2026.pdf"
+      },
+      {
+        "as_of": "2026-02-28",
+        "shares": 432.1639,
+        "nav_per_share": 1147.8391,
+        "mv_usd": 496054.6,
+        "mtd_return_pct": -1.08,
+        "ytd_return_pct": -0.83,
+        "source_doc": "Statement-Feb-2026.pdf"
+      },
+      {
+        "as_of": "2026-03-31",
+        "shares": 432.1639,
+        "nav_per_share": 1135.1782,
+        "mv_usd": 490583.01,
+        "mtd_return_pct": -1.1,
+        "ytd_return_pct": -1.92,
+        "source_doc": "Statement-Mar-2026.pdf"
+      }
+    ]
+  }
+}

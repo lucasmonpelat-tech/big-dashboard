@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-05-26T18:17:31.692833",
+  "refreshedAt": "2026-05-27T12:03:39.912581",
   "inception": "2025-06-30",
   "benchmark_primary": "60/40 blend (60% ACWI + 40% AGG)",
   "benchmark_secondary": "HFRX Global HF proxy (QAI ETF)",
@@ -146,7 +146,7 @@
       "name": "Carlyle AlpInvest Private Markets",
       "sub_class": "private_equity",
       "value_usd": 2722180.73,
-      "weight_pct": 34.6,
+      "weight_pct": 34.59,
       "si_return_pct": 45.8,
       "ytd_return_pct": 3.33,
       "contribution_pct": -0.99,
@@ -154,15 +154,15 @@
       "assumed_annual_pct": 12.0,
       "source": "Carlyle statement (2026-02-27)",
       "valuation_date": "2026-02-27",
-      "days_since_valuation": 88
+      "days_since_valuation": 89
     },
     {
       "isin": "US46438F1012",
       "ticker": "IBIT",
       "name": "iShares Bitcoin Trust",
       "sub_class": "crypto",
-      "value_usd": 867872.88,
-      "weight_pct": 11.03,
+      "value_usd": 869085.84,
+      "weight_pct": 11.04,
       "si_return_pct": -25.5,
       "ytd_return_pct": -11.95,
       "contribution_pct": -3.05,
@@ -170,7 +170,7 @@
       "assumed_annual_pct": null,
       "source": "Stooq cierre 2026-05-26",
       "valuation_date": "2026-05-26",
-      "days_since_valuation": 0
+      "days_since_valuation": 1
     },
     {
       "isin": "LU2659193242",
@@ -197,8 +197,8 @@
       "ticker": "GLD",
       "name": "SPDR Gold Shares",
       "sub_class": "commodity",
-      "value_usd": 838135.1,
-      "weight_pct": 10.65,
+      "value_usd": 842490.0,
+      "weight_pct": 10.71,
       "si_return_pct": 40.91,
       "ytd_return_pct": 7.19,
       "contribution_pct": 4.5,
@@ -206,23 +206,23 @@
       "assumed_annual_pct": null,
       "source": "Stooq cierre 2026-05-26",
       "valuation_date": "2026-05-26",
-      "days_since_valuation": 0
+      "days_since_valuation": 1
     },
     {
       "isin": "KYG4737U1085",
       "ticker": "HLEND",
       "name": "HPS Corporate Lending Fund",
       "sub_class": "private_credit",
-      "value_usd": 753336,
-      "weight_pct": 9.58,
+      "value_usd": 755225.89,
+      "weight_pct": 9.6,
       "si_return_pct": 8.67,
-      "ytd_return_pct": 0.37,
+      "ytd_return_pct": 0.62,
       "contribution_pct": 0.85,
       "ytd_contribution_pct": 0.04,
       "assumed_annual_pct": 9.5,
-      "source": "iCapital HPS (NAV trimestral)",
-      "valuation_date": "2025-12-31",
-      "days_since_valuation": 146
+      "source": "iCapital statement (2026-03-31)",
+      "valuation_date": "2026-03-31",
+      "days_since_valuation": 57
     },
     {
       "isin": "XS2658535526",
@@ -238,7 +238,7 @@
       "assumed_annual_pct": 9.5,
       "source": "Pershing T-1 (2026-05-22)",
       "valuation_date": "2026-05-22",
-      "days_since_valuation": 4
+      "days_since_valuation": 5
     },
     {
       "isin": "FLEX-LEX",
@@ -246,7 +246,7 @@
       "name": "Flex-Lexington Partners Secondaries",
       "sub_class": "private_equity",
       "value_usd": 499999.99,
-      "weight_pct": 6.36,
+      "weight_pct": 6.35,
       "si_return_pct": -2.79,
       "ytd_return_pct": null,
       "contribution_pct": -0.18,
@@ -254,23 +254,23 @@
       "assumed_annual_pct": 12.0,
       "source": "Pershing T-1 (2026-03-31)",
       "valuation_date": "2026-03-31",
-      "days_since_valuation": 56
+      "days_since_valuation": 57
     },
     {
       "isin": "GCRED-I",
       "ticker": "GCRED",
       "name": "Golub Capital Private Credit",
       "sub_class": "private_credit",
-      "value_usd": 496055,
-      "weight_pct": 6.31,
+      "value_usd": 490583.01,
+      "weight_pct": 6.23,
       "si_return_pct": 8.67,
-      "ytd_return_pct": -0.83,
+      "ytd_return_pct": -1.92,
       "contribution_pct": 0.56,
       "ytd_contribution_pct": -0.06,
       "assumed_annual_pct": 9.5,
-      "source": "iCapital Golub (NAV trimestral)",
-      "valuation_date": "2025-12-31",
-      "days_since_valuation": 146
+      "source": "iCapital statement (2026-03-31)",
+      "valuation_date": "2026-03-31",
+      "days_since_valuation": 57
     },
     {
       "isin": "LU2847068389",
@@ -287,11 +287,11 @@
       "source": "Pershing (pending confirm — trade 2026-05-26)",
       "valuation_date": "2026-05-26",
       "status": "pending_confirm",
-      "days_since_valuation": 0
+      "days_since_valuation": 1
     }
   ],
   "_alts_ytd_real_note": "YTD 2026 reconstruido desde statements reales (Carlyle dic + Pershing dic/feb). Reemplaza proxy PSP+carry. Actualizado 2026-05-20.",
   "_calp_correction_note": "2026-05-23: corregidos ISIN (LU2827810776), valuation_date (2026-02-27) y si_return_pct (45.80) segun statement Mar-26 (Period End 27-Feb-2026)",
   "_alts_changes_note": "2026-05-26: NBPEA cerrado (sold 2026-04-30, $862K proceeds). HLGPI agregado (Hamilton Lane Global Private Infrastructure, $1.1M pending confirm).",
-  "_daily_refresh_note": "Refresh diario 2026-05-26: 2 liquidos via Stooq T-1, 2 via Pershing T-1, 1 via Carlyle statement, 2 frozen statement. Total activo: $7,867,589."
+  "_daily_refresh_note": "Refresh diario 2026-05-27: 2 liquidos via Stooq T-1, 2 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $7,869,575."
 }

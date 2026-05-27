@@ -38,6 +38,7 @@ ALTS_FILE = ROOT / "data" / "alts_race.json"
 POSITIONS_FILE = ROOT / "data" / "positions_latest.json"
 LIVE_PRICES_FILE = ROOT / "data" / "live_prices.json"
 CARLYLE_FILE = ROOT / "data" / "alts_carlyle_statement.json"
+ICAPITAL_FILE = ROOT / "data" / "alts_icapital_statements.json"
 
 
 def load_stooq_prices():
@@ -75,6 +76,27 @@ def load_carlyle_latest():
     }
 
 
+def load_icapital_latest():
+    """Ultimo statement por holding del archivo iCapital (HLEND + GCRED).
+    Devuelve dict {ticker: {mv_usd, valuation_date, ytd_return_pct}} o {}."""
+    try:
+        cs = json.load(open(ICAPITAL_FILE, encoding="utf-8"))
+    except Exception:
+        return {}
+    out = {}
+    for ticker, statements in cs.get("statements", {}).items():
+        if not statements:
+            continue
+        latest = max(statements, key=lambda s: s.get("as_of", ""))
+        out[ticker] = {
+            "mv_usd": latest.get("mv_usd"),
+            "valuation_date": latest.get("as_of"),
+            "ytd_return_pct": latest.get("ytd_return_pct"),
+            "nav_per_share": latest.get("nav_per_share"),
+        }
+    return out
+
+
 def days_between(iso_date, today_iso):
     """Dias entre iso_date y today_iso. None si iso_date invalido."""
     if not iso_date:
@@ -97,17 +119,21 @@ def main():
                 if p["sleeve"] == "Alternatives"}
     stooq = load_stooq_prices()
     carlyle = load_carlyle_latest()
+    icapital = load_icapital_latest()  # {HLEND: {...}, GCRED: {...}}
 
     print(f"  Holdings Alts en positions: {len(alts_qty)}")
     print(f"  Stooq prices disponibles: {sum(1 for tk in alts_qty if tk in stooq)}/{len(alts_qty)}")
     if carlyle:
         print(f"  Carlyle (CALP) statement: {carlyle['valuation_date']} -> ${carlyle['mv_usd']:,.0f}")
+    for tk, st in icapital.items():
+        print(f"  iCapital ({tk}) statement: {st['valuation_date']} -> ${st['mv_usd']:,.0f}")
 
     # Cargar alts_race.json
     ar = json.load(open(ALTS_FILE, encoding="utf-8"))
 
     sources_summary = {"daily_close_stooq": [], "pershing_last": [],
-                       "carlyle_statement": [], "frozen_statement": [],
+                       "carlyle_statement": [], "icapital_statement": [],
+                       "frozen_statement": [],
                        "sold_skipped": [], "pending_confirm": []}
 
     for h in ar["holdings"]:
@@ -138,6 +164,19 @@ def main():
             h["days_since_valuation"] = days_between(
                 carlyle["valuation_date"], today_iso)
             sources_summary["carlyle_statement"].append(tk)
+            continue
+
+        # HLEND, GCRED -> iCapital statements (manager NAV via BNY)
+        if tk in icapital:
+            st = icapital[tk]
+            h["value_usd"] = round(st["mv_usd"], 2)
+            h["valuation_date"] = st["valuation_date"]
+            if st.get("ytd_return_pct") is not None:
+                h["ytd_return_pct"] = st["ytd_return_pct"]
+            h["source"] = f"iCapital statement ({st['valuation_date']})"
+            h["days_since_valuation"] = days_between(
+                st["valuation_date"], today_iso)
+            sources_summary["icapital_statement"].append(tk)
             continue
 
         # Holding liquido: precio fresco en Stooq -> recalc MV

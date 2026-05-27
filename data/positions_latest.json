@@ -1,9 +1,9 @@
 {
   "as_of": "May 26, 2026",
-  "refreshed_at": "2026-05-26T13:49:10.601999",
-  "pershing_total": 23904168.4,
+  "refreshed_at": "2026-05-27T12:02:22.251722",
+  "pershing_total": 23900587.04,
   "external_alts_total": 2722180.0,
-  "total_aum": 26626348.4,
+  "total_aum": 26622767.04,
   "_note": "Update 2026-05-26: NBPEA vendido 2026-04-30; HLGPI nuevo (pending confirm 2026-05-26); cash deducido $1.1M por HL pending; price_as_of agregado por holding (input freshness panel). | 2026-05-26 11:50: override de 4 ETFs intraday (IBIT/ILF/ARGT/GLD) con cierre anterior Stooq (2026-05-22). Regla: nunca intraday, siempre T-1 close.",
   "positions": [
     {
@@ -169,14 +169,14 @@
       "ticker": "HLEND",
       "name": "HPS Corporate Lending Fund",
       "sleeve": "Alternatives",
-      "value": 753335.66,
-      "pct": 2.83,
-      "qty": 753335.66,
-      "price": null,
+      "value": 755225.89,
+      "pct": 2.84,
+      "qty": 672.7601,
+      "price": 1122.5783,
       "ter_inst": 0.75,
       "ter_a": null,
-      "source": "Pershing",
-      "price_as_of": null
+      "source": "iCapital HPS statement (2026-03-31)",
+      "price_as_of": "2026-03-31"
     },
     {
       "isin": "IE00B6YCBF59",
@@ -184,7 +184,7 @@
       "name": "Thornburg Equity Income Builder I",
       "sleeve": "Equity",
       "value": 621672.59,
-      "pct": 2.33,
+      "pct": 2.34,
       "qty": 14410.584,
       "price": 43.14,
       "ter_inst": 0.89,
@@ -267,14 +267,14 @@
       "ticker": "GCRED",
       "name": "Golub Capital Private Credit",
       "sleeve": "Alternatives",
-      "value": 496054.6,
-      "pct": 1.86,
-      "qty": 496054.6,
-      "price": null,
+      "value": 490583.01,
+      "pct": 1.84,
+      "qty": 432.1639,
+      "price": 1135.1782,
       "ter_inst": 1.25,
       "ter_a": null,
-      "source": "Pershing",
-      "price_as_of": null
+      "source": "iCapital Golub statement (2026-03-31)",
+      "price_as_of": "2026-03-31"
     },
     {
       "isin": "US37950E2596",
@@ -338,7 +338,7 @@
       "name": "Carlyle AlpInvest Private Markets",
       "sleeve": "Alternatives",
       "value": 2722180.0,
-      "pct": 10.22,
+      "pct": 10.23,
       "qty": 186706.497,
       "price": 14.58,
       "ter_inst": 1.0,
