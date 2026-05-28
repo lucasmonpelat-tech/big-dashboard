@@ -49,11 +49,50 @@ ROOT = Path(__file__).parent.parent
 RACE_FILE = ROOT / "data" / "fi_race.json"
 FUND_NAV_FILE = ROOT / "data" / "fi_fund_nav.json"
 
+# ============================================================================
+# ANCLAS DE NAV (clases de ACUMULACION -> el NAV ya trae el cupon reinvertido,
+# asi que el retorno del NAV ES el retorno total). Cargar el NAV de CIERRE que
+# publica baha, EN LA MISMA MONEDA que el NAV vivo (SGCB en EUR, el resto USD).
+#   YTD = NAV_T1 / NAV_DEC31 - 1
+#   SI  = NAV_T1 / NAV_INCEPTION - 1     (inception BIG = 30-jun-2025)
+# Si un ISIN NO tiene ancla fija aca, se usa la calibracion implicita (fallback)
+# desde el retorno mensual de fi_race.py.
+#
+# PENDIENTE: Lucas pasa los NAV reales de baha. Completar y descomentar.
+# ============================================================================
+NAV_DEC31 = {
+    # "IE00BDT57R20": None,   # PIMCO-LD   (PIMCO GIS Low Duration Income I)
+    # "IE00B87KCF77": None,   # PIMCO-INC  (PIMCO GIS Income I)
+    # "IE00B29K0P99": None,   # PIMCO-EM   (PIMCO GIS EM Local Bond I)
+    # "IE000OE87WX6": None,   # MANIG      (Man GLG Global IG Opportunities)
+    # "LU2049315265": None,   # SGCB       (Schroder GAIA Cat Bond C, EUR)
+}
+NAV_INCEPTION = {
+    # NAV al 30-jun-2025 (inception BIG) por ISIN — opcional, para SI exacto.
+    # Si falta, SI cae al fallback (calibracion / mensual).
+}
 
-def status_for(alpha):
-    if alpha is None:
-        return None
-    return "outperform" if alpha > 0 else ("underperform" if alpha < 0 else "neutral")
+
+def _calibrated_return(anchors, isin, metric, live, ccy, basis_month, monthly_pct, today_iso):
+    """Fallback: ancla implicita calibrada desde el retorno MENSUAL de fi_race.py.
+
+    Calibra una vez por mes (cuando fi_race.py avanza de mes o cambia la moneda) y
+    queda fija; de ahi en mas el retorno = live/ancla - 1. El dia de calibracion
+    reproduce el mensual exacto (parcial=0). Devuelve (return_pct, anchor_dict) o
+    (None, None) si no hay baseline mensual para calibrar.
+    """
+    field = f"nav_anchor_{metric}"
+    a = anchors.get(isin) or {}
+    stale = (a.get(field) is None or a.get("basis_month") != basis_month or a.get("currency") != ccy)
+    if stale:
+        if monthly_pct is None:
+            return None, None
+        a[field] = live / (1 + monthly_pct / 100.0)
+        a["basis_month"] = basis_month
+        a["currency"] = ccy
+        a["anchor_date"] = today_iso
+        anchors[isin] = a
+    return (live / a[field] - 1) * 100, a
 
 
 def main():
@@ -77,7 +116,7 @@ def main():
     basis_month = (race.get("stats") or {}).get("latest_month")  # ej "2026-04"
     anchors = race.get("_daily_anchors", {})
 
-    updated, bootstrapped, skipped = [], [], []
+    updated, exact, calibrated, skipped = [], [], [], []
     for h in race.get("holdings", []):
         isin = h.get("isin")
         rec = fund_navs.get(isin)
@@ -89,65 +128,59 @@ def main():
             skipped.append(h.get("ticker"))
             continue
 
-        a = anchors.get(isin)
-        need_bootstrap = (
-            a is None
-            or a.get("basis_month") != basis_month
-            or a.get("currency") != ccy
-            or not a.get("nav_anchor_ytd")
-            or not a.get("nav_anchor_si")
-        )
+        dec31 = NAV_DEC31.get(isin)
+        incep = NAV_INCEPTION.get(isin)
 
-        if need_bootstrap:
-            # Calibrar anclas desde el retorno MENSUAL actual (limpio, recien
-            # corrido por fi_race.py) + el NAV vivo de hoy.
-            ytd_m = h.get("ytd_return_pct")
-            si_m = h.get("si_return_pct")
-            if ytd_m is None or si_m is None:
-                # No hay baseline mensual -> no se puede calibrar, dejar como esta
-                skipped.append(h.get("ticker"))
-                continue
-            a = {
-                "nav_anchor_ytd": live / (1 + ytd_m / 100.0),
-                "nav_anchor_si": live / (1 + si_m / 100.0),
-                "basis_month": basis_month,
-                "basis_ytd_pct": ytd_m,
-                "basis_si_pct": si_m,
-                "currency": ccy,
-                "anchor_date": today_iso,
-            }
-            anchors[isin] = a
-            bootstrapped.append(h.get("ticker"))
+        # ---- YTD ----
+        if dec31:
+            # EXACTO: NAV acumulativo / NAV real de baha al 31-dic (incluye cupon).
+            ytd_t1 = (live / dec31 - 1) * 100
+            ytd_src = "baha_nav_dec31"
+        else:
+            # FALLBACK: calibrar ancla implicita desde el YTD mensual de fi_race.py.
+            ytd_t1, a_ytd = _calibrated_return(anchors, isin, "ytd", live, ccy,
+                                               basis_month, h.get("ytd_return_pct"), today_iso)
+            ytd_src = "calibrated" if ytd_t1 is not None else None
 
-        # Bridge diario: retorno = nav_vivo / nav_ancla - 1
-        ytd_t1 = (live / a["nav_anchor_ytd"] - 1) * 100
-        si_t1 = (live / a["nav_anchor_si"] - 1) * 100
+        # ---- SI ----
+        if incep:
+            si_t1 = (live / incep - 1) * 100
+        else:
+            si_t1, a_si = _calibrated_return(anchors, isin, "si", live, ccy,
+                                             basis_month, h.get("si_return_pct"), today_iso)
+
+        if ytd_t1 is None:
+            skipped.append(h.get("ticker"))
+            continue
+
         weight = h.get("weight_pct") or 0
-
         h["ytd_return_pct"] = round(ytd_t1, 2)
-        h["si_return_pct"] = round(si_t1, 2)
+        if si_t1 is not None:
+            h["si_return_pct"] = round(si_t1, 2)
+            h["contribution_pct"] = round(si_t1 * weight / 100.0, 2)
         h["ytd_contribution_pct"] = round(ytd_t1 * weight / 100.0, 2)
-        h["contribution_pct"] = round(si_t1 * weight / 100.0, 2)
         h["nav_t1"] = round(live, 4)
         h["nav_currency"] = ccy
         h["nav_date"] = rec.get("scrapedAt")
-        h["return_source"] = "baha_daily_T1"
+        h["return_source"] = ytd_src
         updated.append(h.get("ticker"))
+        (exact if ytd_src == "baha_nav_dec31" else calibrated).append(h.get("ticker"))
 
     race["_daily_anchors"] = anchors
     race["refreshedAt"] = datetime.now().isoformat()
     race["_daily_race_note"] = (
-        f"Retornos por fondo recalculados {today_iso} con NAV vivo T-1 (baha) sobre "
-        f"ancla calibrada al cierre mensual {basis_month}. Fondos sin NAV vivo "
-        f"(carry/scrape fallido) quedan en su retorno mensual."
+        f"Retornos por fondo recalculados {today_iso} con NAV vivo T-1 (baha). "
+        f"YTD exacto (ancla NAV 31-dic): {exact or '—'}. "
+        f"YTD calibrado desde mensual {basis_month}: {calibrated or '—'}. "
+        f"Sin NAV vivo (carry/scrape): {skipped or '—'}."
     )
 
     with open(RACE_FILE, "w", encoding="utf-8") as f:
         json.dump(race, f, indent=2, ensure_ascii=False)
 
     print(f"  Actualizados T-1: {updated}")
-    if bootstrapped:
-        print(f"  Re-calibrados (nuevo mes/ancla): {bootstrapped}")
+    print(f"  YTD exacto (ancla 31-dic): {exact or '—'}")
+    print(f"  YTD calibrado (fallback mensual): {calibrated or '—'}")
     if skipped:
         print(f"  Sin NAV vivo (mensual/carry): {skipped}")
     print(f"  Basis month: {basis_month}")
