@@ -1883,10 +1883,24 @@ async function renderFIRace() {
     }
 
     const stats = data.stats || {};
-    const returns = stats.returns || {};
-    const ann = stats.annualized || {};
+    let returns = stats.returns || {};
+    let ann = stats.annualized || {};
     const holdings = data.holdings || [];
     const pm = data.portfolio_metrics || {};
+
+    // Multi-Period FRESCO (T-1): si fiReal (fi_sleeve_real.json, refrescado diario por
+    // el cron) tiene twr_series, recomputamos los returns con computeMultiPeriodReturns
+    // — mismo approach que Equity Race. Cae al fi_race.json (stats, mensual) solo si falta.
+    if (fiReal && fiReal.twr_series && fiReal.agg_index_series && fiReal.agg_index_series.length) {
+        // benchKey:'agg' -> cada row sale {sleeve, agg, alpha}, exactamente lo que lee
+        // fr-returns-body. ANN sale como result.ANN con la misma forma.
+        const fresh = computeMultiPeriodReturns(
+            fiReal.twr_series, fiReal.agg_index_series,
+            { benchKey: 'agg', toleranceDays: 31 }
+        );
+        returns = fresh;
+        if (fresh.ANN) ann = fresh.ANN;
+    }
 
     const fmtSigned = (v, unit='%') => {
         if (v == null) return '—';
