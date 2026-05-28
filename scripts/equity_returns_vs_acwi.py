@@ -241,7 +241,7 @@ def get_current_mv(ticker):
     pos_file = ROOT / "data" / "positions_latest.json"
     if not pos_file.exists():
         return None
-    with open(pos_file) as f:
+    with open(pos_file, encoding="utf-8") as f:
         d = json.load(f)
     for p in d["positions"]:
         if p.get("ticker") == ticker:
@@ -359,7 +359,7 @@ def main():
     pos_file = ROOT / "data" / "positions_latest.json"
     calc_date = date.today()
     if pos_file.exists():
-        with open(pos_file) as f:
+        with open(pos_file, encoding="utf-8") as f:
             pos = json.load(f)
         as_of_str = pos.get("as_of", "")
         # Parse "May 5, 2026 9:35 AM EDT"
@@ -431,7 +431,7 @@ def main():
         "holdings": results,
     }
     out_path = ROOT / "data" / "equity_returns_vs_acwi.json"
-    with open(out_path, "w") as f:
+    with open(out_path, "w", encoding="utf-8") as f:
         json.dump(out, f, indent=2)
     print(f"\n[OK] Saved detailed: {out_path}")
 
@@ -465,6 +465,14 @@ def main():
             "status": r["status"],
             "status_label": r["status_label"],
             "final_mv_usd": r["current_mv_usd"] if not r["is_closed"] else 0,
+            # === ANCHORS estaticos para el refresh DIARIO (refresh_equity_race_daily.py) ===
+            # El price race se recalcula diario: return = (close_T-1 - first_buy_price)/first_buy_price.
+            # Estos campos NO cambian dia a dia (solo cuando se reprocesan transactions).
+            "first_buy_price": r["first_buy_price"],
+            "first_buy_date": r["first_buy_date"],
+            "acwi_start": r["acwi_start"],            # ACWI price al first_buy_date
+            "qty_remaining": r["qty_remaining"],
+            "end_price": r["end_price"],              # snapshot al full-run; closed=last_sell_price (fijo), open=lo refresca el daily
         })
 
     dashboard_out = {
@@ -477,7 +485,7 @@ def main():
         "holdings": dashboard_holdings,
     }
     dashboard_path = ROOT / "data" / "equity_contributions_real.json"
-    with open(dashboard_path, "w") as f:
+    with open(dashboard_path, "w", encoding="utf-8") as f:
         json.dump(dashboard_out, f, indent=2)
     print(f"[OK] Saved dashboard-compat: {dashboard_path}")
     return 0
