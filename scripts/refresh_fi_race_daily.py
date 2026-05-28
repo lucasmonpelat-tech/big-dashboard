@@ -61,11 +61,13 @@ FUND_NAV_FILE = ROOT / "data" / "fi_fund_nav.json"
 # PENDIENTE: Lucas pasa los NAV reales de baha. Completar y descomentar.
 # ============================================================================
 NAV_DEC31 = {
-    # "IE00BDT57R20": None,   # PIMCO-LD   (PIMCO GIS Low Duration Income I)
-    # "IE00B87KCF77": None,   # PIMCO-INC  (PIMCO GIS Income I)
-    # "IE00B29K0P99": None,   # PIMCO-EM   (PIMCO GIS EM Local Bond I)
-    # "IE000OE87WX6": None,   # MANIG      (Man GLG Global IG Opportunities)
-    # "LU2049315265": None,   # SGCB       (Schroder GAIA Cat Bond C, EUR)
+    # Del statement Pershing 31-dic-2025 (precio 30/12/25), clases ACC:
+    "IE00B87KCF77": 20.0100,    # PIMCO-INC  (PIMCO Income Institutional ACC USD)
+    "IE000OE87WX6": 122.6100,   # MANIG      (Man GLG Global IG Opportunities IVY USD)
+    # PENDIENTE baha (no estaban en la cuenta al 31-dic, comprados en 2026):
+    # "IE00BDT57R20": None,     # PIMCO-LD   (PIMCO GIS Low Duration Income)
+    # "IE00B29K0P99": None,     # PIMCO-EM   (PIMCO GIS EM Local Bond)
+    # "LU2049315265": None,     # SGCB       (Schroder GAIA Cat Bond C, EUR)
 }
 NAV_INCEPTION = {
     # NAV al 30-jun-2025 (inception BIG) por ISIN — opcional, para SI exacto.
