@@ -2001,6 +2001,15 @@ async function renderFIRace() {
         const sign = v >= 0 ? '+' : '';
         return `<span style="color:${color};font-weight:700;">${sign}${v.toFixed(2)}pp</span>`;
     };
+    // NAV del cierre anterior (T-1) por fondo, de baha (refresh_fi_race_daily.py).
+    // Muestra el valor + moneda; la fecha del NAV va en el tooltip. "—" si aun no
+    // hay NAV vivo (TGF carry, MANEM, o el cron todavia no corrio).
+    const fmtNav = h => {
+        if (h.nav_t1 == null) return '<span style="color:#6B88A8;">—</span>';
+        const ccy = h.nav_currency ? ' <span style="font-size:9px;opacity:0.7;">' + h.nav_currency + '</span>' : '';
+        const d = h.nav_date ? new Date(h.nav_date).toISOString().slice(0, 10) : 's/f';
+        return `<span title="NAV al ${d} (baha, cierre anterior)">${h.nav_t1.toFixed(2)}${ccy}</span>`;
+    };
     const holdingsRows = sorted.map(h => `
         <tr>
             <td class="left"><strong>${h.name}</strong></td>
@@ -2012,6 +2021,7 @@ async function renderFIRace() {
             <td>${h.maturity.toFixed(2)}y</td>
             <td><span class="sleeve-badge fi">${h.rating}</span></td>
             <td>${fmtSpread(h.spread_vs_ust)}</td>
+            <td>${fmtNav(h)}</td>
             <td>${fmtPct(h.ytd_return_pct)}</td>
             <td>${fmtPct(h.si_return_pct)}</td>
             <td>${fmtContrib(h.ytd_contribution_pct)}</td>
@@ -2031,6 +2041,7 @@ async function renderFIRace() {
         <td>~8.5y</td>
         <td><span class="sleeve-badge fi">AA</span></td>
         <td style="color:#6B88A8;">0.00pp</td>
+        <td style="color:#6B88A8;">—</td>
         <td>${fmtPct(aggYtd)}</td>
         <td>${fmtPct(aggSi)}</td>
         <td style="color:#6B88A8;">—</td>
