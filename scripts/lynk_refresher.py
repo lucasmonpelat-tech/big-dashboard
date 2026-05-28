@@ -121,6 +121,41 @@ def parse_lynk_body(body: str) -> dict:
     return result
 
 
+def _is_valid_number(v) -> bool:
+    """True solo si v es un numero finito (no None, no NaN, no inf)."""
+    if v is None or isinstance(v, bool):
+        return False
+    if not isinstance(v, (int, float)):
+        return False
+    import math
+    return math.isfinite(v)
+
+
+def validate_scrape(data: dict) -> list:
+    """
+    Validation gate. Devuelve lista de errores (vacia = OK).
+
+    POLITICA: mejor fallar ruidoso que escribir data mala. El dashboard usa
+    estos numeros como SINGLE SOURCE OF TRUTH del performance de BIG, asi que
+    si el scrape no extrajo lo critico (returnYTD, nav) NO sobreescribimos el
+    JSON viejo y salimos con exit(1) para que el workflow de GitHub Actions
+    quede ROJO y notifique. Stale-pero-marcado-viejo > stale-pisado-con-null.
+    """
+    errors = []
+    # Campos CRITICOS: alimentan el KPI YTD y la tabla Performance del dashboard.
+    for field in ("returnYTD", "nav"):
+        if not _is_valid_number(data.get(field)):
+            errors.append(f"{field} invalido o no extraido: {data.get(field)!r}")
+    # Sanity ranges (atrapa un parse que agarro el numero equivocado de la pagina).
+    nav = data.get("nav")
+    if _is_valid_number(nav) and not (10 <= nav <= 10000):
+        errors.append(f"nav fuera de rango razonable: {nav}")
+    ytd = data.get("returnYTD")
+    if _is_valid_number(ytd) and not (-100 <= ytd <= 1000):
+        errors.append(f"returnYTD fuera de rango razonable: {ytd}")
+    return errors
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--email", default="lucas.monpelat@pampa-capital.com",
@@ -132,6 +167,21 @@ def main():
     print("\nExtracted:")
     for k, v in data.items():
         print(f"  {k:20s}: {v}")
+
+    # ===== VALIDATION GATE =====
+    # Si el scrape no extrajo los campos criticos, NO pisamos el JSON viejo y
+    # salimos en error (1) para que el workflow quede rojo. Asi un cron roto se
+    # nota (rojo + JSON con fecha vieja + banner en el dashboard) en vez de
+    # escribir null silenciosamente y mostrar un numero malo.
+    errors = validate_scrape(data)
+    if errors:
+        print("\nERROR: scrape invalido — NO se sobreescribe lynk_data.json.")
+        for e in errors:
+            print(f"  - {e}")
+        print("\nPosibles causas: el email gate cambio, el layout de Lynk cambio, "
+              "o los regex de parse_lynk_body() ya no matchean. Revisar el HTML "
+              "renderizado. El JSON viejo se preserva (mejor stale que null).")
+        sys.exit(1)
 
     OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:

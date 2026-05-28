@@ -385,6 +385,32 @@
         .fresh-badge strong { color: #E0E8F0; font-weight: 600; }
         .fresh-sep { margin: 0 12px; color: #2E74B5; }
 
+        /* ===== "al [fecha]" LABEL junto a numeros derivados de Lynk ===== */
+        .asof-label {
+            display: inline-block;
+            font-size: 0.62em;
+            font-weight: 500;
+            color: #6B88A8;
+            white-space: nowrap;
+            vertical-align: middle;
+        }
+
+        /* ===== BANNER DE ALERTA: Lynk NAV stale ===== */
+        .stale-banner {
+            background: rgba(255,167,38,0.12);
+            border: 1px solid #FFA726;
+            border-left: 4px solid #FFA726;
+            border-radius: 6px;
+            padding: 10px 16px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: #FFD699;
+            line-height: 1.5;
+            font-weight: 600;
+        }
+        .stale-banner strong { color: #FFB74D; }
+        .stale-banner:empty { display: none; }
+
         /* ===== BAR ROWS ===== */
         .bar-row {
             display: flex;
@@ -467,6 +493,7 @@
 
         <!-- ================== TAB: OVERVIEW ================== -->
         <section id="tab-overview" class="tab-section active">
+            <div class="stale-banner" id="lynk-stale-banner"></div>
             <div class="freshness-bar" id="fresh-overview"></div>
             <h2 class="section-title">Key Metrics (Lynk Official)</h2>
             <div class="kpi-grid">
@@ -483,7 +510,7 @@
                 <div class="kpi-card accent-green">
                     <div class="kpi-label">Return YTD</div>
                     <div class="kpi-value" id="kpi-ytd">—</div>
-                    <div class="kpi-sub" id="kpi-ytd-sub">—</div>
+                    <div class="kpi-sub" id="kpi-ytd-sub"><span class="asof-label" id="kpi-ytd-asof"></span></div>
                 </div>
                 <div class="kpi-card accent-green">
                     <div class="kpi-label">Return SI</div>
@@ -1231,8 +1258,8 @@
 
     <!-- Plotly -->
     <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
-    <script src="data/funds_metadata.js?v=20260527a"></script>
+    <script src="data/funds_metadata.js?v=20260528a"></script>
     <script src="data/live_prices.js?v=20260429a"></script>
-    <script src="dashboard.js?v=20260527b"></script>
+    <script src="dashboard.js?v=20260528a"></script>
 </body>
 </html>

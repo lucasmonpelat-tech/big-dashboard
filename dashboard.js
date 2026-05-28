@@ -80,6 +80,33 @@ function freshnessLevel(daysAgo, expectedDays) {
     return { icon: '🔴', color: '#EF5350' };
 }
 
+// ==============================================================
+// LYNK NAV DATE — fecha real del NAV oficial de Lynk (T-1 tipico)
+// ==============================================================
+// La FUENTE DE VERDAD de "a que fecha corresponde el numero YTD/perf de BIG".
+// Se setea en init() leyendo el ultimo punto de lynk_nav_series.json (fecha
+// real del NAV). Si falla, cae a LYNK_DATA.refreshedAt (cuando corrio el cron).
+// Mata la confusion de Lucas: cualquier numero derivado de Lynk lleva "al <fecha>".
+let LYNK_NAV_DATE = null;        // ISO "YYYY-MM-DD" — fecha real del ultimo NAV Lynk
+let LYNK_NAV_DATE_SOURCE = null; // 'series' | 'refreshedAt' — de donde salio
+
+// "2026-05-26" -> "26-May" (es-AR, sin year para ahorrar espacio en KPI).
+function fmtNavDateShort(isoDate) {
+    if (!isoDate) return null;
+    const d = new Date(isoDate);
+    if (isNaN(d.getTime())) return null;
+    // Forzar UTC para que "2026-05-26" no se corra al 25 por timezone.
+    const dd = String(d.getUTCDate()).padStart(2, '0');
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${dd}-${months[d.getUTCMonth()]}`;
+}
+
+// HTML del label "al <fecha>" para pegar al lado de un numero derivado de Lynk.
+function lynkAsOfLabel() {
+    const s = fmtNavDateShort(LYNK_NAV_DATE);
+    return s ? `al ${s}` : '';
+}
+
 // Para fuentes market data: si data >= lastExpectedClose -> verde (no penalizar weekend)
 function marketFreshnessLevel(isoDate) {
     if (!isoDate) return { icon: '⚪', color: '#90A4AE' };
@@ -237,6 +264,48 @@ function renderFreshness(containerId, badges) {
     el.innerHTML = badges.filter(Boolean).join('<span class="fresh-sep">·</span>');
 }
 
+// ==============================================================
+// BANNER DE ALERTA: data Lynk vieja (cron roto / corrio tarde)
+// ==============================================================
+// Si lynk_data.json.refreshedAt tiene > 26h Y hoy es dia habil (lun-vie),
+// mostramos un banner amarillo arriba del Overview. Asi si el cron se rompe
+// 1+ dia, Lucas se entera al toque en vez de mirar un numero viejo creyendo
+// que es fresco. 26h = tolera que el cron corra una vez por dia con holgura.
+// Nota: NO penalizamos fin de semana (sab/dom) porque el cierre Lynk es T-1 y
+// el cron no corre; ahi un refreshedAt del viernes es esperable.
+const LYNK_STALE_THRESHOLD_HOURS = 26;
+
+function renderLynkStaleBanner() {
+    const el = document.getElementById('lynk-stale-banner');
+    if (!el) return;
+    el.innerHTML = '';
+
+    const iso = (window.LYNK_DATA && window.LYNK_DATA.refreshedAt) || null;
+    if (!iso) {
+        el.innerHTML = `⚠️ <strong>NAV Lynk sin fecha de refresh</strong> — `
+            + `no se encontro <code>refreshedAt</code> en lynk_data.json. Verificar el cron de refresh.`;
+        return;
+    }
+    const refreshed = new Date(iso);
+    if (isNaN(refreshed.getTime())) return;
+
+    const ageHours = (Date.now() - refreshed.getTime()) / 3600000;
+    const todayWd = new Date().getDay(); // 0=dom, 6=sab
+    const isWeekend = (todayWd === 0 || todayWd === 6);
+
+    // Solo alertamos en dia habil y si supera el umbral.
+    if (ageHours > LYNK_STALE_THRESHOLD_HOURS && !isWeekend) {
+        const ageDays = Math.floor(ageHours / 24);
+        const ageTxt = ageDays >= 1
+            ? `hace ${ageDays} día${ageDays === 1 ? '' : 's'}`
+            : `hace ${Math.floor(ageHours)} horas`;
+        const dateTxt = iso.substring(0, 16).replace('T', ' ');
+        el.innerHTML = `⚠️ <strong>Lynk NAV no actualizado ${ageTxt}</strong> `
+            + `(último refresh: ${dateTxt}) — el número YTD/performance de BIG puede estar viejo. `
+            + `Verificar el cron <code>lynk-daily-refresh</code>.`;
+    }
+}
+
 // Llena los 8 banners de frescura. Se llama al final del init.
 async function renderAllFreshness() {
     const noCache = '?_=' + Date.now();
@@ -352,7 +421,10 @@ function renderOverview() {
     document.getElementById('kpi-nav-change').textContent = (L.change24h >= 0 ? '+' : '') + L.change24h.toFixed(2) + '% (24h)';
     document.getElementById('kpi-aum').textContent = '$' + (L.aum / 1e6).toFixed(2) + 'M';
     document.getElementById('kpi-ytd').textContent = (L.returnYTD >= 0 ? '+' : '') + L.returnYTD.toFixed(2) + '%';
-    document.getElementById('kpi-ytd-sub').textContent = 'see perf table below';
+    // "al <fecha>" — fecha real del NAV Lynk (T-1 tipico). Si Lucas ve "+1.37% al 26-May"
+    // entiende que es el cierre de ayer, NO un error vs lo que ve hoy en el portal Lynk.
+    const ytdAsOfEl = document.getElementById('kpi-ytd-asof');
+    if (ytdAsOfEl) ytdAsOfEl.textContent = lynkAsOfLabel();
     document.getElementById('kpi-si').textContent = (L.returnSI >= 0 ? '+' : '') + L.returnSI.toFixed(2) + '%';
     document.getElementById('kpi-si-sub').textContent = 'Ann: +' + L.returnAnnualized.toFixed(2) + '%';
     document.getElementById('kpi-vol').textContent = L.volatility.toFixed(2) + '%';
@@ -914,9 +986,18 @@ async function renderPerformance() {
         return (a != null && c != null) ? a - c : null;
     };
 
+    // "al <fecha>" para la fila BIG Fund (numeros derivados de Lynk T-1).
+    // Prioriza el global LYNK_NAV_DATE (seteado en init desde la serie); si por
+    // alguna razon no esta, cae al ultimo punto de bigSeries fetcheado aca mismo.
+    const perfNavISO = LYNK_NAV_DATE
+        || (bigSeries && bigSeries.length ? bigSeries[bigSeries.length - 1].date : null);
+    const perfAsOf = fmtNavDateShort(perfNavISO);
+    const perfAsOfHtml = perfAsOf
+        ? ` <span class="asof-label">(al ${perfAsOf})</span>` : '';
+
     document.getElementById('perf-returns-body').innerHTML = `
         <tr class="row-big">
-            <td class="left"><strong>BIG Fund</strong></td>
+            <td class="left"><strong>BIG Fund</strong>${perfAsOfHtml}</td>
             <td>${fmt(bigReturns['1M'])}</td>
             <td>${fmt(bigReturns['3M'])}</td>
             <td>${fmt(bigReturns['6M'])}</td>
@@ -2147,6 +2228,29 @@ function updateTime() {
     } catch(e) {
         console.log("Lynk static JSON not found; using hardcoded");
     }
+
+    // Fecha REAL del ultimo NAV Lynk (para los labels "al <fecha>"). Fuente de
+    // verdad = ultimo punto de lynk_nav_series.json. Fallback = refreshedAt de
+    // lynk_data.json (cuando corrio el scraper). El series date es el NAV real;
+    // refreshedAt es solo "cuando lo bajamos".
+    try {
+        const respS = await fetch('data/lynk_nav_series.json?_=' + Date.now());
+        if (respS.ok) {
+            const sj = await respS.json();
+            const series = sj && sj.series;
+            if (series && series.length && series[series.length - 1].date) {
+                LYNK_NAV_DATE = series[series.length - 1].date;
+                LYNK_NAV_DATE_SOURCE = 'series';
+            }
+        }
+    } catch(e) { /* fallback abajo */ }
+    if (!LYNK_NAV_DATE && window.LYNK_DATA && window.LYNK_DATA.refreshedAt) {
+        LYNK_NAV_DATE = window.LYNK_DATA.refreshedAt.slice(0, 10);
+        LYNK_NAV_DATE_SOURCE = 'refreshedAt';
+    }
+    console.log("Lynk NAV date (as-of):", LYNK_NAV_DATE, "(via " + LYNK_NAV_DATE_SOURCE + ")");
+
+    renderLynkStaleBanner();
 
     renderOverview();
     renderPositions(livePrices);
