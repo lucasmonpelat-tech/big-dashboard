@@ -64,10 +64,11 @@ NAV_DEC31 = {
     # Del statement Pershing 31-dic-2025 (precio 30/12/25), clases ACC:
     "IE00B87KCF77": 20.0100,    # PIMCO-INC  (PIMCO Income Institutional ACC USD)
     "IE000OE87WX6": 122.6100,   # MANIG      (Man GLG Global IG Opportunities IVY USD)
-    # PENDIENTE baha (no estaban en la cuenta al 31-dic, comprados en 2026):
-    # "IE00BDT57R20": None,     # PIMCO-LD   (PIMCO GIS Low Duration Income)
-    # "IE00B29K0P99": None,     # PIMCO-EM   (PIMCO GIS EM Local Bond)
-    # "LU2049315265": None,     # SGCB       (Schroder GAIA Cat Bond C, EUR)
+    # De baha 31-dic-2025 (Lucas, busqueda por ISIN), clases Inst/Acc USD:
+    "IE00BDT57R20": 13.8000,    # PIMCO-LD   (PIMCO GIS Low Duration Income, Inst Acc USD)
+    "IE00B29K0P99": 17.9400,    # PIMCO-EM   (PIMCO GIS Emerging Local Bond, Inst Acc USD)
+    "LU2049315265": 2079.2600,  # SGCB       (Schroder GAIA Cat Bond C Accumulation, USD)
+    "IE00089T5MA6": 108.5400,   # MANEM      (Man EM Corporate Credit Alternative IV USD)
 }
 NAV_INCEPTION = {
     # NAV al 30-jun-2025 (inception BIG) por ISIN — opcional, para SI exacto.
