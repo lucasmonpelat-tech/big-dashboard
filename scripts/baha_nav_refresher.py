@@ -56,12 +56,12 @@ INSTRUMENTS = {
 # del sleeve; solo los usa refresh_fi_race_daily.py para el RETORNO por fondo (ratio,
 # currency-internal). TGF (XS2324777171) es carry proxy, no se scrapea.
 FI_INSTRUMENTS = {
-    "IE00BDT57R20": {"ticker": "PIMCO-LD",  "name": "PIMCO GIS Low Duration Income Inst USD"},
-    "IE00B87KCF77": {"ticker": "PIMCO-INC", "name": "PIMCO GIS Income Fund Inst USD"},
-    "IE00B29K0P99": {"ticker": "PIMCO-EM",  "name": "PIMCO GIS Emerging Markets Bond Inst USD"},
-    "IE000OE87WX6": {"ticker": "MANIG",     "name": "Manulife Global Fund (FI)"},
-    "LU2049315265": {"ticker": "SGCB",      "name": "SG fund (FI)"},
-    "IE00089T5MA6": {"ticker": "MANEM",     "name": "Manulife EM (FI)"},
+    "IE00BDT57R20": {"ticker": "PIMCO-LD",  "name": "PIMCO GIS Low Duration Income Inst Acc USD"},
+    "IE00B87KCF77": {"ticker": "PIMCO-INC", "name": "PIMCO GIS Income Fund Inst Acc USD"},  # CONFIRMAR: que NO sea clase E (~17.80)
+    "IE00B29K0P99": {"ticker": "PIMCO-EM",  "name": "PIMCO GIS Emerging Local Bond Inst Acc USD"},
+    "IE000OE87WX6": {"ticker": "MANIG",     "name": "Man GLG Global Investment Grade Opportunities IVY USD"},
+    "LU2049315265": {"ticker": "SGCB",      "name": "Schroder GAIA Cat Bond C Acc USD"},
+    "IE00089T5MA6": {"ticker": "MANEM",     "name": "Man EM Corporate Credit Alternative IV USD"},
 }
 
 # NAV del title: "...<numero> <CCY> - baha.com". Currency-agnostic (USD/EUR/GBP/...).
