@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-05-29T18:27:32.309464",
+  "refreshedAt": "2026-05-30T16:53:01.529254",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -631,6 +631,75 @@
           "source": "daily_close"
         }
       ]
+    },
+    {
+      "date": "2026-05-30",
+      "mv_usd": 8136346.845966401,
+      "holdings": [
+        {
+          "ticker": "CSPX",
+          "qty": 3408.0,
+          "price": 816.37,
+          "mv": 2782188.96,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "NBGMT",
+          "qty": 58050.998,
+          "price": 23.37,
+          "mv": 1356651.82326,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MFSCV",
+          "qty": 4063.638,
+          "price": 290.86,
+          "mv": 1181949.74868,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "THOR",
+          "qty": 14410.584,
+          "price": 43.14,
+          "mv": 621672.5937600001,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "JHGSC",
+          "qty": 10410.46,
+          "price": 54.4,
+          "mv": 566329.024,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "LGLI",
+          "qty": 26511.134,
+          "price": 20.0796,
+          "mv": 532332.9662664,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "ARGT",
+          "qty": 4000.0,
+          "price": 97.7,
+          "mv": 390800.0,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "4BRZ",
+          "qty": 6979.0,
+          "price": 50.87,
+          "mv": 355021.73,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "ILF",
+          "qty": 10000.0,
+          "price": 34.94,
+          "mv": 349400.0,
+          "source": "daily_close"
+        }
+      ]
     }
   ],
   "twr_series": [
@@ -717,6 +786,13 @@
       "flow_in": 0.0,
       "twr": 0.0016249539044690398,
       "index": 113.6055
+    },
+    {
+      "date": "2026-05-30",
+      "mv_usd": 8136346.845966401,
+      "flow_in": 0.0,
+      "twr": 0.00019789207578613244,
+      "index": 113.628
     }
   ],
   "acwi_index_series": [
@@ -779,6 +855,11 @@
       "date": "2026-05-29",
       "price": 158.6,
       "index": 123.1098
+    },
+    {
+      "date": "2026-05-30",
+      "price": 158.54,
+      "index": 123.0632
     }
   ],
   "equity_flows_by_month": {
@@ -969,5 +1050,5 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-05-29 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing May 26, 2026."
+  "_daily_refresh_note": "Punto 2026-05-30 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing May 26, 2026."
 }

@@ -1,6 +1,6 @@
 {
   "_description": "NAV cierre anterior de cada UCITS/ETF-DE del equity sleeve, de baha.com. Alimenta el punto 'today' del equity sleeve (YTD al cierre anterior).",
-  "refreshedAt": "2026-05-29T18:27:24.506870",
+  "refreshedAt": "2026-05-30T16:52:54.460897",
   "source": "baha.com (NAV puntual del title) via baha_nav_refresher.py",
   "navs": {
     "IE00BFMHRK20": {
@@ -38,7 +38,7 @@
       "nav": 50.87,
       "baha_fund_id": "tts-152272624",
       "name": "iShares MSCI Brazil UCITS (DE)",
-      "_note": "precio real baha \u2014 reemplaza el proxy EWZ de Stooq que subestimaba ~28%"
+      "_note": "precio real baha — reemplaza el proxy EWZ de Stooq que subestimaba ~28%"
     }
   }
 }
