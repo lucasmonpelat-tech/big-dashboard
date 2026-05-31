@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-05-30T16:53:02.475477",
+  "refreshedAt": "2026-05-31T16:56:23.079810",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Fixed Income",
   "benchmark": "AGG",
@@ -481,6 +481,54 @@
           "source": "pershing_frozen"
         }
       ]
+    },
+    {
+      "date": "2026-05-31",
+      "mv_usd": 10325849.75,
+      "holdings": [
+        {
+          "ticker": "PIMCO-LD",
+          "qty": 288350.688,
+          "price": 13.86999999112192,
+          "mv": 3999424.04,
+          "source": "pershing_frozen"
+        },
+        {
+          "ticker": "PIMCO-INC",
+          "qty": 101032.585,
+          "price": 19.890000043055416,
+          "mv": 2009538.12,
+          "source": "pershing_frozen"
+        },
+        {
+          "ticker": "MANIG",
+          "qty": 15027.986,
+          "price": 123.99999973382992,
+          "mv": 1863470.26,
+          "source": "pershing_frozen"
+        },
+        {
+          "ticker": "PIMCO-EM",
+          "qty": 61949.011,
+          "price": 17.910000048265502,
+          "mv": 1109506.79,
+          "source": "pershing_frozen"
+        },
+        {
+          "ticker": "TGF",
+          "qty": 532000.0,
+          "price": 1.5470813721804513,
+          "mv": 823047.29,
+          "source": "pershing_frozen"
+        },
+        {
+          "ticker": "SGCB",
+          "qty": 246.15,
+          "price": 2116.0400162502538,
+          "mv": 520863.25,
+          "source": "pershing_frozen"
+        }
+      ]
     }
   ],
   "twr_series": [
@@ -574,6 +622,13 @@
       "flow_in": 0.0,
       "twr": 0.0,
       "index": 104.6042
+    },
+    {
+      "date": "2026-05-31",
+      "mv_usd": 10325849.75,
+      "flow_in": 0.0,
+      "twr": 0.0,
+      "index": 104.6042
     }
   ],
   "agg_index_series": [
@@ -639,6 +694,11 @@
     },
     {
       "date": "2026-05-30",
+      "price": 99.06,
+      "index": 103.7987
+    },
+    {
+      "date": "2026-05-31",
       "price": 99.06,
       "index": 103.7987
     }
@@ -830,5 +890,5 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-05-30 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing May 26, 2026."
+  "_daily_refresh_note": "Punto 2026-05-31 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing May 26, 2026."
 }
