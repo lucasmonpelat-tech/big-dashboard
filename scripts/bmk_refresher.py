@@ -3,11 +3,21 @@ bmk_refresher.py
 ================
 Computes the 60/40 benchmark return for BIG (since inception 27-Jun-2025).
 
-Data source: Yahoo Finance via yfinance (ACWI + AGG US-listed ETFs)
-Fallback/target: Bahia feed (TODO — user to provide URL/credentials)
+CAMBIO 2026-06-02: en vez de calcular 0.6*ACWI + 0.4*AGG con rebalance mensual
+(que daba tracking error vs el benchmark real ~3pp YTD), ahora usamos AOR
+directo - iShares Core Growth Allocation ETF (60% stocks / 40% bonds).
+
+Data source: Yahoo Finance via yfinance (AOR US-listed ETF).
+  - AOR = iShares Core Growth Allocation ETF
+  - Composicion: ITOT (US Total) + IDEV (Intl Developed) + IEMG (EM) +
+    IAGG (Intl Bonds) + AGG (US Aggregate)
+  - Es el benchmark 60/40 real mas usado por la industria
+  - Replica casi exactamente lo que era el calculo manual ACWI+AGG, pero
+    sin tracking error de formula.
 
 Outputs:
     data/bmk_6040.json — daily 60/40 history + period returns
+    (formato sin cambios para compatibilidad con dashboard.js)
 
 Usage:
     python scripts/bmk_refresher.py
@@ -21,13 +31,13 @@ from datetime import datetime, date, timedelta
 from pathlib import Path
 
 INCEPTION = date(2025, 6, 27)
+BMK_TICKER = "AOR"  # iShares Core Growth Allocation 60/40
 
 
 def fetch_yf_history(ticker: str, start: date, end: date) -> list[dict]:
     """Fetch daily OHLC history via yfinance. Returns list of {date, close}."""
     import yfinance as yf
     t = yf.Ticker(ticker)
-    # Add 1 day to 'end' so yfinance includes the last day
     h = t.history(start=start.isoformat(), end=(end + timedelta(days=1)).isoformat())
     rows = []
     for ts, row in h.iterrows():
@@ -38,33 +48,17 @@ def fetch_yf_history(ticker: str, start: date, end: date) -> list[dict]:
     return rows
 
 
-def compute_6040(acwi_hist, agg_hist):
-    """Build 60/40 daily index (base 100), rebalanced monthly."""
-    acwi_by_date = {r["date"]: r["close"] for r in acwi_hist}
-    agg_by_date = {r["date"]: r["close"] for r in agg_hist}
-    common_dates = sorted(set(acwi_by_date.keys()) & set(agg_by_date.keys()))
-    if not common_dates:
+def build_index_from_etf(hist: list[dict]) -> list[dict]:
+    """Normaliza la serie de precios a base 100 (anchor = primer dia)."""
+    if not hist:
         return []
-
-    series = []
-    d0 = common_dates[0]
-    anchor_acwi = acwi_by_date[d0]
-    anchor_agg = agg_by_date[d0]
-    anchor_value = 100.0
-    last_month = d0[:7]
-
-    for d in common_dates:
-        month = d[:7]
-        if month != last_month:
-            anchor_acwi = acwi_by_date[d]
-            anchor_agg = agg_by_date[d]
-            anchor_value = series[-1]["value"] if series else 100.0
-            last_month = month
-        acwi_ret = acwi_by_date[d] / anchor_acwi
-        agg_ret = agg_by_date[d] / anchor_agg
-        value = anchor_value * (0.60 * acwi_ret + 0.40 * agg_ret)
-        series.append({"date": d, "value": round(value, 4)})
-    return series
+    anchor = hist[0]["close"]
+    if anchor <= 0:
+        return []
+    return [
+        {"date": r["date"], "value": round(r["close"] / anchor * 100, 4)}
+        for r in hist
+    ]
 
 
 def compute_returns(series, inception: date):
@@ -144,25 +138,21 @@ def main():
     print(f"  Period: {inception} to {today}")
 
     try:
-        print("  Fetching ACWI from Yahoo Finance...")
-        acwi_hist = fetch_yf_history("ACWI", inception, today)
-        print(f"    {len(acwi_hist)} bars")
-
-        print("  Fetching AGG from Yahoo Finance...")
-        agg_hist = fetch_yf_history("AGG", inception, today)
-        print(f"    {len(agg_hist)} bars")
+        print(f"  Fetching {BMK_TICKER} (iShares Core Growth Allocation 60/40) from Yahoo Finance...")
+        hist = fetch_yf_history(BMK_TICKER, inception, today)
+        print(f"    {len(hist)} bars  ({hist[0]['date']} -> {hist[-1]['date']})")
     except Exception as e:
         print(f"ERROR: {e}")
         return
 
-    if not acwi_hist or not agg_hist:
-        print("ERROR: No history data")
+    if not hist:
+        print("ERROR: No history data for AOR")
         return
 
-    series = compute_6040(acwi_hist, agg_hist)
+    series = build_index_from_etf(hist)
     periods = compute_returns(series, inception)
 
-    print(f"\n=== 60/40 Benchmark (ACWI 60% + AGG 40%, monthly rebalance) ===")
+    print(f"\n=== 60/40 Benchmark (AOR — iShares Core Growth Allocation ETF) ===")
     print(f"Latest: {periods['latest_date']} | Value: {periods['latest_value']} (base 100)")
     for k, v in periods["returns"].items():
         print(f"  {k:12s}: {v:+.2f}%" if v is not None else f"  {k:12s}: —")
@@ -171,8 +161,9 @@ def main():
 
     output = {
         "refreshedAt": datetime.now().isoformat(),
-        "source": "Yahoo Finance ACWI+AGG (monthly rebalance 60/40)",
-        "note": "Proxy for MSCI ACWI + Bloomberg US Agg. Target: replace with Bahia feed.",
+        "source": f"Yahoo Finance {BMK_TICKER} (iShares Core Growth Allocation 60/40)",
+        "note": "Single ETF que replica 60% stocks / 40% bonds. Composicion: ITOT + IDEV + IEMG + IAGG + AGG. Reemplaza el calculo viejo 0.6*ACWI + 0.4*AGG.",
+        "ticker": BMK_TICKER,
         "inception": args.inception,
         "periods": periods,
         "series_length": len(series),
