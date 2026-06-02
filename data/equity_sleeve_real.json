@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-06-01T20:12:30.342918",
+  "refreshedAt": "2026-06-02T14:50:42.274412",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -771,14 +771,14 @@
       ]
     },
     {
-      "date": "2026-06-01",
-      "mv_usd": 8138575.917966399,
+      "date": "2026-06-02",
+      "mv_usd": 8139901.7259664,
       "holdings": [
         {
           "ticker": "CSPX",
           "qty": 3408.0,
-          "price": 816.179,
-          "mv": 2781538.032,
+          "price": 817.73,
+          "mv": 2786823.84,
           "source": "daily_close"
         },
         {
@@ -819,8 +819,8 @@
         {
           "ticker": "ARGT",
           "qty": 4000.0,
-          "price": 98.97,
-          "mv": 395880.0,
+          "price": 97.48,
+          "mv": 389920.0,
           "source": "daily_close"
         },
         {
@@ -833,8 +833,8 @@
         {
           "ticker": "ILF",
           "qty": 10000.0,
-          "price": 34.72,
-          "mv": 347200.0,
+          "price": 34.92,
+          "mv": 349200.0,
           "source": "daily_close"
         }
       ]
@@ -940,11 +940,11 @@
       "index": 113.628
     },
     {
-      "date": "2026-06-01",
-      "mv_usd": 8138575.917966399,
+      "date": "2026-06-02",
+      "mv_usd": 8139901.7259664,
       "flow_in": 0.0,
-      "twr": 0.0002739647217846475,
-      "index": 113.6591
+      "twr": 0.0004369135273234459,
+      "index": 113.6776
     }
   ],
   "acwi_index_series": [
@@ -1019,9 +1019,9 @@
       "index": 123.0632
     },
     {
-      "date": "2026-06-01",
-      "price": 159.1,
-      "index": 123.4979
+      "date": "2026-06-02",
+      "price": 159.79,
+      "index": 124.0335
     }
   ],
   "equity_flows_by_month": {
@@ -1212,5 +1212,5 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-06-01 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing May 26, 2026."
+  "_daily_refresh_note": "Punto 2026-06-02 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing May 26, 2026."
 }
