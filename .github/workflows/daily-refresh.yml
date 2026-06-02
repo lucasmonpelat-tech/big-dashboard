@@ -103,6 +103,10 @@ jobs:
         run: python scripts/fi_bench_indices_refresher.py
         continue-on-error: true
 
+      - name: Bench 60/40 (AOR ETF)
+        run: python scripts/bmk_refresher.py
+        continue-on-error: true
+
       # === RECOMPUTE ===
       - name: Recalc Equity sleeve daily NAV
         run: python scripts/refresh_equity_daily.py
