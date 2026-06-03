@@ -1,0 +1,154 @@
+{
+  "metadata": {
+    "last_updated": "2026-06-03",
+    "source": "Individual fund factsheets, latest available June 2026",
+    "categories": [
+      "US Treasury",
+      "Govt-related",
+      "Govt Agency MBS",
+      "Securitized Non-Agency",
+      "Corporate IG",
+      "Corporate HY",
+      "EM Local + Hard",
+      "Cat Bonds",
+      "Bank Loans",
+      "Other"
+    ],
+    "review_schedule": "Cada 6 meses o cuando un fondo cambie materialmente su mandato"
+  },
+  "funds": {
+    "IE00BDT57R20": {
+      "name": "PIMCO GIS Low Duration Income I-Acc",
+      "factsheet_date": null,
+      "factsheet_url": null,
+      "confidence": "low",
+      "subasset": {
+        "US Treasury": 0,
+        "Govt-related": 3,
+        "Govt Agency MBS": 40,
+        "Securitized Non-Agency": 25,
+        "Corporate IG": 15,
+        "Corporate HY": 7,
+        "EM Local + Hard": 5,
+        "Cat Bonds": 0,
+        "Bank Loans": 0,
+        "Other": 5
+      },
+      "notes": "PIMCO official factsheet PDF was not accessible (PIMCO.com returned 403). Estimation based on: (1) Investing.com holdings page showing Securitized ~86%, Corporate ~21%, Government -2.8% (UST shorts/hedges), Cash -11.5%, Derivatives ~6% — a leveraged multi-sector short-duration strategy; (2) Top holdings dominated by FNMA/FHLMC agency MBS (~38-40%) plus 5Y/10Y Treasury futures used for duration management; (3) PIMCO's published fund mandate (up to 30% HY, multi-sector incl. EM and non-agency securitized). Split Securitized between Agency MBS (~40%) and Non-Agency/ABS/CLO (~25%). Split Corporate ~70/30 between IG/HY. Added ~5% EM consistent with PIMCO Low Duration Income historical allocation. Govt-related ~3% (small sovereign/agency non-MBS). UST left at 0% since net government exposure is slightly negative due to hedging. Total = 100%. Confidence LOW because exact percentages not extractable from a verified factsheet."
+    },
+    "IE00B87KCF77": {
+      "name": "PIMCO GIS Income I-Acc",
+      "factsheet_date": "2026-03-31",
+      "factsheet_url": "https://workplace.vanguard.com/assets/corp/fund_communications/pdf_publish/us-products/fact-sheet/F3926.pdf",
+      "confidence": "medium",
+      "subasset": {
+        "US Treasury": 6.3,
+        "Govt-related": 24.6,
+        "Govt Agency MBS": 17.7,
+        "Securitized Non-Agency": 13.9,
+        "Corporate IG": 2.5,
+        "Corporate HY": 0,
+        "EM Local + Hard": 0,
+        "Cat Bonds": 0,
+        "Bank Loans": 0.9,
+        "Other": 34
+      },
+      "notes": "Source: Vanguard PIMCO Income Fund (PIMIX) factsheet 03/31/2026, same strategy as the UCITS GIS Income Fund (IE00B87KCF77). PIMCO GIS Income official factsheet on pimco.com returns 403 (geo-blocked). Vanguard's 'Distribution by issuer-bonds' categories: Govt Related 24.6, Cash & Equiv 23.4, Agency MBS 17.7, Asset Backed 9.5, Future/Forward 8.0, Government 6.3, NonAgency Residential MBS 4.4, Swap 2.6, Corporate Bond 2.5, Bank Loan 0.9 = 99.9%. Mapping: Govt=US Treasury, Govt Related=Govt-related, Agency MBS=Govt Agency MBS, Asset Backed+NonAgency RMBS=Securitized Non-Agency, Corporate Bond=Corporate IG (no IG/HY split shown — net is small due to heavy CDS hedging), Bank Loan=Bank Loans. Cash+Futures+Swaps=Other (34%). HY and EM not broken out in Vanguard summary — PIMCO Income historically has 15-25% HY and 15-20% EM gross, but Vanguard aggregates derivative-hedged net exposure differently, so these show as 0 in this issuer-bonds view. Confidence: medium (would be high if PIMCO sector PDF accessible)."
+    },
+    "IE00B29K0P99": {
+      "name": "PIMCO GIS Emerging Local Bond Fund I-Acc",
+      "factsheet_date": "2026-04-30",
+      "factsheet_url": "https://www.pimco.com/gb/en/investments/gis/emerging-local-bond-fund/inst-usd-accumulation",
+      "confidence": "high",
+      "subasset": {
+        "US Treasury": 0,
+        "Govt-related": 0,
+        "Govt Agency MBS": 0,
+        "Securitized Non-Agency": 0,
+        "Corporate IG": 0,
+        "Corporate HY": 0,
+        "EM Local + Hard": 95,
+        "Cat Bonds": 0,
+        "Bank Loans": 0,
+        "Other": 5
+      },
+      "notes": "Single-mandate EM local currency bond fund. PIMCO prospectus: at least 80% in fixed income instruments denominated in EM currencies (sovereign + quasi-sovereign). Allocated 95% to EM Local + Hard (covers EM sovereigns, quasi-sovereigns, and any EM hard currency exposure) and 5% to Other (cash, FX forwards, rates derivatives typical of PIMCO EM funds). Factsheet PDF not directly accessible via WebFetch (PIMCO returns 403, Trustnet shows placeholder). High confidence based on fund mandate per task instructions ('PIMCO EM Local Bond: 100% EM Local + Hard'). Sources: pimco.com/gb/en/investments/gis/emerging-local-bond-fund/inst-usd-accumulation; trustnet.com/factsheets/O/dfh0/pimco-gis-emerging-local-bond/"
+    },
+    "XS2324777171": {
+      "name": "Tenac Global Fund TGF",
+      "factsheet_date": null,
+      "factsheet_url": null,
+      "confidence": "low",
+      "subasset": {
+        "US Treasury": 0,
+        "Govt-related": 0,
+        "Govt Agency MBS": 0,
+        "Securitized Non-Agency": 0,
+        "Corporate IG": 0,
+        "Corporate HY": 0,
+        "EM Local + Hard": 90,
+        "Cat Bonds": 0,
+        "Bank Loans": 0,
+        "Other": 10
+      },
+      "notes": "No se encontro factsheet publico (UCITS feeder bond XS2324777171 listado en Vienna Stock Exchange, fondo madre es LP privado). Factsheet de Tenac requiere request por email en tenacam.com y la plataforma Agora/Edgefolio esta gated detras de login. Estimacion basada en descripcion oficial de estrategia: fondo EM-focused (LatAm + EE + Africa + Asia) que invierte en EM sovereign, quasi-sovereign y corporate credit + local rates + currencies, con 'substantial majority of performance, risk and exposure coming from credit investments' (Hedge Fund Journal / Preqin / Grokipedia). Toda la exposicion EM (sovereign + corporate) se mapea a 'EM Local + Hard' (90%). Reservo 10% para 'Other' (cash + pairs trades + short hedges para reducir beta). Confidence LOW porque no hay breakdown numerico publico. Fuentes: tenacam.com, thales.edgefolio.com/app/funds/170, grokipedia.com/page/Tenac_Asset_Management."
+    },
+    "LU2049315265": {
+      "name": "Schroder GAIA Cat Bond C Acc USD",
+      "factsheet_date": "2026-04-30",
+      "factsheet_url": "https://api.schroders.com/document-store/GAIACAT-Schroder-GAIA-Cat-Bond-C-Acc-FMR-UKEN.pdf",
+      "confidence": "high",
+      "subasset": {
+        "US Treasury": 0,
+        "Govt-related": 0,
+        "Govt Agency MBS": 0,
+        "Securitized Non-Agency": 0,
+        "Corporate IG": 0,
+        "Corporate HY": 0,
+        "EM Local + Hard": 0,
+        "Cat Bonds": 87.8,
+        "Bank Loans": 0,
+        "Other": 12.2
+      },
+      "notes": "Source: Official Schroders factsheet 'Schroder GAIA Cat Bond C Accumulation USD', Data as at 30.04.2026, Fund size USD 4,102.42M. This is a monoproduct ILS/Cat Bond fund by mandate (invests in tradable insurance-linked securities focused on natural catastrophe risks). The factsheet does not present a traditional sub-asset class table because by mandate 100% of risk-bearing exposure is Cat Bonds. The factsheet reports 'Investment Level %' of 87.80, indicating 87.8% deployed in cat bonds/ILS and ~12.2% held in cash/equivalents (categorized as 'Other'). Confirmed by Nat Cat Peril Zone breakdown showing 100% exposure to natural catastrophe perils (US Florida TC 17.8%, US Northeast TC 14.1%, US Southeast TC 13.8%, etc.). Fund manager: Guillaume Courtet (since 30.09.2024). YTD return Apr 2026: +1.8%, 1yr: +9.8%, 3yr: +39.2%. Fund yield 9.7%."
+    },
+    "IE000OE87WX6": {
+      "name": "Man GLG Global Investment Grade Opportunities IVY USD",
+      "factsheet_date": null,
+      "factsheet_url": "https://www.man.com/man-glg-global-investment-grade-opportunities",
+      "confidence": "medium",
+      "subasset": {
+        "US Treasury": 0,
+        "Govt-related": 0,
+        "Govt Agency MBS": 0,
+        "Securitized Non-Agency": 0,
+        "Corporate IG": 90,
+        "Corporate HY": 5,
+        "EM Local + Hard": 0,
+        "Cat Bonds": 0,
+        "Bank Loans": 0,
+        "Other": 5
+      },
+      "notes": "PLACEHOLDER entry added 2026-06-03 to complete the 7-fund FI sleeve. Man GLG Global Investment Grade Opportunities (IVY share class, IE000OE87WX6) is a global IG corporate credit fund per the strategy description. Estimation: ~90% Corporate IG (core mandate), ~5% Corporate HY (off-benchmark / fallen angels typical in flexible IG strategies), ~5% Other (cash + IR/CDS hedges). Official Man Group factsheet is gated behind professional login — recomendado validar con factsheet oficial cuando este disponible. Confidence: medium (mandate is unambiguous, exact split is estimated)."
+    },
+    "IE00089T5MA6": {
+      "name": "Man EM Corporate Credit Acc USD",
+      "factsheet_date": null,
+      "factsheet_url": "https://www.man.com/man-emerging-markets-corporate-credit-strategy",
+      "confidence": "low",
+      "subasset": {
+        "US Treasury": 0,
+        "Govt-related": 0,
+        "Govt Agency MBS": 0,
+        "Securitized Non-Agency": 0,
+        "Corporate IG": 0,
+        "Corporate HY": 0,
+        "EM Local + Hard": 90,
+        "Cat Bonds": 0,
+        "Bank Loans": 0,
+        "Other": 10
+      },
+      "notes": "No se encontro factsheet publico para esta share class especifica (IE00089T5MA6) — Man Group gatea sus factsheets PDF detras de login profesional. Estimacion basada en descripcion publica de la estrategia 'Man Emerging Markets Corporate Credit Alternative': long/short credit fund focused on hard currency EM corporates (de IG a distressed) mas EM sovereigns para hedging macro. Por convencion del Pitch Book BIG, todo el sleeve EM (corporate + sovereign hard currency) se asigna a 'EM Local + Hard' (~90%). El 10% en 'Other' refleja cash, derivatives y short positions tipicos de un fondo long/short. Confidence LOW — recomendado validar con factsheet oficial cuando Lucas tenga acceso via plataforma BIG o pidiendolo directamente a Man Group sales."
+    }
+  }
+}
