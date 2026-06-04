@@ -1,0 +1,106 @@
+name: Monthly Breakdowns iShares (ACWI + AGG)
+
+# Pipeline mensual para refrescar breakdowns benchmark de los factsheets oficiales
+# de iShares (BlackRock):
+#   - ACWI: sectors + geographic breakdown (benchmark del equity sleeve)
+#   - AGG : credit ratings + sectors + maturity (benchmark del FI sleeve)
+#
+# Corre el dia 15 de cada mes a las 11 UTC (= 08 AM ART). Los factsheets de iShares
+# se publican mensualmente (cierre del mes anterior + ~10 dias habiles), asi que el 15
+# garantiza datos frescos.
+#
+# Outputs:
+#   data/breakdowns/acwi_iShares.json
+#   data/breakdowns/agg_iShares.json
+#   data/breakdowns/fi_subasset_big.json   (si existe scripts/compute_fi_subasset.py)
+#
+# Workflow_dispatch tambien disponible para correr a demanda.
+
+on:
+  schedule:
+    # Dia 15 de cada mes, 11:00 UTC = 08:00 ART
+    - cron: '0 11 15 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  breakdowns:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pdfplumber openpyxl
+
+      # === FETCH iShares factsheets ===
+      - name: Fetch ACWI breakdowns (sectors + geographic)
+        run: python scripts/fetch_acwi_breakdowns.py
+
+      - name: Fetch AGG breakdowns (credit + sectors + maturity)
+        run: python scripts/fetch_agg_breakdowns.py
+
+      # === RECOMPUTE FI sub-asset (BIG-level) ===
+      - name: Compute FI sub-asset BIG (if script exists)
+        run: |
+          if [ -f scripts/compute_fi_subasset.py ]; then
+            python scripts/compute_fi_subasset.py
+          else
+            echo "scripts/compute_fi_subasset.py no existe ΓÇö skipping"
+          fi
+        continue-on-error: true
+
+      # === COMMIT + PUSH (solo si hubo cambios en data/breakdowns/) ===
+      - name: Commit and push breakdowns if changed
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/breakdowns/
+          if git diff --cached --quiet; then
+            echo "no changes en data/breakdowns/" && echo "committed=false" >> $GITHUB_OUTPUT && exit 0
+          fi
+          git commit -m "chore(monthly): refresh iShares breakdowns ($(date -u +%Y-%m-%d))"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort; exit 1; }
+            if git push origin HEAD:main; then echo "committed=true" >> $GITHUB_OUTPUT && exit 0; fi
+            sleep 3
+          done
+          exit 1
+
+      # === RECORD STATUS (mismo patron que daily-refresh.yml) ===
+      - name: Record run status (alertas)
+        if: always()
+        run: |
+          if [ -f scripts/record_run_status.py ]; then
+            python scripts/record_run_status.py --job-status "${{ job.status }}"
+          else
+            echo "scripts/record_run_status.py no existe ΓÇö skipping"
+          fi
+
+      - name: Commit alertas si hubo cambios
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/_alerts/ || true
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "chore(alerts): monthly breakdowns status $(date -u +%Y-%m-%d)"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort; exit 1; }
+            if git push origin HEAD:main; then exit 0; fi
+            sleep 3
+          done
