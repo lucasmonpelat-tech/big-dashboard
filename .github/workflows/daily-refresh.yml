@@ -172,4 +172,4 @@ jobs:
       # === WEEKLY DIGEST (solo sabados) ===
       - name: Weekly digest mail (Saturdays only)
         if: steps.dow.outputs.is_saturday == 'true'
-        run: python scripts/weekly_dige
+        run: python scripts/weekly_digest.py
