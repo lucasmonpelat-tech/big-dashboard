@@ -35,10 +35,19 @@ BMK_TICKER = "AOR"  # iShares Core Growth Allocation 60/40
 
 
 def fetch_yf_history(ticker: str, start: date, end: date) -> list[dict]:
-    """Fetch daily OHLC history via yfinance. Returns list of {date, close}."""
+    """Fetch daily OHLC history via yfinance. Returns list of {date, close}.
+
+    IMPORTANTE — Politica T-1 close (2026-06-08):
+    Usamos `end=end.isoformat()` (sin +1 day) para EXCLUIR el dia actual
+    si el mercado todavia esta abierto. yfinance retorna precios intraday
+    cuando el mercado esta abierto, lo cual contamina el YTD official.
+
+    Manteniendo T-1 close, el dashboard muestra siempre cierres oficiales,
+    consistente con el resto del sistema (Lynk T-1, Pershing T-1, etc).
+    """
     import yfinance as yf
     t = yf.Ticker(ticker)
-    h = t.history(start=start.isoformat(), end=(end + timedelta(days=1)).isoformat())
+    h = t.history(start=start.isoformat(), end=end.isoformat())
     rows = []
     for ts, row in h.iterrows():
         rows.append({
