@@ -98,9 +98,11 @@ def main():
     last_date = grid[-1]
     print(f"  Grid: {len(grid)} fechas, base {base_date} -> {last_date}")
 
-    # bajamos historico con un colchon antes/despues
+    # bajamos historico con un colchon antes; politica T-1 close: NO incluir el dia actual
+    # si todavia no cerro. yfinance trata `end` como exclusivo, asi que end=last_date
+    # garantiza que solo bajamos cierres oficiales <= last_date - 1 dia.
     start = (datetime.fromisoformat(base_date) - timedelta(days=7)).strftime("%Y-%m-%d")
-    end = (datetime.fromisoformat(last_date) + timedelta(days=2)).strftime("%Y-%m-%d")
+    end = last_date  # T-1 close: yfinance.history end es exclusivo
 
     indices_out = {}
     for key, meta in INDICES.items():
