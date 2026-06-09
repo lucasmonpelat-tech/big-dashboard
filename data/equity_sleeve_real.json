@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-06-09T13:51:13.512325",
+  "refreshedAt": "2026-06-09T12:55:53.922607",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -772,8 +772,15 @@
     },
     {
       "date": "2026-06-09",
-      "mv_usd": 4613957.8859664,
+      "mv_usd": 8035846.110697845,
       "holdings": [
+        {
+          "ticker": "CSPX",
+          "qty": 3408.0,
+          "price": 800.02001953125,
+          "mv": 2726468.2265625,
+          "source": "daily_close"
+        },
         {
           "ticker": "NBGMT",
           "qty": 58050.998,
@@ -810,10 +817,24 @@
           "source": "daily_close"
         },
         {
+          "ticker": "ARGT",
+          "qty": 4000.0,
+          "price": 91.87999725341797,
+          "mv": 367519.9890136719,
+          "source": "daily_close"
+        },
+        {
           "ticker": "4BRZ",
           "qty": 6979.0,
           "price": 50.87,
           "mv": 355021.73,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "ILF",
+          "qty": 10000.0,
+          "price": 32.790000915527344,
+          "mv": 327900.00915527344,
           "source": "daily_close"
         }
       ]
@@ -920,10 +941,10 @@
     },
     {
       "date": "2026-06-09",
-      "mv_usd": 4613957.8859664,
+      "mv_usd": 8035846.110697845,
       "flow_in": 0.0,
-      "twr": -0.43292020690418664,
-      "index": 64.4361
+      "twr": -0.012352071165498413,
+      "index": 112.2245
     }
   ],
   "acwi_index_series": [
@@ -999,8 +1020,8 @@
     },
     {
       "date": "2026-06-09",
-      "price": 156.67,
-      "index": 121.6116
+      "price": 153.45,
+      "index": 119.1122
     }
   ],
   "equity_flows_by_month": {

@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-06-09T13:51:14.341270",
+  "refreshedAt": "2026-06-05T13:59:27.557125",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Fixed Income",
   "benchmark": "AGG",
@@ -531,7 +531,7 @@
       ]
     },
     {
-      "date": "2026-06-09",
+      "date": "2026-06-05",
       "mv_usd": 10325849.75,
       "holdings": [
         {
@@ -679,7 +679,7 @@
       "index": 104.6042
     },
     {
-      "date": "2026-06-09",
+      "date": "2026-06-05",
       "mv_usd": 10325849.75,
       "flow_in": 0.0,
       "twr": 0.0,
@@ -758,9 +758,9 @@
       "index": 103.7987
     },
     {
-      "date": "2026-06-09",
-      "price": 98.365,
-      "index": 103.0705
+      "date": "2026-06-05",
+      "price": 98.31,
+      "index": 103.0128
     }
   ],
   "fi_flows_by_month": {
@@ -950,5 +950,5 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-06-09 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing May 26, 2026."
+  "_daily_refresh_note": "Punto 2026-06-05 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing May 26, 2026."
 }

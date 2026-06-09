@@ -27,49 +27,55 @@ from pathlib import Path
 # CONFIG - Same mapping as in data/live_prices.js
 # ==============================================================
 STOOQ_TICKERS = {
-    # Working
-    "ILF":   {"symbol": "ilf.us",    "market": "US",    "currency": "USD"},
-    "ARGT":  {"symbol": "argt.us",   "market": "US",    "currency": "USD"},
-    "GLD":   {"symbol": "gld.us",    "market": "US",    "currency": "USD"},
-    "IBIT":  {"symbol": "ibit.us",   "market": "US",    "currency": "USD"},
-    "CSPX":  {"symbol": "cspx.uk",   "market": "UK",    "currency": "USD"},
-    # Alternative ticker candidates (Stooq sometimes lists under different suffixes)
-    "THOR":  {"symbol": "tibix.us",  "market": "US",    "currency": "USD"},  # Class I
-    "4BRZ":  {"symbol": "ewz.us",    "market": "US",    "currency": "USD"},  # iShares MSCI Brazil ETF (US-listed proxy)
-    # BDC names on Stooq — try alternative formats
-    "HLEND": {"symbol": "hlen.us",   "market": "US",    "currency": "USD"},
-    "BPCC":  {"symbol": "bpcc.f",    "market": "F",     "currency": "USD"},
-    "GCRED": {"symbol": "gcrd.us",   "market": "US",    "currency": "USD"},
+    # MIGRADO 2026-06-09 de Stooq -> Yahoo Finance (yfinance).
+    # Stooq agrego anti-bot challenge JS (proof-of-work) que rompio el scraper.
+    # yfinance es mas estable y ya lo usamos para bench_indices, bmk_6040, etc.
+    # Politica T-1 close: NO incluir el dia actual si todavia no cerro.
+    "ILF":   {"symbol": "ILF",     "currency": "USD"},
+    "ARGT":  {"symbol": "ARGT",    "currency": "USD"},
+    "GLD":   {"symbol": "GLD",     "currency": "USD"},
+    "IBIT":  {"symbol": "IBIT",    "currency": "USD"},
+    "CSPX":  {"symbol": "CSPX.L",  "currency": "USD"},  # London UCITS, denominated USD
+    "THOR":  {"symbol": "TIBIX",   "currency": "USD"},
+    "4BRZ":  {"symbol": "EWZ",     "currency": "USD"},  # US-listed proxy de MSCI Brazil
+    # Privados (BDCs) — no listados en Yahoo. Se manejan via fallback "last known price"
+    # en el script consumer (refresh_equity/alts_daily.py).
+    "HLEND": {"symbol": None,      "currency": "USD"},
+    "BPCC":  {"symbol": None,      "currency": "USD"},
+    "GCRED": {"symbol": None,      "currency": "USD"},
 }
 
-STOOQ_URL_TEMPLATE = "https://stooq.com/q/l/?s={symbol}&f=sd2t2ohlcv&h&e=csv"
 OUTPUT_FILE = Path(__file__).parent.parent / "data" / "live_prices.json"
 
 
-def fetch_stooq_quote(symbol: str) -> dict | None:
-    """Fetch a single quote from Stooq. Returns None on failure."""
-    url = STOOQ_URL_TEMPLATE.format(symbol=symbol)
+def fetch_yf_quote(symbol: str) -> dict | None:
+    """Fetch latest T-1 close quote from Yahoo Finance via yfinance.
+
+    Politica T-1: si el mercado todavia esta abierto cuando este script corre,
+    devolvemos el cierre del dia anterior (no el precio intraday).
+    """
+    if not symbol:
+        return None
     try:
-        r = requests.get(url, timeout=10)
-        if r.status_code != 200:
+        import yfinance as yf
+        from datetime import date, timedelta
+        t = yf.Ticker(symbol)
+        # Ultimos 7 dias para tener buffer (weekends + holidays)
+        end = date.today()
+        start = end - timedelta(days=14)
+        h = t.history(start=start.isoformat(), end=end.isoformat())  # T-1: end exclusivo
+        if h is None or h.empty:
             return None
-        rows = list(csv.reader(io.StringIO(r.text)))
-        if len(rows) < 2:
-            return None
-        header, data = rows[0], rows[1]
-        rec = dict(zip(header, data))
-        # Stooq returns "N/D" for invalid/unknown
-        if rec.get("Close") in ("N/D", None, ""):
-            return None
+        last = h.iloc[-1]
+        last_date = h.index[-1].strftime("%Y-%m-%d")
         return {
-            "symbol": rec.get("Symbol"),
-            "date":   rec.get("Date"),
-            "time":   rec.get("Time"),
-            "open":   float(rec["Open"]) if rec.get("Open", "N/D") != "N/D" else None,
-            "high":   float(rec["High"]) if rec.get("High", "N/D") != "N/D" else None,
-            "low":    float(rec["Low"]) if rec.get("Low", "N/D") != "N/D" else None,
-            "close":  float(rec["Close"]),
-            "volume": float(rec["Volume"]) if rec.get("Volume", "N/D") != "N/D" else 0,
+            "symbol": symbol,
+            "date":   last_date,
+            "open":   float(last["Open"]),
+            "high":   float(last["High"]),
+            "low":    float(last["Low"]),
+            "close":  float(last["Close"]),
+            "volume": float(last["Volume"]) if "Volume" in last else 0,
         }
     except Exception as e:
         print(f"  X {symbol}: {e}")
@@ -77,20 +83,25 @@ def fetch_stooq_quote(symbol: str) -> dict | None:
 
 
 def main():
-    print(f"[{datetime.now().isoformat()}] Fetching live prices from Stooq...")
+    print(f"[{datetime.now().isoformat()}] Fetching live prices from Yahoo Finance (T-1 close)...")
     results = {}
     for ticker, cfg in STOOQ_TICKERS.items():
-        q = fetch_stooq_quote(cfg["symbol"])
+        symbol = cfg.get("symbol")
+        if not symbol:
+            results[ticker] = None
+            print(f"  - {ticker:6s} = skipped (privado, sin ticker publico)")
+            continue
+        q = fetch_yf_quote(symbol)
         if q:
             results[ticker] = {
                 "price": q["close"],
                 "date": q["date"],
-                "time": q["time"],
+                "time": None,
                 "open": q["open"],
                 "high": q["high"],
                 "low": q["low"],
                 "volume": q["volume"],
-                "source": "Stooq",
+                "source": "Yahoo Finance",
             }
             print(f"  OK {ticker:6s} = {q['close']:>10.2f} ({q['date']})")
         else:
