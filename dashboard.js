@@ -1121,16 +1121,34 @@ function renderEquityMonthlyBreakdown(twrSeries, acwiSeries) {
     // El twr_series ya tiene el campo `twr` (mensual ajustado por flujos) pero
     // recalculamos para consistencia y para el ACWI (que no tiene `twr`).
     const rows = [];
-    for (let i = 1; i < twrSeries.length; i++) {
-        const prev = twrSeries[i - 1];
-        const curr = twrSeries[i];
-        // Solo mostrar meses 2026 (consistente con FI Monthly Breakdown — focus en YTD corriente)
-        if (!curr.date.startsWith('2026-')) continue;
+    // Agrupar por YYYY-MM y tomar el ULTIMO punto disponible de cada mes.
+    // (Con series interpoladas diarias, varios dias matchearian -28/-29/-30/-31
+    //  causando filas duplicadas. Este approach toma 1 punto por mes garantizado.)
+    const lastOfMonth = new Map();
+    for (const p of twrSeries) {
+        if (!p.date.startsWith('2026-')) continue;
+        const ym = p.date.slice(0, 7);
+        const existing = lastOfMonth.get(ym);
+        if (!existing || p.date > existing.date) {
+            lastOfMonth.set(ym, p);
+        }
+    }
 
-        // Solo mostrar puntos fin de mes (skip el today_date intra-mes)
-        const isMonthEnd = curr.date.endsWith('-31') || curr.date.endsWith('-30')
-            || curr.date.endsWith('-29') || curr.date.endsWith('-28');
-        if (!isMonthEnd) continue;
+    // Indexar twrSeries por fecha para encontrar el punto del mes anterior
+    const byDate = Object.fromEntries(twrSeries.map(p => [p.date, p]));
+    const sortedMonths = Array.from(lastOfMonth.keys()).sort();
+
+    for (const ym of sortedMonths) {
+        const curr = lastOfMonth.get(ym);
+        // Buscar el ultimo punto del mes anterior (puede no ser exactamente fin de mes)
+        const [year, month] = ym.split('-').map(Number);
+        const prevYear = month === 1 ? year - 1 : year;
+        const prevMonth = month === 1 ? 12 : month - 1;
+        const prevYM = `${prevYear}-${String(prevMonth).padStart(2, '0')}`;
+        // Tomar el ultimo punto del mes anterior
+        const prevCandidates = twrSeries.filter(p => p.date.startsWith(prevYM));
+        if (prevCandidates.length === 0) continue;
+        const prev = prevCandidates[prevCandidates.length - 1];
 
         const bigRet = (curr.index / prev.index - 1) * 100;
         const acwiCurr = acwiByDate[curr.date];
@@ -1139,10 +1157,7 @@ function renderEquityMonthlyBreakdown(twrSeries, acwiSeries) {
         const acwiRet = (acwiCurr / acwiPrev - 1) * 100;
         const alpha = bigRet - acwiRet;
 
-        // Key para la nota: YYYY-MM del mes corriente
-        const ym = curr.date.slice(0, 7);
         const note = EQUITY_MONTHLY_NOTES[ym] || '<span style="color:#6B88A8;font-style:italic;">— sin nota —</span>';
-
         rows.push({ date: curr.date, ym, bigRet, acwiRet, alpha, note });
     }
 
@@ -1188,19 +1203,38 @@ function renderFIMonthlyBreakdown(twrSeries, aggSeries) {
 
     const aggByDate = Object.fromEntries(aggSeries.map(p => [p.date, p.index]));
     const rows = [];
-    for (let i = 1; i < twrSeries.length; i++) {
-        const prev = twrSeries[i - 1];
-        const curr = twrSeries[i];
-        // Solo mostrar meses 2026 (Lucas pidio focus en YTD corriente)
-        if (!curr.date.startsWith('2026-')) continue;
+
+    // Agrupar por YYYY-MM y tomar el ULTIMO punto disponible de cada mes (1 fila por mes).
+    const lastOfMonth = new Map();
+    for (const p of twrSeries) {
+        if (!p.date.startsWith('2026-')) continue;
+        const ym = p.date.slice(0, 7);
+        const existing = lastOfMonth.get(ym);
+        if (!existing || p.date > existing.date) {
+            lastOfMonth.set(ym, p);
+        }
+    }
+
+    const sortedMonths = Array.from(lastOfMonth.keys()).sort();
+    for (const ym of sortedMonths) {
+        const curr = lastOfMonth.get(ym);
+        // Buscar el ultimo punto del mes anterior
+        const [year, month] = ym.split('-').map(Number);
+        const prevYear = month === 1 ? year - 1 : year;
+        const prevMonth = month === 1 ? 12 : month - 1;
+        const prevYM = `${prevYear}-${String(prevMonth).padStart(2, '0')}`;
+        const prevCandidates = twrSeries.filter(p => p.date.startsWith(prevYM));
+        if (prevCandidates.length === 0) continue;
+        const prev = prevCandidates[prevCandidates.length - 1];
+
         const bigRet = (curr.index / prev.index - 1) * 100;
         const aggCurr = aggByDate[curr.date];
         const aggPrev = aggByDate[prev.date];
         if (aggCurr == null || aggPrev == null) continue;
         const aggRet = (aggCurr / aggPrev - 1) * 100;
         const alpha = bigRet - aggRet;
-        const ym = curr.date.slice(0, 7);
         let note = FI_MONTHLY_NOTES[ym] || '<span style="color:#6B88A8;font-style:italic;">— sin nota —</span>';
+
         // Marcar si es punto intra-mes (parcial)
         const isMonthEnd = curr.date.endsWith('-31') || curr.date.endsWith('-30')
             || curr.date.endsWith('-29') || curr.date.endsWith('-28');
