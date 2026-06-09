@@ -1108,6 +1108,7 @@ const EQUITY_MONTHLY_NOTES = {
     "2026-02": "Alpha leve: LatAm rally historico (Arg +27%, ILF flows record) capturado parcial via 4BRZ/ARGT/ILF/LGLI; value tilt ayudo.",
     "2026-03": "Alpha defensivo en selloff -6%: value tilt (NBGMT+MFSCV 33%) y BRK.B residual cushionearon vs equal-weight.",
     "2026-04": "Drag fuerte: rally tech/AI +9% lider por semis; BIG sin BRK.B (Q1 sale), pesado en value/LatAm sin growth puro.",
+    "2026-05": "Rally global equities: NASDAQ +8.4%, S&P +5.3% por earnings beat (83% S&P 500). BIG +5.3% capturo via CSPX (34% sleeve) y NBGMT tech-tilt; alpha leve +0.72pp.",
 };
 
 function renderEquityMonthlyBreakdown(twrSeries, acwiSeries) {
