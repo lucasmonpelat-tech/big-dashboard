@@ -1124,6 +1124,9 @@ function renderEquityMonthlyBreakdown(twrSeries, acwiSeries) {
     for (let i = 1; i < twrSeries.length; i++) {
         const prev = twrSeries[i - 1];
         const curr = twrSeries[i];
+        // Solo mostrar meses 2026 (consistente con FI Monthly Breakdown — focus en YTD corriente)
+        if (!curr.date.startsWith('2026-')) continue;
+
         // Solo mostrar puntos fin de mes (skip el today_date intra-mes)
         const isMonthEnd = curr.date.endsWith('-31') || curr.date.endsWith('-30')
             || curr.date.endsWith('-29') || curr.date.endsWith('-28');
