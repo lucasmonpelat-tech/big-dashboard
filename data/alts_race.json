@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-06-08T14:55:41.734728",
+  "refreshedAt": "2026-06-09T13:51:14.494154",
   "inception": "2025-06-30",
   "benchmark_primary": "60/40 blend (60% ACWI + 40% AGG)",
   "benchmark_secondary": "HFRX Global HF proxy (QAI ETF)",
@@ -154,7 +154,7 @@
       "assumed_annual_pct": 12.0,
       "source": "Carlyle statement (2026-04-30)",
       "valuation_date": "2026-04-30",
-      "days_since_valuation": 39
+      "days_since_valuation": 40
     },
     {
       "isin": "US46438F1012",
@@ -170,7 +170,7 @@
       "assumed_annual_pct": null,
       "source": "Pershing T-1 (2026-05-22)",
       "valuation_date": "2026-05-22",
-      "days_since_valuation": 17
+      "days_since_valuation": 18
     },
     {
       "isin": "LU2659193242",
@@ -206,7 +206,7 @@
       "assumed_annual_pct": null,
       "source": "Pershing T-1 (2026-05-22)",
       "valuation_date": "2026-05-22",
-      "days_since_valuation": 17
+      "days_since_valuation": 18
     },
     {
       "isin": "KYG4737U1085",
@@ -222,7 +222,7 @@
       "assumed_annual_pct": 9.5,
       "source": "iCapital statement (2026-03-31)",
       "valuation_date": "2026-03-31",
-      "days_since_valuation": 69
+      "days_since_valuation": 70
     },
     {
       "isin": "XS2658535526",
@@ -238,7 +238,7 @@
       "assumed_annual_pct": 9.5,
       "source": "Pershing T-1 (2026-05-22)",
       "valuation_date": "2026-05-22",
-      "days_since_valuation": 17
+      "days_since_valuation": 18
     },
     {
       "isin": "FLEX-LEX",
@@ -254,7 +254,7 @@
       "assumed_annual_pct": 12.0,
       "source": "Pershing T-1 (2026-03-31)",
       "valuation_date": "2026-03-31",
-      "days_since_valuation": 69
+      "days_since_valuation": 70
     },
     {
       "isin": "GCRED-I",
@@ -270,7 +270,7 @@
       "assumed_annual_pct": 9.5,
       "source": "iCapital statement (2026-03-31)",
       "valuation_date": "2026-03-31",
-      "days_since_valuation": 69
+      "days_since_valuation": 70
     },
     {
       "isin": "LU2847068389",
@@ -287,11 +287,11 @@
       "source": "Pershing (pending confirm — trade 2026-05-26)",
       "valuation_date": "2026-05-26",
       "status": "pending_confirm",
-      "days_since_valuation": 13
+      "days_since_valuation": 14
     }
   ],
   "_alts_ytd_real_note": "YTD 2026 reconstruido desde statements reales (Carlyle dic + Pershing dic/feb). Reemplaza proxy PSP+carry. Actualizado 2026-05-20.",
   "_calp_correction_note": "2026-05-23: corregidos ISIN (LU2827810776), valuation_date (2026-02-27) y si_return_pct (45.80) segun statement Mar-26 (Period End 27-Feb-2026)",
   "_alts_changes_note": "2026-05-26: NBPEA cerrado (sold 2026-04-30, $862K proceeds). HLGPI agregado (Hamilton Lane Global Private Infrastructure, $1.1M pending confirm).",
-  "_daily_refresh_note": "Refresh diario 2026-06-08: 0 liquidos via Stooq T-1, 4 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $7,855,533."
+  "_daily_refresh_note": "Refresh diario 2026-06-09: 0 liquidos via Stooq T-1, 4 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $7,855,533."
 }
