@@ -47,9 +47,17 @@ ALTS_HOLDINGS = [
 
 
 def fetch_yahoo_monthly(ticker, start, end):
-    """Returns {YYYY-MM: monthly_return_decimal}."""
+    """Returns {YYYY-MM: monthly_return_decimal}.
+
+    Politica T-1 close (2026-06-10): NO incluir intraday del dia actual.
+    yfinance.history end es EXCLUSIVO, asi que end=end ya excluye hoy si el mercado
+    esta abierto. Sin este fix, el resample("ME").last() agarraba el intraday del
+    dia actual como "month-end" del mes en curso, inflando/desinflando los YTD.
+    Ejemplo bug: GLD YTD daba -4.36% por intraday \$379 (10-Jun), cuando T-1 close
+    9-Jun era \$390.78 -> YTD real -1.40%.
+    """
     import yfinance as yf
-    h = yf.Ticker(ticker).history(start=start.isoformat(), end=(end + timedelta(days=2)).isoformat())
+    h = yf.Ticker(ticker).history(start=start.isoformat(), end=end.isoformat())
     if h.empty:
         return {}
     monthly_close = h["Close"].resample("ME").last()

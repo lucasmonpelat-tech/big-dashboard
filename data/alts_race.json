@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-06-10T13:06:47.545997",
+  "refreshedAt": "2026-06-10T13:25:35.712661",
   "inception": "2025-06-30",
   "benchmark_primary": "60/40 blend (60% ACWI + 40% AGG)",
   "benchmark_secondary": "HFRX Global HF proxy (QAI ETF)",
@@ -18,70 +18,70 @@
     "latest_month": "2026-06",
     "returns": {
       "1M": {
-        "sleeve": -3.94,
-        "bmk6040": -2.05,
-        "alpha": -1.89
+        "sleeve": -3.43,
+        "bmk6040": -1.64,
+        "alpha": -1.79
       },
       "3M": {
-        "sleeve": 0.1,
-        "bmk6040": 6.6,
-        "alpha": -6.5
+        "sleeve": 0.63,
+        "bmk6040": 7.05,
+        "alpha": -6.42
       },
       "6M": {
-        "sleeve": -6.11,
-        "bmk6040": 5.23,
-        "alpha": -11.34
+        "sleeve": -5.61,
+        "bmk6040": 5.67,
+        "alpha": -11.28
       },
       "YTD": {
-        "sleeve": -6.11,
-        "bmk6040": 5.23,
-        "alpha": -11.34
+        "sleeve": -5.61,
+        "bmk6040": 5.67,
+        "alpha": -11.28
       },
       "SI": {
-        "sleeve": -2.93,
-        "bmk6040": 13.38,
-        "alpha": -16.31
+        "sleeve": -2.41,
+        "bmk6040": 13.86,
+        "alpha": -16.27
       }
     },
     "annualized": {
-      "sleeve": -2.93,
-      "bmk6040": 13.38,
-      "alpha": -16.31
+      "sleeve": -2.41,
+      "bmk6040": 13.86,
+      "alpha": -16.27
     }
   },
   "stats_vs_hfrx": {
     "latest_month": "2026-06",
     "returns": {
       "1M": {
-        "sleeve": -3.94,
-        "hfrx": -1.18,
-        "alpha": -2.76
+        "sleeve": -3.43,
+        "hfrx": -1.1,
+        "alpha": -2.33
       },
       "3M": {
-        "sleeve": 0.1,
-        "hfrx": 5.45,
-        "alpha": -5.35
+        "sleeve": 0.63,
+        "hfrx": 5.54,
+        "alpha": -4.91
       },
       "6M": {
-        "sleeve": -6.11,
-        "hfrx": 7.37,
-        "alpha": -13.48
+        "sleeve": -5.61,
+        "hfrx": 7.46,
+        "alpha": -13.07
       },
       "YTD": {
-        "sleeve": -6.11,
-        "hfrx": 7.37,
-        "alpha": -13.48
+        "sleeve": -5.61,
+        "hfrx": 7.46,
+        "alpha": -13.07
       },
       "SI": {
-        "sleeve": -2.93,
-        "hfrx": 13.0,
-        "alpha": -15.93
+        "sleeve": -2.41,
+        "hfrx": 13.09,
+        "alpha": -15.5
       }
     },
     "annualized": {
-      "sleeve": -2.93,
-      "hfrx": 13.0,
-      "alpha": -15.93
+      "sleeve": -2.41,
+      "hfrx": 13.09,
+      "alpha": -15.5
     }
   },
   "sleeve_index": {
@@ -97,7 +97,7 @@
     "2026-03": 96.9756,
     "2026-04": 101.2466,
     "2026-05": 101.0518,
-    "2026-06": 97.0721
+    "2026-06": 97.5877
   },
   "bmk6040_index": {
     "2025-06": 100.0,
@@ -112,7 +112,7 @@
     "2026-03": 106.3625,
     "2026-04": 112.5085,
     "2026-05": 115.7588,
-    "2026-06": 113.3834
+    "2026-06": 113.8644
   },
   "hfrx_index": {
     "2025-06": 100.0,
@@ -127,7 +127,7 @@
     "2026-03": 107.1526,
     "2026-04": 112.0831,
     "2026-05": 114.3442,
-    "2026-06": 112.997
+    "2026-06": 113.088
   },
   "sleeve_monthly_returns": {
     "2025-06": 0.028526,
@@ -142,7 +142,7 @@
     "2026-03": -0.027427,
     "2026-04": 0.044043,
     "2026-05": -0.001924,
-    "2026-06": -0.039382
+    "2026-06": -0.03428
   },
   "holdings": [
     {
@@ -152,10 +152,10 @@
       "sub_class": "private_equity",
       "value_usd": 2722180,
       "weight_pct": 38.58,
-      "si_return_pct": -5.43,
-      "ytd_return_pct": -7.54,
-      "contribution_pct": -2.09,
-      "ytd_contribution_pct": -2.91,
+      "si_return_pct": -4.92,
+      "ytd_return_pct": -7.04,
+      "contribution_pct": -1.9,
+      "ytd_contribution_pct": -2.72,
       "assumed_annual_pct": 12.0,
       "source": "PE proxy (PSP 70% + carry 30% @ 12.0%)"
     },
@@ -166,10 +166,10 @@
       "sub_class": "crypto",
       "value_usd": 744326,
       "weight_pct": 10.55,
-      "si_return_pct": -42.18,
-      "ytd_return_pct": -28.72,
-      "contribution_pct": -4.45,
-      "ytd_contribution_pct": -3.03,
+      "si_return_pct": -42.59,
+      "ytd_return_pct": -29.22,
+      "contribution_pct": -4.49,
+      "ytd_contribution_pct": -3.08,
       "assumed_annual_pct": null,
       "source": "yahoo:IBIT"
     },
@@ -180,10 +180,10 @@
       "sub_class": "commodity",
       "value_usd": 748729,
       "weight_pct": 10.61,
-      "si_return_pct": 24.32,
-      "ytd_return_pct": -4.38,
-      "contribution_pct": 2.58,
-      "ytd_contribution_pct": -0.46,
+      "si_return_pct": 28.2,
+      "ytd_return_pct": -1.4,
+      "contribution_pct": 2.99,
+      "ytd_contribution_pct": -0.15,
       "assumed_annual_pct": null,
       "source": "yahoo:GLD"
     },
@@ -222,10 +222,10 @@
       "sub_class": "private_equity",
       "value_usd": 501806,
       "weight_pct": 7.11,
-      "si_return_pct": -5.43,
-      "ytd_return_pct": -7.54,
-      "contribution_pct": -0.39,
-      "ytd_contribution_pct": -0.54,
+      "si_return_pct": -4.92,
+      "ytd_return_pct": -7.04,
+      "contribution_pct": -0.35,
+      "ytd_contribution_pct": -0.5,
       "assumed_annual_pct": 12.0,
       "source": "PE proxy (PSP 70% + carry 30% @ 12.0%)"
     },
@@ -236,10 +236,10 @@
       "sub_class": "private_infra",
       "value_usd": 500000,
       "weight_pct": 7.09,
-      "si_return_pct": -5.68,
-      "ytd_return_pct": -7.66,
-      "contribution_pct": -0.4,
-      "ytd_contribution_pct": -0.54,
+      "si_return_pct": -5.18,
+      "ytd_return_pct": -7.17,
+      "contribution_pct": -0.37,
+      "ytd_contribution_pct": -0.51,
       "assumed_annual_pct": 11.0,
       "source": "PE proxy (PSP 70% + carry 30% @ 11.0%)"
     },
