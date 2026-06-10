@@ -998,28 +998,28 @@ async function renderPerformance() {
     document.getElementById('perf-returns-body').innerHTML = `
         <tr class="row-big">
             <td class="left"><strong>BIG Fund</strong>${perfAsOfHtml}</td>
+            <td>${fmt(bigReturns.YTD)}</td>
             <td>${fmt(bigReturns['1M'])}</td>
             <td>${fmt(bigReturns['3M'])}</td>
             <td>${fmt(bigReturns['6M'])}</td>
-            <td>${fmt(bigReturns.YTD)}</td>
             <td>${fmt(bigReturns.SI)}</td>
             <td>${fmt(bigReturns.ANN)}</td>
         </tr>
         <tr class="row-bmk">
             <td class="left">Benchmark 60/40 (ACWI/AGG)</td>
+            <td>${fmt(bmkReturns.YTD)}</td>
             <td>${fmt(bmkReturns['1M'])}</td>
             <td>${fmt(bmkReturns['3M'])}</td>
             <td>${fmt(bmkReturns['6M'])}</td>
-            <td>${fmt(bmkReturns.YTD)}</td>
             <td>${fmt(bmkReturns.SI)}</td>
             <td>${fmt(bmkReturns.ANN)}</td>
         </tr>
         <tr class="row-alpha">
             <td class="left"><strong>Alpha</strong></td>
+            <td>${fmt(alpha('YTD'))}</td>
             <td>${fmt(alpha('1M'))}</td>
             <td>${fmt(alpha('3M'))}</td>
             <td>${fmt(alpha('6M'))}</td>
-            <td>${fmt(alpha('YTD'))}</td>
             <td>${fmt(alpha('SI'))}</td>
             <td>${fmt(alpha('ANN'))}</td>
         </tr>
