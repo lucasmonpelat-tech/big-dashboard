@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-06-10T14:31:51.754810",
+  "refreshedAt": "2026-06-10T14:15:49.986522",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Fixed Income",
   "benchmark": "AGG",
@@ -3039,6 +3039,46 @@
       "twr": 0.0
     },
     {
+      "date": "2026-06-05",
+      "index": 104.6042,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": 0.0,
+      "twr": 0.0
+    },
+    {
+      "date": "2026-06-06",
+      "index": 104.6042,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": 0.0,
+      "twr": 0.0
+    },
+    {
+      "date": "2026-06-07",
+      "index": 104.6042,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": 0.0,
+      "twr": 0.0
+    },
+    {
+      "date": "2026-06-08",
+      "index": 104.6042,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": 0.0,
+      "twr": 0.0
+    },
+    {
+      "date": "2026-06-09",
+      "index": 104.6042,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": 0.0,
+      "twr": 0.0
+    },
+    {
       "date": "2026-06-10",
       "mv_usd": 10325849.75,
       "flow_in": 0.0,
@@ -4865,32 +4905,62 @@
     },
     {
       "date": "2026-06-01",
-      "index": 103.6415,
+      "index": 103.7208,
       "interpolated": true,
-      "price": 98.91
+      "price": 98.9857
     },
     {
       "date": "2026-06-02",
-      "index": 103.4843,
+      "index": 103.643,
       "interpolated": true,
-      "price": 98.76
+      "price": 98.9114
     },
     {
       "date": "2026-06-03",
-      "index": 103.3272,
+      "index": 103.5651,
       "interpolated": true,
-      "price": 98.61
+      "price": 98.8371
     },
     {
       "date": "2026-06-04",
-      "index": 103.17,
+      "index": 103.4873,
       "interpolated": true,
-      "price": 98.46
+      "price": 98.7628
+    },
+    {
+      "date": "2026-06-05",
+      "index": 103.4094,
+      "interpolated": true,
+      "price": 98.6885
+    },
+    {
+      "date": "2026-06-06",
+      "index": 103.3315,
+      "interpolated": true,
+      "price": 98.6141
+    },
+    {
+      "date": "2026-06-07",
+      "index": 103.2537,
+      "interpolated": true,
+      "price": 98.5398
+    },
+    {
+      "date": "2026-06-08",
+      "index": 103.1758,
+      "interpolated": true,
+      "price": 98.4655
+    },
+    {
+      "date": "2026-06-09",
+      "index": 103.098,
+      "interpolated": true,
+      "price": 98.3912
     },
     {
       "date": "2026-06-10",
-      "price": 98.425,
-      "index": 103.1333
+      "price": 98.3169,
+      "index": 103.0201
     }
   ],
   "fi_flows_by_month": {
@@ -5080,7 +5150,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-06-10 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing May 26, 2026.",
+  "_daily_refresh_note": "Punto 2026-06-10 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing Jun 10, 2026.",
   "twr_series_original": [
     {
       "date": "2025-07-31",
@@ -5090,11 +5160,483 @@
       "index": 100.0
     },
     {
+      "date": "2025-08-01",
+      "index": 100.0584,
+      "interpolated": true,
+      "mv_usd": 6928430.3678,
+      "flow_in": 6675657.9323,
+      "twr": 0.0006
+    },
+    {
+      "date": "2025-08-02",
+      "index": 100.1169,
+      "interpolated": true,
+      "mv_usd": 7027070.2653,
+      "flow_in": 6550939.3345,
+      "twr": 0.0012
+    },
+    {
+      "date": "2025-08-03",
+      "index": 100.1753,
+      "interpolated": true,
+      "mv_usd": 7125710.1628,
+      "flow_in": 6426220.7368,
+      "twr": 0.0018
+    },
+    {
+      "date": "2025-08-04",
+      "index": 100.2338,
+      "interpolated": true,
+      "mv_usd": 7224350.0604,
+      "flow_in": 6301502.139,
+      "twr": 0.0023
+    },
+    {
+      "date": "2025-08-05",
+      "index": 100.2922,
+      "interpolated": true,
+      "mv_usd": 7322989.9579,
+      "flow_in": 6176783.5413,
+      "twr": 0.0029
+    },
+    {
+      "date": "2025-08-06",
+      "index": 100.3507,
+      "interpolated": true,
+      "mv_usd": 7421629.8555,
+      "flow_in": 6052064.9435,
+      "twr": 0.0035
+    },
+    {
+      "date": "2025-08-07",
+      "index": 100.4091,
+      "interpolated": true,
+      "mv_usd": 7520269.753,
+      "flow_in": 5927346.3458,
+      "twr": 0.0041
+    },
+    {
+      "date": "2025-08-08",
+      "index": 100.4675,
+      "interpolated": true,
+      "mv_usd": 7618909.6506,
+      "flow_in": 5802627.7481,
+      "twr": 0.0047
+    },
+    {
+      "date": "2025-08-09",
+      "index": 100.526,
+      "interpolated": true,
+      "mv_usd": 7717549.5481,
+      "flow_in": 5677909.1503,
+      "twr": 0.0053
+    },
+    {
+      "date": "2025-08-10",
+      "index": 100.5844,
+      "interpolated": true,
+      "mv_usd": 7816189.4457,
+      "flow_in": 5553190.5526,
+      "twr": 0.0058
+    },
+    {
+      "date": "2025-08-11",
+      "index": 100.6429,
+      "interpolated": true,
+      "mv_usd": 7914829.3432,
+      "flow_in": 5428471.9548,
+      "twr": 0.0064
+    },
+    {
+      "date": "2025-08-12",
+      "index": 100.7013,
+      "interpolated": true,
+      "mv_usd": 8013469.2408,
+      "flow_in": 5303753.3571,
+      "twr": 0.007
+    },
+    {
+      "date": "2025-08-13",
+      "index": 100.7597,
+      "interpolated": true,
+      "mv_usd": 8112109.1383,
+      "flow_in": 5179034.7594,
+      "twr": 0.0076
+    },
+    {
+      "date": "2025-08-14",
+      "index": 100.8182,
+      "interpolated": true,
+      "mv_usd": 8210749.0359,
+      "flow_in": 5054316.1616,
+      "twr": 0.0082
+    },
+    {
+      "date": "2025-08-15",
+      "index": 100.8766,
+      "interpolated": true,
+      "mv_usd": 8309388.9334,
+      "flow_in": 4929597.5639,
+      "twr": 0.0088
+    },
+    {
+      "date": "2025-08-16",
+      "index": 100.9351,
+      "interpolated": true,
+      "mv_usd": 8408028.831,
+      "flow_in": 4804878.9661,
+      "twr": 0.0094
+    },
+    {
+      "date": "2025-08-17",
+      "index": 100.9935,
+      "interpolated": true,
+      "mv_usd": 8506668.7285,
+      "flow_in": 4680160.3684,
+      "twr": 0.0099
+    },
+    {
+      "date": "2025-08-18",
+      "index": 101.052,
+      "interpolated": true,
+      "mv_usd": 8605308.6261,
+      "flow_in": 4555441.7706,
+      "twr": 0.0105
+    },
+    {
+      "date": "2025-08-19",
+      "index": 101.1104,
+      "interpolated": true,
+      "mv_usd": 8703948.5236,
+      "flow_in": 4430723.1729,
+      "twr": 0.0111
+    },
+    {
+      "date": "2025-08-20",
+      "index": 101.1688,
+      "interpolated": true,
+      "mv_usd": 8802588.4212,
+      "flow_in": 4306004.5752,
+      "twr": 0.0117
+    },
+    {
+      "date": "2025-08-21",
+      "index": 101.2273,
+      "interpolated": true,
+      "mv_usd": 8901228.3187,
+      "flow_in": 4181285.9774,
+      "twr": 0.0123
+    },
+    {
+      "date": "2025-08-22",
+      "index": 101.2857,
+      "interpolated": true,
+      "mv_usd": 8999868.2162,
+      "flow_in": 4056567.3797,
+      "twr": 0.0129
+    },
+    {
+      "date": "2025-08-23",
+      "index": 101.3442,
+      "interpolated": true,
+      "mv_usd": 9098508.1138,
+      "flow_in": 3931848.7819,
+      "twr": 0.0134
+    },
+    {
+      "date": "2025-08-24",
+      "index": 101.4026,
+      "interpolated": true,
+      "mv_usd": 9197148.0113,
+      "flow_in": 3807130.1842,
+      "twr": 0.014
+    },
+    {
+      "date": "2025-08-25",
+      "index": 101.461,
+      "interpolated": true,
+      "mv_usd": 9295787.9089,
+      "flow_in": 3682411.5865,
+      "twr": 0.0146
+    },
+    {
+      "date": "2025-08-26",
+      "index": 101.5195,
+      "interpolated": true,
+      "mv_usd": 9394427.8064,
+      "flow_in": 3557692.9887,
+      "twr": 0.0152
+    },
+    {
+      "date": "2025-08-27",
+      "index": 101.5779,
+      "interpolated": true,
+      "mv_usd": 9493067.704,
+      "flow_in": 3432974.391,
+      "twr": 0.0158
+    },
+    {
+      "date": "2025-08-28",
+      "index": 101.6364,
+      "interpolated": true,
+      "mv_usd": 9591707.6015,
+      "flow_in": 3308255.7932,
+      "twr": 0.0164
+    },
+    {
+      "date": "2025-08-29",
+      "index": 101.6948,
+      "interpolated": true,
+      "mv_usd": 9690347.4991,
+      "flow_in": 3183537.1955,
+      "twr": 0.0169
+    },
+    {
+      "date": "2025-08-30",
+      "index": 101.7533,
+      "interpolated": true,
+      "mv_usd": 9788987.3966,
+      "flow_in": 3058818.5977,
+      "twr": 0.0175
+    },
+    {
       "date": "2025-08-31",
       "mv_usd": 9887627.294177206,
       "flow_in": 2934100.0,
       "twr": 0.018117221093727487,
       "index": 101.8117
+    },
+    {
+      "date": "2025-09-01",
+      "index": 101.8387,
+      "interpolated": true,
+      "mv_usd": 9922885.5949,
+      "flow_in": 2868933.0,
+      "twr": 0.0178
+    },
+    {
+      "date": "2025-09-02",
+      "index": 101.8657,
+      "interpolated": true,
+      "mv_usd": 9958143.8956,
+      "flow_in": 2803766.0,
+      "twr": 0.0174
+    },
+    {
+      "date": "2025-09-03",
+      "index": 101.8927,
+      "interpolated": true,
+      "mv_usd": 9993402.1964,
+      "flow_in": 2738599.0,
+      "twr": 0.0171
+    },
+    {
+      "date": "2025-09-04",
+      "index": 101.9197,
+      "interpolated": true,
+      "mv_usd": 10028660.4971,
+      "flow_in": 2673432.0,
+      "twr": 0.0168
+    },
+    {
+      "date": "2025-09-05",
+      "index": 101.9467,
+      "interpolated": true,
+      "mv_usd": 10063918.7978,
+      "flow_in": 2608265.0,
+      "twr": 0.0164
+    },
+    {
+      "date": "2025-09-06",
+      "index": 101.9737,
+      "interpolated": true,
+      "mv_usd": 10099177.0985,
+      "flow_in": 2543098.0,
+      "twr": 0.0161
+    },
+    {
+      "date": "2025-09-07",
+      "index": 102.0007,
+      "interpolated": true,
+      "mv_usd": 10134435.3993,
+      "flow_in": 2477931.0,
+      "twr": 0.0157
+    },
+    {
+      "date": "2025-09-08",
+      "index": 102.0277,
+      "interpolated": true,
+      "mv_usd": 10169693.7,
+      "flow_in": 2412764.0,
+      "twr": 0.0154
+    },
+    {
+      "date": "2025-09-09",
+      "index": 102.0547,
+      "interpolated": true,
+      "mv_usd": 10204952.0007,
+      "flow_in": 2347597.0,
+      "twr": 0.0151
+    },
+    {
+      "date": "2025-09-10",
+      "index": 102.0817,
+      "interpolated": true,
+      "mv_usd": 10240210.3014,
+      "flow_in": 2282430.0,
+      "twr": 0.0147
+    },
+    {
+      "date": "2025-09-11",
+      "index": 102.1087,
+      "interpolated": true,
+      "mv_usd": 10275468.6022,
+      "flow_in": 2217263.0,
+      "twr": 0.0144
+    },
+    {
+      "date": "2025-09-12",
+      "index": 102.1357,
+      "interpolated": true,
+      "mv_usd": 10310726.9029,
+      "flow_in": 2152096.0,
+      "twr": 0.0141
+    },
+    {
+      "date": "2025-09-13",
+      "index": 102.1627,
+      "interpolated": true,
+      "mv_usd": 10345985.2036,
+      "flow_in": 2086929.0,
+      "twr": 0.0137
+    },
+    {
+      "date": "2025-09-14",
+      "index": 102.1897,
+      "interpolated": true,
+      "mv_usd": 10381243.5043,
+      "flow_in": 2021762.0,
+      "twr": 0.0134
+    },
+    {
+      "date": "2025-09-15",
+      "index": 102.2167,
+      "interpolated": true,
+      "mv_usd": 10416501.8051,
+      "flow_in": 1956595.0,
+      "twr": 0.013
+    },
+    {
+      "date": "2025-09-16",
+      "index": 102.2437,
+      "interpolated": true,
+      "mv_usd": 10451760.1058,
+      "flow_in": 1891428.0,
+      "twr": 0.0127
+    },
+    {
+      "date": "2025-09-17",
+      "index": 102.2707,
+      "interpolated": true,
+      "mv_usd": 10487018.4065,
+      "flow_in": 1826261.0,
+      "twr": 0.0124
+    },
+    {
+      "date": "2025-09-18",
+      "index": 102.2977,
+      "interpolated": true,
+      "mv_usd": 10522276.7073,
+      "flow_in": 1761094.0,
+      "twr": 0.012
+    },
+    {
+      "date": "2025-09-19",
+      "index": 102.3247,
+      "interpolated": true,
+      "mv_usd": 10557535.008,
+      "flow_in": 1695927.0,
+      "twr": 0.0117
+    },
+    {
+      "date": "2025-09-20",
+      "index": 102.3517,
+      "interpolated": true,
+      "mv_usd": 10592793.3087,
+      "flow_in": 1630760.0,
+      "twr": 0.0113
+    },
+    {
+      "date": "2025-09-21",
+      "index": 102.3787,
+      "interpolated": true,
+      "mv_usd": 10628051.6094,
+      "flow_in": 1565593.0,
+      "twr": 0.011
+    },
+    {
+      "date": "2025-09-22",
+      "index": 102.4057,
+      "interpolated": true,
+      "mv_usd": 10663309.9102,
+      "flow_in": 1500426.0,
+      "twr": 0.0107
+    },
+    {
+      "date": "2025-09-23",
+      "index": 102.4327,
+      "interpolated": true,
+      "mv_usd": 10698568.2109,
+      "flow_in": 1435259.0,
+      "twr": 0.0103
+    },
+    {
+      "date": "2025-09-24",
+      "index": 102.4597,
+      "interpolated": true,
+      "mv_usd": 10733826.5116,
+      "flow_in": 1370092.0,
+      "twr": 0.01
+    },
+    {
+      "date": "2025-09-25",
+      "index": 102.4867,
+      "interpolated": true,
+      "mv_usd": 10769084.8123,
+      "flow_in": 1304925.0,
+      "twr": 0.0096
+    },
+    {
+      "date": "2025-09-26",
+      "index": 102.5137,
+      "interpolated": true,
+      "mv_usd": 10804343.1131,
+      "flow_in": 1239758.0,
+      "twr": 0.0093
+    },
+    {
+      "date": "2025-09-27",
+      "index": 102.5407,
+      "interpolated": true,
+      "mv_usd": 10839601.4138,
+      "flow_in": 1174591.0,
+      "twr": 0.009
+    },
+    {
+      "date": "2025-09-28",
+      "index": 102.5677,
+      "interpolated": true,
+      "mv_usd": 10874859.7145,
+      "flow_in": 1109424.0,
+      "twr": 0.0086
+    },
+    {
+      "date": "2025-09-29",
+      "index": 102.5947,
+      "interpolated": true,
+      "mv_usd": 10910118.0152,
+      "flow_in": 1044257.0,
+      "twr": 0.0083
     },
     {
       "date": "2025-09-30",
@@ -5104,11 +5646,483 @@
       "index": 102.6217
     },
     {
+      "date": "2025-10-01",
+      "index": 102.6542,
+      "interpolated": true,
+      "mv_usd": 10962583.7796,
+      "flow_in": 961251.2903,
+      "twr": 0.008
+    },
+    {
+      "date": "2025-10-02",
+      "index": 102.6866,
+      "interpolated": true,
+      "mv_usd": 10979791.2433,
+      "flow_in": 943412.5806,
+      "twr": 0.0081
+    },
+    {
+      "date": "2025-10-03",
+      "index": 102.7191,
+      "interpolated": true,
+      "mv_usd": 10996998.7069,
+      "flow_in": 925573.871,
+      "twr": 0.0081
+    },
+    {
+      "date": "2025-10-04",
+      "index": 102.7516,
+      "interpolated": true,
+      "mv_usd": 11014206.1706,
+      "flow_in": 907735.1613,
+      "twr": 0.0082
+    },
+    {
+      "date": "2025-10-05",
+      "index": 102.784,
+      "interpolated": true,
+      "mv_usd": 11031413.6342,
+      "flow_in": 889896.4516,
+      "twr": 0.0083
+    },
+    {
+      "date": "2025-10-06",
+      "index": 102.8165,
+      "interpolated": true,
+      "mv_usd": 11048621.0979,
+      "flow_in": 872057.7419,
+      "twr": 0.0083
+    },
+    {
+      "date": "2025-10-07",
+      "index": 102.849,
+      "interpolated": true,
+      "mv_usd": 11065828.5615,
+      "flow_in": 854219.0323,
+      "twr": 0.0084
+    },
+    {
+      "date": "2025-10-08",
+      "index": 102.8814,
+      "interpolated": true,
+      "mv_usd": 11083036.0252,
+      "flow_in": 836380.3226,
+      "twr": 0.0084
+    },
+    {
+      "date": "2025-10-09",
+      "index": 102.9139,
+      "interpolated": true,
+      "mv_usd": 11100243.4888,
+      "flow_in": 818541.6129,
+      "twr": 0.0085
+    },
+    {
+      "date": "2025-10-10",
+      "index": 102.9463,
+      "interpolated": true,
+      "mv_usd": 11117450.9525,
+      "flow_in": 800702.9032,
+      "twr": 0.0086
+    },
+    {
+      "date": "2025-10-11",
+      "index": 102.9788,
+      "interpolated": true,
+      "mv_usd": 11134658.4161,
+      "flow_in": 782864.1935,
+      "twr": 0.0086
+    },
+    {
+      "date": "2025-10-12",
+      "index": 103.0113,
+      "interpolated": true,
+      "mv_usd": 11151865.8798,
+      "flow_in": 765025.4839,
+      "twr": 0.0087
+    },
+    {
+      "date": "2025-10-13",
+      "index": 103.0437,
+      "interpolated": true,
+      "mv_usd": 11169073.3434,
+      "flow_in": 747186.7742,
+      "twr": 0.0087
+    },
+    {
+      "date": "2025-10-14",
+      "index": 103.0762,
+      "interpolated": true,
+      "mv_usd": 11186280.8071,
+      "flow_in": 729348.0645,
+      "twr": 0.0088
+    },
+    {
+      "date": "2025-10-15",
+      "index": 103.1087,
+      "interpolated": true,
+      "mv_usd": 11203488.2707,
+      "flow_in": 711509.3548,
+      "twr": 0.0089
+    },
+    {
+      "date": "2025-10-16",
+      "index": 103.1411,
+      "interpolated": true,
+      "mv_usd": 11220695.7344,
+      "flow_in": 693670.6452,
+      "twr": 0.0089
+    },
+    {
+      "date": "2025-10-17",
+      "index": 103.1736,
+      "interpolated": true,
+      "mv_usd": 11237903.198,
+      "flow_in": 675831.9355,
+      "twr": 0.009
+    },
+    {
+      "date": "2025-10-18",
+      "index": 103.2061,
+      "interpolated": true,
+      "mv_usd": 11255110.6617,
+      "flow_in": 657993.2258,
+      "twr": 0.009
+    },
+    {
+      "date": "2025-10-19",
+      "index": 103.2385,
+      "interpolated": true,
+      "mv_usd": 11272318.1253,
+      "flow_in": 640154.5161,
+      "twr": 0.0091
+    },
+    {
+      "date": "2025-10-20",
+      "index": 103.271,
+      "interpolated": true,
+      "mv_usd": 11289525.589,
+      "flow_in": 622315.8065,
+      "twr": 0.0091
+    },
+    {
+      "date": "2025-10-21",
+      "index": 103.3035,
+      "interpolated": true,
+      "mv_usd": 11306733.0526,
+      "flow_in": 604477.0968,
+      "twr": 0.0092
+    },
+    {
+      "date": "2025-10-22",
+      "index": 103.3359,
+      "interpolated": true,
+      "mv_usd": 11323940.5163,
+      "flow_in": 586638.3871,
+      "twr": 0.0093
+    },
+    {
+      "date": "2025-10-23",
+      "index": 103.3684,
+      "interpolated": true,
+      "mv_usd": 11341147.9799,
+      "flow_in": 568799.6774,
+      "twr": 0.0093
+    },
+    {
+      "date": "2025-10-24",
+      "index": 103.4008,
+      "interpolated": true,
+      "mv_usd": 11358355.4436,
+      "flow_in": 550960.9677,
+      "twr": 0.0094
+    },
+    {
+      "date": "2025-10-25",
+      "index": 103.4333,
+      "interpolated": true,
+      "mv_usd": 11375562.9072,
+      "flow_in": 533122.2581,
+      "twr": 0.0094
+    },
+    {
+      "date": "2025-10-26",
+      "index": 103.4658,
+      "interpolated": true,
+      "mv_usd": 11392770.3709,
+      "flow_in": 515283.5484,
+      "twr": 0.0095
+    },
+    {
+      "date": "2025-10-27",
+      "index": 103.4982,
+      "interpolated": true,
+      "mv_usd": 11409977.8345,
+      "flow_in": 497444.8387,
+      "twr": 0.0096
+    },
+    {
+      "date": "2025-10-28",
+      "index": 103.5307,
+      "interpolated": true,
+      "mv_usd": 11427185.2982,
+      "flow_in": 479606.129,
+      "twr": 0.0096
+    },
+    {
+      "date": "2025-10-29",
+      "index": 103.5632,
+      "interpolated": true,
+      "mv_usd": 11444392.7619,
+      "flow_in": 461767.4194,
+      "twr": 0.0097
+    },
+    {
+      "date": "2025-10-30",
+      "index": 103.5956,
+      "interpolated": true,
+      "mv_usd": 11461600.2255,
+      "flow_in": 443928.7097,
+      "twr": 0.0097
+    },
+    {
       "date": "2025-10-31",
       "mv_usd": 11478807.689152021,
       "flow_in": 426090.0,
       "twr": 0.009807006180706068,
       "index": 103.6281
+    },
+    {
+      "date": "2025-11-01",
+      "index": 103.6368,
+      "interpolated": true,
+      "mv_usd": 11379436.5796,
+      "flow_in": 311556.6667,
+      "twr": 0.0096
+    },
+    {
+      "date": "2025-11-02",
+      "index": 103.6454,
+      "interpolated": true,
+      "mv_usd": 11280065.47,
+      "flow_in": 197023.3333,
+      "twr": 0.0093
+    },
+    {
+      "date": "2025-11-03",
+      "index": 103.6541,
+      "interpolated": true,
+      "mv_usd": 11180694.3605,
+      "flow_in": 82490.0,
+      "twr": 0.0091
+    },
+    {
+      "date": "2025-11-04",
+      "index": 103.6627,
+      "interpolated": true,
+      "mv_usd": 11081323.2509,
+      "flow_in": -32043.3333,
+      "twr": 0.0088
+    },
+    {
+      "date": "2025-11-05",
+      "index": 103.6714,
+      "interpolated": true,
+      "mv_usd": 10981952.1414,
+      "flow_in": -146576.6667,
+      "twr": 0.0086
+    },
+    {
+      "date": "2025-11-06",
+      "index": 103.6801,
+      "interpolated": true,
+      "mv_usd": 10882581.0318,
+      "flow_in": -261110.0,
+      "twr": 0.0083
+    },
+    {
+      "date": "2025-11-07",
+      "index": 103.6887,
+      "interpolated": true,
+      "mv_usd": 10783209.9222,
+      "flow_in": -375643.3333,
+      "twr": 0.0081
+    },
+    {
+      "date": "2025-11-08",
+      "index": 103.6974,
+      "interpolated": true,
+      "mv_usd": 10683838.8127,
+      "flow_in": -490176.6667,
+      "twr": 0.0079
+    },
+    {
+      "date": "2025-11-09",
+      "index": 103.706,
+      "interpolated": true,
+      "mv_usd": 10584467.7031,
+      "flow_in": -604710.0,
+      "twr": 0.0076
+    },
+    {
+      "date": "2025-11-10",
+      "index": 103.7147,
+      "interpolated": true,
+      "mv_usd": 10485096.5936,
+      "flow_in": -719243.3333,
+      "twr": 0.0074
+    },
+    {
+      "date": "2025-11-11",
+      "index": 103.7234,
+      "interpolated": true,
+      "mv_usd": 10385725.484,
+      "flow_in": -833776.6667,
+      "twr": 0.0071
+    },
+    {
+      "date": "2025-11-12",
+      "index": 103.732,
+      "interpolated": true,
+      "mv_usd": 10286354.3744,
+      "flow_in": -948310.0,
+      "twr": 0.0069
+    },
+    {
+      "date": "2025-11-13",
+      "index": 103.7407,
+      "interpolated": true,
+      "mv_usd": 10186983.2649,
+      "flow_in": -1062843.3333,
+      "twr": 0.0066
+    },
+    {
+      "date": "2025-11-14",
+      "index": 103.7493,
+      "interpolated": true,
+      "mv_usd": 10087612.1553,
+      "flow_in": -1177376.6667,
+      "twr": 0.0064
+    },
+    {
+      "date": "2025-11-15",
+      "index": 103.758,
+      "interpolated": true,
+      "mv_usd": 9988241.0458,
+      "flow_in": -1291910.0,
+      "twr": 0.0062
+    },
+    {
+      "date": "2025-11-16",
+      "index": 103.7667,
+      "interpolated": true,
+      "mv_usd": 9888869.9362,
+      "flow_in": -1406443.3333,
+      "twr": 0.0059
+    },
+    {
+      "date": "2025-11-17",
+      "index": 103.7753,
+      "interpolated": true,
+      "mv_usd": 9789498.8266,
+      "flow_in": -1520976.6667,
+      "twr": 0.0057
+    },
+    {
+      "date": "2025-11-18",
+      "index": 103.784,
+      "interpolated": true,
+      "mv_usd": 9690127.7171,
+      "flow_in": -1635510.0,
+      "twr": 0.0054
+    },
+    {
+      "date": "2025-11-19",
+      "index": 103.7926,
+      "interpolated": true,
+      "mv_usd": 9590756.6075,
+      "flow_in": -1750043.3333,
+      "twr": 0.0052
+    },
+    {
+      "date": "2025-11-20",
+      "index": 103.8013,
+      "interpolated": true,
+      "mv_usd": 9491385.498,
+      "flow_in": -1864576.6667,
+      "twr": 0.0049
+    },
+    {
+      "date": "2025-11-21",
+      "index": 103.81,
+      "interpolated": true,
+      "mv_usd": 9392014.3884,
+      "flow_in": -1979110.0,
+      "twr": 0.0047
+    },
+    {
+      "date": "2025-11-22",
+      "index": 103.8186,
+      "interpolated": true,
+      "mv_usd": 9292643.2789,
+      "flow_in": -2093643.3333,
+      "twr": 0.0045
+    },
+    {
+      "date": "2025-11-23",
+      "index": 103.8273,
+      "interpolated": true,
+      "mv_usd": 9193272.1693,
+      "flow_in": -2208176.6667,
+      "twr": 0.0042
+    },
+    {
+      "date": "2025-11-24",
+      "index": 103.8359,
+      "interpolated": true,
+      "mv_usd": 9093901.0597,
+      "flow_in": -2322710.0,
+      "twr": 0.004
+    },
+    {
+      "date": "2025-11-25",
+      "index": 103.8446,
+      "interpolated": true,
+      "mv_usd": 8994529.9502,
+      "flow_in": -2437243.3333,
+      "twr": 0.0037
+    },
+    {
+      "date": "2025-11-26",
+      "index": 103.8533,
+      "interpolated": true,
+      "mv_usd": 8895158.8406,
+      "flow_in": -2551776.6667,
+      "twr": 0.0035
+    },
+    {
+      "date": "2025-11-27",
+      "index": 103.8619,
+      "interpolated": true,
+      "mv_usd": 8795787.7311,
+      "flow_in": -2666310.0,
+      "twr": 0.0032
+    },
+    {
+      "date": "2025-11-28",
+      "index": 103.8706,
+      "interpolated": true,
+      "mv_usd": 8696416.6215,
+      "flow_in": -2780843.3333,
+      "twr": 0.003
+    },
+    {
+      "date": "2025-11-29",
+      "index": 103.8792,
+      "interpolated": true,
+      "mv_usd": 8597045.5119,
+      "flow_in": -2895376.6667,
+      "twr": 0.0028
     },
     {
       "date": "2025-11-30",
@@ -5118,11 +6132,491 @@
       "index": 103.8879
     },
     {
+      "date": "2025-12-01",
+      "index": 103.8948,
+      "interpolated": true,
+      "mv_usd": 8506306.0113,
+      "flow_in": -2904748.7097,
+      "twr": 0.0025
+    },
+    {
+      "date": "2025-12-02",
+      "index": 103.9017,
+      "interpolated": true,
+      "mv_usd": 8514937.6203,
+      "flow_in": -2799587.4194,
+      "twr": 0.0025
+    },
+    {
+      "date": "2025-12-03",
+      "index": 103.9086,
+      "interpolated": true,
+      "mv_usd": 8523569.2292,
+      "flow_in": -2694426.129,
+      "twr": 0.0025
+    },
+    {
+      "date": "2025-12-04",
+      "index": 103.9155,
+      "interpolated": true,
+      "mv_usd": 8532200.8382,
+      "flow_in": -2589264.8387,
+      "twr": 0.0024
+    },
+    {
+      "date": "2025-12-05",
+      "index": 103.9224,
+      "interpolated": true,
+      "mv_usd": 8540832.4471,
+      "flow_in": -2484103.5484,
+      "twr": 0.0024
+    },
+    {
+      "date": "2025-12-06",
+      "index": 103.9293,
+      "interpolated": true,
+      "mv_usd": 8549464.056,
+      "flow_in": -2378942.2581,
+      "twr": 0.0024
+    },
+    {
+      "date": "2025-12-07",
+      "index": 103.9362,
+      "interpolated": true,
+      "mv_usd": 8558095.665,
+      "flow_in": -2273780.9677,
+      "twr": 0.0024
+    },
+    {
+      "date": "2025-12-08",
+      "index": 103.9431,
+      "interpolated": true,
+      "mv_usd": 8566727.2739,
+      "flow_in": -2168619.6774,
+      "twr": 0.0024
+    },
+    {
+      "date": "2025-12-09",
+      "index": 103.95,
+      "interpolated": true,
+      "mv_usd": 8575358.8829,
+      "flow_in": -2063458.3871,
+      "twr": 0.0024
+    },
+    {
+      "date": "2025-12-10",
+      "index": 103.9569,
+      "interpolated": true,
+      "mv_usd": 8583990.4918,
+      "flow_in": -1958297.0968,
+      "twr": 0.0024
+    },
+    {
+      "date": "2025-12-11",
+      "index": 103.9638,
+      "interpolated": true,
+      "mv_usd": 8592622.1008,
+      "flow_in": -1853135.8065,
+      "twr": 0.0023
+    },
+    {
+      "date": "2025-12-12",
+      "index": 103.9707,
+      "interpolated": true,
+      "mv_usd": 8601253.7097,
+      "flow_in": -1747974.5161,
+      "twr": 0.0023
+    },
+    {
+      "date": "2025-12-13",
+      "index": 103.9776,
+      "interpolated": true,
+      "mv_usd": 8609885.3187,
+      "flow_in": -1642813.2258,
+      "twr": 0.0023
+    },
+    {
+      "date": "2025-12-14",
+      "index": 103.9845,
+      "interpolated": true,
+      "mv_usd": 8618516.9276,
+      "flow_in": -1537651.9355,
+      "twr": 0.0023
+    },
+    {
+      "date": "2025-12-15",
+      "index": 103.9914,
+      "interpolated": true,
+      "mv_usd": 8627148.5366,
+      "flow_in": -1432490.6452,
+      "twr": 0.0023
+    },
+    {
+      "date": "2025-12-16",
+      "index": 103.9982,
+      "interpolated": true,
+      "mv_usd": 8635780.1455,
+      "flow_in": -1327329.3548,
+      "twr": 0.0023
+    },
+    {
+      "date": "2025-12-17",
+      "index": 104.0051,
+      "interpolated": true,
+      "mv_usd": 8644411.7544,
+      "flow_in": -1222168.0645,
+      "twr": 0.0023
+    },
+    {
+      "date": "2025-12-18",
+      "index": 104.012,
+      "interpolated": true,
+      "mv_usd": 8653043.3634,
+      "flow_in": -1117006.7742,
+      "twr": 0.0022
+    },
+    {
+      "date": "2025-12-19",
+      "index": 104.0189,
+      "interpolated": true,
+      "mv_usd": 8661674.9723,
+      "flow_in": -1011845.4839,
+      "twr": 0.0022
+    },
+    {
+      "date": "2025-12-20",
+      "index": 104.0258,
+      "interpolated": true,
+      "mv_usd": 8670306.5813,
+      "flow_in": -906684.1935,
+      "twr": 0.0022
+    },
+    {
+      "date": "2025-12-21",
+      "index": 104.0327,
+      "interpolated": true,
+      "mv_usd": 8678938.1902,
+      "flow_in": -801522.9032,
+      "twr": 0.0022
+    },
+    {
+      "date": "2025-12-22",
+      "index": 104.0396,
+      "interpolated": true,
+      "mv_usd": 8687569.7992,
+      "flow_in": -696361.6129,
+      "twr": 0.0022
+    },
+    {
+      "date": "2025-12-23",
+      "index": 104.0465,
+      "interpolated": true,
+      "mv_usd": 8696201.4081,
+      "flow_in": -591200.3226,
+      "twr": 0.0022
+    },
+    {
+      "date": "2025-12-24",
+      "index": 104.0534,
+      "interpolated": true,
+      "mv_usd": 8704833.0171,
+      "flow_in": -486039.0323,
+      "twr": 0.0022
+    },
+    {
+      "date": "2025-12-25",
+      "index": 104.0603,
+      "interpolated": true,
+      "mv_usd": 8713464.626,
+      "flow_in": -380877.7419,
+      "twr": 0.0021
+    },
+    {
+      "date": "2025-12-26",
+      "index": 104.0672,
+      "interpolated": true,
+      "mv_usd": 8722096.235,
+      "flow_in": -275716.4516,
+      "twr": 0.0021
+    },
+    {
+      "date": "2025-12-27",
+      "index": 104.0741,
+      "interpolated": true,
+      "mv_usd": 8730727.8439,
+      "flow_in": -170555.1613,
+      "twr": 0.0021
+    },
+    {
+      "date": "2025-12-28",
+      "index": 104.081,
+      "interpolated": true,
+      "mv_usd": 8739359.4528,
+      "flow_in": -65393.871,
+      "twr": 0.0021
+    },
+    {
+      "date": "2025-12-29",
+      "index": 104.0879,
+      "interpolated": true,
+      "mv_usd": 8747991.0618,
+      "flow_in": 39767.4194,
+      "twr": 0.0021
+    },
+    {
+      "date": "2025-12-30",
+      "index": 104.0948,
+      "interpolated": true,
+      "mv_usd": 8756622.6707,
+      "flow_in": 144928.7097,
+      "twr": 0.0021
+    },
+    {
       "date": "2025-12-31",
       "mv_usd": 8765254.279675536,
       "flow_in": 250090.0,
       "twr": 0.00205819574490107,
       "index": 104.1017
+    },
+    {
+      "date": "2026-01-01",
+      "index": 104.1162,
+      "interpolated": true,
+      "mv_usd": 8772707.51,
+      "flow_in": 248258.0771,
+      "twr": 0.0021
+    },
+    {
+      "date": "2026-01-02",
+      "index": 104.1306,
+      "interpolated": true,
+      "mv_usd": 8780160.7402,
+      "flow_in": 246426.1542,
+      "twr": 0.0022
+    },
+    {
+      "date": "2026-01-03",
+      "index": 104.1451,
+      "interpolated": true,
+      "mv_usd": 8787613.9705,
+      "flow_in": 244594.2313,
+      "twr": 0.0023
+    },
+    {
+      "date": "2026-01-04",
+      "index": 104.1595,
+      "interpolated": true,
+      "mv_usd": 8795067.2008,
+      "flow_in": 242762.3084,
+      "twr": 0.0023
+    },
+    {
+      "date": "2026-01-05",
+      "index": 104.174,
+      "interpolated": true,
+      "mv_usd": 8802520.4311,
+      "flow_in": 240930.3855,
+      "twr": 0.0024
+    },
+    {
+      "date": "2026-01-06",
+      "index": 104.1885,
+      "interpolated": true,
+      "mv_usd": 8809973.6613,
+      "flow_in": 239098.4626,
+      "twr": 0.0025
+    },
+    {
+      "date": "2026-01-07",
+      "index": 104.2029,
+      "interpolated": true,
+      "mv_usd": 8817426.8916,
+      "flow_in": 237266.5397,
+      "twr": 0.0026
+    },
+    {
+      "date": "2026-01-08",
+      "index": 104.2174,
+      "interpolated": true,
+      "mv_usd": 8824880.1219,
+      "flow_in": 235434.6168,
+      "twr": 0.0026
+    },
+    {
+      "date": "2026-01-09",
+      "index": 104.2319,
+      "interpolated": true,
+      "mv_usd": 8832333.3522,
+      "flow_in": 233602.6939,
+      "twr": 0.0027
+    },
+    {
+      "date": "2026-01-10",
+      "index": 104.2463,
+      "interpolated": true,
+      "mv_usd": 8839786.5824,
+      "flow_in": 231770.771,
+      "twr": 0.0028
+    },
+    {
+      "date": "2026-01-11",
+      "index": 104.2608,
+      "interpolated": true,
+      "mv_usd": 8847239.8127,
+      "flow_in": 229938.8481,
+      "twr": 0.0029
+    },
+    {
+      "date": "2026-01-12",
+      "index": 104.2752,
+      "interpolated": true,
+      "mv_usd": 8854693.043,
+      "flow_in": 228106.9252,
+      "twr": 0.0029
+    },
+    {
+      "date": "2026-01-13",
+      "index": 104.2897,
+      "interpolated": true,
+      "mv_usd": 8862146.2733,
+      "flow_in": 226275.0023,
+      "twr": 0.003
+    },
+    {
+      "date": "2026-01-14",
+      "index": 104.3042,
+      "interpolated": true,
+      "mv_usd": 8869599.5035,
+      "flow_in": 224443.0794,
+      "twr": 0.0031
+    },
+    {
+      "date": "2026-01-15",
+      "index": 104.3186,
+      "interpolated": true,
+      "mv_usd": 8877052.7338,
+      "flow_in": 222611.1565,
+      "twr": 0.0031
+    },
+    {
+      "date": "2026-01-16",
+      "index": 104.3331,
+      "interpolated": true,
+      "mv_usd": 8884505.9641,
+      "flow_in": 220779.2335,
+      "twr": 0.0032
+    },
+    {
+      "date": "2026-01-17",
+      "index": 104.3475,
+      "interpolated": true,
+      "mv_usd": 8891959.1944,
+      "flow_in": 218947.3106,
+      "twr": 0.0033
+    },
+    {
+      "date": "2026-01-18",
+      "index": 104.362,
+      "interpolated": true,
+      "mv_usd": 8899412.4246,
+      "flow_in": 217115.3877,
+      "twr": 0.0034
+    },
+    {
+      "date": "2026-01-19",
+      "index": 104.3765,
+      "interpolated": true,
+      "mv_usd": 8906865.6549,
+      "flow_in": 215283.4648,
+      "twr": 0.0034
+    },
+    {
+      "date": "2026-01-20",
+      "index": 104.3909,
+      "interpolated": true,
+      "mv_usd": 8914318.8852,
+      "flow_in": 213451.5419,
+      "twr": 0.0035
+    },
+    {
+      "date": "2026-01-21",
+      "index": 104.4054,
+      "interpolated": true,
+      "mv_usd": 8921772.1155,
+      "flow_in": 211619.619,
+      "twr": 0.0036
+    },
+    {
+      "date": "2026-01-22",
+      "index": 104.4198,
+      "interpolated": true,
+      "mv_usd": 8929225.3458,
+      "flow_in": 209787.6961,
+      "twr": 0.0037
+    },
+    {
+      "date": "2026-01-23",
+      "index": 104.4343,
+      "interpolated": true,
+      "mv_usd": 8936678.576,
+      "flow_in": 207955.7732,
+      "twr": 0.0037
+    },
+    {
+      "date": "2026-01-24",
+      "index": 104.4488,
+      "interpolated": true,
+      "mv_usd": 8944131.8063,
+      "flow_in": 206123.8503,
+      "twr": 0.0038
+    },
+    {
+      "date": "2026-01-25",
+      "index": 104.4632,
+      "interpolated": true,
+      "mv_usd": 8951585.0366,
+      "flow_in": 204291.9274,
+      "twr": 0.0039
+    },
+    {
+      "date": "2026-01-26",
+      "index": 104.4777,
+      "interpolated": true,
+      "mv_usd": 8959038.2669,
+      "flow_in": 202460.0045,
+      "twr": 0.0039
+    },
+    {
+      "date": "2026-01-27",
+      "index": 104.4922,
+      "interpolated": true,
+      "mv_usd": 8966491.4971,
+      "flow_in": 200628.0816,
+      "twr": 0.004
+    },
+    {
+      "date": "2026-01-28",
+      "index": 104.5066,
+      "interpolated": true,
+      "mv_usd": 8973944.7274,
+      "flow_in": 198796.1587,
+      "twr": 0.0041
+    },
+    {
+      "date": "2026-01-29",
+      "index": 104.5211,
+      "interpolated": true,
+      "mv_usd": 8981397.9577,
+      "flow_in": 196964.2358,
+      "twr": 0.0042
+    },
+    {
+      "date": "2026-01-30",
+      "index": 104.5355,
+      "interpolated": true,
+      "mv_usd": 8988851.188,
+      "flow_in": 195132.3129,
+      "twr": 0.0042
     },
     {
       "date": "2026-01-31",
@@ -5132,11 +6626,467 @@
       "index": 104.55
     },
     {
+      "date": "2026-02-01",
+      "index": 104.584,
+      "interpolated": true,
+      "mv_usd": 9023341.5305,
+      "flow_in": 210507.1614,
+      "twr": 0.0045
+    },
+    {
+      "date": "2026-02-02",
+      "index": 104.618,
+      "interpolated": true,
+      "mv_usd": 9050378.6428,
+      "flow_in": 227713.9329,
+      "twr": 0.0046
+    },
+    {
+      "date": "2026-02-03",
+      "index": 104.652,
+      "interpolated": true,
+      "mv_usd": 9077415.7551,
+      "flow_in": 244920.7043,
+      "twr": 0.0048
+    },
+    {
+      "date": "2026-02-04",
+      "index": 104.6861,
+      "interpolated": true,
+      "mv_usd": 9104452.8674,
+      "flow_in": 262127.4757,
+      "twr": 0.005
+    },
+    {
+      "date": "2026-02-05",
+      "index": 104.7201,
+      "interpolated": true,
+      "mv_usd": 9131489.9797,
+      "flow_in": 279334.2471,
+      "twr": 0.0052
+    },
+    {
+      "date": "2026-02-06",
+      "index": 104.7541,
+      "interpolated": true,
+      "mv_usd": 9158527.092,
+      "flow_in": 296541.0186,
+      "twr": 0.0053
+    },
+    {
+      "date": "2026-02-07",
+      "index": 104.7881,
+      "interpolated": true,
+      "mv_usd": 9185564.2043,
+      "flow_in": 313747.79,
+      "twr": 0.0055
+    },
+    {
+      "date": "2026-02-08",
+      "index": 104.8221,
+      "interpolated": true,
+      "mv_usd": 9212601.3166,
+      "flow_in": 330954.5614,
+      "twr": 0.0057
+    },
+    {
+      "date": "2026-02-09",
+      "index": 104.8561,
+      "interpolated": true,
+      "mv_usd": 9239638.4289,
+      "flow_in": 348161.3329,
+      "twr": 0.0059
+    },
+    {
+      "date": "2026-02-10",
+      "index": 104.8901,
+      "interpolated": true,
+      "mv_usd": 9266675.5412,
+      "flow_in": 365368.1043,
+      "twr": 0.006
+    },
+    {
+      "date": "2026-02-11",
+      "index": 104.9242,
+      "interpolated": true,
+      "mv_usd": 9293712.6535,
+      "flow_in": 382574.8757,
+      "twr": 0.0062
+    },
+    {
+      "date": "2026-02-12",
+      "index": 104.9582,
+      "interpolated": true,
+      "mv_usd": 9320749.7658,
+      "flow_in": 399781.6471,
+      "twr": 0.0064
+    },
+    {
+      "date": "2026-02-13",
+      "index": 104.9922,
+      "interpolated": true,
+      "mv_usd": 9347786.8781,
+      "flow_in": 416988.4186,
+      "twr": 0.0065
+    },
+    {
+      "date": "2026-02-14",
+      "index": 105.0262,
+      "interpolated": true,
+      "mv_usd": 9374823.9904,
+      "flow_in": 434195.19,
+      "twr": 0.0067
+    },
+    {
+      "date": "2026-02-15",
+      "index": 105.0602,
+      "interpolated": true,
+      "mv_usd": 9401861.1027,
+      "flow_in": 451401.9614,
+      "twr": 0.0069
+    },
+    {
+      "date": "2026-02-16",
+      "index": 105.0942,
+      "interpolated": true,
+      "mv_usd": 9428898.215,
+      "flow_in": 468608.7329,
+      "twr": 0.0071
+    },
+    {
+      "date": "2026-02-17",
+      "index": 105.1282,
+      "interpolated": true,
+      "mv_usd": 9455935.3273,
+      "flow_in": 485815.5043,
+      "twr": 0.0072
+    },
+    {
+      "date": "2026-02-18",
+      "index": 105.1623,
+      "interpolated": true,
+      "mv_usd": 9482972.4396,
+      "flow_in": 503022.2757,
+      "twr": 0.0074
+    },
+    {
+      "date": "2026-02-19",
+      "index": 105.1963,
+      "interpolated": true,
+      "mv_usd": 9510009.5519,
+      "flow_in": 520229.0471,
+      "twr": 0.0076
+    },
+    {
+      "date": "2026-02-20",
+      "index": 105.2303,
+      "interpolated": true,
+      "mv_usd": 9537046.6642,
+      "flow_in": 537435.8186,
+      "twr": 0.0077
+    },
+    {
+      "date": "2026-02-21",
+      "index": 105.2643,
+      "interpolated": true,
+      "mv_usd": 9564083.7765,
+      "flow_in": 554642.59,
+      "twr": 0.0079
+    },
+    {
+      "date": "2026-02-22",
+      "index": 105.2983,
+      "interpolated": true,
+      "mv_usd": 9591120.8888,
+      "flow_in": 571849.3614,
+      "twr": 0.0081
+    },
+    {
+      "date": "2026-02-23",
+      "index": 105.3323,
+      "interpolated": true,
+      "mv_usd": 9618158.0011,
+      "flow_in": 589056.1329,
+      "twr": 0.0083
+    },
+    {
+      "date": "2026-02-24",
+      "index": 105.3663,
+      "interpolated": true,
+      "mv_usd": 9645195.1134,
+      "flow_in": 606262.9043,
+      "twr": 0.0084
+    },
+    {
+      "date": "2026-02-25",
+      "index": 105.4004,
+      "interpolated": true,
+      "mv_usd": 9672232.2257,
+      "flow_in": 623469.6757,
+      "twr": 0.0086
+    },
+    {
+      "date": "2026-02-26",
+      "index": 105.4344,
+      "interpolated": true,
+      "mv_usd": 9699269.338,
+      "flow_in": 640676.4471,
+      "twr": 0.0088
+    },
+    {
+      "date": "2026-02-27",
+      "index": 105.4684,
+      "interpolated": true,
+      "mv_usd": 9726306.4503,
+      "flow_in": 657883.2186,
+      "twr": 0.0089
+    },
+    {
       "date": "2026-02-28",
       "mv_usd": 9753343.562591027,
       "flow_in": 675089.9900000002,
       "twr": 0.00910920201669918,
       "index": 105.5024
+    },
+    {
+      "date": "2026-03-01",
+      "index": 105.4324,
+      "interpolated": true,
+      "mv_usd": 9746870.2393,
+      "flow_in": 653312.8935,
+      "twr": 0.0082
+    },
+    {
+      "date": "2026-03-02",
+      "index": 105.3624,
+      "interpolated": true,
+      "mv_usd": 9740396.9161,
+      "flow_in": 631535.7971,
+      "twr": 0.0072
+    },
+    {
+      "date": "2026-03-03",
+      "index": 105.2923,
+      "interpolated": true,
+      "mv_usd": 9733923.5928,
+      "flow_in": 609758.7006,
+      "twr": 0.0062
+    },
+    {
+      "date": "2026-03-04",
+      "index": 105.2223,
+      "interpolated": true,
+      "mv_usd": 9727450.2696,
+      "flow_in": 587981.6042,
+      "twr": 0.0053
+    },
+    {
+      "date": "2026-03-05",
+      "index": 105.1523,
+      "interpolated": true,
+      "mv_usd": 9720976.9463,
+      "flow_in": 566204.5077,
+      "twr": 0.0043
+    },
+    {
+      "date": "2026-03-06",
+      "index": 105.0823,
+      "interpolated": true,
+      "mv_usd": 9714503.623,
+      "flow_in": 544427.4113,
+      "twr": 0.0034
+    },
+    {
+      "date": "2026-03-07",
+      "index": 105.0122,
+      "interpolated": true,
+      "mv_usd": 9708030.2998,
+      "flow_in": 522650.3148,
+      "twr": 0.0024
+    },
+    {
+      "date": "2026-03-08",
+      "index": 104.9422,
+      "interpolated": true,
+      "mv_usd": 9701556.9765,
+      "flow_in": 500873.2184,
+      "twr": 0.0014
+    },
+    {
+      "date": "2026-03-09",
+      "index": 104.8722,
+      "interpolated": true,
+      "mv_usd": 9695083.6533,
+      "flow_in": 479096.1219,
+      "twr": 0.0005
+    },
+    {
+      "date": "2026-03-10",
+      "index": 104.8022,
+      "interpolated": true,
+      "mv_usd": 9688610.33,
+      "flow_in": 457319.0255,
+      "twr": -0.0005
+    },
+    {
+      "date": "2026-03-11",
+      "index": 104.7322,
+      "interpolated": true,
+      "mv_usd": 9682137.0067,
+      "flow_in": 435541.929,
+      "twr": -0.0014
+    },
+    {
+      "date": "2026-03-12",
+      "index": 104.6621,
+      "interpolated": true,
+      "mv_usd": 9675663.6835,
+      "flow_in": 413764.8326,
+      "twr": -0.0024
+    },
+    {
+      "date": "2026-03-13",
+      "index": 104.5921,
+      "interpolated": true,
+      "mv_usd": 9669190.3602,
+      "flow_in": 391987.7361,
+      "twr": -0.0033
+    },
+    {
+      "date": "2026-03-14",
+      "index": 104.5221,
+      "interpolated": true,
+      "mv_usd": 9662717.037,
+      "flow_in": 370210.6397,
+      "twr": -0.0043
+    },
+    {
+      "date": "2026-03-15",
+      "index": 104.4521,
+      "interpolated": true,
+      "mv_usd": 9656243.7137,
+      "flow_in": 348433.5432,
+      "twr": -0.0053
+    },
+    {
+      "date": "2026-03-16",
+      "index": 104.382,
+      "interpolated": true,
+      "mv_usd": 9649770.3904,
+      "flow_in": 326656.4468,
+      "twr": -0.0062
+    },
+    {
+      "date": "2026-03-17",
+      "index": 104.312,
+      "interpolated": true,
+      "mv_usd": 9643297.0672,
+      "flow_in": 304879.3503,
+      "twr": -0.0072
+    },
+    {
+      "date": "2026-03-18",
+      "index": 104.242,
+      "interpolated": true,
+      "mv_usd": 9636823.7439,
+      "flow_in": 283102.2539,
+      "twr": -0.0081
+    },
+    {
+      "date": "2026-03-19",
+      "index": 104.172,
+      "interpolated": true,
+      "mv_usd": 9630350.4207,
+      "flow_in": 261325.1574,
+      "twr": -0.0091
+    },
+    {
+      "date": "2026-03-20",
+      "index": 104.1019,
+      "interpolated": true,
+      "mv_usd": 9623877.0974,
+      "flow_in": 239548.061,
+      "twr": -0.01
+    },
+    {
+      "date": "2026-03-21",
+      "index": 104.0319,
+      "interpolated": true,
+      "mv_usd": 9617403.7741,
+      "flow_in": 217770.9645,
+      "twr": -0.011
+    },
+    {
+      "date": "2026-03-22",
+      "index": 103.9619,
+      "interpolated": true,
+      "mv_usd": 9610930.4509,
+      "flow_in": 195993.8681,
+      "twr": -0.012
+    },
+    {
+      "date": "2026-03-23",
+      "index": 103.8919,
+      "interpolated": true,
+      "mv_usd": 9604457.1276,
+      "flow_in": 174216.7716,
+      "twr": -0.0129
+    },
+    {
+      "date": "2026-03-24",
+      "index": 103.8219,
+      "interpolated": true,
+      "mv_usd": 9597983.8044,
+      "flow_in": 152439.6752,
+      "twr": -0.0139
+    },
+    {
+      "date": "2026-03-25",
+      "index": 103.7518,
+      "interpolated": true,
+      "mv_usd": 9591510.4811,
+      "flow_in": 130662.5787,
+      "twr": -0.0148
+    },
+    {
+      "date": "2026-03-26",
+      "index": 103.6818,
+      "interpolated": true,
+      "mv_usd": 9585037.1578,
+      "flow_in": 108885.4823,
+      "twr": -0.0158
+    },
+    {
+      "date": "2026-03-27",
+      "index": 103.6118,
+      "interpolated": true,
+      "mv_usd": 9578563.8346,
+      "flow_in": 87108.3858,
+      "twr": -0.0167
+    },
+    {
+      "date": "2026-03-28",
+      "index": 103.5418,
+      "interpolated": true,
+      "mv_usd": 9572090.5113,
+      "flow_in": 65331.2894,
+      "twr": -0.0177
+    },
+    {
+      "date": "2026-03-29",
+      "index": 103.4717,
+      "interpolated": true,
+      "mv_usd": 9565617.1881,
+      "flow_in": 43554.1929,
+      "twr": -0.0187
+    },
+    {
+      "date": "2026-03-30",
+      "index": 103.4017,
+      "interpolated": true,
+      "mv_usd": 9559143.8648,
+      "flow_in": 21777.0965,
+      "twr": -0.0196
     },
     {
       "date": "2026-03-31",
@@ -5146,11 +7096,459 @@
       "index": 103.3317
     },
     {
+      "date": "2026-04-01",
+      "index": 103.3873,
+      "interpolated": true,
+      "mv_usd": 9579748.8297,
+      "flow_in": 21934.2267,
+      "twr": -0.0194
+    },
+    {
+      "date": "2026-04-02",
+      "index": 103.443,
+      "interpolated": true,
+      "mv_usd": 9606827.1178,
+      "flow_in": 43868.4533,
+      "twr": -0.0181
+    },
+    {
+      "date": "2026-04-03",
+      "index": 103.4986,
+      "interpolated": true,
+      "mv_usd": 9633905.406,
+      "flow_in": 65802.68,
+      "twr": -0.0169
+    },
+    {
+      "date": "2026-04-04",
+      "index": 103.5543,
+      "interpolated": true,
+      "mv_usd": 9660983.6941,
+      "flow_in": 87736.9067,
+      "twr": -0.0157
+    },
+    {
+      "date": "2026-04-05",
+      "index": 103.6099,
+      "interpolated": true,
+      "mv_usd": 9688061.9823,
+      "flow_in": 109671.1333,
+      "twr": -0.0145
+    },
+    {
+      "date": "2026-04-06",
+      "index": 103.6656,
+      "interpolated": true,
+      "mv_usd": 9715140.2704,
+      "flow_in": 131605.36,
+      "twr": -0.0132
+    },
+    {
+      "date": "2026-04-07",
+      "index": 103.7212,
+      "interpolated": true,
+      "mv_usd": 9742218.5586,
+      "flow_in": 153539.5867,
+      "twr": -0.012
+    },
+    {
+      "date": "2026-04-08",
+      "index": 103.7768,
+      "interpolated": true,
+      "mv_usd": 9769296.8467,
+      "flow_in": 175473.8133,
+      "twr": -0.0108
+    },
+    {
+      "date": "2026-04-09",
+      "index": 103.8325,
+      "interpolated": true,
+      "mv_usd": 9796375.1348,
+      "flow_in": 197408.04,
+      "twr": -0.0096
+    },
+    {
+      "date": "2026-04-10",
+      "index": 103.8881,
+      "interpolated": true,
+      "mv_usd": 9823453.423,
+      "flow_in": 219342.2667,
+      "twr": -0.0083
+    },
+    {
+      "date": "2026-04-11",
+      "index": 103.9438,
+      "interpolated": true,
+      "mv_usd": 9850531.7111,
+      "flow_in": 241276.4933,
+      "twr": -0.0071
+    },
+    {
+      "date": "2026-04-12",
+      "index": 103.9994,
+      "interpolated": true,
+      "mv_usd": 9877609.9993,
+      "flow_in": 263210.72,
+      "twr": -0.0059
+    },
+    {
+      "date": "2026-04-13",
+      "index": 104.0551,
+      "interpolated": true,
+      "mv_usd": 9904688.2874,
+      "flow_in": 285144.9467,
+      "twr": -0.0047
+    },
+    {
+      "date": "2026-04-14",
+      "index": 104.1107,
+      "interpolated": true,
+      "mv_usd": 9931766.5756,
+      "flow_in": 307079.1733,
+      "twr": -0.0034
+    },
+    {
+      "date": "2026-04-15",
+      "index": 104.1663,
+      "interpolated": true,
+      "mv_usd": 9958844.8637,
+      "flow_in": 329013.4,
+      "twr": -0.0022
+    },
+    {
+      "date": "2026-04-16",
+      "index": 104.222,
+      "interpolated": true,
+      "mv_usd": 9985923.1518,
+      "flow_in": 350947.6267,
+      "twr": -0.001
+    },
+    {
+      "date": "2026-04-17",
+      "index": 104.2776,
+      "interpolated": true,
+      "mv_usd": 10013001.44,
+      "flow_in": 372881.8533,
+      "twr": 0.0002
+    },
+    {
+      "date": "2026-04-18",
+      "index": 104.3333,
+      "interpolated": true,
+      "mv_usd": 10040079.7281,
+      "flow_in": 394816.08,
+      "twr": 0.0015
+    },
+    {
+      "date": "2026-04-19",
+      "index": 104.3889,
+      "interpolated": true,
+      "mv_usd": 10067158.0163,
+      "flow_in": 416750.3067,
+      "twr": 0.0027
+    },
+    {
+      "date": "2026-04-20",
+      "index": 104.4446,
+      "interpolated": true,
+      "mv_usd": 10094236.3044,
+      "flow_in": 438684.5333,
+      "twr": 0.0039
+    },
+    {
+      "date": "2026-04-21",
+      "index": 104.5002,
+      "interpolated": true,
+      "mv_usd": 10121314.5926,
+      "flow_in": 460618.76,
+      "twr": 0.0051
+    },
+    {
+      "date": "2026-04-22",
+      "index": 104.5559,
+      "interpolated": true,
+      "mv_usd": 10148392.8807,
+      "flow_in": 482552.9867,
+      "twr": 0.0064
+    },
+    {
+      "date": "2026-04-23",
+      "index": 104.6115,
+      "interpolated": true,
+      "mv_usd": 10175471.1689,
+      "flow_in": 504487.2133,
+      "twr": 0.0076
+    },
+    {
+      "date": "2026-04-24",
+      "index": 104.6671,
+      "interpolated": true,
+      "mv_usd": 10202549.457,
+      "flow_in": 526421.44,
+      "twr": 0.0088
+    },
+    {
+      "date": "2026-04-25",
+      "index": 104.7228,
+      "interpolated": true,
+      "mv_usd": 10229627.7451,
+      "flow_in": 548355.6667,
+      "twr": 0.01
+    },
+    {
+      "date": "2026-04-26",
+      "index": 104.7784,
+      "interpolated": true,
+      "mv_usd": 10256706.0333,
+      "flow_in": 570289.8933,
+      "twr": 0.0113
+    },
+    {
+      "date": "2026-04-27",
+      "index": 104.8341,
+      "interpolated": true,
+      "mv_usd": 10283784.3214,
+      "flow_in": 592224.12,
+      "twr": 0.0125
+    },
+    {
+      "date": "2026-04-28",
+      "index": 104.8897,
+      "interpolated": true,
+      "mv_usd": 10310862.6096,
+      "flow_in": 614158.3467,
+      "twr": 0.0137
+    },
+    {
+      "date": "2026-04-29",
+      "index": 104.9454,
+      "interpolated": true,
+      "mv_usd": 10337940.8977,
+      "flow_in": 636092.5733,
+      "twr": 0.0149
+    },
+    {
       "date": "2026-04-30",
       "mv_usd": 10365019.185859999,
       "flow_in": 658026.8,
       "twr": 0.016154837920917542,
       "index": 105.001
+    },
+    {
+      "date": "2026-05-01",
+      "index": 104.9868,
+      "interpolated": true,
+      "mv_usd": 10363620.2774,
+      "flow_in": 634525.8429,
+      "twr": 0.0154
+    },
+    {
+      "date": "2026-05-02",
+      "index": 104.9727,
+      "interpolated": true,
+      "mv_usd": 10362221.369,
+      "flow_in": 611024.8857,
+      "twr": 0.0147
+    },
+    {
+      "date": "2026-05-03",
+      "index": 104.9585,
+      "interpolated": true,
+      "mv_usd": 10360822.4606,
+      "flow_in": 587523.9286,
+      "twr": 0.014
+    },
+    {
+      "date": "2026-05-04",
+      "index": 104.9443,
+      "interpolated": true,
+      "mv_usd": 10359423.5522,
+      "flow_in": 564022.9714,
+      "twr": 0.0133
+    },
+    {
+      "date": "2026-05-05",
+      "index": 104.9301,
+      "interpolated": true,
+      "mv_usd": 10358024.6437,
+      "flow_in": 540522.0143,
+      "twr": 0.0126
+    },
+    {
+      "date": "2026-05-06",
+      "index": 104.916,
+      "interpolated": true,
+      "mv_usd": 10356625.7353,
+      "flow_in": 517021.0571,
+      "twr": 0.0119
+    },
+    {
+      "date": "2026-05-07",
+      "index": 104.9018,
+      "interpolated": true,
+      "mv_usd": 10355226.8269,
+      "flow_in": 493520.1,
+      "twr": 0.0112
+    },
+    {
+      "date": "2026-05-08",
+      "index": 104.8876,
+      "interpolated": true,
+      "mv_usd": 10353827.9185,
+      "flow_in": 470019.1429,
+      "twr": 0.0105
+    },
+    {
+      "date": "2026-05-09",
+      "index": 104.8735,
+      "interpolated": true,
+      "mv_usd": 10352429.01,
+      "flow_in": 446518.1857,
+      "twr": 0.0097
+    },
+    {
+      "date": "2026-05-10",
+      "index": 104.8593,
+      "interpolated": true,
+      "mv_usd": 10351030.1016,
+      "flow_in": 423017.2286,
+      "twr": 0.009
+    },
+    {
+      "date": "2026-05-11",
+      "index": 104.8451,
+      "interpolated": true,
+      "mv_usd": 10349631.1932,
+      "flow_in": 399516.2714,
+      "twr": 0.0083
+    },
+    {
+      "date": "2026-05-12",
+      "index": 104.8309,
+      "interpolated": true,
+      "mv_usd": 10348232.2848,
+      "flow_in": 376015.3143,
+      "twr": 0.0076
+    },
+    {
+      "date": "2026-05-13",
+      "index": 104.8168,
+      "interpolated": true,
+      "mv_usd": 10346833.3764,
+      "flow_in": 352514.3571,
+      "twr": 0.0069
+    },
+    {
+      "date": "2026-05-14",
+      "index": 104.8026,
+      "interpolated": true,
+      "mv_usd": 10345434.4679,
+      "flow_in": 329013.4,
+      "twr": 0.0062
+    },
+    {
+      "date": "2026-05-15",
+      "index": 104.7884,
+      "interpolated": true,
+      "mv_usd": 10344035.5595,
+      "flow_in": 305512.4429,
+      "twr": 0.0055
+    },
+    {
+      "date": "2026-05-16",
+      "index": 104.7743,
+      "interpolated": true,
+      "mv_usd": 10342636.6511,
+      "flow_in": 282011.4857,
+      "twr": 0.0048
+    },
+    {
+      "date": "2026-05-17",
+      "index": 104.7601,
+      "interpolated": true,
+      "mv_usd": 10341237.7427,
+      "flow_in": 258510.5286,
+      "twr": 0.0041
+    },
+    {
+      "date": "2026-05-18",
+      "index": 104.7459,
+      "interpolated": true,
+      "mv_usd": 10339838.8342,
+      "flow_in": 235009.5714,
+      "twr": 0.0033
+    },
+    {
+      "date": "2026-05-19",
+      "index": 104.7317,
+      "interpolated": true,
+      "mv_usd": 10338439.9258,
+      "flow_in": 211508.6143,
+      "twr": 0.0026
+    },
+    {
+      "date": "2026-05-20",
+      "index": 104.7176,
+      "interpolated": true,
+      "mv_usd": 10337041.0174,
+      "flow_in": 188007.6571,
+      "twr": 0.0019
+    },
+    {
+      "date": "2026-05-21",
+      "index": 104.7034,
+      "interpolated": true,
+      "mv_usd": 10335642.109,
+      "flow_in": 164506.7,
+      "twr": 0.0012
+    },
+    {
+      "date": "2026-05-22",
+      "index": 104.6892,
+      "interpolated": true,
+      "mv_usd": 10334243.2005,
+      "flow_in": 141005.7429,
+      "twr": 0.0005
+    },
+    {
+      "date": "2026-05-23",
+      "index": 104.6751,
+      "interpolated": true,
+      "mv_usd": 10332844.2921,
+      "flow_in": 117504.7857,
+      "twr": -0.0002
+    },
+    {
+      "date": "2026-05-24",
+      "index": 104.6609,
+      "interpolated": true,
+      "mv_usd": 10331445.3837,
+      "flow_in": 94003.8286,
+      "twr": -0.0009
+    },
+    {
+      "date": "2026-05-25",
+      "index": 104.6467,
+      "interpolated": true,
+      "mv_usd": 10330046.4753,
+      "flow_in": 70502.8714,
+      "twr": -0.0016
+    },
+    {
+      "date": "2026-05-26",
+      "index": 104.6325,
+      "interpolated": true,
+      "mv_usd": 10328647.5668,
+      "flow_in": 47001.9143,
+      "twr": -0.0024
+    },
+    {
+      "date": "2026-05-27",
+      "index": 104.6184,
+      "interpolated": true,
+      "mv_usd": 10327248.6584,
+      "flow_in": 23500.9571,
+      "twr": -0.0031
     },
     {
       "date": "2026-05-28",
@@ -5181,7 +7579,7 @@
       "index": 104.6042
     },
     {
-      "date": "2026-06-05",
+      "date": "2026-06-10",
       "mv_usd": 10325849.75,
       "flow_in": 0.0,
       "twr": 0.0,
@@ -5195,9 +7593,363 @@
       "index": 100.0
     },
     {
+      "date": "2025-08-01",
+      "index": 100.0384,
+      "interpolated": true,
+      "price": 95.4713
+    },
+    {
+      "date": "2025-08-02",
+      "index": 100.0768,
+      "interpolated": true,
+      "price": 95.508
+    },
+    {
+      "date": "2025-08-03",
+      "index": 100.1152,
+      "interpolated": true,
+      "price": 95.5446
+    },
+    {
+      "date": "2025-08-04",
+      "index": 100.1536,
+      "interpolated": true,
+      "price": 95.5813
+    },
+    {
+      "date": "2025-08-05",
+      "index": 100.192,
+      "interpolated": true,
+      "price": 95.6179
+    },
+    {
+      "date": "2025-08-06",
+      "index": 100.2304,
+      "interpolated": true,
+      "price": 95.6546
+    },
+    {
+      "date": "2025-08-07",
+      "index": 100.2688,
+      "interpolated": true,
+      "price": 95.6912
+    },
+    {
+      "date": "2025-08-08",
+      "index": 100.3072,
+      "interpolated": true,
+      "price": 95.7279
+    },
+    {
+      "date": "2025-08-09",
+      "index": 100.3456,
+      "interpolated": true,
+      "price": 95.7645
+    },
+    {
+      "date": "2025-08-10",
+      "index": 100.384,
+      "interpolated": true,
+      "price": 95.8011
+    },
+    {
+      "date": "2025-08-11",
+      "index": 100.4224,
+      "interpolated": true,
+      "price": 95.8378
+    },
+    {
+      "date": "2025-08-12",
+      "index": 100.4608,
+      "interpolated": true,
+      "price": 95.8744
+    },
+    {
+      "date": "2025-08-13",
+      "index": 100.4992,
+      "interpolated": true,
+      "price": 95.9111
+    },
+    {
+      "date": "2025-08-14",
+      "index": 100.5376,
+      "interpolated": true,
+      "price": 95.9477
+    },
+    {
+      "date": "2025-08-15",
+      "index": 100.576,
+      "interpolated": true,
+      "price": 95.9844
+    },
+    {
+      "date": "2025-08-16",
+      "index": 100.6143,
+      "interpolated": true,
+      "price": 96.021
+    },
+    {
+      "date": "2025-08-17",
+      "index": 100.6527,
+      "interpolated": true,
+      "price": 96.0577
+    },
+    {
+      "date": "2025-08-18",
+      "index": 100.6911,
+      "interpolated": true,
+      "price": 96.0943
+    },
+    {
+      "date": "2025-08-19",
+      "index": 100.7295,
+      "interpolated": true,
+      "price": 96.131
+    },
+    {
+      "date": "2025-08-20",
+      "index": 100.7679,
+      "interpolated": true,
+      "price": 96.1676
+    },
+    {
+      "date": "2025-08-21",
+      "index": 100.8063,
+      "interpolated": true,
+      "price": 96.2042
+    },
+    {
+      "date": "2025-08-22",
+      "index": 100.8447,
+      "interpolated": true,
+      "price": 96.2409
+    },
+    {
+      "date": "2025-08-23",
+      "index": 100.8831,
+      "interpolated": true,
+      "price": 96.2775
+    },
+    {
+      "date": "2025-08-24",
+      "index": 100.9215,
+      "interpolated": true,
+      "price": 96.3142
+    },
+    {
+      "date": "2025-08-25",
+      "index": 100.9599,
+      "interpolated": true,
+      "price": 96.3508
+    },
+    {
+      "date": "2025-08-26",
+      "index": 100.9983,
+      "interpolated": true,
+      "price": 96.3875
+    },
+    {
+      "date": "2025-08-27",
+      "index": 101.0367,
+      "interpolated": true,
+      "price": 96.4241
+    },
+    {
+      "date": "2025-08-28",
+      "index": 101.0751,
+      "interpolated": true,
+      "price": 96.4608
+    },
+    {
+      "date": "2025-08-29",
+      "index": 101.1135,
+      "interpolated": true,
+      "price": 96.4974
+    },
+    {
+      "date": "2025-08-30",
+      "index": 101.1519,
+      "interpolated": true,
+      "price": 96.534
+    },
+    {
       "date": "2025-08-31",
       "price": 96.57069396972656,
       "index": 101.1903
+    },
+    {
+      "date": "2025-09-01",
+      "index": 101.2283,
+      "interpolated": true,
+      "price": 96.607
+    },
+    {
+      "date": "2025-09-02",
+      "index": 101.2663,
+      "interpolated": true,
+      "price": 96.6432
+    },
+    {
+      "date": "2025-09-03",
+      "index": 101.3043,
+      "interpolated": true,
+      "price": 96.6795
+    },
+    {
+      "date": "2025-09-04",
+      "index": 101.3423,
+      "interpolated": true,
+      "price": 96.7158
+    },
+    {
+      "date": "2025-09-05",
+      "index": 101.3803,
+      "interpolated": true,
+      "price": 96.7521
+    },
+    {
+      "date": "2025-09-06",
+      "index": 101.4183,
+      "interpolated": true,
+      "price": 96.7883
+    },
+    {
+      "date": "2025-09-07",
+      "index": 101.4563,
+      "interpolated": true,
+      "price": 96.8246
+    },
+    {
+      "date": "2025-09-08",
+      "index": 101.4944,
+      "interpolated": true,
+      "price": 96.8609
+    },
+    {
+      "date": "2025-09-09",
+      "index": 101.5324,
+      "interpolated": true,
+      "price": 96.8971
+    },
+    {
+      "date": "2025-09-10",
+      "index": 101.5704,
+      "interpolated": true,
+      "price": 96.9334
+    },
+    {
+      "date": "2025-09-11",
+      "index": 101.6084,
+      "interpolated": true,
+      "price": 96.9697
+    },
+    {
+      "date": "2025-09-12",
+      "index": 101.6464,
+      "interpolated": true,
+      "price": 97.006
+    },
+    {
+      "date": "2025-09-13",
+      "index": 101.6844,
+      "interpolated": true,
+      "price": 97.0422
+    },
+    {
+      "date": "2025-09-14",
+      "index": 101.7224,
+      "interpolated": true,
+      "price": 97.0785
+    },
+    {
+      "date": "2025-09-15",
+      "index": 101.7604,
+      "interpolated": true,
+      "price": 97.1148
+    },
+    {
+      "date": "2025-09-16",
+      "index": 101.7984,
+      "interpolated": true,
+      "price": 97.151
+    },
+    {
+      "date": "2025-09-17",
+      "index": 101.8364,
+      "interpolated": true,
+      "price": 97.1873
+    },
+    {
+      "date": "2025-09-18",
+      "index": 101.8744,
+      "interpolated": true,
+      "price": 97.2236
+    },
+    {
+      "date": "2025-09-19",
+      "index": 101.9124,
+      "interpolated": true,
+      "price": 97.2599
+    },
+    {
+      "date": "2025-09-20",
+      "index": 101.9504,
+      "interpolated": true,
+      "price": 97.2961
+    },
+    {
+      "date": "2025-09-21",
+      "index": 101.9884,
+      "interpolated": true,
+      "price": 97.3324
+    },
+    {
+      "date": "2025-09-22",
+      "index": 102.0264,
+      "interpolated": true,
+      "price": 97.3687
+    },
+    {
+      "date": "2025-09-23",
+      "index": 102.0645,
+      "interpolated": true,
+      "price": 97.4049
+    },
+    {
+      "date": "2025-09-24",
+      "index": 102.1025,
+      "interpolated": true,
+      "price": 97.4412
+    },
+    {
+      "date": "2025-09-25",
+      "index": 102.1405,
+      "interpolated": true,
+      "price": 97.4775
+    },
+    {
+      "date": "2025-09-26",
+      "index": 102.1785,
+      "interpolated": true,
+      "price": 97.5138
+    },
+    {
+      "date": "2025-09-27",
+      "index": 102.2165,
+      "interpolated": true,
+      "price": 97.55
+    },
+    {
+      "date": "2025-09-28",
+      "index": 102.2545,
+      "interpolated": true,
+      "price": 97.5863
+    },
+    {
+      "date": "2025-09-29",
+      "index": 102.2925,
+      "interpolated": true,
+      "price": 97.6226
     },
     {
       "date": "2025-09-30",
@@ -5205,9 +7957,363 @@
       "index": 102.3305
     },
     {
+      "date": "2025-10-01",
+      "index": 102.3508,
+      "interpolated": true,
+      "price": 97.6782
+    },
+    {
+      "date": "2025-10-02",
+      "index": 102.3711,
+      "interpolated": true,
+      "price": 97.6976
+    },
+    {
+      "date": "2025-10-03",
+      "index": 102.3914,
+      "interpolated": true,
+      "price": 97.717
+    },
+    {
+      "date": "2025-10-04",
+      "index": 102.4118,
+      "interpolated": true,
+      "price": 97.7364
+    },
+    {
+      "date": "2025-10-05",
+      "index": 102.4321,
+      "interpolated": true,
+      "price": 97.7558
+    },
+    {
+      "date": "2025-10-06",
+      "index": 102.4524,
+      "interpolated": true,
+      "price": 97.7752
+    },
+    {
+      "date": "2025-10-07",
+      "index": 102.4727,
+      "interpolated": true,
+      "price": 97.7946
+    },
+    {
+      "date": "2025-10-08",
+      "index": 102.493,
+      "interpolated": true,
+      "price": 97.8139
+    },
+    {
+      "date": "2025-10-09",
+      "index": 102.5133,
+      "interpolated": true,
+      "price": 97.8333
+    },
+    {
+      "date": "2025-10-10",
+      "index": 102.5337,
+      "interpolated": true,
+      "price": 97.8527
+    },
+    {
+      "date": "2025-10-11",
+      "index": 102.554,
+      "interpolated": true,
+      "price": 97.8721
+    },
+    {
+      "date": "2025-10-12",
+      "index": 102.5743,
+      "interpolated": true,
+      "price": 97.8915
+    },
+    {
+      "date": "2025-10-13",
+      "index": 102.5946,
+      "interpolated": true,
+      "price": 97.9109
+    },
+    {
+      "date": "2025-10-14",
+      "index": 102.6149,
+      "interpolated": true,
+      "price": 97.9303
+    },
+    {
+      "date": "2025-10-15",
+      "index": 102.6352,
+      "interpolated": true,
+      "price": 97.9497
+    },
+    {
+      "date": "2025-10-16",
+      "index": 102.6556,
+      "interpolated": true,
+      "price": 97.9691
+    },
+    {
+      "date": "2025-10-17",
+      "index": 102.6759,
+      "interpolated": true,
+      "price": 97.9884
+    },
+    {
+      "date": "2025-10-18",
+      "index": 102.6962,
+      "interpolated": true,
+      "price": 98.0078
+    },
+    {
+      "date": "2025-10-19",
+      "index": 102.7165,
+      "interpolated": true,
+      "price": 98.0272
+    },
+    {
+      "date": "2025-10-20",
+      "index": 102.7368,
+      "interpolated": true,
+      "price": 98.0466
+    },
+    {
+      "date": "2025-10-21",
+      "index": 102.7571,
+      "interpolated": true,
+      "price": 98.066
+    },
+    {
+      "date": "2025-10-22",
+      "index": 102.7775,
+      "interpolated": true,
+      "price": 98.0854
+    },
+    {
+      "date": "2025-10-23",
+      "index": 102.7978,
+      "interpolated": true,
+      "price": 98.1048
+    },
+    {
+      "date": "2025-10-24",
+      "index": 102.8181,
+      "interpolated": true,
+      "price": 98.1242
+    },
+    {
+      "date": "2025-10-25",
+      "index": 102.8384,
+      "interpolated": true,
+      "price": 98.1436
+    },
+    {
+      "date": "2025-10-26",
+      "index": 102.8587,
+      "interpolated": true,
+      "price": 98.163
+    },
+    {
+      "date": "2025-10-27",
+      "index": 102.879,
+      "interpolated": true,
+      "price": 98.1823
+    },
+    {
+      "date": "2025-10-28",
+      "index": 102.8994,
+      "interpolated": true,
+      "price": 98.2017
+    },
+    {
+      "date": "2025-10-29",
+      "index": 102.9197,
+      "interpolated": true,
+      "price": 98.2211
+    },
+    {
+      "date": "2025-10-30",
+      "index": 102.94,
+      "interpolated": true,
+      "price": 98.2405
+    },
+    {
       "date": "2025-10-31",
       "price": 98.25989532470703,
       "index": 102.9603
+    },
+    {
+      "date": "2025-11-01",
+      "index": 102.9811,
+      "interpolated": true,
+      "price": 98.2797
+    },
+    {
+      "date": "2025-11-02",
+      "index": 103.0019,
+      "interpolated": true,
+      "price": 98.2996
+    },
+    {
+      "date": "2025-11-03",
+      "index": 103.0227,
+      "interpolated": true,
+      "price": 98.3194
+    },
+    {
+      "date": "2025-11-04",
+      "index": 103.0435,
+      "interpolated": true,
+      "price": 98.3393
+    },
+    {
+      "date": "2025-11-05",
+      "index": 103.0643,
+      "interpolated": true,
+      "price": 98.3591
+    },
+    {
+      "date": "2025-11-06",
+      "index": 103.085,
+      "interpolated": true,
+      "price": 98.3789
+    },
+    {
+      "date": "2025-11-07",
+      "index": 103.1058,
+      "interpolated": true,
+      "price": 98.3988
+    },
+    {
+      "date": "2025-11-08",
+      "index": 103.1266,
+      "interpolated": true,
+      "price": 98.4186
+    },
+    {
+      "date": "2025-11-09",
+      "index": 103.1474,
+      "interpolated": true,
+      "price": 98.4384
+    },
+    {
+      "date": "2025-11-10",
+      "index": 103.1682,
+      "interpolated": true,
+      "price": 98.4583
+    },
+    {
+      "date": "2025-11-11",
+      "index": 103.189,
+      "interpolated": true,
+      "price": 98.4781
+    },
+    {
+      "date": "2025-11-12",
+      "index": 103.2098,
+      "interpolated": true,
+      "price": 98.498
+    },
+    {
+      "date": "2025-11-13",
+      "index": 103.2306,
+      "interpolated": true,
+      "price": 98.5178
+    },
+    {
+      "date": "2025-11-14",
+      "index": 103.2514,
+      "interpolated": true,
+      "price": 98.5376
+    },
+    {
+      "date": "2025-11-15",
+      "index": 103.2722,
+      "interpolated": true,
+      "price": 98.5575
+    },
+    {
+      "date": "2025-11-16",
+      "index": 103.2929,
+      "interpolated": true,
+      "price": 98.5773
+    },
+    {
+      "date": "2025-11-17",
+      "index": 103.3137,
+      "interpolated": true,
+      "price": 98.5972
+    },
+    {
+      "date": "2025-11-18",
+      "index": 103.3345,
+      "interpolated": true,
+      "price": 98.617
+    },
+    {
+      "date": "2025-11-19",
+      "index": 103.3553,
+      "interpolated": true,
+      "price": 98.6368
+    },
+    {
+      "date": "2025-11-20",
+      "index": 103.3761,
+      "interpolated": true,
+      "price": 98.6567
+    },
+    {
+      "date": "2025-11-21",
+      "index": 103.3969,
+      "interpolated": true,
+      "price": 98.6765
+    },
+    {
+      "date": "2025-11-22",
+      "index": 103.4177,
+      "interpolated": true,
+      "price": 98.6964
+    },
+    {
+      "date": "2025-11-23",
+      "index": 103.4385,
+      "interpolated": true,
+      "price": 98.7162
+    },
+    {
+      "date": "2025-11-24",
+      "index": 103.4593,
+      "interpolated": true,
+      "price": 98.736
+    },
+    {
+      "date": "2025-11-25",
+      "index": 103.4801,
+      "interpolated": true,
+      "price": 98.7559
+    },
+    {
+      "date": "2025-11-26",
+      "index": 103.5008,
+      "interpolated": true,
+      "price": 98.7757
+    },
+    {
+      "date": "2025-11-27",
+      "index": 103.5216,
+      "interpolated": true,
+      "price": 98.7955
+    },
+    {
+      "date": "2025-11-28",
+      "index": 103.5424,
+      "interpolated": true,
+      "price": 98.8154
+    },
+    {
+      "date": "2025-11-29",
+      "index": 103.5632,
+      "interpolated": true,
+      "price": 98.8352
     },
     {
       "date": "2025-11-30",
@@ -5215,9 +8321,369 @@
       "index": 103.584
     },
     {
+      "date": "2025-12-01",
+      "index": 103.5747,
+      "interpolated": true,
+      "price": 98.8462
+    },
+    {
+      "date": "2025-12-02",
+      "index": 103.5654,
+      "interpolated": true,
+      "price": 98.8373
+    },
+    {
+      "date": "2025-12-03",
+      "index": 103.556,
+      "interpolated": true,
+      "price": 98.8284
+    },
+    {
+      "date": "2025-12-04",
+      "index": 103.5467,
+      "interpolated": true,
+      "price": 98.8195
+    },
+    {
+      "date": "2025-12-05",
+      "index": 103.5374,
+      "interpolated": true,
+      "price": 98.8106
+    },
+    {
+      "date": "2025-12-06",
+      "index": 103.5281,
+      "interpolated": true,
+      "price": 98.8017
+    },
+    {
+      "date": "2025-12-07",
+      "index": 103.5187,
+      "interpolated": true,
+      "price": 98.7928
+    },
+    {
+      "date": "2025-12-08",
+      "index": 103.5094,
+      "interpolated": true,
+      "price": 98.7839
+    },
+    {
+      "date": "2025-12-09",
+      "index": 103.5001,
+      "interpolated": true,
+      "price": 98.775
+    },
+    {
+      "date": "2025-12-10",
+      "index": 103.4908,
+      "interpolated": true,
+      "price": 98.7661
+    },
+    {
+      "date": "2025-12-11",
+      "index": 103.4815,
+      "interpolated": true,
+      "price": 98.7572
+    },
+    {
+      "date": "2025-12-12",
+      "index": 103.4721,
+      "interpolated": true,
+      "price": 98.7483
+    },
+    {
+      "date": "2025-12-13",
+      "index": 103.4628,
+      "interpolated": true,
+      "price": 98.7394
+    },
+    {
+      "date": "2025-12-14",
+      "index": 103.4535,
+      "interpolated": true,
+      "price": 98.7305
+    },
+    {
+      "date": "2025-12-15",
+      "index": 103.4442,
+      "interpolated": true,
+      "price": 98.7216
+    },
+    {
+      "date": "2025-12-16",
+      "index": 103.4348,
+      "interpolated": true,
+      "price": 98.7127
+    },
+    {
+      "date": "2025-12-17",
+      "index": 103.4255,
+      "interpolated": true,
+      "price": 98.7038
+    },
+    {
+      "date": "2025-12-18",
+      "index": 103.4162,
+      "interpolated": true,
+      "price": 98.6949
+    },
+    {
+      "date": "2025-12-19",
+      "index": 103.4069,
+      "interpolated": true,
+      "price": 98.686
+    },
+    {
+      "date": "2025-12-20",
+      "index": 103.3975,
+      "interpolated": true,
+      "price": 98.6771
+    },
+    {
+      "date": "2025-12-21",
+      "index": 103.3882,
+      "interpolated": true,
+      "price": 98.6682
+    },
+    {
+      "date": "2025-12-22",
+      "index": 103.3789,
+      "interpolated": true,
+      "price": 98.6593
+    },
+    {
+      "date": "2025-12-23",
+      "index": 103.3696,
+      "interpolated": true,
+      "price": 98.6504
+    },
+    {
+      "date": "2025-12-24",
+      "index": 103.3603,
+      "interpolated": true,
+      "price": 98.6416
+    },
+    {
+      "date": "2025-12-25",
+      "index": 103.3509,
+      "interpolated": true,
+      "price": 98.6327
+    },
+    {
+      "date": "2025-12-26",
+      "index": 103.3416,
+      "interpolated": true,
+      "price": 98.6238
+    },
+    {
+      "date": "2025-12-27",
+      "index": 103.3323,
+      "interpolated": true,
+      "price": 98.6149
+    },
+    {
+      "date": "2025-12-28",
+      "index": 103.323,
+      "interpolated": true,
+      "price": 98.606
+    },
+    {
+      "date": "2025-12-29",
+      "index": 103.3136,
+      "interpolated": true,
+      "price": 98.5971
+    },
+    {
+      "date": "2025-12-30",
+      "index": 103.3043,
+      "interpolated": true,
+      "price": 98.5882
+    },
+    {
       "date": "2025-12-31",
       "price": 98.57927703857422,
       "index": 103.295
+    },
+    {
+      "date": "2026-01-01",
+      "index": 103.3033,
+      "interpolated": true,
+      "price": 98.5872
+    },
+    {
+      "date": "2026-01-02",
+      "index": 103.3117,
+      "interpolated": true,
+      "price": 98.5952
+    },
+    {
+      "date": "2026-01-03",
+      "index": 103.32,
+      "interpolated": true,
+      "price": 98.6032
+    },
+    {
+      "date": "2026-01-04",
+      "index": 103.3284,
+      "interpolated": true,
+      "price": 98.6111
+    },
+    {
+      "date": "2026-01-05",
+      "index": 103.3367,
+      "interpolated": true,
+      "price": 98.6191
+    },
+    {
+      "date": "2026-01-06",
+      "index": 103.345,
+      "interpolated": true,
+      "price": 98.627
+    },
+    {
+      "date": "2026-01-07",
+      "index": 103.3534,
+      "interpolated": true,
+      "price": 98.635
+    },
+    {
+      "date": "2026-01-08",
+      "index": 103.3617,
+      "interpolated": true,
+      "price": 98.643
+    },
+    {
+      "date": "2026-01-09",
+      "index": 103.37,
+      "interpolated": true,
+      "price": 98.6509
+    },
+    {
+      "date": "2026-01-10",
+      "index": 103.3784,
+      "interpolated": true,
+      "price": 98.6589
+    },
+    {
+      "date": "2026-01-11",
+      "index": 103.3867,
+      "interpolated": true,
+      "price": 98.6668
+    },
+    {
+      "date": "2026-01-12",
+      "index": 103.3951,
+      "interpolated": true,
+      "price": 98.6748
+    },
+    {
+      "date": "2026-01-13",
+      "index": 103.4034,
+      "interpolated": true,
+      "price": 98.6827
+    },
+    {
+      "date": "2026-01-14",
+      "index": 103.4117,
+      "interpolated": true,
+      "price": 98.6907
+    },
+    {
+      "date": "2026-01-15",
+      "index": 103.4201,
+      "interpolated": true,
+      "price": 98.6987
+    },
+    {
+      "date": "2026-01-16",
+      "index": 103.4284,
+      "interpolated": true,
+      "price": 98.7066
+    },
+    {
+      "date": "2026-01-17",
+      "index": 103.4368,
+      "interpolated": true,
+      "price": 98.7146
+    },
+    {
+      "date": "2026-01-18",
+      "index": 103.4451,
+      "interpolated": true,
+      "price": 98.7225
+    },
+    {
+      "date": "2026-01-19",
+      "index": 103.4534,
+      "interpolated": true,
+      "price": 98.7305
+    },
+    {
+      "date": "2026-01-20",
+      "index": 103.4618,
+      "interpolated": true,
+      "price": 98.7385
+    },
+    {
+      "date": "2026-01-21",
+      "index": 103.4701,
+      "interpolated": true,
+      "price": 98.7464
+    },
+    {
+      "date": "2026-01-22",
+      "index": 103.4785,
+      "interpolated": true,
+      "price": 98.7544
+    },
+    {
+      "date": "2026-01-23",
+      "index": 103.4868,
+      "interpolated": true,
+      "price": 98.7623
+    },
+    {
+      "date": "2026-01-24",
+      "index": 103.4951,
+      "interpolated": true,
+      "price": 98.7703
+    },
+    {
+      "date": "2026-01-25",
+      "index": 103.5035,
+      "interpolated": true,
+      "price": 98.7783
+    },
+    {
+      "date": "2026-01-26",
+      "index": 103.5118,
+      "interpolated": true,
+      "price": 98.7862
+    },
+    {
+      "date": "2026-01-27",
+      "index": 103.5201,
+      "interpolated": true,
+      "price": 98.7942
+    },
+    {
+      "date": "2026-01-28",
+      "index": 103.5285,
+      "interpolated": true,
+      "price": 98.8021
+    },
+    {
+      "date": "2026-01-29",
+      "index": 103.5368,
+      "interpolated": true,
+      "price": 98.8101
+    },
+    {
+      "date": "2026-01-30",
+      "index": 103.5452,
+      "interpolated": true,
+      "price": 98.8181
     },
     {
       "date": "2026-01-31",
@@ -5225,9 +8691,351 @@
       "index": 103.5535
     },
     {
+      "date": "2026-02-01",
+      "index": 103.6126,
+      "interpolated": true,
+      "price": 98.8824
+    },
+    {
+      "date": "2026-02-02",
+      "index": 103.6717,
+      "interpolated": true,
+      "price": 98.9388
+    },
+    {
+      "date": "2026-02-03",
+      "index": 103.7308,
+      "interpolated": true,
+      "price": 98.9952
+    },
+    {
+      "date": "2026-02-04",
+      "index": 103.7899,
+      "interpolated": true,
+      "price": 99.0516
+    },
+    {
+      "date": "2026-02-05",
+      "index": 103.849,
+      "interpolated": true,
+      "price": 99.108
+    },
+    {
+      "date": "2026-02-06",
+      "index": 103.9081,
+      "interpolated": true,
+      "price": 99.1645
+    },
+    {
+      "date": "2026-02-07",
+      "index": 103.9673,
+      "interpolated": true,
+      "price": 99.2209
+    },
+    {
+      "date": "2026-02-08",
+      "index": 104.0264,
+      "interpolated": true,
+      "price": 99.2773
+    },
+    {
+      "date": "2026-02-09",
+      "index": 104.0855,
+      "interpolated": true,
+      "price": 99.3337
+    },
+    {
+      "date": "2026-02-10",
+      "index": 104.1446,
+      "interpolated": true,
+      "price": 99.3901
+    },
+    {
+      "date": "2026-02-11",
+      "index": 104.2037,
+      "interpolated": true,
+      "price": 99.4465
+    },
+    {
+      "date": "2026-02-12",
+      "index": 104.2628,
+      "interpolated": true,
+      "price": 99.5029
+    },
+    {
+      "date": "2026-02-13",
+      "index": 104.3219,
+      "interpolated": true,
+      "price": 99.5593
+    },
+    {
+      "date": "2026-02-14",
+      "index": 104.381,
+      "interpolated": true,
+      "price": 99.6157
+    },
+    {
+      "date": "2026-02-15",
+      "index": 104.4401,
+      "interpolated": true,
+      "price": 99.6721
+    },
+    {
+      "date": "2026-02-16",
+      "index": 104.4992,
+      "interpolated": true,
+      "price": 99.7285
+    },
+    {
+      "date": "2026-02-17",
+      "index": 104.5583,
+      "interpolated": true,
+      "price": 99.7849
+    },
+    {
+      "date": "2026-02-18",
+      "index": 104.6174,
+      "interpolated": true,
+      "price": 99.8413
+    },
+    {
+      "date": "2026-02-19",
+      "index": 104.6765,
+      "interpolated": true,
+      "price": 99.8977
+    },
+    {
+      "date": "2026-02-20",
+      "index": 104.7356,
+      "interpolated": true,
+      "price": 99.9541
+    },
+    {
+      "date": "2026-02-21",
+      "index": 104.7947,
+      "interpolated": true,
+      "price": 100.0105
+    },
+    {
+      "date": "2026-02-22",
+      "index": 104.8539,
+      "interpolated": true,
+      "price": 100.0669
+    },
+    {
+      "date": "2026-02-23",
+      "index": 104.913,
+      "interpolated": true,
+      "price": 100.1234
+    },
+    {
+      "date": "2026-02-24",
+      "index": 104.9721,
+      "interpolated": true,
+      "price": 100.1798
+    },
+    {
+      "date": "2026-02-25",
+      "index": 105.0312,
+      "interpolated": true,
+      "price": 100.2362
+    },
+    {
+      "date": "2026-02-26",
+      "index": 105.0903,
+      "interpolated": true,
+      "price": 100.2926
+    },
+    {
+      "date": "2026-02-27",
+      "index": 105.1494,
+      "interpolated": true,
+      "price": 100.349
+    },
+    {
       "date": "2026-02-28",
       "price": 100.40538024902344,
       "index": 105.2085
+    },
+    {
+      "date": "2026-03-01",
+      "index": 105.1476,
+      "interpolated": true,
+      "price": 100.3473
+    },
+    {
+      "date": "2026-03-02",
+      "index": 105.0867,
+      "interpolated": true,
+      "price": 100.2891
+    },
+    {
+      "date": "2026-03-03",
+      "index": 105.0258,
+      "interpolated": true,
+      "price": 100.231
+    },
+    {
+      "date": "2026-03-04",
+      "index": 104.9649,
+      "interpolated": true,
+      "price": 100.1729
+    },
+    {
+      "date": "2026-03-05",
+      "index": 104.904,
+      "interpolated": true,
+      "price": 100.1148
+    },
+    {
+      "date": "2026-03-06",
+      "index": 104.8431,
+      "interpolated": true,
+      "price": 100.0566
+    },
+    {
+      "date": "2026-03-07",
+      "index": 104.7822,
+      "interpolated": true,
+      "price": 99.9985
+    },
+    {
+      "date": "2026-03-08",
+      "index": 104.7212,
+      "interpolated": true,
+      "price": 99.9404
+    },
+    {
+      "date": "2026-03-09",
+      "index": 104.6603,
+      "interpolated": true,
+      "price": 99.8823
+    },
+    {
+      "date": "2026-03-10",
+      "index": 104.5994,
+      "interpolated": true,
+      "price": 99.8241
+    },
+    {
+      "date": "2026-03-11",
+      "index": 104.5385,
+      "interpolated": true,
+      "price": 99.766
+    },
+    {
+      "date": "2026-03-12",
+      "index": 104.4776,
+      "interpolated": true,
+      "price": 99.7079
+    },
+    {
+      "date": "2026-03-13",
+      "index": 104.4167,
+      "interpolated": true,
+      "price": 99.6498
+    },
+    {
+      "date": "2026-03-14",
+      "index": 104.3558,
+      "interpolated": true,
+      "price": 99.5917
+    },
+    {
+      "date": "2026-03-15",
+      "index": 104.2949,
+      "interpolated": true,
+      "price": 99.5335
+    },
+    {
+      "date": "2026-03-16",
+      "index": 104.234,
+      "interpolated": true,
+      "price": 99.4754
+    },
+    {
+      "date": "2026-03-17",
+      "index": 104.1731,
+      "interpolated": true,
+      "price": 99.4173
+    },
+    {
+      "date": "2026-03-18",
+      "index": 104.1122,
+      "interpolated": true,
+      "price": 99.3592
+    },
+    {
+      "date": "2026-03-19",
+      "index": 104.0513,
+      "interpolated": true,
+      "price": 99.301
+    },
+    {
+      "date": "2026-03-20",
+      "index": 103.9904,
+      "interpolated": true,
+      "price": 99.2429
+    },
+    {
+      "date": "2026-03-21",
+      "index": 103.9295,
+      "interpolated": true,
+      "price": 99.1848
+    },
+    {
+      "date": "2026-03-22",
+      "index": 103.8686,
+      "interpolated": true,
+      "price": 99.1267
+    },
+    {
+      "date": "2026-03-23",
+      "index": 103.8077,
+      "interpolated": true,
+      "price": 99.0685
+    },
+    {
+      "date": "2026-03-24",
+      "index": 103.7467,
+      "interpolated": true,
+      "price": 99.0104
+    },
+    {
+      "date": "2026-03-25",
+      "index": 103.6858,
+      "interpolated": true,
+      "price": 98.9523
+    },
+    {
+      "date": "2026-03-26",
+      "index": 103.6249,
+      "interpolated": true,
+      "price": 98.8942
+    },
+    {
+      "date": "2026-03-27",
+      "index": 103.564,
+      "interpolated": true,
+      "price": 98.836
+    },
+    {
+      "date": "2026-03-28",
+      "index": 103.5031,
+      "interpolated": true,
+      "price": 98.7779
+    },
+    {
+      "date": "2026-03-29",
+      "index": 103.4422,
+      "interpolated": true,
+      "price": 98.7198
+    },
+    {
+      "date": "2026-03-30",
+      "index": 103.3813,
+      "interpolated": true,
+      "price": 98.6617
     },
     {
       "date": "2026-03-31",
@@ -5235,9 +9043,345 @@
       "index": 103.3204
     },
     {
+      "date": "2026-04-01",
+      "index": 103.3262,
+      "interpolated": true,
+      "price": 98.6091
+    },
+    {
+      "date": "2026-04-02",
+      "index": 103.332,
+      "interpolated": true,
+      "price": 98.6146
+    },
+    {
+      "date": "2026-04-03",
+      "index": 103.3378,
+      "interpolated": true,
+      "price": 98.6202
+    },
+    {
+      "date": "2026-04-04",
+      "index": 103.3437,
+      "interpolated": true,
+      "price": 98.6257
+    },
+    {
+      "date": "2026-04-05",
+      "index": 103.3495,
+      "interpolated": true,
+      "price": 98.6313
+    },
+    {
+      "date": "2026-04-06",
+      "index": 103.3553,
+      "interpolated": true,
+      "price": 98.6368
+    },
+    {
+      "date": "2026-04-07",
+      "index": 103.3611,
+      "interpolated": true,
+      "price": 98.6424
+    },
+    {
+      "date": "2026-04-08",
+      "index": 103.3669,
+      "interpolated": true,
+      "price": 98.6479
+    },
+    {
+      "date": "2026-04-09",
+      "index": 103.3727,
+      "interpolated": true,
+      "price": 98.6535
+    },
+    {
+      "date": "2026-04-10",
+      "index": 103.3785,
+      "interpolated": true,
+      "price": 98.659
+    },
+    {
+      "date": "2026-04-11",
+      "index": 103.3843,
+      "interpolated": true,
+      "price": 98.6646
+    },
+    {
+      "date": "2026-04-12",
+      "index": 103.3902,
+      "interpolated": true,
+      "price": 98.6701
+    },
+    {
+      "date": "2026-04-13",
+      "index": 103.396,
+      "interpolated": true,
+      "price": 98.6757
+    },
+    {
+      "date": "2026-04-14",
+      "index": 103.4018,
+      "interpolated": true,
+      "price": 98.6812
+    },
+    {
+      "date": "2026-04-15",
+      "index": 103.4076,
+      "interpolated": true,
+      "price": 98.6868
+    },
+    {
+      "date": "2026-04-16",
+      "index": 103.4134,
+      "interpolated": true,
+      "price": 98.6923
+    },
+    {
+      "date": "2026-04-17",
+      "index": 103.4192,
+      "interpolated": true,
+      "price": 98.6979
+    },
+    {
+      "date": "2026-04-18",
+      "index": 103.425,
+      "interpolated": true,
+      "price": 98.7034
+    },
+    {
+      "date": "2026-04-19",
+      "index": 103.4309,
+      "interpolated": true,
+      "price": 98.709
+    },
+    {
+      "date": "2026-04-20",
+      "index": 103.4367,
+      "interpolated": true,
+      "price": 98.7145
+    },
+    {
+      "date": "2026-04-21",
+      "index": 103.4425,
+      "interpolated": true,
+      "price": 98.7201
+    },
+    {
+      "date": "2026-04-22",
+      "index": 103.4483,
+      "interpolated": true,
+      "price": 98.7256
+    },
+    {
+      "date": "2026-04-23",
+      "index": 103.4541,
+      "interpolated": true,
+      "price": 98.7312
+    },
+    {
+      "date": "2026-04-24",
+      "index": 103.4599,
+      "interpolated": true,
+      "price": 98.7367
+    },
+    {
+      "date": "2026-04-25",
+      "index": 103.4657,
+      "interpolated": true,
+      "price": 98.7423
+    },
+    {
+      "date": "2026-04-26",
+      "index": 103.4715,
+      "interpolated": true,
+      "price": 98.7478
+    },
+    {
+      "date": "2026-04-27",
+      "index": 103.4774,
+      "interpolated": true,
+      "price": 98.7534
+    },
+    {
+      "date": "2026-04-28",
+      "index": 103.4832,
+      "interpolated": true,
+      "price": 98.7589
+    },
+    {
+      "date": "2026-04-29",
+      "index": 103.489,
+      "interpolated": true,
+      "price": 98.7644
+    },
+    {
       "date": "2026-04-30",
       "price": 98.7699966430664,
       "index": 103.4948
+    },
+    {
+      "date": "2026-05-01",
+      "index": 103.5036,
+      "interpolated": true,
+      "price": 98.7784
+    },
+    {
+      "date": "2026-05-02",
+      "index": 103.5124,
+      "interpolated": true,
+      "price": 98.7868
+    },
+    {
+      "date": "2026-05-03",
+      "index": 103.5212,
+      "interpolated": true,
+      "price": 98.7952
+    },
+    {
+      "date": "2026-05-04",
+      "index": 103.53,
+      "interpolated": true,
+      "price": 98.8036
+    },
+    {
+      "date": "2026-05-05",
+      "index": 103.5388,
+      "interpolated": true,
+      "price": 98.812
+    },
+    {
+      "date": "2026-05-06",
+      "index": 103.5476,
+      "interpolated": true,
+      "price": 98.8204
+    },
+    {
+      "date": "2026-05-07",
+      "index": 103.5564,
+      "interpolated": true,
+      "price": 98.8287
+    },
+    {
+      "date": "2026-05-08",
+      "index": 103.5652,
+      "interpolated": true,
+      "price": 98.8371
+    },
+    {
+      "date": "2026-05-09",
+      "index": 103.574,
+      "interpolated": true,
+      "price": 98.8455
+    },
+    {
+      "date": "2026-05-10",
+      "index": 103.5828,
+      "interpolated": true,
+      "price": 98.8539
+    },
+    {
+      "date": "2026-05-11",
+      "index": 103.5916,
+      "interpolated": true,
+      "price": 98.8623
+    },
+    {
+      "date": "2026-05-12",
+      "index": 103.6004,
+      "interpolated": true,
+      "price": 98.8707
+    },
+    {
+      "date": "2026-05-13",
+      "index": 103.6092,
+      "interpolated": true,
+      "price": 98.8791
+    },
+    {
+      "date": "2026-05-14",
+      "index": 103.618,
+      "interpolated": true,
+      "price": 98.8875
+    },
+    {
+      "date": "2026-05-15",
+      "index": 103.6267,
+      "interpolated": true,
+      "price": 98.8959
+    },
+    {
+      "date": "2026-05-16",
+      "index": 103.6355,
+      "interpolated": true,
+      "price": 98.9043
+    },
+    {
+      "date": "2026-05-17",
+      "index": 103.6443,
+      "interpolated": true,
+      "price": 98.9127
+    },
+    {
+      "date": "2026-05-18",
+      "index": 103.6531,
+      "interpolated": true,
+      "price": 98.9211
+    },
+    {
+      "date": "2026-05-19",
+      "index": 103.6619,
+      "interpolated": true,
+      "price": 98.9295
+    },
+    {
+      "date": "2026-05-20",
+      "index": 103.6707,
+      "interpolated": true,
+      "price": 98.9379
+    },
+    {
+      "date": "2026-05-21",
+      "index": 103.6795,
+      "interpolated": true,
+      "price": 98.9462
+    },
+    {
+      "date": "2026-05-22",
+      "index": 103.6883,
+      "interpolated": true,
+      "price": 98.9546
+    },
+    {
+      "date": "2026-05-23",
+      "index": 103.6971,
+      "interpolated": true,
+      "price": 98.963
+    },
+    {
+      "date": "2026-05-24",
+      "index": 103.7059,
+      "interpolated": true,
+      "price": 98.9714
+    },
+    {
+      "date": "2026-05-25",
+      "index": 103.7147,
+      "interpolated": true,
+      "price": 98.9798
+    },
+    {
+      "date": "2026-05-26",
+      "index": 103.7235,
+      "interpolated": true,
+      "price": 98.9882
+    },
+    {
+      "date": "2026-05-27",
+      "index": 103.7323,
+      "interpolated": true,
+      "price": 98.9966
     },
     {
       "date": "2026-05-28",
@@ -5260,9 +9404,9 @@
       "index": 103.7987
     },
     {
-      "date": "2026-06-05",
-      "price": 98.31,
-      "index": 103.0128
+      "date": "2026-06-10",
+      "price": 98.3169,
+      "index": 103.0201
     }
   ]
 }
