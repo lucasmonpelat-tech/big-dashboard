@@ -35,13 +35,14 @@ BIG_INCEPTION = date(2025, 6, 30)
 # (isin, ticker, name, value_usd, sub_class, source_type, assumed_annual_return_pct)
 ALTS_HOLDINGS = [
     ("LU2837777825", "CALP",  "Carlyle AlpInvest Private Markets",         2722180, "private_equity", "pe_proxy",       12.0),
-    ("US46438F1012", "IBIT",  "iShares Bitcoin Trust",                      917806, "crypto",         "yahoo_monthly",  None),
-    ("LU2659193242", "NBPEA", "NB Global Private Equity Access Fund",       856505, "private_equity", "pe_proxy",       12.0),
-    ("US78463V1070", "GLD",   "SPDR Gold Shares",                           843935, "commodity",      "yahoo_monthly",  None),
+    ("US46438F1012", "IBIT",  "iShares Bitcoin Trust",                      744326, "crypto",         "yahoo_monthly",  None),
+    # NBPEA REMOVIDO 2026-06-10: vendido total 2026-04-30, $862K proceeds.
+    ("US78463V1070", "GLD",   "SPDR Gold Shares",                           748729, "commodity",      "yahoo_monthly",  None),
     ("KYG4737U1085", "HLEND", "HPS Corporate Lending Fund",                 753336, "private_credit", "pc_carry",        9.5),
-    ("XS2658535526", "BPCC",  "Barings Private Credit Corporation",         590010, "private_credit", "pc_carry",        9.5),
-    ("FLEX-LEX",      "FLEX",  "Flex-Lexington Partners Secondaries",        500000, "private_equity", "pe_proxy",       12.0),
-    ("GCRED-I",       "GCRED", "Golub Capital Private Credit",               496055, "private_credit", "pc_carry",        9.5),
+    ("XS2658535526", "BPCC",  "Barings Private Credit Corporation",         595348, "private_credit", "pc_carry",        9.5),
+    ("FLEX-LEX",      "FLEX",  "Flex-Lexington Partners Secondaries",        501806, "private_equity", "pe_proxy",       12.0),
+    ("LU2847068389",  "HLGPI", "Hamilton Lane Global Private Infrastructure", 500000, "private_infra", "pe_proxy",       11.0),
+    ("GCRED-I",       "GCRED", "Golub Capital Private Credit",               490583, "private_credit", "pc_carry",        9.5),
 ]
 
 
