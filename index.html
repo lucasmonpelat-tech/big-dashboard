@@ -686,6 +686,26 @@
                 <div style="font-size:10px;color:#6B88A8;margin-top:8px;font-style:italic;">
                     BIG inception: 30-Jun-2025. Periodos > inception (1Y, 3Y, 5Y) reemplazados por Since Inception + Annualized.
                 </div>
+
+                <!-- Alpha Attribution YTD por Asset Class -->
+                <div id="perf-alpha-attribution-container" style="margin-top:24px;">
+                    <h4 style="margin:0 0 8px 0;color:#FFA726;font-size:13px;">Alpha Attribution YTD por Asset Class</h4>
+                    <div style="font-size:10px;color:#6B88A8;margin-bottom:8px;font-style:italic;">
+                        Desglose del alpha total (BIG YTD − Bench 60/40 YTD) por sleeve. Identifica donde se gana/pierde performance vs benchmark.
+                    </div>
+                    <table class="data-table perf-table" style="margin-bottom: 0;">
+                        <thead>
+                            <tr>
+                                <th class="left">Asset Class</th>
+                                <th>BIG Contrib</th>
+                                <th>Bench Contrib</th>
+                                <th>Alpha</th>
+                                <th class="left">Comentario</th>
+                            </tr>
+                        </thead>
+                        <tbody id="perf-alpha-attribution-body"></tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="summary-box">

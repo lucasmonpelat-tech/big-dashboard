@@ -1025,6 +1025,47 @@ async function renderPerformance() {
         </tr>
     `;
 
+    // ===== Alpha Attribution YTD por Asset Class =====
+    // Carga attribution_ytd.json y desglosa el alpha total por sleeve.
+    try {
+        const ra = await fetch('data/attribution_ytd.json?_=' + Date.now());
+        if (ra.ok) {
+            const attr = await ra.json();
+            const aa = attr && attr.alpha_attribution;
+            const bodyEl = document.getElementById('perf-alpha-attribution-body');
+            if (aa && aa.components && bodyEl) {
+                const fmtPP = (v) => {
+                    if (v === null || v === undefined) return '<span style="color:#6B88A8;">n/a</span>';
+                    const sign = v >= 0 ? '+' : '';
+                    const color = v >= 0 ? '#81C784' : '#EF5350';
+                    return `<strong style="color:${color};">${sign}${v.toFixed(2)}pp</strong>`;
+                };
+                let rows = aa.components.map(c => `
+                    <tr>
+                        <td class="left"><strong>${c.name}</strong></td>
+                        <td>${c.big_contrib_pp !== null && c.big_contrib_pp !== undefined ? fmtPP(c.big_contrib_pp) : '<span style="color:#6B88A8;">—</span>'}</td>
+                        <td>${c.bench_contrib_pp !== null && c.bench_contrib_pp !== undefined ? fmtPP(c.bench_contrib_pp) : '<span style="color:#6B88A8;">—</span>'}</td>
+                        <td>${fmtPP(c.alpha_pp)}</td>
+                        <td class="left" style="font-size:11px;color:#90CAF9;">${c.comment || ''}</td>
+                    </tr>
+                `).join('');
+                // Total row
+                rows += `
+                    <tr style="border-top:2px solid #2E74B5;background:rgba(46,116,181,0.1);">
+                        <td class="left"><strong>TOTAL Alpha YTD</strong></td>
+                        <td style="font-size:11px;color:#90CAF9;">BIG ${aa.big_ytd !== null ? aa.big_ytd.toFixed(2) + '%' : 'n/a'}</td>
+                        <td style="font-size:11px;color:#90CAF9;">Bench ${aa.bench_ytd_aor_etf !== null ? aa.bench_ytd_aor_etf.toFixed(2) + '%' : 'n/a'}</td>
+                        <td>${fmtPP(aa.alpha_ytd_total_pp)}</td>
+                        <td class="left" style="font-size:11px;color:#90CAF9;font-style:italic;">Sum de alpha por sleeve + fee + residual = alpha total</td>
+                    </tr>
+                `;
+                bodyEl.innerHTML = rows;
+            }
+        }
+    } catch (e) {
+        console.warn('Alpha attribution: error fetching', e);
+    }
+
     // Disclaimer: Risk & Capture Metrics vienen del backtest Maximus.
     // Bumpear MAXIMUS_AS_OF en funds_metadata.js al rehacer el factsheet mensual.
     const maximusDate = typeof MAXIMUS_AS_OF !== 'undefined' ? MAXIMUS_AS_OF : null;
