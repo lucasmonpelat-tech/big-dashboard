@@ -200,17 +200,22 @@ def main():
 
         # Holding con valor en Pershing pero sin Stooq feed (BPCC, FLEX, HLGPI)
         # -> usar value de positions_latest.json (que es T-1 de Pershing)
-        # IMPORTANTE: NO tenemos YTD ni SI confiables para estos -> set None (N/A)
         if pos and pos.get("value") and pos.get("price_as_of"):
             h["value_usd"] = round(pos["value"], 2)
             h["valuation_date"] = pos["price_as_of"]
-            h["source"] = f"Pershing T-1 ({pos['price_as_of']}) - SI/YTD pending statement"
+            # 2026-06-10: FLEX y HLGPI entraron Mayo-2026, sin valuation oficial
+            # todavia (privados reportan trimestral/semi-anual). Lucas confirma 0%.
+            if tk in ("FLEX", "HLGPI"):
+                h["source"] = f"Entrada {tk} mayo-2026, sin valuation oficial aun (0%)"
+                h["ytd_return_pct"] = 0.0
+                h["si_return_pct"] = 0.0
+            else:
+                # BPCC y otros: N/A hasta tener statement oficial
+                h["source"] = f"Pershing T-1 ({pos['price_as_of']}) - SI/YTD pending statement"
+                h["ytd_return_pct"] = None
+                h["si_return_pct"] = None
             h["days_since_valuation"] = days_between(
                 h["valuation_date"], today_iso)
-            # 2026-06-10: marcar YTD/SI como None hasta tener statement oficial.
-            # El proxy PSP que tenia el sleeve_index distorsionaba la realidad.
-            h["ytd_return_pct"] = None
-            h["si_return_pct"] = None
             sources_summary["pershing_last"].append(tk)
             continue
 
