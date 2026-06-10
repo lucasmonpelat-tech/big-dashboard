@@ -78,7 +78,7 @@ def load_carlyle_latest():
 
 def load_icapital_latest():
     """Ultimo statement por holding del archivo iCapital (HLEND + GCRED).
-    Devuelve dict {ticker: {mv_usd, valuation_date, ytd_return_pct}} o {}."""
+    Devuelve dict {ticker: {mv_usd, valuation_date, ytd_return_pct, si_return_pct}} o {}."""
     try:
         cs = json.load(open(ICAPITAL_FILE, encoding="utf-8"))
     except Exception:
@@ -92,6 +92,7 @@ def load_icapital_latest():
             "mv_usd": latest.get("mv_usd"),
             "valuation_date": latest.get("as_of"),
             "ytd_return_pct": latest.get("ytd_return_pct"),
+            "si_return_pct": latest.get("si_return_pct"),
             "nav_per_share": latest.get("nav_per_share"),
         }
     return out
@@ -173,6 +174,9 @@ def main():
             h["valuation_date"] = st["valuation_date"]
             if st.get("ytd_return_pct") is not None:
                 h["ytd_return_pct"] = st["ytd_return_pct"]
+            # SI: si el statement lo trae, usarlo; sino, marcar None (N/A en dashboard)
+            if st.get("si_return_pct") is not None:
+                h["si_return_pct"] = st["si_return_pct"]
             h["source"] = f"iCapital statement ({st['valuation_date']})"
             h["days_since_valuation"] = days_between(
                 st["valuation_date"], today_iso)
@@ -194,20 +198,28 @@ def main():
                 sources_summary["daily_close_stooq"].append(tk)
                 continue
 
-        # Holding con valor en Pershing pero sin Stooq feed (BPCC)
+        # Holding con valor en Pershing pero sin Stooq feed (BPCC, FLEX, HLGPI)
         # -> usar value de positions_latest.json (que es T-1 de Pershing)
+        # IMPORTANTE: NO tenemos YTD ni SI confiables para estos -> set None (N/A)
         if pos and pos.get("value") and pos.get("price_as_of"):
             h["value_usd"] = round(pos["value"], 2)
             h["valuation_date"] = pos["price_as_of"]
-            h["source"] = f"Pershing T-1 ({pos['price_as_of']})"
+            h["source"] = f"Pershing T-1 ({pos['price_as_of']}) - SI/YTD pending statement"
             h["days_since_valuation"] = days_between(
                 h["valuation_date"], today_iso)
+            # 2026-06-10: marcar YTD/SI como None hasta tener statement oficial.
+            # El proxy PSP que tenia el sleeve_index distorsionaba la realidad.
+            h["ytd_return_pct"] = None
+            h["si_return_pct"] = None
             sources_summary["pershing_last"].append(tk)
             continue
 
         # Illiquido puro: NO hay precio diario ni Pershing T-1 -> carry-forward
+        # Idem: marcar YTD/SI como None hasta tener statement
         h["days_since_valuation"] = days_between(
             h.get("valuation_date"), today_iso)
+        h["ytd_return_pct"] = None
+        h["si_return_pct"] = None
         sources_summary["frozen_statement"].append(tk)
 
     # Recalc weights con el nuevo total activo
