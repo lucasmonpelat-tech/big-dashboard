@@ -1296,15 +1296,15 @@ async function renderNormalizedPerformance(twrSeries) {
         return;
     }
 
-    // Sleeve trace (siempre visible, dorado)
+    // Sleeve trace (siempre visible, dorado). Solo lineas (sin markers) para
+    // un look mas limpio tipo TradingView con series diarias densas.
     const sleeveTrace = {
         x: twrSeries.map(p => p.date),
         y: twrSeries.map(p => p.index),
         name: 'BIG Equity Sleeve',
-        type: 'scatter', mode: 'lines+markers',
-        line: { color: '#D4AF37', width: 3.5 },
-        marker: { size: 7, color: '#D4AF37' },
-        hovertemplate: '%{x|%b %Y}<br><b>BIG Equity</b>: %{y:.2f}<extra></extra>',
+        type: 'scatter', mode: 'lines',
+        line: { color: '#D4AF37', width: 3, shape: 'spline', smoothing: 0.3 },
+        hovertemplate: '%{x|%d %b %Y}<br><b>BIG Equity</b>: %{y:.2f}<extra></extra>',
     };
 
     // Un trace por indice; visibilidad inicial segun NORM_DEFAULT_ON
@@ -1316,11 +1316,10 @@ async function renderNormalizedPerformance(twrSeries) {
             x: idx.series.map(p => p.date),
             y: idx.series.map(p => p.index),
             name: idx.name,
-            type: 'scatter', mode: 'lines+markers',
-            line: { color: idx.color || '#90A4AE', width: 2, dash: 'dot' },
-            marker: { size: 5, color: idx.color || '#90A4AE' },
+            type: 'scatter', mode: 'lines',
+            line: { color: idx.color || '#90A4AE', width: 1.5, shape: 'spline', smoothing: 0.3 },
             visible: on ? true : 'legendonly',
-            hovertemplate: '%{x|%b %Y}<br><b>' + idx.name + '</b>: %{y:.2f}<extra></extra>',
+            hovertemplate: '%{x|%d %b %Y}<br><b>' + idx.name + '</b>: %{y:.2f}<extra></extra>',
         };
     });
 
@@ -1750,15 +1749,15 @@ async function renderFINormalizedPerformance(twrSeries) {
         return;
     }
 
-    // Sleeve trace (siempre visible, dorado)
+    // Sleeve trace (siempre visible, dorado). Solo lineas (sin markers) para
+    // un look mas limpio tipo TradingView con series diarias densas.
     const sleeveTrace = {
         x: twrSeries.map(p => p.date),
         y: twrSeries.map(p => p.index),
         name: 'BIG FI Sleeve',
-        type: 'scatter', mode: 'lines+markers',
-        line: { color: '#D4AF37', width: 3.5 },
-        marker: { size: 7, color: '#D4AF37' },
-        hovertemplate: '%{x|%b %Y}<br><b>BIG FI</b>: %{y:.2f}<extra></extra>',
+        type: 'scatter', mode: 'lines',
+        line: { color: '#D4AF37', width: 3, shape: 'spline', smoothing: 0.3 },
+        hovertemplate: '%{x|%d %b %Y}<br><b>BIG FI</b>: %{y:.2f}<extra></extra>',
     };
 
     // Un trace por indice; visibilidad inicial segun FI_NORM_DEFAULT_ON
@@ -1770,11 +1769,10 @@ async function renderFINormalizedPerformance(twrSeries) {
             x: idx.series.map(p => p.date),
             y: idx.series.map(p => p.index),
             name: idx.name,
-            type: 'scatter', mode: 'lines+markers',
-            line: { color: idx.color || '#90A4AE', width: 2, dash: 'dot' },
-            marker: { size: 5, color: idx.color || '#90A4AE' },
+            type: 'scatter', mode: 'lines',
+            line: { color: idx.color || '#90A4AE', width: 1.5, shape: 'spline', smoothing: 0.3 },
             visible: on ? true : 'legendonly',
-            hovertemplate: '%{x|%b %Y}<br><b>' + idx.name + '</b>: %{y:.2f}<extra></extra>',
+            hovertemplate: '%{x|%d %b %Y}<br><b>' + idx.name + '</b>: %{y:.2f}<extra></extra>',
         };
     });
 
