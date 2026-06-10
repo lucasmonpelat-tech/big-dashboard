@@ -209,8 +209,16 @@ def main():
                 h["source"] = f"Entrada {tk} mayo-2026, sin valuation oficial aun (0%)"
                 h["ytd_return_pct"] = 0.0
                 h["si_return_pct"] = 0.0
+            elif tk == "BPCC":
+                # BPCC entro jul-2025. Sin statement, asumimos carry constante.
+                # YTD: 9.4% yield x (dias YTD / 365)
+                from datetime import date as _d
+                days_ytd = (_d.fromisoformat(today_iso) - _d(2026, 1, 1)).days
+                h["ytd_return_pct"] = round(9.4 * (days_ytd / 365), 2)
+                h["si_return_pct"] = None  # SI pending cost basis exacto
+                h["source"] = f"Pershing T-1 + carry estimado 9.4%/yr (entrada jul-2025)"
             else:
-                # BPCC y otros: N/A hasta tener statement oficial
+                # Otros pending statement
                 h["source"] = f"Pershing T-1 ({pos['price_as_of']}) - SI/YTD pending statement"
                 h["ytd_return_pct"] = None
                 h["si_return_pct"] = None
