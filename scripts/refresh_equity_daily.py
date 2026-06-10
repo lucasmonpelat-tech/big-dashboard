@@ -109,7 +109,12 @@ def main():
     # FIX: compute flow_in entre anchor y today comparando qty (Modified Dietz, flow al final).
     # Sin esto, los buy/sell intra-mes inflan/desinflan el TWR (bug: spurious +1.87% en May 2026
     # por la compra de NBGMT el 7-May que no estaba descontada).
-    anchor_sleeve = next((s for s in sleeve if s["date"] == anchor["date"]), None)
+    # 2026-06-10: cambio a "ultimo <= anchor date" porque sleeve_series_equity puede tener
+    # gaps (no siempre tiene exactamente el month-end).
+    anchor_sleeve = None
+    for s in sleeve:
+        if s["date"] <= anchor["date"]:
+            anchor_sleeve = s
     anchor_holdings = {h["ticker"]: h for h in (anchor_sleeve or {}).get("holdings", [])}
     flow_in = 0.0
     for tk, qty_today in eq_qty.items():

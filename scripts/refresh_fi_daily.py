@@ -129,7 +129,11 @@ def main():
     # FIX: compute flow_in entre anchor y today comparando qty (Modified Dietz, flow al final).
     # Sin esto, los buy/sell intra-mes inflan/desinflan el TWR. Ej en May 2026: MANEM +176sh
     # agregaba ~$20K spurious. Mismo fix que refresh_equity_daily.py.
-    anchor_sleeve = next((s for s in sleeve if s["date"] == anchor["date"]), None)
+    # 2026-06-10: cambio a "ultimo <= anchor date" porque sleeve_series puede tener gaps.
+    anchor_sleeve = None
+    for s in sleeve:
+        if s["date"] <= anchor["date"]:
+            anchor_sleeve = s
     anchor_holdings = {h["ticker"]: h for h in (anchor_sleeve or {}).get("holdings", [])}
     flow_in = 0.0
     for tk, qty_today in fi_qty.items():
