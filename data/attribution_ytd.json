@@ -1,9 +1,9 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-06-13T12:57:32.705054",
-  "as_of_date": "2026-06-13",
+  "refreshedAt": "2026-06-15T16:26:26.070448",
+  "as_of_date": "2026-06-15",
   "ytd_anchor": "2025-12-31",
-  "days_ytd": 164,
+  "days_ytd": 166,
   "sleeves": [
     {
       "name": "Equity",
@@ -24,23 +24,23 @@
       "value_usd": 7056307.48,
       "weight_pct": 27.07,
       "ytd_pct": -1.92,
-      "contribution_pp": -0.521
+      "contribution_pp": -0.52
     },
     {
       "name": "Cash",
       "value_usd": 626124.78,
       "weight_pct": 2.4,
-      "ytd_pct": 2.38,
-      "contribution_pp": 0.057
+      "ytd_pct": 2.41,
+      "contribution_pp": 0.058
     }
   ],
-  "gross_reconstructed_pct": 1.503,
-  "mgmt_fee_pp": -0.809,
+  "gross_reconstructed_pct": 1.505,
+  "mgmt_fee_pp": -0.819,
   "mgmt_fee_rate_annual_pct": 1.8,
-  "net_reconstructed_pct": 0.694,
-  "lynk_ytd_pct": 0.4,
-  "lynk_refreshed_at": "2026-06-13T12:53:34.352823",
-  "residual_pp": 0.294,
+  "net_reconstructed_pct": 0.686,
+  "lynk_ytd_pct": 0.93,
+  "lynk_refreshed_at": "2026-06-15T16:21:12.112001",
+  "residual_pp": -0.244,
   "alts_detail": [
     {
       "ticker": "CALP",
@@ -87,8 +87,8 @@
       "name": "Barings Private Credit Corporation",
       "value_usd": 595348.04,
       "weight_pct": 8.42,
-      "ytd_pct": 4.2,
-      "contribution_pp": 0.354,
+      "ytd_pct": 4.25,
+      "contribution_pp": 0.358,
       "source": "Pershing T-1 + carry estimado 9.4%/yr (entrada jul-2025)",
       "valuation_date": "2026-06-10"
     },
@@ -128,53 +128,53 @@
     "_description": "Decomposicion del alpha YTD por asset class. Bench teorico = 60% ACWI + 40% AGG.",
     "bench_label": "60/40 (60% ACWI + 40% AGG)",
     "bench_ytd_aor_etf": 6.83,
-    "acwi_ytd": 10.135,
-    "agg_ytd": 0.183,
-    "bench_eq_contrib_pp": 6.081,
-    "bench_fi_contrib_pp": 0.073,
-    "big_ytd": 0.4,
-    "alpha_ytd_total_pp": -6.43,
+    "acwi_ytd": 10.587,
+    "agg_ytd": 0.336,
+    "bench_eq_contrib_pp": 6.352,
+    "bench_fi_contrib_pp": 0.134,
+    "big_ytd": 0.93,
+    "alpha_ytd_total_pp": -5.9,
     "components": [
       {
         "name": "Equity",
         "big_contrib_pp": 1.774,
-        "bench_contrib_pp": 6.081,
-        "alpha_pp": -4.307,
-        "comment": "BIG 30.6% @ +5.79% vs 60% ACWI @ +10.13%"
+        "bench_contrib_pp": 6.352,
+        "alpha_pp": -4.578,
+        "comment": "BIG 30.6% @ +5.79% vs 60% ACWI @ +10.59%"
       },
       {
         "name": "Fixed Income",
         "big_contrib_pp": 0.193,
-        "bench_contrib_pp": 0.073,
-        "alpha_pp": 0.12,
-        "comment": "BIG 39.9% @ +0.48% vs 40% AGG @ +0.18%"
+        "bench_contrib_pp": 0.134,
+        "alpha_pp": 0.059,
+        "comment": "BIG 39.9% @ +0.48% vs 40% AGG @ +0.34%"
       },
       {
         "name": "Alternatives",
-        "big_contrib_pp": -0.521,
+        "big_contrib_pp": -0.52,
         "bench_contrib_pp": 0,
-        "alpha_pp": -0.521,
+        "alpha_pp": -0.52,
         "comment": "BIG 27.1% @ -1.92% (bench no tiene Alts)"
       },
       {
         "name": "Cash",
-        "big_contrib_pp": 0.057,
+        "big_contrib_pp": 0.058,
         "bench_contrib_pp": 0,
-        "alpha_pp": 0.057,
-        "comment": "BIG 2.4% @ +2.38% (bench no tiene Cash)"
+        "alpha_pp": 0.058,
+        "comment": "BIG 2.4% @ +2.41% (bench no tiene Cash)"
       },
       {
         "name": "Mgmt Fee",
-        "big_contrib_pp": -0.809,
+        "big_contrib_pp": -0.819,
         "bench_contrib_pp": 0,
-        "alpha_pp": -0.809,
+        "alpha_pp": -0.819,
         "comment": "Lynk mgmt fee 1.8%/yr (bench AOR fee 0.15% no incluido)"
       },
       {
         "name": "Residual",
         "big_contrib_pp": null,
         "bench_contrib_pp": null,
-        "alpha_pp": -0.97,
+        "alpha_pp": -0.1,
         "comment": "Tracking error AOR vs (60% ACWI + 40% AGG teorico) + Lynk smoothing + cash approx + alts statement lag"
       }
     ]
