@@ -3,15 +3,26 @@
   "isin": "LU2049315265",
   "name": "Schroder GAIA Cat Bond Class C",
   "sleeve": "Fixed Income",
-  "source": "Schroder GAIA factsheet (manual)",
-  "parsed_at": "2026-05-15",
-  "as_of_factsheet": "2026-03-31",
+  "is_cat_bond": true,
+  "source": "Schroder GAIA Cat Bond Ficha Mensual (Chrome MCP, schroders.es)",
+  "parsed_at": "2026-05-21",
+  "as_of_factsheet": "2026-04-30",
   "fi_metrics": {
-    "ytw": 5.12,
-    "duration": 4.03,
-    "maturity": 8.19,
-    "current_yield": 7.80,
-    "rating": "BBB+"
+    "ytw": 9.70,
+    "duration": 0.3,
+    "maturity": 2.2,
+    "current_yield": 9.70,
+    "rating": "NR"
   },
-  "note": "Cat bonds nativos USD. Insurance-linked securities, baja correlacion con FI tradicional."
+  "cat_bond_metrics": {
+    "fund_yield_pct": 9.70,
+    "expected_loss_pct": -3.2,
+    "var_95_pct": -7.9,
+    "var_99_pct": -23.5,
+    "risk_indicator_srri": 3,
+    "weighted_avg_life_yrs": 2.2,
+    "invested_level_pct": 87.80,
+    "maturity_buckets": {"<6m": 10.6, "6-12m": 13.9, "1-2y": 25.1, "2-3y": 29.2, ">3y": 21.2}
+  },
+  "note": "Cat bond / ILS (insurance-linked). NO tiene metricas de bono tradicional: duration de tasa ~0 (floating SOFR+spread), sin rating crediticio (NR), riesgo medido via Expected Loss (-3.2%) no spread vs UST. ytw/current_yield = Fund Yield del factsheet (9.7%). maturity = weighted avg life (~2.2y). Datos reales del factsheet Schroders Abr-2026 (reemplazo el placeholder generico BBB+/dur4/mat8 que estaba mal)."
 }
