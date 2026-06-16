@@ -445,19 +445,24 @@ def main():
 
     dashboard_holdings = []
     for r in results:
+        # Buy-and-hold price race metodology: return_pct = (end_price - first_buy_price) / first_buy_price
+        # Dashboard busca twr_pct/alpha_twr_pp para renderear, asi que mapeamos:
+        # twr_pct  = return_pct (buy-and-hold price return)
+        # alpha_twr_pp = alpha_pct (vs ACWI same window)
+        # Esto NO es TWR clasico (no usa daily NAVs), pero matches lo que el dashboard espera.
         dashboard_holdings.append({
             "ticker": r["ticker"],
             "name": r["name"],
             "period_start": r["first_buy_date"],
             "period_end": r["end_date"],
             "months_held": months_between(r["first_buy_date"], r["end_date"]),
-            "twr_pct": None,  # Not computed in this methodology
+            "twr_pct": r["return_pct"],  # buy-and-hold price return
             "mwr_pct": r["return_pct"],
             "net_pnl_usd": round(r["total_proceeds_usd"] - r["total_buy_usd"], 0) if r["return_pct"] is not None else None,
             "cash_in_usd": r["total_buy_usd"],
             "cash_out_usd": r["total_sell_usd"] + (r["current_mv_usd"] if not r["is_closed"] else 0),
             "acwi_period_return_pct": r["acwi_return_pct"],
-            "alpha_twr_pp": None,
+            "alpha_twr_pp": r["alpha_pct"],  # alpha vs ACWI en la ventana del asset
             "alpha_mwr_pp": r["alpha_pct"],
             "avg_weight_pct": None,
             "contribution_pp": None,
