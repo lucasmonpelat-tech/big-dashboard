@@ -34,6 +34,23 @@ INCEPTION = date(2025, 6, 27)
 BMK_TICKER = "AOR"  # iShares Core Growth Allocation 60/40
 
 
+def _is_valid_price(value) -> bool:
+    """True si value es un numero real positivo (rechaza None/NaN/Inf/<=0).
+
+    Guard 2026-06-16: yfinance ocasionalmente retorna NaN para close.
+    Sin esto, NaN propaga al index y rompe el compute_returns.
+    """
+    if value is None:
+        return False
+    try:
+        v = float(value)
+        if math.isnan(v) or math.isinf(v) or v <= 0:
+            return False
+        return True
+    except (TypeError, ValueError):
+        return False
+
+
 def fetch_yf_history(ticker: str, start: date, end: date) -> list[dict]:
     """Fetch daily OHLC history via yfinance. Returns list of {date, close}.
 
@@ -44,16 +61,25 @@ def fetch_yf_history(ticker: str, start: date, end: date) -> list[dict]:
 
     Manteniendo T-1 close, el dashboard muestra siempre cierres oficiales,
     consistente con el resto del sistema (Lynk T-1, Pershing T-1, etc).
+
+    Guard NaN: skipear filas con close NaN/None/<=0 (yfinance issue ocasional).
     """
     import yfinance as yf
     t = yf.Ticker(ticker)
     h = t.history(start=start.isoformat(), end=end.isoformat())
     rows = []
+    skipped = 0
     for ts, row in h.iterrows():
+        close = row["Close"]
+        if not _is_valid_price(close):
+            skipped += 1
+            continue
         rows.append({
             "date": ts.strftime("%Y-%m-%d"),
-            "close": float(row["Close"]),
+            "close": float(close),
         })
+    if skipped:
+        print(f"  WARN: skipeados {skipped} bars con close NaN/invalid")
     return rows
 
 
@@ -160,6 +186,16 @@ def main():
 
     series = build_index_from_etf(hist)
     periods = compute_returns(series, inception)
+
+    # Guard: si el latest_value o los returns vienen NaN, abort sin sobreescribir
+    latest_val = periods.get("latest_value") if periods else None
+    if not _is_valid_price(latest_val):
+        print(f"  ABORT: latest_value invalido ({latest_val}). NO se sobreescribe bmk_6040.json.")
+        return
+    returns_vals = (periods.get("returns") or {}).values()
+    if all(v is None or (isinstance(v, float) and math.isnan(v)) for v in returns_vals):
+        print(f"  ABORT: todos los returns son None/NaN. NO se sobreescribe bmk_6040.json.")
+        return
 
     print(f"\n=== 60/40 Benchmark (AOR — iShares Core Growth Allocation ETF) ===")
     print(f"Latest: {periods['latest_date']} | Value: {periods['latest_value']} (base 100)")

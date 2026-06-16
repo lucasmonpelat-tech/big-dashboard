@@ -1,25 +1,25 @@
 {
-  "refreshedAt": "2026-06-16T16:04:27.139902",
+  "refreshedAt": "2026-06-16T15:07:30.807571",
   "source": "Yahoo Finance AOR (iShares Core Growth Allocation 60/40)",
   "note": "Single ETF que replica 60% stocks / 40% bonds. Composicion: ITOT + IDEV + IEMG + IAGG + AGG. Reemplaza el calculo viejo 0.6*ACWI + 0.4*AGG.",
   "ticker": "AOR",
   "inception": "2025-06-27",
   "periods": {
-    "latest_date": "2026-06-15",
-    "latest_value": NaN,
+    "latest_date": "2026-06-12",
+    "latest_value": 115.7677,
     "returns": {
-      "1W": NaN,
-      "1M": NaN,
-      "3M": NaN,
-      "6M": NaN,
-      "YTD": NaN,
-      "SI": NaN,
-      "Annualized": NaN
+      "1W": 1.23,
+      "1M": 0.49,
+      "3M": 7.56,
+      "6M": 7.42,
+      "YTD": 6.83,
+      "SI": 15.77,
+      "Annualized": 16.51
     },
-    "volatility": NaN,
-    "sharpe_approx": null
+    "volatility": 8.85,
+    "sharpe_approx": 1.38
   },
-  "series_length": 243,
+  "series_length": 242,
   "series": [
     {
       "date": "2025-06-27",
@@ -99,7 +99,7 @@
     },
     {
       "date": "2025-07-25",
-      "value": 101.969
+      "value": 101.9691
     },
     {
       "date": "2025-07-28",
@@ -191,7 +191,7 @@
     },
     {
       "date": "2025-08-27",
-      "value": 103.2506
+      "value": 103.2507
     },
     {
       "date": "2025-08-28",
@@ -355,7 +355,7 @@
     },
     {
       "date": "2025-10-24",
-      "value": 107.393
+      "value": 107.3929
     },
     {
       "date": "2025-10-27",
@@ -375,11 +375,11 @@
     },
     {
       "date": "2025-10-31",
-      "value": 107.393
+      "value": 107.3929
     },
     {
       "date": "2025-11-03",
-      "value": 107.4259
+      "value": 107.426
     },
     {
       "date": "2025-11-04",
@@ -435,7 +435,7 @@
     },
     {
       "date": "2025-11-21",
-      "value": 105.5451
+      "value": 105.545
     },
     {
       "date": "2025-11-24",
@@ -988,10 +988,6 @@
     {
       "date": "2026-06-12",
       "value": 115.7677
-    },
-    {
-      "date": "2026-06-15",
-      "value": NaN
     }
   ]
 }
