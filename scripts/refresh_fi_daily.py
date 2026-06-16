@@ -24,6 +24,7 @@ Usage:
 """
 
 import json
+import math
 from datetime import date, datetime
 from pathlib import Path
 
@@ -35,22 +36,46 @@ def _is_month_end(date_str):
     return date_str.endswith(("-28", "-29", "-30", "-31"))
 
 
+def _is_valid_price(value) -> bool:
+    """True si value es un numero real positivo. Guard contra NaN-as-truthy.
+
+    Bug fix 2026-06-16: rec.get('price') puede retornar float('nan') que es
+    TRUTHY en Python. Sin este check, NaN se asigna como precio valido y
+    rompe MV downstream.
+    """
+    if value is None:
+        return False
+    try:
+        v = float(value)
+        if math.isnan(v) or math.isinf(v) or v <= 0:
+            return False
+        return True
+    except (TypeError, ValueError):
+        return False
+
+
 def load_daily_prices():
-    """{ticker: precio_cierre_anterior} de baha (UCITS) + Stooq (ETFs)."""
+    """{ticker: precio_cierre_anterior} de baha (UCITS) + live_prices (ETFs).
+
+    Guard NaN: si rec['price'] o rec['nav'] es NaN/None/<=0, NO se incluye.
+    Esto fuerza el fallback "pershing_frozen" downstream en vez de propagar NaN.
+    """
     px = {}
     try:
         ud = json.load(open(ROOT / "data" / "ucits_daily_nav.json", encoding="utf-8"))
         for rec in ud.get("navs", {}).values():
-            if rec.get("ticker") and rec.get("nav"):
-                px[rec["ticker"]] = rec["nav"]
+            ticker = rec.get("ticker")
+            nav = rec.get("nav")
+            if ticker and _is_valid_price(nav):
+                px[ticker] = nav
     except Exception as e:
         print(f"  ucits_daily_nav skipped: {e}")
     try:
         lp = json.load(open(ROOT / "data" / "live_prices.json", encoding="utf-8"))
         prices = lp.get("prices", lp)
         for tk, rec in prices.items():
-            if isinstance(rec, dict) and rec.get("price"):
-                px.setdefault(tk, rec["price"])  # baha gana sobre Stooq
+            if isinstance(rec, dict) and _is_valid_price(rec.get("price")):
+                px.setdefault(tk, rec["price"])  # baha gana sobre live_prices
     except Exception as e:
         print(f"  live_prices skipped: {e}")
     return px
@@ -96,25 +121,26 @@ def main():
         if not qty or qty <= 0:
             continue
         px = daily_px.get(tk)
-        if px is not None:
+        if _is_valid_price(px):
             mv = qty * px
-            holdings_today.append({"ticker": tk, "qty": qty, "price": px, "mv": mv, "source": "daily_close"})
-            mv_today += mv
+            if _is_valid_price(mv):
+                holdings_today.append({"ticker": tk, "qty": qty, "price": px, "mv": mv, "source": "daily_close"})
+                mv_today += mv
+                continue
+        # Fallback: mantener ultimo MV de Pershing
+        prev = last_holdings.get(tk)
+        if prev and _is_valid_price(prev.get("mv")):
+            holdings_today.append({
+                "ticker": tk,
+                "qty": qty,
+                "price": prev.get("price"),
+                "mv": prev["mv"],
+                "source": "pershing_frozen",
+            })
+            mv_today += prev["mv"]
+            print(f"  fallback pershing_frozen: {tk}  mv ${prev['mv']:,.0f}")
         else:
-            # Fallback: mantener ultimo MV de Pershing
-            prev = last_holdings.get(tk)
-            if prev and prev.get("mv") is not None:
-                holdings_today.append({
-                    "ticker": tk,
-                    "qty": qty,
-                    "price": prev.get("price"),
-                    "mv": prev["mv"],
-                    "source": "pershing_frozen",
-                })
-                mv_today += prev["mv"]
-                print(f"  fallback pershing_frozen: {tk}  mv ${prev['mv']:,.0f}")
-            else:
-                print(f"  WARNING: sin precio fresco NI frozen para {tk}, se omite del MV today")
+            print(f"  WARNING: sin precio fresco NI frozen para {tk}, se omite del MV today")
 
     today_iso = date.today().isoformat()
 
@@ -150,6 +176,11 @@ def main():
     mv_anchor = anchor["mv_usd"]
     twr_today = ((mv_today - flow_in) / mv_anchor - 1) if mv_anchor else 0
     index_today = anchor["index"] * (1 + twr_today)
+
+    # Guard final: abort si calculos resultan NaN/0 (NO sobreescribir el JSON con basura)
+    if not _is_valid_price(mv_today) or not _is_valid_price(index_today):
+        print(f"  ABORT: mv_today={mv_today} index_today={index_today} invalido. NO se sobreescribe.")
+        return
 
     new_twr_point = {"date": today_iso, "mv_usd": mv_today, "flow_in": round(flow_in, 2),
                      "twr": twr_today, "index": round(index_today, 4)}

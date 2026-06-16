@@ -21,11 +21,30 @@ Usage:
 """
 
 import json
+import math
 from datetime import date, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
 SLEEVE_FILE = ROOT / "data" / "equity_sleeve_real.json"
+
+
+def _is_valid_price(value) -> bool:
+    """True si value es un numero real positivo (no None, no NaN, no Inf, no <=0).
+
+    Guard critico: rec.get('price') puede retornar float('nan') que es TRUTHY
+    en Python (`if nan:` -> True). Sin este check, NaN propaga downstream y
+    rompe equity_sleeve, alts_race, attribution. Bug recurrente 2026-06-16.
+    """
+    if value is None:
+        return False
+    try:
+        v = float(value)
+        if math.isnan(v) or math.isinf(v) or v <= 0:
+            return False
+        return True
+    except (TypeError, ValueError):
+        return False
 
 
 def _is_month_end(date_str):
@@ -38,16 +57,18 @@ def load_daily_prices():
     try:
         ud = json.load(open(ROOT / "data" / "ucits_daily_nav.json", encoding="utf-8"))
         for rec in ud.get("navs", {}).values():
-            if rec.get("ticker") and rec.get("nav"):
-                px[rec["ticker"]] = rec["nav"]
+            ticker = rec.get("ticker")
+            nav = rec.get("nav")
+            if ticker and _is_valid_price(nav):
+                px[ticker] = nav
     except Exception as e:
         print(f"  ucits_daily_nav skipped: {e}")
     try:
         lp = json.load(open(ROOT / "data" / "live_prices.json", encoding="utf-8"))
         prices = lp.get("prices", lp)
         for tk, rec in prices.items():
-            if isinstance(rec, dict) and rec.get("price"):
-                px.setdefault(tk, rec["price"])  # baha gana sobre Stooq (ej 4BRZ)
+            if isinstance(rec, dict) and _is_valid_price(rec.get("price")):
+                px.setdefault(tk, rec["price"])  # baha gana sobre live_prices (ej 4BRZ)
     except Exception as e:
         print(f"  live_prices skipped: {e}")
     return px
@@ -89,12 +110,36 @@ def main():
         if not qty or qty <= 0:
             continue
         px = daily_px.get(tk)
-        if px is None:
-            print(f"  WARNING: sin precio fresco para {tk}, se omite del MV today")
+        if not _is_valid_price(px):
+            # Guard NaN: si no hay precio valido, intentar fallback al ultimo MV conocido
+            last_sleeve = sleeve[-1] if sleeve else {}
+            last_holding = next(
+                (h for h in last_sleeve.get("holdings", []) if h.get("ticker") == tk),
+                None,
+            )
+            if last_holding and _is_valid_price(last_holding.get("mv")):
+                fallback_mv = last_holding["mv"]
+                fallback_px = last_holding.get("price")
+                holdings_today.append({
+                    "ticker": tk, "qty": qty, "price": fallback_px,
+                    "mv": fallback_mv, "source": "fallback_last_known",
+                })
+                mv_today += fallback_mv
+                print(f"  ! {tk}: sin precio fresco, fallback al ultimo MV ${fallback_mv:,.0f}")
+            else:
+                print(f"  WARNING: sin precio fresco NI fallback para {tk}, se omite del MV today")
             continue
         mv = qty * px
+        if not _is_valid_price(mv):
+            print(f"  WARNING: MV calculado NaN para {tk} (qty={qty}, px={px}), se omite")
+            continue
         mv_today += mv
         holdings_today.append({"ticker": tk, "qty": qty, "price": px, "mv": mv, "source": "daily_close"})
+
+    # Guard final: si mv_today no es valido, abort sin sobreescribir el JSON
+    if not _is_valid_price(mv_today):
+        print(f"  ABORT: mv_today calculado NaN/0 ({mv_today}). NO se sobreescribe el JSON.")
+        return
 
     today_iso = date.today().isoformat()
 

@@ -1,6 +1,6 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-06-16T14:42:55.808157",
+  "refreshedAt": "2026-06-16T14:49:26.207228",
   "as_of_date": "2026-06-16",
   "ytd_anchor": "2025-12-31",
   "days_ytd": 167,
@@ -9,8 +9,8 @@
       "name": "Equity",
       "value_usd": 7983242.71,
       "weight_pct": 30.63,
-      "ytd_pct": 6.3,
-      "contribution_pp": 1.929
+      "ytd_pct": 6.33,
+      "contribution_pp": 1.938
     },
     {
       "name": "Fixed Income",
@@ -34,13 +34,13 @@
       "contribution_pp": 0.058
     }
   ],
-  "gross_reconstructed_pct": 1.733,
+  "gross_reconstructed_pct": 1.742,
   "mgmt_fee_pp": -0.824,
   "mgmt_fee_rate_annual_pct": 1.8,
-  "net_reconstructed_pct": 0.909,
+  "net_reconstructed_pct": 0.918,
   "lynk_ytd_pct": 1.55,
   "lynk_refreshed_at": "2026-06-16T16:00:32.243013",
-  "residual_pp": -0.641,
+  "residual_pp": -0.632,
   "alts_detail": [
     {
       "ticker": "CALP",
@@ -129,25 +129,25 @@
     "bench_label": "60/40 (60% ACWI + 40% AGG)",
     "bench_ytd_aor_etf": NaN,
     "acwi_ytd": 10.587,
-    "agg_ytd": 0.478,
+    "agg_ytd": 0.493,
     "bench_eq_contrib_pp": 6.352,
-    "bench_fi_contrib_pp": 0.191,
+    "bench_fi_contrib_pp": 0.197,
     "big_ytd": 1.55,
     "alpha_ytd_total_pp": NaN,
     "components": [
       {
         "name": "Equity",
-        "big_contrib_pp": 1.929,
+        "big_contrib_pp": 1.938,
         "bench_contrib_pp": 6.352,
-        "alpha_pp": -4.423,
-        "comment": "BIG 30.6% @ +6.30% vs 60% ACWI @ +10.59%"
+        "alpha_pp": -4.414,
+        "comment": "BIG 30.6% @ +6.33% vs 60% ACWI @ +10.59%"
       },
       {
         "name": "Fixed Income",
         "big_contrib_pp": 0.193,
-        "bench_contrib_pp": 0.191,
-        "alpha_pp": 0.002,
-        "comment": "BIG 39.9% @ +0.48% vs 40% AGG @ +0.48%"
+        "bench_contrib_pp": 0.197,
+        "alpha_pp": -0.004,
+        "comment": "BIG 39.9% @ +0.48% vs 40% AGG @ +0.49%"
       },
       {
         "name": "Alternatives",
