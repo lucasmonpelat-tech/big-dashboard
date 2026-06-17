@@ -126,6 +126,10 @@ jobs:
         run: python scripts/refresh_alts_daily.py
         continue-on-error: true
 
+      - name: Refresh holdings returns T-1 (cost basis methodology)
+        run: python scripts/refresh_holdings_returns_daily.py
+        continue-on-error: true
+
       - name: Brinson Attribution YTD
         run: python scripts/compute_attribution.py
         continue-on-error: true
