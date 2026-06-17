@@ -796,21 +796,21 @@
                 <tbody id="er-returns-body"></tbody>
             </table>
 
-            <!-- ================== LA CARRERA DEL ACTIVO (buy-and-hold race) ================== -->
-            <h2 class="section-title">🏁 La Carrera del Activo vs ACWI — desde la primera compra</h2>
+            <!-- ================== CARRERA POR HOLDING — COST BASIS (matchea Pershing) ================== -->
+            <h2 class="section-title">🏁 Carrera por Holding vs ACWI Dollar-Weighted</h2>
             <div class="info-box" style="border-left-color:#81C784;">
-                <strong>Buy-and-hold price race:</strong> Para cada activo medimos el retorno del PRECIO desde el día de la primera compra hasta hoy (o la última venta si está cerrado), y lo comparamos contra el retorno de ACWI <em>en esa misma ventana de tiempo</em>. <strong>Alpha</strong> = Asset Return − ACWI Return. No depende del DCA / timing de las compras subsiguientes — mide la decisión de elegir el activo.
+                <strong>Metodología (Jun-2026):</strong> <strong>Return %</strong> = cost basis ponderado (matchea Pershing UGL) — plata real ganada sobre el costo promedio. <strong>ACWI DW</strong> = ACWI dollar-weighted (el bench si hubieras invertido la misma plata en ACWI con tu mismo timing de compras). <strong>Alpha REAL</strong> = Return − ACWI DW. Holdings activos arriba (OPEN), cerrados abajo con Realized G/L.
             </div>
             <div id="er-real-source" style="font-size:11px;color:#90CAF9;margin-bottom:8px;"></div>
             <table class="data-table">
                 <thead>
                     <tr>
                         <th class="left">Holding</th>
-                        <th class="left">Período (1er buy → hoy/cierre)</th>
-                        <th>Meses</th>
-                        <th>Asset %</th>
-                        <th>ACWI %</th>
-                        <th>Alpha %</th>
+                        <th class="left">Período</th>
+                        <th>MV USD</th>
+                        <th>Return %</th>
+                        <th>ACWI DW</th>
+                        <th>Alpha REAL</th>
                         <th class="left">Status</th>
                     </tr>
                 </thead>
@@ -984,6 +984,27 @@
                 <tbody id="fr-returns-body"></tbody>
             </table>
 
+            <!-- ================== CARRERA POR HOLDING FI vs AGG DOLLAR-WEIGHTED ================== -->
+            <h2 class="section-title">🏁 Carrera por Holding FI vs AGG Dollar-Weighted</h2>
+            <div class="info-box" style="border-left-color:#81C784;">
+                <strong>Metodología (Jun-2026):</strong> <strong>Return %</strong> = cost basis ponderado (matchea Pershing UGL). <strong>AGG DW</strong> = Bloomberg US Aggregate dollar-weighted con tu mismo timing. <strong>Alpha REAL</strong> = Return − AGG DW. Holdings activos arriba, cerrados abajo con Realized G/L.
+            </div>
+            <div id="fr-real-source" style="font-size:11px;color:#90CAF9;margin-bottom:8px;"></div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th class="left">Holding</th>
+                        <th class="left">Período</th>
+                        <th>MV USD</th>
+                        <th>Return %</th>
+                        <th>AGG DW</th>
+                        <th>Alpha REAL</th>
+                        <th class="left">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="fr-real-body"></tbody>
+            </table>
+
             <!-- ================== MONTHLY BREAKDOWN FI — mes a mes 2026 ================== -->
             <h2 class="section-title">📅 Monthly Breakdown — FI Sleeve vs AGG</h2>
             <div class="info-box" style="border-left-color: #64B5F6;">
@@ -1123,6 +1144,27 @@
                     </tr>
                 </thead>
                 <tbody id="ar-returns-body"></tbody>
+            </table>
+
+            <!-- ================== CARRERA POR HOLDING ALTS vs ACWI DOLLAR-WEIGHTED ================== -->
+            <h2 class="section-title">🏁 Carrera por Holding Alts vs ACWI Dollar-Weighted</h2>
+            <div class="info-box" style="border-left-color:#81C784;">
+                <strong>Metodología (Jun-2026):</strong> <strong>Return %</strong> = cost basis ponderado (matchea Pershing UGL para liquidos; statements para privados). <strong>ACWI DW</strong> = ACWI dollar-weighted con tu mismo timing. <strong>Alpha REAL</strong> = Return − ACWI DW. CALP usa statement Carlyle (no pasa por Pershing).
+            </div>
+            <div id="ar-real-source" style="font-size:11px;color:#90CAF9;margin-bottom:8px;"></div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th class="left">Holding</th>
+                        <th class="left">Período</th>
+                        <th>MV USD</th>
+                        <th>Return %</th>
+                        <th>ACWI DW</th>
+                        <th>Alpha REAL</th>
+                        <th class="left">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="ar-real-body"></tbody>
             </table>
 
             <h2 class="section-title">Holding Contributions — Alts</h2>

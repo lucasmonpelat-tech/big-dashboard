@@ -3227,3 +3227,136 @@ async function renderAttributionYTD() {
         </div>
     `;
 }
+
+
+// ============================================================================
+// renderHoldingsRace — funcion unificada para Equity/FI/Alts "Carrera por Holding"
+// ============================================================================
+// Usa la nueva metodologia cost basis ponderado (matchea Pershing).
+// Lee de holdings_returns_{sleeve}.json (generado por compute_holdings_returns.py).
+// Renderea: OPEN holdings (Return + Bench DW + Alpha REAL) + CLOSED (Realized G/L).
+//
+// Decided 2026-06-17 con Lucas: migrar de price race (first_buy) a cost basis
+// porque con DCA cada 1-3 meses el first_buy pierde relevancia rapido.
+// ============================================================================
+async function renderHoldingsRace(sleeveKey, tbodyId, sourceElId) {
+    const noCache = '?_=' + Date.now();
+    const sleeveFiles = {
+        'equity': 'data/holdings_returns_equity.json',
+        'fi':     'data/holdings_returns_fixed_income.json',
+        'alts':   'data/holdings_returns_alternatives.json',
+    };
+    const benchLabel = sleeveKey === 'fi' ? 'AGG DW' : 'ACWI DW';
+    const tbody = document.getElementById(tbodyId);
+    const sourceEl = sourceElId ? document.getElementById(sourceElId) : null;
+    if (!tbody) return;
+
+    let data;
+    try {
+        const r = await fetch(sleeveFiles[sleeveKey] + noCache);
+        if (!r.ok) throw new Error('not available');
+        data = await r.json();
+    } catch (e) {
+        tbody.innerHTML = `<tr><td colspan="7" style="padding:20px;text-align:center;color:#FFA726;">
+            Cost basis returns no disponibles. Run: <code>python scripts/compute_holdings_returns.py</code></td></tr>`;
+        return;
+    }
+
+    const fmtPct = (v, decimals=2) => {
+        if (v == null) return '<span style="color:#6B88A8;">—</span>';
+        const c = v >= 0 ? '#81C784' : '#EF5350';
+        const sign = v >= 0 ? '+' : '';
+        return `<span style="color:${c};">${sign}${v.toFixed(decimals)}%</span>`;
+    };
+    const fmtPp = (v, decimals=2) => {
+        if (v == null) return '<span style="color:#6B88A8;">—</span>';
+        const c = v >= 0 ? '#81C784' : '#EF5350';
+        const sign = v >= 0 ? '+' : '';
+        return `<strong style="color:${c};">${sign}${v.toFixed(decimals)}pp</strong>`;
+    };
+    const fmtMv = (v) => v == null ? '—' : '$' + Math.round(v).toLocaleString('en-US');
+    const fmtPeriod = (start, end) => {
+        if (!start) return '—';
+        const fmt = d => d ? d.slice(0, 7) : '';
+        return `${fmt(start)} → ${fmt(end)}`;
+    };
+
+    const open = (data.holdings || []).filter(h => h.status === 'OPEN');
+    const closed = (data.holdings || []).filter(h => h.status === 'CLOSED');
+
+    let rows = '';
+
+    // OPEN rows
+    open.forEach(h => {
+        const isLoser = h.alpha_real_pp != null && h.alpha_real_pp < 0;
+        const statusBadge = isLoser
+            ? '<span style="color:#EF5350;font-weight:700;">🔴 UNDERPERFORM</span>'
+            : '<span style="color:#81C784;font-weight:700;">🏆 OUTPERFORM</span>';
+        rows += `
+            <tr>
+                <td class="left"><strong>${h.ticker}</strong><br><span style="font-size:10px;color:#6B88A8;">${h.name || ''}</span></td>
+                <td class="left" style="font-size:11px;color:#90CAF9;">${fmtPeriod(h.first_buy_date, h.period_end)}</td>
+                <td>${fmtMv(h.mv_usd)}</td>
+                <td>${fmtPct(h.return_pct)}</td>
+                <td>${fmtPct(h.bench_dw_pct)}</td>
+                <td>${fmtPp(h.alpha_real_pp)}</td>
+                <td class="left">${statusBadge}</td>
+            </tr>
+        `;
+    });
+
+    // Separator + CLOSED rows
+    if (closed.length) {
+        rows += `
+            <tr style="background:#1F3864;">
+                <td colspan="7" class="left" style="padding:10px;font-weight:700;color:#FFA726;font-size:12px;">
+                    🔒 HOLDINGS CERRADOS (Realized G/L de Pershing RGL)
+                </td>
+            </tr>
+        `;
+        closed.forEach(h => {
+            const isWinner = h.realized_gl_pct != null && h.realized_gl_pct >= 0;
+            const statusBadge = isWinner
+                ? '<span style="color:#A5D6A7;font-weight:700;">✅ CLOSED (+)</span>'
+                : '<span style="color:#FFAB91;font-weight:700;">⛔ CLOSED (-)</span>';
+            rows += `
+                <tr style="opacity:0.85;">
+                    <td class="left"><strong>${h.ticker}</strong><br><span style="font-size:10px;color:#6B88A8;">${h.name || ''}</span></td>
+                    <td class="left" style="font-size:11px;color:#90CAF9;">${fmtPeriod(h.first_buy_date, h.last_sell_date)}</td>
+                    <td class="left" style="font-size:11px;color:#6B88A8;">Realized:</td>
+                    <td>${fmtPct(h.realized_gl_pct)}</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td class="left">${statusBadge}</td>
+                </tr>
+            `;
+        });
+    }
+
+    tbody.innerHTML = rows || '<tr><td colspan="7" style="padding:20px;text-align:center;color:#6B88A8;">Sin holdings.</td></tr>';
+
+    if (sourceEl) {
+        const ts = (data.refreshedAt || '').slice(0, 16).replace('T', ' ');
+        sourceEl.innerHTML = `Source: <strong>Cost basis Pershing UGL + Bench Dollar-Weighted</strong> · Refreshed: ${ts} · OPEN: ${data.n_open} · CLOSED: ${data.n_closed}`;
+    }
+}
+
+// Wire renderers — se llaman cuando se entra al tab respectivo
+async function renderEquityRaceHoldingsCB() {
+    await renderHoldingsRace('equity', 'er-real-body', 'er-real-source');
+}
+async function renderFIRaceHoldingsCB() {
+    await renderHoldingsRace('fi', 'fr-real-body', 'fr-real-source');
+}
+async function renderAltsRaceHoldingsCB() {
+    await renderHoldingsRace('alts', 'ar-real-body', 'ar-real-source');
+}
+
+// Auto-trigger en load
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        renderEquityRaceHoldingsCB();
+        renderFIRaceHoldingsCB();
+        renderAltsRaceHoldingsCB();
+    }, 500);
+});
