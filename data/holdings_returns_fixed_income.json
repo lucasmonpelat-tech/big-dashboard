@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-06-17T13:57:08.648330",
+  "refreshedAt": "2026-06-17T14:58:55.929839",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Fixed Income",
   "period_end": "2026-06-17",
@@ -18,8 +18,8 @@
       "return_pct": 1.21,
       "last_price_pershing": 14.04,
       "bench_label": "AGG",
-      "bench_dw_pct": 0.63,
-      "alpha_real_pp": 0.58,
+      "bench_dw_pct": 0.62,
+      "alpha_real_pp": 0.59,
       "first_buy_date": "2026-01-30",
       "period_end": "2026-06-17",
       "n_trades": 5,
@@ -40,7 +40,10 @@
           "date": "2026-02-10",
           "cost": 400030.0
         }
-      ]
+      ],
+      "ytd_pct": 0.94,
+      "bench_ytd_pct": 0.81,
+      "alpha_ytd_pp": 0.13
     },
     {
       "ticker": "PIMCO-INC",
@@ -54,8 +57,8 @@
       "return_pct": 1.9,
       "last_price_pershing": 20.31,
       "bench_label": "AGG",
-      "bench_dw_pct": 2.87,
-      "alpha_real_pp": -0.97,
+      "bench_dw_pct": 2.86,
+      "alpha_real_pp": -0.96,
       "first_buy_date": "2025-07-07",
       "period_end": "2026-06-17",
       "n_trades": 13,
@@ -96,7 +99,10 @@
           "date": "2026-06-17",
           "cost": 1000000.0
         }
-      ]
+      ],
+      "ytd_pct": 0.74,
+      "bench_ytd_pct": 0.81,
+      "alpha_ytd_pp": -0.07
     },
     {
       "ticker": "MANIG",
@@ -110,8 +116,8 @@
       "return_pct": 4.87,
       "last_price_pershing": 125.14,
       "bench_label": "AGG",
-      "bench_dw_pct": 3.41,
-      "alpha_real_pp": 1.46,
+      "bench_dw_pct": 3.39,
+      "alpha_real_pp": 1.48,
       "first_buy_date": "2025-07-07",
       "period_end": "2026-06-17",
       "n_trades": 10,
@@ -152,7 +158,10 @@
           "date": "2026-02-11",
           "cost": 250030.0
         }
-      ]
+      ],
+      "ytd_pct": 1.28,
+      "bench_ytd_pct": 0.81,
+      "alpha_ytd_pp": 0.47
     },
     {
       "ticker": "PIMCO-EM",
@@ -166,8 +175,8 @@
       "return_pct": 0.65,
       "last_price_pershing": 18.49,
       "bench_label": "AGG",
-      "bench_dw_pct": 0.54,
-      "alpha_real_pp": 0.11,
+      "bench_dw_pct": 0.53,
+      "alpha_real_pp": 0.12,
       "first_buy_date": "2026-01-30",
       "period_end": "2026-06-17",
       "n_trades": 2,
@@ -180,7 +189,10 @@
           "date": "2026-04-08",
           "cost": 138030.0
         }
-      ]
+      ],
+      "ytd_pct": 2.06,
+      "bench_ytd_pct": 0.81,
+      "alpha_ytd_pp": 1.25
     },
     {
       "ticker": "TGF",
@@ -194,8 +206,8 @@
       "return_pct": 6.23,
       "last_price_pershing": 152.5985,
       "bench_label": "AGG",
-      "bench_dw_pct": 4.39,
-      "alpha_real_pp": 1.84,
+      "bench_dw_pct": 4.38,
+      "alpha_real_pp": 1.85,
       "first_buy_date": "2025-07-16",
       "period_end": "2026-06-17",
       "n_trades": 2,
@@ -208,7 +220,10 @@
           "date": "2025-08-20",
           "cost": 253920.0
         }
-      ]
+      ],
+      "ytd_pct": 3.53,
+      "bench_ytd_pct": 0.81,
+      "alpha_ytd_pp": 2.72
     },
     {
       "ticker": "SGCB",
@@ -222,8 +237,8 @@
       "return_pct": 1.0,
       "last_price_pershing": 2133.61,
       "bench_label": "AGG",
-      "bench_dw_pct": 0.21,
-      "alpha_real_pp": 0.79,
+      "bench_dw_pct": 0.2,
+      "alpha_real_pp": 0.8,
       "first_buy_date": "2026-04-13",
       "period_end": "2026-06-17",
       "n_trades": 1,
@@ -232,7 +247,10 @@
           "date": "2026-04-13",
           "cost": 519996.8
         }
-      ]
+      ],
+      "ytd_pct": 1.57,
+      "bench_ytd_pct": 0.81,
+      "alpha_ytd_pp": 0.76
     },
     {
       "ticker": "MANEM",
@@ -246,8 +264,8 @@
       "return_pct": 0.83,
       "last_price_pershing": 114.72,
       "bench_label": "AGG",
-      "bench_dw_pct": 0.74,
-      "alpha_real_pp": 0.09,
+      "bench_dw_pct": 0.72,
+      "alpha_real_pp": 0.11,
       "first_buy_date": "2026-05-13",
       "period_end": "2026-06-17",
       "n_trades": 1,
@@ -256,7 +274,8 @@
           "date": "2026-05-13",
           "cost": 20030.0
         }
-      ]
+      ],
+      "bench_ytd_pct": 0.81
     },
     {
       "ticker": "PIMCO-INC",

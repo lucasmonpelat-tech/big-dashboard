@@ -298,6 +298,48 @@ def get_first_buy_date(transactions_list):
     return buys[0]['date']
 
 
+def load_existing_ytd_per_holding():
+    """Lee YTD por ticker de los archivos existentes (equity_race, fi_race, alts_race)."""
+    ytd = {}
+    for fname in ['equity_race.json', 'fi_race.json', 'alts_race.json']:
+        try:
+            d = json.load(open(ROOT / 'data' / fname, encoding='utf-8'))
+            for h in d.get('holdings', []):
+                tk = h.get('ticker')
+                v = h.get('ytd_return_pct')
+                if tk and v is not None:
+                    ytd[tk] = v
+        except Exception:
+            pass
+    return ytd
+
+
+def fetch_bench_ytd_spot(ticker, ytd_anchor='2025-12-31'):
+    """YTD spot del bench (ACWI o AGG) usando yfinance."""
+    try:
+        import yfinance as yf
+        import pandas as pd
+        from datetime import date, timedelta
+        t = yf.Ticker(ticker)
+        end = date.today()
+        h = t.history(start='2025-12-28', end=(end + timedelta(days=2)).isoformat(), auto_adjust=True)
+        if h is None or h.empty:
+            return None
+        try:
+            h.index = h.index.tz_localize(None)
+        except Exception:
+            pass
+        anchor_idx = h.index.get_indexer([pd.Timestamp(ytd_anchor)], method='nearest')[0]
+        anchor = h.iloc[anchor_idx]['Close']
+        last = h.iloc[-1]['Close']
+        if not _is_valid(anchor) or not _is_valid(last):
+            return None
+        return (last / anchor - 1) * 100
+    except Exception as e:
+        print(f"  ERR fetching {ticker} YTD: {e}")
+        return None
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--ugl', required=True)
@@ -340,6 +382,16 @@ def main():
     print(f"    ACWI: {len(acwi_hist)} pts")
     print(f"    AGG:  {len(agg_hist)} pts")
 
+    # Bench YTD spot (un solo numero por sleeve)
+    acwi_ytd_spot = fetch_bench_ytd_spot('ACWI')
+    agg_ytd_spot  = fetch_bench_ytd_spot('AGG')
+    print(f"    ACWI YTD spot: {acwi_ytd_spot:+.2f}%" if acwi_ytd_spot is not None else "    ACWI YTD: N/A")
+    print(f"    AGG YTD spot:  {agg_ytd_spot:+.2f}%" if agg_ytd_spot is not None else "    AGG YTD: N/A")
+
+    # YTD por holding (de archivos race existentes)
+    ytd_per_holding = load_existing_ytd_per_holding()
+    print(f"    YTD per holding loaded: {len(ytd_per_holding)} tickers")
+
     # 5. Compute returns por holding
     by_sleeve = {'Equity': [], 'Fixed Income': [], 'Alternatives': [], 'Cash': []}
 
@@ -358,6 +410,13 @@ def main():
         if data['gl_pct'] is not None and bench_dw is not None:
             alpha_real = data['gl_pct'] - bench_dw
 
+        # YTD del holding (de archivos race) y bench YTD spot
+        h_ytd = ytd_per_holding.get(ticker)
+        bench_ytd_spot = agg_ytd_spot if sleeve == 'Fixed Income' else acwi_ytd_spot
+        alpha_ytd = None
+        if h_ytd is not None and bench_ytd_spot is not None:
+            alpha_ytd = h_ytd - bench_ytd_spot
+
         row = {
             'ticker': ticker,
             'sleeve': sleeve,
@@ -372,6 +431,10 @@ def main():
             'bench_label': bench_label,
             'bench_dw_pct': round(bench_dw, 2) if bench_dw is not None else None,
             'alpha_real_pp': round(alpha_real, 2) if alpha_real is not None else None,
+            # YTD: del activo (TWR price-based) y vs bench YTD spot
+            'ytd_pct': round(h_ytd, 2) if h_ytd is not None else None,
+            'bench_ytd_pct': round(bench_ytd_spot, 2) if bench_ytd_spot is not None else None,
+            'alpha_ytd_pp': round(alpha_ytd, 2) if alpha_ytd is not None else None,
             'first_buy_date': first_buy,
             'period_end': today_iso,
             'n_trades': len(txs),

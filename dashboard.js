@@ -3302,6 +3302,9 @@ async function renderHoldingsRace(sleeveKey, tbodyId, sourceElId) {
                 <td class="left"><strong>${h.ticker}</strong><br><span style="font-size:10px;color:#6B88A8;">${h.name || ''}</span></td>
                 <td class="left" style="font-size:11px;color:#90CAF9;">${fmtPeriod(h.first_buy_date, h.period_end)}</td>
                 <td>${fmtMv(h.mv_usd)}</td>
+                <td>${fmtPct(h.ytd_pct)}</td>
+                <td>${fmtPct(h.bench_ytd_pct)}</td>
+                <td>${fmtPp(h.alpha_ytd_pp)}</td>
                 <td>${fmtPct(h.return_pct)}</td>
                 <td>${fmtPct(h.bench_dw_pct)}</td>
                 <td>${fmtPp(h.alpha_real_pp)}</td>
@@ -3314,7 +3317,7 @@ async function renderHoldingsRace(sleeveKey, tbodyId, sourceElId) {
     if (closed.length) {
         rows += `
             <tr style="background:#1F3864;">
-                <td colspan="7" class="left" style="padding:10px;font-weight:700;color:#FFA726;font-size:12px;">
+                <td colspan="10" class="left" style="padding:10px;font-weight:700;color:#FFA726;font-size:12px;">
                     🔒 HOLDINGS CERRADOS (Realized G/L de Pershing RGL)
                 </td>
             </tr>
@@ -3328,7 +3331,7 @@ async function renderHoldingsRace(sleeveKey, tbodyId, sourceElId) {
                 <tr style="opacity:0.85;">
                     <td class="left"><strong>${h.ticker}</strong><br><span style="font-size:10px;color:#6B88A8;">${h.name || ''}</span></td>
                     <td class="left" style="font-size:11px;color:#90CAF9;">${fmtPeriod(h.first_buy_date, h.last_sell_date)}</td>
-                    <td class="left" style="font-size:11px;color:#6B88A8;">Realized:</td>
+                    <td colspan="4" class="left" style="font-size:11px;color:#6B88A8;">Realized G/L:</td>
                     <td>${fmtPct(h.realized_gl_pct)}</td>
                     <td>—</td>
                     <td>—</td>
@@ -3338,7 +3341,7 @@ async function renderHoldingsRace(sleeveKey, tbodyId, sourceElId) {
         });
     }
 
-    tbody.innerHTML = rows || '<tr><td colspan="7" style="padding:20px;text-align:center;color:#6B88A8;">Sin holdings.</td></tr>';
+    tbody.innerHTML = rows || '<tr><td colspan="10" style="padding:20px;text-align:center;color:#6B88A8;">Sin holdings.</td></tr>';
 
     if (sourceEl) {
         const ts = (data.refreshedAt || '').slice(0, 16).replace('T', ' ');
