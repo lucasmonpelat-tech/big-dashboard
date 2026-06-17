@@ -1446,7 +1446,7 @@ async function renderEquityRace() {
         const trace = {
             type: 'pie',
             hole: 0.4,
-            labels: pieData.map(h => `<b>${wrapName(h.name, 24)}</b><br>${h.pct_sleeve.toFixed(1)}%`),
+            labels: pieData.map(h => h.ticker),
             values: pieData.map(h => h.pct_sleeve),
             customdata: pieData.map(h => [h.name, h.value_usd / 1000, h.pct_fund, h.ticker]),
             hovertemplate:
@@ -1459,13 +1459,16 @@ async function renderEquityRace() {
                 line: { color: '#0D1B2A', width: 2 },
             },
             textposition: 'outside',
-            textinfo: 'label',
-            textfont: { size: 10, color: '#E0E8F0', family: 'Segoe UI' },
-            outsidetextfont: { size: 10, color: '#E0E8F0' },
+            textinfo: 'label+percent',
+            texttemplate: '<b>%{label}</b><br>%{percent:.1%}',
+            textfont: { size: 11, color: '#E0E8F0', family: 'Segoe UI' },
+            outsidetextfont: { size: 11, color: '#E0E8F0' },
             automargin: true,
             pull: pieData.map((_, i) => i === 0 ? 0.04 : 0),  // emphasize largest
             sort: false,
             rotation: 90,
+            // Leader lines (flechitas) automaticas para slices chicas
+            insidetextorientation: 'horizontal',
         };
 
         const layout = {
@@ -1903,7 +1906,7 @@ async function renderFIRace() {
         const trace = {
             type: 'pie',
             hole: 0.4,
-            labels: pieData.map(h => `<b>${wrapName(h.name, 24)}</b><br>${h.pct_sleeve.toFixed(1)}%`),
+            labels: pieData.map(h => h.ticker),
             values: pieData.map(h => h.pct_sleeve),
             customdata: pieData.map(h => [h.name, h.value_usd / 1000, h.pct_fund, h.ticker]),
             hovertemplate:
@@ -1916,9 +1919,10 @@ async function renderFIRace() {
                 line: { color: '#0D1B2A', width: 2 },
             },
             textposition: 'outside',
-            textinfo: 'label',
-            textfont: { size: 10, color: '#E0E8F0', family: 'Segoe UI' },
-            outsidetextfont: { size: 10, color: '#E0E8F0' },
+            textinfo: 'label+percent',
+            texttemplate: '<b>%{label}</b><br>%{percent:.1%}',
+            textfont: { size: 11, color: '#E0E8F0', family: 'Segoe UI' },
+            outsidetextfont: { size: 11, color: '#E0E8F0' },
             automargin: true,
             pull: pieData.map((_, i) => i === 0 ? 0.04 : 0),
             sort: false,
@@ -2441,7 +2445,7 @@ async function renderAltsRace() {
         const trace = {
             type: 'pie',
             hole: 0.4,
-            labels: pieData.map(h => `<b>${wrapName(h.name, 24)}</b><br>${(h.weight_pct).toFixed(1)}%`),
+            labels: pieData.map(h => h.ticker),
             values: pieData.map(h => h.weight_pct),
             customdata: pieData.map(h => [h.name, h.value_usd/1000, h.ticker, h.sub_class, subClassEmoji[h.sub_class] || '']),
             hovertemplate:
@@ -2451,9 +2455,10 @@ async function renderAltsRace() {
                 'MV: $%{customdata[1]:,.0f}K<extra></extra>',
             marker: { colors: colors.slice(0, pieData.length), line: { color: '#0D1B2A', width: 2 } },
             textposition: 'outside',
-            textinfo: 'label',
-            textfont: { size: 10, color: '#E0E8F0' },
-            outsidetextfont: { size: 10, color: '#E0E8F0' },
+            textinfo: 'label+percent',
+            texttemplate: '<b>%{label}</b><br>%{percent:.1%}',
+            textfont: { size: 11, color: '#E0E8F0' },
+            outsidetextfont: { size: 11, color: '#E0E8F0' },
             automargin: true,
             pull: pieData.map((_, i) => i === 0 ? 0.04 : 0),
             sort: false,
