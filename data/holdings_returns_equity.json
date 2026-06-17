@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-06-17T12:47:15.581433",
+  "refreshedAt": "2026-06-17T13:57:08.646888",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Equity",
   "period_end": "2026-06-17",
@@ -12,16 +12,55 @@
       "status": "OPEN",
       "name": "ISHARES VII PLC CORE S&P 500 UCITS ETF ISIN#IE00B5BMR087   ",
       "qty": 3408.0,
-      "mv_usd": 2759371.38,
+      "mv_usd": 2767227.77,
       "cost_basis_usd": 2384387.73,
-      "unrealized_gl_usd": 374983.65,
-      "return_pct": 15.73,
+      "unrealized_gl_usd": 382840.04,
+      "return_pct": 16.06,
+      "last_price_pershing": 811.98,
       "bench_label": "ACWI",
-      "bench_dw_pct": 18.48,
-      "alpha_real_pp": -2.75,
+      "bench_dw_pct": 18.45,
+      "alpha_real_pp": -2.39,
       "first_buy_date": "2025-07-03",
       "period_end": "2026-06-17",
-      "n_trades": 12
+      "n_trades": 12,
+      "buys_history": [
+        {
+          "date": "2025-07-03",
+          "cost": 1711093.01
+        },
+        {
+          "date": "2025-07-31",
+          "cost": 113774.84
+        },
+        {
+          "date": "2025-08-19",
+          "cost": 73593.92
+        },
+        {
+          "date": "2025-09-03",
+          "cost": 215751.38
+        },
+        {
+          "date": "2025-10-02",
+          "cost": 43821.78
+        },
+        {
+          "date": "2025-12-02",
+          "cost": 134713.0
+        },
+        {
+          "date": "2026-01-06",
+          "cost": 40014.16
+        },
+        {
+          "date": "2026-04-07",
+          "cost": 198130.6
+        },
+        {
+          "date": "2026-04-17",
+          "cost": 607997.98
+        }
+      ]
     },
     {
       "ticker": "NBGMT",
@@ -29,16 +68,51 @@
       "status": "OPEN",
       "name": "NEUBERGER BERMAN GLOBAL EQUITY MEGATRENDS FUND CLASS I (ACC)",
       "qty": 58050.998,
-      "mv_usd": 1371745.08,
+      "mv_usd": 1356651.82,
       "cost_basis_usd": 1302618.18,
-      "unrealized_gl_usd": 69126.9,
-      "return_pct": 5.31,
+      "unrealized_gl_usd": 54033.64,
+      "return_pct": 4.15,
+      "last_price_pershing": 23.37,
       "bench_label": "ACWI",
-      "bench_dw_pct": 20.78,
-      "alpha_real_pp": -15.47,
+      "bench_dw_pct": 20.74,
+      "alpha_real_pp": -16.59,
       "first_buy_date": "2025-07-07",
       "period_end": "2026-06-17",
-      "n_trades": 9
+      "n_trades": 9,
+      "buys_history": [
+        {
+          "date": "2025-07-07",
+          "cost": 850030.0
+        },
+        {
+          "date": "2025-08-01",
+          "cost": 292030.0
+        },
+        {
+          "date": "2025-08-20",
+          "cost": 68030.0
+        },
+        {
+          "date": "2025-09-03",
+          "cost": 110030.0
+        },
+        {
+          "date": "2025-10-02",
+          "cost": 45030.0
+        },
+        {
+          "date": "2026-01-07",
+          "cost": 20030.0
+        },
+        {
+          "date": "2026-02-04",
+          "cost": 150030.0
+        },
+        {
+          "date": "2026-05-07",
+          "cost": 144030.0
+        }
+      ]
     },
     {
       "ticker": "MFSCV",
@@ -46,16 +120,47 @@
       "status": "OPEN",
       "name": "MFS MERIDIAN CONTRARIAN VALUE FUND CLASS I1    ",
       "qty": 4063.638,
-      "mv_usd": 1203852.76,
+      "mv_usd": 1181949.75,
       "cost_basis_usd": 1013561.84,
-      "unrealized_gl_usd": 190290.92,
-      "return_pct": 18.77,
+      "unrealized_gl_usd": 168387.91,
+      "return_pct": 16.61,
+      "last_price_pershing": 290.86,
       "bench_label": "ACWI",
-      "bench_dw_pct": 23.6,
-      "alpha_real_pp": -4.83,
+      "bench_dw_pct": 23.56,
+      "alpha_real_pp": -6.95,
       "first_buy_date": "2025-07-07",
       "period_end": "2026-06-17",
-      "n_trades": 8
+      "n_trades": 8,
+      "buys_history": [
+        {
+          "date": "2025-07-07",
+          "cost": 10030.0
+        },
+        {
+          "date": "2025-07-15",
+          "cost": 840030.0
+        },
+        {
+          "date": "2025-08-01",
+          "cost": 295030.0
+        },
+        {
+          "date": "2025-08-19",
+          "cost": 44030.0
+        },
+        {
+          "date": "2025-09-03",
+          "cost": 142030.0
+        },
+        {
+          "date": "2025-10-02",
+          "cost": 53030.0
+        },
+        {
+          "date": "2026-01-06",
+          "cost": 20030.0
+        }
+      ]
     },
     {
       "ticker": "THOR",
@@ -63,16 +168,23 @@
       "status": "OPEN",
       "name": "THORNBURG INVESTMENT INCOME BUILDER FUND CLASS I (USD)   ",
       "qty": 14410.584,
-      "mv_usd": 626428.09,
+      "mv_usd": 621672.59,
       "cost_basis_usd": 610030.0,
-      "unrealized_gl_usd": 16398.09,
-      "return_pct": 2.69,
+      "unrealized_gl_usd": 11642.59,
+      "return_pct": 1.91,
+      "last_price_pershing": 43.14,
       "bench_label": "ACWI",
-      "bench_dw_pct": 5.77,
-      "alpha_real_pp": -3.08,
+      "bench_dw_pct": 5.74,
+      "alpha_real_pp": -3.83,
       "first_buy_date": "2026-04-20",
       "period_end": "2026-06-17",
-      "n_trades": 1
+      "n_trades": 1,
+      "buys_history": [
+        {
+          "date": "2026-04-20",
+          "cost": 610030.0
+        }
+      ]
     },
     {
       "ticker": "JHGSC",
@@ -80,16 +192,47 @@
       "status": "OPEN",
       "name": "JANUS HENDERSON HORIZON GLOBAL SMALLER COMPANIES FUND CLASS ",
       "qty": 10410.46,
-      "mv_usd": 579654.41,
+      "mv_usd": 566329.02,
       "cost_basis_usd": 542060.0,
-      "unrealized_gl_usd": 37594.41,
-      "return_pct": 6.94,
+      "unrealized_gl_usd": 24269.02,
+      "return_pct": 4.48,
+      "last_price_pershing": 54.4,
       "bench_label": "ACWI",
-      "bench_dw_pct": 16.47,
-      "alpha_real_pp": -9.53,
+      "bench_dw_pct": 16.43,
+      "alpha_real_pp": -11.95,
       "first_buy_date": "2025-07-03",
       "period_end": "2026-06-17",
-      "n_trades": 8
+      "n_trades": 8,
+      "buys_history": [
+        {
+          "date": "2025-07-03",
+          "cost": 340030.0
+        },
+        {
+          "date": "2025-07-31",
+          "cost": 119030.0
+        },
+        {
+          "date": "2025-08-19",
+          "cost": 10030.0
+        },
+        {
+          "date": "2025-09-03",
+          "cost": 47030.0
+        },
+        {
+          "date": "2025-10-02",
+          "cost": 18030.0
+        },
+        {
+          "date": "2026-02-03",
+          "cost": 450030.0
+        },
+        {
+          "date": "2026-04-07",
+          "cost": 92030.0
+        }
+      ]
     },
     {
       "ticker": "LGLI",
@@ -97,16 +240,27 @@
       "status": "OPEN",
       "name": "LAZARD GLOBAL LISTED INFRASTRUCTURE FD CL A (USD)(ACC)   ",
       "qty": 26511.134,
-      "mv_usd": 530442.72,
+      "mv_usd": 532332.97,
       "cost_basis_usd": 515000.0,
-      "unrealized_gl_usd": 15442.72,
-      "return_pct": 3.0,
+      "unrealized_gl_usd": 17332.97,
+      "return_pct": 3.37,
+      "last_price_pershing": 20.0796,
       "bench_label": "ACWI",
-      "bench_dw_pct": 9.76,
-      "alpha_real_pp": -6.76,
+      "bench_dw_pct": 9.72,
+      "alpha_real_pp": -6.35,
       "first_buy_date": "2026-02-04",
       "period_end": "2026-06-17",
-      "n_trades": 2
+      "n_trades": 2,
+      "buys_history": [
+        {
+          "date": "2026-02-04",
+          "cost": 450000.0
+        },
+        {
+          "date": "2026-04-08",
+          "cost": 65000.0
+        }
+      ]
     },
     {
       "ticker": "ARGT",
@@ -114,16 +268,31 @@
       "status": "OPEN",
       "name": "GLOBAL X FDS MSCI ARGENTINA ETF     ",
       "qty": 4000.0,
-      "mv_usd": 393040.0,
+      "mv_usd": 390000.0,
       "cost_basis_usd": 377841.38,
-      "unrealized_gl_usd": 15198.62,
-      "return_pct": 4.02,
+      "unrealized_gl_usd": 12158.62,
+      "return_pct": 3.22,
+      "last_price_pershing": 97.5,
       "bench_label": "ACWI",
-      "bench_dw_pct": 9.65,
-      "alpha_real_pp": -5.63,
+      "bench_dw_pct": 9.61,
+      "alpha_real_pp": -6.39,
       "first_buy_date": "2026-01-09",
       "period_end": "2026-06-17",
-      "n_trades": 3
+      "n_trades": 3,
+      "buys_history": [
+        {
+          "date": "2026-01-09",
+          "cost": 198934.42
+        },
+        {
+          "date": "2026-02-03",
+          "cost": 154033.0
+        },
+        {
+          "date": "2026-03-04",
+          "cost": 24873.96
+        }
+      ]
     },
     {
       "ticker": "ILF",
@@ -131,16 +300,23 @@
       "status": "OPEN",
       "name": "ISHARES TR LATIN AMER 40 ETF     ",
       "qty": 10000.0,
-      "mv_usd": 347500.0,
+      "mv_usd": 342999.99,
       "cost_basis_usd": 367141.0,
-      "unrealized_gl_usd": -19641.0,
-      "return_pct": -5.35,
+      "unrealized_gl_usd": -24141.01,
+      "return_pct": -6.58,
+      "last_price_pershing": 34.3,
       "bench_label": "ACWI",
-      "bench_dw_pct": 9.31,
-      "alpha_real_pp": -14.66,
+      "bench_dw_pct": 9.27,
+      "alpha_real_pp": -15.85,
       "first_buy_date": "2026-02-03",
       "period_end": "2026-06-17",
-      "n_trades": 1
+      "n_trades": 1,
+      "buys_history": [
+        {
+          "date": "2026-02-03",
+          "cost": 367141.0
+        }
+      ]
     },
     {
       "ticker": "4BRZ",
@@ -148,16 +324,27 @@
       "status": "OPEN",
       "name": "ISHARES MSCI BRAZIL UCITS ETF (DE) ACCUMULATING UNITS ISIN#D",
       "qty": 6979.0,
-      "mv_usd": 339493.46,
+      "mv_usd": 355021.73,
       "cost_basis_usd": 343054.45,
-      "unrealized_gl_usd": -3561.0,
-      "return_pct": -1.04,
+      "unrealized_gl_usd": 11967.28,
+      "return_pct": 3.49,
+      "last_price_pershing": 50.87,
       "bench_label": "ACWI",
-      "bench_dw_pct": 9.66,
-      "alpha_real_pp": -10.7,
+      "bench_dw_pct": 9.63,
+      "alpha_real_pp": -6.14,
       "first_buy_date": "2026-01-09",
       "period_end": "2026-06-17",
-      "n_trades": 2
+      "n_trades": 2,
+      "buys_history": [
+        {
+          "date": "2026-01-09",
+          "cost": 203412.93
+        },
+        {
+          "date": "2026-02-03",
+          "cost": 139641.52
+        }
+      ]
     },
     {
       "ticker": "CSPX",
@@ -211,5 +398,6 @@
       "last_sell_date": "2026-04-16",
       "n_lots": 9
     }
-  ]
+  ],
+  "_daily_refresh_note": "Daily refresh 2026-06-17: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump."
 }

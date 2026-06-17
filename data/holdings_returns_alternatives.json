@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-06-17T12:47:15.581433",
+  "refreshedAt": "2026-06-17T13:57:08.650845",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Alternatives",
   "period_end": "2026-06-17",
@@ -12,16 +12,59 @@
       "status": "OPEN",
       "name": "ISHARES BITCOIN TR ETF SHS BEN INT     ",
       "qty": 21116.0,
-      "mv_usd": 779391.56,
+      "mv_usd": 784881.68,
       "cost_basis_usd": 1138663.4,
-      "unrealized_gl_usd": -359271.84,
-      "return_pct": -31.55,
+      "unrealized_gl_usd": -353781.72,
+      "return_pct": -31.07,
+      "last_price_pershing": 37.17,
       "bench_label": "ACWI",
-      "bench_dw_pct": 18.54,
-      "alpha_real_pp": -50.09,
+      "bench_dw_pct": 18.5,
+      "alpha_real_pp": -49.57,
       "first_buy_date": "2025-07-02",
       "period_end": "2026-06-17",
-      "n_trades": 12
+      "n_trades": 12,
+      "buys_history": [
+        {
+          "date": "2025-07-02",
+          "cost": 514745.37
+        },
+        {
+          "date": "2025-07-30",
+          "cost": 142380.86
+        },
+        {
+          "date": "2025-08-18",
+          "cost": 49017.9
+        },
+        {
+          "date": "2025-09-03",
+          "cost": 116577.4
+        },
+        {
+          "date": "2025-11-14",
+          "cost": 120145.74
+        },
+        {
+          "date": "2025-11-20",
+          "cost": 64720.87
+        },
+        {
+          "date": "2025-12-02",
+          "cost": 214290.05
+        },
+        {
+          "date": "2026-02-03",
+          "cost": 118639.86
+        },
+        {
+          "date": "2026-02-06",
+          "cost": 72086.2
+        },
+        {
+          "date": "2026-06-03",
+          "cost": 33660.77
+        }
+      ]
     },
     {
       "ticker": "GLD",
@@ -29,16 +72,39 @@
       "status": "OPEN",
       "name": "SPDR GOLD TR GOLD SHS     ",
       "qty": 1952.0,
-      "mv_usd": 777813.44,
+      "mv_usd": 776173.77,
       "cost_basis_usd": 603458.13,
-      "unrealized_gl_usd": 174355.31,
-      "return_pct": 28.89,
+      "unrealized_gl_usd": 172715.64,
+      "return_pct": 28.62,
+      "last_price_pershing": 397.63,
       "bench_label": "ACWI",
-      "bench_dw_pct": 23.52,
-      "alpha_real_pp": 5.37,
+      "bench_dw_pct": 23.48,
+      "alpha_real_pp": 5.14,
       "first_buy_date": "2025-07-02",
       "period_end": "2026-06-17",
-      "n_trades": 12
+      "n_trades": 12,
+      "buys_history": [
+        {
+          "date": "2025-07-02",
+          "cost": 850907.91
+        },
+        {
+          "date": "2025-07-30",
+          "cost": 325195.64
+        },
+        {
+          "date": "2025-08-18",
+          "cost": 50042.88
+        },
+        {
+          "date": "2025-09-03",
+          "cost": 65167.4
+        },
+        {
+          "date": "2025-12-02",
+          "cost": 15175.39
+        }
+      ]
     },
     {
       "ticker": "HLEND",
@@ -50,12 +116,19 @@
       "cost_basis_usd": 735050.0,
       "unrealized_gl_usd": 18285.66,
       "return_pct": 2.49,
+      "last_price_pershing": 1.0,
       "bench_label": "ACWI",
-      "bench_dw_pct": 15.95,
-      "alpha_real_pp": -13.46,
+      "bench_dw_pct": 15.91,
+      "alpha_real_pp": -13.42,
       "first_buy_date": "2025-09-22",
       "period_end": "2026-06-17",
-      "n_trades": 1
+      "n_trades": 1,
+      "buys_history": [
+        {
+          "date": "2025-09-22",
+          "cost": 735050.0
+        }
+      ]
     },
     {
       "ticker": "BPCC",
@@ -67,12 +140,31 @@
       "cost_basis_usd": 554506.45,
       "unrealized_gl_usd": 40841.59,
       "return_pct": 7.37,
+      "last_price_pershing": 128.25,
       "bench_label": "ACWI",
-      "bench_dw_pct": 20.52,
-      "alpha_real_pp": -13.15,
+      "bench_dw_pct": 20.48,
+      "alpha_real_pp": -13.11,
       "first_buy_date": "2025-07-25",
       "period_end": "2026-06-17",
-      "n_trades": 4
+      "n_trades": 4,
+      "buys_history": [
+        {
+          "date": "2025-07-25",
+          "cost": 340000.24
+        },
+        {
+          "date": "2025-07-25",
+          "cost": 114359.75
+        },
+        {
+          "date": "2025-09-19",
+          "cost": 50116.1
+        },
+        {
+          "date": "2025-10-24",
+          "cost": 50030.36
+        }
+      ]
     },
     {
       "ticker": "FLEX",
@@ -84,12 +176,19 @@
       "cost_basis_usd": 499999.99,
       "unrealized_gl_usd": 1805.64,
       "return_pct": 0.36,
+      "last_price_pershing": 30.57,
       "bench_label": "ACWI",
-      "bench_dw_pct": 3.35,
-      "alpha_real_pp": -2.99,
+      "bench_dw_pct": 3.32,
+      "alpha_real_pp": -2.96,
       "first_buy_date": "2026-05-07",
       "period_end": "2026-06-17",
-      "n_trades": 1
+      "n_trades": 1,
+      "buys_history": [
+        {
+          "date": "2026-05-07",
+          "cost": 499999.99
+        }
+      ]
     },
     {
       "ticker": "HLGPI",
@@ -101,12 +200,23 @@
       "cost_basis_usd": 500000.17,
       "unrealized_gl_usd": 0.0,
       "return_pct": 0.0,
+      "last_price_pershing": 134.4475,
       "bench_label": "ACWI",
-      "bench_dw_pct": 0.42,
-      "alpha_real_pp": -0.42,
+      "bench_dw_pct": 0.4,
+      "alpha_real_pp": -0.4,
       "first_buy_date": "2026-05-27",
       "period_end": "2026-06-17",
-      "n_trades": 2
+      "n_trades": 2,
+      "buys_history": [
+        {
+          "date": "2026-05-27",
+          "cost": 500000.17
+        },
+        {
+          "date": "2026-06-17",
+          "cost": 600000.0
+        }
+      ]
     },
     {
       "ticker": "GCRED",
@@ -118,12 +228,19 @@
       "cost_basis_usd": 490050.0,
       "unrealized_gl_usd": 533.01,
       "return_pct": 0.11,
+      "last_price_pershing": 1.0,
       "bench_label": "ACWI",
-      "bench_dw_pct": 15.95,
-      "alpha_real_pp": -15.84,
+      "bench_dw_pct": 15.91,
+      "alpha_real_pp": -15.8,
       "first_buy_date": "2025-09-22",
       "period_end": "2026-06-17",
-      "n_trades": 1
+      "n_trades": 1,
+      "buys_history": [
+        {
+          "date": "2025-09-22",
+          "cost": 490050.0
+        }
+      ]
     },
     {
       "ticker": "GLD",
@@ -151,5 +268,6 @@
       "last_sell_date": "2026-05-26",
       "n_lots": 1
     }
-  ]
+  ],
+  "_daily_refresh_note": "Daily refresh 2026-06-17: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump."
 }

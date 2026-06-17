@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-06-17T12:47:15.581433",
+  "refreshedAt": "2026-06-17T13:57:08.648330",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Fixed Income",
   "period_end": "2026-06-17",
@@ -16,12 +16,31 @@
       "cost_basis_usd": 4000030.0,
       "unrealized_gl_usd": 48413.66,
       "return_pct": 1.21,
+      "last_price_pershing": 14.04,
       "bench_label": "AGG",
-      "bench_dw_pct": 0.59,
-      "alpha_real_pp": 0.62,
+      "bench_dw_pct": 0.63,
+      "alpha_real_pp": 0.58,
       "first_buy_date": "2026-01-30",
       "period_end": "2026-06-17",
-      "n_trades": 5
+      "n_trades": 5,
+      "buys_history": [
+        {
+          "date": "2026-01-30",
+          "cost": 4535806.59
+        },
+        {
+          "date": "2026-02-02",
+          "cost": 3600000.0
+        },
+        {
+          "date": "2026-02-02",
+          "cost": 4535806.59
+        },
+        {
+          "date": "2026-02-10",
+          "cost": 400030.0
+        }
+      ]
     },
     {
       "ticker": "PIMCO-INC",
@@ -33,12 +52,51 @@
       "cost_basis_usd": 2013771.85,
       "unrealized_gl_usd": 38199.95,
       "return_pct": 1.9,
+      "last_price_pershing": 20.31,
       "bench_label": "AGG",
-      "bench_dw_pct": 2.84,
-      "alpha_real_pp": -0.94,
+      "bench_dw_pct": 2.87,
+      "alpha_real_pp": -0.97,
       "first_buy_date": "2025-07-07",
       "period_end": "2026-06-17",
-      "n_trades": 13
+      "n_trades": 13,
+      "buys_history": [
+        {
+          "date": "2025-07-07",
+          "cost": 3400030.0
+        },
+        {
+          "date": "2025-08-01",
+          "cost": 1247030.0
+        },
+        {
+          "date": "2025-08-20",
+          "cost": 200030.0
+        },
+        {
+          "date": "2025-09-04",
+          "cost": 525030.0
+        },
+        {
+          "date": "2025-10-07",
+          "cost": 226030.0
+        },
+        {
+          "date": "2025-12-04",
+          "cost": 130030.0
+        },
+        {
+          "date": "2026-01-07",
+          "cost": 230030.0
+        },
+        {
+          "date": "2026-01-30",
+          "cost": 1100030.0
+        },
+        {
+          "date": "2026-06-17",
+          "cost": 1000000.0
+        }
+      ]
     },
     {
       "ticker": "MANIG",
@@ -50,12 +108,51 @@
       "cost_basis_usd": 1793340.62,
       "unrealized_gl_usd": 87261.55,
       "return_pct": 4.87,
+      "last_price_pershing": 125.14,
       "bench_label": "AGG",
-      "bench_dw_pct": 3.36,
-      "alpha_real_pp": 1.51,
+      "bench_dw_pct": 3.41,
+      "alpha_real_pp": 1.46,
       "first_buy_date": "2025-07-07",
       "period_end": "2026-06-17",
-      "n_trades": 10
+      "n_trades": 10,
+      "buys_history": [
+        {
+          "date": "2025-07-07",
+          "cost": 1190030.0
+        },
+        {
+          "date": "2025-08-05",
+          "cost": 433030.0
+        },
+        {
+          "date": "2025-08-21",
+          "cost": 70030.0
+        },
+        {
+          "date": "2025-09-05",
+          "cost": 187030.0
+        },
+        {
+          "date": "2025-10-08",
+          "cost": 81030.0
+        },
+        {
+          "date": "2025-12-05",
+          "cost": 20030.0
+        },
+        {
+          "date": "2026-01-08",
+          "cost": 20030.0
+        },
+        {
+          "date": "2026-02-06",
+          "cost": 25030.0
+        },
+        {
+          "date": "2026-02-11",
+          "cost": 250030.0
+        }
+      ]
     },
     {
       "ticker": "PIMCO-EM",
@@ -67,12 +164,23 @@
       "cost_basis_usd": 1138060.0,
       "unrealized_gl_usd": 7377.21,
       "return_pct": 0.65,
+      "last_price_pershing": 18.49,
       "bench_label": "AGG",
-      "bench_dw_pct": 0.5,
-      "alpha_real_pp": 0.15,
+      "bench_dw_pct": 0.54,
+      "alpha_real_pp": 0.11,
       "first_buy_date": "2026-01-30",
       "period_end": "2026-06-17",
-      "n_trades": 2
+      "n_trades": 2,
+      "buys_history": [
+        {
+          "date": "2026-01-30",
+          "cost": 1000030.0
+        },
+        {
+          "date": "2026-04-08",
+          "cost": 138030.0
+        }
+      ]
     },
     {
       "ticker": "TGF",
@@ -84,12 +192,23 @@
       "cost_basis_usd": 764206.53,
       "unrealized_gl_usd": 47617.35,
       "return_pct": 6.23,
+      "last_price_pershing": 152.5985,
       "bench_label": "AGG",
-      "bench_dw_pct": 4.35,
-      "alpha_real_pp": 1.88,
+      "bench_dw_pct": 4.39,
+      "alpha_real_pp": 1.84,
       "first_buy_date": "2025-07-16",
       "period_end": "2026-06-17",
-      "n_trades": 2
+      "n_trades": 2,
+      "buys_history": [
+        {
+          "date": "2025-07-16",
+          "cost": 510286.53
+        },
+        {
+          "date": "2025-08-20",
+          "cost": 253920.0
+        }
+      ]
     },
     {
       "ticker": "SGCB",
@@ -101,12 +220,19 @@
       "cost_basis_usd": 519996.8,
       "unrealized_gl_usd": 5191.3,
       "return_pct": 1.0,
+      "last_price_pershing": 2133.61,
       "bench_label": "AGG",
-      "bench_dw_pct": 0.17,
-      "alpha_real_pp": 0.83,
+      "bench_dw_pct": 0.21,
+      "alpha_real_pp": 0.79,
       "first_buy_date": "2026-04-13",
       "period_end": "2026-06-17",
-      "n_trades": 1
+      "n_trades": 1,
+      "buys_history": [
+        {
+          "date": "2026-04-13",
+          "cost": 519996.8
+        }
+      ]
     },
     {
       "ticker": "MANEM",
@@ -118,12 +244,19 @@
       "cost_basis_usd": 20030.0,
       "unrealized_gl_usd": 167.14,
       "return_pct": 0.83,
+      "last_price_pershing": 114.72,
       "bench_label": "AGG",
-      "bench_dw_pct": 0.7,
-      "alpha_real_pp": 0.13,
+      "bench_dw_pct": 0.74,
+      "alpha_real_pp": 0.09,
       "first_buy_date": "2026-05-13",
       "period_end": "2026-06-17",
-      "n_trades": 1
+      "n_trades": 1,
+      "buys_history": [
+        {
+          "date": "2026-05-13",
+          "cost": 20030.0
+        }
+      ]
     },
     {
       "ticker": "PIMCO-INC",
@@ -151,5 +284,6 @@
       "last_sell_date": "2026-01-30",
       "n_lots": 9
     }
-  ]
+  ],
+  "_daily_refresh_note": "Daily refresh 2026-06-17: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump."
 }

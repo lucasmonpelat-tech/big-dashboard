@@ -368,12 +368,20 @@ def main():
             'cost_basis_usd': data['cost'],
             'unrealized_gl_usd': data['gl'],
             'return_pct': data['gl_pct'],
+            'last_price_pershing': data.get('last_price'),
             'bench_label': bench_label,
             'bench_dw_pct': round(bench_dw, 2) if bench_dw is not None else None,
             'alpha_real_pp': round(alpha_real, 2) if alpha_real is not None else None,
             'first_buy_date': first_buy,
             'period_end': today_iso,
             'n_trades': len(txs),
+            # Buys cachedos para que refresh_holdings_returns_daily.py pueda
+            # recalcular bench_dw_pct con precios ACWI/AGG actuales sin necesitar
+            # el archivo Pershing transactions.xlsx.
+            'buys_history': [
+                {'date': t['date'], 'cost': t['cost']}
+                for t in txs if t['side'] == 'BUY'
+            ],
         }
         by_sleeve[sleeve].append(row)
 
