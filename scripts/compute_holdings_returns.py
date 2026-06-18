@@ -378,15 +378,15 @@ def main():
 
     print(f"\n  Fetching benchmark history (since {bench_start})...")
     acwi_hist = fetch_bench_history('ACWI', bench_start, today)
-    agg_hist  = fetch_bench_history('AGG',  bench_start, today)
+    agg_hist  = fetch_bench_history('IUAG.L',  bench_start, today)  # iShares Core US Aggregate UCITS USD Acc (London)
     print(f"    ACWI: {len(acwi_hist)} pts")
     print(f"    AGG:  {len(agg_hist)} pts")
 
     # Bench YTD spot (un solo numero por sleeve)
     acwi_ytd_spot = fetch_bench_ytd_spot('ACWI')
-    agg_ytd_spot  = fetch_bench_ytd_spot('AGG')
+    agg_ytd_spot  = fetch_bench_ytd_spot('IUAG.L')  # iShares Core US Agg UCITS USD Acc (London) — alineado con baha
     print(f"    ACWI YTD spot: {acwi_ytd_spot:+.2f}%" if acwi_ytd_spot is not None else "    ACWI YTD: N/A")
-    print(f"    AGG YTD spot:  {agg_ytd_spot:+.2f}%" if agg_ytd_spot is not None else "    AGG YTD: N/A")
+    print(f"    AGG (IUAG.L) YTD spot:  {agg_ytd_spot:+.2f}%" if agg_ytd_spot is not None else "    AGG YTD: N/A")
 
     # YTD por holding (de archivos race existentes)
     ytd_per_holding = load_existing_ytd_per_holding()

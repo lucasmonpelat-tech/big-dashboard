@@ -82,10 +82,15 @@ def load_daily_prices():
 
 
 def fetch_agg_close():
-    """Ultimo cierre de AGG (Yahoo). Devuelve (price, None) o (None, error)."""
+    """Ultimo cierre del bench FI (UCITS USD Acc, alineado con baha).
+
+    2026-06-18: cambiado de AGG (NYSE) a IUAG.L (UCITS London) por decision
+    de Lucas para alinearse con lo que ve en baha. UCITS tiene TER mayor y
+    cierre Europa, da YTD distinto.
+    """
     try:
         import yfinance as yf
-        hist = yf.Ticker("AGG").history(period="5d")
+        hist = yf.Ticker("IUAG.L").history(period="5d")
         if len(hist):
             return float(hist["Close"].iloc[-1]), None
         return None, "sin datos"

@@ -224,12 +224,12 @@ def main():
     # 3. Fetch bench history (ACWI + AGG) y YTD spot
     print(f"  Fetching ACWI + AGG history since {earliest_buy}...")
     acwi_hist = fetch_bench_history('ACWI', earliest_buy)
-    agg_hist  = fetch_bench_history('AGG',  earliest_buy)
+    agg_hist  = fetch_bench_history('IUAG.L',  earliest_buy)  # iShares Core US Aggregate UCITS USD Acc
     print(f"    ACWI: {len(acwi_hist)} pts, AGG: {len(agg_hist)} pts")
 
     # Bench YTD spot (un numero por sleeve)
     acwi_ytd_spot = fetch_bench_ytd_spot('ACWI')
-    agg_ytd_spot  = fetch_bench_ytd_spot('AGG')
+    agg_ytd_spot  = fetch_bench_ytd_spot('IUAG.L')  # UCITS USD Acc — alineado con baha
     print(f"    ACWI YTD: {acwi_ytd_spot:+.2f}%" if acwi_ytd_spot is not None else "    ACWI YTD: N/A")
     print(f"    AGG YTD:  {agg_ytd_spot:+.2f}%" if agg_ytd_spot is not None else "    AGG YTD: N/A")
 
