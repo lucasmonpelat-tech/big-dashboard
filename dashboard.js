@@ -1640,78 +1640,13 @@ async function renderEquityRace() {
     const acwi_ref = siRet.acwi || 0;
 
     // ============================================================
-    // REAL TWR HOLDING CONTRIBUTIONS (from Pershing transactions)
+    // CARRERA POR HOLDING (cost basis methodology) — desde 2026-06-17
+    // Usa renderHoldingsRace() al final del archivo. La lógica vieja
+    // (price race con equity_contributions_real.json) fue removida porque
+    // la tabla pasó a 10 columnas y los datos viejos no encajaban.
     // ============================================================
-    if (realContribs && realContribs.holdings && realContribs.holdings.length) {
-        const statusColor = {
-            outperform:          '#81C784',
-            outperform_closed:   '#A5D6A7',
-            underperform:        '#EF5350',
-            underperform_closed: '#FFAB91',
-            neutral:             '#90A4AE',
-            neutral_closed:      '#B0BEC5',
-            unknown:             '#607D8B',
-        };
-        const statusBadge = {
-            outperform:          '🏆 OUTPERFORM',
-            outperform_closed:   '🏆 OUTPERFORM (cerrado)',
-            underperform:        '🔴 UNDERPERFORM',
-            underperform_closed: '🔴 UNDERPERFORM (cerrado)',
-            neutral:             '⚪ NEUTRAL',
-            neutral_closed:      '⚪ NEUTRAL (cerrado)',
-            unknown:             '⚪ —',
-        };
-        const fmtPct = (v, decimals=2) => {
-            if (v == null) return '—';
-            const c = v >= 0 ? '#81C784' : '#EF5350';
-            const sign = v >= 0 ? '+' : '';
-            return `<span style="color:${c};">${sign}${v.toFixed(decimals)}%</span>`;
-        };
-        const fmtPp = (v, decimals=2) => {
-            if (v == null) return '—';
-            const c = v >= 0 ? '#81C784' : '#EF5350';
-            const sign = v >= 0 ? '+' : '';
-            return `<strong style="color:${c};">${sign}${v.toFixed(decimals)}pp</strong>`;
-        };
-        const fmtUsd = (v) => {
-            if (v == null) return '—';
-            const c = v >= 0 ? '#81C784' : '#EF5350';
-            const sign = v >= 0 ? '+' : '';
-            return `<span style="color:${c};font-family:'Courier New',monospace;">${sign}$${Math.abs(v).toLocaleString('en-US', {maximumFractionDigits: 0})}</span>`;
-        };
-        const fmtUsdNeutral = (v) => {
-            if (v == null) return '—';
-            return `<span style="color:#E0E8F0;font-family:'Courier New',monospace;">$${v.toLocaleString('en-US', {maximumFractionDigits: 0})}</span>`;
-        };
-        document.getElementById('er-real-source').innerHTML =
-            `Source: <strong>${realContribs.source}</strong> · Period: ${realContribs.period_start} → ${realContribs.period_end}`;
-
-        // Ordenar: UNDERPERFORM CERRADO al final, el resto por alpha desc
-        const statusRank = (s) => s === 'underperform_closed' ? 1 : 0;
-        const sortedHoldings = [...realContribs.holdings].sort((a, b) => {
-            const rA = statusRank(a.status);
-            const rB = statusRank(b.status);
-            if (rA !== rB) return rA - rB;            // closed-undp van al final
-            const alphaA = a.alpha_mwr_pp ?? -999;
-            const alphaB = b.alpha_mwr_pp ?? -999;
-            return alphaB - alphaA;                   // mejor alpha primero
-        });
-
-        const realRows = sortedHoldings.map(h => `
-            <tr>
-                <td class="left"><strong>${h.name}</strong><br><span style="font-size:10px;color:#6B88A8;">${h.ticker}</span></td>
-                <td class="left" style="font-size:11px;color:#90CAF9;">${h.period_start.slice(0,7)} → ${h.period_end.slice(0,7)}</td>
-                <td>${h.months_held}</td>
-                <td>${fmtPct(h.mwr_pct)}</td>
-                <td>${fmtPct(h.acwi_period_return_pct)}</td>
-                <td>${fmtPct(h.alpha_mwr_pp)}</td>
-                <td class="left"><span style="color:${statusColor[h.status]};font-weight:700;">${statusBadge[h.status]}</span></td>
-            </tr>
-        `).join('');
-        document.getElementById('er-real-body').innerHTML = realRows;
-    } else {
-        document.getElementById('er-real-body').innerHTML =
-            '<tr><td colspan="7" style="padding:20px;text-align:center;color:#FFA726;">Real TWR contributions not available. Run: <code>python scripts/holding_contributions_real.py --sleeve equity</code></td></tr>';
+    if (typeof renderHoldingsRace === 'function') {
+        renderHoldingsRace('equity', 'er-real-body', 'er-real-source');
     }
 
     // (Trade Ideas section removed el 2026-05-15 — Lucas quiere ordenar la
