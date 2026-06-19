@@ -1,16 +1,16 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-06-18T14:18:10.011231",
-  "as_of_date": "2026-06-18",
+  "refreshedAt": "2026-06-19T14:19:30.949449",
+  "as_of_date": "2026-06-19",
   "ytd_anchor": "2025-12-31",
-  "days_ytd": 169,
+  "days_ytd": 170,
   "sleeves": [
     {
       "name": "Equity",
       "value_usd": 8159384.36,
       "weight_pct": 30.92,
-      "ytd_pct": 6.03,
-      "contribution_pp": 1.863
+      "ytd_pct": 5.85,
+      "contribution_pp": 1.808
     },
     {
       "name": "Fixed Income",
@@ -23,24 +23,24 @@
       "name": "Alternatives",
       "value_usd": 7120563.09,
       "weight_pct": 26.98,
-      "ytd_pct": -1.59,
+      "ytd_pct": -1.58,
       "contribution_pp": -0.428
     },
     {
       "name": "Cash",
       "value_usd": 626124.78,
       "weight_pct": 2.37,
-      "ytd_pct": 2.45,
-      "contribution_pp": 0.058
+      "ytd_pct": 2.47,
+      "contribution_pp": 0.059
     }
   ],
-  "gross_reconstructed_pct": 1.685,
-  "mgmt_fee_pp": -0.833,
+  "gross_reconstructed_pct": 1.631,
+  "mgmt_fee_pp": -0.838,
   "mgmt_fee_rate_annual_pct": 1.8,
-  "net_reconstructed_pct": 0.852,
+  "net_reconstructed_pct": 0.793,
   "lynk_ytd_pct": 1.21,
-  "lynk_refreshed_at": "2026-06-18T14:14:05.924193",
-  "residual_pp": -0.358,
+  "lynk_refreshed_at": "2026-06-19T14:15:26.435669",
+  "residual_pp": -0.417,
   "alts_detail": [
     {
       "ticker": "CALP",
@@ -87,8 +87,8 @@
       "name": "Barings Private Credit Corporation",
       "value_usd": 595348.04,
       "weight_pct": 8.41,
-      "ytd_pct": 4.33,
-      "contribution_pp": 0.364,
+      "ytd_pct": 4.35,
+      "contribution_pp": 0.366,
       "source": "Pershing T-1 + carry estimado 9.4%/yr (entrada jul-2025)",
       "valuation_date": "2026-06-17"
     },
@@ -128,53 +128,53 @@
     "_description": "Decomposicion del alpha YTD por asset class. Bench teorico = 60% ACWI + 40% AGG.",
     "bench_label": "60/40 (60% ACWI + 40% AGG)",
     "bench_ytd_aor_etf": 6.89,
-    "acwi_ytd": 11.925,
-    "agg_ytd": 0.472,
-    "bench_eq_contrib_pp": 7.155,
-    "bench_fi_contrib_pp": 0.189,
+    "acwi_ytd": 10.836,
+    "agg_ytd": -5.578,
+    "bench_eq_contrib_pp": 6.502,
+    "bench_fi_contrib_pp": -2.231,
     "big_ytd": 1.21,
     "alpha_ytd_total_pp": -5.68,
     "components": [
       {
         "name": "Equity",
-        "big_contrib_pp": 1.863,
-        "bench_contrib_pp": 7.155,
-        "alpha_pp": -5.292,
-        "comment": "BIG 30.9% @ +6.03% vs 60% ACWI @ +11.92%"
+        "big_contrib_pp": 1.808,
+        "bench_contrib_pp": 6.502,
+        "alpha_pp": -4.694,
+        "comment": "BIG 30.9% @ +5.85% vs 60% ACWI @ +10.84%"
       },
       {
         "name": "Fixed Income",
         "big_contrib_pp": 0.192,
-        "bench_contrib_pp": 0.189,
-        "alpha_pp": 0.003,
-        "comment": "BIG 39.7% @ +0.48% vs 40% AGG @ +0.47%"
+        "bench_contrib_pp": -2.231,
+        "alpha_pp": 2.423,
+        "comment": "BIG 39.7% @ +0.48% vs 40% AGG @ -5.58%"
       },
       {
         "name": "Alternatives",
         "big_contrib_pp": -0.428,
         "bench_contrib_pp": 0,
         "alpha_pp": -0.428,
-        "comment": "BIG 27.0% @ -1.59% (bench no tiene Alts)"
+        "comment": "BIG 27.0% @ -1.58% (bench no tiene Alts)"
       },
       {
         "name": "Cash",
-        "big_contrib_pp": 0.058,
+        "big_contrib_pp": 0.059,
         "bench_contrib_pp": 0,
-        "alpha_pp": 0.058,
-        "comment": "BIG 2.4% @ +2.45% (bench no tiene Cash)"
+        "alpha_pp": 0.059,
+        "comment": "BIG 2.4% @ +2.47% (bench no tiene Cash)"
       },
       {
         "name": "Mgmt Fee",
-        "big_contrib_pp": -0.833,
+        "big_contrib_pp": -0.838,
         "bench_contrib_pp": 0,
-        "alpha_pp": -0.833,
+        "alpha_pp": -0.838,
         "comment": "Lynk mgmt fee 1.8%/yr (bench AOR fee 0.15% no incluido)"
       },
       {
         "name": "Residual",
         "big_contrib_pp": null,
         "bench_contrib_pp": null,
-        "alpha_pp": 0.812,
+        "alpha_pp": -2.202,
         "comment": "Tracking error AOR vs (60% ACWI + 40% AGG teorico) + Lynk smoothing + cash approx + alts statement lag"
       }
     ]
