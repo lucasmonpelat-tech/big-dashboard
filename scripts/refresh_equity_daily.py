@@ -75,13 +75,23 @@ def load_daily_prices():
 
 
 def fetch_acwi_close():
-    """Ultimo cierre de ACWI (Yahoo). Devuelve (price, None) o (None, error)."""
+    """Ultimo cierre VALIDO de ACWI (Yahoo). Devuelve (price, None) o (None, error).
+
+    Guard NaN (2026-06-19): yfinance ocasionalmente retorna NaN para el ultimo
+    close cuando el mercado esta abierto o hay delay. Iteramos hacia atras
+    buscando el ultimo close valido (no None/NaN/<=0).
+    """
     try:
         import yfinance as yf
-        hist = yf.Ticker("ACWI").history(period="5d")
-        if len(hist):
-            return float(hist["Close"].iloc[-1]), None
-        return None, "sin datos"
+        hist = yf.Ticker("ACWI").history(period="10d")
+        if not len(hist):
+            return None, "sin datos"
+        # Iterar de mas reciente a mas viejo buscando un close valido
+        for i in range(len(hist) - 1, -1, -1):
+            close = hist["Close"].iloc[i]
+            if _is_valid_price(close):
+                return float(close), None
+        return None, "todos los closes invalidos (NaN)"
     except Exception as e:
         return None, str(e)[:60]
 
@@ -192,7 +202,8 @@ def main():
     # ACWI today (Yahoo, rebaseado al primer punto)
     acwi_price, err = fetch_acwi_close()
     base_price = acwi[0]["price"]
-    if acwi_price and base_price:
+    # Guard: tanto acwi_price como base_price deben ser validos (no NaN)
+    if _is_valid_price(acwi_price) and _is_valid_price(base_price):
         acwi_index = round(acwi_price / base_price * 100, 4)
         new_acwi = {"date": today_iso, "price": round(acwi_price, 4), "index": acwi_index}
         if _is_month_end(acwi[-1]["date"]):
