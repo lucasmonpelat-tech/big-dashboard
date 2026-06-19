@@ -1,14 +1,14 @@
 {
-  "refreshedAt": "2026-06-16T15:40:33.549073",
+  "refreshedAt": "2026-06-19T11:55:04.092031",
   "inception": "2025-06-30",
   "benchmark": "MSCI ACWI (via ACWI ETF - Yahoo)",
   "stats": {
     "latest_month": "2026-05",
     "returns": {
       "1M": {
-        "sleeve": 1.5,
+        "sleeve": 1.76,
         "acwi": 4.62,
-        "alpha": -3.12
+        "alpha": -2.86
       },
       "3M": {
         "sleeve": 3.13,
@@ -16,40 +16,40 @@
         "alpha": -4.44
       },
       "6M": {
-        "sleeve": 10.42,
+        "sleeve": 10.52,
         "acwi": 13.05,
-        "alpha": -2.63
+        "alpha": -2.53
       },
       "YTD": {
-        "sleeve": 9.72,
+        "sleeve": 9.48,
         "acwi": 12.05,
-        "alpha": -2.33
+        "alpha": -2.57
       },
       "SI": {
-        "sleeve": 21.18,
+        "sleeve": 21.35,
         "acwi": 24.36,
-        "alpha": -3.18
+        "alpha": -3.01
       }
     },
     "annualized": {
-      "sleeve": 23.32,
+      "sleeve": 23.5,
       "acwi": 26.85,
-      "alpha": -3.53
+      "alpha": -3.35
     }
   },
   "sleeve_index": {
     "2025-06": 100.0,
-    "2025-07": 100.5423,
-    "2025-08": 103.7333,
-    "2025-09": 105.7711,
-    "2025-10": 108.6557,
-    "2025-11": 109.7482,
-    "2025-12": 110.4516,
-    "2026-01": 115.6764,
-    "2026-02": 117.5009,
-    "2026-03": 110.8354,
-    "2026-04": 119.3971,
-    "2026-05": 121.1843
+    "2025-07": 100.9605,
+    "2025-08": 103.8166,
+    "2025-09": 105.6691,
+    "2025-10": 108.7766,
+    "2025-11": 109.8011,
+    "2025-12": 110.8375,
+    "2026-01": 115.8536,
+    "2026-02": 117.6671,
+    "2026-03": 110.2959,
+    "2026-04": 119.2514,
+    "2026-05": 121.3499
   },
   "acwi_index": {
     "2025-06": 100.0,
@@ -64,25 +64,25 @@
     "2026-03": 108.5425,
     "2026-04": 118.8736,
     "2026-05": 124.3646,
-    "2026-06": 124.5015
+    "2026-06": 124.541
   },
   "sleeve_monthly_returns": {
-    "2025-06": 0.046621,
-    "2025-07": 0.005423,
-    "2025-08": 0.031738,
-    "2025-09": 0.019644,
-    "2025-10": 0.027273,
-    "2025-11": 0.010054,
-    "2025-12": 0.006409,
-    "2026-01": 0.047304,
-    "2026-02": 0.015773,
-    "2026-03": -0.056728,
-    "2026-04": 0.077248,
-    "2026-05": 0.014968,
+    "2025-06": 0.046115,
+    "2025-07": 0.009605,
+    "2025-08": 0.02829,
+    "2025-09": 0.017844,
+    "2025-10": 0.029408,
+    "2025-11": 0.009419,
+    "2025-12": 0.009438,
+    "2026-01": 0.045256,
+    "2026-02": 0.015654,
+    "2026-03": -0.062644,
+    "2026-04": 0.081194,
+    "2026-05": 0.017598,
     "2026-06": null
   },
   "acwi_monthly_returns": {
-    "2025-06": 0.048064884921008355,
+    "2025-06": 0.04806481875471125,
     "2025-07": 0.010575380093005293,
     "2025-08": 0.026777512039866558,
     "2025-09": 0.03597131406680276,
@@ -94,7 +94,7 @@
     "2026-03": -0.06113449384401359,
     "2026-04": 0.09517949690122252,
     "2026-05": 0.046192447943032455,
-    "2026-06": 0.001100647969923596
+    "2026-06": 0.0014180941411467973
   },
   "holdings": [
     {
@@ -103,11 +103,11 @@
       "name": "iShares Core S&P 500 UCITS",
       "value_usd": 2657592.48,
       "weight_pct": 33.86,
-      "si_return_pct": 22.76,
-      "ytd_return_pct": 10.6,
-      "contribution_pct": 7.71,
-      "ytd_contribution_pct": 3.59,
-      "source": "Yahoo:SPY (proxy)",
+      "si_return_pct": 22.22,
+      "ytd_return_pct": 9.22,
+      "contribution_pct": 7.52,
+      "ytd_contribution_pct": 3.12,
+      "source": "Yahoo:CSPX.L (proxy)",
       "months_counted": 12,
       "ytd_months_counted": 6
     },
@@ -187,11 +187,11 @@
       "name": "iShares MSCI Brazil UCITS (DE)",
       "value_usd": 383356.47,
       "weight_pct": 4.88,
-      "si_return_pct": 24.81,
-      "ytd_return_pct": 9.5,
-      "contribution_pct": 1.21,
-      "ytd_contribution_pct": 0.46,
-      "source": "Yahoo:EWZ",
+      "si_return_pct": 24.63,
+      "ytd_return_pct": 7.54,
+      "contribution_pct": 1.2,
+      "ytd_contribution_pct": 0.37,
+      "source": "Yahoo:4BRZ.DE (proxy)",
       "months_counted": 12,
       "ytd_months_counted": 6
     },
@@ -201,10 +201,10 @@
       "name": "Global X MSCI Argentina ETF",
       "value_usd": 359520.0,
       "weight_pct": 4.58,
-      "si_return_pct": 15.87,
-      "ytd_return_pct": 6.59,
-      "contribution_pct": 0.73,
-      "ytd_contribution_pct": 0.3,
+      "si_return_pct": 15.48,
+      "ytd_return_pct": 6.22,
+      "contribution_pct": 0.71,
+      "ytd_contribution_pct": 0.28,
       "source": "Yahoo:ARGT",
       "months_counted": 12,
       "ytd_months_counted": 6
@@ -215,8 +215,8 @@
       "name": "iShares Latin America 40 ETF",
       "value_usd": 357600.0,
       "weight_pct": 4.56,
-      "si_return_pct": 34.12,
-      "ytd_return_pct": 12.72,
+      "si_return_pct": 34.15,
+      "ytd_return_pct": 12.75,
       "contribution_pct": 1.56,
       "ytd_contribution_pct": 0.58,
       "source": "Yahoo:ILF",

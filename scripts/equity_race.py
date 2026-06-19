@@ -33,20 +33,23 @@ BIG_INCEPTION = date(2025, 6, 30)  # First Lynk NAV = 100
 EQUITY_HOLDINGS = [
     # (isin, ticker, name, value_usd, yahoo_ticker or None)
     # Values from Pershing May 5, 2026
-    ("IE00B5BMR087", "CSPX",  "iShares Core S&P 500 UCITS",              2657592.48, "ACWI"),  # proxy via ACWI fails—use SPY as proxy for S&P500; but we have CSPX.L too
+    ("IE00B5BMR087", "CSPX",  "iShares Core S&P 500 UCITS",              2657592.48, "CSPX.L"),  # UCITS real (London), no proxy SPY
     ("IE00BFMHRK20", "NBGMT", "NB Global Equity Megatrends I",           1227372.60, None),
     ("LU1985812756", "MFSCV", "MFS Meridian Contrarian Value I1",        1146067.83, None),
     ("IE00B6YCBF59", "THOR",  "Thornburg Equity Income Builder I",       610432.34,  None),
     ("LU2940405447", "JHGSC", "Janus Henderson Global Smaller Cos F2",   570389.10,  None),
     ("IE00BF4KN675", "LGLI",  "Lazard Global Listed Infrastructure A",   535776.76,  None),
-    ("DE000A0Q4R85", "4BRZ",  "iShares MSCI Brazil UCITS (DE)",          383356.47,  "EWZ"),   # EWZ as US-listed proxy for MSCI Brazil
+    ("DE000A0Q4R85", "4BRZ",  "iShares MSCI Brazil UCITS (DE)",          383356.47,  "4BRZ.DE"),   # UCITS DE real, no proxy EWZ
     ("US37950E2596", "ARGT",  "Global X MSCI Argentina ETF",             359520.00,  "ARGT"),
     ("US4642873909", "ILF",   "iShares Latin America 40 ETF",            357600.00,  "ILF"),
 ]
 
-# Override: for CSPX we want real S&P 500 tracking; use SPY (US-listed)
+# Override: para CSPX usar el UCITS real (CSPX.L) en lugar del proxy SPY
+# 2026-06-18: Lucas pidio datos correctos. SPY da YTD +10.6% pero CSPX.L da +9.21%
+# (diff por TER, FX y dividend treatment del UCITS USD Acc vs SPY USD Dist).
 YAHOO_OVERRIDES = {
-    "IE00B5BMR087": "SPY",   # S&P 500 proxy
+    "IE00B5BMR087": "CSPX.L",   # iShares Core S&P 500 UCITS USD Acc (London)
+    "DE000A0Q4R85": "4BRZ.DE",  # iShares MSCI Brazil UCITS DE (Xetra)
 }
 
 SPANISH_MONTHS = {
