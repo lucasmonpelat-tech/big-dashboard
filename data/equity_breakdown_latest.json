@@ -1,12 +1,23 @@
 {
-  "asOf": "2026-05-27",
-  "source": "PRIMARY: FT.com tearsheet por fondo × Pershing weights (5-May)",
+  "asOf": "2026-05-31",
+  "source": "PRIMARY: factsheets oficiales (PDF MFS, thornburg.com, Endowus NB) + FT.com per fondo donde no actualizado x weights sleeve T-1",
   "method": "Para cada equity holding: regional/sectorial extraído de FT.com fund tearsheet (que toma datos directo del fund manager), ponderado por peso BIG. NO usa Maximus.",
   "verification": {
-    "marzo_japan": 1.5,
-    "abril_japan": 1.5,
-    "delta": "0pp - matches marzo (sanity check OK)",
-    "rotation_impact": "BRK.B salió 16-Abr (era 100% US). CSPX entró (100% US). THOR entró (40% Eurozone). Net: -5pp NA, +2pp Europe."
+    "updated_2026_06_22": true,
+    "mfscv_change_may_vs_mar": "Top 10 rotation: salieron Becton/Cenovus/Veolia/Medtronic, entraron Merck/Howden/ABInBev/Symrise/Croda. Industrials +5.7pp, Materials -6.4pp, Utilities +4.3pp (nuevo).",
+    "thor_change_may_vs_jan": "Income Builder data 4 meses fresca. Sector Financial 22.8 (era 21.6 +1.2pp). Top 10: Orange sigue top, BNP sube a #2.",
+    "nbgmt_change_jun_vs_mar": "NBGMT fuerte rotation Q2: salio Amdocs (era #1), Expedia, NICE, Uber, Charles_River. Entraron Gen Digital, Chewy, Zeta, ON Semi, Cisco, Shift4, Element, Alibaba. Tema +Tech/Cons.Cyc continua. Regional/sector mantengo Mar-2026 (no disponible publico Jun).",
+    "sleeve_weights_used": {
+      "CSPX": 0.34,
+      "NBGMT": 0.168,
+      "MFSCV": 0.146,
+      "THOR": 0.077,
+      "JHGSC": 0.07,
+      "LGLI": 0.066,
+      "ARGT": 0.048,
+      "ILF": 0.042,
+      "4BRZ": 0.044
+    }
   },
   "style": {
     "title": "Distribución por Estilo",
@@ -46,7 +57,7 @@
       },
       {
         "category": "Financial",
-        "big": 12,
+        "big": 13,
         "acwi": 17
       },
       {
@@ -56,7 +67,7 @@
       },
       {
         "category": "Cons. Cyc.",
-        "big": 11,
+        "big": 10,
         "acwi": 9
       },
       {
@@ -71,7 +82,7 @@
       },
       {
         "category": "Cons. Def.",
-        "big": 5,
+        "big": 6,
         "acwi": 5
       },
       {
@@ -86,12 +97,12 @@
       },
       {
         "category": "Basic Mat.",
-        "big": 6,
+        "big": 5,
         "acwi": 4
       },
       {
         "category": "Real estate",
-        "big": 1,
+        "big": 2,
         "acwi": 2
       },
       {
@@ -101,15 +112,15 @@
       }
     ],
     "totals": {
-      "big": 97,
+      "big": 100,
       "acwi": 100
     },
     "footnote": "Sumatoria FT.com 9 fondos × Pershing weights (2026-05-27). Sector \"Other\" agrupa REITs+otros según mapping FT.com.",
     "primary_sources": {
       "CSPX": "FT.com tearsheet — Technology 37.61% / Financial 11.14% / Comm. Serv. 11.08% / Cons. Cyc. 9.94% / Health 8.29%",
       "NBGMT": "FT.com tearsheet — Technology 38.59% / Cons. Cyc. 14.91% / Industrials 14.85% / Health 12.27% / Comm. Serv. 7.49%",
-      "MFSCV": "FT.com tearsheet — Industrials 18.75% / Cons. Cyc. 16.56% / Health 16.26% / Basic Mat. 15.12% / Cons. Def. 13.53%",
-      "THOR": "FT.com tearsheet — Financial 21.64% / Comm. Serv. 17.62% / Health 10.14% / Technology 9.47% / Industrials 7.68%",
+      "MFSCV": "MFS Meridian Contrarian Value factsheet 31-May-2026 (PDF) - Industrials 24.4 / Health 16.0 / Financial 13.4 / Cons.Cyc 13.4 / Cons.Def 12.6 / Materials 8.7 / Utilities 4.3 / Energy 2.3 / Cash 4.9 (sin Tech/Comm.Serv/RE)",
+      "THOR": "Thornburg Equity Income Builder 31-May-2026 (thornburg.com) - Financial 22.8 / Comm.Serv 16.0 / Tech 10.5 / Health 9.6 / Cash 9.7 (resto Indust/Cons/Energy/Utilities est)",
       "JHGSC": "FT.com tearsheet — Industrials 27.75% / Financial 12.78% / Technology 12.02% / Cons. Cyc. 10.97% / Health 8.86%",
       "LGLI": "FT.com tearsheet — Utilities 51.29% / Industrials 28.46% / Real estate 13.18% / Comm. Serv. 1.29%",
       "ARGT": "FT.com tearsheet — Cons. Cyc. 26.19% / Energy 22.11% / Financial 13.66% / Basic Mat. 13.21% / Industrials 8.31%",
@@ -129,7 +140,7 @@
       },
       {
         "category": "LatAm",
-        "big": 14,
+        "big": 13,
         "acwi": 1
       },
       {
@@ -149,7 +160,7 @@
       },
       {
         "category": "Otros",
-        "big": 7,
+        "big": 8,
         "acwi": 13
       }
     ],
@@ -159,15 +170,15 @@
     },
     "footnote": "Otros incluye Asia EM (NBGMT 7%), Australasia (JHGSC 5%), Asia Dev (THOR/LGLI), Africa/ME, China, otros. Sanity check vs marzo: NA -5pp (BRK.B salió), Europe +2pp (THOR entró), Japan +0.5pp consistente.",
     "primary_sources": {
-      "CSPX": "iShares Core S&P 500 — 100% US (definición)",
-      "NBGMT": "FT.com tearsheet IE00BFMHRK20 — US 78.4 / UK 4.8 / Asia EM 7.4 / ME 4.4 / Other 2.8",
-      "MFSCV": "FT.com tearsheet LU1985812756 — Eurozone 43.6 / UK 19.5 / US 18.6 / Canada 7.6 / Japan 3.6 / Other 3.2",
-      "THOR": "FT.com tearsheet IE00B6YCBF59 — Eurozone 40 / US 24 / Europe ex-Euro 7 / Asia Dev 7 / UK 6 / Other 6",
-      "JHGSC": "FT.com tearsheet LU2940405447 — US 60.9 / Japan 13.2 / Eurozone 7.4 / Australasia 4.6 / UK 4.4 / Other 6.4",
-      "LGLI": "FT.com tearsheet IE00BF4KN675 — Eurozone 39.4 / US 23.7 / UK 20.2 / Canada 4.3 / Asia Dev 3.6 / Other 5",
-      "4BRZ": "iShares MSCI Brazil — 100% Brazil",
-      "ARGT": "Global X MSCI Argentina — 100% Argentina",
-      "ILF": "iShares LatAm 40 — Brazil ~58 / Mexico ~22 / Chile ~7 / others"
+      "CSPX": "iShares Core S&P 500 - 100% US (definicion)",
+      "NBGMT": "NB factsheet 31-Mar-2026 (Jun-2026 regional no publicado) - US 78.4 / UK 4.8 / Asia EM 7.4 / ME 4.4 / Other 5.0",
+      "MFSCV": "MFS factsheet 31-May-2026 (PDF MFS) - Eurozone 46.8 (EUR cur) / UK 22.2 / US 16.5 / Canada 3.9 / Japan 3.4 / Cash 7.2",
+      "THOR": "Thornburg Equity Income Builder 31-May-2026 (thornburg.com) - US 24.9 / France 14.4 / Germany 8.7 / Netherlands 7.1 / UK 7.8 / Japan~5 / Asia Dev/Other ~25",
+      "JHGSC": "Janus Henderson 31-Mar-2026 (sin cambio) - US 60.9 / Japan 13.2 / Eurozone 7.4 / Australasia 4.6 / UK 4.4 / Other 9.5",
+      "LGLI": "L&G 31-Mar-2026 (sin cambio) - Eurozone 39.4 / US 23.7 / UK 20.2 / Canada 4.3 / Asia Dev 3.6 / Other 8.8",
+      "4BRZ": "iShares MSCI Brazil - 100% Brazil",
+      "ARGT": "Global X MSCI Argentina - 100% Argentina",
+      "ILF": "iShares LatAm 40 - Brazil ~58 / Mexico ~22 / Chile ~7 / others 13"
     }
   }
 }
