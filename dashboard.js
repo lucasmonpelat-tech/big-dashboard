@@ -1702,6 +1702,60 @@ async function renderEquityRace() {
             '<tr><td colspan="7" style="padding:20px;text-align:center;color:#FFA726;">Run: <code>python scripts/acwi_overlap.py</code></td></tr>';
     }
 
+    // ============================================================
+    // TOP 10 PER FUND — lookthrough card grid
+    // ============================================================
+    try {
+        const ftResp = await fetch('data/fund_holdings_top10.json?_=' + Date.now());
+        if (ftResp.ok) {
+            const ft = await ftResp.json();
+            const FUND_ORDER = ['CSPX', 'NBGMT', 'MFSCV', 'THOR'];
+            const fmtName = (k) => k.replace(/_/g, ' ');
+            const cards = FUND_ORDER.map(tk => {
+                const f = ft[tk]; if (!f) return '';
+                const asOf = f._as_of || '?';
+                const factsheet = f._factsheet_top10 || {};
+                const topHoldings = f.top_holdings || {};
+                let holdings = Object.entries(factsheet).filter(([k,v]) => !k.startsWith('_') && typeof v === 'number');
+                if (!holdings.length) {
+                    holdings = Object.entries(topHoldings).filter(([k,v]) => typeof v === 'number');
+                }
+                holdings.sort((a,b) => b[1] - a[1]);
+                const total = holdings.reduce((s,[,v]) => s+v, 0);
+                const rows = holdings.slice(0,10).map(([name,w],i) => `
+                    <tr>
+                        <td style="padding:4px 6px; color:#90CAF9; font-size:11px;">${i+1}</td>
+                        <td style="padding:4px 6px; font-size:12px;">${fmtName(name)}</td>
+                        <td style="padding:4px 6px; text-align:right; font-weight:600; color:#D4AF37;">${w.toFixed(2)}%</td>
+                    </tr>
+                `).join('');
+                const note = factsheet._note || '';
+                return `
+                    <div style="background:#12243A; border-radius:8px; padding:14px; border-left:3px solid #D4AF37;">
+                        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;">
+                            <div>
+                                <div style="font-size:14px; font-weight:700; color:#D4AF37;">${tk}</div>
+                                <div style="font-size:11px; color:#90CAF9;">${f.name || ''}</div>
+                            </div>
+                            <div style="font-size:10px; color:#90CAF9; text-align:right;">as of ${asOf}</div>
+                        </div>
+                        <table style="width:100%; border-collapse:collapse;">
+                            <tbody>${rows}</tbody>
+                            <tr style="border-top:1px solid #1F3864;">
+                                <td colspan="2" style="padding:6px 6px 0; font-size:11px; color:#90CAF9;"><strong>Top 10 total</strong></td>
+                                <td style="padding:6px 6px 0; text-align:right; font-weight:700; color:#D4AF37;">${total.toFixed(1)}%</td>
+                            </tr>
+                        </table>
+                        ${note ? `<div style="margin-top:8px; padding-top:8px; border-top:1px solid #1F3864; font-size:10px; color:#FFA726; line-height:1.4;">${note}</div>` : ''}
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('er-fund-top10').innerHTML = cards;
+        }
+    } catch(e) {
+        console.warn('fund_holdings_top10.json not available', e);
+    }
+
     // (Specific trade recommendations removed el 2026-05-15 — info primero,
     // recomendaciones automaticas despues cuando este todo bien ordenado.)
 }

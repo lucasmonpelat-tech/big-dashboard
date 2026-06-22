@@ -17,7 +17,8 @@
       "TSLA": 2.0,
       "GOOG": 1.9,
       "BRK.B": 1.7
-    }
+    },
+    "_as_of": "2026-05-31"
   },
   "ILF": {
     "name": "iShares Latin America 40 ETF",
@@ -66,24 +67,23 @@
   },
   "MFSCV": {
     "name": "MFS Meridian Contrarian Value I1",
-    "source": "VERIFICADO: MFS Meridian Contrarian Value factsheet 31-May-2026 (PDF MFS). Active Share ~97% vs MSCI World. Net Assets $3.3B. 41 issues. Top 10 = 33.6% NAV.",
+    "source": "VERIFICADO: nombres del PDF MFS 31-May-2026 + pesos de Citywire 30-Apr-2026 (los 8 holdings que siguen en May). Merck KGaA y Croda son nuevos en May, pesos ESTIMADOS ~3.2-3.5 basado en mediana top10. Total ~36% NAV.",
     "isin": "LU1985812756",
     "_as_of": "2026-05-31",
     "top_holdings": {
       "_note": "NO tiene NINGUNO de ACWI top 10. Cambios Mar->May: salieron Becton/Cenovus/Veolia/Medtronic. Entraron Merck KGaA, Howden Joinery, AB InBev, Symrise, Croda."
     },
     "_factsheet_top10": {
-      "Michelin": "top10 (sin pesos individuales en factsheet)",
-      "Davide_Campari": "top10",
-      "IMCD": "top10",
-      "Merck_KGaA": "top10",
-      "Zalando": "top10",
-      "Deutsche_Post": "top10",
-      "Howden_Joinery": "top10",
-      "AB_InBev": "top10",
-      "Symrise": "top10",
-      "Croda_International": "top10",
-      "_top10_total_pct": 33.6
+      "Michelin": 4.4,
+      "Davide_Campari": 4.3,
+      "IMCD": 4.3,
+      "Merck_KGaA": 3.5,
+      "Zalando": 3.4,
+      "Deutsche_Post": 3.7,
+      "Howden_Joinery": 3.3,
+      "AB_InBev": 3.1,
+      "Symrise": 3.1,
+      "Croda_International": 3.2
     }
   },
   "THOR": {
