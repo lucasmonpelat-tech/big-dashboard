@@ -4,8 +4,8 @@
   "method": "BIG_exposure[stock] = \u03a3 (fund_weight_in_BIG \u00d7 stock_weight_in_fund / 100)",
   "summary": {
     "total_acwi_top10": 24.75,
-    "total_big_top10_exposure": 13.01,
-    "diff_pp": -11.74
+    "total_big_top10_exposure": 12.45,
+    "diff_pp": -12.3
   },
   "overlap": [
     {
@@ -14,14 +14,14 @@
       "sector": "Information Technology",
       "location": "United States",
       "weight_acwi": 5.13,
-      "weight_big": 2.54,
-      "diff_pp": -2.59,
+      "weight_big": 2.544,
+      "diff_pp": -2.586,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 33.86,
+          "fund_weight_in_equity_sleeve": 33.91,
           "stock_weight_in_fund": 7.5,
-          "contribution": 2.54
+          "contribution": 2.544
         }
       ]
     },
@@ -31,14 +31,14 @@
       "sector": "Information Technology",
       "location": "United States",
       "weight_acwi": 4.04,
-      "weight_big": 2.201,
-      "diff_pp": -1.839,
+      "weight_big": 2.204,
+      "diff_pp": -1.836,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 33.86,
+          "fund_weight_in_equity_sleeve": 33.91,
           "stock_weight_in_fund": 6.5,
-          "contribution": 2.201
+          "contribution": 2.204
         }
       ]
     },
@@ -48,14 +48,14 @@
       "sector": "Information Technology",
       "location": "United States",
       "weight_acwi": 3.04,
-      "weight_big": 2.032,
-      "diff_pp": -1.008,
+      "weight_big": 2.035,
+      "diff_pp": -1.005,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 33.86,
+          "fund_weight_in_equity_sleeve": 33.91,
           "stock_weight_in_fund": 6.0,
-          "contribution": 2.032
+          "contribution": 2.035
         }
       ]
     },
@@ -65,14 +65,14 @@
       "sector": "Consumer Discretionary",
       "location": "United States",
       "weight_acwi": 2.58,
-      "weight_big": 1.355,
-      "diff_pp": -1.225,
+      "weight_big": 1.357,
+      "diff_pp": -1.223,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 33.86,
+          "fund_weight_in_equity_sleeve": 33.91,
           "stock_weight_in_fund": 4.0,
-          "contribution": 1.355
+          "contribution": 1.357
         }
       ]
     },
@@ -82,20 +82,14 @@
       "sector": "Communication",
       "location": "United States",
       "weight_acwi": 2.03,
-      "weight_big": 1.345,
-      "diff_pp": -0.685,
+      "weight_big": 0.78,
+      "diff_pp": -1.25,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 33.86,
+          "fund_weight_in_equity_sleeve": 33.91,
           "stock_weight_in_fund": 2.3,
-          "contribution": 0.779
-        },
-        {
-          "fund": "NBGMT",
-          "fund_weight_in_equity_sleeve": 15.64,
-          "stock_weight_in_fund": 3.62,
-          "contribution": 0.566
+          "contribution": 0.78
         }
       ]
     },
@@ -105,20 +99,20 @@
       "sector": "Information Technology",
       "location": "United States",
       "weight_acwi": 1.93,
-      "weight_big": 1.103,
-      "diff_pp": -0.827,
+      "weight_big": 1.078,
+      "diff_pp": -0.852,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 33.86,
+          "fund_weight_in_equity_sleeve": 33.91,
           "stock_weight_in_fund": 2.5,
-          "contribution": 0.847
+          "contribution": 0.848
         },
         {
           "fund": "THOR",
-          "fund_weight_in_equity_sleeve": 7.78,
-          "stock_weight_in_fund": 3.3,
-          "contribution": 0.257
+          "fund_weight_in_equity_sleeve": 7.68,
+          "stock_weight_in_fund": 3.0,
+          "contribution": 0.23
         }
       ]
     },
@@ -128,14 +122,14 @@
       "sector": "Information Technology",
       "location": "Taiwan",
       "weight_acwi": 1.74,
-      "weight_big": 0.202,
-      "diff_pp": -1.538,
+      "weight_big": 0.215,
+      "diff_pp": -1.525,
       "contributors": [
         {
           "fund": "THOR",
-          "fund_weight_in_equity_sleeve": 7.78,
-          "stock_weight_in_fund": 2.6,
-          "contribution": 0.202
+          "fund_weight_in_equity_sleeve": 7.68,
+          "stock_weight_in_fund": 2.8,
+          "contribution": 0.215
         }
       ]
     },
@@ -145,14 +139,14 @@
       "sector": "Communication",
       "location": "United States",
       "weight_acwi": 1.69,
-      "weight_big": 0.643,
-      "diff_pp": -1.047,
+      "weight_big": 0.644,
+      "diff_pp": -1.046,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 33.86,
+          "fund_weight_in_equity_sleeve": 33.91,
           "stock_weight_in_fund": 1.9,
-          "contribution": 0.643
+          "contribution": 0.644
         }
       ]
     },
@@ -162,14 +156,14 @@
       "sector": "Communication",
       "location": "United States",
       "weight_acwi": 1.49,
-      "weight_big": 0.914,
-      "diff_pp": -0.576,
+      "weight_big": 0.916,
+      "diff_pp": -0.574,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 33.86,
+          "fund_weight_in_equity_sleeve": 33.91,
           "stock_weight_in_fund": 2.7,
-          "contribution": 0.914
+          "contribution": 0.916
         }
       ]
     },
@@ -179,14 +173,14 @@
       "sector": "Consumer Discretionary",
       "location": "United States",
       "weight_acwi": 1.08,
-      "weight_big": 0.677,
-      "diff_pp": -0.403,
+      "weight_big": 0.678,
+      "diff_pp": -0.402,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 33.86,
+          "fund_weight_in_equity_sleeve": 33.91,
           "stock_weight_in_fund": 2.0,
-          "contribution": 0.677
+          "contribution": 0.678
         }
       ]
     }
