@@ -1796,7 +1796,7 @@ async function renderEquityRace() {
                     </thead>
                     <tbody>${rows}</tbody>
                     <tr style="border-top:2px solid #1F3864;background:#12243A;">
-                        <td colspan="3" style="padding:8px;"><strong>TOTAL TOP 10 (% del Equity sleeve)</strong></td>
+                        <td colspan="3" style="padding:8px;"><strong>TOTAL TOP 15 (% del Equity sleeve)</strong></td>
                         <td style="padding:8px;text-align:right;"><strong style="color:#D4AF37;">${total.toFixed(2)}%</strong></td>
                         <td></td>
                     </tr>
