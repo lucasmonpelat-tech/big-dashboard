@@ -1709,7 +1709,7 @@ async function renderEquityRace() {
         const ftResp = await fetch('data/fund_holdings_top10.json?_=' + Date.now());
         if (ftResp.ok) {
             const ft = await ftResp.json();
-            const FUND_ORDER = ['CSPX', 'NBGMT', 'MFSCV', 'THOR'];
+            const FUND_ORDER = ['CSPX', 'NBGMT', 'MFSCV', 'THOR', 'JHGSC', 'LGLI', 'ARGT', 'ILF', '4BRZ'];
             const fmtName = (k) => k.replace(/_/g, ' ');
             const cards = FUND_ORDER.map(tk => {
                 const f = ft[tk]; if (!f) return '';
@@ -1754,6 +1754,60 @@ async function renderEquityRace() {
         }
     } catch(e) {
         console.warn('fund_holdings_top10.json not available', e);
+    }
+
+    // ============================================================
+    // TOP 10 CONSOLIDADO BIG Equity sleeve
+    // ============================================================
+    try {
+        const cResp = await fetch('data/equity_top10_consolidated.json?_=' + Date.now());
+        if (cResp.ok) {
+            const cData = await cResp.json();
+            const rows = cData.consolidated_top10.map((h, i) => {
+                const funds = (h.funds || []).map(f =>
+                    `<span style="color:#90CAF9;">${f.fund}</span> <span style="color:#D4AF37;">${f.weight_in_fund.toFixed(1)}%</span>`
+                ).join('  ·  ');
+                const bigBar = Math.min(h.weight_in_sleeve_pct / 3.0, 1.0) * 100;
+                return `
+                    <tr>
+                        <td style="padding:6px 8px; color:#90CAF9; font-size:12px;">${h.rank}</td>
+                        <td style="padding:6px 8px; font-weight:600;">${h.name}</td>
+                        <td style="padding:6px 8px; font-size:11px; color:#90CAF9;">${funds}</td>
+                        <td style="padding:6px 8px; text-align:right; font-weight:700; color:#D4AF37;">${h.weight_in_sleeve_pct.toFixed(2)}%</td>
+                        <td style="padding:6px 8px;">
+                            <div style="background:#0C1B2E; height:14px; border-radius:3px; position:relative; min-width:140px;">
+                                <div style="background:linear-gradient(90deg,#D4AF37 0%,#E5BF47 100%); height:100%; width:${bigBar}%; border-radius:3px;"></div>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+            const total = cData.consolidated_top10.reduce((s, h) => s + h.weight_in_sleeve_pct, 0);
+            document.getElementById('er-consolidated-body').innerHTML = `
+                <table class="data-table" style="margin-top:8px;">
+                    <thead>
+                        <tr>
+                            <th class="left">#</th>
+                            <th class="left">Holding</th>
+                            <th class="left">Vía (fondo · peso fondo)</th>
+                            <th>% del Equity Sleeve</th>
+                            <th class="left">Bar</th>
+                        </tr>
+                    </thead>
+                    <tbody>${rows}</tbody>
+                    <tr style="border-top:2px solid #1F3864;background:#12243A;">
+                        <td colspan="3" style="padding:8px;"><strong>TOTAL TOP 10 (% del Equity sleeve)</strong></td>
+                        <td style="padding:8px;text-align:right;"><strong style="color:#D4AF37;">${total.toFixed(2)}%</strong></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <div style="margin-top:8px; font-size:11px; color:#90CAF9;">
+                    Refreshed ${cData.refreshedAt} · Método: ${cData.method}
+                </div>
+            `;
+        }
+    } catch(e) {
+        console.warn('equity_top10_consolidated.json not available', e);
     }
 
     // (Specific trade recommendations removed el 2026-05-15 — info primero,
