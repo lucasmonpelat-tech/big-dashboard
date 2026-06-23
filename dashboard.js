@@ -609,12 +609,56 @@ async function renderNavChart(targetId) {
 // ==============================================================
 // POSITIONS TAB
 // ==============================================================
-function renderPositions(livePrices) {
+async function getTminus1Navs() {
+    // Build a map ticker -> {nav, date, source} from the same T-1 sources
+    // used by the Race tabs (so NAV/Price column es consistente).
+    const map = {};
+    // 1) UCITS baha daily NAV (highest priority for UCITS)
+    try {
+        const r = await fetch('data/ucits_daily_nav.json?_=' + Date.now());
+        if (r.ok) {
+            const d = await r.json();
+            const navs = d.navs || {};
+            for (const rec of Object.values(navs)) {
+                const tk = rec.ticker;
+                const nav = rec.nav;
+                const date = rec.date || (d.refreshedAt || '').slice(0,10);
+                if (tk && typeof nav === 'number' && isFinite(nav) && nav > 0) {
+                    map[tk] = { nav, date, source: 'baha T-1' };
+                }
+            }
+        }
+    } catch(e) { console.warn('ucits_daily_nav not loaded', e); }
+    // 2) Last point of equity_sleeve_real / fi_sleeve_real (per-holding prices)
+    for (const f of ['equity_sleeve_real.json', 'fi_sleeve_real.json']) {
+        try {
+            const r = await fetch('data/' + f + '?_=' + Date.now());
+            if (!r.ok) continue;
+            const d = await r.json();
+            const series = d.sleeve_series_equity || d.sleeve_series_fi || d.sleeve_series || [];
+            if (!series.length) continue;
+            const last = series[series.length - 1];
+            const date = last.date;
+            for (const h of (last.holdings || [])) {
+                const tk = h.ticker;
+                const price = h.price;
+                if (tk && typeof price === 'number' && isFinite(price) && price > 0 && !map[tk]) {
+                    map[tk] = { nav: price, date, source: 'sleeve T-1' };
+                }
+            }
+        } catch(e) { console.warn(f + ' not loaded', e); }
+    }
+    return map;
+}
+
+async function renderPositions(livePrices) {
     const tbody = document.getElementById('positions-body');
     tbody.innerHTML = '';
     const sleeveOrder = ["Equity", "Alternatives", "Fixed Income", "Cash"];
     const sleeveClass = { Equity: "equity", Alternatives: "alts", "Fixed Income": "fi", Cash: "cash" };
     const { totals, total } = computeSleeveTotals(BIG_POSITIONS);
+
+    const T1 = await getTminus1Navs();
 
     sleeveOrder.forEach(sleeve => {
         const items = BIG_POSITIONS.filter(p => p.sleeve === sleeve);
@@ -629,10 +673,18 @@ function renderPositions(livePrices) {
         `;
         tbody.appendChild(hdr);
         items.forEach(p => {
-            const nav = getNAV(p, livePrices);
+            // Try T-1 source first (consistent con Race tabs), then live, then manual
+            let nav;
+            if (T1[p.ticker]) {
+                nav = { nav: T1[p.ticker].nav, date: T1[p.ticker].date, source: T1[p.ticker].source, isT1: true, isLive: false };
+            } else {
+                nav = getNAV(p, livePrices);
+            }
             let navTag;
             if (p.status === 'IN_TRANSIT') {
                 navTag = '<span class="tag" style="background:#FFA726;color:#0D1B2A;">IN TRANSIT</span>';
+            } else if (nav.isT1) {
+                navTag = '<span class="tag tag-live">T-1</span>';
             } else if (nav.isLive) {
                 navTag = '<span class="tag tag-live">LIVE</span>';
             } else if (nav.nav) {
@@ -2402,7 +2454,7 @@ function updateTime() {
     renderLynkStaleBanner();
 
     renderOverview();
-    renderPositions(livePrices);
+    await renderPositions(livePrices);
     renderCurrency();
     renderCountry();
     renderYield();
