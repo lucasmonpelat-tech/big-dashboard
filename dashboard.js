@@ -2377,8 +2377,10 @@ async function renderFIBreakdown() {
 function updateTime() {
     const now = new Date();
     const s = now.toLocaleString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-    document.getElementById('update-time').textContent = s;
-    document.getElementById('footer-time').textContent = s;
+    const upd = document.getElementById('update-time');
+    if (upd) upd.textContent = s;
+    const ft = document.getElementById('footer-time');
+    if (ft) ft.textContent = s;
 }
 
 // ==============================================================
@@ -2454,7 +2456,7 @@ function updateTime() {
     renderLynkStaleBanner();
 
     renderOverview();
-    await renderPositions(livePrices);
+    renderPositions(livePrices);  // async — fire and forget, no bloquea otros renders
     renderCurrency();
     renderCountry();
     renderYield();
