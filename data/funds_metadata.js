@@ -178,18 +178,23 @@ const ALTS_LIQUIDITY = {
     "US46438F1012": { profile: "daily",     ticker: "IBIT",  redemption: "Daily (ETF listado)" },
     "US78463V1070": { profile: "daily",     ticker: "GLD",   redemption: "Daily (ETF listado)" },
 
-    // Quarterly — interval funds / evergreen BDCs con redemption windows
-    "KYG4737U1085": { profile: "quarterly", ticker: "HLEND", redemption: "Quarterly windows + 5% gate (HPS)" },
-    "XS2658535526": { profile: "quarterly", ticker: "BPCC",  redemption: "Quarterly windows + 5% gate (Barings)" },
-    "GCRED-I":      { profile: "quarterly", ticker: "GCRED", redemption: "Quarterly windows (Golub)" },
+    // Quarterly — interval funds / BDCs con redemption windows (penalty si te salís fuera)
+    "KYG4737U1085": { profile: "quarterly", ticker: "HLEND", redemption: "Quarterly windows + 5% gate", lock_type: "Quarterly windows" },
+    "XS2658535526": { profile: "quarterly", ticker: "BPCC",  redemption: "Quarterly windows + 5% gate", lock_type: "Quarterly windows" },
+    "GCRED-I":      { profile: "quarterly", ticker: "GCRED", redemption: "Quarterly windows", lock_type: "Quarterly windows" },
 
-    // Annual / soft-lock — private equity feeders
-    "LU2659193242": { profile: "annual",    ticker: "NBPEA", redemption: "Semi-anual / 1y soft-lock (NB PE)" },
-    "LU2966298809":     { profile: "annual",    ticker: "FLEX",  redemption: "1-3y lock + annual exits (Flex-Lex)" },
-
-    // Long-lock — illiquid PE with multi-year hard lock
-    "LU2827810776": { profile: "long_lock", ticker: "CALP",  redemption: "1y soft-lock + 5y hard-lock (Carlyle)" },
-    "LU2847068389": { profile: "long_lock", ticker: "HLGPI", redemption: "Illiquid infrastructure — multi-year lock (placeholder, ajustar con factsheet)" },
+    // 1-year hard lock-up — privates
+    "LU2966298809": { profile: "lock_up", ticker: "FLEX",  redemption: "1y lock + annual exits (Flex-Lex)",
+                      lock_type: "1y hard lock", purchase_date: "2026-05-07", unlock_date: "2027-05-07" },
+    "LU2827810776": { profile: "lock_up", ticker: "CALP",  redemption: "1y soft-lock (Carlyle)",
+                      lock_type: "1y soft lock", purchase_date: "2025-08-29", unlock_date: "2026-08-29" },
+    "LU2847068389": { profile: "lock_up", ticker: "HLGPI", redemption: "1y hard lock (Hamilton Lane)",
+                      lock_type: "1y hard lock", purchase_date: "2026-06-17", unlock_date: "2027-06-17",
+                      tranches: [
+                          { date: "2026-05-27", unlock: "2027-05-27", amount: 500000 },
+                          { date: "2026-06-17", unlock: "2027-06-17", amount: 600000 },
+                      ]
+    },
 };
 
 // ============================================================

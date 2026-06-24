@@ -2706,42 +2706,89 @@ async function renderAltsRace() {
             concEl.innerHTML = headerAlert + top3Note + rows;
         }
 
-        // ----- Liquidity buckets -----
-        const profileMeta = {
-            daily:     { label: 'Daily (líquido)',      color: '#81C784', icon: '🟢', order: 1 },
-            quarterly: { label: 'Quarterly windows',    color: '#FFD54F', icon: '🟡', order: 2 },
-            annual:    { label: 'Annual / soft-lock',   color: '#FFA726', icon: '🟠', order: 3 },
-            long_lock: { label: 'Long-lock (1y+)',      color: '#EF5350', icon: '🔴', order: 4 },
-            unknown:   { label: 'Sin clasificar',       color: '#90A4AE', icon: '⚪', order: 5 },
-        };
-        const buckets = { daily: [], quarterly: [], annual: [], long_lock: [], unknown: [] };
-        for (const p of altsPos) {
-            const liq = (typeof ALTS_LIQUIDITY !== 'undefined' && ALTS_LIQUIDITY[p.isin]) || null;
-            const profile = liq ? liq.profile : 'unknown';
-            buckets[profile].push({ ...p, redemption: liq ? liq.redemption : '?' });
-        }
+        // ----- Liquidity buckets: Daily + Lock-up -----
         const liqEl = document.getElementById('ar-liquidity');
         if (liqEl) {
-            const html = Object.keys(buckets)
-                .filter(k => buckets[k].length > 0)
-                .sort((a, b) => profileMeta[a].order - profileMeta[b].order)
-                .map(k => {
-                    const meta = profileMeta[k];
-                    const items = buckets[k];
-                    const totalMV = items.reduce((a, p) => a + p.value, 0);
-                    const pctSleeve = totalMV / altsTotal * 100;
-                    const tickers = items.map(p => p.ticker).join(', ');
-                    return `
-                        <div style="margin-bottom: 14px; padding: 10px; background:#0D1B2A; border-left: 3px solid ${meta.color}; border-radius: 4px;">
-                            <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
-                                <span style="font-size:12px;font-weight:700;color:${meta.color};">${meta.icon} ${meta.label}</span>
-                                <span style="font-size:13px;color:#E0E8F0;font-weight:700;">${pctSleeve.toFixed(1)}% · $${(totalMV/1e6).toFixed(2)}M</span>
-                            </div>
-                            <div style="font-size:11px;color:#90CAF9;">${tickers}</div>
-                            ${items.length === 1 ? `<div style="font-size:10px;color:#6B88A8;margin-top:3px;font-style:italic;">${items[0].redemption}</div>` : ''}
-                        </div>`;
-                }).join('');
-            liqEl.innerHTML = html;
+            const dailyItems = [];
+            const lockedItems = [];
+            for (const p of altsPos) {
+                const liq = (typeof ALTS_LIQUIDITY !== 'undefined' && ALTS_LIQUIDITY[p.isin]) || null;
+                if (liq && liq.profile === 'daily') {
+                    dailyItems.push({ ...p, ...liq });
+                } else {
+                    lockedItems.push({ ...p, ...liq, lock_type: liq?.lock_type || 'Sin clasificar' });
+                }
+            }
+            const dailyMV = dailyItems.reduce((a, p) => a + p.value, 0);
+            const lockedMV = lockedItems.reduce((a, p) => a + p.value, 0);
+            const today = new Date();
+
+            // Daily bucket (verde)
+            const dailyHTML = `
+                <div style="margin-bottom: 14px; padding: 10px; background:#0D1B2A; border-left: 3px solid #81C784; border-radius: 4px;">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                        <span style="font-size:12px;font-weight:700;color:#81C784;">🟢 Daily (líquido)</span>
+                        <span style="font-size:13px;color:#E0E8F0;font-weight:700;">${(dailyMV/altsTotal*100).toFixed(1)}% · $${(dailyMV/1e6).toFixed(2)}M</span>
+                    </div>
+                    <div style="font-size:11px;color:#90CAF9;">${dailyItems.map(p => p.ticker).join(', ')}</div>
+                </div>`;
+
+            // Lock-up table (rows ordenadas por unlock date asc — los que se desbloquean antes arriba)
+            const fmtDate = (d) => d ? new Date(d).toLocaleDateString('es-AR', {day:'2-digit', month:'short', year:'2-digit'}) : '—';
+            const sortedLocked = lockedItems.slice().sort((a, b) => {
+                if (!a.unlock_date && !b.unlock_date) return 0;
+                if (!a.unlock_date) return 1;
+                if (!b.unlock_date) return -1;
+                return new Date(a.unlock_date) - new Date(b.unlock_date);
+            });
+            const lockRows = sortedLocked.map(p => {
+                let daysLeft = null;
+                let daysLabel = '—';
+                let daysColor = '#90CAF9';
+                if (p.unlock_date) {
+                    daysLeft = Math.ceil((new Date(p.unlock_date) - today) / 86400000);
+                    if (daysLeft <= 0) { daysLabel = '<strong style="color:#81C784;">DESBLOQUEADO</strong>'; }
+                    else if (daysLeft <= 90) { daysLabel = `<strong style="color:#FFA726;">${daysLeft}d ⚠</strong>`; }
+                    else { daysLabel = `${daysLeft}d`; }
+                }
+                return `
+                    <tr>
+                        <td style="padding:6px 8px;"><strong>${p.ticker}</strong></td>
+                        <td style="padding:6px 8px; font-size:11px; color:#90CAF9;">${p.lock_type}</td>
+                        <td style="padding:6px 8px; font-size:11px;">${fmtDate(p.purchase_date)}</td>
+                        <td style="padding:6px 8px; font-size:11px; font-weight:600;">${fmtDate(p.unlock_date)}</td>
+                        <td style="padding:6px 8px; text-align:center; font-size:12px;">${daysLabel}</td>
+                        <td style="padding:6px 8px; text-align:right; font-weight:700; color:#D4AF37;">$${(p.value/1000).toFixed(0)}K</td>
+                    </tr>`;
+            }).join('');
+            const hardLocked = sortedLocked.filter(p => p.unlock_date && (new Date(p.unlock_date) - today) > 0)
+                .reduce((a, p) => a + p.value, 0);
+            const lockHTML = `
+                <div style="margin-bottom: 8px; padding: 10px; background:#0D1B2A; border-left: 3px solid #B0A0FF; border-radius: 4px;">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                        <span style="font-size:12px;font-weight:700;color:#B0A0FF;">🔒 Lock-up</span>
+                        <span style="font-size:13px;color:#E0E8F0;font-weight:700;">${(lockedMV/altsTotal*100).toFixed(1)}% · $${(lockedMV/1e6).toFixed(2)}M</span>
+                    </div>
+                    <table style="width:100%; border-collapse:collapse; font-size:11px;">
+                        <thead>
+                            <tr style="border-bottom:1px solid #1F3864; color:#90CAF9;">
+                                <th style="padding:6px 8px; text-align:left;">Ticker</th>
+                                <th style="padding:6px 8px; text-align:left;">Tipo</th>
+                                <th style="padding:6px 8px; text-align:left;">Compra</th>
+                                <th style="padding:6px 8px; text-align:left;">Desbloqueo</th>
+                                <th style="padding:6px 8px; text-align:center;">Faltan</th>
+                                <th style="padding:6px 8px; text-align:right;">Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody>${lockRows}</tbody>
+                    </table>
+                    <div style="margin-top:8px; padding-top:8px; border-top:1px solid #1F3864; font-size:11px; color:#90CAF9;">
+                        Bloqueado hasta unlock: <strong style="color:#FFA726;">$${(hardLocked/1e6).toFixed(2)}M</strong>
+                        (no rescatable sin penalty hasta su fecha)
+                    </div>
+                </div>`;
+
+            liqEl.innerHTML = dailyHTML + lockHTML;
         }
     } catch (e) {
         console.warn('Failed to render concentration/liquidity panel', e);
