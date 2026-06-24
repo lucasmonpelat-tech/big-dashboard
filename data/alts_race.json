@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-06-24T13:22:33.888760",
+  "refreshedAt": "2026-06-24T14:47:03.170067",
   "inception": "2025-06-30",
   "benchmark_primary": "60/40 blend (60% ACWI + 40% AGG)",
   "benchmark_secondary": "HFRX Global HF proxy (QAI ETF)",
@@ -168,14 +168,14 @@
       "sub_class": "crypto",
       "value_usd": 721005.82,
       "weight_pct": 9.48,
-      "si_return_pct": -41.12,
-      "ytd_return_pct": -27.41,
-      "contribution_pct": -3.9,
-      "ytd_contribution_pct": -2.6,
+      "si_return_pct": -37.68,
+      "ytd_return_pct": -18.47,
+      "contribution_pct": -3.57,
+      "ytd_contribution_pct": -1.75,
       "assumed_annual_pct": null,
-      "source": "Stooq cierre 2026-06-23",
-      "valuation_date": "2026-06-23",
-      "days_since_valuation": 1
+      "source": "Pershing UGL (cost basis + MV oficial)",
+      "valuation_date": "2026-06-24",
+      "days_since_valuation": 0
     },
     {
       "isin": "US78463V1070",
@@ -184,14 +184,14 @@
       "sub_class": "commodity",
       "value_usd": 706762.16,
       "weight_pct": 9.3,
-      "si_return_pct": 30.09,
-      "ytd_return_pct": 0.06,
-      "contribution_pct": 2.8,
-      "ytd_contribution_pct": 0.01,
+      "si_return_pct": 18.64,
+      "ytd_return_pct": 9.14,
+      "contribution_pct": 1.73,
+      "ytd_contribution_pct": 0.85,
       "assumed_annual_pct": null,
-      "source": "Stooq cierre 2026-06-23",
-      "valuation_date": "2026-06-23",
-      "days_since_valuation": 1
+      "source": "Pershing UGL (cost basis + MV oficial)",
+      "valuation_date": "2026-06-24",
+      "days_since_valuation": 0
     },
     {
       "isin": "KYG4737U1085",
@@ -200,14 +200,14 @@
       "sub_class": "private_credit",
       "value_usd": 759172.36,
       "weight_pct": 9.99,
-      "si_return_pct": 1.96,
-      "ytd_return_pct": 0.62,
-      "contribution_pct": 0.2,
-      "ytd_contribution_pct": 0.06,
+      "si_return_pct": 3.28,
+      "ytd_return_pct": 2.09,
+      "contribution_pct": 0.33,
+      "ytd_contribution_pct": 0.21,
       "assumed_annual_pct": 9.5,
-      "source": "iCapital statement (2026-03-31)",
-      "valuation_date": "2026-03-31",
-      "days_since_valuation": 85
+      "source": "Pershing UGL (cost basis + MV oficial)",
+      "valuation_date": "2026-06-24",
+      "days_since_valuation": 0
     },
     {
       "isin": "XS2658535526",
@@ -216,14 +216,14 @@
       "sub_class": "private_credit",
       "value_usd": 595348.04,
       "weight_pct": 7.83,
-      "si_return_pct": null,
-      "ytd_return_pct": 4.48,
-      "contribution_pct": 0.8,
-      "ytd_contribution_pct": 0.35,
+      "si_return_pct": 7.37,
+      "ytd_return_pct": 3.86,
+      "contribution_pct": 0.58,
+      "ytd_contribution_pct": 0.3,
       "assumed_annual_pct": 9.5,
-      "source": "Pershing T-1 + carry estimado 9.4%/yr (entrada jul-2025)",
-      "valuation_date": "2026-06-17",
-      "days_since_valuation": 7
+      "source": "Pershing UGL (cost basis + MV oficial)",
+      "valuation_date": "2026-06-24",
+      "days_since_valuation": 0
     },
     {
       "isin": "FLEX-LEX",
@@ -232,14 +232,14 @@
       "sub_class": "private_equity",
       "value_usd": 501805.63,
       "weight_pct": 6.6,
-      "si_return_pct": 0.0,
-      "ytd_return_pct": 0.0,
-      "contribution_pct": 0.0,
-      "ytd_contribution_pct": 0.0,
+      "si_return_pct": 0.36,
+      "ytd_return_pct": 0.36,
+      "contribution_pct": 0.02,
+      "ytd_contribution_pct": 0.02,
       "assumed_annual_pct": 12.0,
-      "source": "Entrada FLEX mayo-2026, sin valuation oficial aun (0%)",
-      "valuation_date": "2026-06-17",
-      "days_since_valuation": 7
+      "source": "Pershing UGL (cost basis + MV oficial)",
+      "valuation_date": "2026-06-24",
+      "days_since_valuation": 0
     },
     {
       "isin": "LU2847068389",
@@ -253,7 +253,7 @@
       "contribution_pct": 0.19,
       "ytd_contribution_pct": 0.19,
       "assumed_annual_pct": 11.0,
-      "source": "HLGPI: tranche 1 $500K (27-May) +2.8% Mayo, tranche 2 $600K (17-Jun) settled. Cost basis $1.10M.",
+      "source": "Pershing UGL (cost basis + MV oficial)",
       "valuation_date": "2026-06-24",
       "days_since_valuation": 0,
       "monthly_navs": [
@@ -276,15 +276,16 @@
       "sub_class": "private_credit",
       "value_usd": 495475.43,
       "weight_pct": 6.52,
-      "si_return_pct": -0.53,
-      "ytd_return_pct": -1.92,
-      "contribution_pct": -0.03,
-      "ytd_contribution_pct": -0.13,
+      "si_return_pct": 1.11,
+      "ytd_return_pct": 0.71,
+      "contribution_pct": 0.07,
+      "ytd_contribution_pct": 0.05,
       "assumed_annual_pct": 9.5,
-      "source": "iCapital statement (2026-03-31)",
-      "valuation_date": "2026-03-31",
-      "days_since_valuation": 85
+      "source": "Pershing UGL (cost basis + MV oficial)",
+      "valuation_date": "2026-06-24",
+      "days_since_valuation": 0
     }
   ],
-  "_daily_refresh_note": "Refresh diario 2026-06-24: 2 liquidos via Stooq T-1, 3 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $7,034,209."
+  "_daily_refresh_note": "Refresh diario 2026-06-24: 2 liquidos via Stooq T-1, 3 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $7,034,209.",
+  "_ugl_sync": "2026-06-24: SI/YTD sincronizados con Pershing UGL para privates y alternates"
 }
