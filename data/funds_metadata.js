@@ -39,7 +39,7 @@ const BIG_POSITIONS = [
     { isin: "KYG4737U1085", ticker: "HLEND", name: "HPS Corporate Lending Fund", sleeve: "Alternatives", value: 759172.36, pct: 2.92, terInst: 0.75, terA: null },
     { isin: "XS2658535526", ticker: "BPCC", name: "Barings Private Credit Corporation (BPCC)", sleeve: "Alternatives", value: 595348.04, pct: 2.29, terInst: 1.25, terA: null },
     { isin: "LU2966298809", ticker: "FLEX", name: "Franklin Lexington PE Secondaries I", sleeve: "Alternatives", value: 501805.63, pct: 1.93, terInst: null, terA: null },
-    { isin: "LU2847068389", ticker: "HLGPI", name: "Hamilton Lane Global Private Infrastructure Fund", sleeve: "Alternatives", value: 1114198.98, pct: 4.28, terInst: null, terA: null, status: "partial_settled_600k_pending" },
+    { isin: "LU2847068389", ticker: "HLGPI", name: "Hamilton Lane Global Private Infrastructure Fund", sleeve: "Alternatives", value: 1114198.98, pct: 4.28, terInst: null, terA: null },
     { isin: "GCRED-I", ticker: "GCRED", name: "Golub Capital Private Credit", sleeve: "Alternatives", value: 495475.43, pct: 1.90, terInst: 1.25, terA: null },
 
     // ----- FIXED INCOME -----
