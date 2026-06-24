@@ -153,7 +153,7 @@ const CURRENT_YIELD = {
     "GCRED-I":      { y: 10.5, t: "Distribution Rate",    n: "GCRED — ~SOFR+5.5% floating",   m: false },
     "KYG4737U1085": { y: 9.1,  t: "Distribution Rate",    n: "HLEND — estimated",             m: true  },
     "LU2827810776": { y: null, t: "N/A — illiquid PE",    n: "Carlyle — return via cap gain", m: false },
-    "LU2847068389": { y: null, t: "N/A — illiquid infra", n: "HL Global Private Infra — return via cap gain + distrib (PLACEHOLDER)", m: false },
+    "LU2847068389": { y: 4.0,  t: "Distribution Yield",   n: "HLGPI — Hamilton Lane Global Private Infra", m: false },
     "LU2659193242": { y: null, t: "N/A — illiquid PE",    n: "NB PE — return via cap gain",   m: false },
     "XS2658535526": { y: 9.4,  t: "Distribution Rate",    n: "Barings BPCC — email datum",    m: true  },
     "LU2966298809":     { y: null, t: "N/A — illiquid PE",    n: "Flex-Lex — secondaries",        m: false },
