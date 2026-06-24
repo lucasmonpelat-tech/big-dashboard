@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-06-24T14:27:24.211431",
+  "refreshedAt": "2026-06-24T14:41:21.019457",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Alternatives",
   "period_end": "2026-06-24",
@@ -12,17 +12,17 @@
       "status": "OPEN",
       "name": "ISHARES BITCOIN TR ETF SHS BEN INT     ",
       "qty": 21116.0,
-      "mv_usd": 721005.82,
-      "cost_basis_usd": 721005.82,
-      "unrealized_gl_usd": 0.0,
-      "return_pct": 0.0,
-      "last_price_pershing": 34.145,
+      "mv_usd": 709603.18,
+      "cost_basis_usd": 1138663.4,
+      "unrealized_gl_usd": -429060.22,
+      "return_pct": -37.68,
+      "last_price_pershing": 33.605,
       "bench_label": "ACWI",
       "bench_dw_pct": 15.83,
-      "alpha_real_pp": -15.83,
+      "alpha_real_pp": -53.51,
       "first_buy_date": "2025-07-02",
       "period_end": "2026-06-24",
-      "n_trades": 12,
+      "n_trades": 10,
       "buys_history": [
         {
           "date": "2025-07-02",
@@ -67,8 +67,7 @@
       ],
       "ytd_pct": -27.41,
       "bench_ytd_pct": 9.86,
-      "alpha_ytd_pp": -37.27,
-      "_cb_reset": "2026-06-24: cost basis reset to MV (era $1,138,663 dando -36.7% absurdo). Pendiente refresh con 4 archivos Pershing."
+      "alpha_ytd_pp": -37.27
     },
     {
       "ticker": "GLD",
@@ -76,17 +75,17 @@
       "status": "OPEN",
       "name": "SPDR GOLD TR GOLD SHS     ",
       "qty": 1924.0,
-      "mv_usd": 706762.16,
-      "cost_basis_usd": 603458.13,
-      "unrealized_gl_usd": 103304.03,
-      "return_pct": 17.12,
-      "last_price_pershing": 367.34,
+      "mv_usd": 705732.82,
+      "cost_basis_usd": 594831.98,
+      "unrealized_gl_usd": 110900.84,
+      "return_pct": 18.64,
+      "last_price_pershing": 366.805,
       "bench_label": "ACWI",
       "bench_dw_pct": 20.69,
-      "alpha_real_pp": -3.57,
+      "alpha_real_pp": -2.05,
       "first_buy_date": "2025-07-02",
       "period_end": "2026-06-24",
-      "n_trades": 12,
+      "n_trades": 5,
       "buys_history": [
         {
           "date": "2025-07-02",
@@ -150,7 +149,7 @@
       "cost_basis_usd": 554506.45,
       "unrealized_gl_usd": 40841.59,
       "return_pct": 7.37,
-      "last_price_pershing": 128.25,
+      "last_price_pershing": 1.2825,
       "bench_label": "ACWI",
       "bench_dw_pct": 17.76,
       "alpha_real_pp": -10.39,
@@ -213,8 +212,8 @@
       "name": "HAMILTON LANE GLOBAL PRIVATE INFRASTRUCTURE FUND CLASS I (AC",
       "qty": 8058.402,
       "mv_usd": 1114198.98,
-      "cost_basis_usd": 1100000.17,
-      "unrealized_gl_usd": 14198.81,
+      "cost_basis_usd": 1100000.13,
+      "unrealized_gl_usd": 14198.85,
       "return_pct": 1.29,
       "last_price_pershing": 138.2655,
       "bench_label": "ACWI",
@@ -280,5 +279,6 @@
     }
   ],
   "_daily_refresh_note": "Daily refresh 2026-06-24: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
-  "_synced_to_positions": "2026-06-24: MVs sincronizados desde positions_latest.json (Pershing 24-Jun)"
+  "_synced_to_positions": "2026-06-24: MVs sincronizados desde positions_latest.json (Pershing 24-Jun)",
+  "_ugl_refresh": "2026-06-24: cost basis + returns desde Pershing UGL (Multiple-row aggregates)"
 }

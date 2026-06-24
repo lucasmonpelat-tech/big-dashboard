@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-06-24T14:27:24.208002",
+  "refreshedAt": "2026-06-24T14:41:21.015966",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Equity",
   "period_end": "2026-06-24",
@@ -12,17 +12,17 @@
       "status": "OPEN",
       "name": "ISHARES VII PLC CORE S&P 500 UCITS ETF ISIN#IE00B5BMR087   ",
       "qty": 3408.0,
-      "mv_usd": 2706326.88,
+      "mv_usd": 2717646.55,
       "cost_basis_usd": 2384387.73,
-      "unrealized_gl_usd": 321939.15,
-      "return_pct": 13.5,
-      "last_price_pershing": 794.11,
+      "unrealized_gl_usd": 333258.82,
+      "return_pct": 13.98,
+      "last_price_pershing": 797.4315,
       "bench_label": "ACWI",
       "bench_dw_pct": 15.77,
-      "alpha_real_pp": -2.27,
+      "alpha_real_pp": -1.79,
       "first_buy_date": "2025-07-03",
       "period_end": "2026-06-24",
-      "n_trades": 12,
+      "n_trades": 9,
       "buys_history": [
         {
           "date": "2025-07-03",
@@ -81,7 +81,7 @@
       "alpha_real_pp": -14.31,
       "first_buy_date": "2025-07-07",
       "period_end": "2026-06-24",
-      "n_trades": 9,
+      "n_trades": 8,
       "buys_history": [
         {
           "date": "2025-07-07",
@@ -136,7 +136,7 @@
       "alpha_real_pp": -3.33,
       "first_buy_date": "2025-07-07",
       "period_end": "2026-06-24",
-      "n_trades": 8,
+      "n_trades": 6,
       "buys_history": [
         {
           "date": "2025-07-07",
@@ -214,7 +214,7 @@
       "alpha_real_pp": -7.27,
       "first_buy_date": "2025-07-03",
       "period_end": "2026-06-24",
-      "n_trades": 8,
+      "n_trades": 2,
       "buys_history": [
         {
           "date": "2025-07-03",
@@ -286,14 +286,14 @@
       "status": "OPEN",
       "name": "GLOBAL X FDS MSCI ARGENTINA ETF     ",
       "qty": 4000.0,
-      "mv_usd": 363600.0,
+      "mv_usd": 363720.0,
       "cost_basis_usd": 377841.38,
-      "unrealized_gl_usd": -14241.38,
-      "return_pct": -3.77,
-      "last_price_pershing": 90.9,
+      "unrealized_gl_usd": -14121.38,
+      "return_pct": -3.74,
+      "last_price_pershing": 90.93,
       "bench_label": "ACWI",
       "bench_dw_pct": 7.14,
-      "alpha_real_pp": -10.91,
+      "alpha_real_pp": -10.88,
       "first_buy_date": "2026-01-09",
       "period_end": "2026-06-24",
       "n_trades": 3,
@@ -321,14 +321,14 @@
       "status": "OPEN",
       "name": "ISHARES TR LATIN AMER 40 ETF     ",
       "qty": 10000.0,
-      "mv_usd": 332500.0,
+      "mv_usd": 332001.0,
       "cost_basis_usd": 367141.0,
-      "unrealized_gl_usd": -34641.0,
-      "return_pct": -9.44,
-      "last_price_pershing": 33.25,
+      "unrealized_gl_usd": -35140.0,
+      "return_pct": -9.57,
+      "last_price_pershing": 33.2001,
       "bench_label": "ACWI",
       "bench_dw_pct": 6.8,
-      "alpha_real_pp": -16.24,
+      "alpha_real_pp": -16.37,
       "first_buy_date": "2026-02-03",
       "period_end": "2026-06-24",
       "n_trades": 1,
@@ -414,5 +414,6 @@
     }
   ],
   "_daily_refresh_note": "Daily refresh 2026-06-24: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
-  "_synced_to_positions": "2026-06-24: MVs sincronizados desde positions_latest.json (Pershing 24-Jun)"
+  "_synced_to_positions": "2026-06-24: MVs sincronizados desde positions_latest.json (Pershing 24-Jun)",
+  "_ugl_refresh": "2026-06-24: cost basis + returns desde Pershing UGL (Multiple-row aggregates)"
 }
