@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>One-Pagers Alternativos BIG — CAPM · FLEX-I · HL GPI</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', 'Calibri', sans-serif;
+    background: #d8d6cc;
+    color: #1a1a1a;
+    font-size: 11.5px;
+    line-height: 1.45;
+    padding: 20px 0;
+  }
+
+  /* ====== NAV BAR (no print) ====== */
+  .navbar {
+    position: sticky;
+    top: 0;
+    background: #0d1b2a;
+    color: #fff;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    z-index: 100;
+    margin: -20px 0 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .navbar .nav-title { font-size: 13px; font-weight: 600; letter-spacing: 0.3px; }
+  .navbar .nav-tabs { display: flex; gap: 4px; margin-left: auto; }
+  .navbar .nav-tab {
+    padding: 6px 14px; cursor: pointer; border-radius: 3px;
+    background: #1a2f4a; color: #a0bcd8; font-size: 12px; font-weight: 500;
+    border: none; transition: all 0.15s;
+  }
+  .navbar .nav-tab:hover { background: #2a4060; color: #fff; }
+  .navbar .nav-tab.active { background: #c9a961; color: #0d1b2a; font-weight: 700; }
+  .navbar .print-btn {
+    padding: 6px 14px; background: #c9a961; color: #0d1b2a;
+    border: none; border-radius: 3px; cursor: pointer; font-size: 12px; font-weight: 700;
+  }
+  .navbar .print-btn:hover { background: #d6b878; }
+
+  /* ====== A4 PAGE (one per fund) ====== */
+  .page {
+    background: #fff;
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto 24px;
+    padding: 14mm 14mm 12mm;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    display: none;
+    position: relative;
+  }
+  .page.active { display: block; }
+
+  /* ====== HEADER ====== */
+  .pampa-strip {
+    background: #0d1b2a;
+    color: #fff;
+    padding: 8px 14mm;
+    margin: -14mm -14mm 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 0.8px;
+  }
+  .pampa-strip .pampa-logo {
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+  .pampa-strip .pampa-tag { color: #c9a961; font-weight: 500; }
+
+  .fund-hdr {
+    border-bottom: 3px solid #0d1b2a;
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .fund-hdr .fund-info h1 {
+    font-size: 19px;
+    color: #0d1b2a;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .fund-hdr .fund-info .mgr {
+    font-size: 11.5px;
+    color: #666;
+    margin-top: 3px;
+    font-style: italic;
+  }
+  .fund-hdr .fund-info .cat {
+    display: inline-block;
+    background: #c9a961;
+    color: #0d1b2a;
+    padding: 2px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 2px;
+    margin-top: 6px;
+  }
+  .fund-hdr .fund-key {
+    text-align: right;
+    font-size: 10.5px;
+    color: #555;
+    line-height: 1.6;
+  }
+  .fund-hdr .fund-key b { color: #0d1b2a; }
+
+  /* ====== SECTION ====== */
+  .sect-title {
+    font-size: 11px;
+    color: #0d1b2a;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #c9a961;
+    padding-bottom: 3px;
+    margin: 12px 0 8px;
+  }
+
+  /* ====== TEXT ====== */
+  p { font-size: 11.5px; line-height: 1.55; color: #2a2a2a; margin-bottom: 6px; }
+  .lead {
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: #2a2a2a;
+    background: #fafaf3;
+    border-left: 3px solid #c9a961;
+    padding: 9px 12px;
+    margin-bottom: 8px;
+  }
+
+  /* ====== KEY STATS ====== */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .stat {
+    background: #0d1b2a;
+    color: #fff;
+    padding: 10px 10px;
+    border-radius: 3px;
+    text-align: center;
+  }
+  .stat .num {
+    font-size: 18px;
+    font-weight: 700;
+    color: #c9a961;
+    line-height: 1.1;
+  }
+  .stat .lbl {
+    font-size: 9.5px;
+    color: #a0bcd8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 3px;
+  }
+
+  /* ====== 2-COL LAYOUT ====== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 6px;
+  }
+  .col h4 {
+    font-size: 10.5px;
+    color: #0d1b2a;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+
+  /* ====== TABLES ====== */
+  table.perf {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+  table.perf th {
+    background: #0d1b2a;
+    color: #fff;
+    padding: 6px 8px;
+    text-align: center;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+  table.perf td {
+    padding: 5px 8px;
+    border-bottom: 1px solid #f0ede5;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+  }
+  table.perf td:first-child { text-align: left; font-family: 'Segoe UI', sans-serif; font-weight: 500; }
+  table.perf tr:last-child td { border-bottom: none; }
+  table.perf tr:nth-child(even) td { background: #fafaf3; }
+  .pos { color: #1a5a2a; font-weight: 700; }
+  .neg { color: #8a1a1a; font-weight: 700; }
+
+  /* ====== BAR CHARTS ====== */
+  .bar-row {
+    display: grid;
+    grid-template-columns: 95px 1fr;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 3px;
+    font-size: 10.5px;
+  }
+  .bar-row .lbl { color: #444; }
+  .bar-row .bar-bg {
+    background: #f0ede5;
+    border-radius: 2px;
+    height: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .bar-row .bar-fill {
+    background: #0d1b2a;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 5px;
+    color: #fff;
+    font-size: 9.5px;
+    font-weight: 600;
+  }
+  .bar-row .bar-fill.gold { background: #c9a961; color: #0d1b2a; }
+  .bar-row .bar-fill.navy { background: #1d4e89; }
+
+  /* ====== KEY TERMS BLOCK ====== */
+  .terms {
+    background: #fafaf3;
+    border: 1px solid #e8e4dc;
+    border-radius: 3px;
+    padding: 9px 12px;
+    margin-bottom: 8px;
+  }
+  .terms .term-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 8px;
+    padding: 3px 0;
+    font-size: 10.5px;
+    border-bottom: 1px dotted #ddd;
+  }
+  .terms .term-row:last-child { border-bottom: none; }
+  .terms .term-lbl {
+    color: #666;
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    padding-top: 2px;
+  }
+  .terms .term-val { color: #0d1b2a; font-weight: 500; }
+  .terms .term-val b { font-weight: 700; }
+
+  /* ====== TOP HOLDINGS ====== */
+  .holdings-list { font-size: 10.5px; }
+  .holdings-list .h-row {
+    display: grid;
+    grid-template-columns: 18px 1fr 70px 50px;
+    gap: 6px;
+    padding: 4px 0;
+    border-bottom: 1px dotted #e0ddd0;
+    align-items: center;
+  }
+  .holdings-list .h-row:last-child { border-bottom: none; }
+  .holdings-list .h-num {
+    background: #0d1b2a;
+    color: #c9a961;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+  }
+  .holdings-list .h-name b { color: #0d1b2a; }
+  .holdings-list .h-name span { color: #888; font-size: 9.5px; display: block; }
+  .holdings-list .h-tag { font-size: 9px; color: #666; }
+  .holdings-list .h-pct { text-align: right; font-weight: 700; color: #0d1b2a; font-family: 'Courier New', monospace; }
+
+  /* ====== FOOTER ====== */
+  .pampa-footer {
+    border-top: 2px solid #0d1b2a;
+    padding-top: 6px;
+    margin-top: 10px;
+    font-size: 8.5px;
+    color: #777;
+    line-height: 1.4;
+  }
+  .pampa-footer .contacto {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    font-size: 9px;
+    color: #0d1b2a;
+  }
+  .pampa-footer .contacto b { color: #0d1b2a; }
+
+  /* ====== SCREEN ONLY ====== */
+  @media screen {
+    body { background: #d8d6cc; }
+  }
+
+  /* ====== PRINT ====== */
+  @media print {
+    body { background: #fff; padding: 0; margin: 0; }
+    .navbar { display: none; }
+    .page {
+      display: block !important;
+      box-shadow: none;
+      margin: 0;
+      width: 100%;
+      min-height: auto;
+      page-break-after: always;
+    }
+    .page:last-child { page-break-after: auto; }
+    @page { size: A4 portrait; margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-title">PAMPA CAPITAL · One-Pagers Alternativos BIG</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('capm', this)">CAPM · Private Equity</button>
+    <button class="nav-tab" onclick="showPage('flex', this)">FLEX-I · Secondaries</button>
+    <button class="nav-tab" onclick="showPage('bxpe', this)">BXPE · Blackstone PE</button>
+    <button class="nav-tab" onclick="showPage('kpec', this)">K-PEC · KKR PE</button>
+    <button class="nav-tab" onclick="showPage('hlgpi', this)">HL GPI · Infrastructure</button>
+  </div>
+  <button class="print-btn" onclick="window.print()">🖨 Imprimir / PDF</button>
+</nav>
+
+<!-- ============================================================== -->
+<!-- ====================== ONE-PAGER 1: CAPM ===================== -->
+<!-- ============================================================== -->
+<div id="capm" class="page active">
+
+  <div class="pampa-strip">
+    <span class="pampa-logo">PAMPA CAPITAL</span>
+    <span class="pampa-tag">Multi Family Office · Alternativos · Junio 2026</span>
+  </div>
+
+  <div class="fund-hdr">
+    <div class="fund-info">
+      <h1>Carlyle AlpInvest Private Markets</h1>
+      <div class="mgr">Carlyle Group / AlpInvest Partners · Sub-Fund I (CAPM SICAV)</div>
+      <div class="cat">PRIVATE EQUITY · EVERGREEN</div>
+    </div>
+    <div class="fund-key">
+      <div><b>ISIN:</b> LU2837777825 (I-USD Acc)</div>
+      <div><b>Estructura:</b> Luxembourg SICAV-UCI Part II</div>
+      <div><b>Inception:</b> Julio 2024</div>
+      <div><b>Datos al:</b> 30-Abril-2026</div>
+    </div>
+  </div>
+
+  <div class="sect-title">¿Qué hace este fondo?</div>
+  <div class="lead">
+    <strong>CAPM da acceso a la plataforma de Private Equity de Carlyle/AlpInvest</strong> — uno de los compradores institucionales de secundarios más grandes del mundo — con un solo cheque y mínimo accesible. El fondo invierte principalmente en <strong>secundarios</strong> (compra participaciones en fondos de PE ya existentes, con descuento y portfolios ya armados) y <strong>co-inversiones directas</strong> junto a los GPs líderes globales. La meta: dar al cliente acceso al universo de PE de Carlyle/AlpInvest con J-curve mitigada — exposición a +3,000 empresas privadas desde día uno.
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat"><div class="num">$1.94B</div><div class="lbl">NAV Total Fondo</div></div>
+    <div class="stat"><div class="num">3,000</div><div class="lbl">Empresas en Portfolio</div></div>
+    <div class="stat"><div class="num">230</div><div class="lbl">General Partners</div></div>
+    <div class="stat"><div class="num">140</div><div class="lbl">Transacciones</div></div>
+  </div>
+
+  <div class="sect-title">El gestor — Carlyle / AlpInvest</div>
+  <p style="font-size:10.5px"><strong>Carlyle</strong> es una de las top-3 firmas de PE del mundo (junto con Blackstone y KKR), con presencia desde 1987 y $440B+ en AUM total. <strong>AlpInvest Partners</strong> (parte del segmento Carlyle desde 2011) es uno de los <strong>3 compradores de secundarios más grandes globalmente</strong>, con $84B en AUM dedicado a PE — relaciones consolidadas con +230 GPs en buyout, growth y venture. Ventaja clave: cuando hay continuation funds o single-asset secondaries de calidad, AlpInvest está en la mesa por su escala.</p>
+
+  <div class="sect-title">Track Record — Performance neto (Class I-USD)</div>
+  <table class="perf">
+    <thead><tr><th>Periodo</th><th>YTD 2026</th><th>FY 2025</th><th>Jul-Dec 2024</th><th>SI Total</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Class I-USD (Acc)</td>
+        <td class="pos">+2.83%</td>
+        <td class="pos">+19.07%</td>
+        <td class="pos">+18.50%</td>
+        <td class="pos">+45.10%</td>
+      </tr>
+      <tr>
+        <td>Class B1 USD</td>
+        <td class="pos">+2.83%</td>
+        <td class="pos">+18.97%</td>
+        <td class="pos">+18.60%</td>
+        <td class="pos">+45.10%</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:10px;color:#888;font-style:italic">Returns netos de todos los fees. NAV por acción Class I-USD: $14.51 (Apr-26). 22 meses de track record. Past performance no garantiza retornos futuros.</p>
+
+  <div class="two-col">
+    <div class="col">
+      <div class="sect-title">Composición — Estrategia</div>
+      <div class="bar-row"><div class="lbl">Co-Investments</div><div class="bar-bg"><div class="bar-fill" style="width:78%">35%</div></div></div>
+      <div class="bar-row"><div class="lbl">Sec. GP-Centered</div><div class="bar-bg"><div class="bar-fill gold" style="width:71%">32%</div></div></div>
+      <div class="bar-row"><div class="lbl">Sec. LP Interest</div><div class="bar-bg"><div class="bar-fill navy" style="width:69%">31%</div></div></div>
+      <div class="bar-row"><div class="lbl">Fund Investments</div><div class="bar-bg"><div class="bar-fill" style="width:5%">1%</div></div></div>
+
+      <div class="sect-title">Por Tamaño de Empresa</div>
+      <div class="bar-row"><div class="lbl">Mid Market</div><div class="bar-bg"><div class="bar-fill" style="width:100%">46%</div></div></div>
+      <div class="bar-row"><div class="lbl">Small Market</div><div class="bar-bg"><div class="bar-fill gold" style="width:37%">17%</div></div></div>
+      <div class="bar-row"><div class="lbl">Large Buyout</div><div class="bar-bg"><div class="bar-fill navy" style="width:33%">15%</div></div></div>
+      <div class="bar-row"><div class="lbl">Upper Mid</div><div class="bar-bg"><div class="bar-fill" style="width:30%">14%</div></div></div>
+      <div class="bar-row"><div class="lbl">Mega Buyout</div><div class="bar-bg"><div class="bar-fill" style="width:13%">6%</div></div></div>
+    </div>
+
+    <div class="col">
+      <div class="sect-title">Geografía</div>
+      <div class="bar-row"><div class="lbl">US</div><div class="bar-bg"><div class="bar-fill" style="width:100%">69%</div></div></div>
+      <div class="bar-row"><div class="lbl">Europa</div><div class="bar-bg"><div class="bar-fill gold" style="width:41%">28%</div></div></div>
+      <div class="bar-row"><div class="lbl">Resto del Mundo</div><div class="bar-bg"><div class="bar-fill navy" style="width:4%">3%</div></div></div>
+
+      <div class="sect-title">Top 5 Transacciones</div>
+      <div class="holdings-list">
+        <div class="h-row"><div class="h-num">1</div><div class="h-name"><b>Horizon</b><span>Sec. GP-Centered · Diversified</span></div><div class="h-tag">6 assets</div><div class="h-pct">5%</div></div>
+        <div class="h-row"><div class="h-num">2</div><div class="h-name"><b>Beagle</b><span>Sec. LP Portfolio · Diversified</span></div><div class="h-tag">250+ assets</div><div class="h-pct">4%</div></div>
+        <div class="h-row"><div class="h-num">3</div><div class="h-name"><b>Pacific</b><span>Sec. LP Portfolio · Diversified</span></div><div class="h-tag">100+ assets</div><div class="h-pct">4%</div></div>
+        <div class="h-row"><div class="h-num">4</div><div class="h-name"><b>Alphabet</b><span>Sec. GP-Centered · Healthcare</span></div><div class="h-tag">1 asset</div><div class="h-pct">3%</div></div>
+        <div class="h-row"><div class="h-num">5</div><div class="h-name"><b>Genesis</b><span>Sec. LP Portfolio · Diversified</span></div><div class="h-tag">75+ assets</div><div class="h-pct">2%</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sect-title">Términos clave</div>
+  <div class="terms">
+    <div class="term-row"><div class="term-lbl">Mínimo Inversión</div><div class="term-val"><b>USD 25.000</b> (vía distribuidor) · USD 1M (directo)</div></div>
+    <div class="term-row"><div class="term-lbl">Suscripciones</div><div class="term-val">Mensuales (fully funded)</div></div>
+    <div class="term-row"><div class="term-lbl">Rescates</div><div class="term-val"><b>Mensuales</b>, hasta 1.667% del NAV por mes · 2% early redemption fee si &lt; 12 meses</div></div>
+    <div class="term-row"><div class="term-lbl">Management Fee</div><div class="term-val"><b>1.25%</b> p.a. sobre NAV</div></div>
+    <div class="term-row"><div class="term-lbl">Incentive Fee</div><div class="term-val"><b>10%</b> trimestral sobre net profits · sin claw-back · Loss Recovery Account</div></div>
+    <div class="term-row"><div class="term-lbl">Currency</div><div class="term-val">USD · múltiples share classes disponibles</div></div>
+    <div class="term-row"><div class="term-lbl">Tax Treatment</div><div class="term-val">SICAV Luxembourg (sin K-1) · investor-friendly para clientes LatAm</div></div>
+    <div class="term-row"><div class="term-lbl">PRIIPs Risk Indicator</div><div class="term-val">6 / 7 (alto)</div></div>
+  </div>
+
+  <div class="sect-title">📜 Track Récord — Fondos cerrados anteriores de AlpInvest</div>
+  <div class="lead" style="font-size:10.5px;line-height:1.5">
+    Para contexto: track récord de los <strong>vehículos cerrados institucionales de AlpInvest desde el año 2000</strong>. CAPM hereda este deal flow, equipo y experiencia. Quartile Rank vs benchmark de la industria (1 = top quartile, 4 = bottom quartile).
+  </div>
+
+  <h4 style="font-size:10px;color:#0d1b2a;font-weight:700;letter-spacing:0.5px;margin:8px 0 4px;text-transform:uppercase">AlpInvest Secondaries Program (ASP)</h4>
+  <table class="perf" style="font-size:10.5px">
+    <thead>
+      <tr>
+        <th style="padding:5px 6px">Fondo</th>
+        <th style="padding:5px 6px">Vintage</th>
+        <th style="padding:5px 6px">Tamaño</th>
+        <th style="padding:5px 6px">Gross IRR</th>
+        <th style="padding:5px 6px">Net IRR</th>
+        <th style="padding:5px 6px">Gross Mult.</th>
+        <th style="padding:5px 6px">Net Mult.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>ASP I</td><td>2002</td><td>$600M</td><td>55.6%</td><td class="pos">47.8%</td><td>1.9x</td><td>1.7x</td></tr>
+      <tr><td>ASP II</td><td>2003</td><td>$1,200M</td><td>27.0%</td><td class="pos">22.9%</td><td>1.8x</td><td>1.7x</td></tr>
+      <tr><td>ASP III</td><td>2006</td><td>$2,700M</td><td>10.9%</td><td>8.8%</td><td>1.6x</td><td>1.4x</td></tr>
+      <tr><td>ASP IV</td><td>2009</td><td>$2,200M</td><td>18.9%</td><td class="pos">16.0%</td><td>1.7x</td><td>1.5x</td></tr>
+      <tr><td>ASP V</td><td>2011</td><td>$6,400M</td><td>20.7%</td><td class="pos">17.0%</td><td>1.9x</td><td>1.5x</td></tr>
+      <tr><td>ASP VI</td><td>2017</td><td>$6,700M</td><td>17.4%</td><td>13.7%</td><td>1.6x</td><td>1.5x</td></tr>
+      <tr><td>ASP VII</td><td>2020</td><td>$9,200M</td><td>29.9%</td><td class="pos">22.4%</td><td>1.5x</td><td>1.3x</td></tr>
+      <tr><td>ASP VIII</td><td>2024</td><td>$13,500M*</td><td colspan="4" style="text-align:center;font-style:italic;color:#888">Recién lanzado · sin track aún (N/A)</td></tr>
+    </tbody>
+  </table>
+
+  <h4 style="font-size:10px;color:#0d1b2a;font-weight:700;letter-spacing:0.5px;margin:10px 0 4px;text-transform:uppercase">AlpInvest Co-Investment Program (ACP)</h4>
+  <table class="perf" style="font-size:10.5px">
+    <thead>
+      <tr>
+        <th style="padding:5px 6px">Fondo</th>
+        <th style="padding:5px 6px">Vintage</th>
+        <th style="padding:5px 6px">Tamaño</th>
+        <th style="padding:5px 6px">Gross IRR</th>
+        <th style="padding:5px 6px">Net IRR</th>
+        <th style="padding:5px 6px">Gross Mult.</th>
+        <th style="padding:5px 6px">Net Mult.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>ACP I</td><td>2000</td><td>$550M</td><td>19.9%</td><td class="pos">16.4%</td><td>1.7x</td><td>1.5x</td></tr>
+      <tr><td>ACP II</td><td>2003</td><td>$1,300M</td><td>43.4%</td><td class="pos">38.7%</td><td>2.8x</td><td>2.4x</td></tr>
+      <tr><td>ACP III</td><td>2006</td><td>$3,300M</td><td>6.3%</td><td>5.1%</td><td>1.5x</td><td>1.4x</td></tr>
+      <tr><td>ACP IV</td><td>2010</td><td>$1,700M</td><td>23.4%</td><td class="pos">20.8%</td><td>3.0x</td><td>2.6x</td></tr>
+      <tr><td>ACP V</td><td>2013</td><td>$1,300M</td><td>27.9%</td><td class="pos">24.9%</td><td>2.9x</td><td>2.3x</td></tr>
+      <tr><td>ACP VI</td><td>2014</td><td>$3,300M</td><td>24.7%</td><td class="pos">21.4%</td><td>2.6x</td><td>2.3x</td></tr>
+      <tr><td>ACP VII</td><td>2017</td><td>$3,300M</td><td>9.7%</td><td>7.2%</td><td>1.9x</td><td>1.7x</td></tr>
+      <tr><td>ACP VIII</td><td>2020</td><td>$4,700M</td><td>11.7%</td><td>8.8%</td><td>1.3x</td><td>1.2x</td></tr>
+      <tr><td>ACP IX</td><td>2023</td><td>$4,250M</td><td colspan="4" style="text-align:center;font-style:italic;color:#888">Vintage joven · sin track meaningful aún (N/A)</td></tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:9.5px;color:#666;margin-top:6px;font-style:italic">
+    *ASP VIII en fundraising. Net IRR rangos históricos: ASP 8.8% - 47.8% · ACP 5.1% - 38.7%. Fuente: AlpInvest. Past performance no garantiza retornos futuros.
+  </p>
+
+  <div class="pampa-footer">
+    <div class="contacto">
+      <span><b>Lucas Monpelat</b> · Wealth Management Associate · lucas.monpelat@pampa-capital.com</span>
+      <span><b>PAMPA CAPITAL</b> · Multi Family Office</span>
+    </div>
+    <p style="font-size:8px">Este documento es material informativo basado en el factsheet oficial Apr-2026 del fondo. No constituye recomendación de inversión. Las inversiones en activos alternativos involucran riesgo de pérdida total del capital, baja liquidez y horizonte de largo plazo. Past performance no garantiza retornos futuros. Para decisiones de inversión referirse al Prospecto y KID del fondo. Consultar implicaciones fiscales con asesor especializado.</p>
+  </div>
+</div>
+
+
+<!-- ============================================================== -->
+<!-- ====================== ONE-PAGER 2: FLEX ===================== -->
+<!-- ============================================================== -->
+<div id="flex" class="page">
+
+  <div class="pampa-strip">
+    <span class="pampa-logo">PAMPA CAPITAL</span>
+    <span class="pampa-tag">Multi Family Office · Alternativos · Junio 2026</span>
+  </div>
+
+  <div class="fund-hdr">
+    <div class="fund-info">
+      <h1>Franklin Lexington PE Secondaries Fund</h1>
+      <div class="mgr">Lexington Partners (Franklin Templeton Group) · FLEX-I</div>
+      <div class="cat">PRIVATE EQUITY · SECUNDARIOS</div>
+    </div>
+    <div class="fund-key">
+      <div><b>Share Class:</b> E (acc) USD</div>
+      <div><b>Estructura:</b> Luxembourg SICAV SA, Part II UCI</div>
+      <div><b>Inception:</b> 7-Marzo-2025</div>
+      <div><b>Datos al:</b> 30-Abril-2026</div>
+    </div>
+  </div>
+
+  <div class="sect-title">¿Qué hace este fondo?</div>
+  <div class="lead">
+    <strong>FLEX-I es el fondo evergreen de secundarios de Lexington Partners</strong> — el líder histórico del mercado de secondaries con +30 años de track record. El fondo compra participaciones en fondos de PE ya existentes ("Partnership secondaries", 61% del portfolio) y participa en continuation funds + single-asset secondaries ("GP-Led", 32%), donde los GPs extienden su tenencia sobre empresas ya maduras. El resultado: <strong>una cartera de ~2,000 empresas privadas con vintage maduro (47% pre-2019)</strong>, descuento sobre NAV en compra, y J-curve eliminada — el cliente entra con el portfolio ya generando cash flows.
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat"><div class="num">$2.1B</div><div class="lbl">NAV del Fondo</div></div>
+    <div class="stat"><div class="num">2,000</div><div class="lbl">Empresas en Portfolio</div></div>
+    <div class="stat"><div class="num">94</div><div class="lbl">General Partners</div></div>
+    <div class="stat"><div class="num">236</div><div class="lbl">Interests · 63 transacciones</div></div>
+  </div>
+
+  <div class="sect-title">El gestor — Lexington Partners</div>
+  <p style="font-size:10.5px"><strong>Lexington Partners</strong> es <strong>el líder histórico del mercado de secundarios PE</strong>, fundada en 1994, hoy parte del Franklin Templeton Group. Capitalización total: <strong>~$84B</strong>. Más de 200 profesionales (92 dedicados específicamente a secondaries y co-invest). 28 partners con promedio de 22 años de experiencia y 19 años trabajando juntos en Lexington — uno de los equipos más estables de la industria. Track histórico: <strong>5,200+ secondary interests adquiridos vía 750+ transacciones</strong> + 600+ co-investments. Relaciones consolidadas con 950+ sponsors globalmente. Es el manager al que los GPs van a vender cuando necesitan liquidez.</p>
+
+  <div class="sect-title">Track Record — Performance neto (Class E acc USD)</div>
+  <table class="perf">
+    <thead><tr><th>Periodo</th><th>1 Mes</th><th>3 Meses</th><th>YTD 2026</th><th>1 Año</th><th>SI Anualizado</th><th>SI Acumulado</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Class E (acc) USD</td>
+        <td class="pos">+0.4%</td>
+        <td class="pos">+2.8%</td>
+        <td class="pos">+3.8%</td>
+        <td class="pos">+22.4%</td>
+        <td class="pos">+22.2%</td>
+        <td class="pos">+25.8%</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:10px;color:#888;font-style:italic">Returns netos de management fees. ~14 meses de track record desde inception (Mar-25). El sesgo a vintage maduro (47% pre-2019) acelera distribuciones vs un fondo PE tradicional. Past performance no garantiza retornos futuros.</p>
+
+  <div class="two-col">
+    <div class="col">
+      <div class="sect-title">Tipo de Transacción</div>
+      <div class="bar-row"><div class="lbl">Partnership</div><div class="bar-bg"><div class="bar-fill" style="width:100%">61%</div></div></div>
+      <div class="bar-row"><div class="lbl">GP-Led</div><div class="bar-bg"><div class="bar-fill gold" style="width:52%">32%</div></div></div>
+      <div class="bar-row"><div class="lbl">Co-Investment</div><div class="bar-bg"><div class="bar-fill navy" style="width:11%">7%</div></div></div>
+
+      <div class="sect-title">Geografía</div>
+      <div class="bar-row"><div class="lbl">North America</div><div class="bar-bg"><div class="bar-fill" style="width:100%">77%</div></div></div>
+      <div class="bar-row"><div class="lbl">UK / Europa</div><div class="bar-bg"><div class="bar-fill gold" style="width:25%">19%</div></div></div>
+      <div class="bar-row"><div class="lbl">Asia-Pacific</div><div class="bar-bg"><div class="bar-fill navy" style="width:3%">2%</div></div></div>
+      <div class="bar-row"><div class="lbl">LatAm</div><div class="bar-bg"><div class="bar-fill navy" style="width:3%">2%</div></div></div>
+
+      <div class="sect-title">Estrategia (Sub-Sector)</div>
+      <div class="bar-row"><div class="lbl">Mid/Small Buyout</div><div class="bar-bg"><div class="bar-fill" style="width:100%">28%</div></div></div>
+      <div class="bar-row"><div class="lbl">Large Buyout</div><div class="bar-bg"><div class="bar-fill gold" style="width:89%">25%</div></div></div>
+      <div class="bar-row"><div class="lbl">Venture Capital</div><div class="bar-bg"><div class="bar-fill navy" style="width:64%">18%</div></div></div>
+      <div class="bar-row"><div class="lbl">Mega Buyout</div><div class="bar-bg"><div class="bar-fill" style="width:50%">14%</div></div></div>
+      <div class="bar-row"><div class="lbl">Growth Capital</div><div class="bar-bg"><div class="bar-fill gold" style="width:36%">10%</div></div></div>
+    </div>
+
+    <div class="col">
+      <div class="sect-title">Industria</div>
+      <div class="bar-row"><div class="lbl">Technology</div><div class="bar-bg"><div class="bar-fill" style="width:100%">27%</div></div></div>
+      <div class="bar-row"><div class="lbl">Industrials</div><div class="bar-bg"><div class="bar-fill gold" style="width:85%">23%</div></div></div>
+      <div class="bar-row"><div class="lbl">Health Care</div><div class="bar-bg"><div class="bar-fill navy" style="width:55%">15%</div></div></div>
+      <div class="bar-row"><div class="lbl">Consumer Disc.</div><div class="bar-bg"><div class="bar-fill" style="width:37%">10%</div></div></div>
+      <div class="bar-row"><div class="lbl">Financials</div><div class="bar-bg"><div class="bar-fill gold" style="width:33%">9%</div></div></div>
+
+      <div class="sect-title">Top 5 Holdings (cada uno 3% NAV)</div>
+      <div class="holdings-list">
+        <div class="h-row"><div class="h-num">1</div><div class="h-name"><b>FS Equity Partners CV1</b><span>Mid/Small Buyout · NA</span></div><div class="h-tag">GP-Led</div><div class="h-pct">3%</div></div>
+        <div class="h-row"><div class="h-num">2</div><div class="h-name"><b>CF24XB SCSp</b><span>Mega Buyout · NA</span></div><div class="h-tag">GP-Led</div><div class="h-pct">3%</div></div>
+        <div class="h-row"><div class="h-num">3</div><div class="h-name"><b>GA Continuity Fund II</b><span>Growth Capital · NA</span></div><div class="h-tag">GP-Led</div><div class="h-pct">3%</div></div>
+        <div class="h-row"><div class="h-num">4</div><div class="h-name"><b>WCP Bridge Fund</b><span>Mid/Small Buyout · NA</span></div><div class="h-tag">Partnership</div><div class="h-pct">3%</div></div>
+        <div class="h-row"><div class="h-num">5</div><div class="h-name"><b>Lexington PE Wildcat</b><span>Large Buyout · NA</span></div><div class="h-tag">GP-Led</div><div class="h-pct">3%</div></div>
+      </div>
+
+      <div class="sect-title">Top 5 GPs Subyacentes</div>
+      <div class="holdings-list">
+        <div class="h-row"><div class="h-num">1</div><div class="h-name"><b>Advent International</b><span>Mega/Large/Mid Buyout · Global</span></div><div class="h-tag"></div><div class="h-pct">6%</div></div>
+        <div class="h-row"><div class="h-num">2</div><div class="h-name"><b>Bain Capital</b><span>Mega/Large Buyout + Venture · NA/UK</span></div><div class="h-tag"></div><div class="h-pct">5%</div></div>
+        <div class="h-row"><div class="h-num">3</div><div class="h-name"><b>VC Sponsor (conf.)</b><span>Venture · NA</span></div><div class="h-tag"></div><div class="h-pct">4%</div></div>
+        <div class="h-row"><div class="h-num">4</div><div class="h-name"><b>Hildred Capital Mgmt</b><span>Growth + Mid Buyout</span></div><div class="h-tag"></div><div class="h-pct">3%</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sect-title">Términos clave</div>
+  <div class="terms">
+    <div class="term-row"><div class="term-lbl">Mínimo Inversión</div><div class="term-val"><b>USD 25.000</b> (o equivalente)</div></div>
+    <div class="term-row"><div class="term-lbl">Suscripciones</div><div class="term-val">Mensuales (fully funded)</div></div>
+    <div class="term-row"><div class="term-lbl">Rescates</div><div class="term-val"><b>Trimestrales</b>, hasta 5% del NAV del fondo por trimestre · 30 días notice · 2% early redemption fee si &lt; 1 año</div></div>
+    <div class="term-row"><div class="term-lbl">Management Fee</div><div class="term-val"><b>1.25%</b> p.a.</div></div>
+    <div class="term-row"><div class="term-lbl">Performance Fee</div><div class="term-val"><b>12.5%</b> sobre 5% hurdle · 100% catch-up · High-Water Mark</div></div>
+    <div class="term-row"><div class="term-lbl">Currencies</div><div class="term-val">USD, EUR, GBP, CHF, SGD, HKD, JPY, CAD, AUD, CZK</div></div>
+    <div class="term-row"><div class="term-lbl">Custodian / AIFM</div><div class="term-val">BNY Mellon (Luxembourg) · Waystone Mgmt Co</div></div>
+    <div class="term-row"><div class="term-lbl">Tax Treatment</div><div class="term-val">SICAV Luxembourg · investor-friendly para clientes LatAm (sin K-1)</div></div>
+  </div>
+
+  <div class="pampa-footer">
+    <div class="contacto">
+      <span><b>Lucas Monpelat</b> · Wealth Management Associate · lucas.monpelat@pampa-capital.com</span>
+      <span><b>PAMPA CAPITAL</b> · Multi Family Office</span>
+    </div>
+    <p style="font-size:8px">Este documento es material informativo basado en el factsheet oficial Apr-2026 del fondo. No constituye recomendación de inversión. Las inversiones en activos alternativos involucran riesgo de pérdida total del capital, baja liquidez y horizonte de largo plazo. Past performance no garantiza retornos futuros. Para decisiones de inversión referirse al Prospecto y KID del fondo. Consultar implicaciones fiscales con asesor especializado.</p>
+  </div>
+</div>
+
+
+<!-- ============================================================== -->
+<!-- ====================== ONE-PAGER 3: BXPE ===================== -->
+<!-- ============================================================== -->
+<div id="bxpe" class="page">
+
+  <div class="pampa-strip">
+    <span class="pampa-logo">PAMPA CAPITAL</span>
+    <span class="pampa-tag">Multi Family Office · Alternativos · Junio 2026</span>
+  </div>
+
+  <div class="fund-hdr">
+    <div class="fund-info">
+      <h1>Blackstone Private Equity Strategies Fund</h1>
+      <div class="mgr">Blackstone · BXPE SICAV (perpetual evergreen)</div>
+      <div class="cat">PRIVATE EQUITY · FLAGSHIP EVERGREEN</div>
+    </div>
+    <div class="fund-key">
+      <div><b>Share Class:</b> I-A USD (Acc)</div>
+      <div><b>Estructura:</b> Luxembourg SICAV</div>
+      <div><b>Inception:</b> 2-Enero-2024</div>
+      <div><b>Datos al:</b> 30-Abril-2026</div>
+    </div>
+  </div>
+
+  <div class="sect-title">¿Qué hace este fondo?</div>
+  <div class="lead">
+    <strong>BXPE es el fondo evergreen flagship de Private Equity de Blackstone</strong> — la plataforma de PE más grande del mundo según Private Equity International (capital raised 2011-2024). El fondo da acceso a 15+ estrategias de PE de Blackstone (Corporate Buyouts 60%, Growth 17%, Hybrid Capital 11%, Secondaries 6%) en una sola línea, con 150+ portfolio companies activas. Apuesta fuerte a la tesis <strong>AI Disruptors & Enablers</strong>: invierte en empresas como Anthropic (LLMs), AirTrunk (data center #1 de Asia Pacific) y el JV con Google ($5B equity commitment para infraestructura TPU). Para clientes HNW que quieren un solo cheque al PE más grande del planeta.
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat"><div class="num">$6.9B</div><div class="lbl">NAV del Fondo</div></div>
+    <div class="stat"><div class="num">150+</div><div class="lbl">PE Investments</div></div>
+    <div class="stat"><div class="num">15+</div><div class="lbl">Estrategias PE</div></div>
+    <div class="stat"><div class="num">18</div><div class="lbl">Deals últimos 3 meses</div></div>
+  </div>
+
+  <div class="sect-title">El gestor — Blackstone</div>
+  <p style="font-size:10.5px"><strong>Blackstone (NYSE: BX)</strong> es <strong>la plataforma de Private Equity más grande del mundo</strong> según Private Equity International (capital raised Ene-2011 a Dic-2024). Fundada en 1985, listada desde 2007, hoy con ~$1.2T en AUM global across PE, Real Estate, Credit, y Hedge Fund Solutions. El PE Platform de Blackstone tiene track récord desde Octubre 1987 — uno de los más largos de la industria. <strong>Más de $150B+ en exposición global a data centers</strong> respalda la tesis AI Infrastructure. Equipo institucional con relaciones con +1,000 corporates y deal flow propietario en US, Europa y Asia. BXPE da acceso retail/wealth a ese mismo deal flow institucional.</p>
+
+  <div class="sect-title">Track Record — Performance neto (Class I-A USD)</div>
+  <table class="perf">
+    <thead><tr><th>Periodo</th><th>1 Mes (Abr)</th><th>YTD 2026</th><th>Trailing 1 Año</th><th>2025 FY</th><th>2024 FY</th><th>Anualizado ITD</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Class I-A USD (Acc)</td>
+        <td class="pos">+1.0%</td>
+        <td class="pos">+5.5%</td>
+        <td class="pos">+18.2%</td>
+        <td class="pos">+17.9%</td>
+        <td class="pos">+16.2%</td>
+        <td class="pos">+17.1%</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:10px;color:#888;font-style:italic">Returns netos de todos los fees. NAV per share Class I-A USD: $36.13 (Apr-26, desde NAV inicial $30). Class A-A USD ITD ann: +15.9% (con servicing fee 0.85%). ~28 meses de track récord. Past performance no garantiza retornos futuros.</p>
+
+  <div class="two-col">
+    <div class="col">
+      <div class="sect-title">Estrategia</div>
+      <div class="bar-row"><div class="lbl">Corporate (Buyouts)</div><div class="bar-bg"><div class="bar-fill" style="width:100%">60%</div></div></div>
+      <div class="bar-row"><div class="lbl">Growth</div><div class="bar-bg"><div class="bar-fill gold" style="width:28%">17%</div></div></div>
+      <div class="bar-row"><div class="lbl">Hybrid Capital</div><div class="bar-bg"><div class="bar-fill navy" style="width:18%">11%</div></div></div>
+      <div class="bar-row"><div class="lbl">Debt & Other</div><div class="bar-bg"><div class="bar-fill" style="width:12%">7%</div></div></div>
+      <div class="bar-row"><div class="lbl">Secondaries</div><div class="bar-bg"><div class="bar-fill gold" style="width:10%">6%</div></div></div>
+
+      <div class="sect-title">Geografía</div>
+      <div class="bar-row"><div class="lbl">North America</div><div class="bar-bg"><div class="bar-fill" style="width:100%">74%</div></div></div>
+      <div class="bar-row"><div class="lbl">EMEA</div><div class="bar-bg"><div class="bar-fill gold" style="width:15%">11%</div></div></div>
+      <div class="bar-row"><div class="lbl">APAC</div><div class="bar-bg"><div class="bar-fill navy" style="width:11%">8%</div></div></div>
+      <div class="bar-row"><div class="lbl">Debt & Other</div><div class="bar-bg"><div class="bar-fill" style="width:9%">7%</div></div></div>
+
+      <div class="sect-title">Sectores principales</div>
+      <div class="bar-row"><div class="lbl">Business Services</div><div class="bar-bg"><div class="bar-fill" style="width:100%">12%</div></div></div>
+      <div class="bar-row"><div class="lbl">Software</div><div class="bar-bg"><div class="bar-fill gold" style="width:100%">12%</div></div></div>
+      <div class="bar-row"><div class="lbl">Consumer</div><div class="bar-bg"><div class="bar-fill navy" style="width:75%">9%</div></div></div>
+      <div class="bar-row"><div class="lbl">Healthcare</div><div class="bar-bg"><div class="bar-fill" style="width:75%">9%</div></div></div>
+      <div class="bar-row"><div class="lbl">Industrials</div><div class="bar-bg"><div class="bar-fill gold" style="width:75%">9%</div></div></div>
+      <div class="bar-row"><div class="lbl">Energy</div><div class="bar-bg"><div class="bar-fill navy" style="width:75%">9%</div></div></div>
+      <div class="bar-row"><div class="lbl">Financial Services</div><div class="bar-bg"><div class="bar-fill" style="width:67%">8%</div></div></div>
+      <div class="bar-row"><div class="lbl">Tech & Services</div><div class="bar-bg"><div class="bar-fill gold" style="width:67%">8%</div></div></div>
+    </div>
+
+    <div class="col">
+      <div class="sect-title">Top 10 Holdings (~36% NAV)</div>
+      <div class="holdings-list">
+        <div class="h-row"><div class="h-num">1</div><div class="h-name"><b>AI Fire</b><span>Fire & life safety services</span></div><div class="h-tag">Corporate</div><div class="h-pct">—</div></div>
+        <div class="h-row"><div class="h-num">2</div><div class="h-name"><b>AIR Control Concepts</b><span>Commercial HVAC buy-and-build</span></div><div class="h-tag">Corporate</div><div class="h-pct">—</div></div>
+        <div class="h-row"><div class="h-num">3</div><div class="h-name"><b>AirTrunk</b><span>#1 data center platform Asia Pacific</span></div><div class="h-tag">Corporate</div><div class="h-pct">—</div></div>
+        <div class="h-row"><div class="h-num">4</div><div class="h-name"><b>Champions Group</b><span>Residential home repair platform</span></div><div class="h-tag">Corporate</div><div class="h-pct">—</div></div>
+        <div class="h-row"><div class="h-num">5</div><div class="h-name"><b>Enverus</b><span>Data analytics para energy</span></div><div class="h-tag">Corporate</div><div class="h-pct">—</div></div>
+        <div class="h-row"><div class="h-num">6</div><div class="h-name"><b>Hologic</b><span>Women's health medtech</span></div><div class="h-tag">Corporate</div><div class="h-pct">—</div></div>
+        <div class="h-row"><div class="h-num">7</div><div class="h-name"><b>Jersey Mike's</b><span>Submarine sandwich franchisor</span></div><div class="h-tag">Corporate</div><div class="h-pct">—</div></div>
+        <div class="h-row"><div class="h-num">8</div><div class="h-name"><b>Smartsheet</b><span>Work management platform</span></div><div class="h-tag">Corporate</div><div class="h-pct">—</div></div>
+        <div class="h-row"><div class="h-num">9</div><div class="h-name"><b>Anthropic</b><span>AI / Claude (enterprise LLMs)</span></div><div class="h-tag">Growth</div><div class="h-pct">—</div></div>
+        <div class="h-row"><div class="h-num">10</div><div class="h-name"><b>Vaxcare</b><span>Vaccination solutions provider</span></div><div class="h-tag">Growth</div><div class="h-pct">—</div></div>
+      </div>
+
+      <div class="sect-title">⚡ Tesis destacada — AI Disruptors & Enablers</div>
+      <p style="font-size:10.5px"><strong>Spotlight: Google TPU Co JV</strong> — Blackstone y Google armaron un joint venture nuevo para una AI cloud company. Funds de Blackstone aportan <strong>$5B equity commitment inicial</strong>. La empresa ofrecerá compute-as-a-service usando TPUs de Google (los chips que entrenan Gemini y Claude de Anthropic). Primera fase: <strong>500 MW de capacidad online en 2027</strong>. Respaldado por $150B+ de exposure de Blackstone a data centers globales.</p>
+    </div>
+  </div>
+
+  <div class="sect-title">Términos clave</div>
+  <div class="terms">
+    <div class="term-row"><div class="term-lbl">Mínimo Inversión</div><div class="term-val"><b>USD 25.000</b> (Class I-I más alto)</div></div>
+    <div class="term-row"><div class="term-lbl">Suscripciones</div><div class="term-val">Mensuales (fully funded, NAV primer día calendario)</div></div>
+    <div class="term-row"><div class="term-lbl">Rescates</div><div class="term-val"><b>Trimestrales</b>, hasta 3.0% shares outstanding por trimestre · 95% NAV si &lt; 24 meses (5% early redemption)</div></div>
+    <div class="term-row"><div class="term-lbl">Management Fee</div><div class="term-val"><b>1.25%</b> p.a. NAV (accrual mensual)</div></div>
+    <div class="term-row"><div class="term-lbl">AIFM Fee</div><div class="term-val"><b>0.10%</b> p.a. NAV (mensual)</div></div>
+    <div class="term-row"><div class="term-lbl">Performance Fee</div><div class="term-val"><b>12.5%</b> sobre 5% hurdle · 100% catch-up · HWM · payable trimestralmente</div></div>
+    <div class="term-row"><div class="term-lbl">Servicing Fee (Class A)</div><div class="term-val">Hasta <b>0.85%</b> p.a. (Class I no tiene)</div></div>
+    <div class="term-row"><div class="term-lbl">Tax Treatment</div><div class="term-val">SICAV Luxembourg (sin K-1) · investor-friendly para clientes LatAm</div></div>
+    <div class="term-row"><div class="term-lbl">PRIIPs Risk Indicator</div><div class="term-val">Alto (alternative investments)</div></div>
+  </div>
+
+  <div class="pampa-footer">
+    <div class="contacto">
+      <span><b>Lucas Monpelat</b> · Wealth Management Associate · lucas.monpelat@pampa-capital.com</span>
+      <span><b>PAMPA CAPITAL</b> · Multi Family Office</span>
+    </div>
+    <p style="font-size:8px">Este documento es material informativo basado en el factsheet oficial Apr-2026 del fondo. No constituye recomendación de inversión. Las inversiones en activos alternativos involucran riesgo de pérdida total del capital, baja liquidez y horizonte de largo plazo. Past performance no garantiza retornos futuros. Para decisiones de inversión referirse al Prospecto y KID del fondo. Consultar implicaciones fiscales con asesor especializado.</p>
+  </div>
+</div>
+
+
+<!-- ============================================================== -->
+<!-- ====================== ONE-PAGER 4: K-PEC ==================== -->
+<!-- ============================================================== -->
+<div id="kpec" class="page">
+
+  <div class="pampa-strip">
+    <span class="pampa-logo">PAMPA CAPITAL</span>
+    <span class="pampa-tag">Multi Family Office · Alternativos · Junio 2026</span>
+  </div>
+
+  <div class="fund-hdr">
+    <div class="fund-info">
+      <h1>KKR Private Equity Conglomerate (K-PEC)</h1>
+      <div class="mgr">KKR · vía iCapital Offshore Access Fund SPC (Cayman) para no-US</div>
+      <div class="cat">PRIVATE EQUITY · FLAGSHIP EVERGREEN</div>
+    </div>
+    <div class="fund-key">
+      <div><b>Share Class:</b> R-I (Founder) / U (Standard nuevos)</div>
+      <div><b>Estructura:</b> US Operating Co + Cayman SPC Access</div>
+      <div><b>Inception:</b> Agosto 2023</div>
+      <div><b>Datos al:</b> 30-Abril-2026</div>
+    </div>
+  </div>
+
+  <div class="sect-title">¿Qué hace este fondo?</div>
+  <div class="lead">
+    <strong>K-PEC es el flagship evergreen de Private Equity de KKR</strong> — uno de los 3 mayores managers de PE del mundo junto con Blackstone y Carlyle. El fondo da acceso al deal flow institucional de KKR (Buyout 53%, Core 13%, Growth 6%, Mid-Market 4%, Impact 3%) con 79 portfolio companies activas en 8 sectores y 3 regiones. <strong>Para clientes no-US se accede vía iCapital Offshore Access Fund SPC (Cayman)</strong> — wrapper que evita el K-1 partnership (tax-friendly para LatAm), pero suma ~70 bps anuales de drag por fees adicionales. Diferencial: <strong>reporting SEC público (10-Q, 10-K) del underlying K-PEC</strong> — la única transparencia "institucional" del segmento.
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat"><div class="num">$11.6B</div><div class="lbl">Transactional NAV</div></div>
+    <div class="stat"><div class="num">79</div><div class="lbl">Portfolio Companies</div></div>
+    <div class="stat"><div class="num">8</div><div class="lbl">Sectores</div></div>
+    <div class="stat"><div class="num">2do</div><div class="lbl">PE Manager Global</div></div>
+  </div>
+
+  <div class="sect-title">El gestor — KKR</div>
+  <p style="font-size:10.5px"><strong>KKR & Co. (NYSE: KKR)</strong> es <strong>una de las 3 firmas de Private Equity más grandes del mundo</strong> junto con Blackstone y Carlyle. Fundada en 1976 (49 años), pionera del leveraged buyout moderno. AUM global: $580B+ across PE, credit, real estate, infrastructure. <strong>El PE Platform de KKR es uno de los más institucionales</strong>: equipos especializados (KKR Capstone para operating expertise, Capital Markets, Senior Advisors), 950+ deals históricos. Track histórico institucional sobresaliente: KKR Global Infrastructure II (vintage 2014) entregó 15.8% net IRR / 1.9x net TVPI. <strong>K-PEC da acceso retail/wealth ($100k mínimo) al mismo deal flow institucional</strong>.</p>
+
+  <div class="sect-title">Track Record — Performance neto</div>
+  <table class="perf">
+    <thead><tr><th>Periodo</th><th>1 Mes (Abr)</th><th>YTD 2026</th><th>Trailing 1 Año</th><th>2025 FY</th><th>2024 FY</th><th>Anualizado ITD</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Class R-I (Underlying)</td>
+        <td class="pos">+0.5%</td>
+        <td class="pos">+3.8%</td>
+        <td class="pos">+14.5%</td>
+        <td class="pos">+16.8%</td>
+        <td class="pos">+11.7%</td>
+        <td class="pos">+13.1%</td>
+      </tr>
+      <tr>
+        <td>Access Fund Class R-I*</td>
+        <td class="pos">+0.5%</td>
+        <td class="pos">+3.7%</td>
+        <td>+13.8%</td>
+        <td class="pos">+16.5%</td>
+        <td class="pos">+11.3%</td>
+        <td class="pos">+12.3%</td>
+      </tr>
+      <tr>
+        <td>Access Fund Class U (nuevos)</td>
+        <td>+0.5%</td>
+        <td>+3.4%</td>
+        <td>+12.5%</td>
+        <td>+15.5%</td>
+        <td>+10.4%</td>
+        <td>+11.4%</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:10px;color:#888;font-style:italic">*Class R-I del Access Fund cerrada a nuevos inversores (Jun-2024). Los nuevos clientes acceden vía Class U (servicing fee 0.85%). Haircut Access vs Underlying: ~70 bps anuales. Past performance no garantiza retornos futuros.</p>
+
+  <div class="two-col">
+    <div class="col">
+      <div class="sect-title">Estrategia</div>
+      <div class="bar-row"><div class="lbl">Buyout</div><div class="bar-bg"><div class="bar-fill" style="width:100%">53%</div></div></div>
+      <div class="bar-row"><div class="lbl">Liquidity Sleeve</div><div class="bar-bg"><div class="bar-fill gold" style="width:34%">18%</div></div></div>
+      <div class="bar-row"><div class="lbl">Core</div><div class="bar-bg"><div class="bar-fill navy" style="width:25%">13%</div></div></div>
+      <div class="bar-row"><div class="lbl">Growth Equity</div><div class="bar-bg"><div class="bar-fill" style="width:11%">6%</div></div></div>
+      <div class="bar-row"><div class="lbl">Mid-Market</div><div class="bar-bg"><div class="bar-fill gold" style="width:8%">4%</div></div></div>
+      <div class="bar-row"><div class="lbl">Global Impact</div><div class="bar-bg"><div class="bar-fill navy" style="width:6%">3%</div></div></div>
+      <div class="bar-row"><div class="lbl">Opportunistic</div><div class="bar-bg"><div class="bar-fill" style="width:4%">2%</div></div></div>
+
+      <div class="sect-title">Geografía</div>
+      <div class="bar-row"><div class="lbl">Americas</div><div class="bar-bg"><div class="bar-fill" style="width:100%">49%</div></div></div>
+      <div class="bar-row"><div class="lbl">EMEA</div><div class="bar-bg"><div class="bar-fill gold" style="width:84%">41%</div></div></div>
+      <div class="bar-row"><div class="lbl">Asia Pacific</div><div class="bar-bg"><div class="bar-fill navy" style="width:20%">10%</div></div></div>
+
+      <div class="sect-title">Sectores</div>
+      <div class="bar-row"><div class="lbl">IT</div><div class="bar-bg"><div class="bar-fill" style="width:100%">30%</div></div></div>
+      <div class="bar-row"><div class="lbl">Health Care</div><div class="bar-bg"><div class="bar-fill gold" style="width:80%">24%</div></div></div>
+      <div class="bar-row"><div class="lbl">Industrials</div><div class="bar-bg"><div class="bar-fill navy" style="width:50%">15%</div></div></div>
+      <div class="bar-row"><div class="lbl">Financials</div><div class="bar-bg"><div class="bar-fill" style="width:37%">11%</div></div></div>
+      <div class="bar-row"><div class="lbl">Consumer Disc.</div><div class="bar-bg"><div class="bar-fill gold" style="width:30%">9%</div></div></div>
+      <div class="bar-row"><div class="lbl">Consumer Staples</div><div class="bar-bg"><div class="bar-fill navy" style="width:20%">6%</div></div></div>
+      <div class="bar-row"><div class="lbl">Communications</div><div class="bar-bg"><div class="bar-fill" style="width:13%">4%</div></div></div>
+    </div>
+
+    <div class="col">
+      <div class="sect-title">Top 10 Holdings</div>
+      <div class="holdings-list">
+        <div class="h-row"><div class="h-num">1</div><div class="h-name"><b>Cotiviti</b><span>Health Care · US (May 2024)</span></div><div class="h-tag">HC Data</div><div class="h-pct">—</div></div>
+        <div class="h-row"><div class="h-num">2</div><div class="h-name"><b>Omnissa</b><span>IT · US (Jun 2024)</span></div><div class="h-tag">Ex-VMware</div><div class="h-pct">—</div></div>
+        <div class="h-row"><div class="h-num">3</div><div class="h-name"><b>Spectris</b><span>Industrials · UK (Nov 2025)</span></div><div class="h-tag">Precision</div><div class="h-pct">—</div></div>
+        <div class="h-row"><div class="h-num">4</div><div class="h-name"><b>Exact</b><span>IT · Netherlands (Apr 2019)</span></div><div class="h-tag">SaaS Tax</div><div class="h-pct">—</div></div>
+        <div class="h-row"><div class="h-num">5</div><div class="h-name"><b>Wella</b><span>Consumer Staples · CH (Dec 2020)</span></div><div class="h-tag">Beauty</div><div class="h-pct">—</div></div>
+        <div class="h-row"><div class="h-num">6</div><div class="h-name"><b>Söderberg & Partners</b><span>Financials · Sweden (Nov 2024)</span></div><div class="h-tag">Insurance</div><div class="h-pct">—</div></div>
+        <div class="h-row"><div class="h-num">7</div><div class="h-name"><b>Fujisoft</b><span>IT · Japan (Nov 2024)</span></div><div class="h-tag">Enterprise SW</div><div class="h-pct">—</div></div>
+        <div class="h-row"><div class="h-num">8</div><div class="h-name"><b>Biotage</b><span>Health Care · Sweden (Jun 2025)</span></div><div class="h-tag">Life Sci</div><div class="h-pct">—</div></div>
+        <div class="h-row"><div class="h-num">9</div><div class="h-name"><b>Karo</b><span>Health Care · Sweden (Aug 2025)</span></div><div class="h-tag">Consumer HC</div><div class="h-pct">—</div></div>
+        <div class="h-row"><div class="h-num">10</div><div class="h-name"><b>BMC</b><span>IT · US (Sep 2018)</span></div><div class="h-tag">Infra SW</div><div class="h-pct">—</div></div>
+      </div>
+
+      <div class="sect-title">Vintage Diversification</div>
+      <div class="bar-row"><div class="lbl">2024</div><div class="bar-bg"><div class="bar-fill" style="width:100%">38%</div></div></div>
+      <div class="bar-row"><div class="lbl">2025</div><div class="bar-bg"><div class="bar-fill gold" style="width:76%">29%</div></div></div>
+      <div class="bar-row"><div class="lbl">2023</div><div class="bar-bg"><div class="bar-fill navy" style="width:34%">13%</div></div></div>
+      <div class="bar-row"><div class="lbl">2019</div><div class="bar-bg"><div class="bar-fill" style="width:24%">9%</div></div></div>
+      <div class="bar-row"><div class="lbl">2018-2022</div><div class="bar-bg"><div class="bar-fill gold" style="width:29%">11%</div></div></div>
+      <p style="font-size:10px;color:#666;margin-top:4px;font-style:italic">Average vintage: ~2.5 años. Buena mezcla nuevos + maduros generando exits.</p>
+    </div>
+  </div>
+
+  <div class="sect-title">Términos clave (Access Fund para no-US)</div>
+  <div class="terms">
+    <div class="term-row"><div class="term-lbl">Mínimo Inversión</div><div class="term-val"><b>USD 100.000</b> (USD 150.000 EEA/UK)</div></div>
+    <div class="term-row"><div class="term-lbl">Estructura</div><div class="term-val">Cayman SPC (Access Fund iCapital) → US Operating Co (K-PEC)</div></div>
+    <div class="term-row"><div class="term-lbl">Suscripciones</div><div class="term-val">Mensuales (fully funded)</div></div>
+    <div class="term-row"><div class="term-lbl">Rescates</div><div class="term-val"><b>Trimestrales</b>, hasta 5% NAV por trimestre · 5% early redemption fee si &lt; 2 años</div></div>
+    <div class="term-row"><div class="term-lbl">Mgmt Fee (Underlying)</div><div class="term-val"><b>1.25%</b> p.a. KKR (R-I tuvo discount a 1.00% por 60 meses)</div></div>
+    <div class="term-row"><div class="term-lbl">Performance Fee</div><div class="term-val"><b>15%</b> sobre 5% hurdle · 100% catch-up · HWM · KKR</div></div>
+    <div class="term-row"><div class="term-lbl">Access Fund Fees</div><div class="term-val">0.20% admin + <b>0.85% servicing</b> (Class U) = 1.05% adicional · iCapital</div></div>
+    <div class="term-row"><div class="term-lbl">Fee stack total Class U</div><div class="term-val"><b>~2.30% mgmt + 15% perf</b> (suma underlying + access)</div></div>
+    <div class="term-row"><div class="term-lbl">Tax Treatment</div><div class="term-val">Access Fund SPC offshore (sin K-1) · investor-friendly LatAm</div></div>
+    <div class="term-row"><div class="term-lbl">Reporting</div><div class="term-val"><b>SEC público</b> (10-Q + 10-K del K-PEC underlying) ⭐</div></div>
+  </div>
+
+  <div class="pampa-footer">
+    <div class="contacto">
+      <span><b>Lucas Monpelat</b> · Wealth Management Associate · lucas.monpelat@pampa-capital.com</span>
+      <span><b>PAMPA CAPITAL</b> · Multi Family Office</span>
+    </div>
+    <p style="font-size:8px">Este documento es material informativo basado en el factsheet oficial Apr-2026 del fondo. No constituye recomendación de inversión. Las inversiones en activos alternativos involucran riesgo de pérdida total del capital, baja liquidez y horizonte de largo plazo. Past performance no garantiza retornos futuros. Para decisiones de inversión referirse al Prospecto y KID del fondo. Consultar implicaciones fiscales con asesor especializado.</p>
+  </div>
+</div>
+
+
+<!-- ============================================================== -->
+<!-- ====================== ONE-PAGER 5: HL GPI =================== -->
+<!-- ============================================================== -->
+<div id="hlgpi" class="page">
+
+  <div class="pampa-strip">
+    <span class="pampa-logo">PAMPA CAPITAL</span>
+    <span class="pampa-tag">Multi Family Office · Alternativos · Junio 2026</span>
+  </div>
+
+  <div class="fund-hdr">
+    <div class="fund-info">
+      <h1>Hamilton Lane Global Private Infrastructure</h1>
+      <div class="mgr">Hamilton Lane · HL GPI SICAV</div>
+      <div class="cat">INFRAESTRUCTURA PRIVADA · MULTI-MANAGER</div>
+    </div>
+    <div class="fund-key">
+      <div><b>ISIN:</b> LU2847068389 (Class I-USD Acc)</div>
+      <div><b>Estructura:</b> Luxembourg SICAV Part II</div>
+      <div><b>Inception:</b> Febrero 2024</div>
+      <div><b>Datos al:</b> 30-Abril-2026</div>
+    </div>
+  </div>
+
+  <div class="sect-title">¿Qué hace este fondo?</div>
+  <div class="lead">
+    <strong>HL GPI es un fondo evergreen de infraestructura privada multi-manager</strong> — el cliente accede a 50 inversiones distribuidas entre <strong>37 GPs líderes globales</strong> (Brookfield, KKR, Ares, EQT, Stonepeak, etc.) con un solo cheque. El acceso ocurre vía tres canales: <strong>co-investments (47%)</strong> directos con los GPs, <strong>secundarios diversificados (30%)</strong>, y <strong>secundarios single-asset (23%)</strong>. Foco: Core+ (50%) y Value-Add (45%) — activos esenciales con cash flow estable que generan retorno por inflation-pass-through + value creation. Target: <strong>10-12% neto anual</strong>.
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat"><div class="num">$982M</div><div class="lbl">AUM del Fondo</div></div>
+    <div class="stat"><div class="num">50</div><div class="lbl">Inversiones</div></div>
+    <div class="stat"><div class="num">37</div><div class="lbl">GPs Subyacentes</div></div>
+    <div class="stat"><div class="num">$30M</div><div class="lbl">Skin in Game HL</div></div>
+  </div>
+
+  <div class="sect-title">El gestor — Hamilton Lane</div>
+  <p style="font-size:10.5px"><strong>Hamilton Lane (NASDAQ: HLNE)</strong> es uno de los gestores puros de mercados privados más grandes del mundo con <strong>~$1 trillón en AUM y supervisión</strong>. Fundada en 1991, listada desde 2017. Su negocio principal: asesorar y co-invertir junto a inversores institucionales (pensiones, endowments, family offices) en private equity, private credit, infraestructura y real estate. Ventaja del modelo multi-manager: acceden a deal flow exclusivo de GPs porque son LP recurrente en sus fondos cerrados — los GPs les ofrecen co-investments y secundarios "warehoused" que clientes individuales nunca verían. <strong>HL committed $30M propios en GPI</strong> — alineación de intereses.</p>
+
+  <div class="sect-title">Track Record — Performance neto (Class I-USD Acc)</div>
+  <table class="perf">
+    <thead><tr><th>Periodo</th><th>1 Mes (Abr)</th><th>3 Meses</th><th>YTD 2026</th><th>1 Año</th><th>2025 FY</th><th>SI Anual.</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Class I-USD (Acc)</td>
+        <td class="pos">+4.35%</td>
+        <td class="pos">+4.03%</td>
+        <td class="pos">+5.33%</td>
+        <td class="pos">+16.74%</td>
+        <td class="pos">+20.50%</td>
+        <td class="pos">+23.90%</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:10px;color:#888;font-style:italic">SI annualized (+23.9%) incluye performance del vehículo predecesor (Cayman Holdings LP). El track del GPI SICAV directo es de ~26 meses. Returns netos de fees. Past performance no garantiza retornos futuros.</p>
+
+  <div class="two-col">
+    <div class="col">
+      <div class="sect-title">Composición por Estrategia</div>
+      <div class="bar-row"><div class="lbl">Core+</div><div class="bar-bg"><div class="bar-fill" style="width:100%">50%</div></div></div>
+      <div class="bar-row"><div class="lbl">Value-Add</div><div class="bar-bg"><div class="bar-fill gold" style="width:90%">45%</div></div></div>
+      <div class="bar-row"><div class="lbl">Core</div><div class="bar-bg"><div class="bar-fill navy" style="width:10%">5%</div></div></div>
+
+      <div class="sect-title">Origen de los Deals</div>
+      <div class="bar-row"><div class="lbl">Co-Investments</div><div class="bar-bg"><div class="bar-fill" style="width:100%">47%</div></div></div>
+      <div class="bar-row"><div class="lbl">Diversified Sec.</div><div class="bar-bg"><div class="bar-fill gold" style="width:64%">30%</div></div></div>
+      <div class="bar-row"><div class="lbl">Single-Asset Sec.</div><div class="bar-bg"><div class="bar-fill navy" style="width:49%">23%</div></div></div>
+
+      <div class="sect-title">Sectores</div>
+      <div class="bar-row"><div class="lbl">Telecom</div><div class="bar-bg"><div class="bar-fill" style="width:100%">25%</div></div></div>
+      <div class="bar-row"><div class="lbl">Power & Energy</div><div class="bar-bg"><div class="bar-fill gold" style="width:92%">23%</div></div></div>
+      <div class="bar-row"><div class="lbl">Transport</div><div class="bar-bg"><div class="bar-fill navy" style="width:80%">20%</div></div></div>
+      <div class="bar-row"><div class="lbl">Renewables</div><div class="bar-bg"><div class="bar-fill" style="width:68%">17%</div></div></div>
+      <div class="bar-row"><div class="lbl">Environment</div><div class="bar-bg"><div class="bar-fill gold" style="width:52%">13%</div></div></div>
+      <div class="bar-row"><div class="lbl">Other</div><div class="bar-bg"><div class="bar-fill navy" style="width:8%">2%</div></div></div>
+    </div>
+
+    <div class="col">
+      <div class="sect-title">Geografía</div>
+      <div class="bar-row"><div class="lbl">North America</div><div class="bar-bg"><div class="bar-fill" style="width:100%">73%</div></div></div>
+      <div class="bar-row"><div class="lbl">Europa</div><div class="bar-bg"><div class="bar-fill gold" style="width:30%">22%</div></div></div>
+      <div class="bar-row"><div class="lbl">Asia Pacific</div><div class="bar-bg"><div class="bar-fill navy" style="width:7%">5%</div></div></div>
+
+      <div class="sect-title">Top 5 Holdings (~22.8% NAV)</div>
+      <div class="holdings-list">
+        <div class="h-row"><div class="h-num">1</div><div class="h-name"><b>Entex</b><span>Power · Bernhard Capital</span></div><div class="h-tag">Co-Invest</div><div class="h-pct">5.4%</div></div>
+        <div class="h-row"><div class="h-num">2</div><div class="h-name"><b>Project Tide</b><span>Transport · Hoegh Capital</span></div><div class="h-tag">Single-Asset</div><div class="h-pct">4.8%</div></div>
+        <div class="h-row"><div class="h-num">3</div><div class="h-name"><b>Watco</b><span>Transport · Duration Capital</span></div><div class="h-tag">Co-Invest</div><div class="h-pct">4.5%</div></div>
+        <div class="h-row"><div class="h-num">4</div><div class="h-name"><b>Project Sparerib</b><span>Telecom · Snowhawk</span></div><div class="h-tag">Diversified</div><div class="h-pct">4.3%</div></div>
+        <div class="h-row"><div class="h-num">5</div><div class="h-name"><b>Project Cristiano</b><span>Environment · Quaero</span></div><div class="h-tag">Diversified</div><div class="h-pct">3.8%</div></div>
+      </div>
+
+      <div class="sect-title">¿Por qué multi-manager?</div>
+      <p style="font-size:10.5px">El cliente accede a <strong>37 GPs en un solo cheque</strong> — exposición simultánea a las casas que están en el top-tier global de infra. Ningún GP individual concentra más del 5-6% del fondo. Es la forma más diversificada de tener infraestructura privada como inversor no-institucional.</p>
+    </div>
+  </div>
+
+  <div class="sect-title">Términos clave</div>
+  <div class="terms">
+    <div class="term-row"><div class="term-lbl">Mínimo Class I</div><div class="term-val"><b>USD 2.000.000</b></div></div>
+    <div class="term-row"><div class="term-lbl">Mínimo Class A</div><div class="term-val"><b>USD 100.000</b></div></div>
+    <div class="term-row"><div class="term-lbl">Suscripciones</div><div class="term-val">Mensuales</div></div>
+    <div class="term-row"><div class="term-lbl">Rescates</div><div class="term-val"><b>Mensuales</b> (más flexible que comparables) · 3% early redemption fee si &lt; 1 año</div></div>
+    <div class="term-row"><div class="term-lbl">Management Fee (Class I)</div><div class="term-val"><b>1.40%</b> p.a.</div></div>
+    <div class="term-row"><div class="term-lbl">Performance Fee</div><div class="term-val"><b>0%</b> · sin carry — diferencial clave vs comparables</div></div>
+    <div class="term-row"><div class="term-lbl">Target Return Net</div><div class="term-val"><b>10-12% p.a.</b></div></div>
+    <div class="term-row"><div class="term-lbl">Tax Treatment</div><div class="term-val">SICAV Luxembourg (sin K-1) · investor-friendly para clientes LatAm</div></div>
+  </div>
+
+  <div class="pampa-footer">
+    <div class="contacto">
+      <span><b>Lucas Monpelat</b> · Wealth Management Associate · lucas.monpelat@pampa-capital.com</span>
+      <span><b>PAMPA CAPITAL</b> · Multi Family Office</span>
+    </div>
+    <p style="font-size:8px">Este documento es material informativo basado en el factsheet oficial Apr-2026 del fondo. No constituye recomendación de inversión. Las inversiones en activos alternativos involucran riesgo de pérdida total del capital, baja liquidez y horizonte de largo plazo. Past performance no garantiza retornos futuros. Para decisiones de inversión referirse al Prospecto y KID del fondo. Consultar implicaciones fiscales con asesor especializado.</p>
+  </div>
+</div>
+
+<script>
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+
+</body>
+</html>
