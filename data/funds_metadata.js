@@ -22,44 +22,44 @@
 // ============================================================
 const BIG_POSITIONS = [
     // ----- EQUITY -----
-    { isin: "IE00B5BMR087", ticker: "CSPX", name: "iShares Core S&P 500 UCITS", sleeve: "Equity", value: 2686015.20, pct: 10.31, terInst: 0.07, terA: null },
-    { isin: "IE00BFMHRK20", ticker: "NBGMT", name: "NB Global Equity Megatrends I", sleeve: "Equity", value: 1361876.41, pct: 5.23, terInst: 0.75, terA: 1.45 },
-    { isin: "LU1985812756", ticker: "MFSCV", name: "MFS Meridian Contrarian Value I1", sleeve: "Equity", value: 1190158.30, pct: 4.57, terInst: 0.85, terA: 1.94 },
-    { isin: "IE00B6YCBF59", ticker: "THOR", name: "Thornburg Equity Income Builder I", sleeve: "Equity", value: 612593.93, pct: 2.35, terInst: 0.89, terA: null },
-    { isin: "LU2940405447", ticker: "JHGSC", name: "Janus Henderson Global Smaller Cos F2", sleeve: "Equity", value: 574969.71, pct: 2.21, terInst: 1.00, terA: null },
-    { isin: "IE00BF4KN675", ticker: "LGLI", name: "Lazard Global Listed Infrastructure A", sleeve: "Equity", value: 523263.51, pct: 2.01, terInst: 0.74, terA: null },
-    { isin: "US37950E2596", ticker: "ARGT", name: "Global X MSCI Argentina ETF", sleeve: "Equity", value: 370660.00, pct: 1.42, terInst: 0.59, terA: null },
-    { isin: "DE000A0Q4R85", ticker: "4BRZ", name: "iShares MSCI Brazil UCITS (DE)", sleeve: "Equity", value: 330455.65, pct: 1.27, terInst: 0.47, terA: null },
-    { isin: "US4642873909", ticker: "ILF", name: "iShares Latin America 40 ETF", sleeve: "Equity", value: 333250.00, pct: 1.28, terInst: 0.59, terA: null },
+    { isin: "IE00B5BMR087", ticker: "CSPX", name: "iShares Core S&P 500 UCITS", sleeve: "Equity", value: 2706326.88, pct: 10.39, terInst: 0.07, terA: null },
+    { isin: "IE00BFMHRK20", ticker: "NBGMT", name: "NB Global Equity Megatrends I", sleeve: "Equity", value: 1350846.72, pct: 5.19, terInst: 0.75, terA: 1.45 },
+    { isin: "LU1985812756", ticker: "MFSCV", name: "MFS Meridian Contrarian Value I1", sleeve: "Equity", value: 1190320.84, pct: 4.57, terInst: 0.85, terA: 1.94 },
+    { isin: "IE00B6YCBF59", ticker: "THOR", name: "Thornburg Equity Income Builder I", sleeve: "Equity", value: 620231.54, pct: 2.38, terInst: 0.89, terA: null },
+    { isin: "LU2940405447", ticker: "JHGSC", name: "Janus Henderson Global Smaller Cos F2", sleeve: "Equity", value: 577468.22, pct: 2.22, terInst: 1.00, terA: null },
+    { isin: "IE00BF4KN675", ticker: "LGLI", name: "Lazard Global Listed Infrastructure A", sleeve: "Equity", value: 521916.74, pct: 2.00, terInst: 0.74, terA: null },
+    { isin: "US37950E2596", ticker: "ARGT", name: "Global X MSCI Argentina ETF", sleeve: "Equity", value: 363600.00, pct: 1.40, terInst: 0.59, terA: null },
+    { isin: "DE000A0Q4R85", ticker: "4BRZ", name: "iShares MSCI Brazil UCITS (DE)", sleeve: "Equity", value: 337770.34, pct: 1.30, terInst: 0.47, terA: null },
+    { isin: "US4642873909", ticker: "ILF", name: "iShares Latin America 40 ETF", sleeve: "Equity", value: 332500.00, pct: 1.28, terInst: 0.59, terA: null },
 
     // ----- ALTERNATIVES (mix of Pershing + CALP external) -----
     { isin: "LU2827810776", ticker: "CALP", name: "Carlyle AlpInvest Private Markets", sleeve: "Alternatives", value: 2722180.00, pct: 10.44, terInst: 1.00, terA: null, external: true },
-    { isin: "US46438F1012", ticker: "IBIT", name: "iShares Bitcoin Trust", sleeve: "Alternatives", value: 744326.33, pct: 2.86, terInst: 1.25, terA: null },
-    { isin: "US78463V1070", ticker: "GLD", name: "SPDR Gold Shares", sleeve: "Alternatives", value: 748728.64, pct: 2.87, terInst: 0.25, terA: null },
-    { isin: "KYG4737U1085", ticker: "HLEND", name: "HPS Corporate Lending Fund", sleeve: "Alternatives", value: 753335.66, pct: 2.89, terInst: 0.75, terA: null },
-    { isin: "XS2658535526", ticker: "BPCC", name: "Barings Private Credit Corporation (BPCC)", sleeve: "Alternatives", value: 595348.04, pct: 2.28, terInst: 1.25, terA: null },
+    { isin: "US46438F1012", ticker: "IBIT", name: "iShares Bitcoin Trust", sleeve: "Alternatives", value: 721005.82, pct: 2.77, terInst: 1.25, terA: null },
+    { isin: "US78463V1070", ticker: "GLD", name: "SPDR Gold Shares", sleeve: "Alternatives", value: 706762.16, pct: 2.71, terInst: 0.25, terA: null },
+    { isin: "KYG4737U1085", ticker: "HLEND", name: "HPS Corporate Lending Fund", sleeve: "Alternatives", value: 759172.36, pct: 2.92, terInst: 0.75, terA: null },
+    { isin: "XS2658535526", ticker: "BPCC", name: "Barings Private Credit Corporation (BPCC)", sleeve: "Alternatives", value: 595348.04, pct: 2.29, terInst: 1.25, terA: null },
     { isin: "LU2966298809", ticker: "FLEX", name: "Franklin Lexington PE Secondaries I", sleeve: "Alternatives", value: 501805.63, pct: 1.93, terInst: null, terA: null },
-    { isin: "LU2847068389", ticker: "HLGPI", name: "Hamilton Lane Global Private Infrastructure Fund", sleeve: "Alternatives", value: 500000.17, pct: 1.92, terInst: null, terA: null, status: "partial_settled_600k_pending" },
-    { isin: "GCRED-I", ticker: "GCRED", name: "Golub Capital Private Credit", sleeve: "Alternatives", value: 490583.01, pct: 1.88, terInst: 1.25, terA: null },
+    { isin: "LU2847068389", ticker: "HLGPI", name: "Hamilton Lane Global Private Infrastructure Fund", sleeve: "Alternatives", value: 1114198.98, pct: 4.28, terInst: null, terA: null, status: "partial_settled_600k_pending" },
+    { isin: "GCRED-I", ticker: "GCRED", name: "Golub Capital Private Credit", sleeve: "Alternatives", value: 495475.43, pct: 1.90, terInst: 1.25, terA: null },
 
     // ----- FIXED INCOME -----
-    { isin: "IE00BDT57R20", ticker: "PIMCO-LD", name: "PIMCO GIS Low Duration Income I", sleeve: "Fixed Income", value: 4025375.60, pct: 15.44, terInst: 0.55, terA: 1.45 },
-    { isin: "IE00B87KCF77", ticker: "PIMCO-INC", name: "PIMCO GIS Income I", sleeve: "Fixed Income", value: 2029744.63, pct: 7.79, terInst: 0.55, terA: 1.10 },
-    { isin: "IE000OE87WX6", ticker: "MANIG", name: "Man GLG Global IG Opportunities", sleeve: "Fixed Income", value: 1868579.78, pct: 7.17, terInst: 0.89, terA: 1.89 },
-    { isin: "IE00B29K0P99", ticker: "PIMCO-EM", name: "PIMCO GIS EM Local Bond I", sleeve: "Fixed Income", value: 1118179.65, pct: 4.29, terInst: 0.89, terA: null },
-    { isin: "XS2324777171", ticker: "TGF", name: "Tenac Global Fund (TGF)", sleeve: "Fixed Income", value: 811823.88, pct: 3.11, terInst: 0.75, terA: 1.41 },
-    { isin: "LU2049315265", ticker: "SGCB", name: "Schroder GAIA Cat Bond Class C", sleeve: "Fixed Income", value: 523346.90, pct: 2.01, terInst: 1.37, terA: null },
-    { isin: "IE00089T5MA6", ticker: "MANEM", name: "Man EM Corporate Credit Alt IV", sleeve: "Fixed Income", value: 20103.83, pct: 0.08, terInst: null, terA: null },
+    { isin: "IE00BDT57R20", ticker: "PIMCO-LD", name: "PIMCO GIS Low Duration Income I", sleeve: "Fixed Income", value: 3041962.88, pct: 11.68, terInst: 0.55, terA: 1.45 },
+    { isin: "IE00B87KCF77", ticker: "PIMCO-INC", name: "PIMCO GIS Income I", sleeve: "Fixed Income", value: 3043889.19, pct: 11.69, terInst: 0.55, terA: 1.10 },
+    { isin: "IE000OE87WX6", ticker: "MANIG", name: "Man GLG Global IG Opportunities", sleeve: "Fixed Income", value: 1880151.33, pct: 7.22, terInst: 0.89, terA: 1.89 },
+    { isin: "IE00B29K0P99", ticker: "PIMCO-EM", name: "PIMCO GIS EM Local Bond I", sleeve: "Fixed Income", value: 1126852.51, pct: 4.33, terInst: 0.89, terA: null },
+    { isin: "XS2324777171", ticker: "TGF", name: "Tenac Global Fund (TGF)", sleeve: "Fixed Income", value: 811823.88, pct: 3.12, terInst: 0.75, terA: 1.41 },
+    { isin: "LU2049315265", ticker: "SGCB", name: "Schroder GAIA Cat Bond Class C", sleeve: "Fixed Income", value: 525225.02, pct: 2.02, terInst: 1.37, terA: null },
+    { isin: "IE00089T5MA6", ticker: "MANEM", name: "Man EM Corporate Credit Alt IV", sleeve: "Fixed Income", value: 20195.38, pct: 0.08, terInst: null, terA: null },
 
     // ----- CASH -----
-    { isin: "CASH-USD", ticker: "CASH", name: "Cash USD", sleeve: "Cash", value: 626124.78, pct: 2.40, terInst: null, terA: null }
+    { isin: "CASH-USD", ticker: "CASH", name: "Cash USD", sleeve: "Cash", value: 40457.10, pct: 0.16, terInst: null, terA: null }
 ];
 
 // ============================================================
 // DATA FRESHNESS MARKERS — para el banner de frescura de cada tab.
 // Bumpear cuando se refresca la data subyacente.
 // ============================================================
-const POSITIONS_AS_OF = "2026-06-10";       // Fecha del export Pershing (positions_latest.json as_of)
+const POSITIONS_AS_OF = "2026-06-24";       // Fecha del export Pershing (positions_latest.json as_of)
 const METADATA_LAST_REVIEW = "2026-05-14";  // CURRENCY/COUNTRY/CURRENT_YIELD/FI_METRICS — ultima revision dicts
 
 // ============================================================
