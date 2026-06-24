@@ -2610,6 +2610,7 @@ async function renderAltsRace() {
     const subClassLabel = {
         'private_equity': '🏛️ Private Equity',
         'private_credit': '💵 Private Credit',
+        'private_infra':  '🏗️ Private Infra',
         'crypto': '₿ Crypto',
         'commodity': '🥇 Commodity',
     };
@@ -2640,8 +2641,8 @@ async function renderAltsRace() {
 
     // Sub-class bars
     const subBreak = pm.sub_class_breakdown_pct || {};
-    const subOrder = ['private_equity', 'private_credit', 'crypto', 'commodity'];
-    const subColors = { 'private_equity': '#1F3864', 'private_credit': '#5B9BD5', 'crypto': '#FFB74D', 'commodity': '#D4AF37' };
+    const subOrder = ['private_equity', 'private_credit', 'private_infra', 'crypto', 'commodity'];
+    const subColors = { 'private_equity': '#1F3864', 'private_credit': '#5B9BD5', 'private_infra': '#66BB6A', 'crypto': '#FFB74D', 'commodity': '#D4AF37' };
     const subTraces = [{
         type: 'bar',
         orientation: 'h',
