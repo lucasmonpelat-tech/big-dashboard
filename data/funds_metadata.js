@@ -178,10 +178,13 @@ const ALTS_LIQUIDITY = {
     "US46438F1012": { profile: "daily",     ticker: "IBIT",  redemption: "Daily (ETF listado)" },
     "US78463V1070": { profile: "daily",     ticker: "GLD",   redemption: "Daily (ETF listado)" },
 
-    // Quarterly — interval funds / BDCs con redemption windows (penalty si te salís fuera)
-    "KYG4737U1085": { profile: "quarterly", ticker: "HLEND", redemption: "Quarterly windows + 5% gate", lock_type: "Quarterly windows" },
-    "XS2658535526": { profile: "quarterly", ticker: "BPCC",  redemption: "Quarterly windows + 5% gate", lock_type: "Quarterly windows" },
-    "GCRED-I":      { profile: "quarterly", ticker: "GCRED", redemption: "Quarterly windows", lock_type: "Quarterly windows" },
+    // Private Credit — 1y lock-up + quarterly windows post-unlock
+    "KYG4737U1085": { profile: "lock_up", ticker: "HLEND", redemption: "1y lock + Quarterly windows + 5% gate (HPS)",
+                      lock_type: "1y lock + Quarterly", purchase_date: "2025-09-22", unlock_date: "2026-09-22" },
+    "XS2658535526": { profile: "lock_up", ticker: "BPCC",  redemption: "1y lock + Quarterly windows + 5% gate (Barings)",
+                      lock_type: "1y lock + Quarterly", purchase_date: "2025-07-25", unlock_date: "2026-07-25" },
+    "GCRED-I":      { profile: "lock_up", ticker: "GCRED", redemption: "1y lock + Quarterly windows (Golub)",
+                      lock_type: "1y lock + Quarterly", purchase_date: "2025-09-22", unlock_date: "2026-09-22" },
 
     // 1-year hard lock-up — privates
     "LU2966298809": { profile: "lock_up", ticker: "FLEX",  redemption: "1y lock + annual exits (Flex-Lex)",
