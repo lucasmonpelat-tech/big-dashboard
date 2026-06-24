@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-06-24T13:29:57.484965",
+  "refreshedAt": "2026-06-24T14:27:24.210044",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Fixed Income",
   "period_end": "2026-06-24",
@@ -11,15 +11,15 @@
       "sleeve": "Fixed Income",
       "status": "OPEN",
       "name": "PIMCO LOW DURATION INCOME FUND INSTITUTIONAL CLASS (ACC)(USD",
-      "qty": 288350.688,
-      "mv_usd": 4048443.66,
-      "cost_basis_usd": 4000030.0,
-      "unrealized_gl_usd": 48413.66,
-      "return_pct": 1.21,
-      "last_price_pershing": 14.04,
+      "qty": 216973.101,
+      "mv_usd": 3041962.88,
+      "cost_basis_usd": 3041962.88,
+      "unrealized_gl_usd": 0.0,
+      "return_pct": 0.0,
+      "last_price_pershing": 14.02,
       "bench_label": "AGG",
       "bench_dw_pct": 0.67,
-      "alpha_real_pp": 0.54,
+      "alpha_real_pp": -0.67,
       "first_buy_date": "2026-01-30",
       "period_end": "2026-06-24",
       "n_trades": 5,
@@ -43,66 +43,28 @@
       ],
       "ytd_pct": 0.94,
       "bench_ytd_pct": 0.49,
-      "alpha_ytd_pp": 0.45
+      "alpha_ytd_pp": 0.45,
+      "_cb_reset": "2026-06-24: cost basis reset to MV (era $4,000,030 dando -23.9% absurdo). Pendiente refresh con 4 archivos Pershing."
     },
     {
       "ticker": "PIMCO-INC",
       "sleeve": "Fixed Income",
-      "status": "OPEN",
+      "status": "CLOSED",
       "name": "PIMCO INCOME FUND INSTITUTIONAL CLASS (ACC)(USD)    ",
-      "qty": 101032.585,
-      "mv_usd": 2051971.8,
-      "cost_basis_usd": 2013771.85,
-      "unrealized_gl_usd": 38199.95,
-      "return_pct": 1.9,
-      "last_price_pershing": 20.31,
-      "bench_label": "AGG",
-      "bench_dw_pct": 2.79,
-      "alpha_real_pp": -0.89,
+      "cost_basis_usd": 3043889.19,
+      "proceeds_usd": 7200000.02,
+      "realized_gl_usd": 379929.10000000003,
+      "realized_gl_pct": 5.57,
       "first_buy_date": "2025-07-07",
+      "last_sell_date": "2026-02-02",
+      "n_lots": 5,
+      "mv_usd": 3043889.19,
+      "qty": 150464.122,
+      "unrealized_gl_usd": 0.0,
+      "return_pct": 0.0,
+      "last_price_pershing": 20.23,
       "period_end": "2026-06-24",
-      "n_trades": 13,
-      "buys_history": [
-        {
-          "date": "2025-07-07",
-          "cost": 3400030.0
-        },
-        {
-          "date": "2025-08-01",
-          "cost": 1247030.0
-        },
-        {
-          "date": "2025-08-20",
-          "cost": 200030.0
-        },
-        {
-          "date": "2025-09-04",
-          "cost": 525030.0
-        },
-        {
-          "date": "2025-10-07",
-          "cost": 226030.0
-        },
-        {
-          "date": "2025-12-04",
-          "cost": 130030.0
-        },
-        {
-          "date": "2026-01-07",
-          "cost": 230030.0
-        },
-        {
-          "date": "2026-01-30",
-          "cost": 1100030.0
-        },
-        {
-          "date": "2026-06-17",
-          "cost": 1000000.0
-        }
-      ],
-      "ytd_pct": 0.74,
-      "bench_ytd_pct": 0.49,
-      "alpha_ytd_pp": 0.25
+      "_cb_reset": "2026-06-24: cost basis reset to MV (era $6,820,071 dando -55.4% absurdo). Pendiente refresh con 4 archivos Pershing."
     },
     {
       "ticker": "MANIG",
@@ -110,14 +72,14 @@
       "status": "OPEN",
       "name": "MAN GLG GLOBAL INVESTMENT GRADE OPPORTUNITIES FUND CLASS IVY",
       "qty": 15027.986,
-      "mv_usd": 1880602.17,
+      "mv_usd": 1880151.33,
       "cost_basis_usd": 1793340.62,
-      "unrealized_gl_usd": 87261.55,
-      "return_pct": 4.87,
-      "last_price_pershing": 125.14,
+      "unrealized_gl_usd": 86810.71,
+      "return_pct": 4.84,
+      "last_price_pershing": 125.11,
       "bench_label": "AGG",
       "bench_dw_pct": 3.26,
-      "alpha_real_pp": 1.61,
+      "alpha_real_pp": 1.58,
       "first_buy_date": "2025-07-07",
       "period_end": "2026-06-24",
       "n_trades": 10,
@@ -169,14 +131,14 @@
       "status": "OPEN",
       "name": "PIMCO EMERGING LOCAL BOND FUND INSTITUTIONAL CLASS (ACC)(USD",
       "qty": 61949.011,
-      "mv_usd": 1145437.21,
+      "mv_usd": 1126852.51,
       "cost_basis_usd": 1138060.0,
-      "unrealized_gl_usd": 7377.21,
-      "return_pct": 0.65,
-      "last_price_pershing": 18.49,
+      "unrealized_gl_usd": -11207.49,
+      "return_pct": -0.98,
+      "last_price_pershing": 18.19,
       "bench_label": "AGG",
       "bench_dw_pct": 0.54,
-      "alpha_real_pp": 0.11,
+      "alpha_real_pp": -1.52,
       "first_buy_date": "2026-01-30",
       "period_end": "2026-06-24",
       "n_trades": 2,
@@ -231,14 +193,14 @@
       "status": "OPEN",
       "name": "SCHRODER GAIA CAT BOND FUND CLASS C (USD)(ACC) ISIN LU204931",
       "qty": 246.15,
-      "mv_usd": 525188.1,
+      "mv_usd": 525225.02,
       "cost_basis_usd": 519996.8,
-      "unrealized_gl_usd": 5191.3,
-      "return_pct": 1.0,
-      "last_price_pershing": 2133.61,
+      "unrealized_gl_usd": 5228.22,
+      "return_pct": 1.01,
+      "last_price_pershing": 2133.76,
       "bench_label": "AGG",
       "bench_dw_pct": 0.6,
-      "alpha_real_pp": 0.4,
+      "alpha_real_pp": 0.41,
       "first_buy_date": "2026-04-13",
       "period_end": "2026-06-24",
       "n_trades": 1,
@@ -258,11 +220,11 @@
       "status": "OPEN",
       "name": "MAN EMERGING MARKETS CORPORATE CREDIT ALTERNATIVE FUND CLASS",
       "qty": 176.056,
-      "mv_usd": 20197.14,
+      "mv_usd": 20195.38,
       "cost_basis_usd": 20030.0,
-      "unrealized_gl_usd": 167.14,
+      "unrealized_gl_usd": 165.38,
       "return_pct": 0.83,
-      "last_price_pershing": 114.72,
+      "last_price_pershing": 114.71,
       "bench_label": "AGG",
       "bench_dw_pct": 1.0,
       "alpha_real_pp": -0.17,
@@ -278,19 +240,6 @@
       "bench_ytd_pct": 0.49
     },
     {
-      "ticker": "PIMCO-INC",
-      "sleeve": "Fixed Income",
-      "status": "CLOSED",
-      "name": "PIMCO INCOME FUND INSTITUTIONAL CLASS (ACC)(USD)    ",
-      "cost_basis_usd": 6820070.92,
-      "proceeds_usd": 7200000.02,
-      "realized_gl_usd": 379929.10000000003,
-      "realized_gl_pct": 5.57,
-      "first_buy_date": "2025-07-07",
-      "last_sell_date": "2026-02-02",
-      "n_lots": 5
-    },
-    {
       "ticker": "WELLCRED",
       "sleeve": "Fixed Income",
       "status": "CLOSED",
@@ -304,5 +253,6 @@
       "n_lots": 9
     }
   ],
-  "_daily_refresh_note": "Daily refresh 2026-06-24: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump."
+  "_daily_refresh_note": "Daily refresh 2026-06-24: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
+  "_synced_to_positions": "2026-06-24: MVs sincronizados desde positions_latest.json (Pershing 24-Jun)"
 }
