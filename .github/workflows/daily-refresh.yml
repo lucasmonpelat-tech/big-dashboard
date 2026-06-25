@@ -129,6 +129,10 @@ jobs:
       - name: Refresh holdings returns T-1 (cost basis methodology)
         run: python scripts/refresh_holdings_returns_daily.py
         continue-on-error: true
+        
+      - name: Sync alts_race con Pershing UGL (cost-basis weighted)
+        run: python scripts/sync_alts_ugl.py
+        continue-on-error: true
 
       - name: Brinson Attribution YTD
         run: python scripts/compute_attribution.py
