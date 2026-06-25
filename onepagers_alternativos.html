@@ -29,11 +29,21 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   }
   .navbar .nav-title { font-size: 13px; font-weight: 600; letter-spacing: 0.3px; }
-  .navbar .nav-tabs { display: flex; gap: 4px; margin-left: auto; }
+  .navbar .nav-tabs { display: flex; gap: 14px; margin-left: auto; align-items: flex-end; }
+  .nav-group { display: flex; flex-direction: column; gap: 3px; }
+  .nav-group-label {
+    font-size: 8.5px; color: #c9a961; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; text-align: center; padding: 0 2px;
+  }
+  .nav-group-inner {
+    display: flex; gap: 3px; padding: 3px;
+    background: rgba(13,27,42,0.5); border-radius: 4px;
+    border: 1px solid rgba(201,169,97,0.35);
+  }
   .navbar .nav-tab {
-    padding: 6px 14px; cursor: pointer; border-radius: 3px;
-    background: #1a2f4a; color: #a0bcd8; font-size: 12px; font-weight: 500;
-    border: none; transition: all 0.15s;
+    padding: 5px 11px; cursor: pointer; border-radius: 2px;
+    background: #1a2f4a; color: #a0bcd8; font-size: 11.5px; font-weight: 500;
+    border: none; transition: all 0.15s; white-space: nowrap;
   }
   .navbar .nav-tab:hover { background: #2a4060; color: #fff; }
   .navbar .nav-tab.active { background: #c9a961; color: #0d1b2a; font-weight: 700; }
@@ -342,12 +352,22 @@
 <nav class="navbar">
   <div class="nav-title">PAMPA CAPITAL · One-Pagers Alternativos BIG</div>
   <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showPage('capm', this)">CAPM · Private Equity</button>
-    <button class="nav-tab" onclick="showPage('flex', this)">FLEX-I · Secondaries</button>
-    <button class="nav-tab" onclick="showPage('bxpe', this)">BXPE · Blackstone PE</button>
-    <button class="nav-tab" onclick="showPage('kpec', this)">K-PEC · KKR PE</button>
-    <button class="nav-tab" onclick="showPage('hlgpi', this)">HL GPI · Infrastructure</button>
-    <button class="nav-tab" onclick="showPage('kinfra', this)">K-INFRA · KKR Infra</button>
+    <div class="nav-group">
+      <div class="nav-group-label">Private Equity</div>
+      <div class="nav-group-inner">
+        <button class="nav-tab active" onclick="showPage('capm', this)">CAPM</button>
+        <button class="nav-tab" onclick="showPage('flex', this)">FLEX-I</button>
+        <button class="nav-tab" onclick="showPage('bxpe', this)">BXPE</button>
+        <button class="nav-tab" onclick="showPage('kpec', this)">K-PEC</button>
+      </div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">Infrastructure</div>
+      <div class="nav-group-inner">
+        <button class="nav-tab" onclick="showPage('hlgpi', this)">HL GPI</button>
+        <button class="nav-tab" onclick="showPage('kinfra', this)">K-INFRA</button>
+      </div>
+    </div>
   </div>
   <button class="print-btn" onclick="window.print()">🖨 Imprimir / PDF</button>
 </nav>
