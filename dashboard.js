@@ -2625,7 +2625,8 @@ async function renderAltsRace() {
              + `<br><span style="font-size:9px;color:#6B88A8;">${h.source || ''}</span>`;
     };
     const sorted = [...holdings].sort((a, b) => (b.ytd_contribution_pct || -999) - (a.ytd_contribution_pct || -999));
-    document.getElementById('ar-holdings-body').innerHTML = sorted.map(h => `
+    const arHoldingsBody = document.getElementById('ar-holdings-body');
+    if (arHoldingsBody) arHoldingsBody.innerHTML = sorted.map(h => `
         <tr>
             <td class="left"><strong>${h.name}</strong> <span style="font-size:10px;color:#90CAF9;">(${h.ticker})</span></td>
             <td class="left">${subClassLabel[h.sub_class] || h.sub_class}</td>

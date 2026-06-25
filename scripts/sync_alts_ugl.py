@@ -82,6 +82,16 @@ def main():
             if ytd is not None:
                 h['ytd_contribution_pct'] = round(w * ytd / 100, 2)
 
+    # 3a) Recompute sub_class_breakdown_pct (los pesos cambian con MVs nuevos)
+    pm_pre = ar.setdefault('portfolio_metrics', {})
+    sub_pct = {}
+    if total > 0:
+        for h in ar['holdings']:
+            sc = h.get('sub_class') or 'other'
+            v = h.get('value_usd') or 0
+            sub_pct[sc] = sub_pct.get(sc, 0) + v / total * 100
+        pm_pre['sub_class_breakdown_pct'] = {k: round(v, 2) for k, v in sub_pct.items()}
+
     # 3) Recompute sleeve YTD/SI/etc from weighted contributions (cost-basis)
     sleeve_ytd_cb = sum(h.get('ytd_contribution_pct', 0) or 0 for h in ar['holdings'])
     sleeve_si_cb = sum(h.get('contribution_pct', 0) or 0 for h in ar['holdings'])
