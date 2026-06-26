@@ -82,6 +82,13 @@
         }
         .tab-section { display: none; }
         .tab-section.active { display: block; }
+        /* One Pagers tab: full-width, escapar del container .main */
+        #tab-onepagers.active {
+            margin: 0 calc(50% - 50vw) -48px;
+            padding: 0;
+        }
+        #tab-onepagers .section-title { padding: 0 24px; }
+        #tab-onepagers iframe { display: block; }
 
         /* ===== SECTION TITLE ===== */
         .section-title {
@@ -1217,13 +1224,10 @@
              editandose por separado y se ve aca sin duplicar)
              ======================================== -->
         <section id="tab-onepagers" class="tab-section">
-            <h2 class="section-title">📄 One-Pagers Alternativos — CAPM · FLEX-I · HL GPI</h2>
-            <div class="info-box" style="border-left-color: #D4AF37;">
-                <strong>Material de soporte:</strong> one-pagers institucionales de los fondos alternativos del sleeve. Editable en <code>onepagers_alternativos.html</code> del repo, se refleja aca automaticamente. Tambien accesible directo en <a href="onepagers_alternativos.html" target="_blank" style="color:#D4AF37;">vista completa</a>.
-            </div>
+            <h2 class="section-title">📄 One-Pagers Alternativos — CAPM · FLEX-I · HL GPI <a href="onepagers_alternativos.html" target="_blank" style="color:#D4AF37; font-size:12px; font-weight:400; margin-left:12px;">[abrir en pestaña aparte ↗]</a></h2>
             <iframe
                 src="onepagers_alternativos.html"
-                style="width:100%; height: calc(100vh - 220px); min-height: 800px; border: 1px solid #1F3864; border-radius: 6px; background:#d8d6cc;"
+                style="width:100%; height: calc(100vh - 140px); min-height: 900px; border: 0; background:#d8d6cc; display:block;"
                 title="One-Pagers Alternativos">
             </iframe>
         </section>
