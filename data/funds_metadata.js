@@ -33,7 +33,7 @@ const BIG_POSITIONS = [
     { isin: "US4642873909", ticker: "ILF", name: "iShares Latin America 40 ETF", sleeve: "Equity", value: 332500.00, pct: 1.28, terInst: 0.59, terA: null },
 
     // ----- ALTERNATIVES (mix of Pershing + CALP external) -----
-    { isin: "LU2827810776", ticker: "CALP", name: "Carlyle AlpInvest Private Markets", sleeve: "Alternatives", value: 2722180.00, pct: 10.44, terInst: 1.00, terA: null, external: true },
+    { isin: "LU2827810776", ticker: "CALP", name: "Carlyle AlpInvest Private Markets", sleeve: "Alternatives", value: 2738984.31, pct: 10.52, terInst: 1.00, terA: null, external: true },
     { isin: "US46438F1012", ticker: "IBIT", name: "iShares Bitcoin Trust", sleeve: "Alternatives", value: 721005.82, pct: 2.77, terInst: 1.25, terA: null },
     { isin: "US78463V1070", ticker: "GLD", name: "SPDR Gold Shares", sleeve: "Alternatives", value: 706762.16, pct: 2.71, terInst: 0.25, terA: null },
     { isin: "KYG4737U1085", ticker: "HLEND", name: "HPS Corporate Lending Fund", sleeve: "Alternatives", value: 759172.36, pct: 2.92, terInst: 0.75, terA: null },
