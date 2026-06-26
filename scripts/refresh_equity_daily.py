@@ -48,7 +48,16 @@ def _is_valid_price(value) -> bool:
 
 
 def _is_month_end(date_str):
-    return date_str.endswith(("-28", "-29", "-30", "-31"))
+    """True solo si date_str es el ULTIMO dia real del mes calendario.
+
+    Bug previo (pre-2026-06-26): consideraba CUALQUIER dia -28/-29/-30/-31
+    como month-end. Para meses de 31 dias (Mar/May/Jul/etc), el -28 disparaba
+    un reset prematuro del anchor TWR → flow_in y twr quedaban en 0 los
+    ultimos 3-4 dias del mes → audit TWR mensual rompia (721 bps en May-26).
+    """
+    import calendar
+    y, m, d = map(int, date_str.split("-"))
+    return d == calendar.monthrange(y, m)[1]
 
 
 def load_daily_prices():

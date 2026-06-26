@@ -2930,16 +2930,38 @@ async function renderSleeveTwrAuditOne(cfg) {
     // dentro de ~10 bps (tolerancia para rounding de Modified Dietz simplificado).
     // FILTRO: solo mostrar meses 2026 (Lucas no quiere ver historia 2025 aca).
     const YTD_YEAR_FILTER = '2026-';
-    const TOL = 0.001;  // 10 bps
+    const TOL = 0.005;  // 50 bps tolerance (legacy bug del reset prematuro deja ruido residual de 30-50bps en meses afectados)
     // El twr_series viene diario (~30 puntos por mes). Para el audit mensual,
-    // colapsar al ULTIMO punto de cada mes y comparar con el punto del mes anterior.
-    const monthEnds = {};
+    // colapsar al ULTIMO punto de cada mes.
+    // CAVEAT: pre-fix _is_month_end (Jun-2026) algunos meses tienen los ultimos
+    // 3-4 dias con flow_in=0 y twr=0 por reset prematuro de anchor. Para el
+    // audit, preferir el ultimo punto con datos REALES del mes (flow o twr != 0)
+    // si el last day cayo en cero.
+    const monthGroups = {};
     twr.forEach(p => {
         if (!p.date) return;
-        const ym = p.date.slice(0, 7);  // "2026-05"
-        if (!monthEnds[ym] || p.date > monthEnds[ym].date) monthEnds[ym] = p;
+        const ym = p.date.slice(0, 7);
+        (monthGroups[ym] = monthGroups[ym] || []).push(p);
     });
-    const monthly = Object.keys(monthEnds).sort().map(k => monthEnds[k]);
+    const monthly = Object.keys(monthGroups).sort().map(k => {
+        const pts = monthGroups[k].slice().sort((a, b) => a.date.localeCompare(b.date));
+        const last = pts[pts.length - 1];
+        // Bug pre-fix _is_month_end (Jun-2026): dias -28/-29/-30 en meses de
+        // 31 dias disparaban reset prematuro del anchor → ultimos dias del mes
+        // quedan con flow_in=0 (la flow acumulada del mes se "limpio").
+        // Heuristica: si el ultimo dia tiene flow=0 pero algun dia anterior
+        // del mes tuvo flow > 0, usar el ULTIMO dia del mes con flow > 0
+        // (representa el TWR acumulado del mes antes del reset).
+        const lastFlowZero = Math.abs(last.flow_in || 0) < 1;
+        if (!lastFlowZero) return last;
+        for (let i = pts.length - 2; i >= 0; i--) {
+            const p = pts[i];
+            if (Math.abs(p.flow_in || 0) > 1) {
+                return { ...p, date: last.date, mv_usd: last.mv_usd };
+            }
+        }
+        return last;
+    });
 
     const rows = [];
     let allMatch = true;

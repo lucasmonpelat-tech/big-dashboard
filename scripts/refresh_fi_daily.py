@@ -33,7 +33,14 @@ SLEEVE_FILE = ROOT / "data" / "fi_sleeve_real.json"
 
 
 def _is_month_end(date_str):
-    return date_str.endswith(("-28", "-29", "-30", "-31"))
+    """True solo si date_str es el ultimo dia REAL del mes calendario.
+
+    Bug previo (pre-2026-06-26): consideraba CUALQUIER dia -28/-29/-30/-31
+    como month-end → reset anchor prematuro en meses de 31 dias.
+    """
+    import calendar
+    y, m, d = map(int, date_str.split("-"))
+    return d == calendar.monthrange(y, m)[1]
 
 
 def _is_valid_price(value) -> bool:
