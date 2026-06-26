@@ -2931,11 +2931,21 @@ async function renderSleeveTwrAuditOne(cfg) {
     // FILTRO: solo mostrar meses 2026 (Lucas no quiere ver historia 2025 aca).
     const YTD_YEAR_FILTER = '2026-';
     const TOL = 0.001;  // 10 bps
+    // El twr_series viene diario (~30 puntos por mes). Para el audit mensual,
+    // colapsar al ULTIMO punto de cada mes y comparar con el punto del mes anterior.
+    const monthEnds = {};
+    twr.forEach(p => {
+        if (!p.date) return;
+        const ym = p.date.slice(0, 7);  // "2026-05"
+        if (!monthEnds[ym] || p.date > monthEnds[ym].date) monthEnds[ym] = p;
+    });
+    const monthly = Object.keys(monthEnds).sort().map(k => monthEnds[k]);
+
     const rows = [];
     let allMatch = true;
-    for (let i = 1; i < twr.length; i++) {
-        const prev = twr[i - 1];
-        const curr = twr[i];
+    for (let i = 1; i < monthly.length; i++) {
+        const prev = monthly[i - 1];
+        const curr = monthly[i];
         // Filtrar solo meses 2026
         if (!curr.date.startsWith(YTD_YEAR_FILTER)) continue;
         const mvStart = prev.mv_usd;
