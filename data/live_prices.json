@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-06-29T14:53:53.744922",
+  "refreshedAt": "2026-06-30T06:38:39.106947",
   "prices": {
     "ILF": {
       "price": 33.810001373291016,
@@ -10,7 +10,9 @@
       "low": 33.310001373291016,
       "volume": 900300.0,
       "source": "Yahoo Finance",
-      "stale": false
+      "stale": true,
+      "stale_since": "2026-06-30T06:38:39.106509",
+      "stale_reason": "yfinance retorno NaN/None"
     },
     "ARGT": {
       "price": 91.30000305175781,
@@ -21,7 +23,9 @@
       "low": 89.81999969482422,
       "volume": 78000.0,
       "source": "Yahoo Finance",
-      "stale": false
+      "stale": true,
+      "stale_since": "2026-06-30T06:38:39.106593",
+      "stale_reason": "yfinance retorno NaN/None"
     },
     "GLD": {
       "price": 373.6300048828125,
@@ -32,7 +36,9 @@
       "low": 371.17999267578125,
       "volume": 5591900.0,
       "source": "Yahoo Finance",
-      "stale": false
+      "stale": true,
+      "stale_since": "2026-06-30T06:38:39.106660",
+      "stale_reason": "yfinance retorno NaN/None"
     },
     "IBIT": {
       "price": 33.849998474121094,
@@ -43,7 +49,9 @@
       "low": 33.25,
       "volume": 59134700.0,
       "source": "Yahoo Finance",
-      "stale": false
+      "stale": true,
+      "stale_since": "2026-06-30T06:38:39.106722",
+      "stale_reason": "yfinance retorno NaN/None"
     },
     "CSPX": {
       "price": 794.1300048828125,
@@ -54,7 +62,9 @@
       "low": 785.52001953125,
       "volume": 108936.0,
       "source": "Yahoo Finance",
-      "stale": false
+      "stale": true,
+      "stale_since": "2026-06-30T06:38:39.106783",
+      "stale_reason": "yfinance retorno NaN/None"
     },
     "THOR": {
       "price": 38.279998779296875,
@@ -65,7 +75,9 @@
       "low": 38.279998779296875,
       "volume": 0,
       "source": "Yahoo Finance",
-      "stale": false
+      "stale": true,
+      "stale_since": "2026-06-30T06:38:39.106866",
+      "stale_reason": "yfinance retorno NaN/None"
     },
     "4BRZ": {
       "price": 34.66999816894531,
@@ -76,15 +88,17 @@
       "low": 34.099998474121094,
       "volume": 20640800.0,
       "source": "Yahoo Finance",
-      "stale": false
+      "stale": true,
+      "stale_since": "2026-06-30T06:38:39.106937",
+      "stale_reason": "yfinance retorno NaN/None"
     },
     "HLEND": null,
     "BPCC": null,
     "GCRED": null
   },
   "_meta": {
-    "fresh": 7,
-    "stale": 0,
+    "fresh": 0,
+    "stale": 7,
     "guard_note": "Tickers con stale=true mantienen ultimo precio valido (yfinance retorno NaN)"
   }
 }
