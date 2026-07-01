@@ -118,8 +118,20 @@ def fetch_bench_history(ticker, start_iso):
 
 
 def load_ytd_per_holding():
-    """Lee YTD por ticker de los archivos existentes (equity_race, fi_race, alts_race)."""
+    """YTD spot por ticker.
+
+    ANTES (bug fixed 2026-07-01): leia ytd_return_pct de los race JSONs
+    (equity_race.json, fi_race.json, alts_race.json). Problema: esos JSONs
+    se actualizan mensual/semanal via scripts separados, entonces el YTD
+    quedaba stale semanas o meses (ej: equity_race.json = Jun-19, fi_race
+    = May-21). GLD YTD dashboard +9.14% vs real -7.05% (gap +16pp).
+
+    AHORA: para cada ticker con precio yfinance publico, calcular YTD spot
+    on-the-fly. Para UCITS sin yfinance, usar ucits_daily_nav.json anchor
+    Dec-31-2025 si esta disponible. Fallback: leer stale race JSON.
+    """
     ytd = {}
+    # 1) Fallback: race JSONs (por si algun ticker no tiene yfinance)
     for fname in ['equity_race.json', 'fi_race.json', 'alts_race.json']:
         try:
             d = json.load(open(ROOT / 'data' / fname, encoding='utf-8'))
@@ -130,6 +142,53 @@ def load_ytd_per_holding():
                     ytd[tk] = v
         except Exception:
             pass
+
+    # 2) YTD SPOT via yfinance para tickers con precio publico
+    # Mapping ticker -> yahoo symbol (usa YAHOO_OVERRIDES si necesita, ej CSPX.L)
+    YAHOO_MAP = {
+        # Alts liquidos
+        'IBIT': 'IBIT', 'GLD': 'GLD',
+        # Equity ETFs
+        'ARGT': 'ARGT', 'ILF': 'ILF', '4BRZ': '4BRZ.DE',
+        'CSPX': 'CSPX.L',
+    }
+    try:
+        import yfinance as yf
+        for tk, sym in YAHOO_MAP.items():
+            try:
+                t = yf.Ticker(sym)
+                # anchor Dec-31-2025
+                hist_dec = t.history(start='2025-12-28', end='2026-01-02', auto_adjust=True)
+                if not len(hist_dec):
+                    continue
+                anchor = float(hist_dec['Close'].iloc[-1])
+                # hoy
+                hist_now = t.history(period='5d', auto_adjust=True)
+                if not len(hist_now):
+                    continue
+                last = float(hist_now['Close'].iloc[-1])
+                if anchor > 0 and last > 0:
+                    ytd_spot = round((last / anchor - 1) * 100, 2)
+                    old = ytd.get(tk)
+                    ytd[tk] = ytd_spot
+                    if old is not None and abs(old - ytd_spot) > 1:
+                        print(f"    [ytd_spot yf] {tk}: {old:+.2f}% -> {ytd_spot:+.2f}% ({sym})")
+            except Exception as e:
+                print(f"    WARNING yfinance {tk}: {str(e)[:60]}")
+    except ImportError:
+        pass
+
+    # 3) YTD SPOT para UCITS via ucits_daily_nav.json (NBGMT, MFSCV, THOR, JHGSC, LGLI)
+    # Necesita anchor Dec-31-2025 de baha. Si no lo tenemos, deja el stale.
+    try:
+        ud = json.load(open(ROOT / 'data' / 'ucits_daily_nav.json', encoding='utf-8'))
+        navs = ud.get('navs', {})
+        # Ancla historica (Dec-31-2025) — necesita venir del script mensual.
+        # Por ahora si no tenemos ancla, no pisamos el stale.
+        # TODO: mantener un ucits_ytd_anchor.json con NAV Dec-31 por fondo.
+    except Exception:
+        pass
+
     return ytd
 
 

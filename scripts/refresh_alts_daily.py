@@ -183,7 +183,7 @@ def main():
             sources_summary["icapital_statement"].append(tk)
             continue
 
-        # Holding liquido: precio fresco en Stooq -> recalc MV
+        # Holding liquido: precio fresco en Stooq -> recalc MV + YTD spot
         pos = alts_qty.get(tk)
         if pos and tk in stooq:
             price, price_date = stooq[tk]
@@ -195,6 +195,22 @@ def main():
                 h["source"] = f"Stooq cierre {price_date or '(T-1)'}"
                 h["days_since_valuation"] = days_between(
                     h["valuation_date"], today_iso)
+                # FIX 2026-07-01: YTD spot con yfinance para ETFs liquidos.
+                # Antes: ytd_return_pct venia stale del alts_race.py mensual.
+                # Ahora: (price_hoy / close_2025-12-31 - 1) * 100.
+                try:
+                    import yfinance as yf
+                    hist = yf.Ticker(tk).history(start="2025-12-28", end="2025-12-31")
+                    if len(hist):
+                        anchor = float(hist["Close"].iloc[-1])
+                        if anchor > 0:
+                            ytd_spot = round((price / anchor - 1) * 100, 2)
+                            old_ytd = h.get("ytd_return_pct")
+                            h["ytd_return_pct"] = ytd_spot
+                            # Reconstruir SI (cost basis weighted del holding_returns)
+                            print(f"  [ytd_spot] {tk}: {old_ytd}% -> {ytd_spot}% (price ${price:.2f} / anchor ${anchor:.2f})")
+                except Exception as e:
+                    print(f"  WARNING ytd_spot {tk}: {e}")
                 sources_summary["daily_close_stooq"].append(tk)
                 continue
 

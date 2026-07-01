@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-07-01T13:40:13.536597",
+  "refreshedAt": "2026-07-01T18:12:31.127187",
   "inception": "2025-06-30",
   "benchmark_primary": "60/40 blend (60% ACWI + 40% AGG)",
   "benchmark_secondary": "HFRX Global HF proxy (QAI ETF)",
@@ -13,31 +13,31 @@
       "private_infra": 14.63
     },
     "n_holdings": 8,
-    "ytd_return_pct": 0.88,
+    "ytd_return_pct": -1.78,
     "si_return_pct": 2.88
   },
   "stats_vs_6040": {
     "latest_month": "2026-06",
     "returns": {
       "1M": {
-        "sleeve": 0.52,
+        "sleeve": 0.12,
         "bmk6040": -1.18,
-        "alpha": 1.7
+        "alpha": 1.3
       },
       "3M": {
-        "sleeve": 0.86,
+        "sleeve": -0.36,
         "bmk6040": 7.55,
-        "alpha": -6.69
+        "alpha": -7.91
       },
       "6M": {
-        "sleeve": 0.86,
+        "sleeve": -1.7,
         "bmk6040": 6.17,
-        "alpha": -5.31
+        "alpha": -7.87
       },
       "YTD": {
-        "sleeve": 0.86,
+        "sleeve": -1.7,
         "bmk6040": 6.17,
-        "alpha": -5.31
+        "alpha": -7.87
       },
       "SI": {
         "sleeve": 2.88,
@@ -88,17 +88,17 @@
   },
   "sleeve_index": {
     "2025-06": 100.0,
-    "2025-07": 100.319,
-    "2025-08": 100.6281,
-    "2025-09": 100.9416,
-    "2025-10": 101.2043,
-    "2025-11": 101.4578,
-    "2025-12": 102.0,
-    "2026-01": 101.9353,
-    "2026-02": 101.9428,
-    "2026-03": 102.006,
-    "2026-04": 102.2267,
-    "2026-05": 102.347,
+    "2025-07": 100.6673,
+    "2025-08": 101.3345,
+    "2025-09": 102.0017,
+    "2025-10": 102.6678,
+    "2025-11": 103.3336,
+    "2025-12": 104.66,
+    "2026-01": 103.7524,
+    "2026-02": 103.5004,
+    "2026-03": 103.2496,
+    "2026-04": 103.0024,
+    "2026-05": 102.753,
     "2026-06": 102.88
   },
   "bmk6040_index": {
@@ -171,9 +171,9 @@
       "value_usd": 702951.66,
       "weight_pct": 9.23,
       "si_return_pct": -38.27,
-      "ytd_return_pct": -18.47,
+      "ytd_return_pct": -31.52,
       "contribution_pct": -3.53,
-      "ytd_contribution_pct": -1.7,
+      "ytd_contribution_pct": -2.91,
       "assumed_annual_pct": null,
       "source": "Pershing UGL via sync_alts_ugl.py",
       "valuation_date": "2026-07-01",
@@ -187,9 +187,9 @@
       "value_usd": 708763.13,
       "weight_pct": 9.31,
       "si_return_pct": 19.15,
-      "ytd_return_pct": 9.14,
+      "ytd_return_pct": -6.49,
       "contribution_pct": 1.78,
-      "ytd_contribution_pct": 0.85,
+      "ytd_contribution_pct": -0.6,
       "assumed_annual_pct": null,
       "source": "Pershing UGL via sync_alts_ugl.py",
       "valuation_date": "2026-07-01",
@@ -276,7 +276,7 @@
       "days_since_valuation": 0
     }
   ],
-  "_sync_alts_ugl_at": "2026-07-01T17:47:53.997602",
+  "_sync_alts_ugl_at": "2026-07-01T18:12:38.760776",
   "_sync_alts_ugl_note": "Returns y sleeve YTD/SI sobreescritos con Pershing UGL (cost-basis weighted). sleeve_index mensual sigue siendo time-weighted con proxies (para charts históricos).",
   "_daily_refresh_note": "Refresh diario 2026-07-01: 2 liquidos via Stooq T-1, 3 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $7,607,861."
 }
