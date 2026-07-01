@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-06-30T13:15:03.829563",
+  "refreshedAt": "2026-07-01T13:40:12.356332",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -828,6 +828,75 @@
           "qty": 10000.0,
           "price": 33.84000015258789,
           "mv": 338400.0015258789,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "4BRZ",
+          "qty": 6979.0,
+          "price": 50.87,
+          "mv": 355021.73,
+          "source": "daily_close"
+        }
+      ]
+    },
+    {
+      "date": "2026-07-01",
+      "mv_usd": 8061938.143290618,
+      "holdings": [
+        {
+          "ticker": "CSPX",
+          "qty": 3408.0,
+          "price": 805.5399780273438,
+          "mv": 2745280.2451171875,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "NBGMT",
+          "qty": 58050.998,
+          "price": 23.37,
+          "mv": 1356651.82326,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MFSCV",
+          "qty": 4063.638,
+          "price": 290.86,
+          "mv": 1181949.74868,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "THOR",
+          "qty": 14410.584,
+          "price": 43.14,
+          "mv": 621672.5937600001,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "JHGSC",
+          "qty": 10410.46,
+          "price": 54.4,
+          "mv": 566329.024,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "LGLI",
+          "qty": 26511.134,
+          "price": 20.0796,
+          "mv": 532332.9662664,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "ARGT",
+          "qty": 4000.0,
+          "price": 91.30000305175781,
+          "mv": 365200.01220703125,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "ILF",
+          "qty": 10000.0,
+          "price": 33.75,
+          "mv": 337500.0,
           "source": "daily_close"
         },
         {
@@ -3345,6 +3414,13 @@
       "flow_in": 0.0,
       "twr": 0.0018960394418703341,
       "index": 112.1992
+    },
+    {
+      "date": "2026-07-01",
+      "mv_usd": 8061938.143290618,
+      "flow_in": 0.0,
+      "twr": 0.0034731703893919885,
+      "index": 112.5889
     }
   ],
   "acwi_index_series": [
@@ -5216,6 +5292,11 @@
       "date": "2026-06-30",
       "price": 155.82,
       "index": 120.9519
+    },
+    {
+      "date": "2026-07-01",
+      "price": 155.75,
+      "index": 120.8975
     }
   ],
   "equity_flows_by_month": {
@@ -5406,7 +5487,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-06-30 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing Jun 24, 2026.",
+  "_daily_refresh_note": "Punto 2026-07-01 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing Jun 24, 2026.",
   "twr_series_original": [
     {
       "date": "2025-07-31",
