@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-05-21T15:05:44.980307",
+  "refreshedAt": "2026-07-02T12:58:12.363802",
   "inception": "2025-06-30",
   "benchmark": "Bloomberg US Aggregate (via AGG ETF)",
   "ust_reference": "10Y US Treasury (^TNX)",
@@ -183,7 +183,7 @@
       "ytw": 8.67,
       "duration": 5.17,
       "maturity": 11.92,
-      "rating": "\u2014",
+      "rating": "—",
       "spread_vs_ust": 4.11,
       "source": "carry:8.67%/yr"
     },
@@ -221,5 +221,7 @@
       "spread_vs_ust": -4.56,
       "source": "baha:IE00089T5MA6"
     }
-  ]
+  ],
+  "_daily_anchors": {},
+  "_daily_race_note": "Retornos por fondo recalculados 2026-07-02 con NAV vivo T-1 (baha). YTD exacto (ancla NAV 31-dic): —. YTD calibrado desde mensual 2026-04: —. Sin NAV vivo (carry/scrape): ['PIMCO-LD', 'PIMCO-INC', 'MANIG', 'PIMCO-EM', 'TGF', 'SGCB', 'MANEM']."
 }

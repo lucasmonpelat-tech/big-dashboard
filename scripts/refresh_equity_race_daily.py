@@ -119,6 +119,52 @@ def main():
     print(f"  Close date: {close_date} | ACWI date: {acwi_date}")
     print(f"  Saved: {RACE_FILE}")
 
+    # FIX 2026-07-02: sobreescribir YTDs del equity_race.json con spot yfinance.
+    # Antes: equity_race.json quedaba stale desde el ultimo run manual de
+    # equity_race.py (mensual), y refresh_holdings_returns_daily.py leia esos
+    # YTDs stale y los mostraba en el UI.
+    equity_race_file = ROOT / "data" / "equity_race.json"
+    if equity_race_file.exists():
+        try:
+            import yfinance as yf
+            YMAP = {
+                'CSPX': 'CSPX.L', 'ARGT': 'ARGT', 'ILF': 'ILF',
+                '4BRZ': '4BRZ.DE',
+                # UCITS sin yfinance decente -> no se pisa (fallback al legacy)
+            }
+            er = json.load(open(equity_race_file, encoding='utf-8'))
+            n_updated = 0
+            for h in er.get('holdings', []):
+                tk = h.get('ticker')
+                sym = YMAP.get(tk)
+                if not sym:
+                    continue
+                try:
+                    t = yf.Ticker(sym)
+                    hist_dec = t.history(start='2025-12-28', end='2026-01-02', auto_adjust=True)
+                    hist_now = t.history(period='5d', auto_adjust=True)
+                    if len(hist_dec) and len(hist_now):
+                        anchor = float(hist_dec['Close'].iloc[-1])
+                        last = float(hist_now['Close'].iloc[-1])
+                        if anchor > 0:
+                            ytd_new = round((last / anchor - 1) * 100, 2)
+                            old = h.get('ytd_return_pct')
+                            h['ytd_return_pct'] = ytd_new
+                            if old is not None and abs(old - ytd_new) > 1:
+                                print(f"  [equity_race YTD spot] {tk}: {old:+.2f}% -> {ytd_new:+.2f}%")
+                            n_updated += 1
+                except Exception as e:
+                    print(f"    WARN {tk}: {str(e)[:50]}")
+            er['refreshedAt'] = datetime.now().isoformat()
+            er['_ytd_spot_updated'] = f'{datetime.now().date()}: {n_updated} holdings YTD spot via yfinance'
+            with open(equity_race_file, 'w', encoding='utf-8') as f:
+                json.dump(er, f, indent=2, ensure_ascii=False)
+            print(f"  equity_race.json: {n_updated} holdings con YTD spot fresco")
+        except ImportError:
+            print("  yfinance no disponible, skip equity_race YTD spot")
+        except Exception as e:
+            print(f"  WARN equity_race YTD spot: {e}")
+
 
 if __name__ == "__main__":
     main()

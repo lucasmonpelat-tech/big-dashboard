@@ -107,13 +107,33 @@ def main():
         return
     race = json.load(open(RACE_FILE, encoding="utf-8"))
 
-    if not FUND_NAV_FILE.exists():
-        print(f"  WARN: {FUND_NAV_FILE} no existe todavia (scraper baha aun no corrio para FI).")
-        print("        Se mantiene la tabla mensual sin cambios.")
-        return
-    fund_navs = json.load(open(FUND_NAV_FILE, encoding="utf-8")).get("navs", {})
+    # FIX 2026-07-02: preferir ucits_daily_nav.json (donde estan los NAVs vivos
+    # actualizados por baha_nav_refresher). fi_fund_nav.json quedaba vacio pq
+    # el pipeline se consolido en ucits_daily_nav. Fallback al legacy si existe.
+    ucits_file = ROOT / "data" / "ucits_daily_nav.json"
+    fund_navs = {}
+    if ucits_file.exists():
+        try:
+            ucits = json.load(open(ucits_file, encoding="utf-8")).get("navs", {})
+            for isin_key, rec in ucits.items():
+                # ucits_daily_nav guarda por ISIN. Normalizar formato: {isin: {nav, currency}}
+                fund_navs[isin_key] = {
+                    "nav": rec.get("nav"),
+                    "currency": rec.get("currency", "USD"),
+                    "ticker": rec.get("ticker"),
+                }
+            if fund_navs:
+                print(f"  Loaded {len(fund_navs)} NAVs desde ucits_daily_nav.json")
+        except Exception as e:
+            print(f"  WARN ucits_daily_nav: {e}")
+
+    if not fund_navs and FUND_NAV_FILE.exists():
+        legacy = json.load(open(FUND_NAV_FILE, encoding="utf-8")).get("navs", {})
+        fund_navs.update(legacy)
+        print(f"  Fallback: {len(fund_navs)} NAVs desde fi_fund_nav.json (legacy)")
+
     if not fund_navs:
-        print("  WARN: fi_fund_nav.json sin navs. Se mantiene mensual.")
+        print("  WARN: sin NAVs FI (ucits_daily_nav.json y fi_fund_nav.json vacios). Se mantiene mensual.")
         return
 
     basis_month = (race.get("stats") or {}).get("latest_month")  # ej "2026-04"
