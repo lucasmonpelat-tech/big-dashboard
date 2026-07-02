@@ -1,8 +1,8 @@
 {
-  "refreshedAt": "2026-07-01T18:12:38.212942",
+  "refreshedAt": "2026-07-02T13:05:12.197598",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Fixed Income",
-  "period_end": "2026-07-01",
+  "period_end": "2026-07-02",
   "n_open": 7,
   "n_closed": 2,
   "holdings": [
@@ -21,7 +21,7 @@
       "bench_dw_pct": 0.39,
       "alpha_real_pp": 0.67,
       "first_buy_date": "2026-01-30",
-      "period_end": "2026-07-01",
+      "period_end": "2026-07-02",
       "n_trades": 2,
       "buys_history": [
         {
@@ -80,7 +80,7 @@
       "bench_dw_pct": 2.97,
       "alpha_real_pp": 1.87,
       "first_buy_date": "2025-07-07",
-      "period_end": "2026-07-01",
+      "period_end": "2026-07-02",
       "n_trades": 9,
       "buys_history": [
         {
@@ -139,7 +139,7 @@
       "bench_dw_pct": 0.26,
       "alpha_real_pp": -1.24,
       "first_buy_date": "2026-01-30",
-      "period_end": "2026-07-01",
+      "period_end": "2026-07-02",
       "n_trades": 2,
       "buys_history": [
         {
@@ -170,7 +170,7 @@
       "bench_dw_pct": 4.07,
       "alpha_real_pp": 2.16,
       "first_buy_date": "2025-07-16",
-      "period_end": "2026-07-01",
+      "period_end": "2026-07-02",
       "n_trades": 2,
       "buys_history": [
         {
@@ -201,7 +201,7 @@
       "bench_dw_pct": 0.32,
       "alpha_real_pp": 0.69,
       "first_buy_date": "2026-04-13",
-      "period_end": "2026-07-01",
+      "period_end": "2026-07-02",
       "n_trades": 1,
       "buys_history": [
         {
@@ -228,7 +228,7 @@
       "bench_dw_pct": 0.72,
       "alpha_real_pp": 0.11,
       "first_buy_date": "2026-05-13",
-      "period_end": "2026-07-01",
+      "period_end": "2026-07-02",
       "n_trades": 1,
       "buys_history": [
         {
@@ -252,7 +252,7 @@
       "n_lots": 9
     }
   ],
-  "_daily_refresh_note": "Daily refresh 2026-07-01: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
+  "_daily_refresh_note": "Daily refresh 2026-07-02: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
   "_synced_to_positions": "2026-06-24: MVs sincronizados desde positions_latest.json (Pershing 24-Jun)",
   "_ugl_refresh": "2026-06-24: cost basis + returns desde Pershing UGL (Multiple-row aggregates)"
 }

@@ -1,8 +1,8 @@
 {
-  "refreshedAt": "2026-07-01T18:12:38.215830",
+  "refreshedAt": "2026-07-02T13:05:12.198397",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Alternatives",
-  "period_end": "2026-07-01",
+  "period_end": "2026-07-02",
   "n_open": 7,
   "n_closed": 2,
   "holdings": [
@@ -21,7 +21,7 @@
       "bench_dw_pct": 18.79,
       "alpha_real_pp": -9.23,
       "first_buy_date": "2025-08-29",
-      "period_end": "2026-07-01",
+      "period_end": "2026-07-02",
       "n_trades": 1,
       "buys_history": [
         {
@@ -40,16 +40,16 @@
       "status": "OPEN",
       "name": "ISHARES BITCOIN TR ETF SHS BEN INT     ",
       "qty": 21116.0,
-      "mv_usd": 702951.66,
+      "mv_usd": 717944.0,
       "cost_basis_usd": 1138663.4,
-      "unrealized_gl_usd": -435711.74,
-      "return_pct": -38.27,
-      "last_price_pershing": 33.29,
+      "unrealized_gl_usd": -420719.4,
+      "return_pct": -36.95,
+      "last_price_pershing": 34.0,
       "bench_label": "ACWI",
       "bench_dw_pct": 17.09,
-      "alpha_real_pp": -55.36,
+      "alpha_real_pp": -54.04,
       "first_buy_date": "2025-07-02",
-      "period_end": "2026-07-01",
+      "period_end": "2026-07-02",
       "n_trades": 10,
       "buys_history": [
         {
@@ -103,16 +103,16 @@
       "status": "OPEN",
       "name": "SPDR GOLD TR GOLD SHS     ",
       "qty": 1924.0,
-      "mv_usd": 708763.13,
+      "mv_usd": 713034.41,
       "cost_basis_usd": 594831.98,
-      "unrealized_gl_usd": 113931.15,
-      "return_pct": 19.15,
-      "last_price_pershing": 368.38,
+      "unrealized_gl_usd": 118202.43,
+      "return_pct": 19.87,
+      "last_price_pershing": 370.6,
       "bench_label": "ACWI",
       "bench_dw_pct": 22.01,
-      "alpha_real_pp": -2.86,
+      "alpha_real_pp": -2.14,
       "first_buy_date": "2025-07-02",
-      "period_end": "2026-07-01",
+      "period_end": "2026-07-02",
       "n_trades": 5,
       "buys_history": [
         {
@@ -155,7 +155,7 @@
       "bench_dw_pct": 14.53,
       "alpha_real_pp": -11.25,
       "first_buy_date": "2025-09-22",
-      "period_end": "2026-07-01",
+      "period_end": "2026-07-02",
       "n_trades": 1,
       "buys_history": [
         {
@@ -182,7 +182,7 @@
       "bench_dw_pct": 19.04,
       "alpha_real_pp": -11.67,
       "first_buy_date": "2025-07-25",
-      "period_end": "2026-07-01",
+      "period_end": "2026-07-02",
       "n_trades": 4,
       "buys_history": [
         {
@@ -202,9 +202,9 @@
           "cost": 50030.36
         }
       ],
-      "ytd_pct": 4.66,
+      "ytd_pct": 4.69,
       "bench_ytd_pct": 11.06,
-      "alpha_ytd_pp": -6.4
+      "alpha_ytd_pp": -6.37
     },
     {
       "ticker": "FLEX",
@@ -221,7 +221,7 @@
       "bench_dw_pct": 2.08,
       "alpha_real_pp": -1.72,
       "first_buy_date": "2026-05-07",
-      "period_end": "2026-07-01",
+      "period_end": "2026-07-02",
       "n_trades": 1,
       "buys_history": [
         {
@@ -248,7 +248,7 @@
       "bench_dw_pct": -0.04,
       "alpha_real_pp": 1.33,
       "first_buy_date": "2026-05-27",
-      "period_end": "2026-07-01",
+      "period_end": "2026-07-02",
       "n_trades": 2,
       "buys_history": [
         {
@@ -280,7 +280,7 @@
       "bench_dw_pct": 14.53,
       "alpha_real_pp": -13.42,
       "first_buy_date": "2025-09-22",
-      "period_end": "2026-07-01",
+      "period_end": "2026-07-02",
       "n_trades": 1,
       "buys_history": [
         {
@@ -306,7 +306,7 @@
       "n_lots": 1
     }
   ],
-  "_daily_refresh_note": "Daily refresh 2026-07-01: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
+  "_daily_refresh_note": "Daily refresh 2026-07-02: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
   "_synced_to_positions": "2026-06-24: MVs sincronizados desde positions_latest.json (Pershing 24-Jun)",
   "_ugl_refresh": "2026-06-24: cost basis + returns desde Pershing UGL (Multiple-row aggregates)",
   "_calp_added": "2026-06-25: CALP agregado desde alts_carlyle_statement.json (external, no esta en Pershing UGL)"
