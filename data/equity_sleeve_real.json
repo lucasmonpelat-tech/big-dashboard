@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-07-02T13:05:06.436496",
+  "refreshedAt": "2026-07-03T13:03:42.567236",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -840,14 +840,14 @@
       ]
     },
     {
-      "date": "2026-07-02",
-      "mv_usd": 8070733.652445892,
+      "date": "2026-07-03",
+      "mv_usd": 8063710.331706146,
       "holdings": [
         {
           "ticker": "CSPX",
           "qty": 3408.0,
-          "price": 808.9600219726562,
-          "mv": 2756935.7548828125,
+          "price": 806.0599975585938,
+          "mv": 2747052.4716796875,
           "source": "daily_close"
         },
         {
@@ -888,15 +888,15 @@
         {
           "ticker": "ARGT",
           "qty": 4000.0,
-          "price": 91.11000061035156,
-          "mv": 364440.00244140625,
+          "price": 91.44999694824219,
+          "mv": 365799.98779296875,
           "source": "daily_close"
         },
         {
           "ticker": "ILF",
           "qty": 10000.0,
-          "price": 33.540000915527344,
-          "mv": 335400.00915527344,
+          "price": 33.689998626708984,
+          "mv": 336899.98626708984,
           "source": "daily_close"
         },
         {
@@ -3416,11 +3416,11 @@
       "index": 112.1992
     },
     {
-      "date": "2026-07-02",
-      "mv_usd": 8070733.652445892,
+      "date": "2026-07-03",
+      "mv_usd": 8063710.331706146,
       "flow_in": 0.0,
-      "twr": 0.004567951483014809,
-      "index": 112.7117
+      "twr": 0.0036937555013401013,
+      "index": 112.6136
     }
   ],
   "acwi_index_series": [
@@ -5294,9 +5294,9 @@
       "index": 120.9519
     },
     {
-      "date": "2026-07-02",
-      "price": 156.12,
-      "index": 121.1847
+      "date": "2026-07-03",
+      "price": 156.15,
+      "index": 121.208
     }
   ],
   "equity_flows_by_month": {
@@ -5487,7 +5487,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-07-02 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing Jun 24, 2026.",
+  "_daily_refresh_note": "Punto 2026-07-03 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing Jun 24, 2026.",
   "twr_series_original": [
     {
       "date": "2025-07-31",
