@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-07-03T13:03:46.032073",
+  "refreshedAt": "2026-07-04T12:13:59.869025",
   "inception": "2025-06-30",
   "benchmark_primary": "60/40 blend (60% ACWI + 40% AGG)",
   "benchmark_secondary": "HFRX Global HF proxy (QAI ETF)",
@@ -88,17 +88,17 @@
   },
   "sleeve_index": {
     "2025-06": 100.0,
-    "2025-07": 100.706,
-    "2025-08": 101.4119,
-    "2025-09": 102.1179,
-    "2025-10": 102.8239,
-    "2025-11": 103.5298,
+    "2025-07": 100.7072,
+    "2025-08": 101.4144,
+    "2025-09": 102.1217,
+    "2025-10": 102.8289,
+    "2025-11": 103.5361,
     "2025-12": 104.88,
-    "2026-01": 104.0085,
-    "2026-02": 103.7813,
-    "2026-03": 103.554,
-    "2026-04": 103.3267,
-    "2026-05": 103.0995,
+    "2026-01": 104.0158,
+    "2026-02": 103.7882,
+    "2026-03": 103.5607,
+    "2026-04": 103.3332,
+    "2026-05": 103.1057,
     "2026-06": 103.31
   },
   "bmk6040_index": {
@@ -160,7 +160,7 @@
       "ytd_contribution_pct": 1.42,
       "assumed_annual_pct": 12.0,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-03",
+      "valuation_date": "2026-07-04",
       "days_since_valuation": 0
     },
     {
@@ -176,7 +176,7 @@
       "ytd_contribution_pct": -2.86,
       "assumed_annual_pct": null,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-03",
+      "valuation_date": "2026-07-04",
       "days_since_valuation": 0
     },
     {
@@ -192,7 +192,7 @@
       "ytd_contribution_pct": -0.44,
       "assumed_annual_pct": null,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-03",
+      "valuation_date": "2026-07-04",
       "days_since_valuation": 0
     },
     {
@@ -208,7 +208,7 @@
       "ytd_contribution_pct": 0.06,
       "assumed_annual_pct": 9.5,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-03",
+      "valuation_date": "2026-07-04",
       "days_since_valuation": 0
     },
     {
@@ -219,12 +219,12 @@
       "value_usd": 595348.04,
       "weight_pct": 7.76,
       "si_return_pct": 7.37,
-      "ytd_return_pct": 4.71,
+      "ytd_return_pct": 4.74,
       "contribution_pct": 0.57,
       "ytd_contribution_pct": 0.37,
       "assumed_annual_pct": 9.5,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-03",
+      "valuation_date": "2026-07-04",
       "days_since_valuation": 0
     },
     {
@@ -240,7 +240,7 @@
       "ytd_contribution_pct": 0.0,
       "assumed_annual_pct": 12.0,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-03",
+      "valuation_date": "2026-07-04",
       "days_since_valuation": 0
     },
     {
@@ -256,7 +256,7 @@
       "ytd_contribution_pct": 0.0,
       "assumed_annual_pct": 11.0,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-03",
+      "valuation_date": "2026-07-04",
       "days_since_valuation": 0
     },
     {
@@ -272,11 +272,11 @@
       "ytd_contribution_pct": -0.12,
       "assumed_annual_pct": 9.5,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-03",
+      "valuation_date": "2026-07-04",
       "days_since_valuation": 0
     }
   ],
-  "_sync_alts_ugl_at": "2026-07-03T13:03:48.377460",
+  "_sync_alts_ugl_at": "2026-07-04T12:14:02.073038",
   "_sync_alts_ugl_note": "Returns y sleeve YTD/SI sobreescritos con Pershing UGL (cost-basis weighted). sleeve_index mensual sigue siendo time-weighted con proxies (para charts históricos).",
-  "_daily_refresh_note": "Refresh diario 2026-07-03: 2 liquidos via Stooq T-1, 3 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $7,659,983."
+  "_daily_refresh_note": "Refresh diario 2026-07-04: 2 liquidos via Stooq T-1, 3 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $7,659,983."
 }

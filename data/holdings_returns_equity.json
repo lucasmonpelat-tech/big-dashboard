@@ -1,8 +1,8 @@
 {
-  "refreshedAt": "2026-07-03T13:03:48.251879",
+  "refreshedAt": "2026-07-04T12:14:01.946809",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Equity",
-  "period_end": "2026-07-03",
+  "period_end": "2026-07-04",
   "n_open": 9,
   "n_closed": 4,
   "holdings": [
@@ -12,16 +12,16 @@
       "status": "OPEN",
       "name": "ISHARES VII PLC CORE S&P 500 UCITS ETF ISIN#IE00B5BMR087   ",
       "qty": 3408.0,
-      "mv_usd": 2747052.47,
+      "mv_usd": 2753186.83,
       "cost_basis_usd": 2384387.73,
-      "unrealized_gl_usd": 362664.74,
-      "return_pct": 15.21,
-      "last_price_pershing": 806.06,
+      "unrealized_gl_usd": 368799.1,
+      "return_pct": 15.47,
+      "last_price_pershing": 807.86,
       "bench_label": "ACWI",
       "bench_dw_pct": 17.05,
-      "alpha_real_pp": -1.84,
+      "alpha_real_pp": -1.58,
       "first_buy_date": "2025-07-03",
-      "period_end": "2026-07-03",
+      "period_end": "2026-07-04",
       "n_trades": 9,
       "buys_history": [
         {
@@ -61,9 +61,9 @@
           "cost": 607997.98
         }
       ],
-      "ytd_pct": 9.33,
+      "ytd_pct": 9.39,
       "bench_ytd_pct": 11.08,
-      "alpha_ytd_pp": -1.75
+      "alpha_ytd_pp": -1.69
     },
     {
       "ticker": "NBGMT",
@@ -80,7 +80,7 @@
       "bench_dw_pct": 19.32,
       "alpha_real_pp": -15.17,
       "first_buy_date": "2025-07-07",
-      "period_end": "2026-07-03",
+      "period_end": "2026-07-04",
       "n_trades": 8,
       "buys_history": [
         {
@@ -135,7 +135,7 @@
       "bench_dw_pct": 22.11,
       "alpha_real_pp": -5.5,
       "first_buy_date": "2025-07-07",
-      "period_end": "2026-07-03",
+      "period_end": "2026-07-04",
       "n_trades": 6,
       "buys_history": [
         {
@@ -186,7 +186,7 @@
       "bench_dw_pct": 4.49,
       "alpha_real_pp": -2.58,
       "first_buy_date": "2026-04-20",
-      "period_end": "2026-07-03",
+      "period_end": "2026-07-04",
       "n_trades": 1,
       "buys_history": [
         {
@@ -213,7 +213,7 @@
       "bench_dw_pct": 15.06,
       "alpha_real_pp": -10.58,
       "first_buy_date": "2025-07-03",
-      "period_end": "2026-07-03",
+      "period_end": "2026-07-04",
       "n_trades": 2,
       "buys_history": [
         {
@@ -264,7 +264,7 @@
       "bench_dw_pct": 8.43,
       "alpha_real_pp": -5.06,
       "first_buy_date": "2026-02-04",
-      "period_end": "2026-07-03",
+      "period_end": "2026-07-04",
       "n_trades": 2,
       "buys_history": [
         {
@@ -295,7 +295,7 @@
       "bench_dw_pct": 8.32,
       "alpha_real_pp": -11.51,
       "first_buy_date": "2026-01-09",
-      "period_end": "2026-07-03",
+      "period_end": "2026-07-04",
       "n_trades": 3,
       "buys_history": [
         {
@@ -330,7 +330,7 @@
       "bench_dw_pct": 7.99,
       "alpha_real_pp": -16.23,
       "first_buy_date": "2026-02-03",
-      "period_end": "2026-07-03",
+      "period_end": "2026-07-04",
       "n_trades": 1,
       "buys_history": [
         {
@@ -357,7 +357,7 @@
       "bench_dw_pct": 8.34,
       "alpha_real_pp": -4.85,
       "first_buy_date": "2026-01-09",
-      "period_end": "2026-07-03",
+      "period_end": "2026-07-04",
       "n_trades": 2,
       "buys_history": [
         {
@@ -369,9 +369,9 @@
           "cost": 139641.52
         }
       ],
-      "ytd_pct": 10.45,
+      "ytd_pct": 10.79,
       "bench_ytd_pct": 11.08,
-      "alpha_ytd_pp": -0.63
+      "alpha_ytd_pp": -0.29
     },
     {
       "ticker": "VIRTUS",
@@ -413,7 +413,7 @@
       "n_lots": 9
     }
   ],
-  "_daily_refresh_note": "Daily refresh 2026-07-03: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
+  "_daily_refresh_note": "Daily refresh 2026-07-04: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
   "_synced_to_positions": "2026-06-24: MVs sincronizados desde positions_latest.json (Pershing 24-Jun)",
   "_ugl_refresh": "2026-06-24: cost basis + returns desde Pershing UGL (Multiple-row aggregates)"
 }
