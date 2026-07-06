@@ -1,9 +1,9 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-07-04T12:14:02.123480",
-  "as_of_date": "2026-07-04",
+  "refreshedAt": "2026-07-06T14:34:18.681078",
+  "as_of_date": "2026-07-06",
   "ytd_anchor": "2025-12-31",
-  "days_ytd": 185,
+  "days_ytd": 187,
   "sleeves": [
     {
       "name": "Equity",
@@ -23,24 +23,24 @@
       "name": "Alternatives",
       "value_usd": 7615948.42,
       "weight_pct": 29.17,
-      "ytd_pct": -1.57,
-      "contribution_pp": -0.458
+      "ytd_pct": -1.47,
+      "contribution_pp": -0.43
     },
     {
       "name": "Cash",
       "value_usd": 40457.1,
       "weight_pct": 0.15,
-      "ytd_pct": 2.69,
+      "ytd_pct": 2.72,
       "contribution_pp": 0.004
     }
   ],
-  "gross_reconstructed_pct": 1.491,
-  "mgmt_fee_pp": -0.912,
+  "gross_reconstructed_pct": 1.519,
+  "mgmt_fee_pp": -0.922,
   "mgmt_fee_rate_annual_pct": 1.8,
-  "net_reconstructed_pct": 0.579,
-  "lynk_ytd_pct": 1.06,
-  "lynk_refreshed_at": "2026-07-04T12:09:55.839612",
-  "residual_pp": -0.481,
+  "net_reconstructed_pct": 0.597,
+  "lynk_ytd_pct": 1.02,
+  "lynk_refreshed_at": "2026-07-06T14:30:13.757400",
+  "residual_pp": -0.423,
   "alts_detail": [
     {
       "ticker": "CALP",
@@ -50,7 +50,7 @@
       "ytd_pct": 3.97,
       "contribution_pp": 1.418,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-04"
+      "valuation_date": "2026-07-06"
     },
     {
       "ticker": "HLGPI",
@@ -60,7 +60,7 @@
       "ytd_pct": 0,
       "contribution_pp": 0.0,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-04"
+      "valuation_date": "2026-07-06"
     },
     {
       "ticker": "HLEND",
@@ -70,37 +70,37 @@
       "ytd_pct": 0.62,
       "contribution_pp": 0.061,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-04"
+      "valuation_date": "2026-07-06"
     },
     {
       "ticker": "IBIT",
       "name": "iShares Bitcoin Trust",
       "value_usd": 736314.9,
       "weight_pct": 9.6,
-      "ytd_pct": -29.77,
-      "contribution_pp": -2.858,
+      "ytd_pct": -29.24,
+      "contribution_pp": -2.807,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-04"
+      "valuation_date": "2026-07-06"
     },
     {
       "ticker": "GLD",
       "name": "SPDR Gold Shares",
       "value_usd": 727522.13,
       "weight_pct": 9.49,
-      "ytd_pct": -4.59,
-      "contribution_pp": -0.435,
+      "ytd_pct": -4.15,
+      "contribution_pp": -0.394,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-04"
+      "valuation_date": "2026-07-06"
     },
     {
       "ticker": "BPCC",
       "name": "Barings Private Credit Corporation",
       "value_usd": 595348.04,
       "weight_pct": 7.76,
-      "ytd_pct": 4.74,
-      "contribution_pp": 0.368,
+      "ytd_pct": 4.79,
+      "contribution_pp": 0.372,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-04"
+      "valuation_date": "2026-07-06"
     },
     {
       "ticker": "FLEX",
@@ -110,7 +110,7 @@
       "ytd_pct": 0,
       "contribution_pp": 0.0,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-04"
+      "valuation_date": "2026-07-06"
     },
     {
       "ticker": "GCRED",
@@ -120,7 +120,7 @@
       "ytd_pct": -1.92,
       "contribution_pp": -0.124,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-04"
+      "valuation_date": "2026-07-06"
     }
   ],
   "total_aum": 26107486.99,
@@ -129,11 +129,11 @@
     "bench_label": "60/40 (60% ACWI + 40% AGG)",
     "bench_ytd_aor_etf": 7.88,
     "acwi_ytd": 11.078,
-    "agg_ytd": 0.362,
+    "agg_ytd": 0.315,
     "bench_eq_contrib_pp": 6.647,
-    "bench_fi_contrib_pp": 0.145,
-    "big_ytd": 1.06,
-    "alpha_ytd_total_pp": -6.82,
+    "bench_fi_contrib_pp": 0.126,
+    "big_ytd": 1.02,
+    "alpha_ytd_total_pp": -6.86,
     "components": [
       {
         "name": "Equity",
@@ -145,36 +145,36 @@
       {
         "name": "Fixed Income",
         "big_contrib_pp": 0.22,
-        "bench_contrib_pp": 0.145,
-        "alpha_pp": 0.075,
-        "comment": "BIG 40.0% @ +0.55% vs 40% AGG @ +0.36%"
+        "bench_contrib_pp": 0.126,
+        "alpha_pp": 0.094,
+        "comment": "BIG 40.0% @ +0.55% vs 40% AGG @ +0.31%"
       },
       {
         "name": "Alternatives",
-        "big_contrib_pp": -0.458,
+        "big_contrib_pp": -0.43,
         "bench_contrib_pp": 0,
-        "alpha_pp": -0.458,
-        "comment": "BIG 29.2% @ -1.57% (bench no tiene Alts)"
+        "alpha_pp": -0.43,
+        "comment": "BIG 29.2% @ -1.47% (bench no tiene Alts)"
       },
       {
         "name": "Cash",
         "big_contrib_pp": 0.004,
         "bench_contrib_pp": 0,
         "alpha_pp": 0.004,
-        "comment": "BIG 0.1% @ +2.69% (bench no tiene Cash)"
+        "comment": "BIG 0.1% @ +2.72% (bench no tiene Cash)"
       },
       {
         "name": "Mgmt Fee",
-        "big_contrib_pp": -0.912,
+        "big_contrib_pp": -0.922,
         "bench_contrib_pp": 0,
-        "alpha_pp": -0.912,
+        "alpha_pp": -0.922,
         "comment": "Lynk mgmt fee 1.8%/yr (bench AOR fee 0.15% no incluido)"
       },
       {
         "name": "Residual",
         "big_contrib_pp": null,
         "bench_contrib_pp": null,
-        "alpha_pp": -0.607,
+        "alpha_pp": -0.684,
         "comment": "Tracking error AOR vs (60% ACWI + 40% AGG teorico) + Lynk smoothing + cash approx + alts statement lag"
       }
     ]
