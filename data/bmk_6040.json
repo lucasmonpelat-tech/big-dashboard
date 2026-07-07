@@ -1,25 +1,25 @@
 {
-  "refreshedAt": "2026-07-06T14:34:12.810657",
+  "refreshedAt": "2026-07-07T13:28:42.522713",
   "source": "Yahoo Finance AOR (iShares Core Growth Allocation 60/40)",
   "note": "Single ETF que replica 60% stocks / 40% bonds. Composicion: ITOT + IDEV + IEMG + IAGG + AGG. Reemplaza el calculo viejo 0.6*ACWI + 0.4*AGG.",
   "ticker": "AOR",
   "inception": "2025-06-27",
   "periods": {
-    "latest_date": "2026-07-02",
-    "latest_value": 116.9003,
+    "latest_date": "2026-07-06",
+    "latest_value": 116.9172,
     "returns": {
-      "1W": 1.12,
-      "1M": -0.08,
-      "3M": 8.4,
-      "6M": 7.88,
-      "YTD": 7.88,
-      "SI": 16.9,
-      "Annualized": 16.67
+      "1W": 0.72,
+      "1M": 2.24,
+      "3M": 8.16,
+      "6M": 6.82,
+      "YTD": 7.89,
+      "SI": 16.92,
+      "Annualized": 16.49
     },
-    "volatility": 8.9,
-    "sharpe_approx": 1.39
+    "volatility": 8.89,
+    "sharpe_approx": 1.37
   },
-  "series_length": 255,
+  "series_length": 256,
   "series": [
     {
       "date": "2025-06-27",
@@ -55,11 +55,11 @@
     },
     {
       "date": "2025-07-10",
-      "value": 100.901
+      "value": 100.9011
     },
     {
       "date": "2025-07-11",
-      "value": 100.4246
+      "value": 100.4245
     },
     {
       "date": "2025-07-14",
@@ -71,7 +71,7 @@
     },
     {
       "date": "2025-07-16",
-      "value": 100.4738
+      "value": 100.4739
     },
     {
       "date": "2025-07-17",
@@ -355,7 +355,7 @@
     },
     {
       "date": "2025-10-24",
-      "value": 107.3929
+      "value": 107.393
     },
     {
       "date": "2025-10-27",
@@ -375,11 +375,11 @@
     },
     {
       "date": "2025-10-31",
-      "value": 107.3929
+      "value": 107.393
     },
     {
       "date": "2025-11-03",
-      "value": 107.426
+      "value": 107.4259
     },
     {
       "date": "2025-11-04",
@@ -455,7 +455,7 @@
     },
     {
       "date": "2025-12-01",
-      "value": 107.36
+      "value": 107.3599
     },
     {
       "date": "2025-12-02",
@@ -1040,6 +1040,10 @@
     {
       "date": "2026-07-02",
       "value": 116.9003
+    },
+    {
+      "date": "2026-07-06",
+      "value": 116.9172
     }
   ]
 }
