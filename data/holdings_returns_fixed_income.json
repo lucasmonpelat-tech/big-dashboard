@@ -1,8 +1,8 @@
 {
-  "refreshedAt": "2026-07-11T12:00:28.523355",
+  "refreshedAt": "2026-07-14T12:22:29.900678",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Fixed Income",
-  "period_end": "2026-07-11",
+  "period_end": "2026-07-14",
   "n_open": 7,
   "n_closed": 2,
   "holdings": [
@@ -18,10 +18,10 @@
       "return_pct": 1.06,
       "last_price_pershing": 14.02,
       "bench_label": "AGG",
-      "bench_dw_pct": 0.05,
-      "alpha_real_pp": 1.01,
+      "bench_dw_pct": -0.56,
+      "alpha_real_pp": 1.62,
       "first_buy_date": "2026-01-30",
-      "period_end": "2026-07-11",
+      "period_end": "2026-07-14",
       "n_trades": 2,
       "buys_history": [
         {
@@ -42,8 +42,8 @@
         }
       ],
       "ytd_pct": 0.94,
-      "bench_ytd_pct": -0.13,
-      "alpha_ytd_pp": 1.07
+      "bench_ytd_pct": -0.73,
+      "alpha_ytd_pp": 1.67
     },
     {
       "ticker": "PIMCO-INC",
@@ -77,10 +77,10 @@
       "return_pct": 4.84,
       "last_price_pershing": 125.11,
       "bench_label": "AGG",
-      "bench_dw_pct": 2.62,
-      "alpha_real_pp": 2.22,
+      "bench_dw_pct": 2.0,
+      "alpha_real_pp": 2.84,
       "first_buy_date": "2025-07-07",
-      "period_end": "2026-07-11",
+      "period_end": "2026-07-14",
       "n_trades": 9,
       "buys_history": [
         {
@@ -121,8 +121,8 @@
         }
       ],
       "ytd_pct": 1.28,
-      "bench_ytd_pct": -0.13,
-      "alpha_ytd_pp": 1.41
+      "bench_ytd_pct": -0.73,
+      "alpha_ytd_pp": 2.01
     },
     {
       "ticker": "PIMCO-EM",
@@ -136,10 +136,10 @@
       "return_pct": -0.98,
       "last_price_pershing": 18.19,
       "bench_label": "AGG",
-      "bench_dw_pct": -0.08,
-      "alpha_real_pp": -0.9,
+      "bench_dw_pct": -0.69,
+      "alpha_real_pp": -0.29,
       "first_buy_date": "2026-01-30",
-      "period_end": "2026-07-11",
+      "period_end": "2026-07-14",
       "n_trades": 2,
       "buys_history": [
         {
@@ -152,8 +152,8 @@
         }
       ],
       "ytd_pct": 2.06,
-      "bench_ytd_pct": -0.13,
-      "alpha_ytd_pp": 2.19
+      "bench_ytd_pct": -0.73,
+      "alpha_ytd_pp": 2.79
     },
     {
       "ticker": "TGF",
@@ -167,10 +167,10 @@
       "return_pct": 6.23,
       "last_price_pershing": 1.526,
       "bench_label": "AGG",
-      "bench_dw_pct": 3.72,
-      "alpha_real_pp": 2.51,
+      "bench_dw_pct": 3.09,
+      "alpha_real_pp": 3.14,
       "first_buy_date": "2025-07-16",
-      "period_end": "2026-07-11",
+      "period_end": "2026-07-14",
       "n_trades": 2,
       "buys_history": [
         {
@@ -183,8 +183,8 @@
         }
       ],
       "ytd_pct": 3.53,
-      "bench_ytd_pct": -0.13,
-      "alpha_ytd_pp": 3.66
+      "bench_ytd_pct": -0.73,
+      "alpha_ytd_pp": 4.26
     },
     {
       "ticker": "SGCB",
@@ -198,10 +198,10 @@
       "return_pct": 1.01,
       "last_price_pershing": 2133.76,
       "bench_label": "AGG",
-      "bench_dw_pct": -0.02,
-      "alpha_real_pp": 1.03,
+      "bench_dw_pct": -0.63,
+      "alpha_real_pp": 1.64,
       "first_buy_date": "2026-04-13",
-      "period_end": "2026-07-11",
+      "period_end": "2026-07-14",
       "n_trades": 1,
       "buys_history": [
         {
@@ -210,8 +210,8 @@
         }
       ],
       "ytd_pct": 1.57,
-      "bench_ytd_pct": -0.13,
-      "alpha_ytd_pp": 1.7
+      "bench_ytd_pct": -0.73,
+      "alpha_ytd_pp": 2.3
     },
     {
       "ticker": "MANEM",
@@ -225,10 +225,10 @@
       "return_pct": 0.83,
       "last_price_pershing": 114.71,
       "bench_label": "AGG",
-      "bench_dw_pct": 0.38,
-      "alpha_real_pp": 0.45,
+      "bench_dw_pct": -0.23,
+      "alpha_real_pp": 1.06,
       "first_buy_date": "2026-05-13",
-      "period_end": "2026-07-11",
+      "period_end": "2026-07-14",
       "n_trades": 1,
       "buys_history": [
         {
@@ -236,7 +236,7 @@
           "cost": 20030.0
         }
       ],
-      "bench_ytd_pct": -0.13
+      "bench_ytd_pct": -0.73
     },
     {
       "ticker": "WELLCRED",
@@ -252,7 +252,7 @@
       "n_lots": 9
     }
   ],
-  "_daily_refresh_note": "Daily refresh 2026-07-11: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
+  "_daily_refresh_note": "Daily refresh 2026-07-14: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
   "_synced_to_positions": "2026-06-24: MVs sincronizados desde positions_latest.json (Pershing 24-Jun)",
   "_ugl_refresh": "2026-06-24: cost basis + returns desde Pershing UGL (Multiple-row aggregates)"
 }
