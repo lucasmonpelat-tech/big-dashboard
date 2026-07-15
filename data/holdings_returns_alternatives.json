@@ -1,8 +1,8 @@
 {
-  "refreshedAt": "2026-07-14T12:22:29.901276",
+  "refreshedAt": "2026-07-15T12:23:28.126642",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Alternatives",
-  "period_end": "2026-07-14",
+  "period_end": "2026-07-15",
   "n_open": 7,
   "n_closed": 2,
   "holdings": [
@@ -21,7 +21,7 @@
       "bench_dw_pct": 18.65,
       "alpha_real_pp": -9.09,
       "first_buy_date": "2025-08-29",
-      "period_end": "2026-07-14",
+      "period_end": "2026-07-15",
       "n_trades": 1,
       "buys_history": [
         {
@@ -40,16 +40,16 @@
       "status": "OPEN",
       "name": "ISHARES BITCOIN TR ETF SHS BEN INT     ",
       "qty": 21116.0,
-      "mv_usd": 743705.55,
+      "mv_usd": 772423.32,
       "cost_basis_usd": 1138663.4,
-      "unrealized_gl_usd": -394957.85,
-      "return_pct": -34.69,
-      "last_price_pershing": 35.22,
+      "unrealized_gl_usd": -366240.08,
+      "return_pct": -32.16,
+      "last_price_pershing": 36.58,
       "bench_label": "ACWI",
       "bench_dw_pct": 16.95,
-      "alpha_real_pp": -51.64,
+      "alpha_real_pp": -49.11,
       "first_buy_date": "2025-07-02",
-      "period_end": "2026-07-14",
+      "period_end": "2026-07-15",
       "n_trades": 10,
       "buys_history": [
         {
@@ -93,7 +93,7 @@
           "cost": 33660.77
         }
       ],
-      "ytd_pct": -29.06,
+      "ytd_pct": -26.32,
       "bench_ytd_pct": 10.93,
       "alpha_ytd_pp": -39.99
     },
@@ -112,7 +112,7 @@
       "bench_dw_pct": 21.87,
       "alpha_real_pp": -3.12,
       "first_buy_date": "2025-07-02",
-      "period_end": "2026-07-14",
+      "period_end": "2026-07-15",
       "n_trades": 5,
       "buys_history": [
         {
@@ -136,7 +136,7 @@
           "cost": 15175.39
         }
       ],
-      "ytd_pct": -7.36,
+      "ytd_pct": -7.96,
       "bench_ytd_pct": 10.93,
       "alpha_ytd_pp": -18.29
     },
@@ -155,7 +155,7 @@
       "bench_dw_pct": 14.39,
       "alpha_real_pp": -11.11,
       "first_buy_date": "2025-09-22",
-      "period_end": "2026-07-14",
+      "period_end": "2026-07-15",
       "n_trades": 1,
       "buys_history": [
         {
@@ -182,7 +182,7 @@
       "bench_dw_pct": 18.9,
       "alpha_real_pp": -11.53,
       "first_buy_date": "2025-07-25",
-      "period_end": "2026-07-14",
+      "period_end": "2026-07-15",
       "n_trades": 4,
       "buys_history": [
         {
@@ -202,7 +202,7 @@
           "cost": 50030.36
         }
       ],
-      "ytd_pct": 5.0,
+      "ytd_pct": 5.02,
       "bench_ytd_pct": 10.93,
       "alpha_ytd_pp": -5.93
     },
@@ -221,7 +221,7 @@
       "bench_dw_pct": 1.96,
       "alpha_real_pp": -1.6,
       "first_buy_date": "2026-05-07",
-      "period_end": "2026-07-14",
+      "period_end": "2026-07-15",
       "n_trades": 1,
       "buys_history": [
         {
@@ -248,7 +248,7 @@
       "bench_dw_pct": -0.15,
       "alpha_real_pp": 1.44,
       "first_buy_date": "2026-05-27",
-      "period_end": "2026-07-14",
+      "period_end": "2026-07-15",
       "n_trades": 2,
       "buys_history": [
         {
@@ -280,7 +280,7 @@
       "bench_dw_pct": 14.39,
       "alpha_real_pp": -13.28,
       "first_buy_date": "2025-09-22",
-      "period_end": "2026-07-14",
+      "period_end": "2026-07-15",
       "n_trades": 1,
       "buys_history": [
         {
@@ -306,7 +306,7 @@
       "n_lots": 1
     }
   ],
-  "_daily_refresh_note": "Daily refresh 2026-07-14: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
+  "_daily_refresh_note": "Daily refresh 2026-07-15: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
   "_synced_to_positions": "2026-06-24: MVs sincronizados desde positions_latest.json (Pershing 24-Jun)",
   "_ugl_refresh": "2026-06-24: cost basis + returns desde Pershing UGL (Multiple-row aggregates)",
   "_calp_added": "2026-06-25: CALP agregado desde alts_carlyle_statement.json (external, no esta en Pershing UGL)"

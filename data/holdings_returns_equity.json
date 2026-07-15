@@ -1,8 +1,8 @@
 {
-  "refreshedAt": "2026-07-14T12:22:29.899977",
+  "refreshedAt": "2026-07-15T12:23:28.125015",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Equity",
-  "period_end": "2026-07-14",
+  "period_end": "2026-07-15",
   "n_open": 9,
   "n_closed": 4,
   "holdings": [
@@ -12,16 +12,16 @@
       "status": "OPEN",
       "name": "ISHARES VII PLC CORE S&P 500 UCITS ETF ISIN#IE00B5BMR087   ",
       "qty": 3408.0,
-      "mv_usd": 2770056.47,
+      "mv_usd": 2769443.06,
       "cost_basis_usd": 2384387.73,
-      "unrealized_gl_usd": 385668.74,
-      "return_pct": 16.17,
-      "last_price_pershing": 812.81,
+      "unrealized_gl_usd": 385055.33,
+      "return_pct": 16.15,
+      "last_price_pershing": 812.63,
       "bench_label": "ACWI",
       "bench_dw_pct": 16.89,
-      "alpha_real_pp": -0.72,
+      "alpha_real_pp": -0.74,
       "first_buy_date": "2025-07-03",
-      "period_end": "2026-07-14",
+      "period_end": "2026-07-15",
       "n_trades": 9,
       "buys_history": [
         {
@@ -61,7 +61,7 @@
           "cost": 607997.98
         }
       ],
-      "ytd_pct": 9.41,
+      "ytd_pct": 10.12,
       "bench_ytd_pct": 10.93,
       "alpha_ytd_pp": -1.52
     },
@@ -80,7 +80,7 @@
       "bench_dw_pct": 19.16,
       "alpha_real_pp": -15.01,
       "first_buy_date": "2025-07-07",
-      "period_end": "2026-07-14",
+      "period_end": "2026-07-15",
       "n_trades": 8,
       "buys_history": [
         {
@@ -135,7 +135,7 @@
       "bench_dw_pct": 21.94,
       "alpha_real_pp": -5.33,
       "first_buy_date": "2025-07-07",
-      "period_end": "2026-07-14",
+      "period_end": "2026-07-15",
       "n_trades": 6,
       "buys_history": [
         {
@@ -186,7 +186,7 @@
       "bench_dw_pct": 4.35,
       "alpha_real_pp": -2.44,
       "first_buy_date": "2026-04-20",
-      "period_end": "2026-07-14",
+      "period_end": "2026-07-15",
       "n_trades": 1,
       "buys_history": [
         {
@@ -213,7 +213,7 @@
       "bench_dw_pct": 14.9,
       "alpha_real_pp": -10.42,
       "first_buy_date": "2025-07-03",
-      "period_end": "2026-07-14",
+      "period_end": "2026-07-15",
       "n_trades": 2,
       "buys_history": [
         {
@@ -264,7 +264,7 @@
       "bench_dw_pct": 8.29,
       "alpha_real_pp": -4.92,
       "first_buy_date": "2026-02-04",
-      "period_end": "2026-07-14",
+      "period_end": "2026-07-15",
       "n_trades": 2,
       "buys_history": [
         {
@@ -295,7 +295,7 @@
       "bench_dw_pct": 8.18,
       "alpha_real_pp": -8.16,
       "first_buy_date": "2026-01-09",
-      "period_end": "2026-07-14",
+      "period_end": "2026-07-15",
       "n_trades": 3,
       "buys_history": [
         {
@@ -311,7 +311,7 @@
           "cost": 24873.96
         }
       ],
-      "ytd_pct": 3.73,
+      "ytd_pct": NaN,
       "bench_ytd_pct": 10.93,
       "alpha_ytd_pp": -7.2
     },
@@ -330,7 +330,7 @@
       "bench_dw_pct": 7.84,
       "alpha_real_pp": -14.93,
       "first_buy_date": "2026-02-03",
-      "period_end": "2026-07-14",
+      "period_end": "2026-07-15",
       "n_trades": 1,
       "buys_history": [
         {
@@ -338,7 +338,7 @@
           "cost": 367141.0
         }
       ],
-      "ytd_pct": 13.45,
+      "ytd_pct": NaN,
       "bench_ytd_pct": 10.93,
       "alpha_ytd_pp": 2.52
     },
@@ -357,7 +357,7 @@
       "bench_dw_pct": 8.19,
       "alpha_real_pp": -4.7,
       "first_buy_date": "2026-01-09",
-      "period_end": "2026-07-14",
+      "period_end": "2026-07-15",
       "n_trades": 2,
       "buys_history": [
         {
@@ -369,7 +369,7 @@
           "cost": 139641.52
         }
       ],
-      "ytd_pct": 12.88,
+      "ytd_pct": 13.51,
       "bench_ytd_pct": 10.93,
       "alpha_ytd_pp": 1.95
     },
@@ -413,7 +413,7 @@
       "n_lots": 9
     }
   ],
-  "_daily_refresh_note": "Daily refresh 2026-07-14: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
+  "_daily_refresh_note": "Daily refresh 2026-07-15: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
   "_synced_to_positions": "2026-06-24: MVs sincronizados desde positions_latest.json (Pershing 24-Jun)",
   "_ugl_refresh": "2026-06-24: cost basis + returns desde Pershing UGL (Multiple-row aggregates)"
 }
