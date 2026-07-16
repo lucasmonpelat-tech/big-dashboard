@@ -1,25 +1,25 @@
 {
-  "refreshedAt": "2026-07-15T12:23:20.591507",
+  "refreshedAt": "2026-07-16T12:27:43.200341",
   "source": "Yahoo Finance AOR (iShares Core Growth Allocation 60/40)",
   "note": "Single ETF que replica 60% stocks / 40% bonds. Composicion: ITOT + IDEV + IEMG + IAGG + AGG. Reemplaza el calculo viejo 0.6*ACWI + 0.4*AGG.",
   "ticker": "AOR",
   "inception": "2025-06-27",
   "periods": {
-    "latest_date": "2026-07-13",
-    "latest_value": 115.6178,
+    "latest_date": "2026-07-15",
+    "latest_value": 116.546,
     "returns": {
-      "1W": -1.11,
-      "1M": -0.13,
-      "3M": 3.9,
-      "6M": 4.76,
-      "YTD": 6.69,
-      "SI": 15.62,
-      "Annualized": 14.93
+      "1W": 0.74,
+      "1M": -0.28,
+      "3M": 3.72,
+      "6M": 5.79,
+      "YTD": 7.55,
+      "SI": 16.55,
+      "Annualized": 15.72
     },
-    "volatility": 8.9,
-    "sharpe_approx": 1.19
+    "volatility": 8.88,
+    "sharpe_approx": 1.29
   },
-  "series_length": 261,
+  "series_length": 263,
   "series": [
     {
       "date": "2025-06-27",
@@ -55,7 +55,7 @@
     },
     {
       "date": "2025-07-10",
-      "value": 100.901
+      "value": 100.9011
     },
     {
       "date": "2025-07-11",
@@ -355,7 +355,7 @@
     },
     {
       "date": "2025-10-24",
-      "value": 107.3929
+      "value": 107.393
     },
     {
       "date": "2025-10-27",
@@ -375,7 +375,7 @@
     },
     {
       "date": "2025-10-31",
-      "value": 107.3929
+      "value": 107.393
     },
     {
       "date": "2025-11-03",
@@ -435,7 +435,7 @@
     },
     {
       "date": "2025-11-21",
-      "value": 105.5451
+      "value": 105.545
     },
     {
       "date": "2025-11-24",
@@ -499,7 +499,7 @@
     },
     {
       "date": "2025-12-16",
-      "value": 107.624
+      "value": 107.6239
     },
     {
       "date": "2025-12-17",
@@ -1064,6 +1064,14 @@
     {
       "date": "2026-07-13",
       "value": 115.6178
+    },
+    {
+      "date": "2026-07-14",
+      "value": 116.1916
+    },
+    {
+      "date": "2026-07-15",
+      "value": 116.546
     }
   ]
 }
