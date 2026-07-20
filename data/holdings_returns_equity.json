@@ -1,8 +1,8 @@
 {
-  "refreshedAt": "2026-07-18T11:59:53.665508",
+  "refreshedAt": "2026-07-20T13:14:05.577827",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Equity",
-  "period_end": "2026-07-18",
+  "period_end": "2026-07-20",
   "n_open": 9,
   "n_closed": 4,
   "holdings": [
@@ -21,7 +21,7 @@
       "bench_dw_pct": 16.19,
       "alpha_real_pp": -1.19,
       "first_buy_date": "2025-07-03",
-      "period_end": "2026-07-18",
+      "period_end": "2026-07-20",
       "n_trades": 9,
       "buys_history": [
         {
@@ -61,9 +61,9 @@
           "cost": 607997.98
         }
       ],
-      "ytd_pct": 8.95,
+      "ytd_pct": 9.17,
       "bench_ytd_pct": 10.26,
-      "alpha_ytd_pp": -1.31
+      "alpha_ytd_pp": -1.09
     },
     {
       "ticker": "NBGMT",
@@ -80,7 +80,7 @@
       "bench_dw_pct": 18.44,
       "alpha_real_pp": -14.29,
       "first_buy_date": "2025-07-07",
-      "period_end": "2026-07-18",
+      "period_end": "2026-07-20",
       "n_trades": 8,
       "buys_history": [
         {
@@ -135,7 +135,7 @@
       "bench_dw_pct": 21.21,
       "alpha_real_pp": -4.6,
       "first_buy_date": "2025-07-07",
-      "period_end": "2026-07-18",
+      "period_end": "2026-07-20",
       "n_trades": 6,
       "buys_history": [
         {
@@ -186,7 +186,7 @@
       "bench_dw_pct": 3.72,
       "alpha_real_pp": -1.81,
       "first_buy_date": "2026-04-20",
-      "period_end": "2026-07-18",
+      "period_end": "2026-07-20",
       "n_trades": 1,
       "buys_history": [
         {
@@ -213,7 +213,7 @@
       "bench_dw_pct": 14.21,
       "alpha_real_pp": -9.73,
       "first_buy_date": "2025-07-03",
-      "period_end": "2026-07-18",
+      "period_end": "2026-07-20",
       "n_trades": 2,
       "buys_history": [
         {
@@ -264,7 +264,7 @@
       "bench_dw_pct": 7.63,
       "alpha_real_pp": -4.26,
       "first_buy_date": "2026-02-04",
-      "period_end": "2026-07-18",
+      "period_end": "2026-07-20",
       "n_trades": 2,
       "buys_history": [
         {
@@ -295,7 +295,7 @@
       "bench_dw_pct": 7.53,
       "alpha_real_pp": -10.1,
       "first_buy_date": "2026-01-09",
-      "period_end": "2026-07-18",
+      "period_end": "2026-07-20",
       "n_trades": 3,
       "buys_history": [
         {
@@ -330,7 +330,7 @@
       "bench_dw_pct": 7.19,
       "alpha_real_pp": -14.39,
       "first_buy_date": "2026-02-03",
-      "period_end": "2026-07-18",
+      "period_end": "2026-07-20",
       "n_trades": 1,
       "buys_history": [
         {
@@ -357,7 +357,7 @@
       "bench_dw_pct": 7.54,
       "alpha_real_pp": -4.05,
       "first_buy_date": "2026-01-09",
-      "period_end": "2026-07-18",
+      "period_end": "2026-07-20",
       "n_trades": 2,
       "buys_history": [
         {
@@ -369,9 +369,9 @@
           "cost": 139641.52
         }
       ],
-      "ytd_pct": 12.29,
+      "ytd_pct": 12.5,
       "bench_ytd_pct": 10.26,
-      "alpha_ytd_pp": 2.03
+      "alpha_ytd_pp": 2.24
     },
     {
       "ticker": "VIRTUS",
@@ -413,7 +413,7 @@
       "n_lots": 9
     }
   ],
-  "_daily_refresh_note": "Daily refresh 2026-07-18: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
+  "_daily_refresh_note": "Daily refresh 2026-07-20: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
   "_synced_to_positions": "2026-06-24: MVs sincronizados desde positions_latest.json (Pershing 24-Jun)",
   "_ugl_refresh": "2026-06-24: cost basis + returns desde Pershing UGL (Multiple-row aggregates)"
 }
