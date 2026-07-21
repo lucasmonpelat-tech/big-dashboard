@@ -1,6 +1,6 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-07-21T19:37:03.058266",
+  "refreshedAt": "2026-07-21T19:59:03.512472",
   "as_of_date": "2026-07-21",
   "ytd_anchor": "2025-12-31",
   "days_ytd": 202,
@@ -23,8 +23,8 @@
       "name": "Alternatives",
       "value_usd": 7615948.42,
       "weight_pct": 29.17,
-      "ytd_pct": -1.21,
-      "contribution_pp": -0.352
+      "ytd_pct": -1.2,
+      "contribution_pp": -0.351
     },
     {
       "name": "Cash",
@@ -34,13 +34,13 @@
       "contribution_pp": 0.005
     }
   ],
-  "gross_reconstructed_pct": 1.616,
+  "gross_reconstructed_pct": 1.617,
   "mgmt_fee_pp": -0.996,
   "mgmt_fee_rate_annual_pct": 1.8,
-  "net_reconstructed_pct": 0.62,
+  "net_reconstructed_pct": 0.621,
   "lynk_ytd_pct": 1.54,
-  "lynk_refreshed_at": "2026-07-21T19:32:59.851354",
-  "residual_pp": -0.92,
+  "lynk_refreshed_at": "2026-07-21T19:54:55.247084",
+  "residual_pp": -0.919,
   "alts_detail": [
     {
       "ticker": "CALP",
@@ -67,8 +67,8 @@
       "name": "iShares Bitcoin Trust",
       "value_usd": 778969.23,
       "weight_pct": 10.13,
-      "ytd_pct": -24.23,
-      "contribution_pp": -2.454,
+      "ytd_pct": -24.26,
+      "contribution_pp": -2.457,
       "source": "Pershing UGL via sync_alts_ugl.py",
       "valuation_date": "2026-07-21"
     },
@@ -87,8 +87,8 @@
       "name": "SPDR Gold Shares",
       "value_usd": 707262.41,
       "weight_pct": 9.2,
-      "ytd_pct": -5.48,
-      "contribution_pp": -0.504,
+      "ytd_pct": -5.42,
+      "contribution_pp": -0.498,
       "source": "Pershing UGL via sync_alts_ugl.py",
       "valuation_date": "2026-07-21"
     },
@@ -151,10 +151,10 @@
       },
       {
         "name": "Alternatives",
-        "big_contrib_pp": -0.352,
+        "big_contrib_pp": -0.351,
         "bench_contrib_pp": 0,
-        "alpha_pp": -0.352,
-        "comment": "BIG 29.2% @ -1.21% (bench no tiene Alts)"
+        "alpha_pp": -0.351,
+        "comment": "BIG 29.2% @ -1.20% (bench no tiene Alts)"
       },
       {
         "name": "Cash",
@@ -174,7 +174,7 @@
         "name": "Residual",
         "big_contrib_pp": null,
         "bench_contrib_pp": null,
-        "alpha_pp": 0.408,
+        "alpha_pp": 0.407,
         "comment": "Tracking error AOR vs (60% ACWI + 40% AGG teorico) + Lynk smoothing + cash approx + alts statement lag"
       }
     ]
