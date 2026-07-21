@@ -31,3 +31,14 @@ data/acwi_holdings/acwi_holdings.csv
 
 # Handoffs (internal docs)
 handoffs/
+
+# Dashboard v2: session state (Playwright cookies/cache — sensible + pesado, 50MB+)
+data/netx360_session/
+
+# Dashboard v2: raw XLSX (se regeneran cada dia desde Pershing — pipeline debe correr en el runner)
+data/raw/
+
+# Backups (viejo staleado)
+*.bak
+*.bak.json
+pampa-big-analyzer.*.bak

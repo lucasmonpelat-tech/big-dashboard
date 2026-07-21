@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BIG Fund Dashboard v2</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+  <style>
+    :root {
+      --navy: #0a2540;
+      --navy-2: #1a3a5f;
+      --gold: #c9a961;
+      --gold-dark: #a68937;
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --text: #1a2138;
+      --text-mute: #6b7280;
+      --border: #e4e7ec;
+      --green: #16a34a;
+      --red: #dc2626;
+      --gray: #64748b;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg); color: var(--text);
+      font-size: 14px;
+    }
+
+    /* Header */
+    header {
+      background: var(--navy);
+      color: white;
+      padding: 16px 32px;
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 4px solid var(--gold);
+    }
+    header h1 { margin: 0; font-size: 20px; font-weight: 600; }
+    header .subtitle { font-size: 12px; color: var(--gold); margin-top: 2px; }
+    .last-update { text-align: right; font-size: 12px; color: rgba(255,255,255,0.7); }
+    .last-update .as-of { color: var(--gold); font-weight: 600; }
+
+    /* Tabs */
+    nav.tabs {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      display: flex; gap: 4px;
+      overflow-x: auto;
+    }
+    nav.tabs button {
+      background: transparent; border: none;
+      padding: 14px 20px;
+      font-size: 13px; font-weight: 500;
+      color: var(--text-mute);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    nav.tabs button:hover { color: var(--navy); }
+    nav.tabs button.active {
+      color: var(--navy);
+      border-bottom-color: var(--gold);
+      font-weight: 600;
+    }
+
+    main { padding: 24px 32px; max-width: 1600px; margin: 0 auto; }
+
+    /* KPI cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .kpi-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      border-left: 4px solid var(--gold);
+    }
+    .kpi-card .label {
+      font-size: 11px;
+      color: var(--text-mute);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      font-weight: 500;
+    }
+    .kpi-card .value {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-top: 4px;
+    }
+    .kpi-card .sub {
+      font-size: 12px;
+      color: var(--text-mute);
+      margin-top: 2px;
+    }
+    .kpi-card.pos { border-left-color: var(--green); }
+    .kpi-card.pos .value { color: var(--green); }
+    .kpi-card.neg { border-left-color: var(--red); }
+    .kpi-card.neg .value { color: var(--red); }
+    .kpi-card.info { border-left-color: var(--navy); }
+
+    /* Section card */
+    .section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+    }
+    .section h2 {
+      margin: 0 0 16px 0;
+      font-size: 16px;
+      color: var(--navy);
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 8px;
+      display: inline-block;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    thead th {
+      background: var(--navy);
+      color: white;
+      padding: 10px 8px;
+      text-align: center;
+      font-weight: 500;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+      user-select: none;
+      position: sticky; top: 0;
+      border-bottom: 2px solid var(--gold);
+    }
+    thead th:hover { background: var(--navy-2); }
+    thead th.sort-asc::after { content: " ▲"; color: var(--gold); }
+    thead th.sort-desc::after { content: " ▼"; color: var(--gold); }
+    tbody tr:hover { background: #fafbfc; }
+    tbody td { padding: 8px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    tbody td.num { text-align: right; font-variant-numeric: tabular-nums; font-family: 'Consolas', monospace; }
+    tbody td.center { text-align: center; }
+    tbody tr.total-row { background: #f8fafc; font-weight: 600; }
+    tbody tr.total-row td { border-top: 2px solid var(--navy); }
+
+    .pos-val { color: var(--green); font-weight: 500; }
+    .neg-val { color: var(--red); font-weight: 500; }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* Comparison chips (Rendimientos tab) */
+    .comp-chip {
+      background: white;
+      border: 1px solid var(--border);
+      color: var(--text-mute);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .comp-chip:hover { border-color: var(--gold); color: var(--navy); }
+    .comp-chip.active {
+      background: var(--navy);
+      color: white;
+      border-color: var(--navy);
+    }
+
+    /* Perf tab (Rendimientos vs Benchmark) — copia del dashboard viejo */
+    .info-box-perf {
+      background: #f0f4f8;
+      border-left: 4px solid var(--navy);
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text);
+      border-radius: 4px;
+    }
+    .perf-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    .perf-table thead th {
+      background: var(--navy);
+      color: white;
+      padding: 10px 8px;
+      text-align: center;
+      font-weight: 500;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      border-bottom: 2px solid var(--gold);
+    }
+    .perf-table th.left, .perf-table td.left { text-align: left; padding-left: 12px; }
+    .perf-table td {
+      padding: 10px 8px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      font-variant-numeric: tabular-nums;
+      font-family: 'Consolas', monospace;
+    }
+    .perf-table tr.row-big  { background: #112240; color: #d4af37; font-weight: 700; }
+    .perf-table tr.row-bmk  { background: #1a2a3d; color: #90caf9; }
+    .perf-table tr.row-alpha{ background: #0e2218; color: #81c784; font-weight: 700; }
+    .perf-table tr.row-big td, .perf-table tr.row-bmk td, .perf-table tr.row-alpha td {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .perf-table tr.attr-row td { background: white; color: var(--text); }
+    .perf-table tr.attr-row td.pos { color: var(--green); font-weight: 600; }
+    .perf-table tr.attr-row td.neg { color: var(--red); font-weight: 600; }
+    .perf-table tr.attr-total td { background: #f8fafc; font-weight: 700; border-top: 2px solid var(--navy); }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-mute);
+    }
+    .error {
+      background: #fee;
+      border: 1px solid #fcc;
+      color: #900;
+      padding: 12px 16px;
+      border-radius: 6px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>BIG Fund Dashboard</h1>
+      <div class="subtitle">LSERIES DAC · JXD101380 · Pampa Capital</div>
+    </div>
+    <div class="last-update">
+      Snapshot <span class="as-of" id="asOf">—</span><br>
+      Generated <span id="generatedAt">—</span>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button data-tab="overview" class="active">Overview</button>
+    <!-- Positions se movió abajo del NAV chart en Overview -->
+
+    <button data-tab="rendimientos">Rendimientos vs Benchmark</button>
+    <button data-tab="sleeves">Sleeves Race</button>
+    <button data-tab="lookthrough" disabled title="Coming soon">Currency · Sectorial · Regional</button>
+    <!-- Costos totales: tab oculto por pedido de Lucas. Data sigue en costs.json por si suma despues. -->
+    <!-- <button data-tab="costs">Costos totales</button> -->
+
+    <button data-tab="onepager">One Pager Alts</button>
+  </nav>
+
+  <main>
+    <div id="loading" class="loading">Cargando data canonical…</div>
+    <div id="errorBox" class="error" style="display:none"></div>
+
+    <!-- OVERVIEW -->
+    <section id="overview" class="tab-content">
+      <div class="kpi-grid" id="overviewKpis"></div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px">
+        <div class="section">
+          <h2>Distribución por Security Type</h2>
+          <table id="secTypeTable">
+            <thead><tr>
+              <th>Security Type</th>
+              <th>Market Value USD</th>
+              <th>% Portfolio</th>
+              <th>Holdings</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="section">
+          <h2>Allocation por Sleeve (BIG mandate)</h2>
+          <div id="allocBars"></div>
+          <div style="font-size:11px;color:var(--text-mute);margin-top:12px">
+            Target: 30% Equity · 40% Fixed Income · 30% Alternatives · 0% Cash (mandato multi-asset BIG).
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>NAV Evolution — Base 100 (Since Inception)</h2>
+        <div id="nav-chart-overview" style="min-height: 380px"></div>
+      </div>
+
+      <div class="section">
+        <h2>Holdings + Cost Basis + P&amp;L (por asset class)</h2>
+        <div>
+          <table id="positionsTable">
+            <thead><tr>
+              <th data-sort-key="security_id">Ticker</th>
+              <th data-sort-key="description" style="text-align:left">Description</th>
+              <th data-sort-key="quantity">Quantity</th>
+              <th data-sort-key="market_value_usd">Market Value USD</th>
+              <th data-sort-key="cost_basis">Cost Basis</th>
+              <th data-sort-key="unrealized_gl">Unreal. G/L</th>
+              <th data-sort-key="unrealized_gl_pct">G/L %</th>
+              <th data-sort-key="pct_portfolio">% Port</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- RENDIMIENTOS vs BENCHMARK (replica el Performance tab del viejo) -->
+    <section id="rendimientos" class="tab-content">
+      <div class="info-box-perf">
+        <strong>Performance BIG vs Benchmark 60/40 (ACWI/AGG):</strong>
+        YTD / SI / Annualized derivan del NAV oficial de <strong>Lynk</strong> (estructurador de la nota — matchea la app exacta).
+        1M / 3M / 6M vienen del mismo NAV. Benchmark: <strong>AOR ETF</strong> (proxy de 60% MSCI ACWI + 40% Bloomberg Global Agg).
+        <br><span style="font-size:11px;color:var(--gold-dark)">
+          ✅ V2 fix: series alineadas por fechas comunes + rebased a 100 en la primera intersección.
+          El viejo ploteaba con arrays x separados sin intersect ni rebase.
+        </span>
+      </div>
+
+      <div class="section">
+        <h2>Performance Returns — Multi-Period</h2>
+        <table class="perf-table">
+          <thead>
+            <tr>
+              <th class="left">Strategy</th>
+              <th>YTD</th>
+              <th>1M</th>
+              <th>3M</th>
+              <th>6M</th>
+              <th>LTM</th>
+              <th>Since Inception</th>
+            </tr>
+          </thead>
+          <tbody id="perf-returns-body"></tbody>
+        </table>
+        <div style="font-size:11px;color:var(--text-mute);margin-top:8px;font-style:italic">
+          BIG inception: 30-Jun-2025. Periodos &gt; 1Y reemplazados por Since Inception.
+          Alpha en <strong>bp</strong> (basis points) = 100 bp = 1%.
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Alpha Attribution YTD por Asset Class</h2>
+        <div style="font-size:12px;color:var(--text-mute);margin-bottom:8px;font-style:italic">
+          Desglose del alpha total (BIG YTD − Bench 60/40 YTD) por sleeve. Identifica dónde se gana/pierde performance vs benchmark.
+        </div>
+        <table class="perf-table">
+          <thead>
+            <tr>
+              <th class="left">Asset Class</th>
+              <th>BIG Contrib</th>
+              <th>Bench Contrib</th>
+              <th>Alpha</th>
+              <th class="left">Comentario</th>
+            </tr>
+          </thead>
+          <tbody id="perf-alpha-attribution-body"></tbody>
+        </table>
+      </div>
+
+      <div class="section">
+        <h2>Risk &amp; Capture Metrics</h2>
+        <div style="font-size:11px;color:var(--text-mute);margin-bottom:10px;font-style:italic">
+          Vol / TE anualizados con √252 sobre la ventana Since Inception.
+          IR = alpha_ann / TE_ann. Sharpe con Rf=0 (cash yield marginal).
+        </div>
+        <div class="kpi-grid" id="perf-risk-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))"></div>
+      </div>
+
+      <div class="section">
+        <h2>NAV Evolution — Base 100 (Since Inception)</h2>
+        <div id="nav-chart-perf" style="min-height: 420px"></div>
+        <div style="font-size:11px;color:var(--text-mute);margin-top:8px">
+          Series alineadas por fechas comunes; ambas rebased a 100 en la primera intersección.
+        </div>
+      </div>
+    </section>
+
+    <!-- SLEEVES RACE (Equity vs ACWI / FI vs AGG / Alts vs 60/40) -->
+    <section id="sleeves" class="tab-content">
+      <div class="info-box-perf">
+        <strong>Sleeves Race — BIG vs benchmark por asset class.</strong>
+        Cada sleeve tiene su benchmark natural: <strong>Equity vs ACWI</strong>, <strong>FI vs Bloomberg Global AGG</strong>, <strong>Alts</strong> (referencia 60/40).
+        Data: TWR reconstruido desde transacciones Pershing (flow-adjusted, no backtest de pesos actuales).
+      </div>
+
+      <div style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap">
+        <button class="comp-chip active" data-sleeve="equity">Equity vs ACWI</button>
+        <button class="comp-chip" data-sleeve="fi">Fixed Income vs AGG</button>
+        <button class="comp-chip" data-sleeve="alts">Alternatives</button>
+      </div>
+
+      <div class="kpi-grid" id="sleeveKpis" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))"></div>
+
+      <div class="section" id="sleeve-multi-period-block">
+        <h2>Performance Returns — Multi-Period</h2>
+        <table class="perf-table">
+          <thead>
+            <tr>
+              <th class="left">Strategy</th>
+              <th>YTD</th>
+              <th>1M</th>
+              <th>3M</th>
+              <th>6M</th>
+              <th>Since Inception</th>
+            </tr>
+          </thead>
+          <tbody id="sleeve-returns-body"></tbody>
+        </table>
+      </div>
+
+      <div class="section" id="sleeve-chart-block">
+        <h2>Normalized Performance — Base 100</h2>
+        <div id="sleeve-chart" style="min-height: 420px"></div>
+        <div style="font-size:11px;color:var(--text-mute);margin-top:8px">
+          Series alineadas (mismo archivo backend, sin re-align issues del viejo).
+        </div>
+      </div>
+
+      <!-- ALTS-ONLY: Pie composición -->
+      <div class="section" id="alts-pie-block" style="display:none">
+        <h2>Composición del Sleeve</h2>
+        <div id="alts-pie-chart" style="min-height: 420px"></div>
+      </div>
+
+      <!-- ALTS-ONLY: Concentration + Liquidity -->
+      <div class="section" id="alts-conc-liq-block" style="display:none">
+        <div style="font-size:13px;color:var(--text-mute);margin-bottom:12px;line-height:1.5">
+          <strong>Lectura:</strong> concentración por holding + liquidez del sleeve.
+          Los privates tienen lockups y redemption windows distintos — clave para gestionar liquidez del fondo total.
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1.4fr; gap: 20px">
+          <div>
+            <h3 style="font-size:14px;color:var(--navy);margin-bottom:12px">📊 Concentration Ranking</h3>
+            <div id="alts-concentration"></div>
+          </div>
+          <div>
+            <h3 style="font-size:14px;color:var(--navy);margin-bottom:12px">🔒 Liquidity Buckets</h3>
+            <div id="alts-liquidity"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 id="sleeve-holdings-title">Holdings del Sleeve — Return vs Bench (Dollar-Weighted)</h2>
+        <div id="sleeve-holdings-note" style="font-size:12px;color:var(--text-mute);margin-bottom:8px;font-style:italic">
+          <strong>Bench DW</strong> (Dollar-Weighted) = return del benchmark si hubieras comprado los mismos USD en las mismas fechas que el holding.
+          <strong>Alpha</strong> = Return del holding − Bench DW en el mismo período.
+        </div>
+        <div>
+          <table>
+            <thead><tr>
+              <th style="text-align:left">Holding</th>
+              <th>Weight</th>
+              <th>Return</th>
+              <th>Bench DW</th>
+              <th>Alpha</th>
+              <th>Return YTD</th>
+              <th>Bench YTD</th>
+              <th>Alpha YTD</th>
+            </tr></thead>
+            <tbody id="sleeve-holdings-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- COSTOS TOTALES -->
+    <section id="costs" class="tab-content">
+      <div class="info-box-perf">
+        <strong>Costos totales del portafolio.</strong>
+        Comisiones y fees extraídos directamente de las transacciones Pershing (últimos 30 días)
+        + costos históricos por taxlot activo (baked-in en el cost basis).
+      </div>
+
+      <div class="kpi-grid" id="costsKpis" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))"></div>
+
+      <div class="section">
+        <h2>Costos por Transacción (últimos 30 días)</h2>
+        <div style="max-height: 400px; overflow-y: auto">
+          <table>
+            <thead><tr>
+              <th style="text-align:left">Fecha</th>
+              <th style="text-align:left">Security</th>
+              <th style="text-align:left">Descripción</th>
+              <th>Commission</th>
+              <th>Fees</th>
+              <th>Principal</th>
+            </tr></thead>
+            <tbody id="costsTxnBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Costos por Taxlot (activos actualmente)</h2>
+        <div style="max-height: 400px; overflow-y: auto">
+          <table>
+            <thead><tr>
+              <th style="text-align:left">Security</th>
+              <th style="text-align:left">Taxlot ID</th>
+              <th style="text-align:left">Entry Date</th>
+              <th>Commission</th>
+              <th>Fees</th>
+              <th>Current Cost</th>
+            </tr></thead>
+            <tbody id="costsTaxlotBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ONE PAGER ALTS (iframe al viejo) -->
+    <section id="onepager" class="tab-content">
+      <div class="info-box-perf">
+        <strong>One Pagers Alternativos.</strong>
+        Fichas individuales de los fondos alternativos (Carlyle, HL GPI, K-PEC, BXPE, CAPM, FLEX)
+        — para compartir con Fer y Segundo. Editables desde el archivo original.
+      </div>
+      <iframe src="../../onepagers_alternativos.html"
+              style="width:100%; height:calc(100vh - 250px); border:1px solid var(--border); border-radius:6px"
+              title="One Pagers Alternativos"></iframe>
+    </section>
+
+    <!-- Positions se movió al Overview arriba con grouping por asset class -->
+
+  </main>
+
+  <script>
+    // ============================================================
+    // CONFIG
+    // ============================================================
+    // Fecha del snapshot a mostrar (hardcoded por ahora; luego picker)
+    const SNAPSHOT_DATE = "2026-07-17";
+    const CANONICAL_BASE = `../../data/canonical/${SNAPSHOT_DATE}`;
+
+    // ============================================================
+    // UTILS
+    // ============================================================
+    const fmtUsd = (v, decimals = 2) => {
+      if (v === null || v === undefined || isNaN(v)) return "—";
+      return "$" + v.toLocaleString("en-US", {
+        minimumFractionDigits: decimals, maximumFractionDigits: decimals,
+      });
+    };
+    const fmtNum = (v, decimals = 2) => {
+      if (v === null || v === undefined || isNaN(v)) return "—";
+      return v.toLocaleString("en-US", {
+        minimumFractionDigits: decimals, maximumFractionDigits: decimals,
+      });
+    };
+    const fmtPct = (v, decimals = 2) => {
+      if (v === null || v === undefined || isNaN(v)) return "—";
+      return v.toFixed(decimals) + "%";
+    };
+    const glClass = (v) => v > 0 ? "pos-val" : v < 0 ? "neg-val" : "";
+
+    async function loadJson(name) {
+      const resp = await fetch(`${CANONICAL_BASE}/${name}.json`);
+      if (!resp.ok) throw new Error(`No pude cargar ${name}.json (${resp.status})`);
+      return resp.json();
+    }
+
+    // Fallback loader: leer JSONs del dashboard viejo (data/xxx.json)
+    async function loadLegacyJson(name) {
+      const resp = await fetch(`../../data/${name}.json`);
+      if (!resp.ok) throw new Error(`No pude cargar legacy ${name}.json (${resp.status})`);
+      return resp.json();
+    }
+
+    // ============================================================
+    // TAB NAVIGATION
+    // ============================================================
+    document.querySelectorAll("nav.tabs button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (btn.disabled) return;
+        document.querySelectorAll("nav.tabs button").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById(btn.dataset.tab).classList.add("active");
+      });
+    });
+
+    // ============================================================
+    // RENDER OVERVIEW
+    // ============================================================
+    function renderOverview(positions, pnl, costs, txns, bmComp) {
+      const totalAum = positions.holdings.reduce((s, h) => s + (h.market_value_usd || 0), 0);
+      const cash = positions.holdings
+        .filter(h => h.security_type === "Cash")
+        .reduce((s, h) => s + (h.market_value_usd || 0), 0);
+      const comp = bmComp?.comparisons?.total_vs_6040;
+      const navLatest = comp?.series?.[comp.series.length - 1]?.portfolio;
+      const returnYtd = comp?.returns?.YTD?.portfolio_pct;
+      const returnSi  = comp?.returns?.SI?.portfolio_pct;
+      const volPort   = comp?.stats?.volatility_portfolio_pct_ann;
+      const inception = comp?.inception;
+      const daysSinceLaunch = inception
+        ? Math.floor((new Date(comp.as_of) - new Date(inception)) / 86400000)
+        : null;
+
+      // 6 KPIs replicando el dashboard viejo
+      const kpis = [
+        {
+          label: "NAV (Base 100)", value: navLatest ? navLatest.toFixed(3) : "—",
+          sub: `desde ${inception || "—"}`, klass: "info"
+        },
+        {
+          label: "AUM", value: fmtUsd(totalAum, 0),
+          sub: `${positions.holdings.length} holdings · cash $${(cash/1000).toFixed(0)}k`, klass: "info"
+        },
+        {
+          label: "Return YTD",
+          value: returnYtd !== null && returnYtd !== undefined ? _fmtPct(returnYtd) : "—",
+          sub: "Lynk NAV",
+          klass: (returnYtd || 0) >= 0 ? "pos" : "neg"
+        },
+        {
+          label: "Return Since Inception",
+          value: returnSi !== null && returnSi !== undefined ? _fmtPct(returnSi) : "—",
+          sub: `${daysSinceLaunch || 0} días`,
+          klass: (returnSi || 0) >= 0 ? "pos" : "neg"
+        },
+        {
+          label: "Volatility (ann)",
+          value: volPort !== null && volPort !== undefined ? volPort.toFixed(2) + "%" : "—",
+          sub: `TE vs Bench: ${comp?.stats?.tracking_error_pct_ann ?? "—"}%`,
+          klass: "info"
+        },
+        {
+          label: "Days Since Launch",
+          value: daysSinceLaunch || "—",
+          sub: `inception ${inception || "—"}`, klass: "info"
+        },
+      ];
+
+      const grid = document.getElementById("overviewKpis");
+      grid.innerHTML = kpis.map(k => `
+        <div class="kpi-card ${k.klass}">
+          <div class="label">${k.label}</div>
+          <div class="value">${k.value}</div>
+          <div class="sub">${k.sub}</div>
+        </div>
+      `).join("");
+
+      // Alloc bars por sleeve — desde positions (ya con CALP y externals mergeados)
+      const targetPcts = {"Equity": 30, "Fixed Income": 40, "Alternatives": 30, "Cash": 0};
+      const sleeveColors = {"Equity": "#c9a961", "Fixed Income": "#4a7ab8", "Alternatives": "#7c6f9c", "Cash": "#7fa88f"};
+      const sleeveData = {"Equity": {mv: 0, pct: 0}, "Fixed Income": {mv: 0, pct: 0},
+                          "Alternatives": {mv: 0, pct: 0}, "Cash": {mv: 0, pct: 0}};
+      positions.holdings.forEach(h => {
+        const s = classifyHolding(h);
+        if (sleeveData[s]) sleeveData[s].mv += h.market_value_usd || 0;
+      });
+      Object.keys(sleeveData).forEach(k => {
+        sleeveData[k].pct = totalAum > 0 ? (sleeveData[k].mv / totalAum) * 100 : 0;
+      });
+      document.getElementById("allocBars").innerHTML = ["Equity", "Fixed Income", "Alternatives", "Cash"].map(name => {
+        const d = sleeveData[name] || {mv: 0, pct: 0};
+        const target = targetPcts[name];
+        const diff = d.pct - target;
+        const diffStr = (diff > 0 ? "+" : "") + diff.toFixed(1) + " pp";
+        const diffCls = Math.abs(diff) < 3 ? "" : (diff > 0 ? "pos-val" : "neg-val");
+        return `
+          <div style="margin-bottom:14px">
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
+              <span><strong>${name}</strong> · $${(d.mv/1e6).toFixed(2)}M</span>
+              <span>${d.pct.toFixed(1)}% <span style="color:#888">(target ${target}%)</span> · <span class="${diffCls}">${diffStr}</span></span>
+            </div>
+            <div style="height:12px;background:#e4e7ec;border-radius:6px;overflow:hidden;position:relative">
+              <div style="width:${d.pct}%;height:100%;background:${sleeveColors[name]};border-radius:6px"></div>
+              <div style="position:absolute;top:0;left:${target}%;width:2px;height:100%;background:#333"></div>
+            </div>
+          </div>`;
+      }).join("");
+
+      // NAV chart en Overview (misma data que el widget de rendimientos)
+      if (comp) {
+        const dates = comp.series.map(p => p.date);
+        const portVals = comp.series.map(p => p.portfolio);
+        const benchVals = comp.series.map(p => p.benchmark);
+        Plotly.newPlot("nav-chart-overview", [
+          {x: dates, y: portVals, name: "BIG (Lynk NAV)", type: "scatter", mode: "lines",
+            line: {color: "#d4af37", width: 2.5}},
+          {x: dates, y: benchVals, name: "Benchmark 60/40", type: "scatter", mode: "lines",
+            line: {color: "#4a7ab8", width: 2, dash: "dot"}},
+        ], {
+          margin: {t: 20, r: 20, b: 40, l: 50}, showlegend: true,
+          legend: {orientation: "h", y: -0.15, x: 0.5, xanchor: "center"},
+          xaxis: {showgrid: true, gridcolor: "#eee"},
+          yaxis: {title: "Base 100", showgrid: true, gridcolor: "#eee"},
+          plot_bgcolor: "white", paper_bgcolor: "white", hovermode: "x unified",
+        }, {responsive: true, displaylogo: false});
+      }
+
+      // Distribución por security type
+      const byType = {};
+      positions.holdings.forEach(h => {
+        const t = h.security_type || "Unknown";
+        if (!byType[t]) byType[t] = { mv: 0, count: 0 };
+        byType[t].mv += h.market_value_usd || 0;
+        byType[t].count += 1;
+      });
+      const tbody = document.querySelector("#secTypeTable tbody");
+      tbody.innerHTML = Object.entries(byType)
+        .sort((a, b) => b[1].mv - a[1].mv)
+        .map(([type, d]) => `
+          <tr>
+            <td>${type}</td>
+            <td class="num">${fmtUsd(d.mv)}</td>
+            <td class="num">${fmtPct((d.mv / totalAum) * 100)}</td>
+            <td class="center">${d.count}</td>
+          </tr>
+        `).join("") + `
+          <tr class="total-row">
+            <td>TOTAL</td>
+            <td class="num">${fmtUsd(totalAum)}</td>
+            <td class="num">100.00%</td>
+            <td class="center">${positions.holdings.length}</td>
+          </tr>
+        `;
+    }
+
+    // ============================================================
+    // RENDER POSITIONS (holdings + cost basis + P&L agregado por security)
+    // ============================================================
+    let positionsData = null;
+    let currentSort = { key: "market_value_usd", desc: true };
+
+    function buildPositionsRows(positions, pnl) {
+      // Agregar taxlots UGL por security_id
+      const taxlotsBySec = {};
+      pnl.unrealized.forEach(t => {
+        const k = t.security_id;
+        if (!taxlotsBySec[k]) taxlotsBySec[k] = { cost: 0, gl: 0, qty: 0 };
+        taxlotsBySec[k].cost += t.current_total_cost || 0;
+        taxlotsBySec[k].gl += t.gain_loss || 0;
+        taxlotsBySec[k].qty += t.quantity || 0;
+      });
+
+      const totalAum = positions.holdings.reduce((s, h) => s + (h.market_value_usd || 0), 0);
+      return positions.holdings.map(h => {
+        const tl = taxlotsBySec[h.security_id] || { cost: 0, gl: 0 };
+        const glPct = tl.cost > 0 ? (tl.gl / tl.cost) * 100 : null;
+        // Extraer ISIN de description si viene embedded (ej: "ISIN#IE00B5BMR087")
+        const isinFromDesc = ((h.description || "").match(/ISIN#?\s*([A-Z]{2}[A-Z0-9]{10})/i) || [])[1];
+        return {
+          security_id: h.security_id,
+          isin: h.isin || isinFromDesc || null,
+          symbol: h.symbol || null,
+          description: h.description,
+          security_type: h.security_type,
+          quantity: h.quantity,
+          market_value_usd: h.market_value_usd,
+          cost_basis: tl.cost,
+          unrealized_gl: tl.gl,
+          unrealized_gl_pct: glPct,
+          pct_portfolio: (h.market_value_usd / totalAum) * 100,
+        };
+      });
+    }
+
+    function renderPositions() {
+      if (!positionsData) return;
+
+      // Classify + group por sleeve (matching contra race JSONs por ISIN/ticker)
+      const grouped = {"Equity": [], "Fixed Income": [], "Alternatives": [], "Cash": []};
+      positionsData.forEach(r => {
+        const sleeve = classifyHolding(r);
+        grouped[sleeve].push({...r, _sleeve: sleeve});
+      });
+
+      // Sort DENTRO de cada grupo por currentSort.key
+      const sortRows = arr => arr.sort((a, b) => {
+        const va = a[currentSort.key], vb = b[currentSort.key];
+        if (va == null) return 1; if (vb == null) return -1;
+        if (typeof va === "string") return currentSort.desc ? vb.localeCompare(va) : va.localeCompare(vb);
+        return currentSort.desc ? vb - va : va - vb;
+      });
+
+      // Totales globales
+      const allRows = positionsData;
+      const totalMv = allRows.reduce((s, r) => s + (r.market_value_usd || 0), 0);
+      const totalCost = allRows.reduce((s, r) => s + (r.cost_basis || 0), 0);
+      const totalGl = allRows.reduce((s, r) => s + (r.unrealized_gl || 0), 0);
+
+      // Colores por sleeve (mismo que alloc bars)
+      const sleeveColors = {
+        "Equity": "#c9a961",
+        "Fixed Income": "#4a7ab8",
+        "Alternatives": "#7c6f9c",
+        "Cash": "#7fa88f",
+      };
+
+      const tbody = document.querySelector("#positionsTable tbody");
+      const sleevesOrder = ["Equity", "Fixed Income", "Alternatives", "Cash"];
+      let html = "";
+      sleevesOrder.forEach(sleeve => {
+        const rows = grouped[sleeve];
+        if (!rows.length) return;
+        sortRows(rows);
+        const sleeveMv = rows.reduce((s, r) => s + (r.market_value_usd || 0), 0);
+        const sleeveCost = rows.reduce((s, r) => s + (r.cost_basis || 0), 0);
+        const sleeveGl = rows.reduce((s, r) => s + (r.unrealized_gl || 0), 0);
+        const sleevePctPort = totalMv > 0 ? (sleeveMv / totalMv) * 100 : 0;
+
+        // Subheader
+        html += `<tr class="sleeve-header" style="background:${sleeveColors[sleeve]}22">
+          <td colspan="8" style="padding:10px 12px; font-weight:700; color:${sleeveColors[sleeve]}; text-transform:uppercase; letter-spacing:.5px; font-size:11px; border-top:2px solid ${sleeveColors[sleeve]}; border-bottom:1px solid ${sleeveColors[sleeve]}44">
+            <span style="display:inline-block; width:8px; height:8px; background:${sleeveColors[sleeve]}; border-radius:50%; margin-right:8px; vertical-align:middle"></span>
+            ${sleeve} — ${rows.length} holdings · MV $${(sleeveMv/1e6).toFixed(2)}M · ${sleevePctPort.toFixed(1)}% del portfolio
+          </td>
+        </tr>`;
+
+        // Rows del sleeve
+        html += rows.map(r => `
+          <tr>
+            <td><b>${r.security_id}</b></td>
+            <td style="text-align:left">${r.description}</td>
+            <td class="num">${fmtNum(r.quantity, 2)}</td>
+            <td class="num">${fmtUsd(r.market_value_usd)}</td>
+            <td class="num">${r.cost_basis ? fmtUsd(r.cost_basis) : "—"}</td>
+            <td class="num ${glClass(r.unrealized_gl)}">${r.cost_basis ? fmtUsd(r.unrealized_gl) : "—"}</td>
+            <td class="num ${glClass(r.unrealized_gl_pct)}">${fmtPct(r.unrealized_gl_pct)}</td>
+            <td class="num">${fmtPct(r.pct_portfolio)}</td>
+          </tr>
+        `).join("");
+
+        // Subtotal del sleeve
+        const sleeveGlPct = sleeveCost > 0 ? (sleeveGl / sleeveCost) * 100 : null;
+        html += `<tr style="background:${sleeveColors[sleeve]}11; font-weight:600">
+          <td colspan="3" style="text-align:right; padding-right:10px; font-style:italic; color:${sleeveColors[sleeve]}">Subtotal ${sleeve}</td>
+          <td class="num">${fmtUsd(sleeveMv)}</td>
+          <td class="num">${sleeveCost > 0 ? fmtUsd(sleeveCost) : "—"}</td>
+          <td class="num ${glClass(sleeveGl)}">${sleeveCost > 0 ? fmtUsd(sleeveGl) : "—"}</td>
+          <td class="num ${glClass(sleeveGlPct)}">${fmtPct(sleeveGlPct)}</td>
+          <td class="num">${fmtPct(sleevePctPort)}</td>
+        </tr>`;
+      });
+
+      // Total row global
+      html += `<tr class="total-row">
+        <td colspan="3">TOTAL (${allRows.length} holdings)</td>
+        <td class="num">${fmtUsd(totalMv)}</td>
+        <td class="num">${fmtUsd(totalCost)}</td>
+        <td class="num ${glClass(totalGl)}">${fmtUsd(totalGl)}</td>
+        <td class="num ${glClass(totalCost > 0 ? (totalGl / totalCost) * 100 : 0)}">
+          ${totalCost > 0 ? fmtPct((totalGl / totalCost) * 100) : "—"}
+        </td>
+        <td class="num">100.00%</td>
+      </tr>`;
+
+      tbody.innerHTML = html;
+
+      // Update sort indicators
+      document.querySelectorAll("#positionsTable th").forEach(th => {
+        th.classList.remove("sort-asc", "sort-desc");
+        if (th.dataset.sortKey === currentSort.key) {
+          th.classList.add(currentSort.desc ? "sort-desc" : "sort-asc");
+        }
+      });
+    }
+
+    // Sort handlers
+    document.querySelectorAll("#positionsTable th").forEach(th => {
+      th.addEventListener("click", () => {
+        const key = th.dataset.sortKey;
+        if (!key) return;
+        if (currentSort.key === key) currentSort.desc = !currentSort.desc;
+        else { currentSort.key = key; currentSort.desc = true; }
+        renderPositions();
+      });
+    });
+
+    // ============================================================
+    // RENDER RENDIMIENTOS vs BENCHMARK
+    // ============================================================
+    function _fmtPct(v, dec = 2) {
+      if (v === null || v === undefined || isNaN(v)) return "—";
+      const sign = v > 0 ? "+" : "";
+      return sign + v.toFixed(dec) + "%";
+    }
+    function _fmtBp(v) {
+      if (v === null || v === undefined || isNaN(v)) return "—";
+      const sign = v > 0 ? "+" : "";
+      return sign + v.toFixed(0) + " bp";
+    }
+    function _fmtNum(v, dec = 2) {
+      if (v === null || v === undefined || isNaN(v)) return "—";
+      return v.toFixed(dec);
+    }
+
+    function renderPerfReturns(comp) {
+      // Multi-Period Returns table: 3 rows (BIG / Bench / Alpha)
+      const r = comp.returns;
+      const periods = ["YTD", "1M", "3M", "6M", "LTM", "SI"];
+      const bigCells = periods.map(p => `<td>${_fmtPct(r[p]?.portfolio_pct)}</td>`).join("");
+      const bmkCells = periods.map(p => `<td>${_fmtPct(r[p]?.benchmark_pct)}</td>`).join("");
+      const alphaCells = periods.map(p => `<td>${_fmtBp(r[p]?.alpha_bp)}</td>`).join("");
+
+      document.getElementById("perf-returns-body").innerHTML = `
+        <tr class="row-big">    <td class="left">BIG (Lynk NAV)</td>${bigCells}</tr>
+        <tr class="row-bmk">    <td class="left">Benchmark (${comp.benchmark_name})</td>${bmkCells}</tr>
+        <tr class="row-alpha">  <td class="left">Alpha</td>${alphaCells}</tr>
+      `;
+    }
+
+    function renderAlphaAttribution(attrib) {
+      // attrib.alpha_attribution.components -> tabla con rows por asset class + Total
+      const aa = attrib?.alpha_attribution;
+      if (!aa) {
+        document.getElementById("perf-alpha-attribution-body").innerHTML =
+          `<tr><td colspan="5" style="text-align:center;color:#888">No hay data de alpha attribution</td></tr>`;
+        return;
+      }
+      const comps = aa.components || [];
+      const rows = comps.map(c => {
+        const alphaCls = c.alpha_pp > 0 ? "pos" : c.alpha_pp < 0 ? "neg" : "";
+        const bigC = c.big_contrib_pp !== null && c.big_contrib_pp !== undefined
+          ? _fmtPct(c.big_contrib_pp) : "—";
+        const benchC = c.bench_contrib_pp !== null && c.bench_contrib_pp !== undefined
+          ? _fmtPct(c.bench_contrib_pp) : "—";
+        return `<tr class="attr-row">
+          <td class="left"><strong>${c.name}</strong></td>
+          <td>${bigC}</td>
+          <td>${benchC}</td>
+          <td class="${alphaCls}">${_fmtPct(c.alpha_pp)}</td>
+          <td class="left" style="font-size:11px;color:#555">${c.comment || ""}</td>
+        </tr>`;
+      }).join("");
+      const totalCls = aa.alpha_ytd_total_pp > 0 ? "pos" : "neg";
+      const total = `<tr class="attr-row attr-total">
+        <td class="left">TOTAL Alpha YTD</td>
+        <td>${_fmtPct(aa.big_ytd)}</td>
+        <td>${_fmtPct(aa.bench_ytd_aor_etf)}</td>
+        <td class="${totalCls}">${_fmtPct(aa.alpha_ytd_total_pp)}</td>
+        <td class="left" style="font-size:11px;color:#555">BIG ${_fmtPct(aa.big_ytd)} − ${aa.bench_label} ${_fmtPct(aa.bench_ytd_aor_etf)}</td>
+      </tr>`;
+      document.getElementById("perf-alpha-attribution-body").innerHTML = rows + total;
+    }
+
+    function renderRiskGrid(comp) {
+      const s = comp.stats;
+      const kpis = [
+        {label: "Vol Portfolio", value: `${_fmtNum(s.volatility_portfolio_pct_ann)}%`, sub: "annualized", klass: "info"},
+        {label: "Vol Benchmark", value: `${_fmtNum(s.volatility_benchmark_pct_ann)}%`, sub: "annualized", klass: "info"},
+        {label: "Tracking Error", value: `${_fmtNum(s.tracking_error_pct_ann)}%`, sub: "annualized", klass: "info"},
+        {label: "Info Ratio", value: _fmtNum(s.info_ratio, 3), sub: "alpha_ann / TE_ann",
+          klass: s.info_ratio >= 0 ? "pos" : "neg"},
+        {label: "Sharpe Portfolio", value: _fmtNum(s.sharpe_portfolio, 3), sub: "Rf = 0",
+          klass: s.sharpe_portfolio >= 0 ? "pos" : "neg"},
+        {label: "Sharpe Benchmark", value: _fmtNum(s.sharpe_benchmark, 3), sub: "Rf = 0", klass: "info"},
+        {label: "Beta", value: _fmtNum(s.beta, 3), sub: "cov / var(bench)", klass: "info"},
+        {label: "Correlation", value: _fmtNum(s.correlation, 3), sub: `n=${s.n_days} days`, klass: "info"},
+      ];
+      document.getElementById("perf-risk-grid").innerHTML = kpis.map(k => `
+        <div class="kpi-card ${k.klass}">
+          <div class="label">${k.label}</div>
+          <div class="value">${k.value}</div>
+          <div class="sub">${k.sub}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderNavChart(comp) {
+      const dates = comp.series.map(p => p.date);
+      const port = comp.series.map(p => p.portfolio);
+      const bench = comp.series.map(p => p.benchmark);
+
+      const traces = [
+        {
+          x: dates, y: port,
+          name: "BIG (Lynk NAV)",
+          type: "scatter", mode: "lines",
+          line: { color: "#d4af37", width: 2.5 },
+        },
+        {
+          x: dates, y: bench,
+          name: `Benchmark: ${comp.benchmark_name}`,
+          type: "scatter", mode: "lines",
+          line: { color: "#4a7ab8", width: 2, dash: "dot" },
+        },
+      ];
+      const layout = {
+        margin: { t: 20, r: 20, b: 40, l: 50 },
+        showlegend: true,
+        legend: { orientation: "h", y: -0.15, x: 0.5, xanchor: "center" },
+        xaxis: { showgrid: true, gridcolor: "#eee", tickfont: { size: 11 } },
+        yaxis: {
+          title: "Base 100",
+          showgrid: true, gridcolor: "#eee",
+          tickfont: { size: 11 },
+          zeroline: false,
+        },
+        plot_bgcolor: "white",
+        paper_bgcolor: "white",
+        hovermode: "x unified",
+      };
+      Plotly.newPlot("nav-chart-perf", traces, layout, {responsive: true, displaylogo: false});
+    }
+
+    // ============================================================
+    // RENDER COSTOS TOTALES
+    // ============================================================
+    function renderCosts(costs) {
+      const t = costs.totals;
+      const kpis = [
+        { label: "Commissions (30 días)", value: fmtUsd(t.commissions_txn_30d, 2),
+          sub: "de transacciones recientes", klass: "info" },
+        { label: "Fees (30 días)", value: fmtUsd(t.fees_txn_30d, 2),
+          sub: "de transacciones recientes", klass: "info" },
+        { label: "Commissions (taxlots activos)", value: fmtUsd(t.commissions_taxlots_current, 2),
+          sub: "baked-in cost basis", klass: "info" },
+        { label: "Fees (taxlots activos)", value: fmtUsd(t.fees_taxlots_current, 2),
+          sub: "baked-in cost basis", klass: "info" },
+      ];
+      document.getElementById("costsKpis").innerHTML = kpis.map(k => `
+        <div class="kpi-card ${k.klass}">
+          <div class="label">${k.label}</div>
+          <div class="value">${k.value}</div>
+          <div class="sub">${k.sub}</div>
+        </div>
+      `).join("");
+
+      // Table costos por transacción
+      document.getElementById("costsTxnBody").innerHTML = costs.by_transaction
+        .sort((a, b) => (b.commission + b.fees) - (a.commission + a.fees))
+        .map(t => `
+          <tr>
+            <td style="text-align:left">${t.process_date || "—"}</td>
+            <td style="text-align:left"><strong>${t.security_id || "—"}</strong></td>
+            <td style="text-align:left; font-size:11px; color:#555">${t.description || ""}</td>
+            <td class="num">${fmtUsd(t.commission, 2)}</td>
+            <td class="num">${fmtUsd(t.fees, 2)}</td>
+            <td class="num">${t.principal !== null ? fmtUsd(t.principal, 2) : "—"}</td>
+          </tr>
+        `).join("");
+
+      // Table costos por taxlot
+      document.getElementById("costsTaxlotBody").innerHTML = costs.by_taxlot
+        .sort((a, b) => (b.commission + b.fees) - (a.commission + a.fees))
+        .map(tl => `
+          <tr>
+            <td style="text-align:left"><strong>${tl.security_id || "—"}</strong>
+              <div style="font-size:11px;color:#888">${tl.description || ""}</div></td>
+            <td style="text-align:left; font-family:monospace; font-size:11px">${tl.taxlot_id || "—"}</td>
+            <td style="text-align:left; font-size:11px">${tl.entry_date || "—"}</td>
+            <td class="num">${fmtUsd(tl.commission, 2)}</td>
+            <td class="num">${fmtUsd(tl.fees, 2)}</td>
+            <td class="num">${fmtUsd(tl.current_cost, 2)}</td>
+          </tr>
+        `).join("");
+    }
+
+    // ============================================================
+    // RENDER SLEEVES RACE (Equity vs ACWI, FI vs AGG)
+    // ============================================================
+    let currentSleeve = "equity";
+    let sleevesData = {equity: null, fi: null, alts: null};
+
+    function renderSleeveKpis(comp, raceMeta) {
+      const r = comp.returns;
+      const si = r.SI;
+      const daysSi = comp.n_observations;
+      const annualized = si && si.portfolio_pct !== null && daysSi > 30
+        ? (Math.pow(1 + si.portfolio_pct / 100, 365 / daysSi) - 1) * 100 : null;
+      const kpis = [
+        { label: "Sleeve SI", value: _fmtPct(si?.portfolio_pct),
+          sub: `desde ${comp.inception}`, klass: (si?.portfolio_pct || 0) >= 0 ? "pos" : "neg" },
+        { label: `${comp.benchmark_name} SI`, value: _fmtPct(si?.benchmark_pct),
+          sub: "mismo período", klass: "info" },
+        { label: "Alpha SI", value: _fmtBp(si?.alpha_bp),
+          sub: "portfolio - bench", klass: (si?.alpha_bp || 0) >= 0 ? "pos" : "neg" },
+        { label: "Annualized (Sleeve)", value: _fmtPct(annualized),
+          sub: `${daysSi} días`, klass: (annualized || 0) >= 0 ? "pos" : "neg" },
+        { label: "Vol / TE (Sleeve)",
+          value: `${comp.stats.volatility_portfolio_pct_ann}% / ${comp.stats.tracking_error_pct_ann}%`,
+          sub: `IR=${comp.stats.info_ratio}`,
+          klass: "info" },
+      ];
+      document.getElementById("sleeveKpis").innerHTML = kpis.map(k => `
+        <div class="kpi-card ${k.klass}">
+          <div class="label">${k.label}</div>
+          <div class="value">${k.value}</div>
+          <div class="sub">${k.sub}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderSleeveReturns(comp) {
+      const r = comp.returns;
+      const periods = ["YTD", "1M", "3M", "6M", "SI"];
+      const bigCells = periods.map(p => `<td>${_fmtPct(r[p]?.portfolio_pct)}</td>`).join("");
+      const bmkCells = periods.map(p => `<td>${_fmtPct(r[p]?.benchmark_pct)}</td>`).join("");
+      const alphaCells = periods.map(p => `<td>${_fmtBp(r[p]?.alpha_bp)}</td>`).join("");
+      document.getElementById("sleeve-returns-body").innerHTML = `
+        <tr class="row-big">    <td class="left">Sleeve</td>${bigCells}</tr>
+        <tr class="row-bmk">    <td class="left">${comp.benchmark_name}</td>${bmkCells}</tr>
+        <tr class="row-alpha">  <td class="left">Alpha</td>${alphaCells}</tr>
+      `;
+    }
+
+    function renderSleeveChart(comp) {
+      const dates = comp.series.map(p => p.date);
+      Plotly.newPlot("sleeve-chart", [
+        { x: dates, y: comp.series.map(p => p.portfolio), name: "Sleeve",
+          type: "scatter", mode: "lines", line: {color: "#d4af37", width: 2.5} },
+        { x: dates, y: comp.series.map(p => p.benchmark), name: comp.benchmark_name,
+          type: "scatter", mode: "lines", line: {color: "#4a7ab8", width: 2, dash: "dot"} },
+      ], {
+        margin: {t: 20, r: 20, b: 40, l: 50}, showlegend: true,
+        legend: {orientation: "h", y: -0.15, x: 0.5, xanchor: "center"},
+        xaxis: {showgrid: true, gridcolor: "#eee"},
+        yaxis: {title: "Base 100", showgrid: true, gridcolor: "#eee"},
+        plot_bgcolor: "white", paper_bgcolor: "white", hovermode: "x unified",
+      }, {responsive: true, displaylogo: false});
+    }
+
+    function renderSleeveMonthly(raceData, sleeveKey) {
+      // raceData.sleeve_monthly_returns : {"YYYY-MM": 0.02, ...}
+      // raceData.acwi_monthly_returns o agg_monthly_returns
+      const smr = raceData?.sleeve_monthly_returns || {};
+      const bmkKey = sleeveKey === "equity" ? "acwi_monthly_returns" : "agg_monthly_returns";
+      const bmr = raceData?.[bmkKey] || {};
+      const months = Object.keys(smr).sort();
+      const rows = months.map(m => {
+        const sv = smr[m];
+        const bv = bmr[m];
+        if (sv === null || sv === undefined) return "";
+        const svPct = sv * 100;
+        const bvPct = bv !== null && bv !== undefined ? bv * 100 : null;
+        const alpha = bvPct !== null ? (svPct - bvPct) * 100 : null; // in bp
+        const alphaCls = alpha !== null ? (alpha > 0 ? "pos-val" : alpha < 0 ? "neg-val" : "") : "";
+        const svCls = sv > 0 ? "pos-val" : sv < 0 ? "neg-val" : "";
+        return `<tr class="attr-row">
+          <td class="left">${m}</td>
+          <td class="${svCls}">${_fmtPct(svPct)}</td>
+          <td>${bvPct !== null ? _fmtPct(bvPct) : "—"}</td>
+          <td class="${alphaCls}">${alpha !== null ? _fmtBp(alpha) : "—"}</td>
+        </tr>`;
+      }).join("");
+      document.querySelector("#sleeve-monthly-table tbody").innerHTML = rows;
+    }
+
+    function renderSleeveHoldings(sleeveKey) {
+      // Canonical v2 holdings_returns.json: MV correcto de Pershing UGL + bench DW ya calculados
+      const hr = window.__hRets?.[sleeveKey];
+      const holdings = (hr?.holdings || []).filter(h => (h.status || "OPEN") === "OPEN");
+      const totalMv = holdings.reduce((s, h) => s + (h.mv_usd || 0), 0);
+      const sorted = [...holdings].sort((a, b) => (b.mv_usd || 0) - (a.mv_usd || 0));
+      const isAlts = sleeveKey === "alts";
+
+      // Título y nota dinámicos
+      const titleEl = document.getElementById("sleeve-holdings-title");
+      const noteEl = document.getElementById("sleeve-holdings-note");
+      if (isAlts) {
+        titleEl.textContent = "Holdings del Sleeve — Return SI + YTD";
+        noteEl.innerHTML = `<strong>Sin bench comparison</strong> — los alternativos no tienen un benchmark único claro (mix de private credit/PE/gold/crypto). Return simple: MWR desde primera compra + YTD.`;
+      } else {
+        titleEl.textContent = "Holdings del Sleeve — Return vs Bench (Dollar-Weighted)";
+        noteEl.innerHTML = `<strong>Bench DW</strong> (Dollar-Weighted) = return del benchmark si hubieras comprado los mismos USD en las mismas fechas que el holding. <strong>Alpha</strong> = Return del holding − Bench DW en el mismo período.`;
+      }
+
+      // Header dinámico
+      const table = document.querySelector("#sleeve-holdings-body").closest("table");
+      if (isAlts) {
+        table.querySelector("thead").innerHTML = `<tr>
+          <th style="text-align:left">Holding</th>
+          <th>Weight</th>
+          <th>Return SI</th>
+          <th>Return YTD</th>
+          <th>MV USD</th>
+        </tr>`;
+      } else {
+        table.querySelector("thead").innerHTML = `<tr>
+          <th style="text-align:left">Holding</th>
+          <th>Weight</th>
+          <th>Return</th>
+          <th>Bench DW</th>
+          <th>Alpha</th>
+          <th>Return YTD</th>
+          <th>Bench YTD</th>
+          <th>Alpha YTD</th>
+        </tr>`;
+      }
+
+      const rows = sorted.map(h => {
+        const weight = totalMv > 0 ? (h.mv_usd / totalMv) * 100 : 0;
+        if (isAlts) {
+          return `<tr>
+            <td style="text-align:left"><strong>${h.ticker || ""}</strong>
+              <div style="font-size:11px;color:#888">${(h.name || "").trim()}</div></td>
+            <td class="num">${_fmtNum(weight, 2)}%</td>
+            <td class="num ${glClass(h.return_pct)}">${_fmtPct(h.return_pct)}</td>
+            <td class="num ${glClass(h.ytd_pct)}">${_fmtPct(h.ytd_pct)}</td>
+            <td class="num">${fmtUsd(h.mv_usd, 0)}</td>
+          </tr>`;
+        }
+        return `<tr>
+          <td style="text-align:left"><strong>${h.ticker || ""}</strong>
+            <div style="font-size:11px;color:#888">${(h.name || "").trim()}</div></td>
+          <td class="num">${_fmtNum(weight, 2)}%</td>
+          <td class="num ${glClass(h.return_pct)}">${_fmtPct(h.return_pct)}</td>
+          <td class="num" style="color:#666">${_fmtPct(h.bench_dw_pct)}</td>
+          <td class="num ${glClass(h.alpha_real_pp)}"><strong>${_fmtBp(h.alpha_real_pp * 100)}</strong></td>
+          <td class="num ${glClass(h.ytd_pct)}">${_fmtPct(h.ytd_pct)}</td>
+          <td class="num" style="color:#666">${_fmtPct(h.bench_ytd_pct)}</td>
+          <td class="num ${glClass(h.alpha_ytd_pp)}"><strong>${_fmtBp(h.alpha_ytd_pp * 100)}</strong></td>
+        </tr>`;
+      }).join("");
+      const colspan = isAlts ? 5 : 8;
+      document.getElementById("sleeve-holdings-body").innerHTML = rows || `<tr><td colspan="${colspan}" style="text-align:center;color:#888;padding:20px">No hay data disponible</td></tr>`;
+    }
+
+    async function loadSleeveData() {
+      // Cargamos on-demand equity_race + fi_race + alts_race para el monthly breakdown, holdings y sleeve classification
+      if (!sleevesData.equity) {
+        try { sleevesData.equity = await loadLegacyJson("equity_race"); } catch (e) {}
+      }
+      if (!sleevesData.fi) {
+        try { sleevesData.fi = await loadLegacyJson("fi_race"); } catch (e) {}
+      }
+      if (!sleevesData.alts) {
+        try { sleevesData.alts = await loadLegacyJson("alts_race"); } catch (e) {}
+      }
+    }
+
+    // Classify holding by sleeve — matching robusto vs race JSONs:
+    //   1. ISIN exacto
+    //   2. Ticker del race (contenido en security_id o description del positions)
+    //   3. security_type + keywords en description (fallback)
+    function _matchRaceHoldings(h, raceHoldings, sleeve) {
+      const isin = (h.isin || "").toUpperCase();
+      const secId = (h.security_id || "").toUpperCase();
+      const desc = (h.description || "").toUpperCase();
+      for (const rh of raceHoldings || []) {
+        const raceIsin = (rh.isin || "").toUpperCase();
+        const raceTicker = (rh.ticker || "").toUpperCase();
+        // ISIN exacto
+        if (isin && raceIsin && isin === raceIsin) return sleeve;
+        // Ticker match (mínimo 3 chars, evitar false positives)
+        if (raceTicker.length >= 3) {
+          // Exact security_id match
+          if (secId === raceTicker || secId === `${raceTicker}:GB` || secId === `${raceTicker}:DE`) return sleeve;
+          // Ticker embedded en description como palabra (word boundary)
+          if (new RegExp(`\\b${raceTicker.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\$&")}\\b`).test(desc)) return sleeve;
+        }
+      }
+      return null;
+    }
+
+    function classifyHolding(h) {
+      if (h.security_type === "Cash") return "Cash";
+      // Match contra las 3 races por ISIN o ticker
+      const s = _matchRaceHoldings(h, sleevesData.equity?.holdings, "Equity")
+             || _matchRaceHoldings(h, sleevesData.fi?.holdings, "Fixed Income")
+             || _matchRaceHoldings(h, sleevesData.alts?.holdings, "Alternatives");
+      if (s) return s;
+      // Fallback por security_type + keywords fuertes
+      if (h.security_type === "Corporate Bonds") return "Fixed Income";
+      if (h.security_type === "Limited Partnerships") return "Alternatives";
+      const desc = (h.description || "").toUpperCase();
+      if (/CARLYLE|HAMILTON LANE|GOLUB|HPS|BARINGS|FRANKLIN LEXINGTON|BLACKROCK PRIVATE|LEXINGTON|K-PEC|BXPE|CAPM|FLEX|PICKED|ALTERNAT|BITCOIN|GOLD SHS/.test(desc)) return "Alternatives";
+      if (/BOND|CREDIT|CAT BOND|LOW DURATION|EMERGING LOCAL|TENAC|TGF|MEDIUM TERM NOTE|INVESTMENT GRADE|AGG|FIXED/.test(desc)) return "Fixed Income";
+      // Default: Equity
+      return "Equity";
+    }
+
+    // Toggle bloques según sleeve (Alts oculta Multi-Period + Normalized Chart y muestra Pie + Conc/Liq)
+    function _toggleSleeveBlocks(sleeveKey) {
+      const isAlts = sleeveKey === "alts";
+      document.getElementById("sleeve-multi-period-block").style.display = isAlts ? "none" : "";
+      document.getElementById("sleeve-chart-block").style.display = isAlts ? "none" : "";
+      document.getElementById("alts-pie-block").style.display = isAlts ? "" : "none";
+      document.getElementById("alts-conc-liq-block").style.display = isAlts ? "" : "none";
+    }
+
+    // KPIs simples para Alts (sin bench comparison — es un sleeve sin bench claro)
+    function renderAltsKpis(holdings) {
+      const totalMv = holdings.reduce((s, h) => s + (h.mv_usd || 0), 0);
+      const totalCost = holdings.reduce((s, h) => s + (h.cost_basis_usd || 0), 0);
+      const wSI = holdings.reduce((s, h) => s + (h.mv_usd || 0) * (h.return_pct || 0), 0) / (totalMv || 1);
+      const wYTD = holdings.reduce((s, h) => s + (h.mv_usd || 0) * (h.ytd_pct || 0), 0) / (totalMv || 1);
+      const kpis = [
+        { label: "Sleeve AUM", value: fmtUsd(totalMv, 0), sub: `${holdings.length} holdings`, klass: "info" },
+        { label: "Sleeve Return SI", value: _fmtPct(wSI), sub: "weighted por MV", klass: wSI >= 0 ? "pos" : "neg" },
+        { label: "Sleeve Return YTD", value: _fmtPct(wYTD), sub: "weighted por MV", klass: wYTD >= 0 ? "pos" : "neg" },
+        { label: "Cost Basis Total", value: fmtUsd(totalCost, 0), sub: `Unreal. G/L $${((totalMv - totalCost) / 1e6).toFixed(2)}M`, klass: "info" },
+      ];
+      document.getElementById("sleeveKpis").innerHTML = kpis.map(k => `
+        <div class="kpi-card ${k.klass}">
+          <div class="label">${k.label}</div>
+          <div class="value">${k.value}</div>
+          <div class="sub">${k.sub}</div>
+        </div>
+      `).join("");
+    }
+
+    // Pie chart de composición Alts
+    function renderAltsPie(holdings) {
+      const totalMv = holdings.reduce((s, h) => s + (h.mv_usd || 0), 0);
+      const sorted = [...holdings].sort((a, b) => (b.mv_usd || 0) - (a.mv_usd || 0));
+      const colors = ["#c9a961", "#e67e22", "#7c6f9c", "#4a7ab8", "#7fa88f", "#e8b57a", "#6a5aa5", "#3a6a99"];
+      Plotly.newPlot("alts-pie-chart", [{
+        type: "pie", hole: 0.55,
+        labels: sorted.map(h => h.ticker),
+        values: sorted.map(h => h.mv_usd),
+        marker: { colors: colors.slice(0, sorted.length) },
+        textinfo: "label+percent",
+        textposition: "outside",
+        textfont: { size: 13, color: "#0a2540" },
+        hovertemplate: "<b>%{label}</b><br>$%{value:,.0f}<br>%{percent}<extra></extra>",
+      }], {
+        margin: { t: 10, r: 20, b: 10, l: 20 },
+        showlegend: false,
+        annotations: [{
+          text: `<b>Alternatives</b><br><span style='font-size:16px'>$${(totalMv / 1e6).toFixed(2)}M</span><br><span style='font-size:12px;color:#888'>100%</span>`,
+          x: 0.5, y: 0.5, font: { size: 14, color: "#0a2540" }, showarrow: false,
+        }],
+      }, { responsive: true, displaylogo: false });
+    }
+
+    // Concentration Ranking bars
+    function renderAltsConcentration(holdings) {
+      const totalMv = holdings.reduce((s, h) => s + (h.mv_usd || 0), 0);
+      const sorted = [...holdings].sort((a, b) => (b.mv_usd || 0) - (a.mv_usd || 0));
+      const top1 = sorted[0];
+      const top1Pct = top1 ? (top1.mv_usd / totalMv) * 100 : 0;
+      const top3Pct = sorted.slice(0, 3).reduce((s, h) => s + (h.mv_usd || 0), 0) / totalMv * 100;
+      const alertColor = top1Pct >= 30 ? "#dc2626" : top1Pct >= 20 ? "#f59e0b" : "#16a34a";
+      const alertEmoji = top1Pct >= 30 ? "🔴" : top1Pct >= 20 ? "🟠" : "🟢";
+      const alertText = top1Pct >= 30 ? "Alta concentración" : top1Pct >= 20 ? "Concentración moderada" : "Concentración baja";
+      let html = `
+        <div style="font-size:12px;color:${alertColor};margin-bottom:6px">
+          ${alertEmoji} <strong>${alertText}:</strong> ${top1?.ticker || "—"} es ${top1Pct.toFixed(1)}% del sleeve
+        </div>
+        <div style="font-size:12px;color:var(--text-mute);margin-bottom:12px">
+          Top 3 = ${top3Pct.toFixed(1)}% del sleeve
+        </div>`;
+      sorted.forEach((h, i) => {
+        const pct = (h.mv_usd / totalMv) * 100;
+        const barW = (pct / top1Pct * 100).toFixed(1);
+        const color = pct >= 30 ? "#dc2626" : pct >= 20 ? "#f59e0b" : "#16a34a";
+        html += `
+          <div style="margin-bottom:8px">
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+              <span><strong>${i + 1}.</strong> ${h.ticker}</span>
+              <span style="color:${color};font-weight:700">${pct.toFixed(1)}%</span>
+            </div>
+            <div style="height:6px;background:#e4e7ec;border-radius:3px;overflow:hidden">
+              <div style="height:100%;width:${barW}%;background:${color}"></div>
+            </div>
+          </div>`;
+      });
+      document.getElementById("alts-concentration").innerHTML = html;
+    }
+
+    // Liquidity Buckets (Daily + Lock-up con detalle)
+    function renderAltsLiquidity(holdings) {
+      const liqData = window.__altsLiq?.profiles || {};
+      const totalMv = holdings.reduce((s, h) => s + (h.mv_usd || 0), 0);
+      const today = new Date();
+      const dailyItems = [];
+      const lockedItems = [];
+      holdings.forEach(h => {
+        const liq = h.isin ? liqData[h.isin] : null;
+        if (liq && liq.profile === "daily") {
+          dailyItems.push({ ...h, ...liq });
+        } else {
+          lockedItems.push({ ...h, ...(liq || {}), lock_type: liq?.lock_type || "Sin clasificar" });
+        }
+      });
+      const dailyMv = dailyItems.reduce((s, h) => s + (h.mv_usd || 0), 0);
+      const lockedMv = lockedItems.reduce((s, h) => s + (h.mv_usd || 0), 0);
+
+      const fmtDate = d => d ? new Date(d).toLocaleDateString("es-AR", { day: "2-digit", month: "short", year: "2-digit" }) : "—";
+
+      const dailyHTML = `
+        <div style="padding:12px 14px; background:#f8fafc; border-left:3px solid #16a34a; border-radius:4px; margin-bottom:12px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+            <strong style="color:#16a34a">🟢 Daily (líquido)</strong>
+            <strong>${(dailyMv / totalMv * 100).toFixed(1)}% · $${(dailyMv / 1e6).toFixed(2)}M</strong>
+          </div>
+          <div style="font-size:11px;color:var(--text-mute)">${dailyItems.map(h => h.ticker).join(", ") || "—"}</div>
+        </div>`;
+
+      const sortedLocked = [...lockedItems].sort((a, b) => {
+        if (!a.unlock_date && !b.unlock_date) return 0;
+        if (!a.unlock_date) return 1;
+        if (!b.unlock_date) return -1;
+        return new Date(a.unlock_date) - new Date(b.unlock_date);
+      });
+      const lockRows = sortedLocked.map(h => {
+        let daysLabel = "—";
+        if (h.unlock_date) {
+          const daysLeft = Math.ceil((new Date(h.unlock_date) - today) / 86400000);
+          if (daysLeft <= 0) daysLabel = `<strong style="color:#16a34a">DESBLOQUEADO</strong>`;
+          else if (daysLeft <= 90) daysLabel = `<strong style="color:#f59e0b">${daysLeft}d ⚠</strong>`;
+          else daysLabel = `${daysLeft}d`;
+        }
+        return `<tr>
+          <td style="padding:6px 8px"><strong>${h.ticker}</strong></td>
+          <td style="padding:6px 8px; font-size:11px; color:var(--text-mute)">${h.lock_type}</td>
+          <td style="padding:6px 8px; font-size:11px">${fmtDate(h.purchase_date)}</td>
+          <td style="padding:6px 8px; font-size:11px; font-weight:600">${fmtDate(h.unlock_date)}</td>
+          <td style="padding:6px 8px; text-align:center; font-size:12px">${daysLabel}</td>
+          <td style="padding:6px 8px; text-align:right; font-weight:700; color:var(--gold)">$${((h.mv_usd || 0) / 1000).toFixed(0)}K</td>
+        </tr>`;
+      }).join("");
+      const lockHTML = `
+        <div style="padding:12px 14px; background:#f8fafc; border-left:3px solid #7c6f9c; border-radius:4px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+            <strong style="color:#7c6f9c">🔒 Lock-up</strong>
+            <strong>${(lockedMv / totalMv * 100).toFixed(1)}% · $${(lockedMv / 1e6).toFixed(2)}M</strong>
+          </div>
+          <table style="width:100%; border-collapse:collapse; font-size:11px">
+            <thead>
+              <tr style="border-bottom:1px solid var(--border); color:var(--text-mute); font-size:11px">
+                <th style="padding:6px 8px; text-align:left">Ticker</th>
+                <th style="padding:6px 8px; text-align:left">Tipo</th>
+                <th style="padding:6px 8px; text-align:left">Compra</th>
+                <th style="padding:6px 8px; text-align:left">Desbloqueo</th>
+                <th style="padding:6px 8px; text-align:center">Faltan</th>
+                <th style="padding:6px 8px; text-align:right">Monto</th>
+              </tr>
+            </thead>
+            <tbody>${lockRows}</tbody>
+          </table>
+          <div style="margin-top:10px; padding-top:8px; border-top:1px solid var(--border); font-size:11px; color:var(--text-mute)">
+            Bloqueado hasta unlock: <strong style="color:#f59e0b">$${(lockedMv / 1e6).toFixed(2)}M</strong>
+            (no rescatable sin penalty hasta su fecha)
+          </div>
+        </div>`;
+
+      document.getElementById("alts-liquidity").innerHTML = dailyHTML + lockHTML;
+    }
+
+    function renderSleeve(sleeveKey) {
+      _toggleSleeveBlocks(sleeveKey);
+
+      // ALTS: layout distinto (sin bench comparison, con pie + conc + liq)
+      if (sleeveKey === "alts") {
+        const holdings = (window.__hRets?.alts?.holdings || []).filter(h => (h.status || "OPEN") === "OPEN");
+        renderAltsKpis(holdings);
+        renderAltsPie(holdings);
+        renderAltsConcentration(holdings);
+        renderAltsLiquidity(holdings);
+        renderSleeveHoldings(sleeveKey);
+        return;
+      }
+
+      // Equity / FI: layout con bench comparison
+      const bmComp = window.__bmComp;
+      if (!bmComp) return;
+      const compKey = sleeveKey === "equity" ? "equity_vs_acwi" : "fi_vs_agg";
+      const comp = bmComp.comparisons[compKey];
+
+      renderSleeveKpis(comp);
+      renderSleeveReturns(comp);
+      renderSleeveChart(comp);
+      renderSleeveHoldings(sleeveKey);
+    }
+
+    // Chip handlers
+    document.querySelectorAll('.comp-chip[data-sleeve]').forEach(chip => {
+      chip.addEventListener("click", () => {
+        if (chip.disabled) return;
+        document.querySelectorAll('.comp-chip[data-sleeve]').forEach(c => c.classList.remove("active"));
+        chip.classList.add("active");
+        currentSleeve = chip.dataset.sleeve;
+        renderSleeve(currentSleeve);
+      });
+    });
+
+    // ============================================================
+    // MAIN
+    // ============================================================
+    async function main() {
+      try {
+        const [positions, pnl, costs, txns, bmComp] = await Promise.all([
+          loadJson("positions"),
+          loadJson("pnl"),
+          loadJson("costs"),
+          loadJson("transactions"),
+          loadJson("benchmark_comparison"),
+        ]);
+
+        // Legacy JSONs (todavia del dashboard viejo — se migran gradual)
+        let attribYtd = null;
+        try {
+          attribYtd = await loadLegacyJson("attribution_ytd");
+          window.__attribYtd = attribYtd;
+        } catch (e) {
+          console.warn("attribution_ytd.json no disponible:", e.message);
+        }
+
+        // alts_liquidity.json — liquidity profile por holding del sleeve Alts
+        try { window.__altsLiq = await loadLegacyJson("alts_liquidity"); } catch (e) { window.__altsLiq = null; }
+
+        // alts_external.json — holdings alternatives externos (CALP desde statement)
+        try { window.__altsExt = await loadLegacyJson("alts_external"); } catch (e) { window.__altsExt = null; }
+
+        // Mergear externals a positions para que aparezcan en Overview (positions/AUM/alloc)
+        if (window.__altsExt?.holdings) {
+          for (const eh of window.__altsExt.holdings) {
+            if (positions.holdings.some(h => h.isin === eh.isin)) continue;
+            positions.holdings.push({
+              security_id: eh.ticker,
+              isin: eh.isin,
+              cusip: null,
+              symbol: eh.ticker,
+              description: eh.name,
+              security_type: "Limited Partnerships",
+              account_type: "CASH",
+              position_ccy: "USD",
+              quantity: eh.qty,
+              market_price_ccy: eh.last_price_usd,
+              market_value_ccy: eh.mv_usd,
+              fx_rate_to_usd: 1.0,
+              market_value_usd: eh.mv_usd,
+              price_date: eh.as_of,
+              market_code: "EXT",  // marker: external source
+              _external_source: eh.source,
+            });
+          }
+        }
+
+        // holdings_returns.json — canonical v2, MV correcto de Pershing UGL + bench DW
+        let hRetsV2 = null;
+        try {
+          hRetsV2 = await loadJson("holdings_returns");
+          window.__hRets = {
+            equity: {holdings: hRetsV2?.sleeves?.equity?.holdings || []},
+            fi:     {holdings: hRetsV2?.sleeves?.fixed_income?.holdings || []},
+            alts:   {holdings: hRetsV2?.sleeves?.alternatives?.holdings || []},
+          };
+        } catch (e) {
+          console.warn("holdings_returns.json canonical no disponible, fallback a legacy");
+          window.__hRets = {equity: null, fi: null, alts: null};
+          try { window.__hRets.equity = await loadLegacyJson("holdings_returns_equity"); } catch (_) {}
+          try { window.__hRets.fi     = await loadLegacyJson("holdings_returns_fixed_income"); } catch (_) {}
+          try { window.__hRets.alts   = await loadLegacyJson("holdings_returns_alternatives"); } catch (_) {}
+        }
+
+        document.getElementById("asOf").textContent = positions.as_of;
+        document.getElementById("generatedAt").textContent = positions.generated_at.replace("T", " ").replace("Z", " UTC");
+
+        // Cargar sleeve data ANTES de render positions (para el ISIN → sleeve lookup)
+        await loadSleeveData();
+
+        // Overview + Positions
+        renderOverview(positions, pnl, costs, txns, bmComp);
+        positionsData = buildPositionsRows(positions, pnl);
+        renderPositions();
+
+        // Rendimientos vs Benchmark
+        window.__bmComp = bmComp;
+        const comp = bmComp.comparisons.total_vs_6040;
+        renderPerfReturns(comp);
+        renderAlphaAttribution(attribYtd);
+        renderRiskGrid(comp);
+        renderNavChart(comp);
+
+        // Sleeves Race (equity + fi)
+        renderSleeve(currentSleeve);
+
+        // Costos totales
+        renderCosts(costs);
+
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("overview").classList.add("active");
+      } catch (e) {
+        document.getElementById("loading").style.display = "none";
+        const err = document.getElementById("errorBox");
+        err.style.display = "block";
+        err.textContent = `Error cargando data: ${e.message}. Chequeá que exista ${CANONICAL_BASE}/*.json`;
+        console.error(e);
+      }
+    }
+    main();
+  </script>
+</body>
+</html>

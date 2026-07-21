@@ -1,0 +1,215 @@
+{
+  "_description": "Precios al 31-Dec del anio anterior, usados como anchor para calcular YTD correcto (TWR real del fondo, no MWR).",
+  "_updated": "2026-07-17",
+  "_source": "Pershing UGL + year_start_anchors legacy + baha monthlyReturns",
+  "_generation_rule": "Cada 1-Ene guardar el precio 31-Dec del anio anterior en este archivo (script snapshot_year_start_prices.py).",
+  "anchors_2026": {
+    "IE00B6YCBF59": {
+      "ticker": "THOR",
+      "name": "Thornburg Income Builder",
+      "ytd_source_pct": 14.15,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=year_start_anchors, qty_pre=0"
+    },
+    "US46438F1012": {
+      "ticker": "IBIT",
+      "name": "iShares Bitcoin Trust",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": 15695.0,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=15695.0"
+    },
+    "IE00B29K0P99": {
+      "ticker": "PIMCO-EM",
+      "name": "PIMCO GIS EM Local Bond",
+      "ytd_source_pct": 2.23,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=year_start_anchors, qty_pre=0"
+    },
+    "DE000A0Q4R85": {
+      "ticker": "4BRZ",
+      "name": "iShares MSCI Brazil UCITS",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
+    "IE00BF4KN675": {
+      "ticker": "LGLI",
+      "name": "Lazard Global Listed Infra",
+      "ytd_source_pct": 9.91,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=year_start_anchors, qty_pre=0"
+    },
+    "XS2658535526": {
+      "ticker": "BPCC",
+      "name": "Barings Private Credit BPCC",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": 464209.0,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=464209.0"
+    },
+    "IE000OE87WX6": {
+      "ticker": "MANIG",
+      "name": "Man GLG Global IG Opportunities",
+      "ytd_source_pct": 2.55,
+      "price_2025_dec_31": 122.018528,
+      "qty_2025_dec_31": 12640.339,
+      "mv_2025_dec_31": 1542355.56,
+      "ytd_source": "year_start_anchors"
+    },
+    "US4642873909": {
+      "ticker": "ILF",
+      "name": "iShares Latin America 40",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
+    "US46434V8862": {
+      "ticker": "HEWJ",
+      "name": "ISHARES TR ISHARES CURRENCY HEDGED MSCI ",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
+    "IE00B87KCF77": {
+      "ticker": "PIMCO-INC",
+      "name": "PIMCO GIS Income I",
+      "ytd_source_pct": 1.4,
+      "price_2025_dec_31": 19.911243,
+      "qty_2025_dec_31": 36564.949,
+      "mv_2025_dec_31": 728053.58,
+      "ytd_source": "year_start_anchors"
+    },
+    "LU2847068389": {
+      "ticker": "LU2847068389",
+      "name": "HAMILTON LANE GLOBAL PRIVATE INFRASTRUCT",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
+    "IE00089T5MA6": {
+      "ticker": "MANEM",
+      "name": "Man EM Corp Credit Alt",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
+    "IE00B5BMR087": {
+      "ticker": "CSPX",
+      "name": "iShares Core S&P 500 UCITS",
+      "ytd_source_pct": 10.08,
+      "price_2025_dec_31": 740.43423,
+      "qty_2025_dec_31": 2271.0,
+      "mv_2025_dec_31": 1681526.14,
+      "ytd_source": "year_start_anchors"
+    },
+    "IE00BDT57R20": {
+      "ticker": "PIMCO-LD",
+      "name": "PIMCO GIS Low Duration Income I",
+      "ytd_source_pct": 1.81,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=year_start_anchors, qty_pre=0"
+    },
+    "IE00BFMHRK20": {
+      "ticker": "NBGMT",
+      "name": "NB Global Equity Megatrends I",
+      "ytd_source_pct": 5.88,
+      "price_2025_dec_31": 23.4983,
+      "qty_2025_dec_31": 44731.728,
+      "mv_2025_dec_31": 1051119.56,
+      "ytd_source": "year_start_anchors"
+    },
+    "US53656G4982": {
+      "ticker": "MAGS",
+      "name": "LISTED FDS TR ROUNDHILL MAGNIFICENT SEVE",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
+    "LU2049315265": {
+      "ticker": "SGCB",
+      "name": "Schroder GAIA Cat Bond",
+      "ytd_source_pct": 1.57,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=year_start_anchors, qty_pre=0"
+    },
+    "LU2940405447": {
+      "ticker": "JHGSC",
+      "name": "Janus Henderson Global Smaller Cos",
+      "ytd_source_pct": 11.1,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=year_start_anchors, qty_pre=0"
+    },
+    "US37950E2596": {
+      "ticker": "ARGT",
+      "name": "Global X MSCI Argentina",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
+    "LU1985812756": {
+      "ticker": "MFSCV",
+      "name": "MFS Contrarian Value I1",
+      "ytd_source_pct": 10.83,
+      "price_2025_dec_31": 277.73166,
+      "qty_2025_dec_31": 3989.558,
+      "mv_2025_dec_31": 1108026.57,
+      "ytd_source": "year_start_anchors"
+    },
+    "LU2966298809": {
+      "ticker": "FLEX",
+      "name": "Franklin Lexington PE Secondaries",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
+    "US78463V1070": {
+      "ticker": "GLD",
+      "name": "SPDR Gold Shares",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": 1924.0,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=1924.0"
+    },
+    "XS2324777171": {
+      "ticker": "TGF",
+      "name": "Tenac Global Fund",
+      "ytd_source_pct": 2.86,
+      "price_2025_dec_31": 1.499281,
+      "qty_2025_dec_31": 532000.0,
+      "mv_2025_dec_31": 797617.49,
+      "ytd_source": "year_start_anchors"
+    }
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "description": "Fuentes oficiales de factsheets para el proceso mensual BIG. Cada entry tiene product_page (fund overview) y factsheet_pdf (link directo al PDF si es publico).",
+  "last_updated": "2026-07-06",
+  "equity": [
+    {
+      "ticker": "CSPX",
+      "isin": "IE00B5BMR087",
+      "name": "iShares Core S&P 500 UCITS ETF Acc",
+      "provider": "iShares (BlackRock)",
+      "product_page": "https://www.ishares.com/uk/individual/en/products/253743/ishares-sp-500-b-ucits-etf-acc-fund",
+      "factsheet_pdf": "https://www.ishares.com/ch/individual/en/literature/fact-sheet/cspx-ishares-core-s-p-500-ucits-etf-fund-fact-sheet-en-ch.pdf",
+      "login_required": false,
+      "notes": "PDF publico, sector via IVV US"
+    },
+    {
+      "ticker": "NBGMT",
+      "isin": "IE00BFMHRK20",
+      "name": "Neuberger Berman Global Equity Megatrends I (Acc) USD",
+      "provider": "Neuberger Berman",
+      "product_page": "https://www.nb.com/en/ae/products/ucits-funds/global-equity-megatrends-fund",
+      "factsheet_pdf": "https://www.nb.com/handlers/documents.ashx?item_id=a04cdaaf-5bb0-40b6-b128-544d261fd94e",
+      "login_required": false,
+      "notes": "Reporta por megatrend, no GICS sectorial"
+    },
+    {
+      "ticker": "MFSCV",
+      "isin": "LU1985812756",
+      "name": "MFS Meridian Funds - Contrarian Value I1",
+      "provider": "MFS Meridian",
+      "product_page": "https://www.mfs.com/en-ch/investment-professional/product-strategies/meridian-funds/LU1985812756-contrarian-value-fund-share-I1USD.html",
+      "factsheet_pdf": "https://www.mfs.com/content/dam/mfs-enterprise/mfscom/products/factsheet/meridian/gg/mer_cvf_fs_gg_en.pdf",
+      "login_required": false,
+      "notes": "Cerrado a nuevos inversores 01-Jul-2025"
+    },
+    {
+      "ticker": "THOR",
+      "isin": "IE00B6YCBF59",
+      "name": "Thornburg Investment Income Builder I (Uhdg) Acc",
+      "provider": "Thornburg",
+      "product_page": "https://www.thornburg.com/product/ucits-funds/uib/TBIIBUI-ID/",
+      "factsheet_pdf": "https://s40910.pcdn.co/wp-content/uploads/2022/02/TH4547_U-fact-sheet-EIB.pdf",
+      "login_required": false,
+      "notes": "Renombrado a Equity Income Builder 01-Apr-2025"
+    },
+    {
+      "ticker": "JHGSC",
+      "isin": "LU2940405447",
+      "name": "Janus Henderson Horizon Global Smaller Companies F2",
+      "provider": "Janus Henderson",
+      "product_page": "https://www.janushenderson.com/es-es/investor/product/jhhf-global-smaller-companies-fund/",
+      "factsheet_pdf": "https://documents.janushenderson.com/prod/documents/docId/DW4ZVG",
+      "login_required": false
+    },
+    {
+      "ticker": "LGLI",
+      "isin": "IE00BF4KN675",
+      "name": "Lazard Global Listed Infrastructure A (Acc) USD",
+      "provider": "Lazard",
+      "product_page": "https://www.lazardassetmanagement.com/ie/en_gb/investment-solutions/how-to-invest/17/400",
+      "factsheet_pdf": "https://www.lazardassetmanagement.com/content/dam/lazard-asset-management/lmap-documents/94988/299707.pdf",
+      "login_required": false
+    },
+    {
+      "ticker": "ARGT",
+      "isin": "US37950E2596",
+      "name": "Global X MSCI Argentina ETF",
+      "provider": "Global X",
+      "product_page": "https://www.globalxetfs.com/funds/argt",
+      "factsheet_pdf": "https://assets.globalxetfs.com/funds/documents/argt/Fact-Sheet_ARGT.pdf",
+      "login_required": false
+    },
+    {
+      "ticker": "ILF",
+      "isin": "US4642873909",
+      "name": "iShares Latin America 40 ETF",
+      "provider": "iShares (BlackRock)",
+      "product_page": "https://www.ishares.com/us/products/239761/ishares-latin-america-40-etf",
+      "factsheet_pdf": "https://www.ishares.com/us/literature/fact-sheet/ilf-ishares-latin-america-40-etf-fund-fact-sheet-en-us.pdf",
+      "login_required": false
+    },
+    {
+      "ticker": "4BRZ",
+      "isin": "DE000A0Q4R85",
+      "name": "iShares MSCI Brazil UCITS ETF (DE) Acc",
+      "provider": "iShares (BlackRock)",
+      "product_page": "https://www.ishares.com/uk/individual/en/products/304304/ishares-msci-brazil-ucits-etf-de-acc-fund",
+      "factsheet_pdf": "https://www.ishares.com/ch/individual/en/literature/fact-sheet/4brz-ishares-msci-brazil-ucits-etf-de-fund-fact-sheet-en-ch.pdf",
+      "login_required": false
+    }
+  ],
+  "fixed_income": [
+    {
+      "ticker": "PIMCO-LD",
+      "isin": "IE00BDT57R20",
+      "name": "PIMCO GIS Low Duration Income Fund Institutional (Acc) USD",
+      "provider": "PIMCO",
+      "product_page": "https://www.pimco.com/gb/en/investments/gis/low-duration-income-fund/inst-usd-accumulation",
+      "factsheet_pdf": null,
+      "login_required": true,
+      "notes": "Factsheet detallado detras de login profesional. US mutual proxy: PFIIX"
+    },
+    {
+      "ticker": "PIMCO-INC",
+      "isin": "IE00B87KCF77",
+      "name": "PIMCO GIS Income Fund Institutional (Acc) USD",
+      "provider": "PIMCO",
+      "product_page": "https://www.pimco.com/gb/en/investments/gis/income-fund/inst-usd-accumulation",
+      "factsheet_pdf": null,
+      "login_required": true
+    },
+    {
+      "ticker": "PIMCO-EM",
+      "isin": "IE00B29K0P99",
+      "name": "PIMCO GIS Emerging Local Bond Fund Institutional (Acc) USD",
+      "provider": "PIMCO",
+      "product_page": "https://www.pimco.com/gb/en/investments/gis/emerging-local-bond-fund/inst-usd-accumulation",
+      "factsheet_pdf": null,
+      "login_required": true
+    },
+    {
+      "ticker": "MANIG",
+      "isin": "IE000OE87WX6",
+      "name": "Man GLG Global Investment Grade Opportunities IVY (USD)",
+      "provider": "Man GLG",
+      "product_page": "https://www.man.com/products/man-glg-global-investment-grade-opportunities",
+      "factsheet_pdf": null,
+      "login_required": true,
+      "notes": "Man Group Professional Investor login required"
+    },
+    {
+      "ticker": "MANEM",
+      "isin": "IE00089T5MA6",
+      "name": "Man Emerging Markets Corporate Credit Alternative IV (USD)",
+      "provider": "Man",
+      "product_page": "https://www.man.com/products/man-emerging-markets-corporate-credit-alternative-dv-usd",
+      "factsheet_pdf": null,
+      "login_required": true
+    },
+    {
+      "ticker": "TGF",
+      "isin": "XS2324777171",
+      "name": "Tenac Global Fund (LFeeder DAC)",
+      "provider": "Tenac",
+      "product_page": "https://tenacam.com/",
+      "factsheet_pdf": null,
+      "login_required": true,
+      "notes": "Hedge fund privado. Pedir reporte mensual a Nico Dujovne. DEJAR CON DATA ACTUAL - no perseguir mes a mes."
+    },
+    {
+      "ticker": "SGCB",
+      "isin": "LU2049315265",
+      "name": "Schroder GAIA Cat Bond C (Acc) USD",
+      "provider": "Schroder",
+      "product_page": "https://api.schroders.com/document-store/id/28f7c6bd-3341-43a7-856d-ff3731f96065",
+      "factsheet_pdf": "https://api.schroders.com/document-store/id/28f7c6bd-3341-43a7-856d-ff3731f96065",
+      "login_required": false,
+      "notes": "Reportado en formato peril-region, no rating tradicional"
+    }
+  ]
+}

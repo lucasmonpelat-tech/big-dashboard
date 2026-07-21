@@ -1,0 +1,157 @@
+{
+  "as_of_target": "2026-06-30",
+  "generated_at": "2026-07-06T19:36:04Z",
+  "note": "Los factsheets Junio 2026 aun no publicados (10-15 dias despues de cierre). Data al 31-May-2026 excepto NBGMT (29-May) y CSPX sectorial via IVV proxy (30-Jun).",
+  "funds": {
+    "CSPX": {
+      "isin": "IE00B5BMR087",
+      "as_of_date": "2026-05-31",
+      "aum_usd": 153660210000,
+      "sectorial": {
+        "Information Technology": 36.80, "Financials": 12.19, "Communication Services": 9.86,
+        "Consumer Discretionary": 9.32, "Health Care": 9.18, "Industrials": 8.87,
+        "Consumer Staples": 4.66, "Utilities": 2.22, "Energy": 2.11,
+        "Materials": 1.88, "Real Estate": 1.86, "Other": 0.88
+      },
+      "regional": {"North America": 100.0},
+      "currency": {"USD": 100.0},
+      "source_url": "https://www.ishares.com/uk/individual/en/products/253743/ishares-sp-500-b-ucits-etf-acc-fund"
+    },
+    "NBGMT": {
+      "isin": "IE00BFMHRK20",
+      "as_of_date": "2026-05-29",
+      "aum_usd": 1095540000,
+      "sectorial": null,
+      "megatrend_exposure": {
+        "Evolving Global Consumer": 21.49, "Smart Systems": 20.20, "Energy Efficiency": 18.80,
+        "Personalization of Media": 11.97, "Health & Wellbeing": 10.87, "Humanization of Pets": 8.86,
+        "Rising Value of Water": 3.99, "Energy Infrastructure": 3.75, "Cash": 0.07
+      },
+      "regional": {"North America": 56.0, "Non-US Developed": 27.0, "Emerging Markets & Others": 18.0},
+      "currency": null,
+      "source_url": "https://www.nb.com/en/ae/products/ucits-funds/global-equity-megatrends-fund",
+      "notes": "NB usa megatrend, no GICS sectorial. Regional = revenue distribution."
+    },
+    "MFSCV": {
+      "isin": "LU1985812756",
+      "as_of_date": "2026-05-31",
+      "aum_usd": 3300000000,
+      "sectorial": {
+        "Industrials": 24.4, "Health Care": 16.0, "Financials": 13.4, "Consumer Discretionary": 13.4,
+        "Consumer Staples": 12.6, "Materials": 8.7, "Utilities": 4.3, "Energy": 2.3,
+        "Communication Services": 0.0, "Information Technology": 0.0, "Real Estate": 0.0,
+        "Cash": 4.9
+      },
+      "regional": {
+        "United Kingdom": 22.2, "United States": 16.5, "France": 15.5,
+        "Germany": 15.0, "Netherlands": 7.5, "Others": 23.4
+      },
+      "currency": {"EUR": 46.8, "USD": 23.7, "GBP": 22.2, "CAD": 3.9, "JPY": 3.4},
+      "source_url": "https://www.mfs.com/en-ch/investment-professional/product-strategies/meridian-funds/LU1985812756-contrarian-value-fund-share-I1USD.html"
+    },
+    "THOR": {
+      "isin": "IE00B6YCBF59",
+      "as_of_date": "2026-05-31",
+      "aum_usd": 564100000,
+      "sectorial": {
+        "Financials": 22.8, "Communication Services": 16.0, "Information Technology": 10.5,
+        "Health Care": 9.6, "Industrials": 7.4, "Utilities": 6.7, "Consumer Staples": 5.2,
+        "Energy": 5.0, "Consumer Discretionary": 4.9, "Materials": 2.3, "Real Estate": 0.0,
+        "Cash": 9.7
+      },
+      "regional": {
+        "United States": 27.6, "France": 9.6, "Germany": 8.6, "United Kingdom": 7.8,
+        "Netherlands": 5.4, "Italy": 4.0, "Switzerland": 3.1, "South Korea": 2.8,
+        "Canada": 2.8, "Spain": 2.8, "Others": 25.5
+      },
+      "currency": null,
+      "source_url": "https://www.thornburg.com/product/ucits-funds/uib/TBIIBUI-ID/"
+    },
+    "JHGSC": {
+      "isin": "LU2940405447",
+      "as_of_date": "2026-05-31",
+      "aum_usd": 2470000000,
+      "sectorial": {
+        "Industrials": 31.78, "Information Technology": 13.26, "Financials": 12.49,
+        "Consumer Discretionary": 8.98, "Health Care": 8.67, "Materials": 6.92,
+        "Energy": 4.88, "Communication Services": 2.89, "Consumer Staples": 2.79,
+        "Real Estate": 2.77, "Cash": 3.77
+      },
+      "regional": {
+        "United States": 62.12, "Japan": 10.94, "Australia": 5.28, "United Kingdom": 5.00,
+        "Canada": 4.08, "France": 1.55, "Spain": 1.54, "Switzerland": 1.42,
+        "Denmark": 1.11, "Portugal": 0.82, "Others": 6.14
+      },
+      "currency": null,
+      "source_url": "https://www.janushenderson.com/es-es/investor/product/jhhf-global-smaller-companies-fund/"
+    },
+    "LGLI": {
+      "isin": "IE00BF4KN675",
+      "as_of_date": "2026-05-31",
+      "aum_usd": 2931280000,
+      "sectorial": {
+        "Utilities": 48.8, "Industrials": 28.0, "Real Estate": 14.4,
+        "Communication Services": 8.8, "Energy": 0.0
+      },
+      "regional": {
+        "Continental Europe": 41.3, "North America": 30.0, "United Kingdom": 17.5,
+        "Asia ex Japan": 11.2, "Japan": 0.0
+      },
+      "currency": null,
+      "source_url": "https://www.lazardassetmanagement.com/ie/en_gb/investment-solutions/how-to-invest/17/400"
+    },
+    "ARGT": {
+      "isin": "US37950E2596",
+      "as_of_date": "2026-05-31",
+      "aum_usd": 900720000,
+      "sectorial": {
+        "Consumer Discretionary": 27.07, "Energy": 19.71, "Financials": 16.32,
+        "Materials": 11.88, "Utilities": 9.57, "Consumer Staples": 6.58,
+        "Communication Services": 3.35, "Real Estate": 3.16, "Industrials": 2.36,
+        "Health Care": 0.0, "Information Technology": 0.0
+      },
+      "regional": {
+        "Argentina": 69.36, "Canada": 9.95, "Chile": 7.83,
+        "United States": 6.33, "Luxembourg": 3.60, "Uruguay": 2.93
+      },
+      "currency": {
+        "ARS": 69.36, "CAD": 9.95, "CLP": 7.83, "USD": 6.33, "EUR": 3.60, "UYU": 2.93
+      },
+      "source_url": "https://www.globalxetfs.com/funds/argt"
+    },
+    "ILF": {
+      "isin": "US4642873909",
+      "as_of_date": "2026-05-31",
+      "aum_usd": 3693609266,
+      "sectorial": {
+        "Financials": 36.70, "Materials": 21.71, "Energy": 10.46, "Consumer Staples": 9.83,
+        "Industrials": 6.60, "Communication Services": 5.93, "Utilities": 4.66,
+        "Consumer Discretionary": 1.20, "Health Care": 1.10, "Real Estate": 0.76,
+        "Cash": 1.06
+      },
+      "regional": {
+        "Brazil": 54.95, "Mexico": 26.72, "Chile": 6.71, "Peru": 6.52,
+        "Colombia": 2.59, "Sweden": 1.45, "Cash": 1.06
+      },
+      "currency": {
+        "BRL": 54.95, "MXN": 26.72, "CLP": 6.71, "PEN": 6.52,
+        "COP": 2.59, "SEK": 1.45, "USD": 1.06
+      },
+      "source_url": "https://www.ishares.com/us/products/239761/ishares-latin-america-40-etf"
+    },
+    "4BRZ": {
+      "isin": "DE000A0Q4R85",
+      "as_of_date": "2026-05-31",
+      "aum_usd": 4868580000,
+      "sectorial": {
+        "Financials": 36.56, "Materials": 14.08, "Utilities": 13.88, "Energy": 13.81,
+        "Industrials": 8.67, "Consumer Staples": 5.51, "Consumer Discretionary": 2.29,
+        "Communication Services": 2.08, "Health Care": 1.22, "Cash": 1.91,
+        "Real Estate": 0.0, "Information Technology": 0.0
+      },
+      "regional": {"Brazil": 100.0},
+      "currency": {"BRL": 100.0},
+      "source_url": "https://www.ishares.com/uk/individual/en/products/304304/ishares-msci-brazil-ucits-etf-de-acc-fund"
+    }
+  }
+}

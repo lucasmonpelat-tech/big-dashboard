@@ -1,0 +1,220 @@
+{
+  "as_of": "2026-06-30",
+  "total_aum": 26225151.44,
+  "total_equity_pct": 30.91,
+  "total_fi_pct": 39.99,
+  "sectorial_rv": {
+    "Technology": 14.21,
+    "Financial": 12.52,
+    "Industrials": 11.96,
+    "Cons. Cyc.": 7.5,
+    "Health": 6.91,
+    "Utilities": 6.24,
+    "Comm. Serv.": 5.82,
+    "Cons. Def.": 4.96,
+    "Basic Mat.": 4.61,
+    "Energy": 3.68,
+    "Real Estate": 1.93,
+    "Cash": 1.85,
+    "Other": 0.3
+  },
+  "regional_rv": {
+    "North Am": 60.42,
+    "Latin Am": 11.86,
+    "Europe dev": 11.32,
+    "Others": 6.03,
+    "UK": 5.34,
+    "EM Others": 3.13,
+    "Japan": 1.5,
+    "Asia/Others dev": 0.59
+  },
+  "currency_portfolio": {
+    "USD": 72.5,
+    "EUR": 7.93,
+    "GBP": 3.88,
+    "GOLD": 2.72,
+    "BTC": 2.7,
+    "BRL": 2.4,
+    "OTHER": 1.39,
+    "ARS": 0.97,
+    "JPY": 0.81,
+    "MXN": 0.8,
+    "CAD": 0.46,
+    "INR": 0.44,
+    "MYR": 0.44,
+    "CNY": 0.43,
+    "IDR": 0.39,
+    "PLN": 0.37,
+    "ZAR": 0.32,
+    "THB": 0.32,
+    "CZK": 0.21,
+    "CLP": 0.2,
+    "AUD": 0.16,
+    "PEN": 0.08,
+    "UYU": 0.04,
+    "COP": 0.03,
+    "SEK": 0.02
+  },
+  "current_yield_weighted": 4.08,
+  "yield_by_holding": [
+    {
+      "ticker": "CSPX",
+      "weight": 10.47,
+      "yield": 1.3,
+      "contrib": 0.1361
+    },
+    {
+      "ticker": "NBGMT",
+      "weight": 5.37,
+      "yield": 0.8,
+      "contrib": 0.043
+    },
+    {
+      "ticker": "MFSCV",
+      "weight": 4.54,
+      "yield": 1.1,
+      "contrib": 0.05
+    },
+    {
+      "ticker": "THOR",
+      "weight": 2.36,
+      "yield": 4.2,
+      "contrib": 0.0993
+    },
+    {
+      "ticker": "JHGSC",
+      "weight": 2.2,
+      "yield": 1.0,
+      "contrib": 0.022
+    },
+    {
+      "ticker": "LGLI",
+      "weight": 1.99,
+      "yield": 3.9,
+      "contrib": 0.0776
+    },
+    {
+      "ticker": "ARGT",
+      "weight": 1.39,
+      "yield": 1.5,
+      "contrib": 0.0209
+    },
+    {
+      "ticker": "ILF",
+      "weight": 1.29,
+      "yield": 3.6,
+      "contrib": 0.0463
+    },
+    {
+      "ticker": "4BRZ",
+      "weight": 1.29,
+      "yield": 2.8,
+      "contrib": 0.0363
+    },
+    {
+      "ticker": "PIMCO-LD",
+      "weight": 11.62,
+      "yield": 5.98,
+      "contrib": 0.6951
+    },
+    {
+      "ticker": "PIMCO-INC",
+      "weight": 11.64,
+      "yield": 6.83,
+      "contrib": 0.7951
+    },
+    {
+      "ticker": "MANIG",
+      "weight": 7.21,
+      "yield": 6.2,
+      "contrib": 0.4469
+    },
+    {
+      "ticker": "PIMCO-EM",
+      "weight": 4.33,
+      "yield": 8.29,
+      "contrib": 0.3591
+    },
+    {
+      "ticker": "TGF",
+      "weight": 3.1,
+      "yield": 8.0,
+      "contrib": 0.2476
+    },
+    {
+      "ticker": "SGCB",
+      "weight": 2.01,
+      "yield": 7.8,
+      "contrib": 0.1565
+    },
+    {
+      "ticker": "HLEND",
+      "weight": 2.89,
+      "yield": 9.1,
+      "contrib": 0.2634
+    },
+    {
+      "ticker": "BPCC",
+      "weight": 2.29,
+      "yield": 9.4,
+      "contrib": 0.2148
+    },
+    {
+      "ticker": "HLGPI",
+      "weight": 4.25,
+      "yield": 4.0,
+      "contrib": 0.1699
+    },
+    {
+      "ticker": "GCRED",
+      "weight": 1.89,
+      "yield": 10.5,
+      "contrib": 0.1984
+    }
+  ],
+  "rating_rf": {
+    "AA": 16.71,
+    "AAA": 5.36,
+    "BBB": 2.47,
+    "A": 1.95,
+    "BB": 1.48,
+    "Below B / NR": 0.87,
+    "B": 0.26
+  },
+  "gaps": {
+    "sectorial_rv_missing": [
+      {
+        "ticker": "NBGMT",
+        "weight": 5.37
+      }
+    ],
+    "regional_rv_missing": [],
+    "currency_missing": [],
+    "rating_rf_missing": [
+      {
+        "ticker": "PIMCO-LD",
+        "weight": 11.62
+      },
+      {
+        "ticker": "MANIG",
+        "weight": 7.21
+      },
+      {
+        "ticker": "PIMCO-EM",
+        "weight": 4.33
+      },
+      {
+        "ticker": "TGF",
+        "weight": 3.1
+      },
+      {
+        "ticker": "SGCB",
+        "weight": 2.01
+      },
+      {
+        "ticker": "MANEM",
+        "weight": 0.08
+      }
+    ]
+  }
+}

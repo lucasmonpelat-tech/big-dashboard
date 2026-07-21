@@ -1,0 +1,230 @@
+{
+  "as_of_target": "2026-06-30",
+  "generated_at": "2026-07-06T17:20:00Z",
+  "note": "Data del 31-May-2026 (los factsheets Junio 2026 se publican mid-Jul). Los 3 PIMCO + SGCB descargados directamente de sitios oficiales via Chrome MCP.",
+  "funds": {
+    "PIMCO-LD": {
+      "isin": "IE00BDT57R20",
+      "as_of_date": "2026-05-31",
+      "aum_usd": 18700000000,
+      "sectorial": {
+        "Government Related": 4,
+        "Agency MBS": 33,
+        "ABS": 7,
+        "CMBS": 2,
+        "Non US RMBS": 8,
+        "Non-Agency MBS": 2,
+        "Investment Grade Credit": 11,
+        "High Yield Credit": 3,
+        "Bank Loan": 0,
+        "Emerging Markets": 3,
+        "Other": 0,
+        "Cash": 27
+      },
+      "regional": {
+        "United States": 74.4,
+        "United Kingdom": 12.2,
+        "Australia": 6.1
+      },
+      "currency": {"USD": 100.0},
+      "duration_breakdown": {
+        "<1 Year": 2, "1-3 Years": 34, "3-5 Years": 11, "5-10 Years": 57,
+        "10-20 Years": -4, "20+ Years": 0
+      },
+      "maturity_breakdown": {
+        "0-1 Years": 23, "1-3 Years": 27, "3-5 Years": 23, "5-10 Years": 26,
+        "10-20 Years": 3, "20+ Years": -2
+      },
+      "top_industries": {
+        "Banks": 3.4, "Technology": 1.9, "Electric Utility": 0.9
+      },
+      "fi_metrics": {
+        "ytw": 5.98,
+        "current_yield": 4.08,
+        "distribution_yield": 5.54,
+        "duration": 2.52,
+        "maturity": 3.56,
+        "avg_coupon": 4.04,
+        "avg_rating": null
+      },
+      "source_url": "https://www.pimco.com/gb/en/investments/gis/low-duration-income-fund/inst-usd-accumulation",
+      "factsheet_pdf": "factsheets/fi/PIMCO-LD_20260630.pdf",
+      "notes": "Sector allocation 100.0%. USD-hedged share class."
+    },
+    "PIMCO-INC": {
+      "isin": "IE00B87KCF77",
+      "as_of_date": "2026-05-31",
+      "aum_usd": 124700000000,
+      "sectorial": {
+        "Government Related": 14,
+        "Agency MBS": 36,
+        "ABS": 4,
+        "CMBS": 4,
+        "Non US RMBS": 3,
+        "Non-Agency MBS": 3,
+        "Investment Grade Credit": 15,
+        "High Yield Credit": 5,
+        "Bank Loan": 1,
+        "Emerging Markets": 7,
+        "Other": 0,
+        "Cash": 7
+      },
+      "regional": {
+        "United States": 75.5, "United Kingdom": 12.0, "Australia": 6.3,
+        "European Union": 1.6, "South Africa": 1.6, "Brazil": 1.5,
+        "Peru": 1.2, "Colombia": 0.9, "Japan": 0.4, "Germany": -2.2
+      },
+      "currency": {"USD": 100.0},
+      "duration_breakdown": {
+        "<1 Year": 9, "1-3 Years": 12, "3-5 Years": 12, "5-10 Years": 42,
+        "10-20 Years": 27, "20+ Years": -2
+      },
+      "maturity_breakdown": {
+        "0-1 Years": 0, "1-3 Years": 1, "3-5 Years": 30, "5-10 Years": 53,
+        "10-20 Years": 11, "20+ Years": 5
+      },
+      "rating_breakdown": {
+        "AAA": 18.4, "AA": 57.4, "A": 6.7, "BBB": 8.5,
+        "BB": 5.1, "B": 0.9, "Below B / NR": 3.0
+      },
+      "top_industries": {
+        "Banks": 4.5, "Technology": 2.1, "Financial Other": 1.4,
+        "Automotive": 1.0, "Electric Utility": 0.9, "Media Cable": 0.8
+      },
+      "fi_metrics": {
+        "ytw": 6.83,
+        "distribution_yield": 6.04,
+        "duration": 6.31,
+        "maturity": 9.41,
+        "avg_rating": "AA"
+      },
+      "source_url": "https://www.pimco.com/gb/en/investments/gis/income-fund/inst-usd-accumulation",
+      "factsheet_pdf": "factsheets/fi/PIMCO-INC_20260630.pdf"
+    },
+    "PIMCO-EM": {
+      "isin": "IE00B29K0P99",
+      "as_of_date": "2026-05-31",
+      "aum_usd": null,
+      "sectorial": {
+        "US Government Related": -1,
+        "Securitized": 0,
+        "Investment Grade Credit": 0,
+        "High Yield Credit": 0,
+        "Non-USD Developed": -11,
+        "Emerging Markets": 91,
+        "Other": -1,
+        "Net Other Short Duration": 21
+      },
+      "regional": {
+        "South Africa": 13.5, "Malaysia": 12.7, "China": 12.2,
+        "Indonesia": 9.6, "Mexico": 8.8, "India": 8.6, "Colombia": 7.1,
+        "Peru": 6.6, "Brazil": 6.4, "Czech Republic": 6.4
+      },
+      "currency": {
+        "MXN": 10.41, "INR": 9.99, "MYR": 9.99, "CNY": 9.90, "IDR": 9.06,
+        "BRL": 8.79, "PLN": 8.55, "ZAR": 7.35, "THB": 7.33, "CZK": 4.74
+      },
+      "duration_breakdown": {
+        "0-1 Years": 26, "1-3 Years": -17, "3-5 Years": 32, "5-10 Years": 35,
+        "10-20 Years": 21, "20+ Years": 3
+      },
+      "maturity_breakdown": {
+        "<1 Year": -3, "1-3 Years": -4, "3-5 Years": 17, "5-10 Years": 69,
+        "10-20 Years": 17, "20+ Years": 4
+      },
+      "fi_metrics": {
+        "ytw": 8.29,
+        "current_yield": 5.72,
+        "distribution_yield": 7.32,
+        "duration": 5.26,
+        "maturity": 7.45,
+        "avg_coupon": 6.25,
+        "avg_rating": null
+      },
+      "source_url": "https://www.pimco.com/gb/en/investments/gis/emerging-local-bond-fund/inst-usd-accumulation",
+      "factsheet_pdf": "factsheets/fi/PIMCO-EM_20260630.pdf",
+      "notes": "Unhedged EMFX. Currency = top 10 by DWE (Duration Weighted Exposure)."
+    },
+    "MANIG": {
+      "isin": "IE000OE87WX6",
+      "as_of_date": "2026-01-30",
+      "aum_usd": null,
+      "sectorial": null,
+      "regional": null,
+      "currency": {"USD": 100.0},
+      "rating_breakdown": null,
+      "fi_metrics": null,
+      "source_url": "https://www.man.com/products/man-glg-global-investment-grade-opportunities",
+      "factsheet_pdf": "factsheets/fi/MANIG_20260130.pdf",
+      "notes": "Factsheet D USD (no IVY class) al 30-Ene-2026. UCITS product page requiere login professional para versiones recientes. Data numerica no accesible en la version publica encontrada. Fondo activo overweight non-bank US financials + LatAm."
+    },
+    "MANEM": {
+      "isin": "IE00089T5MA6",
+      "as_of_date": "2026-03-31",
+      "aum_usd": 374316751,
+      "sectorial": null,
+      "regional": null,
+      "currency": {"USD": 100.0},
+      "rating_breakdown": null,
+      "fi_metrics": null,
+      "source_url": "https://www.man.com/products/man-emerging-markets-corporate-credit-alternative-dv-usd",
+      "notes": "Login required. Long/short EM corp credit hard currency."
+    },
+    "TGF": {
+      "isin": "XS2324777171",
+      "as_of_date": null,
+      "aum_usd": 144000000,
+      "sectorial": null,
+      "regional": {"Emerging Markets (Argentina-tilted)": 100.0},
+      "currency": {"USD": 100.0},
+      "rating_breakdown": null,
+      "fi_metrics": null,
+      "notes": "UNRESOLVED - hedge fund privado. Se mantiene con narrativa. No perseguir mes a mes."
+    },
+    "SGCB": {
+      "isin": "LU2049315265",
+      "as_of_date": "2026-05-31",
+      "aum_usd": 3900000000,
+      "sectorial": {"Cat Bonds": 97.1, "Life/Other ILS": 2.9},
+      "regional": {
+        "USA Florida Tropical Cyclone": 16.3,
+        "USA Northeast Tropical Cyclone": 14.4,
+        "USA Southeast Tropical Cyclone": 13.8,
+        "USA Gulf Tropical Cyclone": 12.3,
+        "USA California Earthquake": 9.5,
+        "Caribbean Tropical Cyclone": 8.7,
+        "Other North Atlantic": 7.0,
+        "Rest of the World All Natural Perils": 6.6,
+        "Europe All Natural Perils": 5.3,
+        "USA Canada Severe Weather": 2.4
+      },
+      "currency": {"USD": 100.0},
+      "maturity_breakdown": {
+        "<6 months": 10, "6-12 months": 24, "1-2 years": 13,
+        "2-3 years": 25, ">3 years": 28
+      },
+      "esg_criteria": {
+        "Nat Cat & Life Risk": 97.1, "Meteorological": 76.8, "Protection Gap": 19.5
+      },
+      "fi_metrics": {
+        "yield": 9.8,
+        "expected_loss_pct": -3.4,
+        "var_95": -8.1,
+        "tail_var_95": -18.1,
+        "var_99": -24.3,
+        "tail_var_99": -29.3,
+        "avg_rating": "NR"
+      },
+      "source_url": "https://www.schroders.com",
+      "factsheet_pdf": "factsheets/fi/SGCB_20260531.pdf",
+      "notes": "Peril breakdown = contribution to expected loss. Portfolio yield 9.8% gross."
+    }
+  },
+  "coverage_summary": {
+    "portfolio_weight_covered_sectorial": "17.98%",
+    "portfolio_weight_covered_regional": "17.98%",
+    "portfolio_weight_covered_yield": "27.60%",
+    "portfolio_weight_covered_rating": "11.65%",
+    "notes": "PIMCO-LD/INC/EM+SGCB completos. MANIG (7.21%), MANEM (0.08%), TGF (3.10%) sin data numerica pública."
+  }
+}
