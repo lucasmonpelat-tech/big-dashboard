@@ -48,6 +48,9 @@ jobs:
       MAIL_LUCAS: ${{ secrets.MAIL_LUCAS }}
       MAIL_FER: ${{ secrets.MAIL_FER }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      # === Pipeline v2 (NetX360+ Pershing → canonical JSONs) ===
+      NETX360_USER: ${{ secrets.NETX360_USER }}
+      NETX360_PASSWORD: ${{ secrets.NETX360_PASSWORD }}
 
     steps:
       - uses: actions/checkout@v4
@@ -136,6 +139,14 @@ jobs:
 
       - name: Brinson Attribution YTD
         run: python scripts/compute_attribution.py
+        continue-on-error: true
+         # === PIPELINE V2 (NetX360+ Pershing → canonical JSONs) ===
+      - name: v2 — NetX360+ Pershing download (4 XLSX)
+        run: python dashboard_v2/ingest/netx360_auto.py
+        continue-on-error: true
+
+      - name: v2 — Transform (parsers + benchmark_comparison + holdings_returns + snapshot)
+        run: python -m dashboard_v2.transform.run_all
         continue-on-error: true
 
       # === COMMIT + PUSH ===
