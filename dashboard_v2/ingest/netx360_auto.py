@@ -36,7 +36,12 @@ from datetime import date, datetime, timedelta
 from email.header import decode_header
 from pathlib import Path
 
-import keyring
+try:
+    import keyring
+except ImportError:
+    # keyring solo requerido en local (Windows Credential Manager).
+    # En CI (GitHub Actions) usamos env vars — keyring innecesario.
+    keyring = None
 from playwright.sync_api import sync_playwright
 
 
@@ -46,6 +51,8 @@ def _get_secret(env_var: str, keyring_service: str, keyring_key: str) -> str | N
     v = os.environ.get(env_var)
     if v:
         return v
+    if keyring is None:
+        return None
     try:
         return keyring.get_password(keyring_service, keyring_key)
     except Exception:

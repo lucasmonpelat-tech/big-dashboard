@@ -16,7 +16,9 @@ from pathlib import Path
 import openpyxl
 
 
-ROOT = Path(r"C:\Users\lmonp\OneDrive\Desktop\Code\big-dashboard")
+# Repo root — dinámico (Windows local + Linux CI). Este archivo está en
+# dashboard_v2/transform/_common.py → parents[2] = repo root.
+ROOT = Path(__file__).resolve().parents[2]
 
 
 def find_header_row(ws, min_filled_cells: int = 5, max_scan: int = 30) -> int:
