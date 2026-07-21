@@ -61,7 +61,8 @@ def _get_secret(env_var: str, keyring_service: str, keyring_key: str) -> str | N
 # ============================================================
 # CONFIG
 # ============================================================
-ROOT = Path("C:/Users/lmonp/OneDrive/Desktop/Code/big-dashboard")
+# Dinámico — dashboard_v2/ingest/netx360_auto.py → parents[2] = repo root
+ROOT = Path(__file__).resolve().parents[2]
 RAW_DIR = ROOT / "data" / "raw"
 ALERTS_DIR = ROOT / "data" / "_alerts"
 ALERTS_DIR.mkdir(parents=True, exist_ok=True)
