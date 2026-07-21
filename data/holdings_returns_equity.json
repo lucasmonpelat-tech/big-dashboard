@@ -1,8 +1,8 @@
 {
-  "refreshedAt": "2026-07-20T13:14:05.577827",
+  "refreshedAt": "2026-07-21T12:29:45.780562",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Equity",
-  "period_end": "2026-07-20",
+  "period_end": "2026-07-21",
   "n_open": 9,
   "n_closed": 4,
   "holdings": [
@@ -12,16 +12,16 @@
       "status": "OPEN",
       "name": "ISHARES VII PLC CORE S&P 500 UCITS ETF ISIN#IE00B5BMR087   ",
       "qty": 3408.0,
-      "mv_usd": 2742076.72,
+      "mv_usd": 2746643.53,
       "cost_basis_usd": 2384387.73,
-      "unrealized_gl_usd": 357688.99,
-      "return_pct": 15.0,
-      "last_price_pershing": 804.6,
+      "unrealized_gl_usd": 362255.8,
+      "return_pct": 15.19,
+      "last_price_pershing": 805.94,
       "bench_label": "ACWI",
-      "bench_dw_pct": 16.19,
-      "alpha_real_pp": -1.19,
+      "bench_dw_pct": 15.8,
+      "alpha_real_pp": -0.61,
       "first_buy_date": "2025-07-03",
-      "period_end": "2026-07-20",
+      "period_end": "2026-07-21",
       "n_trades": 9,
       "buys_history": [
         {
@@ -61,9 +61,9 @@
           "cost": 607997.98
         }
       ],
-      "ytd_pct": 9.17,
-      "bench_ytd_pct": 10.26,
-      "alpha_ytd_pp": -1.09
+      "ytd_pct": 9.09,
+      "bench_ytd_pct": 9.89,
+      "alpha_ytd_pp": -0.8
     },
     {
       "ticker": "NBGMT",
@@ -77,10 +77,10 @@
       "return_pct": 4.15,
       "last_price_pershing": 23.37,
       "bench_label": "ACWI",
-      "bench_dw_pct": 18.44,
-      "alpha_real_pp": -14.29,
+      "bench_dw_pct": 18.04,
+      "alpha_real_pp": -13.89,
       "first_buy_date": "2025-07-07",
-      "period_end": "2026-07-20",
+      "period_end": "2026-07-21",
       "n_trades": 8,
       "buys_history": [
         {
@@ -117,8 +117,8 @@
         }
       ],
       "ytd_pct": 2.88,
-      "bench_ytd_pct": 10.26,
-      "alpha_ytd_pp": -7.38
+      "bench_ytd_pct": 9.89,
+      "alpha_ytd_pp": -7.01
     },
     {
       "ticker": "MFSCV",
@@ -132,10 +132,10 @@
       "return_pct": 16.61,
       "last_price_pershing": 290.86,
       "bench_label": "ACWI",
-      "bench_dw_pct": 21.21,
-      "alpha_real_pp": -4.6,
+      "bench_dw_pct": 20.8,
+      "alpha_real_pp": -4.19,
       "first_buy_date": "2025-07-07",
-      "period_end": "2026-07-20",
+      "period_end": "2026-07-21",
       "n_trades": 6,
       "buys_history": [
         {
@@ -168,8 +168,8 @@
         }
       ],
       "ytd_pct": 6.55,
-      "bench_ytd_pct": 10.26,
-      "alpha_ytd_pp": -3.71
+      "bench_ytd_pct": 9.89,
+      "alpha_ytd_pp": -3.34
     },
     {
       "ticker": "THOR",
@@ -183,10 +183,10 @@
       "return_pct": 1.91,
       "last_price_pershing": 43.14,
       "bench_label": "ACWI",
-      "bench_dw_pct": 3.72,
-      "alpha_real_pp": -1.81,
+      "bench_dw_pct": 3.37,
+      "alpha_real_pp": -1.46,
       "first_buy_date": "2026-04-20",
-      "period_end": "2026-07-20",
+      "period_end": "2026-07-21",
       "n_trades": 1,
       "buys_history": [
         {
@@ -195,8 +195,8 @@
         }
       ],
       "ytd_pct": 14.15,
-      "bench_ytd_pct": 10.26,
-      "alpha_ytd_pp": 3.89
+      "bench_ytd_pct": 9.89,
+      "alpha_ytd_pp": 4.26
     },
     {
       "ticker": "JHGSC",
@@ -210,10 +210,10 @@
       "return_pct": 4.48,
       "last_price_pershing": 54.4,
       "bench_label": "ACWI",
-      "bench_dw_pct": 14.21,
-      "alpha_real_pp": -9.73,
+      "bench_dw_pct": 13.83,
+      "alpha_real_pp": -9.35,
       "first_buy_date": "2025-07-03",
-      "period_end": "2026-07-20",
+      "period_end": "2026-07-21",
       "n_trades": 2,
       "buys_history": [
         {
@@ -246,8 +246,8 @@
         }
       ],
       "ytd_pct": 11.1,
-      "bench_ytd_pct": 10.26,
-      "alpha_ytd_pp": 0.84
+      "bench_ytd_pct": 9.89,
+      "alpha_ytd_pp": 1.21
     },
     {
       "ticker": "LGLI",
@@ -261,10 +261,10 @@
       "return_pct": 3.37,
       "last_price_pershing": 20.0796,
       "bench_label": "ACWI",
-      "bench_dw_pct": 7.63,
-      "alpha_real_pp": -4.26,
+      "bench_dw_pct": 7.27,
+      "alpha_real_pp": -3.9,
       "first_buy_date": "2026-02-04",
-      "period_end": "2026-07-20",
+      "period_end": "2026-07-21",
       "n_trades": 2,
       "buys_history": [
         {
@@ -277,8 +277,8 @@
         }
       ],
       "ytd_pct": 9.91,
-      "bench_ytd_pct": 10.26,
-      "alpha_ytd_pp": -0.35
+      "bench_ytd_pct": 9.89,
+      "alpha_ytd_pp": 0.02
     },
     {
       "ticker": "ARGT",
@@ -286,16 +286,16 @@
       "status": "OPEN",
       "name": "GLOBAL X FDS MSCI ARGENTINA ETF     ",
       "qty": 4000.0,
-      "mv_usd": 368120.0,
+      "mv_usd": 371399.99,
       "cost_basis_usd": 377841.38,
-      "unrealized_gl_usd": -9721.38,
-      "return_pct": -2.57,
-      "last_price_pershing": 92.03,
+      "unrealized_gl_usd": -6441.39,
+      "return_pct": -1.7,
+      "last_price_pershing": 92.85,
       "bench_label": "ACWI",
-      "bench_dw_pct": 7.53,
-      "alpha_real_pp": -10.1,
+      "bench_dw_pct": 7.17,
+      "alpha_real_pp": -8.87,
       "first_buy_date": "2026-01-09",
-      "period_end": "2026-07-20",
+      "period_end": "2026-07-21",
       "n_trades": 3,
       "buys_history": [
         {
@@ -311,9 +311,9 @@
           "cost": 24873.96
         }
       ],
-      "ytd_pct": 1.04,
-      "bench_ytd_pct": 10.26,
-      "alpha_ytd_pp": -9.22
+      "ytd_pct": 1.94,
+      "bench_ytd_pct": 9.89,
+      "alpha_ytd_pp": -7.95
     },
     {
       "ticker": "ILF",
@@ -321,16 +321,16 @@
       "status": "OPEN",
       "name": "ISHARES TR LATIN AMER 40 ETF     ",
       "qty": 10000.0,
-      "mv_usd": 340700.0,
+      "mv_usd": 342400.02,
       "cost_basis_usd": 367141.0,
-      "unrealized_gl_usd": -26441.0,
-      "return_pct": -7.2,
-      "last_price_pershing": 34.07,
+      "unrealized_gl_usd": -24740.98,
+      "return_pct": -6.74,
+      "last_price_pershing": 34.24,
       "bench_label": "ACWI",
-      "bench_dw_pct": 7.19,
-      "alpha_real_pp": -14.39,
+      "bench_dw_pct": 6.83,
+      "alpha_real_pp": -13.57,
       "first_buy_date": "2026-02-03",
-      "period_end": "2026-07-20",
+      "period_end": "2026-07-21",
       "n_trades": 1,
       "buys_history": [
         {
@@ -338,9 +338,9 @@
           "cost": 367141.0
         }
       ],
-      "ytd_pct": 13.32,
-      "bench_ytd_pct": 10.26,
-      "alpha_ytd_pp": 3.06
+      "ytd_pct": 13.88,
+      "bench_ytd_pct": 9.89,
+      "alpha_ytd_pp": 3.99
     },
     {
       "ticker": "4BRZ",
@@ -354,10 +354,10 @@
       "return_pct": 3.49,
       "last_price_pershing": 50.87,
       "bench_label": "ACWI",
-      "bench_dw_pct": 7.54,
-      "alpha_real_pp": -4.05,
+      "bench_dw_pct": 7.18,
+      "alpha_real_pp": -3.69,
       "first_buy_date": "2026-01-09",
-      "period_end": "2026-07-20",
+      "period_end": "2026-07-21",
       "n_trades": 2,
       "buys_history": [
         {
@@ -369,9 +369,9 @@
           "cost": 139641.52
         }
       ],
-      "ytd_pct": 12.5,
-      "bench_ytd_pct": 10.26,
-      "alpha_ytd_pp": 2.24
+      "ytd_pct": 13.1,
+      "bench_ytd_pct": 9.89,
+      "alpha_ytd_pp": 3.21
     },
     {
       "ticker": "VIRTUS",
@@ -413,7 +413,7 @@
       "n_lots": 9
     }
   ],
-  "_daily_refresh_note": "Daily refresh 2026-07-20: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
+  "_daily_refresh_note": "Daily refresh 2026-07-21: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
   "_synced_to_positions": "2026-06-24: MVs sincronizados desde positions_latest.json (Pershing 24-Jun)",
   "_ugl_refresh": "2026-06-24: cost basis + returns desde Pershing UGL (Multiple-row aggregates)"
 }
