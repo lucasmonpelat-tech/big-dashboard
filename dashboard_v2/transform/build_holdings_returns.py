@@ -1,13 +1,14 @@
 """
-Transform: positions.json + pnl.json + bench indices -> canonical/holdings_returns.json
+Transform: positions.json + pnl.json + bench indices + race -> canonical/holdings_returns.json
 
-Fixes el bug de precio staleado del compute_holdings_returns.py viejo (que usaba
-baha/yfinance con precio T-2 o T-3, dando -6% de discrepancia en NBGMT y otros).
-
-Approach v2:
-- MV / cost / return: DIRECTO desde pnl.json (UGL Pershing T-1, precio real)
-- Bench Dollar-Weighted: calculado desde buys_history con bench_indices daily prices
-- YTD: dollar-weighted restricted a trades >= 2026-01-01
+Metodología (Jul-2026, decidida por Lucas):
+- **Holding SI return**: Pershing UGL (MWR: gl/cost). Match por CUSIP en pnl.json.
+- **Holding YTD return**: PRICE return desde 31-Dic-2025 (source: equity_race.json /
+  fi_race.json, ya calculado por scripts/equity_race_baha.py + fi_race_baha.py).
+- **Bench SI return**: PRICE return simple desde primera compra del activo
+  (price_today / price_at_first_buy - 1). NO dollar-weighted.
+- **Bench YTD return**: PRICE return simple desde 31-Dic-2025 hasta hoy.
+- **Alpha SI/YTD**: return_holding - return_bench.
 
 Sources:
 - data/canonical/YYYY-MM-DD/positions.json  (holdings actuales con ISIN + MV)
@@ -17,12 +18,16 @@ Sources:
 - data/holdings_returns_alternatives.json    (idem)
 - data/equity_bench_indices.json             (ACWI daily prices)
 - data/fi_bench_indices.json                 (AGG daily prices)
+- data/equity_race.json                      (holdings SI/YTD price-based via baha/yfinance)
+- data/fi_race.json                          (idem)
 
 Output:
 - data/canonical/YYYY-MM-DD/holdings_returns.json — single file con equity + fi + alts,
-  con MV/return/bench_dw/alpha correctos por holding.
+  con MV/return correctos por holding + bench price-based por período.
 
-TODO futuro: migrar buys_history y bench_indices a canonical propios (Sprint próximo).
+Notas:
+- Para holdings que no están en race (alts como CALP, HLEND, IBIT), fallback a método
+  legacy dollar-weighted en Bench SI y YTD None (no anchor disponible).
 """
 from __future__ import annotations
 import argparse
@@ -156,10 +161,38 @@ def _compute_bench_dw(buys: list[dict], bench_prices: dict, mv_today: float) -> 
     return round(bench_return_pct, 2), round(bench_mv_today, 2)
 
 
+def _compute_bench_price_return(bench_prices: dict, anchor_date: str) -> float | None:
+    """
+    Price return simple: (price_today / price_at_anchor) - 1.
+    Retorna % o None si falta data.
+    Si anchor_date es previa al inicio de la serie (ej: activo comprado 2025-07-07
+    pero ACWI series arranca 2025-07-31), usa la primera fecha disponible.
+    """
+    if not bench_prices or not anchor_date:
+        return None
+    dates_sorted = sorted(bench_prices.keys())
+    if not dates_sorted:
+        return None
+    price_today = bench_prices[dates_sorted[-1]]
+    price_anchor = _price_on_or_before(bench_prices, anchor_date)
+    # Fallback: si anchor previa a la serie, usar primer precio disponible
+    if price_anchor is None and anchor_date < dates_sorted[0]:
+        price_anchor = bench_prices[dates_sorted[0]]
+    if price_anchor is None or price_anchor <= 0 or price_today is None:
+        return None
+    return round((price_today / price_anchor - 1) * 100, 2)
+
+
 def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
-                  bench_prices: dict, v0_by_isin: dict, bench_label: str) -> dict:
-    """Calcula UN holding con MV correcto (Pershing UGL) + bench DW (histórico + YTD).
-    v0_by_isin: dict {isin: mv_2025_dec_31} para MWR YTD real cuando anchor disponible."""
+                  bench_prices: dict, v0_by_isin: dict, bench_label: str,
+                  race_by_isin: dict) -> dict:
+    """Calcula UN holding.
+    - MV/cost/return_pct (SI): Pershing UGL (MWR gl/cost).
+    - ytd_pct: price return desde 31-Dic-25 (source: race_by_isin[isin].ytd_return_pct).
+    - bench_dw_pct (Bench SI): price return desde primera compra del activo.
+    - bench_ytd_pct: price return desde 31-Dic-25 hasta hoy.
+    Fallback a métodos legacy si el ISIN no está en race (alts).
+    v0_by_isin: dict {isin: mv_2025_dec_31} para MWR YTD real cuando NO tenemos race YTD."""
     ticker = h_legacy.get("ticker") or ""
     name = (h_legacy.get("name") or "").strip()
     # NOTA: NO heredamos status del legacy — el script viejo tiene bugs
@@ -211,37 +244,38 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
         if pos.get("isin"):
             isin = pos.get("isin")
 
-    # Bench DW (todo período, SI)
-    bench_dw_pct, bench_mv_synth = _compute_bench_dw(buys, bench_prices, mv or 0)
+    # ===== Bench SI (Jul-2026: PRICE return desde primera compra) =====
+    # Nueva metodología (Lucas Jul-2026): NO dollar-weighted. Simple buy-and-hold del bench
+    # desde el first_buy_date del activo.
+    #   bench_si_pct = (price_today / price_at_first_buy) - 1
+    # first_buy_date sale de buys_history legacy o del primer taxlot en pnl (fallback).
+    first_buy_date = h_legacy.get("first_buy_date")
+    if not first_buy_date and buys:
+        first_buy_date = min((b["date"] for b in buys if b.get("date")), default=None)
+    bench_dw_pct = _compute_bench_price_return(bench_prices, first_buy_date) if first_buy_date else None
     alpha_real_pp = (
         round(return_pct - bench_dw_pct, 2)
         if (return_pct is not None and bench_dw_pct is not None)
         else None
     )
 
-    # ===== MWR YTD (Opción A — Pershing puro, sin baha) =====
-    # Simple Dietz simplificado:
-    #   V0 = cost_pre_ytd  (cost basis del capital comprometido antes de 2026-01-01)
-    #   Buys_YTD = sum de compras 2026
-    #   V1 = mv hoy
-    #   MWR_YTD = (V1 - V0 - Buys_YTD) / (V0 + Buys_YTD)
-    # Aproximacion: V0 = cost basis (no MV real al 31-Dic-25 que no tenemos).
-    # Para holdings 100% nuevos del 2026, V0 = 0 → cálculo exacto.
-    # Para holdings pre-2026, subestima si el fondo ganó pre-2026, sobreestima si perdió.
+    # ===== Holding YTD (Jul-2026: PRICE return desde 31-Dic-25) =====
+    # Source primaria: equity_race.json / fi_race.json (baha/yfinance price series).
+    # Fallback: MWR YTD (Simple Dietz con V0 anchor) — solo si no está en race.
     ytd_pct = None
     bench_ytd_dw_pct = None
     alpha_ytd_pp = None
-    if pos and agg:
+
+    race_h = race_by_isin.get(isin) if isin else None
+    if race_h is not None and race_h.get("ytd_return_pct") is not None:
+        ytd_pct = round(float(race_h["ytd_return_pct"]), 2)
+    elif pos and agg:
         cost_pre_ytd = agg.get("cost_pre_ytd", 0) or 0
         buys_ytd_list = agg.get("buys_ytd", [])
         buys_ytd_total = sum(b["cost"] for b in buys_ytd_list)
-        # V0 real: MV al 31-Dic-25 desde year_start_anchors.
-        # Regla: si hay posición pre-YTD (cost_pre_ytd > 0) pero NO tenemos anchor V0 real,
-        # dejamos YTD = None (no inventamos con cost_basis que da YTD = SI falso).
         has_pre_ytd_position = cost_pre_ytd > 0
         has_anchor = isin in v0_by_isin if isin else False
         if has_pre_ytd_position and not has_anchor:
-            # No podemos calcular YTD honesto — falta anchor 31-Dic-25 para este ISIN
             v0_real = None
             capital_ytd = 0
         else:
@@ -250,33 +284,11 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
         if capital_ytd > 0 and mv is not None:
             ytd_pct = round((mv - v0_real - buys_ytd_total) / capital_ytd * 100, 2)
 
-        # Bench DW YTD: V0 (en bench sintético) = v0_real (mismo capital al inicio del año)
-        # + compras 2026 al precio del bench de cada fecha
-        if bench_prices and capital_ytd > 0:
-            price_bench_start = _price_on_or_before(bench_prices, YTD_ANCHOR)
-            dates_sorted = sorted(bench_prices.keys())
-            price_bench_today = bench_prices[dates_sorted[-1]] if dates_sorted else None
+    # ===== Bench YTD (Jul-2026: PRICE return desde 31-Dic-25) =====
+    bench_ytd_dw_pct = _compute_bench_price_return(bench_prices, "2025-12-31")
 
-            if price_bench_start and price_bench_today and price_bench_start > 0:
-                # V0 en bench: si hubiera invertido v0_real en bench el 31-Dic-25
-                shares_pre_synth = v0_real / price_bench_start
-                bench_mv_pre = shares_pre_synth * price_bench_today
-
-                # Buys 2026 en bench (shares sintéticas a precio bench de la fecha)
-                shares_buys_synth = 0.0
-                for b in buys_ytd_list:
-                    p = _price_on_or_before(bench_prices, b["date"])
-                    if p and p > 0:
-                        shares_buys_synth += b["cost"] / p
-                bench_mv_buys = shares_buys_synth * price_bench_today
-
-                bench_mv_total = bench_mv_pre + bench_mv_buys
-                bench_ytd_dw_pct = round(
-                    (bench_mv_total - v0_real - buys_ytd_total) / capital_ytd * 100, 2
-                )
-
-        if ytd_pct is not None and bench_ytd_dw_pct is not None:
-            alpha_ytd_pp = round(ytd_pct - bench_ytd_dw_pct, 2)
+    if ytd_pct is not None and bench_ytd_dw_pct is not None:
+        alpha_ytd_pp = round(ytd_pct - bench_ytd_dw_pct, 2)
 
     return {
         "ticker": ticker,
@@ -316,6 +328,29 @@ def _load_year_start_anchors() -> dict:
     return out
 
 
+def _load_race_by_isin(path: Path) -> dict:
+    """Retorna dict {isin: {si_return_pct, ytd_return_pct, first_buy_date, source}}
+    desde equity_race.json / fi_race.json (source: baha/yfinance price series)."""
+    if not path.exists():
+        return {}
+    try:
+        d = json.load(open(path, encoding='utf-8'))
+    except Exception:
+        return {}
+    out = {}
+    for h in d.get("holdings", []) or []:
+        isin = h.get("isin")
+        if not isin:
+            continue
+        out[isin] = {
+            "si_return_pct": h.get("si_return_pct"),
+            "ytd_return_pct": h.get("ytd_return_pct"),
+            "first_buy_date": h.get("first_buy_date"),
+            "source": h.get("source"),
+        }
+    return out
+
+
 def build(as_of: str) -> dict:
     # Load canonical v2
     with open(CANONICAL_DIR / as_of / "positions.json", encoding='utf-8') as f:
@@ -325,14 +360,19 @@ def build(as_of: str) -> dict:
     pnl_agg = _agg_by_security(pnl)
     v0_by_isin = _load_year_start_anchors()
 
+    # Race JSONs (SI/YTD price-based por ISIN) — Jul-2026 nueva metodología
+    equity_race = _load_race_by_isin(DATA_DIR / "equity_race.json")
+    fi_race = _load_race_by_isin(DATA_DIR / "fi_race.json")
+
     # Load legacy (solo para buys_history histórico — TODO: migrar)
+    # 4to elemento: race dict por sleeve (alts no tiene race, dict vacío)
     hr_files = {
         "equity":       (DATA_DIR / "holdings_returns_equity.json", "ACWI",
-                         DATA_DIR / "equity_bench_indices.json"),
+                         DATA_DIR / "equity_bench_indices.json", equity_race),
         "fixed_income": (DATA_DIR / "holdings_returns_fixed_income.json", "AGG",
-                         DATA_DIR / "fi_bench_indices.json"),
+                         DATA_DIR / "fi_bench_indices.json", fi_race),
         "alternatives": (DATA_DIR / "holdings_returns_alternatives.json", "ACWI",
-                         DATA_DIR / "equity_bench_indices.json"),
+                         DATA_DIR / "equity_bench_indices.json", {}),
     }
 
     out = {
@@ -347,7 +387,7 @@ def build(as_of: str) -> dict:
         "sleeves": {},
     }
 
-    for sleeve_key, (hr_path, bench_label, bench_path) in hr_files.items():
+    for sleeve_key, (hr_path, bench_label, bench_path, race_by_isin) in hr_files.items():
         if not hr_path.exists():
             out["sleeves"][sleeve_key] = {"holdings": [], "error": f"{hr_path.name} no existe"}
             continue
@@ -360,7 +400,8 @@ def build(as_of: str) -> dict:
             # NO filtrar por status legacy — puede estar mal (ej: PIMCO-INC marcado CLOSED
             # pero está en portfolio). El status real lo determina build_holding via positions.
             hr_out = build_holding(h_legacy, positions, pnl_agg,
-                                   bench_prices, v0_by_isin, bench_label)
+                                   bench_prices, v0_by_isin, bench_label,
+                                   race_by_isin)
             # Solo incluimos OPEN (los CLOSED reales quedan fuera del widget)
             if hr_out.get("status") == "OPEN":
                 holdings_out.append(hr_out)
@@ -376,12 +417,19 @@ def build(as_of: str) -> dict:
                 # Ya está en holdings_out? Skip (Pershing UGL tiene prioridad si aparece)
                 if any(h.get("isin") == eh.get("isin") for h in holdings_out if h.get("isin")):
                     continue
-                # Calcular Bench DW / Alpha si tenemos buys_history + bench_prices
+                # Calcular Bench SI (price return desde first_buy) + Bench YTD (desde 31-Dic-25)
                 buys = eh.get("buys_history") or []
-                bench_dw_pct, _ = _compute_bench_dw(buys, bench_prices, eh.get("mv_usd", 0))
+                first_buy_date = eh.get("first_buy_date")
+                if not first_buy_date and buys:
+                    first_buy_date = min((b["date"] for b in buys if b.get("date")), default=None)
+                bench_dw_pct = _compute_bench_price_return(bench_prices, first_buy_date) if first_buy_date else None
                 alpha_real_pp = None
                 if eh.get("return_pct") is not None and bench_dw_pct is not None:
                     alpha_real_pp = round(eh["return_pct"] - bench_dw_pct, 2)
+                bench_ytd_pct = _compute_bench_price_return(bench_prices, "2025-12-31")
+                alpha_ytd_pp = None
+                if eh.get("ytd_pct") is not None and bench_ytd_pct is not None:
+                    alpha_ytd_pp = round(eh["ytd_pct"] - bench_ytd_pct, 2)
                 holdings_out.append({
                     "ticker": eh.get("ticker"),
                     "name": eh.get("name"),
@@ -396,9 +444,9 @@ def build(as_of: str) -> dict:
                     "bench_dw_pct": bench_dw_pct,
                     "alpha_real_pp": alpha_real_pp,
                     "ytd_pct": eh.get("ytd_pct"),
-                    "bench_ytd_pct": None,
-                    "alpha_ytd_pp": None,
-                    "first_buy_date": eh.get("first_buy_date"),
+                    "bench_ytd_pct": bench_ytd_pct,
+                    "alpha_ytd_pp": alpha_ytd_pp,
+                    "first_buy_date": first_buy_date,
                     "buys_history": buys,
                     "_mv_source": "external_statement",
                     "_source_note": eh.get("source"),
