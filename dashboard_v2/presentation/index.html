@@ -479,6 +479,96 @@
           </table>
         </div>
       </div>
+
+      <!-- EQUITY-ONLY: Lookthrough al ACWI + composición del sleeve -->
+      <div id="equity-lookthrough-block" style="display:none">
+        <div class="section">
+          <h2>🎯 BIG vs ACWI — Top 10 Lookthrough</h2>
+          <div style="font-size:13px;color:var(--text-mute);margin-bottom:12px;line-height:1.5">
+            ¿Cuánto de cada top 10 ACWI tenemos en BIG via los fondos equity que invertimos?
+            Si nuestro % es mucho menor → estamos <strong>UNDERWEIGHT mega-caps</strong> (lo que mueve ACWI).
+            <span style="color:#e6a532">⚠️ CSPX exact (S&amp;P 500), UCITS ESTIMATED (verificar con factsheets).</span>
+          </div>
+          <div id="er-overlap-summary" style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap"></div>
+          <table>
+            <thead>
+              <tr>
+                <th style="text-align:left">#</th>
+                <th style="text-align:left">Ticker</th>
+                <th style="text-align:left">Name</th>
+                <th style="text-align:left">Sector</th>
+                <th>ACWI %</th>
+                <th>BIG %</th>
+                <th>Diff (pp)</th>
+              </tr>
+            </thead>
+            <tbody id="er-overlap-body"></tbody>
+          </table>
+        </div>
+
+        <div class="section">
+          <h2>📦 Top 10 por Fondo — Lookthrough detallado</h2>
+          <div style="font-size:13px;color:var(--text-mute);margin-bottom:12px;line-height:1.5">
+            Top 10 holdings de cada UCITS/ETF de tu Equity sleeve. Pesos sobre NAV del fondo (no del sleeve).
+            <span style="color:#7fa88f;font-size:11px">Fechas variables por fondo — ver header de cada card.</span>
+          </div>
+          <div id="er-fund-top10" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px"></div>
+        </div>
+
+        <div class="section">
+          <h2>🎯 BIG Equity — Top 15 Holdings Consolidado (look-through)</h2>
+          <div style="font-size:13px;color:var(--text-mute);margin-bottom:8px;line-height:1.5">
+            Top 15 del sleeve completo — companies que pesan más en BIG Equity sumando exposure across todos los fondos.
+            Fórmula: peso del fondo en el sleeve × peso del holding en el fondo.
+            <span style="color:#7fa88f;font-size:11px">Companies pueden aparecer en múltiples fondos (Petrobras en ILF+4BRZ, AVGO en CSPX+THOR, etc).</span>
+          </div>
+          <div id="er-consolidated-body"></div>
+        </div>
+
+        <div class="section">
+          <h2>📊 Estilo · Sectorial · Regional</h2>
+          <div style="font-size:13px;color:var(--text-mute);margin-bottom:12px;line-height:1.5">
+            Composición del Equity sleeve vs <strong>MSCI ACWI</strong> — datos para factsheet institucional.
+            <span style="color:var(--text-mute);font-size:11px">Fuente: Maximus + iShares ACWI Factsheet.</span>
+          </div>
+          <div style="margin-bottom:20px">
+            <h3 style="font-size:14px;color:var(--navy);margin-bottom:10px">Distribución por Estilo (BIG vs BMK)</h3>
+            <div id="er-style-bars"></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+            <div>
+              <h3 style="font-size:14px;color:var(--navy);margin-bottom:10px">Distribución Sectorial (%)</h3>
+              <div id="er-sectorial-bars"></div>
+            </div>
+            <div>
+              <h3 style="font-size:14px;color:var(--navy);margin-bottom:10px">Distribución Regional (%)</h3>
+              <div id="er-regional-bars"></div>
+            </div>
+          </div>
+          <div class="kpi-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));margin-top:16px">
+            <div class="kpi-card">
+              <div class="kpi-label">BIG Value Tilt</div>
+              <div class="kpi-value" id="er-kpi-value">—</div>
+              <div class="kpi-sub">vs ACWI typical 28%</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">BIG LatAm Exposure</div>
+              <div class="kpi-value" id="er-kpi-latam">—</div>
+              <div class="kpi-sub">vs ACWI 1.5% (10x más)</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">BIG Financial Sector</div>
+              <div class="kpi-value" id="er-kpi-fin">—</div>
+              <div class="kpi-sub">vs ACWI 16.8%</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Date / Source</div>
+              <div class="kpi-value" style="font-size:14px" id="er-kpi-date">—</div>
+              <div class="kpi-sub">Maximus + ACWI Factsheet</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- COSTOS TOTALES -->
@@ -1285,10 +1375,12 @@
     // Toggle bloques según sleeve (Alts oculta Multi-Period + Normalized Chart y muestra Pie + Conc/Liq)
     function _toggleSleeveBlocks(sleeveKey) {
       const isAlts = sleeveKey === "alts";
+      const isEquity = sleeveKey === "equity";
       document.getElementById("sleeve-multi-period-block").style.display = isAlts ? "none" : "";
       document.getElementById("sleeve-chart-block").style.display = isAlts ? "none" : "";
       document.getElementById("alts-pie-block").style.display = isAlts ? "" : "none";
       document.getElementById("alts-conc-liq-block").style.display = isAlts ? "" : "none";
+      document.getElementById("equity-lookthrough-block").style.display = isEquity ? "" : "none";
     }
 
     // KPIs simples para Alts (sin bench comparison — es un sleeve sin bench claro)
@@ -1475,6 +1567,219 @@
       renderSleeveReturns(comp);
       renderSleeveChart(comp);
       renderSleeveHoldings(sleeveKey);
+
+      // EQUITY-only: lookthrough al ACWI + composición del sleeve
+      if (sleeveKey === "equity") {
+        renderEquityLookthrough();
+      }
+    }
+
+    // ============================================================
+    // EQUITY LOOKTHROUGH — 4 widgets: overlap, top10/fondo, top15 consolidado, style/sector/regional
+    // ============================================================
+    let _equityLookthroughLoaded = false;
+    async function renderEquityLookthrough() {
+      if (_equityLookthroughLoaded) return;
+      _equityLookthroughLoaded = true;
+
+      const NAVY = "var(--navy)", GOLD = "var(--gold)", MUTE = "var(--text-mute)";
+      const POS = "#7fa88f", NEG = "#c96060", WARN = "#e6a532";
+
+      // === Widget 1: ACWI Top 10 Lookthrough Overlap ===
+      try {
+        const ov = await loadLegacyJson("acwi_overlap");
+        const summary = ov.summary;
+        const card = (label, val, color, sub) => `
+          <div style="flex:1;min-width:220px;background:#f7f5f0;padding:14px;border-radius:6px;border-left:3px solid ${color}">
+            <div style="font-size:11px;color:${MUTE};margin-bottom:4px">${label}</div>
+            <div style="font-size:22px;font-weight:700;color:${color}">${val}</div>
+            ${sub ? `<div style="font-size:10px;color:${MUTE};margin-top:4px">${sub}</div>` : ""}
+          </div>`;
+        const diffColor = summary.diff_pp >= 0 ? POS : NEG;
+        document.getElementById("er-overlap-summary").innerHTML =
+          card("🌐 ACWI Top 10 weight", summary.total_acwi_top10.toFixed(1) + "%", "#4a7ab8", "% del ACWI (100% equity)") +
+          card("🎯 BIG Equity lookthrough", summary.total_big_top10_exposure.toFixed(1) + "%", "var(--gold)", "% del Equity Sleeve (100%, apples-to-apples)") +
+          card("⚠️ Diff (BIG − ACWI)", (summary.diff_pp >= 0 ? "+" : "") + summary.diff_pp.toFixed(1) + "pp", diffColor,
+               summary.diff_pp < 0 ? "BIG UNDERWEIGHT en megacaps — explica parte del alpha vs ACWI" : "BIG OVERWEIGHT");
+
+        const rows = ov.overlap.map((h, i) => {
+          const dc = h.diff_pp >= 0 ? POS : NEG;
+          const ds = h.diff_pp >= 0 ? "+" : "";
+          return `<tr>
+            <td>${i + 1}</td>
+            <td style="text-align:left"><strong>${h.ticker}</strong></td>
+            <td style="text-align:left;font-size:11px">${h.name}</td>
+            <td style="text-align:left;font-size:10px;color:${MUTE}">${h.sector}</td>
+            <td><strong style="color:#4a7ab8">${h.weight_acwi.toFixed(2)}%</strong></td>
+            <td><strong style="color:var(--gold)">${h.weight_big.toFixed(2)}%</strong></td>
+            <td><strong style="color:${dc}">${ds}${h.diff_pp.toFixed(2)}pp</strong></td>
+          </tr>`;
+        }).join("");
+        const totalRow = `<tr style="border-top:2px solid var(--navy);background:#f7f5f0">
+          <td colspan="4" style="text-align:left"><strong>TOTAL TOP 10</strong></td>
+          <td><strong style="color:#4a7ab8">${summary.total_acwi_top10.toFixed(2)}%</strong></td>
+          <td><strong style="color:var(--gold)">${summary.total_big_top10_exposure.toFixed(2)}%</strong></td>
+          <td><strong style="color:${diffColor}">${summary.diff_pp >= 0 ? "+" : ""}${summary.diff_pp.toFixed(2)}pp</strong></td>
+        </tr>`;
+        document.getElementById("er-overlap-body").innerHTML = rows + totalRow;
+      } catch (e) {
+        console.warn("acwi_overlap.json unavailable", e);
+        document.getElementById("er-overlap-body").innerHTML =
+          `<tr><td colspan="7" style="padding:20px;text-align:center;color:${WARN}">Data no disponible — correr <code>scripts/acwi_overlap.py</code></td></tr>`;
+      }
+
+      // === Widget 2: Top 10 por Fondo cards ===
+      try {
+        const ft = await loadLegacyJson("fund_holdings_top10");
+        const FUND_ORDER = ["CSPX", "NBGMT", "MFSCV", "THOR", "JHGSC", "LGLI", "ARGT", "ILF", "4BRZ"];
+        const fmtName = k => k.replace(/_/g, " ");
+        const cards = FUND_ORDER.map(tk => {
+          const f = ft[tk]; if (!f) return "";
+          const asOf = f._as_of || "?";
+          const factsheet = f._factsheet_top10 || {};
+          const topHoldings = f.top_holdings || {};
+          let holdings = Object.entries(factsheet).filter(([k, v]) => !k.startsWith("_") && typeof v === "number");
+          if (!holdings.length) holdings = Object.entries(topHoldings).filter(([_, v]) => typeof v === "number");
+          holdings.sort((a, b) => b[1] - a[1]);
+          const total = holdings.reduce((s, [, v]) => s + v, 0);
+          const rows = holdings.slice(0, 10).map(([name, w], i) => `
+            <tr>
+              <td style="padding:4px 6px;color:${MUTE};font-size:11px">${i + 1}</td>
+              <td style="padding:4px 6px;font-size:12px">${fmtName(name)}</td>
+              <td style="padding:4px 6px;text-align:right;font-weight:600;color:var(--gold)">${w.toFixed(2)}%</td>
+            </tr>`).join("");
+          const note = factsheet._note || "";
+          return `
+            <div style="background:#f7f5f0;border-radius:8px;padding:14px;border-left:3px solid var(--gold)">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px">
+                <div>
+                  <div style="font-size:14px;font-weight:700;color:var(--gold)">${tk}</div>
+                  <div style="font-size:11px;color:${MUTE}">${f.name || ""}</div>
+                </div>
+                <div style="font-size:10px;color:${MUTE};text-align:right">as of ${asOf}</div>
+              </div>
+              <table style="width:100%;border-collapse:collapse">
+                <tbody>${rows}</tbody>
+                <tr style="border-top:1px solid #ddd">
+                  <td colspan="2" style="padding:6px 6px 0;font-size:11px;color:${MUTE}"><strong>Top 10 total</strong></td>
+                  <td style="padding:6px 6px 0;text-align:right;font-weight:700;color:var(--gold)">${total.toFixed(1)}%</td>
+                </tr>
+              </table>
+              ${note ? `<div style="margin-top:8px;padding-top:8px;border-top:1px solid #ddd;font-size:10px;color:${WARN};line-height:1.4">${note}</div>` : ""}
+            </div>`;
+        }).join("");
+        document.getElementById("er-fund-top10").innerHTML = cards;
+      } catch (e) {
+        console.warn("fund_holdings_top10.json unavailable", e);
+      }
+
+      // === Widget 3: Top 15 Consolidado ===
+      try {
+        const c = await loadLegacyJson("equity_top10_consolidated");
+        const rows = c.consolidated_top10.map(h => {
+          const funds = (h.funds || []).map(f =>
+            `<span style="color:${MUTE}">${f.fund}</span> <span style="color:var(--gold)">${f.weight_in_fund.toFixed(1)}%</span>`
+          ).join(" · ");
+          const barW = Math.min(h.weight_in_sleeve_pct / 3.0, 1.0) * 100;
+          return `<tr>
+            <td style="padding:6px 8px;color:${MUTE};font-size:12px">${h.rank}</td>
+            <td style="padding:6px 8px;font-weight:600">${h.name}</td>
+            <td style="padding:6px 8px;font-size:11px">${funds}</td>
+            <td style="padding:6px 8px;text-align:right;font-weight:700;color:var(--gold)">${h.weight_in_sleeve_pct.toFixed(2)}%</td>
+            <td style="padding:6px 8px">
+              <div style="background:#eee;height:14px;border-radius:3px;position:relative;min-width:140px">
+                <div style="background:linear-gradient(90deg,var(--gold) 0%,#d4bf5e 100%);height:100%;width:${barW}%;border-radius:3px"></div>
+              </div>
+            </td>
+          </tr>`;
+        }).join("");
+        const total = c.consolidated_top10.reduce((s, h) => s + h.weight_in_sleeve_pct, 0);
+        document.getElementById("er-consolidated-body").innerHTML = `
+          <table>
+            <thead>
+              <tr>
+                <th style="text-align:left">#</th>
+                <th style="text-align:left">Holding</th>
+                <th style="text-align:left">Vía (fondo · peso fondo)</th>
+                <th>% del Equity Sleeve</th>
+                <th style="text-align:left">Bar</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+            <tr style="border-top:2px solid var(--navy);background:#f7f5f0">
+              <td colspan="3" style="padding:8px"><strong>TOTAL TOP 15 (% del Equity sleeve)</strong></td>
+              <td style="padding:8px;text-align:right"><strong style="color:var(--gold)">${total.toFixed(2)}%</strong></td>
+              <td></td>
+            </tr>
+          </table>
+          <div style="margin-top:8px;font-size:11px;color:${MUTE}">
+            Refreshed ${c.refreshedAt || "—"} · Método: ${c.method || "—"}
+          </div>`;
+      } catch (e) {
+        console.warn("equity_top10_consolidated.json unavailable", e);
+      }
+
+      // === Widget 4: Style / Sectorial / Regional + KPIs ===
+      try {
+        const bd = await loadLegacyJson("equity_breakdown_latest");
+        const renderBar = (label, bigVal, bmkVal, bigLabel = "BIG", bmkLabel = "BMK") => {
+          const max = Math.max(bigVal, bmkVal, 1);
+          const bigW = (bigVal / max) * 100;
+          const bmkW = (bmkVal / max) * 100;
+          const bd_ = v => Number.isInteger(v) ? v : v.toFixed(1);
+          return `
+            <div style="margin-bottom:14px">
+              <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+                <span style="font-size:11px;font-weight:700">${label}</span>
+                <span style="font-size:10px;color:${MUTE}">
+                  <span style="color:var(--gold);font-weight:700">${bigLabel} ${bd_(bigVal)}%</span>
+                  &nbsp;·&nbsp;
+                  <span style="color:#4a7ab8">${bmkLabel} ${bd_(bmkVal)}%</span>
+                </span>
+              </div>
+              <div style="position:relative;height:18px;background:#eee;border-radius:3px;overflow:hidden">
+                <div style="position:absolute;height:50%;top:0;left:0;width:${bigW}%;background:linear-gradient(90deg,var(--gold) 0%,#d4bf5e 100%);border-radius:3px 0 0 0"></div>
+                <div style="position:absolute;height:50%;bottom:0;left:0;width:${bmkW}%;background:linear-gradient(90deg,#4a7ab8 0%,#6a9bd8 100%);border-radius:0 0 0 3px"></div>
+              </div>
+            </div>`;
+        };
+
+        const st = bd.style;
+        document.getElementById("er-style-bars").innerHTML =
+          st.rows.map(r => renderBar(r.category, r.big, r.bmk, "BIG", "BMK")).join("") +
+          `<div style="margin-top:10px;padding-top:10px;border-top:1px solid #ddd;font-size:11px;color:${MUTE}">
+            <strong style="color:var(--gold)">Total BIG: ${st.totals.big}%</strong> ·
+            <strong style="color:#4a7ab8">Total BMK: ${st.totals.bmk}%</strong>
+          </div>`;
+
+        const sec = bd.sectorial;
+        let secFooter = `<div style="margin-top:10px;padding-top:10px;border-top:1px solid #ddd;font-size:11px;color:${MUTE}">
+          <strong style="color:var(--gold)">Total BIG: ${sec.totals.big}%</strong> ·
+          <strong style="color:#4a7ab8">Total ACWI: ${sec.totals.acwi}%</strong>`;
+        if (sec.footnote) secFooter += `<div style="font-size:10px;color:${MUTE};margin-top:4px;font-style:italic">${sec.footnote}</div>`;
+        secFooter += `</div>`;
+        document.getElementById("er-sectorial-bars").innerHTML =
+          sec.rows.map(r => renderBar(r.category, r.big, r.acwi, "BIG", "ACWI")).join("") + secFooter;
+
+        const reg = bd.regional;
+        document.getElementById("er-regional-bars").innerHTML =
+          reg.rows.map(r => renderBar(r.category, r.big, r.acwi, "BIG", "ACWI")).join("") +
+          `<div style="margin-top:10px;padding-top:10px;border-top:1px solid #ddd;font-size:11px;color:${MUTE}">
+            <strong style="color:var(--gold)">Total BIG: ${reg.totals.big}%</strong> ·
+            <strong style="color:#4a7ab8">Total ACWI: ${reg.totals.acwi}%</strong>
+          </div>`;
+
+        const valueRow = st.rows.find(r => r.category === "Value");
+        const latamRow = reg.rows.find(r => /(LatAm|Latin\s*Am)/i.test(r.category));
+        const finRow = sec.rows.find(r => r.category === "Financial");
+        if (valueRow) document.getElementById("er-kpi-value").textContent = valueRow.big + "%";
+        if (latamRow) document.getElementById("er-kpi-latam").textContent = latamRow.big + "%";
+        if (finRow) document.getElementById("er-kpi-fin").textContent = finRow.big + "%";
+        const asOf = bd.asOf || bd.as_of;
+        if (asOf) document.getElementById("er-kpi-date").textContent = asOf;
+      } catch (e) {
+        console.warn("equity_breakdown_latest.json unavailable", e);
+      }
     }
 
     // Chip handlers
