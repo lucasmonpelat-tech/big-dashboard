@@ -9,16 +9,16 @@
     :root {
       --navy: #0a2540;
       --navy-2: #1a3a5f;
-      --gold: #c9a961;
+      --gold: #d4af37;
       --gold-dark: #a68937;
-      --bg: #f6f7f9;
-      --card: #ffffff;
-      --text: #1a2138;
-      --text-mute: #6b7280;
-      --border: #e4e7ec;
-      --green: #16a34a;
-      --red: #dc2626;
-      --gray: #64748b;
+      --bg: #0c1b2e;           /* fondo principal dark navy (viejo) */
+      --card: #12243a;         /* cards dark */
+      --text: #e0e8f0;         /* texto claro */
+      --text-mute: #90caf9;    /* subtítulos azul claro */
+      --border: #1f3864;       /* bordes oscuros */
+      --green: #81c784;
+      --red: #ef5350;
+      --gray: #6b88a8;
     }
 
     * { box-sizing: border-box; }
@@ -44,7 +44,7 @@
 
     /* Tabs */
     nav.tabs {
-      background: white;
+      background: #0a1a2e;
       border-bottom: 1px solid var(--border);
       padding: 0 32px;
       display: flex; gap: 4px;
@@ -60,9 +60,9 @@
       white-space: nowrap;
       transition: color 0.15s, border-color 0.15s;
     }
-    nav.tabs button:hover { color: var(--navy); }
+    nav.tabs button:hover { color: var(--gold); }
     nav.tabs button.active {
-      color: var(--navy);
+      color: var(--gold);
       border-bottom-color: var(--gold);
       font-weight: 600;
     }
@@ -93,7 +93,7 @@
     .kpi-card .value {
       font-size: 22px;
       font-weight: 700;
-      color: var(--navy);
+      color: var(--gold);
       margin-top: 4px;
     }
     .kpi-card .sub {
@@ -118,11 +118,12 @@
     .section h2 {
       margin: 0 0 16px 0;
       font-size: 16px;
-      color: var(--navy);
+      color: var(--gold);
       border-bottom: 2px solid var(--gold);
       padding-bottom: 8px;
       display: inline-block;
     }
+    .section h3 { color: var(--gold); }
 
     /* Table */
     table {
@@ -147,12 +148,12 @@
     thead th:hover { background: var(--navy-2); }
     thead th.sort-asc::after { content: " ▲"; color: var(--gold); }
     thead th.sort-desc::after { content: " ▼"; color: var(--gold); }
-    tbody tr:hover { background: #fafbfc; }
+    tbody tr:hover { background: rgba(212,175,55,0.06); }
     tbody td { padding: 8px; border-bottom: 1px solid var(--border); vertical-align: middle; }
     tbody td.num { text-align: right; font-variant-numeric: tabular-nums; font-family: 'Consolas', monospace; }
     tbody td.center { text-align: center; }
-    tbody tr.total-row { background: #f8fafc; font-weight: 600; }
-    tbody tr.total-row td { border-top: 2px solid var(--navy); }
+    tbody tr.total-row { background: rgba(212,175,55,0.08); font-weight: 600; }
+    tbody tr.total-row td { border-top: 2px solid var(--gold); }
 
     .pos-val { color: var(--green); font-weight: 500; }
     .neg-val { color: var(--red); font-weight: 500; }
@@ -162,7 +163,7 @@
 
     /* Comparison chips (Rendimientos tab) */
     .comp-chip {
-      background: white;
+      background: transparent;
       border: 1px solid var(--border);
       color: var(--text-mute);
       padding: 8px 14px;
@@ -172,17 +173,18 @@
       cursor: pointer;
       transition: all 0.15s;
     }
-    .comp-chip:hover { border-color: var(--gold); color: var(--navy); }
+    .comp-chip:hover { border-color: var(--gold); color: var(--gold); }
     .comp-chip.active {
-      background: var(--navy);
-      color: white;
-      border-color: var(--navy);
+      background: var(--gold);
+      color: var(--navy);
+      border-color: var(--gold);
+      font-weight: 700;
     }
 
     /* Perf tab (Rendimientos vs Benchmark) — copia del dashboard viejo */
     .info-box-perf {
-      background: #f0f4f8;
-      border-left: 4px solid var(--navy);
+      background: rgba(212,175,55,0.06);
+      border-left: 4px solid var(--gold);
       padding: 14px 18px;
       margin-bottom: 20px;
       font-size: 13px;
@@ -1590,7 +1592,7 @@
         const ov = await loadLegacyJson("acwi_overlap");
         const summary = ov.summary;
         const card = (label, val, color, sub) => `
-          <div style="flex:1;min-width:220px;background:#f7f5f0;padding:14px;border-radius:6px;border-left:3px solid ${color}">
+          <div style="flex:1;min-width:220px;background:#12243a;padding:14px;border-radius:6px;border-left:3px solid ${color}">
             <div style="font-size:11px;color:${MUTE};margin-bottom:4px">${label}</div>
             <div style="font-size:22px;font-weight:700;color:${color}">${val}</div>
             ${sub ? `<div style="font-size:10px;color:${MUTE};margin-top:4px">${sub}</div>` : ""}
@@ -1615,7 +1617,7 @@
             <td><strong style="color:${dc}">${ds}${h.diff_pp.toFixed(2)}pp</strong></td>
           </tr>`;
         }).join("");
-        const totalRow = `<tr style="border-top:2px solid var(--navy);background:#f7f5f0">
+        const totalRow = `<tr style="border-top:2px solid var(--navy);background:#12243a">
           <td colspan="4" style="text-align:left"><strong>TOTAL TOP 10</strong></td>
           <td><strong style="color:#4a7ab8">${summary.total_acwi_top10.toFixed(2)}%</strong></td>
           <td><strong style="color:var(--gold)">${summary.total_big_top10_exposure.toFixed(2)}%</strong></td>
@@ -1650,7 +1652,7 @@
             </tr>`).join("");
           const note = factsheet._note || "";
           return `
-            <div style="background:#f7f5f0;border-radius:8px;padding:14px;border-left:3px solid var(--gold)">
+            <div style="background:#12243a;border-radius:8px;padding:14px;border-left:3px solid var(--gold)">
               <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px">
                 <div>
                   <div style="font-size:14px;font-weight:700;color:var(--gold)">${tk}</div>
@@ -1660,12 +1662,12 @@
               </div>
               <table style="width:100%;border-collapse:collapse">
                 <tbody>${rows}</tbody>
-                <tr style="border-top:1px solid #ddd">
+                <tr style="border-top:1px solid #1f3864">
                   <td colspan="2" style="padding:6px 6px 0;font-size:11px;color:${MUTE}"><strong>Top 10 total</strong></td>
                   <td style="padding:6px 6px 0;text-align:right;font-weight:700;color:var(--gold)">${total.toFixed(1)}%</td>
                 </tr>
               </table>
-              ${note ? `<div style="margin-top:8px;padding-top:8px;border-top:1px solid #ddd;font-size:10px;color:${WARN};line-height:1.4">${note}</div>` : ""}
+              ${note ? `<div style="margin-top:8px;padding-top:8px;border-top:1px solid #1f3864;font-size:10px;color:${WARN};line-height:1.4">${note}</div>` : ""}
             </div>`;
         }).join("");
         document.getElementById("er-fund-top10").innerHTML = cards;
@@ -1687,7 +1689,7 @@
             <td style="padding:6px 8px;font-size:11px">${funds}</td>
             <td style="padding:6px 8px;text-align:right;font-weight:700;color:var(--gold)">${h.weight_in_sleeve_pct.toFixed(2)}%</td>
             <td style="padding:6px 8px">
-              <div style="background:#eee;height:14px;border-radius:3px;position:relative;min-width:140px">
+              <div style="background:#0c1b2e;height:14px;border-radius:3px;position:relative;min-width:140px">
                 <div style="background:linear-gradient(90deg,var(--gold) 0%,#d4bf5e 100%);height:100%;width:${barW}%;border-radius:3px"></div>
               </div>
             </td>
@@ -1706,7 +1708,7 @@
               </tr>
             </thead>
             <tbody>${rows}</tbody>
-            <tr style="border-top:2px solid var(--navy);background:#f7f5f0">
+            <tr style="border-top:2px solid var(--navy);background:#12243a">
               <td colspan="3" style="padding:8px"><strong>TOTAL TOP 15 (% del Equity sleeve)</strong></td>
               <td style="padding:8px;text-align:right"><strong style="color:var(--gold)">${total.toFixed(2)}%</strong></td>
               <td></td>
@@ -1737,7 +1739,7 @@
                   <span style="color:#4a7ab8">${bmkLabel} ${bd_(bmkVal)}%</span>
                 </span>
               </div>
-              <div style="position:relative;height:18px;background:#eee;border-radius:3px;overflow:hidden">
+              <div style="position:relative;height:18px;background:#0c1b2e;border-radius:3px;overflow:hidden">
                 <div style="position:absolute;height:50%;top:0;left:0;width:${bigW}%;background:linear-gradient(90deg,var(--gold) 0%,#d4bf5e 100%);border-radius:3px 0 0 0"></div>
                 <div style="position:absolute;height:50%;bottom:0;left:0;width:${bmkW}%;background:linear-gradient(90deg,#4a7ab8 0%,#6a9bd8 100%);border-radius:0 0 0 3px"></div>
               </div>
@@ -1747,13 +1749,13 @@
         const st = bd.style;
         document.getElementById("er-style-bars").innerHTML =
           st.rows.map(r => renderBar(r.category, r.big, r.bmk, "BIG", "BMK")).join("") +
-          `<div style="margin-top:10px;padding-top:10px;border-top:1px solid #ddd;font-size:11px;color:${MUTE}">
+          `<div style="margin-top:10px;padding-top:10px;border-top:1px solid #1f3864;font-size:11px;color:${MUTE}">
             <strong style="color:var(--gold)">Total BIG: ${st.totals.big}%</strong> ·
             <strong style="color:#4a7ab8">Total BMK: ${st.totals.bmk}%</strong>
           </div>`;
 
         const sec = bd.sectorial;
-        let secFooter = `<div style="margin-top:10px;padding-top:10px;border-top:1px solid #ddd;font-size:11px;color:${MUTE}">
+        let secFooter = `<div style="margin-top:10px;padding-top:10px;border-top:1px solid #1f3864;font-size:11px;color:${MUTE}">
           <strong style="color:var(--gold)">Total BIG: ${sec.totals.big}%</strong> ·
           <strong style="color:#4a7ab8">Total ACWI: ${sec.totals.acwi}%</strong>`;
         if (sec.footnote) secFooter += `<div style="font-size:10px;color:${MUTE};margin-top:4px;font-style:italic">${sec.footnote}</div>`;
@@ -1764,7 +1766,7 @@
         const reg = bd.regional;
         document.getElementById("er-regional-bars").innerHTML =
           reg.rows.map(r => renderBar(r.category, r.big, r.acwi, "BIG", "ACWI")).join("") +
-          `<div style="margin-top:10px;padding-top:10px;border-top:1px solid #ddd;font-size:11px;color:${MUTE}">
+          `<div style="margin-top:10px;padding-top:10px;border-top:1px solid #1f3864;font-size:11px;color:${MUTE}">
             <strong style="color:var(--gold)">Total BIG: ${reg.totals.big}%</strong> ·
             <strong style="color:#4a7ab8">Total ACWI: ${reg.totals.acwi}%</strong>
           </div>`;
