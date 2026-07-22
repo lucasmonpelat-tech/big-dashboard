@@ -1,0 +1,827 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-07-22",
+  "account_id": "JXD101380",
+  "source_files": {
+    "transactions": "data/raw/2026-07-22/netx360/Transactions_JXD101380.xlsx",
+    "ugl": "data/raw/2026-07-22/netx360/Unrealized+Gain+Loss_JXD101380.xlsx"
+  },
+  "generated_at": "2026-07-22T12:34:32Z",
+  "totals": {
+    "commissions_txn_30d": 150.0,
+    "fees_txn_30d": 203.85,
+    "commissions_taxlots_current": 812.7,
+    "fees_taxlots_current": 1760.0
+  },
+  "by_transaction": [
+    {
+      "process_date": "2026-07-07",
+      "security_id": "G7113P361",
+      "description": "PIMCO INCOME FUND INSTITUTIONAL CLASS (ACC)(USD) EJXD101380 D - FRAC.8900 HLD PERS ALL $ UNSOLICITED ORDER AS OF 07-02-26",
+      "commission": 0.0,
+      "fees": 30.0,
+      "principal": -150000.0
+    },
+    {
+      "process_date": "2026-07-07",
+      "security_id": "G7S11T150",
+      "description": "PIMCO LOW DURATION INCOME FUND INSTITUTIONAL CLASS (ACC)(USD) EJXD101380 D - FRAC.3210 HLD PERS ALL $ UNSOLICITED ORDER AS OF 07-02-26",
+      "commission": 0.0,
+      "fees": 30.0,
+      "principal": -100000.0
+    },
+    {
+      "process_date": "2026-07-07",
+      "security_id": "G5896H580",
+      "description": "MAN GLG GLOBAL INVESTMENT GRADE OPPORTUNITIES FUND CLASS IVY (USD) EJXD101380 D - FRAC.4990 UNSOLICITED ORDER HLD PERS ALL $ AS OF 07-02-26",
+      "commission": 0.0,
+      "fees": 30.0,
+      "principal": -200000.0
+    },
+    {
+      "process_date": "2026-07-06",
+      "security_id": "IBIT",
+      "description": "ISHARES BITCOIN TR ETF SHS BEN INT UNSOLICITED ORDER DISCRETION EXERCISED",
+      "commission": 25.0,
+      "fees": 16.0,
+      "principal": -78657.6
+    },
+    {
+      "process_date": "2026-07-06",
+      "security_id": "BTC",
+      "description": "GRAYSCALE BITCOIN MINI TR ETF SHS NEW UNSOLICITED ORDER DISCRETION EXERCISED",
+      "commission": 25.0,
+      "fees": 17.63,
+      "principal": 78832.79
+    },
+    {
+      "process_date": "2026-07-02",
+      "security_id": "GLD",
+      "description": "SPDR GOLD TR GOLD SHS UNSOLICITED ORDER DISCRETION EXERCISED AVERAGE UNIT PRICE TRANSACTION YOUR BROKER ACTED AS AGENT",
+      "commission": 25.0,
+      "fees": 16.0,
+      "principal": -99868.75
+    },
+    {
+      "process_date": "2026-07-02",
+      "security_id": "MAGS",
+      "description": "LISTED FDS TR ROUNDHILL MAGNIFICENT SEVEN ETF UNSOLICITED ORDER DISCRETION EXERCISED",
+      "commission": 25.0,
+      "fees": 16.0,
+      "principal": -199567.19
+    },
+    {
+      "process_date": "2026-07-02",
+      "security_id": "HEWJ",
+      "description": "ISHARES TR ISHARES CURRENCY HEDGED MSCI JAPAN ETF UNSOLICITED ORDER DISCRETION EXERCISED AVERAGE UNIT PRICE TRANSACTION YOUR BROKER ACTED AS AGENT",
+      "commission": 0.0,
+      "fees": 16.0,
+      "principal": -200163.75
+    },
+    {
+      "process_date": "2026-07-02",
+      "security_id": "BTC",
+      "description": "GRAYSCALE BITCOIN MINI TR ETF SHS NEW UNSOLICITED ORDER DISCRETION EXERCISED",
+      "commission": 25.0,
+      "fees": 16.0,
+      "principal": -78501.88
+    },
+    {
+      "process_date": "2026-07-02",
+      "security_id": "G7113P361",
+      "description": "PIMCO INCOME FUND INSTITUTIONAL CLASS (ACC)(USD) X 5 - FRAC.7580 UNSOLICITED ORDER CORRECTED CONFIRM AS OF 11-25-25",
+      "commission": 0.0,
+      "fees": 30.0,
+      "principal": 1679999.99
+    },
+    {
+      "process_date": "2026-07-02",
+      "security_id": "G7113P361",
+      "description": "PIMCO INCOME FUND INSTITUTIONAL CLASS (ACC)(USD) 5 - FRAC.2960 PRIN AMT LESS DEF'D SLS CHG OF  31675.44 UNSOLICITED ORDER CANCELLED TRADE AS OF 11-25-25",
+      "commission": 0.0,
+      "fees": -30.0,
+      "principal": -1680000.0
+    },
+    {
+      "process_date": "2026-06-23",
+      "security_id": "GLD",
+      "description": "SPDR GOLD TR GOLD SHS UNSOLICITED ORDER DISCRETION EXERCISED",
+      "commission": 25.0,
+      "fees": 16.22,
+      "principal": 10612.42
+    }
+  ],
+  "by_taxlot": [
+    {
+      "security_id": "379LP0083",
+      "taxlot_id": "20250922P1YS1L",
+      "description": "GOLUB CAPITAL PRIVATE CREDIT ICAPITAL OFFSHORE ACCESS FUND SP 1",
+      "commission": 0.0,
+      "fees": 50.0,
+      "current_cost": 490050.0,
+      "entry_date": "2025-09-22"
+    },
+    {
+      "security_id": "449LP0055",
+      "taxlot_id": "20250922P1YSZV",
+      "description": "ICAPITAL HPS CORPORATE LENDING OFFSHORE ACCESS FUND SP1",
+      "commission": 0.0,
+      "fees": 50.0,
+      "current_cost": 735050.0,
+      "entry_date": "2025-09-22"
+    },
+    {
+      "security_id": "ARGT",
+      "taxlot_id": "20260109I4CK8R",
+      "description": "GLOBAL X FDS MSCI ARGENTINA ETF",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 198934.42,
+      "entry_date": "2026-01-09"
+    },
+    {
+      "security_id": "ARGT",
+      "taxlot_id": "20260203I7I898",
+      "description": "GLOBAL X FDS MSCI ARGENTINA ETF",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 154033.0,
+      "entry_date": "2026-02-03"
+    },
+    {
+      "security_id": "ARGT",
+      "taxlot_id": "20260304I1HGTH",
+      "description": "GLOBAL X FDS MSCI ARGENTINA ETF",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 24873.96,
+      "entry_date": "2026-03-04"
+    },
+    {
+      "security_id": "CSTNL",
+      "taxlot_id": "20250731A05073",
+      "description": "ISHARES VII PLC CORE S&P 500 UCITS ETF ISIN#IE00B5BMR087",
+      "commission": 25.0,
+      "fees": 0.0,
+      "current_cost": 113774.84,
+      "entry_date": "2025-07-31"
+    },
+    {
+      "security_id": "CSTNL",
+      "taxlot_id": "20250819A01816",
+      "description": "ISHARES VII PLC CORE S&P 500 UCITS ETF ISIN#IE00B5BMR087",
+      "commission": 25.0,
+      "fees": 0.0,
+      "current_cost": 73593.92,
+      "entry_date": "2025-08-19"
+    },
+    {
+      "security_id": "CSTNL",
+      "taxlot_id": "20250903A05609",
+      "description": "ISHARES VII PLC CORE S&P 500 UCITS ETF ISIN#IE00B5BMR087",
+      "commission": 25.0,
+      "fees": 0.0,
+      "current_cost": 215751.38,
+      "entry_date": "2025-09-03"
+    },
+    {
+      "security_id": "CSTNL",
+      "taxlot_id": "20251002A03271",
+      "description": "ISHARES VII PLC CORE S&P 500 UCITS ETF ISIN#IE00B5BMR087",
+      "commission": 25.0,
+      "fees": 0.0,
+      "current_cost": 43821.78,
+      "entry_date": "2025-10-02"
+    },
+    {
+      "security_id": "CSTNL",
+      "taxlot_id": "20251202A04247",
+      "description": "ISHARES VII PLC CORE S&P 500 UCITS ETF ISIN#IE00B5BMR087",
+      "commission": 25.0,
+      "fees": 0.0,
+      "current_cost": 134713.0,
+      "entry_date": "2025-12-02"
+    },
+    {
+      "security_id": "CSTNL",
+      "taxlot_id": "20260106A02183",
+      "description": "ISHARES VII PLC CORE S&P 500 UCITS ETF ISIN#IE00B5BMR087",
+      "commission": 25.0,
+      "fees": 0.0,
+      "current_cost": 40014.16,
+      "entry_date": "2026-01-06"
+    },
+    {
+      "security_id": "CSTNL",
+      "taxlot_id": "20260407A02920",
+      "description": "ISHARES VII PLC CORE S&P 500 UCITS ETF ISIN#IE00B5BMR087",
+      "commission": 25.0,
+      "fees": 0.0,
+      "current_cost": 198130.6,
+      "entry_date": "2026-04-07"
+    },
+    {
+      "security_id": "CSTNL",
+      "taxlot_id": "20260417A05366",
+      "description": "ISHARES VII PLC CORE S&P 500 UCITS ETF ISIN#IE00B5BMR087",
+      "commission": 25.0,
+      "fees": 0.0,
+      "current_cost": 607997.98,
+      "entry_date": "2026-04-17"
+    },
+    {
+      "security_id": "G5478EAA2",
+      "taxlot_id": "20250716T5NPOU",
+      "description": "LFEEDER DAC EURO MEDIUM TERM NOTE ISIN#XS2324777171 VARIABL 08/17/51 REG DTD 08/17/21",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 510286.53,
+      "entry_date": "2025-07-16"
+    },
+    {
+      "security_id": "G5478EAA2",
+      "taxlot_id": "20250820T6M23G",
+      "description": "LFEEDER DAC EURO MEDIUM TERM NOTE ISIN#XS2324777171 VARIABL 08/17/51 REG DTD 08/17/21",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 253920.0,
+      "entry_date": "2025-08-20"
+    },
+    {
+      "security_id": "G5896H580",
+      "taxlot_id": "20250702AR0I5Z",
+      "description": "MAN GLG GLOBAL INVESTMENT GRADE OPPORTUNITIES FUND CLASS IVY (USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 707100.62,
+      "entry_date": "2025-07-07"
+    },
+    {
+      "security_id": "G5896H580",
+      "taxlot_id": "20250730AVPW4I",
+      "description": "MAN GLG GLOBAL INVESTMENT GRADE OPPORTUNITIES FUND CLASS IVY (USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 433030.0,
+      "entry_date": "2025-08-05"
+    },
+    {
+      "security_id": "G5896H580",
+      "taxlot_id": "20250818AXV9YS",
+      "description": "MAN GLG GLOBAL INVESTMENT GRADE OPPORTUNITIES FUND CLASS IVY (USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 70030.0,
+      "entry_date": "2025-08-21"
+    },
+    {
+      "security_id": "G5896H580",
+      "taxlot_id": "20250902AY6IHX",
+      "description": "MAN GLG GLOBAL INVESTMENT GRADE OPPORTUNITIES FUND CLASS IVY (USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 187030.0,
+      "entry_date": "2025-09-05"
+    },
+    {
+      "security_id": "G5896H580",
+      "taxlot_id": "20251003ACIR27",
+      "description": "MAN GLG GLOBAL INVESTMENT GRADE OPPORTUNITIES FUND CLASS IVY (USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 81030.0,
+      "entry_date": "2025-10-08"
+    },
+    {
+      "security_id": "G5896H580",
+      "taxlot_id": "20251202AIQ8EU",
+      "description": "MAN GLG GLOBAL INVESTMENT GRADE OPPORTUNITIES FUND CLASS IVY (USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 20030.0,
+      "entry_date": "2025-12-05"
+    },
+    {
+      "security_id": "G5896H580",
+      "taxlot_id": "20260105AMRIHA",
+      "description": "MAN GLG GLOBAL INVESTMENT GRADE OPPORTUNITIES FUND CLASS IVY (USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 20030.0,
+      "entry_date": "2026-01-08"
+    },
+    {
+      "security_id": "G5896H580",
+      "taxlot_id": "20260203ARG6I6",
+      "description": "MAN GLG GLOBAL INVESTMENT GRADE OPPORTUNITIES FUND CLASS IVY (USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 25030.0,
+      "entry_date": "2026-02-06"
+    },
+    {
+      "security_id": "G5896H580",
+      "taxlot_id": "20260206ARX82G",
+      "description": "MAN GLG GLOBAL INVESTMENT GRADE OPPORTUNITIES FUND CLASS IVY (USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 250030.0,
+      "entry_date": "2026-02-11"
+    },
+    {
+      "security_id": "G5896H580",
+      "taxlot_id": "20260702AJH7ZH",
+      "description": "MAN GLG GLOBAL INVESTMENT GRADE OPPORTUNITIES FUND CLASS IVY (USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 200030.0,
+      "entry_date": "2026-07-07"
+    },
+    {
+      "security_id": "G594CD616",
+      "taxlot_id": "20260508ADB34X",
+      "description": "MAN EMERGING MARKETS CORPORATE CREDIT ALTERNATIVE FUND CLASS IV (USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 20030.0,
+      "entry_date": "2026-05-13"
+    },
+    {
+      "security_id": "G6430T809",
+      "taxlot_id": "20250702AR0I64",
+      "description": "NEUBERGER BERMAN GLOBAL EQUITY MEGATRENDS FUND CLASS I (ACC)(USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 473408.18,
+      "entry_date": "2025-07-07"
+    },
+    {
+      "security_id": "G6430T809",
+      "taxlot_id": "20250730AVP17T",
+      "description": "NEUBERGER BERMAN GLOBAL EQUITY MEGATRENDS FUND CLASS I (ACC)(USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 292030.0,
+      "entry_date": "2025-08-01"
+    },
+    {
+      "security_id": "G6430T809",
+      "taxlot_id": "20250818AXV9ZC",
+      "description": "NEUBERGER BERMAN GLOBAL EQUITY MEGATRENDS FUND CLASS I (ACC)(USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 68030.0,
+      "entry_date": "2025-08-20"
+    },
+    {
+      "security_id": "G6430T809",
+      "taxlot_id": "20250902AY6INT",
+      "description": "NEUBERGER BERMAN GLOBAL EQUITY MEGATRENDS FUND CLASS I (ACC)(USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 110030.0,
+      "entry_date": "2025-09-03"
+    },
+    {
+      "security_id": "G6430T809",
+      "taxlot_id": "20251001AB6X8F",
+      "description": "NEUBERGER BERMAN GLOBAL EQUITY MEGATRENDS FUND CLASS I (ACC)(USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 45030.0,
+      "entry_date": "2025-10-02"
+    },
+    {
+      "security_id": "G6430T809",
+      "taxlot_id": "20260105AMRIMV",
+      "description": "NEUBERGER BERMAN GLOBAL EQUITY MEGATRENDS FUND CLASS I (ACC)(USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 20030.0,
+      "entry_date": "2026-01-07"
+    },
+    {
+      "security_id": "G6430T809",
+      "taxlot_id": "20260203ARG6JP",
+      "description": "NEUBERGER BERMAN GLOBAL EQUITY MEGATRENDS FUND CLASS I (ACC)(USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 150030.0,
+      "entry_date": "2026-02-04"
+    },
+    {
+      "security_id": "G6430T809",
+      "taxlot_id": "20260505ACZI81",
+      "description": "NEUBERGER BERMAN GLOBAL EQUITY MEGATRENDS FUND CLASS I (ACC)(USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 144030.0,
+      "entry_date": "2026-05-07"
+    },
+    {
+      "security_id": "G7097Y503",
+      "taxlot_id": "20260128AQXQX6",
+      "description": "PIMCO EMERGING LOCAL BOND FUND INSTITUTIONAL CLASS (ACC)(USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 1000030.0,
+      "entry_date": "2026-01-30"
+    },
+    {
+      "security_id": "G7097Y503",
+      "taxlot_id": "20260406AZDL0R",
+      "description": "PIMCO EMERGING LOCAL BOND FUND INSTITUTIONAL CLASS (ACC)(USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 138030.0,
+      "entry_date": "2026-04-08"
+    },
+    {
+      "security_id": "G7113P361",
+      "taxlot_id": "20250702AR0I0S",
+      "description": "PIMCO INCOME FUND INSTITUTIONAL CLASS (ACC)(USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 30246.03,
+      "entry_date": "2025-07-07"
+    },
+    {
+      "security_id": "G7113P361",
+      "taxlot_id": "20250902AY6H67",
+      "description": "PIMCO INCOME FUND INSTITUTIONAL CLASS (ACC)(USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 327651.85,
+      "entry_date": "2025-09-04"
+    },
+    {
+      "security_id": "G7113P361",
+      "taxlot_id": "20251003ACIR2I",
+      "description": "PIMCO INCOME FUND INSTITUTIONAL CLASS (ACC)(USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 226030.0,
+      "entry_date": "2025-10-07"
+    },
+    {
+      "security_id": "G7113P361",
+      "taxlot_id": "20251202AIQ7ZE",
+      "description": "PIMCO INCOME FUND INSTITUTIONAL CLASS (ACC)(USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 130030.0,
+      "entry_date": "2025-12-04"
+    },
+    {
+      "security_id": "G7113P361",
+      "taxlot_id": "20260105AMRICL",
+      "description": "PIMCO INCOME FUND INSTITUTIONAL CLASS (ACC)(USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 230030.0,
+      "entry_date": "2026-01-07"
+    },
+    {
+      "security_id": "G7113P361",
+      "taxlot_id": "20260128AQXQZL",
+      "description": "PIMCO INCOME FUND INSTITUTIONAL CLASS (ACC)(USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 1100030.0,
+      "entry_date": "2026-01-30"
+    },
+    {
+      "security_id": "G7113P361",
+      "taxlot_id": "20260702AJH70C",
+      "description": "PIMCO INCOME FUND INSTITUTIONAL CLASS (ACC)(USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 150030.0,
+      "entry_date": "2026-07-07"
+    },
+    {
+      "security_id": "G7151GAA7",
+      "taxlot_id": "20250725T5W7V9",
+      "description": "PM ALPHA DAC BARINGS BPCC ETN I ACC MEDIUM TERM NOTES VARIABLE 0.000% 07/31/33 REG DTD 08/24/23",
+      "commission": 35.49,
+      "fees": 30.0,
+      "current_cost": 114359.75,
+      "entry_date": "2025-07-25"
+    },
+    {
+      "security_id": "G7151GAA7",
+      "taxlot_id": "20250919T7HVU1",
+      "description": "PM ALPHA DAC BARINGS BPCC ETN I ACC MEDIUM TERM NOTES VARIABLE 0.000% 07/31/33 REG DTD 08/24/23",
+      "commission": 27.21,
+      "fees": 30.0,
+      "current_cost": 50116.1,
+      "entry_date": "2025-09-19"
+    },
+    {
+      "security_id": "G7151GAA7",
+      "taxlot_id": "20251024T8HGQO",
+      "description": "PM ALPHA DAC BARINGS BPCC ETN I ACC MEDIUM TERM NOTES VARIABLE 0.000% 07/31/33 REG DTD 08/24/23",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 50030.36,
+      "entry_date": "2025-10-24"
+    },
+    {
+      "security_id": "G7S11T150",
+      "taxlot_id": "20260206ARX823",
+      "description": "PIMCO LOW DURATION INCOME FUND INSTITUTIONAL CLASS (ACC)(USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 400030.0,
+      "entry_date": "2026-02-10"
+    },
+    {
+      "security_id": "G7S11T150",
+      "taxlot_id": "20260702AJH70E",
+      "description": "PIMCO LOW DURATION INCOME FUND INSTITUTIONAL CLASS (ACC)(USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 100030.0,
+      "entry_date": "2026-07-07"
+    },
+    {
+      "security_id": "G8T49N214",
+      "taxlot_id": "20260416AAP4A0",
+      "description": "THORNBURG INVESTMENT INCOME BUILDER FUND CLASS I (USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 610030.0,
+      "entry_date": "2026-04-20"
+    },
+    {
+      "security_id": "GLD",
+      "taxlot_id": "20250702I2V9SB",
+      "description": "SPDR GOLD TR GOLD SHS",
+      "commission": 0.0,
+      "fees": 2.0,
+      "current_cost": 139250.67,
+      "entry_date": "2025-07-02"
+    },
+    {
+      "security_id": "GLD",
+      "taxlot_id": "20250730I5RPQ7",
+      "description": "SPDR GOLD TR GOLD SHS",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 325195.64,
+      "entry_date": "2025-07-30"
+    },
+    {
+      "security_id": "GLD",
+      "taxlot_id": "20250818I7UQSK",
+      "description": "SPDR GOLD TR GOLD SHS",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 50042.88,
+      "entry_date": "2025-08-18"
+    },
+    {
+      "security_id": "GLD",
+      "taxlot_id": "20250903I9EM0R",
+      "description": "SPDR GOLD TR GOLD SHS",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 65167.4,
+      "entry_date": "2025-09-03"
+    },
+    {
+      "security_id": "GLD",
+      "taxlot_id": "20251202I92CRY",
+      "description": "SPDR GOLD TR GOLD SHS",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 15175.39,
+      "entry_date": "2025-12-02"
+    },
+    {
+      "security_id": "GLD",
+      "taxlot_id": "20260702I6A4KS",
+      "description": "SPDR GOLD TR GOLD SHS",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 99909.75,
+      "entry_date": "2026-07-02"
+    },
+    {
+      "security_id": "HEWJ",
+      "taxlot_id": "20260702I6A3BU",
+      "description": "ISHARES TR ISHARES CURRENCY HEDGED MSCI JAPAN ETF",
+      "commission": 0.0,
+      "fees": 16.0,
+      "current_cost": 200179.75,
+      "entry_date": "2026-07-02"
+    },
+    {
+      "security_id": "IBIT",
+      "taxlot_id": "20250702I2YJRA",
+      "description": "ISHARES BITCOIN TR ETF SHS BEN INT",
+      "commission": 0.0,
+      "fees": 2.0,
+      "current_cost": 207143.75,
+      "entry_date": "2025-07-02"
+    },
+    {
+      "security_id": "IBIT",
+      "taxlot_id": "20250730I5UIK4",
+      "description": "ISHARES BITCOIN TR ETF SHS BEN INT",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 142380.86,
+      "entry_date": "2025-07-30"
+    },
+    {
+      "security_id": "IBIT",
+      "taxlot_id": "20250818I7UQTV",
+      "description": "ISHARES BITCOIN TR ETF SHS BEN INT",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 49017.9,
+      "entry_date": "2025-08-18"
+    },
+    {
+      "security_id": "IBIT",
+      "taxlot_id": "20250903I9EM6E",
+      "description": "ISHARES BITCOIN TR ETF SHS BEN INT",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 116577.4,
+      "entry_date": "2025-09-03"
+    },
+    {
+      "security_id": "IBIT",
+      "taxlot_id": "20251114I8E1GD",
+      "description": "ISHARES BITCOIN TR ETF SHS BEN INT",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 120145.74,
+      "entry_date": "2025-11-14"
+    },
+    {
+      "security_id": "IBIT",
+      "taxlot_id": "20251120I84ZH0",
+      "description": "ISHARES BITCOIN TR ETF SHS BEN INT",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 64720.87,
+      "entry_date": "2025-11-20"
+    },
+    {
+      "security_id": "IBIT",
+      "taxlot_id": "20251202I92LSK",
+      "description": "ISHARES BITCOIN TR ETF SHS BEN INT",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 214290.05,
+      "entry_date": "2025-12-02"
+    },
+    {
+      "security_id": "IBIT",
+      "taxlot_id": "20260203I7IP00",
+      "description": "ISHARES BITCOIN TR ETF SHS BEN INT",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 118639.86,
+      "entry_date": "2026-02-03"
+    },
+    {
+      "security_id": "IBIT",
+      "taxlot_id": "20260206I8C2Y8",
+      "description": "ISHARES BITCOIN TR ETF SHS BEN INT",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 72086.2,
+      "entry_date": "2026-02-06"
+    },
+    {
+      "security_id": "IBIT",
+      "taxlot_id": "20260603I2EF4K",
+      "description": "ISHARES BITCOIN TR ETF SHS BEN INT",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 33660.77,
+      "entry_date": "2026-06-03"
+    },
+    {
+      "security_id": "IBIT",
+      "taxlot_id": "20260706I6CWDB",
+      "description": "ISHARES BITCOIN TR ETF SHS BEN INT",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 78698.6,
+      "entry_date": "2026-07-06"
+    },
+    {
+      "security_id": "IDMBF",
+      "taxlot_id": "20260109A02075",
+      "description": "ISHARES MSCI BRAZIL UCITS ETF (DE) ACCUMULATING UNITS ISIN#DE000A0Q4R85",
+      "commission": 25.0,
+      "fees": 0.0,
+      "current_cost": 203412.93,
+      "entry_date": "2026-01-09"
+    },
+    {
+      "security_id": "IDMBF",
+      "taxlot_id": "20260203A02587",
+      "description": "ISHARES MSCI BRAZIL UCITS ETF (DE) ACCUMULATING UNITS ISIN#DE000A0Q4R85",
+      "commission": 25.0,
+      "fees": 0.0,
+      "current_cost": 139641.52,
+      "entry_date": "2026-02-03"
+    },
+    {
+      "security_id": "ILF",
+      "taxlot_id": "20260203I7OVJX",
+      "description": "ISHARES TR LATIN AMER 40 ETF",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 367141.0,
+      "entry_date": "2026-02-03"
+    },
+    {
+      "security_id": "L468AA656",
+      "taxlot_id": "20260202ARA95F",
+      "description": "JANUS HENDERSON HORIZON GLOBAL SMALLER COMPANIES FUND CLASS F2 (USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 450030.0,
+      "entry_date": "2026-02-03"
+    },
+    {
+      "security_id": "L468AA656",
+      "taxlot_id": "20260406AZDL2N",
+      "description": "JANUS HENDERSON HORIZON GLOBAL SMALLER COMPANIES FUND CLASS F2 (USD)",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 92030.0,
+      "entry_date": "2026-04-07"
+    },
+    {
+      "security_id": "L6366L196",
+      "taxlot_id": "20250714ASZZDT",
+      "description": "MFS MERIDIAN CONTRARIAN VALUE FUND CLASS I1",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 459411.84,
+      "entry_date": "2025-07-15"
+    },
+    {
+      "security_id": "L6366L196",
+      "taxlot_id": "20250730AVPXCS",
+      "description": "MFS MERIDIAN CONTRARIAN VALUE FUND CLASS I1",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 295030.0,
+      "entry_date": "2025-08-01"
+    },
+    {
+      "security_id": "L6366L196",
+      "taxlot_id": "20250818AXV9Y2",
+      "description": "MFS MERIDIAN CONTRARIAN VALUE FUND CLASS I1",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 44030.0,
+      "entry_date": "2025-08-19"
+    },
+    {
+      "security_id": "L6366L196",
+      "taxlot_id": "20250902AY6IL8",
+      "description": "MFS MERIDIAN CONTRARIAN VALUE FUND CLASS I1",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 142030.0,
+      "entry_date": "2025-09-03"
+    },
+    {
+      "security_id": "L6366L196",
+      "taxlot_id": "20251001AB6X7P",
+      "description": "MFS MERIDIAN CONTRARIAN VALUE FUND CLASS I1",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 53030.0,
+      "entry_date": "2025-10-02"
+    },
+    {
+      "security_id": "L6366L196",
+      "taxlot_id": "20260105AMRIL7",
+      "description": "MFS MERIDIAN CONTRARIAN VALUE FUND CLASS I1",
+      "commission": 0.0,
+      "fees": 30.0,
+      "current_cost": 20030.0,
+      "entry_date": "2026-01-06"
+    },
+    {
+      "security_id": "MAGS",
+      "taxlot_id": "20260702I58TM8",
+      "description": "LISTED FDS TR ROUNDHILL MAGNIFICENT SEVEN ETF",
+      "commission": 25.0,
+      "fees": 16.0,
+      "current_cost": 199608.19,
+      "entry_date": "2026-07-02"
+    }
+  ]
+}

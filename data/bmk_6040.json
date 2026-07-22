@@ -1,25 +1,25 @@
 {
-  "refreshedAt": "2026-07-21T19:58:54.281371",
+  "refreshedAt": "2026-07-22T12:32:09.744057",
   "source": "Yahoo Finance AOR (iShares Core Growth Allocation 60/40)",
   "note": "Single ETF que replica 60% stocks / 40% bonds. Composicion: ITOT + IDEV + IEMG + IAGG + AGG. Reemplaza el calculo viejo 0.6*ACWI + 0.4*AGG.",
   "ticker": "AOR",
   "inception": "2025-06-27",
   "periods": {
-    "latest_date": "2026-07-20",
-    "latest_value": 115.0777,
+    "latest_date": "2026-07-21",
+    "latest_value": 115.8034,
     "returns": {
-      "1W": -0.47,
-      "1M": -1.51,
-      "3M": 1.61,
-      "6M": 4.41,
-      "YTD": 6.2,
-      "SI": 15.08,
-      "Annualized": 14.13
+      "1W": -0.33,
+      "1M": -0.89,
+      "3M": 3.09,
+      "6M": 6.37,
+      "YTD": 6.86,
+      "SI": 15.8,
+      "Annualized": 14.77
     },
     "volatility": 8.87,
-    "sharpe_approx": 1.11
+    "sharpe_approx": 1.18
   },
-  "series_length": 266,
+  "series_length": 267,
   "series": [
     {
       "date": "2025-06-27",
@@ -95,11 +95,11 @@
     },
     {
       "date": "2025-07-24",
-      "value": 101.7554
+      "value": 101.7555
     },
     {
       "date": "2025-07-25",
-      "value": 101.969
+      "value": 101.9691
     },
     {
       "date": "2025-07-28",
@@ -135,11 +135,11 @@
     },
     {
       "date": "2025-08-07",
-      "value": 101.7554
+      "value": 101.7555
     },
     {
       "date": "2025-08-08",
-      "value": 102.1333
+      "value": 102.1334
     },
     {
       "date": "2025-08-11",
@@ -535,7 +535,7 @@
     },
     {
       "date": "2025-12-30",
-      "value": 108.881
+      "value": 108.8809
     },
     {
       "date": "2025-12-31",
@@ -599,7 +599,7 @@
     },
     {
       "date": "2026-01-23",
-      "value": 110.3311
+      "value": 110.3312
     },
     {
       "date": "2026-01-26",
@@ -655,7 +655,7 @@
     },
     {
       "date": "2026-02-12",
-      "value": 111.1812
+      "value": 111.1813
     },
     {
       "date": "2026-02-13",
@@ -671,7 +671,7 @@
     },
     {
       "date": "2026-02-19",
-      "value": 111.6146
+      "value": 111.6147
     },
     {
       "date": "2026-02-20",
@@ -727,7 +727,7 @@
     },
     {
       "date": "2026-03-11",
-      "value": 109.4144
+      "value": 109.4143
     },
     {
       "date": "2026-03-12",
@@ -1084,6 +1084,10 @@
     {
       "date": "2026-07-20",
       "value": 115.0777
+    },
+    {
+      "date": "2026-07-21",
+      "value": 115.8034
     }
   ]
 }
