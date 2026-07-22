@@ -222,10 +222,10 @@
     .perf-table tr.row-big td, .perf-table tr.row-bmk td, .perf-table tr.row-alpha td {
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-    .perf-table tr.attr-row td { background: white; color: var(--text); }
+    .perf-table tr.attr-row td { background: var(--card); color: var(--text); }
     .perf-table tr.attr-row td.pos { color: var(--green); font-weight: 600; }
     .perf-table tr.attr-row td.neg { color: var(--red); font-weight: 600; }
-    .perf-table tr.attr-total td { background: #f8fafc; font-weight: 700; border-top: 2px solid var(--navy); }
+    .perf-table tr.attr-total td { background: rgba(212,175,55,0.08); color: var(--text); font-weight: 700; border-top: 2px solid var(--gold); }
 
     /* Loading */
     .loading {
@@ -1025,7 +1025,7 @@
           <td>${bigC}</td>
           <td>${benchC}</td>
           <td class="${alphaCls}">${_fmtPct(c.alpha_pp)}</td>
-          <td class="left" style="font-size:11px;color:#555">${c.comment || ""}</td>
+          <td class="left" style="font-size:11px;color:var(--text-mute)">${c.comment || ""}</td>
         </tr>`;
       }).join("");
       const totalCls = aa.alpha_ytd_total_pp > 0 ? "pos" : "neg";
@@ -1034,7 +1034,7 @@
         <td>${_fmtPct(aa.big_ytd)}</td>
         <td>${_fmtPct(aa.bench_ytd_aor_etf)}</td>
         <td class="${totalCls}">${_fmtPct(aa.alpha_ytd_total_pp)}</td>
-        <td class="left" style="font-size:11px;color:#555">BIG ${_fmtPct(aa.big_ytd)} − ${aa.bench_label} ${_fmtPct(aa.bench_ytd_aor_etf)}</td>
+        <td class="left" style="font-size:11px;color:var(--text-mute)">BIG ${_fmtPct(aa.big_ytd)} − ${aa.bench_label} ${_fmtPct(aa.bench_ytd_aor_etf)}</td>
       </tr>`;
       document.getElementById("perf-alpha-attribution-body").innerHTML = rows + total;
     }
@@ -1129,7 +1129,7 @@
           <tr>
             <td style="text-align:left">${t.process_date || "—"}</td>
             <td style="text-align:left"><strong>${t.security_id || "—"}</strong></td>
-            <td style="text-align:left; font-size:11px; color:#555">${t.description || ""}</td>
+            <td style="text-align:left; font-size:11px; color:var(--text-mute)">${t.description || ""}</td>
             <td class="num">${fmtUsd(t.commission, 2)}</td>
             <td class="num">${fmtUsd(t.fees, 2)}</td>
             <td class="num">${t.principal !== null ? fmtUsd(t.principal, 2) : "—"}</td>
