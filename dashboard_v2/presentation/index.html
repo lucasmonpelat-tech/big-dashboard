@@ -1263,24 +1263,25 @@
 
       // Header dinámico
       const table = document.querySelector("#sleeve-holdings-body").closest("table");
+      const THR = "text-align:right";
       if (isAlts) {
         table.querySelector("thead").innerHTML = `<tr>
           <th style="text-align:left">Holding</th>
-          <th>Weight</th>
-          <th>Return SI</th>
-          <th>Return YTD</th>
-          <th>MV USD</th>
+          <th style="${THR}">Weight</th>
+          <th style="${THR}">Return SI</th>
+          <th style="${THR}">Return YTD</th>
+          <th style="${THR}">MV USD</th>
         </tr>`;
       } else {
         table.querySelector("thead").innerHTML = `<tr>
           <th style="text-align:left">Holding</th>
-          <th>Weight</th>
-          <th>Return SI</th>
-          <th>Bench SI</th>
-          <th>Alpha SI</th>
-          <th>Return YTD</th>
-          <th>Bench YTD</th>
-          <th>Alpha YTD</th>
+          <th style="${THR}">Weight</th>
+          <th style="${THR}">Return SI</th>
+          <th style="${THR}">Bench SI</th>
+          <th style="${THR}">Alpha SI</th>
+          <th style="${THR}">Return YTD</th>
+          <th style="${THR}">Bench YTD</th>
+          <th style="${THR}">Alpha YTD</th>
         </tr>`;
       }
 
@@ -1289,7 +1290,7 @@
         if (isAlts) {
           return `<tr>
             <td style="text-align:left"><strong>${h.ticker || ""}</strong>
-              <div style="font-size:11px;color:#888">${(h.name || "").trim()}</div></td>
+              <div style="font-size:11px;color:var(--text-mute)">${(h.name || "").trim()}</div></td>
             <td class="num">${_fmtNum(weight, 2)}%</td>
             <td class="num ${glClass(h.return_pct)}">${_fmtPct(h.return_pct)}</td>
             <td class="num ${glClass(h.ytd_pct)}">${_fmtPct(h.ytd_pct)}</td>
@@ -1298,18 +1299,18 @@
         }
         return `<tr>
           <td style="text-align:left"><strong>${h.ticker || ""}</strong>
-            <div style="font-size:11px;color:#888">${(h.name || "").trim()}</div></td>
+            <div style="font-size:11px;color:var(--text-mute)">${(h.name || "").trim()}</div></td>
           <td class="num">${_fmtNum(weight, 2)}%</td>
           <td class="num ${glClass(h.return_pct)}">${_fmtPct(h.return_pct)}</td>
-          <td class="num" style="color:#666">${_fmtPct(h.bench_dw_pct)}</td>
+          <td class="num" style="color:var(--text-mute)">${_fmtPct(h.bench_dw_pct)}</td>
           <td class="num ${glClass(h.alpha_real_pp)}"><strong>${_fmtBp(h.alpha_real_pp * 100)}</strong></td>
           <td class="num ${glClass(h.ytd_pct)}">${_fmtPct(h.ytd_pct)}</td>
-          <td class="num" style="color:#666">${_fmtPct(h.bench_ytd_pct)}</td>
+          <td class="num" style="color:var(--text-mute)">${_fmtPct(h.bench_ytd_pct)}</td>
           <td class="num ${glClass(h.alpha_ytd_pp)}"><strong>${_fmtBp(h.alpha_ytd_pp * 100)}</strong></td>
         </tr>`;
       }).join("");
       const colspan = isAlts ? 5 : 8;
-      document.getElementById("sleeve-holdings-body").innerHTML = rows || `<tr><td colspan="${colspan}" style="text-align:center;color:#888;padding:20px">No hay data disponible</td></tr>`;
+      document.getElementById("sleeve-holdings-body").innerHTML = rows || `<tr><td colspan="${colspan}" style="text-align:center;color:var(--text-mute);padding:20px">No hay data disponible</td></tr>`;
     }
 
     async function loadSleeveData() {
