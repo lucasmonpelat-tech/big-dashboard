@@ -107,19 +107,18 @@ def _agg_by_security(pnl_data: dict) -> dict:
 
 
 def _find_position(positions_data: dict, ticker_or_name: str, isin: str = None) -> dict | None:
-    """Buscar en positions.holdings por ISIN primero, después por description substring largo.
-    Nota: usamos 40 chars mínimo para evitar false matches
-    (ej: NBPEA "NEUBERGER BERMAN GLOBAL PRIVATE EQUITY" vs
-         NBGMT "NEUBERGER BERMAN GLOBAL EQUITY MEGATRENDS" — coinciden los primeros 22 chars).
+    """Buscar en positions.holdings por ISIN primero, después por description substring.
+    Nota: usamos 30 chars para tolerar variantes menores del provider
+    (ej: legacy "LAZARD GLOBAL LISTED INFRASTRUCTURE FD C" vs positions
+     "LAZARD GLOBAL LISTED INFRASTRUCTURE FUND" — 30 chars coinciden).
+    Con 30 chars aún evitamos false-match tipo NBPEA vs NBGMT (divergen char 24).
     """
     for h in positions_data.get("holdings", []):
         if isin and h.get("isin") == isin:
             return h
-    # Fallback: substring largo (40 chars) para evitar falsos positivos
     if ticker_or_name:
         name_up = ticker_or_name.upper().strip()
-        # 40 chars, o el nombre completo si es más corto
-        n = name_up[:40] if len(name_up) >= 40 else name_up
+        n = name_up[:30] if len(name_up) >= 30 else name_up
         for h in positions_data.get("holdings", []):
             if n in (h.get("description") or "").upper():
                 return h
@@ -328,6 +327,68 @@ def _load_year_start_anchors() -> dict:
     return out
 
 
+def _classify_sleeve(pos: dict, equity_race: dict, fi_race: dict) -> str:
+    """Retorna el sleeve del holding: 'equity', 'fixed_income', 'alternatives' o 'cash'.
+    Orden de prioridad:
+      1. Cash
+      2. ISIN match en race JSONs (equity/fi)
+      3. Alt keywords en description (BARINGS/CARLYLE/etc) — ANTES de security_type
+         porque Pershing marca BPCC (private credit ETN) como "Corporate Bonds".
+      4. security_type (Corporate Bonds → FI, Limited Partnerships → Alts)
+      5. Fallback keywords FI (BOND/CREDIT/etc)
+      6. Default: equity
+    """
+    if pos.get("security_type") == "Cash":
+        return "cash"
+    isin = pos.get("isin")
+    if isin:
+        if isin in equity_race: return "equity"
+        if isin in fi_race:     return "fixed_income"
+    desc = (pos.get("description") or "").upper()
+    # Alt keywords PRIMERO — BPCC (BARINGS) es "Corporate Bonds" en Pershing pero es alt
+    if any(k in desc for k in ("CARLYLE","HAMILTON LANE","GOLUB","HPS","BARINGS",
+                                "FRANKLIN LEXINGTON","BLACKROCK PRIVATE","LEXINGTON",
+                                "K-PEC","BXPE","CAPM","FLEX","BITCOIN","GOLD SHS")):
+        return "alternatives"
+    stype = pos.get("security_type") or ""
+    if stype == "Corporate Bonds": return "fixed_income"
+    if stype == "Limited Partnerships": return "alternatives"
+    if any(k in desc for k in ("BOND","CREDIT","CAT BOND","LOW DURATION","EMERGING LOCAL",
+                                "TENAC","TGF","MEDIUM TERM NOTE","INVESTMENT GRADE","AGG","FIXED")):
+        return "fixed_income"
+    return "equity"
+
+
+def _make_synthetic_legacy(pos: dict, pnl_agg: dict) -> dict:
+    """Crea un dict h_legacy sintético para holdings que están en positions.json
+    pero NO en el legacy holdings_returns_*.json (compras recientes).
+    build_holding() consume este dict como si viniera del legacy — sacando MV/cost/GL
+    de positions + reconstruyendo buys_history desde pnl taxlots.
+    """
+    desc = (pos.get("description") or "").strip()
+    ticker = pos.get("security_id") or ""
+    if ":" in ticker: ticker = ticker.split(":")[0]
+    cusip = pos.get("cusip")
+    sid = pos.get("security_id")
+    agg = pnl_agg.get(cusip) or pnl_agg.get(sid) or {}
+    buys = sorted(agg.get("buys", []), key=lambda b: b.get("date") or "") if agg else []
+    first_buy = buys[0]["date"] if buys else None
+    return {
+        "ticker": ticker,
+        "name": desc,
+        "isin": pos.get("isin"),
+        "status": "OPEN",
+        "buys_history": buys,
+        "first_buy_date": first_buy,
+        "n_trades": len(buys),
+        "mv_usd": pos.get("market_value_usd"),
+        "cost_basis_usd": agg.get("cost") if agg else None,
+        "unrealized_gl_usd": agg.get("gl") if agg else None,
+        "return_pct": None,
+        "qty": pos.get("quantity"),
+    }
+
+
 def _load_race_by_isin(path: Path) -> dict:
     """Retorna dict {isin: {si_return_pct, ytd_return_pct, first_buy_date, source}}
     desde equity_race.json / fi_race.json (source: baha/yfinance price series)."""
@@ -388,14 +449,15 @@ def build(as_of: str) -> dict:
     }
 
     for sleeve_key, (hr_path, bench_label, bench_path, race_by_isin) in hr_files.items():
-        if not hr_path.exists():
-            out["sleeves"][sleeve_key] = {"holdings": [], "error": f"{hr_path.name} no existe"}
-            continue
-
-        hr = json.load(open(hr_path, encoding='utf-8'))
         bench_prices = _load_bench_prices(bench_path, bench_label)
 
+        # Legacy (opcional — puede estar stale, no incluye compras recientes)
+        hr = json.load(open(hr_path, encoding='utf-8')) if hr_path.exists() else {"holdings": []}
+
         holdings_out = []
+        legacy_isins_seen = set()
+        legacy_descs_seen = set()  # match por description substring para holdings sin ISIN en legacy
+
         for h_legacy in hr.get("holdings", []):
             # NO filtrar por status legacy — puede estar mal (ej: PIMCO-INC marcado CLOSED
             # pero está en portfolio). El status real lo determina build_holding via positions.
@@ -405,6 +467,34 @@ def build(as_of: str) -> dict:
             # Solo incluimos OPEN (los CLOSED reales quedan fuera del widget)
             if hr_out.get("status") == "OPEN":
                 holdings_out.append(hr_out)
+                if hr_out.get("isin"): legacy_isins_seen.add(hr_out["isin"])
+                nm = (hr_out.get("name") or "").upper().strip()
+                if nm: legacy_descs_seen.add(nm[:40])
+
+        # POSITIONS SWEEP — agregar holdings del positions.json que el legacy no tiene
+        # (compras recientes: MAGS, HEWJ, etc). Clasificar cada holding al sleeve correcto
+        # y crear un h_legacy sintético para pasarlo al mismo build_holding().
+        for pos in positions.get("holdings", []):
+            if (pos.get("market_value_usd") or 0) <= 0:
+                continue
+            sleeve = _classify_sleeve(pos, equity_race, fi_race)
+            if sleeve != sleeve_key:
+                continue
+            isin = pos.get("isin")
+            desc_key = (pos.get("description") or "").upper().strip()[:40]
+            # Skip si ya lo procesamos vía legacy
+            if isin and isin in legacy_isins_seen:
+                continue
+            if desc_key and desc_key in legacy_descs_seen:
+                continue
+            h_synth = _make_synthetic_legacy(pos, pnl_agg)
+            hr_out = build_holding(h_synth, positions, pnl_agg,
+                                   bench_prices, v0_by_isin, bench_label,
+                                   race_by_isin)
+            if hr_out.get("status") == "OPEN":
+                hr_out["_mv_source"] = hr_out.get("_mv_source") or "positions_sweep"
+                holdings_out.append(hr_out)
+                if hr_out.get("isin"): legacy_isins_seen.add(hr_out["isin"])
 
         # Merge EXTERNAL holdings (data manual desde statements — no en Pershing UGL)
         # Ejemplo: CALP (Carlyle) viene con statement directo del manager.

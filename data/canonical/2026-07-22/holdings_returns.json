@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "as_of": "2026-07-22",
-  "generated_at": "2026-07-22T17:29:05Z",
+  "generated_at": "2026-07-22T18:30:31Z",
   "note": "Holdings con MV/return DIRECTO de Pershing UGL (canonical v2 pnl.json). Bench DW calculado desde buys_history + bench indices. Fixes bug de precio staleado del compute_holdings_returns.py viejo.",
   "sources": {
     "positions": "data/canonical/2026-07-22/positions.json",
@@ -10,7 +10,7 @@
   "sleeves": {
     "equity": {
       "bench_label": "ACWI",
-      "n_open": 8,
+      "n_open": 11,
       "holdings": [
         {
           "ticker": "CSPX",
@@ -251,6 +251,36 @@
           "_mv_source": "pershing_ugl"
         },
         {
+          "ticker": "LGLI",
+          "name": "LAZARD GLOBAL LISTED INFRASTRUCTURE FD CL A (USD)(ACC)",
+          "isin": "IE00BF4KN675",
+          "status": "OPEN",
+          "qty": 26511.134,
+          "mv_usd": 521224.8,
+          "cost_basis_usd": 515000.0,
+          "unrealized_gl_usd": 6224.8,
+          "return_pct": 1.21,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 7.24,
+          "alpha_real_pp": -6.03,
+          "ytd_pct": 9.91,
+          "bench_ytd_pct": 9.89,
+          "alpha_ytd_pp": 0.02,
+          "first_buy_date": "2026-02-04",
+          "n_trades": 2,
+          "buys_history": [
+            {
+              "date": "2026-02-04",
+              "cost": 450000.0
+            },
+            {
+              "date": "2026-04-08",
+              "cost": 65000.0
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
           "ticker": "ARGT",
           "name": "GLOBAL X FDS MSCI ARGENTINA ETF",
           "isin": "US37950E2596",
@@ -336,6 +366,58 @@
             {
               "date": "2026-02-03",
               "cost": 367141.0
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "MAGS",
+          "name": "LISTED FDS TR ROUNDHILL MAGNIFICENT SEVEN ETF",
+          "isin": "US53656G4982",
+          "status": "OPEN",
+          "qty": 3075.0,
+          "mv_usd": 205871.25,
+          "cost_basis_usd": 199608.19,
+          "unrealized_gl_usd": 6263.06,
+          "return_pct": 3.14,
+          "bench_label": "ACWI",
+          "bench_dw_pct": -1.59,
+          "alpha_real_pp": 4.73,
+          "ytd_pct": 3.14,
+          "bench_ytd_pct": 9.89,
+          "alpha_ytd_pp": -6.75,
+          "first_buy_date": "2026-07-02",
+          "n_trades": 1,
+          "buys_history": [
+            {
+              "date": "2026-07-02",
+              "cost": 199608.19
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "HEWJ",
+          "name": "ISHARES TR ISHARES CURRENCY HEDGED MSCI JAPAN ETF",
+          "isin": "US46434V8862",
+          "status": "OPEN",
+          "qty": 3125.0,
+          "mv_usd": 200343.75,
+          "cost_basis_usd": 200179.75,
+          "unrealized_gl_usd": 164.0,
+          "return_pct": 0.08,
+          "bench_label": "ACWI",
+          "bench_dw_pct": -1.59,
+          "alpha_real_pp": 1.67,
+          "ytd_pct": 0.08,
+          "bench_ytd_pct": 9.89,
+          "alpha_ytd_pp": -9.81,
+          "first_buy_date": "2026-07-02",
+          "n_trades": 1,
+          "buys_history": [
+            {
+              "date": "2026-07-02",
+              "cost": 200179.75
             }
           ],
           "_mv_source": "pershing_ugl"
