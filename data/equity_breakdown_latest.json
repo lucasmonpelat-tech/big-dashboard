@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-05-31",
-  "source": "PRIMARY: factsheets oficiales (PDF MFS, thornburg.com, Endowus NB) + FT.com per fondo donde no actualizado x weights sleeve T-1",
+  "asOf": "2026-07-22",
+  "source": "PRIMARY: factsheets oficiales (PDF MFS, thornburg.com, Endowus NB) + FT.com per fondo donde no actualizado x weights sleeve T-1 | UPDATED 2026-07-22: agregados MAGS + HEWJ via rescale + contribuciones ponderadas. | UPDATED 2026-07-22: agregados MAGS + HEWJ via rescale + contribuciones ponderadas.",
   "method": "Para cada equity holding: regional/sectorial extraído de FT.com fund tearsheet (que toma datos directo del fund manager), ponderado por peso BIG. NO usa Maximus.",
   "verification": {
     "updated_2026_06_22": true,
@@ -8,16 +8,19 @@
     "thor_change_may_vs_jan": "Income Builder data 4 meses fresca. Sector Financial 22.8 (era 21.6 +1.2pp). Top 10: Orange sigue top, BNP sube a #2.",
     "nbgmt_change_jun_vs_mar": "NBGMT fuerte rotation Q2: salio Amdocs (era #1), Expedia, NICE, Uber, Charles_River. Entraron Gen Digital, Chewy, Zeta, ON Semi, Cisco, Shift4, Element, Alibaba. Tema +Tech/Cons.Cyc continua. Regional/sector mantengo Mar-2026 (no disponible publico Jun).",
     "sleeve_weights_used": {
-      "CSPX": 0.34,
-      "NBGMT": 0.168,
-      "MFSCV": 0.146,
-      "THOR": 0.077,
-      "JHGSC": 0.07,
-      "LGLI": 0.066,
-      "ARGT": 0.048,
-      "ILF": 0.042,
-      "4BRZ": 0.044
-    }
+      "CSPX": 0.32,
+      "NBGMT": 0.1656,
+      "MFSCV": 0.1435,
+      "THOR": 0.0724,
+      "JHGSC": 0.0658,
+      "LGLI": 0.060599999999999994,
+      "ARGT": 0.043899999999999995,
+      "4BRZ": 0.0408,
+      "ILF": 0.0403,
+      "MAGS": 0.0239,
+      "HEWJ": 0.0233
+    },
+    "refresh_2026-07-22": "Rescale 9 fondos originales × 0.9528 + MAGS (100% US, Growth) + HEWJ (100% Japan, Blend/Value)"
   },
   "style": {
     "title": "Distribución por Estilo",
@@ -26,17 +29,17 @@
     "rows": [
       {
         "category": "Value",
-        "big": 32,
+        "big": 30.2,
         "bmk": 28
       },
       {
         "category": "Growth",
-        "big": 38,
+        "big": 39.4,
         "bmk": 32
       },
       {
         "category": "Blend",
-        "big": 30,
+        "big": 30.4,
         "bmk": 40
       }
     ],
@@ -52,62 +55,62 @@
     "rows": [
       {
         "category": "Technology",
-        "big": 21,
+        "big": 22.3,
         "acwi": 26
       },
       {
         "category": "Financial",
-        "big": 13,
+        "big": 12.6,
         "acwi": 17
       },
       {
         "category": "Comm. Serv.",
-        "big": 7,
+        "big": 8.1,
         "acwi": 9
       },
       {
         "category": "Cons. Cyc.",
-        "big": 10,
+        "big": 10.8,
         "acwi": 9
       },
       {
         "category": "Health",
-        "big": 9,
+        "big": 8.4,
         "acwi": 9
       },
       {
         "category": "Industrials",
-        "big": 14,
+        "big": 13.8,
         "acwi": 11
       },
       {
         "category": "Cons. Def.",
-        "big": 6,
+        "big": 5.6,
         "acwi": 5
       },
       {
         "category": "Energy",
-        "big": 5,
+        "big": 4.6,
         "acwi": 5
       },
       {
         "category": "Utilities",
-        "big": 6,
+        "big": 5.5,
         "acwi": 3
       },
       {
         "category": "Basic Mat.",
-        "big": 5,
+        "big": 4.6,
         "acwi": 4
       },
       {
         "category": "Real estate",
-        "big": 2,
+        "big": 1.9,
         "acwi": 2
       },
       {
         "category": "Other",
-        "big": 2,
+        "big": 1.8,
         "acwi": 0
       }
     ],
@@ -135,32 +138,32 @@
     "rows": [
       {
         "category": "N. America",
-        "big": 58,
+        "big": 57.5,
         "acwi": 66
       },
       {
         "category": "LatAm",
-        "big": 13,
+        "big": 11.8,
         "acwi": 1
       },
       {
         "category": "Europe dev.",
-        "big": 13,
+        "big": 11.8,
         "acwi": 11
       },
       {
         "category": "UK",
-        "big": 6,
+        "big": 5.4,
         "acwi": 4
       },
       {
         "category": "Japan",
-        "big": 2,
+        "big": 6.3,
         "acwi": 5
       },
       {
         "category": "Otros",
-        "big": 8,
+        "big": 7.2,
         "acwi": 13
       }
     ],

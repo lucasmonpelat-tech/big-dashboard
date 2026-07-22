@@ -1,6 +1,6 @@
 {
   "_description": "Top 10 holdings per BIG equity fund. Used for lookthrough analysis vs ACWI top 10.",
-  "_lastUpdate": "2026-06-23",
+  "_lastUpdate": "2026-07-22",
   "_status": "VERIFICADO: 9/9 fondos diversificados. CSPX, NBGMT, MFSCV, THOR, JHGSC, LGLI, ILF, ARGT, 4BRZ con factsheet/holdings data 2026.",
   "CSPX": {
     "name": "iShares Core S&P 500 UCITS",
@@ -200,5 +200,38 @@
       "Ferrovial": 4.4,
       "Consolidated_Edison": 4.2
     }
+  },
+  "MAGS": {
+    "_description": "Roundhill Magnificent Seven ETF — equal weight (~14.3%) rebalanced quarterly",
+    "_as_of": "2026-07-15",
+    "_factsheet_top10": {
+      "NVIDIA CORP": 14.0,
+      "APPLE INC": 15.1,
+      "MICROSOFT CORP": 14.2,
+      "AMAZON.COM INC": 14.2,
+      "ALPHABET INC CLASS A": 13.8,
+      "META PLATFORMS INC CLASS A": 15.4,
+      "TESLA INC": 13.2,
+      "_note": "MAGS rebalancea a equal-weight cada trimestre. Data mid-Jul-26 (post-Jun rebalance)."
+    },
+    "name": "Roundhill Magnificent Seven ETF"
+  },
+  "HEWJ": {
+    "_description": "iShares Currency Hedged MSCI Japan ETF — 99.81% EWJ (unhedged) + JPY hedge",
+    "_as_of": "2026-07-17",
+    "_factsheet_top10": {
+      "Mitsubishi UFJ Financial Group": 4.64,
+      "Tokyo Electron": 3.65,
+      "Toyota Motor": 3.43,
+      "Sumitomo Mitsui Financial Group": 3.05,
+      "Hitachi": 2.61,
+      "Sony Group": 2.53,
+      "SoftBank Group": 2.52,
+      "Advantest": 2.52,
+      "Mizuho Financial Group": 2.34,
+      "Recruit Holdings": 2.12,
+      "_note": "Holdings desde EWJ (que HEWJ replica 99.81%). Top 10 aprox = 27.4% del NAV."
+    },
+    "name": "iShares Currency Hedged MSCI Japan ETF"
   }
 }

@@ -669,7 +669,7 @@
 
     // Fallback loader: leer JSONs del dashboard viejo (data/xxx.json)
     async function loadLegacyJson(name) {
-      const resp = await fetch(`../../data/${name}.json`);
+      const resp = await fetch(`../../data/${name}.json?_=${Date.now()}`);
       if (!resp.ok) throw new Error(`No pude cargar legacy ${name}.json (${resp.status})`);
       return resp.json();
     }
@@ -1631,7 +1631,7 @@
       // === Widget 2: Top 10 por Fondo cards ===
       try {
         const ft = await loadLegacyJson("fund_holdings_top10");
-        const FUND_ORDER = ["CSPX", "NBGMT", "MFSCV", "THOR", "JHGSC", "LGLI", "ARGT", "ILF", "4BRZ"];
+        const FUND_ORDER = ["CSPX", "NBGMT", "MFSCV", "THOR", "JHGSC", "LGLI", "ARGT", "ILF", "4BRZ", "MAGS", "HEWJ"];
         const fmtName = k => k.replace(/_/g, " ");
         const cards = FUND_ORDER.map(tk => {
           const f = ft[tk]; if (!f) return "";
