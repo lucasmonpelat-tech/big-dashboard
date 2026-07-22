@@ -812,19 +812,35 @@
     let currentSort = { key: "market_value_usd", desc: true };
 
     function buildPositionsRows(positions, pnl) {
-      // Agregar taxlots UGL por security_id
+      // Agregar taxlots UGL por CUSIP y por security_id (positions.security_id puede diferir del
+      // pnl.security_id — ej: CSPX:GB vs CSTNL, LU2049315265 vs L8147L735 —, pero el CUSIP matchea).
+      const taxlotsByCusip = {};
       const taxlotsBySec = {};
       pnl.unrealized.forEach(t => {
-        const k = t.security_id;
-        if (!taxlotsBySec[k]) taxlotsBySec[k] = { cost: 0, gl: 0, qty: 0 };
-        taxlotsBySec[k].cost += t.current_total_cost || 0;
-        taxlotsBySec[k].gl += t.gain_loss || 0;
-        taxlotsBySec[k].qty += t.quantity || 0;
+        if (t.cusip) {
+          if (!taxlotsByCusip[t.cusip]) taxlotsByCusip[t.cusip] = { cost: 0, gl: 0, qty: 0 };
+          taxlotsByCusip[t.cusip].cost += t.current_total_cost || 0;
+          taxlotsByCusip[t.cusip].gl += t.gain_loss || 0;
+          taxlotsByCusip[t.cusip].qty += t.quantity || 0;
+        }
+        const sk = t.security_id;
+        if (sk) {
+          if (!taxlotsBySec[sk]) taxlotsBySec[sk] = { cost: 0, gl: 0, qty: 0 };
+          taxlotsBySec[sk].cost += t.current_total_cost || 0;
+          taxlotsBySec[sk].gl += t.gain_loss || 0;
+          taxlotsBySec[sk].qty += t.quantity || 0;
+        }
       });
 
       const totalAum = positions.holdings.reduce((s, h) => s + (h.market_value_usd || 0), 0);
       return positions.holdings.map(h => {
-        const tl = taxlotsBySec[h.security_id] || { cost: 0, gl: 0 };
+        // Match CUSIP primero (más confiable), después security_id
+        let tl = (h.cusip && taxlotsByCusip[h.cusip]) || taxlotsBySec[h.security_id];
+        // Fallback para externals (CALP): cost basis + gl del alts_external.json
+        if (!tl && (h._ext_cost_basis != null || h._ext_unrealized_gl != null)) {
+          tl = { cost: h._ext_cost_basis || 0, gl: h._ext_unrealized_gl || 0 };
+        }
+        if (!tl) tl = { cost: 0, gl: 0 };
         const glPct = tl.cost > 0 ? (tl.gl / tl.cost) * 100 : null;
         // Extraer ISIN de description si viene embedded (ej: "ISIN#IE00B5BMR087")
         const isinFromDesc = ((h.description || "").match(/ISIN#?\s*([A-Z]{2}[A-Z0-9]{10})/i) || [])[1];
@@ -1777,6 +1793,8 @@
               price_date: eh.as_of,
               market_code: "EXT",  // marker: external source
               _external_source: eh.source,
+              _ext_cost_basis: eh.cost_basis_usd,
+              _ext_unrealized_gl: eh.unrealized_gl_usd,
             });
           }
         }
