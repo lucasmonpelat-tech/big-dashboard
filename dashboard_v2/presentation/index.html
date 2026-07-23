@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BIG Fund Dashboard v2</title>
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+  <!-- funds_metadata.js: constantes globales COUNTRY_EXPOSURE, CURRENT_YIELD, COUNTRY_COLORS -->
+  <script src="../../data/funds_metadata.js"></script>
   <style>
     :root {
       --navy: #0a2540;
@@ -261,7 +263,7 @@
 
     <button data-tab="rendimientos">Rendimientos vs Benchmark</button>
     <button data-tab="sleeves">Sleeves Race</button>
-    <button data-tab="lookthrough" disabled title="Coming soon">Currency · Sectorial · Regional</button>
+    <button data-tab="geoyield">Geography · Yield</button>
     <!-- Costos totales: tab oculto por pedido de Lucas. Data sigue en costs.json por si suma despues. -->
     <!-- <button data-tab="costs">Costos totales</button> -->
 
@@ -591,6 +593,49 @@
             <tbody id="costsTaxlotBody"></tbody>
           </table>
         </div>
+      </div>
+    </section>
+
+    <!-- GEOGRAPHY · YIELD -->
+    <section id="geoyield" class="tab-content">
+      <div class="info-box-perf">
+        <strong>Geography & Yield del portfolio total.</strong>
+        Exposición por país del subyacente (ponderada por peso portfolio) + yield ponderado del portafolio vs benchmark 60/40.
+        Data por ISIN: factsheets oficiales (última review 10-Jun-2026). Weights: <strong>positions.json live</strong> (T-1).
+      </div>
+
+      <div class="section">
+        <h2>🌍 Country Exposure — Portfolio Total (ponderado)</h2>
+        <div style="font-size:12px;color:var(--text-mute);margin-bottom:12px">
+          Cada fondo del portfolio se descompone por país del subyacente (factsheet); se pondera por peso portfolio actual.
+        </div>
+        <div id="gy-country-bars" style="margin-bottom:16px"></div>
+        <table>
+          <thead><tr>
+            <th style="text-align:left">Instrument</th>
+            <th style="text-align:right">% Port</th>
+            <th style="text-align:left">Country Breakdown</th>
+          </tr></thead>
+          <tbody id="gy-country-tbody"></tbody>
+        </table>
+      </div>
+
+      <div class="section">
+        <h2>💰 Portfolio Yield vs Benchmark 60/40</h2>
+        <div style="font-size:12px;color:var(--text-mute);margin-bottom:12px">
+          Yield pagado o estimado por cada fondo. Para PE ilíquido → N/A (retorno vía cap gain). Yield ponderado del portafolio vs bench 60% ACWI (2.0%) + 40% AGG (4.5%).
+        </div>
+        <div class="kpi-grid" id="gy-yield-summary" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))"></div>
+        <table style="margin-top:16px">
+          <thead><tr>
+            <th style="text-align:left">Instrument</th>
+            <th style="text-align:right">% Port</th>
+            <th style="text-align:right">Yield</th>
+            <th style="text-align:left">Type</th>
+            <th style="text-align:left">Note</th>
+          </tr></thead>
+          <tbody id="gy-yield-tbody"></tbody>
+        </table>
       </div>
     </section>
 
@@ -1837,6 +1882,7 @@
         await loadSleeveData();
 
         // Overview + Positions
+        window.__positions = positions;  // para tab Geography · Yield
         renderOverview(positions, pnl, costs, txns, bmComp);
         positionsData = buildPositionsRows(positions, pnl);
         renderPositions();
@@ -1865,6 +1911,174 @@
         console.error(e);
       }
     }
+    // ============================================================
+    // GEOGRAPHY + YIELD (widget del tab "Geography · Yield")
+    // Consume funds_metadata.js (globals: COUNTRY_EXPOSURE + CURRENT_YIELD + COUNTRY_COLORS)
+    // y positions.json live (window.__positions) para weights.
+    // ============================================================
+    let _geoyieldLoaded = false;
+    function renderGeoyield() {
+      if (_geoyieldLoaded) return;
+      if (typeof COUNTRY_EXPOSURE === "undefined" || typeof CURRENT_YIELD === "undefined") {
+        console.warn("funds_metadata.js no disponible");
+        return;
+      }
+      const positions = window.__positions;
+      if (!positions) return;
+
+      const totalMv = positions.holdings.reduce((s, h) => s + (h.market_value_usd || 0), 0);
+      const rows = positions.holdings
+        .filter(h => (h.market_value_usd || 0) > 0)
+        .map(h => {
+          const isinFromDesc = ((h.description || "").match(/ISIN#?\s*([A-Z]{2}[A-Z0-9]{10})/i) || [])[1];
+          const isin = h.isin || isinFromDesc;
+          const desc = (h.description || "").trim();
+          const isCash = h.security_type === "Cash" || h.security_id === "USD999997";
+          const isinKey = isCash ? "CASH-USD" : isin;
+          return {
+            isin: isinKey,
+            ticker: (h.security_id || "").split(":")[0],
+            name: isCash ? "Cash USD" : desc,
+            pct: (h.market_value_usd / totalMv) * 100,
+            mv: h.market_value_usd,
+          };
+        })
+        .sort((a, b) => b.pct - a.pct);
+
+      // ==== COUNTRY BARS ====
+      const totals = {};
+      rows.forEach(r => {
+        const ce = COUNTRY_EXPOSURE[r.isin];
+        if (!ce) return;
+        ce.forEach(e => { totals[e.c] = (totals[e.c] || 0) + (r.pct * e.p) / 100; });
+      });
+      const tsum = Object.values(totals).reduce((a, b) => a + b, 0);
+      const sorted = Object.entries(totals).sort((a, b) => b[1] - a[1]);
+      const bars = document.getElementById("gy-country-bars");
+      if (bars) bars.innerHTML = sorted.slice(0, 15).map(([c, v]) => {
+        const color = (typeof COUNTRY_COLORS !== "undefined" && COUNTRY_COLORS[c]) || "#7fa88f";
+        const w = tsum > 0 ? ((v / tsum) * 100) : 0;
+        return `
+          <div style="display:grid;grid-template-columns:80px 1fr 60px;gap:12px;align-items:center;margin-bottom:6px">
+            <div style="font-size:12px;font-weight:600;color:${color}">${c}</div>
+            <div style="background:#0c1b2e;height:14px;border-radius:3px;overflow:hidden">
+              <div style="width:${w}%;height:100%;background:${color};border-radius:3px"></div>
+            </div>
+            <div style="font-size:12px;text-align:right;color:var(--text)">${w.toFixed(1)}%</div>
+          </div>`;
+      }).join("");
+
+      // ==== COUNTRY TBODY ====
+      const sleeveOf = h => classifyHolding(h);
+      const groupedRows = [];
+      const sleeves = { "Equity": [], "Fixed Income": [], "Alternatives": [], "Cash": [] };
+      positions.holdings.forEach(h => {
+        if ((h.market_value_usd || 0) <= 0) return;
+        const sleeve = sleeveOf(h);
+        sleeves[sleeve].push(h);
+      });
+      const tbody = document.getElementById("gy-country-tbody");
+      let html = "";
+      ["Equity", "Fixed Income", "Alternatives", "Cash"].forEach(sleeve => {
+        const hs = sleeves[sleeve] || [];
+        if (!hs.length) return;
+        html += `<tr style="background:rgba(212,175,55,0.05)"><td colspan="3" style="text-align:left;font-weight:700;color:var(--gold);padding:6px 8px;font-size:12px">${sleeve}</td></tr>`;
+        hs.forEach(h => {
+          const isinFromDesc = ((h.description || "").match(/ISIN#?\s*([A-Z]{2}[A-Z0-9]{10})/i) || [])[1];
+          const isin = h.security_type === "Cash" ? "CASH-USD" : (h.isin || isinFromDesc);
+          const ce = COUNTRY_EXPOSURE[isin];
+          const pct = (h.market_value_usd / totalMv) * 100;
+          const name = h.security_type === "Cash" ? "Cash USD" : (h.description || "").trim();
+          const pills = ce
+            ? ce.map(e => {
+                const c = (typeof COUNTRY_COLORS !== "undefined" && COUNTRY_COLORS[e.c]) || "#7fa88f";
+                return `<span style="background:${c};color:#fff;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;margin-right:4px;display:inline-block;margin-bottom:2px">${e.c} ${e.p}%</span>`;
+              }).join("")
+            : `<span style="color:var(--text-mute);font-size:11px;font-style:italic">sin data de country</span>`;
+          html += `
+            <tr>
+              <td style="text-align:left"><strong>${name.slice(0, 55)}</strong><div style="font-size:10px;color:var(--text-mute)">${isin || ""}</div></td>
+              <td class="num">${pct.toFixed(2)}%</td>
+              <td style="text-align:left">${pills}</td>
+            </tr>`;
+        });
+      });
+      if (tbody) tbody.innerHTML = html;
+
+      // ==== YIELD SUMMARY ====
+      let weightedYield = 0, pctWithYield = 0, manualCount = 0, noYieldCount = 0;
+      rows.forEach(r => {
+        const yd = CURRENT_YIELD[r.isin];
+        if (!yd) return;
+        if (yd.y && yd.y > 0) {
+          weightedYield += (r.pct * yd.y) / 100;
+          pctWithYield += r.pct;
+        } else if (yd.y === null || yd.y === 0) noYieldCount++;
+        if (yd.m) manualCount++;
+      });
+      const bmkYield = 0.60 * 2.0 + 0.40 * 4.5;
+      const summary = document.getElementById("gy-yield-summary");
+      if (summary) summary.innerHTML = `
+        <div class="kpi-card pos">
+          <div class="label">Portfolio Weighted Yield</div>
+          <div class="value">${weightedYield.toFixed(2)}%</div>
+          <div class="sub">ponderado por peso portfolio</div>
+        </div>
+        <div class="kpi-card info">
+          <div class="label">% Portfolio con Yield</div>
+          <div class="value">${pctWithYield.toFixed(1)}%</div>
+          <div class="sub">assets con yield &gt; 0</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Benchmark 60/40 Yield</div>
+          <div class="value">${bmkYield.toFixed(2)}%</div>
+          <div class="sub">60% ACWI (2.0%) + 40% AGG (4.5%)</div>
+        </div>
+        <div class="kpi-card ${weightedYield - bmkYield >= 0 ? "pos" : "neg"}">
+          <div class="label">Yield Alpha</div>
+          <div class="value">${(weightedYield - bmkYield >= 0 ? "+" : "") + (weightedYield - bmkYield).toFixed(2)}%</div>
+          <div class="sub">vs 60/40 · ${manualCount} holdings manual</div>
+        </div>
+      `;
+
+      // ==== YIELD TBODY ====
+      let ytbody = "";
+      ["Equity", "Fixed Income", "Alternatives", "Cash"].forEach(sleeve => {
+        const hs = sleeves[sleeve] || [];
+        if (!hs.length) return;
+        ytbody += `<tr style="background:rgba(212,175,55,0.05)"><td colspan="5" style="text-align:left;font-weight:700;color:var(--gold);padding:6px 8px;font-size:12px">${sleeve}</td></tr>`;
+        hs.forEach(h => {
+          const isinFromDesc = ((h.description || "").match(/ISIN#?\s*([A-Z]{2}[A-Z0-9]{10})/i) || [])[1];
+          const isin = h.security_type === "Cash" ? "CASH-USD" : (h.isin || isinFromDesc);
+          const yd = CURRENT_YIELD[isin];
+          const pct = (h.market_value_usd / totalMv) * 100;
+          const name = h.security_type === "Cash" ? "Cash USD" : (h.description || "").trim();
+          const ytxt = yd
+            ? (yd.y === null || yd.y === 0 ? `<span style="color:var(--text-mute)">N/A</span>` : `<strong style="color:var(--gold)">${yd.y.toFixed(2)}%</strong>${yd.m ? ' <span style="color:#e6a532;font-size:9px">⚠</span>' : ""}`)
+            : `<span style="color:var(--text-mute);font-style:italic">no data</span>`;
+          const ttxt = yd ? yd.t : "";
+          const ntxt = yd ? yd.n : "";
+          ytbody += `
+            <tr>
+              <td style="text-align:left"><strong>${name.slice(0, 55)}</strong><div style="font-size:10px;color:var(--text-mute)">${isin || ""}</div></td>
+              <td class="num">${pct.toFixed(2)}%</td>
+              <td class="num">${ytxt}</td>
+              <td style="text-align:left;font-size:11px;color:var(--text-mute)">${ttxt}</td>
+              <td style="text-align:left;font-size:11px;color:var(--text-mute)">${ntxt}</td>
+            </tr>`;
+        });
+      });
+      const yt = document.getElementById("gy-yield-tbody");
+      if (yt) yt.innerHTML = ytbody;
+
+      _geoyieldLoaded = true;
+    }
+
+    // Hook al tab switcher: renderizar cuando se active el tab
+    document.querySelectorAll('nav.tabs button[data-tab="geoyield"]').forEach(btn => {
+      btn.addEventListener("click", () => setTimeout(renderGeoyield, 100));
+    });
+
     resolveSnapshotDate().then(main);
   </script>
 </body>
