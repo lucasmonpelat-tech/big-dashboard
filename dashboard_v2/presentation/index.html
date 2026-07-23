@@ -610,34 +610,34 @@
       <div class="section">
         <h2>🌍 Country Exposure — Portfolio Total (ponderado)</h2>
         <div style="font-size:12px;color:var(--text-mute);margin-bottom:12px">
-          Cada fondo del portfolio se descompone por país del subyacente (factsheet); se pondera por peso portfolio actual.
+          Cada fondo se descompone por país del subyacente (factsheet); se pondera por peso portfolio actual.
         </div>
         <div id="gy-country-bars" style="margin-bottom:16px"></div>
-        <table>
-          <thead><tr>
-            <th style="text-align:left">Instrument</th>
-            <th style="text-align:right">% Port</th>
-            <th style="text-align:left">Country Breakdown</th>
-          </tr></thead>
-          <tbody id="gy-country-tbody"></tbody>
-        </table>
       </div>
 
       <div class="section">
         <h2>💰 Portfolio Yield vs Benchmark 60/40</h2>
         <div style="font-size:12px;color:var(--text-mute);margin-bottom:12px">
-          Yield pagado o estimado por cada fondo. Para PE ilíquido → N/A (retorno vía cap gain). Yield ponderado del portafolio vs bench 60% ACWI (2.0%) + 40% AGG (4.5%).
+          Yield pagado o estimado por cada fondo. Para PE ilíquido → N/A (retorno vía cap gain). Bench: 60% ACWI (2.0%) + 40% AGG (4.5%).
         </div>
         <div class="kpi-grid" id="gy-yield-summary" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))"></div>
-        <table style="margin-top:16px">
+      </div>
+
+      <div class="section">
+        <h2>📊 Holdings — Country Breakdown + Yield</h2>
+        <div style="font-size:12px;color:var(--text-mute);margin-bottom:12px">
+          Vista unificada por holding: peso, exposure geográfica (pills) y yield (con tipo + nota).
+          <span style="color:#e6a532">⚠</span> = yield con confirmación manual pendiente.
+        </div>
+        <table>
           <thead><tr>
             <th style="text-align:left">Instrument</th>
             <th style="text-align:right">% Port</th>
+            <th style="text-align:left">Country Breakdown</th>
             <th style="text-align:right">Yield</th>
-            <th style="text-align:left">Type</th>
-            <th style="text-align:left">Note</th>
+            <th style="text-align:left">Type / Note</th>
           </tr></thead>
-          <tbody id="gy-yield-tbody"></tbody>
+          <tbody id="gy-combined-tbody"></tbody>
         </table>
       </div>
     </section>
@@ -1958,68 +1958,105 @@
       const tsum = Object.values(totals).reduce((a, b) => a + b, 0);
       const sorted = Object.entries(totals).sort((a, b) => b[1] - a[1]);
       const bars = document.getElementById("gy-country-bars");
+      // Paleta refinada de países (Navy + Gold + acentos ricos, todo apto dark theme)
+      const CC = {
+        US: "#c9a961", UK: "#7a9ec9", GB: "#7a9ec9",
+        DE: "#e0b660", FR: "#4a7ab8", ES: "#c67c5a", IT: "#8a9e5e", NL: "#e6a532",
+        CH: "#c96060", SE: "#5abfbf", NO: "#5a8dbf",
+        JP: "#d47a7a",
+        BR: "#7fa88f", MX: "#c99b5a", AR: "#7ab5c9", CL: "#a68fbf", CO: "#c9a961", PE: "#8fa87f",
+        AU: "#c9b45a", CA: "#c95a5a",
+        TW: "#5aa0c9", KR: "#a05ac9", CN: "#c95a5a", HK: "#c99b5a", IN: "#c95a91", ID: "#5ac97f",
+        RU: "#c95a5a", ZA: "#8fc95a", TR: "#c97a5a",
+        PL: "#7fa88f",
+        GLOBAL: "#c9a961", EM: "#7ab89e", EU: "#4a7ab8", LatAm: "#7fa88f",
+        OTHER: "#6b88a8"
+      };
+      const colorFor = c => CC[c] || (typeof COUNTRY_COLORS !== "undefined" && COUNTRY_COLORS[c]) || "#6b88a8";
+
       if (bars) bars.innerHTML = sorted.slice(0, 15).map(([c, v]) => {
-        const color = (typeof COUNTRY_COLORS !== "undefined" && COUNTRY_COLORS[c]) || "#7fa88f";
+        const color = colorFor(c);
         const w = tsum > 0 ? ((v / tsum) * 100) : 0;
         return `
-          <div style="display:grid;grid-template-columns:80px 1fr 60px;gap:12px;align-items:center;margin-bottom:6px">
-            <div style="font-size:12px;font-weight:600;color:${color}">${c}</div>
-            <div style="background:#0c1b2e;height:14px;border-radius:3px;overflow:hidden">
-              <div style="width:${w}%;height:100%;background:${color};border-radius:3px"></div>
+          <div style="display:grid;grid-template-columns:70px 1fr 60px;gap:12px;align-items:center;margin-bottom:8px">
+            <div style="font-size:12px;font-weight:700;color:${color}">${c}</div>
+            <div style="background:rgba(255,255,255,0.04);height:16px;border-radius:4px;overflow:hidden;border:1px solid rgba(255,255,255,0.06)">
+              <div style="width:${w}%;height:100%;background:linear-gradient(90deg,${color} 0%,${color}dd 100%);border-radius:4px;box-shadow:inset 0 -1px 0 rgba(0,0,0,0.2)"></div>
             </div>
-            <div style="font-size:12px;text-align:right;color:var(--text)">${w.toFixed(1)}%</div>
+            <div style="font-size:12px;text-align:right;color:var(--text);font-weight:600">${w.toFixed(1)}%</div>
           </div>`;
       }).join("");
 
-      // ==== COUNTRY TBODY ====
+      // ==== COMBINED TBODY (country + yield) ====
       const sleeveOf = h => classifyHolding(h);
-      const groupedRows = [];
       const sleeves = { "Equity": [], "Fixed Income": [], "Alternatives": [], "Cash": [] };
       positions.holdings.forEach(h => {
         if ((h.market_value_usd || 0) <= 0) return;
-        const sleeve = sleeveOf(h);
-        sleeves[sleeve].push(h);
+        sleeves[sleeveOf(h)].push(h);
       });
-      const tbody = document.getElementById("gy-country-tbody");
-      let html = "";
+      const sleeveTint = {
+        "Equity":       "rgba(201,169,97,0.06)",
+        "Fixed Income": "rgba(74,122,184,0.06)",
+        "Alternatives": "rgba(212,122,122,0.06)",
+        "Cash":         "rgba(127,168,143,0.06)",
+      };
+      let combined = "";
+      let weightedYield = 0, pctWithYield = 0, manualCount = 0, noYieldCount = 0;
+
       ["Equity", "Fixed Income", "Alternatives", "Cash"].forEach(sleeve => {
         const hs = sleeves[sleeve] || [];
         if (!hs.length) return;
-        html += `<tr style="background:rgba(212,175,55,0.05)"><td colspan="3" style="text-align:left;font-weight:700;color:var(--gold);padding:6px 8px;font-size:12px">${sleeve}</td></tr>`;
+        combined += `<tr style="background:${sleeveTint[sleeve]}"><td colspan="5" style="text-align:left;font-weight:700;color:var(--gold);padding:8px 10px;font-size:12px;letter-spacing:0.4px;text-transform:uppercase">${sleeve}</td></tr>`;
         hs.forEach(h => {
           const isinFromDesc = ((h.description || "").match(/ISIN#?\s*([A-Z]{2}[A-Z0-9]{10})/i) || [])[1];
           const isin = h.security_type === "Cash" ? "CASH-USD" : (h.isin || isinFromDesc);
           const ce = COUNTRY_EXPOSURE[isin];
+          const yd = CURRENT_YIELD[isin];
           const pct = (h.market_value_usd / totalMv) * 100;
           const name = h.security_type === "Cash" ? "Cash USD" : (h.description || "").trim();
+
+          // Country pills
           const pills = ce
             ? ce.map(e => {
-                const c = (typeof COUNTRY_COLORS !== "undefined" && COUNTRY_COLORS[e.c]) || "#7fa88f";
-                return `<span style="background:${c};color:#fff;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;margin-right:4px;display:inline-block;margin-bottom:2px">${e.c} ${e.p}%</span>`;
+                const c = colorFor(e.c);
+                return `<span style="background:${c};color:#0c1b2e;padding:2px 9px;border-radius:11px;font-size:10px;font-weight:700;margin-right:4px;display:inline-block;margin-bottom:3px;box-shadow:0 1px 2px rgba(0,0,0,0.3)">${e.c}&nbsp;${e.p}%</span>`;
               }).join("")
-            : `<span style="color:var(--text-mute);font-size:11px;font-style:italic">sin data de country</span>`;
-          html += `
+            : `<span style="color:var(--text-mute);font-size:11px;font-style:italic">sin data</span>`;
+
+          // Yield cell
+          let ytxt, ttxt;
+          if (yd) {
+            if (yd.y === null || yd.y === 0) {
+              ytxt = `<span style="color:var(--text-mute);font-weight:600">N/A</span>`;
+            } else {
+              ytxt = `<strong style="color:var(--gold);font-size:13px">${yd.y.toFixed(2)}%</strong>${yd.m ? ' <span title="requiere confirmación manual" style="color:#e6a532;font-size:10px">⚠</span>' : ""}`;
+              weightedYield += (pct * yd.y) / 100;
+              pctWithYield += pct;
+            }
+            if (yd.m) manualCount++;
+            if (yd.y === null || yd.y === 0) noYieldCount++;
+            ttxt = `<div style="font-size:11px;color:var(--text-mute);font-weight:600">${yd.t}</div><div style="font-size:10px;color:var(--text-mute);opacity:0.7;margin-top:1px">${yd.n}</div>`;
+          } else {
+            ytxt = `<span style="color:var(--text-mute);font-style:italic">no data</span>`;
+            ttxt = `<span style="color:var(--text-mute);font-size:11px;font-style:italic">—</span>`;
+          }
+
+          combined += `
             <tr>
-              <td style="text-align:left"><strong>${name.slice(0, 55)}</strong><div style="font-size:10px;color:var(--text-mute)">${isin || ""}</div></td>
-              <td class="num">${pct.toFixed(2)}%</td>
+              <td style="text-align:left"><strong>${name.slice(0, 55)}</strong><div style="font-size:10px;color:var(--text-mute);font-family:monospace">${isin || ""}</div></td>
+              <td class="num" style="font-weight:600">${pct.toFixed(2)}%</td>
               <td style="text-align:left">${pills}</td>
+              <td class="num">${ytxt}</td>
+              <td style="text-align:left">${ttxt}</td>
             </tr>`;
         });
       });
-      if (tbody) tbody.innerHTML = html;
+      const cbody = document.getElementById("gy-combined-tbody");
+      if (cbody) cbody.innerHTML = combined;
 
       // ==== YIELD SUMMARY ====
-      let weightedYield = 0, pctWithYield = 0, manualCount = 0, noYieldCount = 0;
-      rows.forEach(r => {
-        const yd = CURRENT_YIELD[r.isin];
-        if (!yd) return;
-        if (yd.y && yd.y > 0) {
-          weightedYield += (r.pct * yd.y) / 100;
-          pctWithYield += r.pct;
-        } else if (yd.y === null || yd.y === 0) noYieldCount++;
-        if (yd.m) manualCount++;
-      });
       const bmkYield = 0.60 * 2.0 + 0.40 * 4.5;
+      const alpha = weightedYield - bmkYield;
       const summary = document.getElementById("gy-yield-summary");
       if (summary) summary.innerHTML = `
         <div class="kpi-card pos">
@@ -2037,42 +2074,12 @@
           <div class="value">${bmkYield.toFixed(2)}%</div>
           <div class="sub">60% ACWI (2.0%) + 40% AGG (4.5%)</div>
         </div>
-        <div class="kpi-card ${weightedYield - bmkYield >= 0 ? "pos" : "neg"}">
+        <div class="kpi-card ${alpha >= 0 ? "pos" : "neg"}">
           <div class="label">Yield Alpha</div>
-          <div class="value">${(weightedYield - bmkYield >= 0 ? "+" : "") + (weightedYield - bmkYield).toFixed(2)}%</div>
-          <div class="sub">vs 60/40 · ${manualCount} holdings manual</div>
+          <div class="value">${(alpha >= 0 ? "+" : "") + alpha.toFixed(2)}%</div>
+          <div class="sub">vs 60/40 · ${manualCount} manual</div>
         </div>
       `;
-
-      // ==== YIELD TBODY ====
-      let ytbody = "";
-      ["Equity", "Fixed Income", "Alternatives", "Cash"].forEach(sleeve => {
-        const hs = sleeves[sleeve] || [];
-        if (!hs.length) return;
-        ytbody += `<tr style="background:rgba(212,175,55,0.05)"><td colspan="5" style="text-align:left;font-weight:700;color:var(--gold);padding:6px 8px;font-size:12px">${sleeve}</td></tr>`;
-        hs.forEach(h => {
-          const isinFromDesc = ((h.description || "").match(/ISIN#?\s*([A-Z]{2}[A-Z0-9]{10})/i) || [])[1];
-          const isin = h.security_type === "Cash" ? "CASH-USD" : (h.isin || isinFromDesc);
-          const yd = CURRENT_YIELD[isin];
-          const pct = (h.market_value_usd / totalMv) * 100;
-          const name = h.security_type === "Cash" ? "Cash USD" : (h.description || "").trim();
-          const ytxt = yd
-            ? (yd.y === null || yd.y === 0 ? `<span style="color:var(--text-mute)">N/A</span>` : `<strong style="color:var(--gold)">${yd.y.toFixed(2)}%</strong>${yd.m ? ' <span style="color:#e6a532;font-size:9px">⚠</span>' : ""}`)
-            : `<span style="color:var(--text-mute);font-style:italic">no data</span>`;
-          const ttxt = yd ? yd.t : "";
-          const ntxt = yd ? yd.n : "";
-          ytbody += `
-            <tr>
-              <td style="text-align:left"><strong>${name.slice(0, 55)}</strong><div style="font-size:10px;color:var(--text-mute)">${isin || ""}</div></td>
-              <td class="num">${pct.toFixed(2)}%</td>
-              <td class="num">${ytxt}</td>
-              <td style="text-align:left;font-size:11px;color:var(--text-mute)">${ttxt}</td>
-              <td style="text-align:left;font-size:11px;color:var(--text-mute)">${ntxt}</td>
-            </tr>`;
-        });
-      });
-      const yt = document.getElementById("gy-yield-tbody");
-      if (yt) yt.innerHTML = ytbody;
 
       _geoyieldLoaded = true;
     }
