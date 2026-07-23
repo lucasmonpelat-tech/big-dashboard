@@ -1645,10 +1645,10 @@
       const fmtDate = d => d ? new Date(d).toLocaleDateString("es-AR", { day: "2-digit", month: "short", year: "2-digit" }) : "—";
 
       const dailyHTML = `
-        <div style="padding:12px 14px; background:#f8fafc; border-left:3px solid #16a34a; border-radius:4px; margin-bottom:12px">
+        <div style="padding:12px 14px; background:rgba(127,168,143,0.10); border-left:3px solid #7fa88f; border-radius:4px; margin-bottom:12px">
           <div style="display:flex;justify-content:space-between;margin-bottom:4px">
-            <strong style="color:#16a34a">🟢 Daily (líquido)</strong>
-            <strong>${(dailyMv / totalMv * 100).toFixed(1)}% · $${(dailyMv / 1e6).toFixed(2)}M</strong>
+            <strong style="color:#7fa88f">🟢 Daily (líquido)</strong>
+            <strong style="color:var(--text)">${(dailyMv / totalMv * 100).toFixed(1)}% · $${(dailyMv / 1e6).toFixed(2)}M</strong>
           </div>
           <div style="font-size:11px;color:var(--text-mute)">${dailyItems.map(h => h.ticker).join(", ") || "—"}</div>
         </div>`;
@@ -1677,10 +1677,10 @@
         </tr>`;
       }).join("");
       const lockHTML = `
-        <div style="padding:12px 14px; background:#f8fafc; border-left:3px solid #7c6f9c; border-radius:4px">
+        <div style="padding:12px 14px; background:rgba(166,143,191,0.10); border-left:3px solid #a68fbf; border-radius:4px">
           <div style="display:flex;justify-content:space-between;margin-bottom:8px">
-            <strong style="color:#7c6f9c">🔒 Lock-up</strong>
-            <strong>${(lockedMv / totalMv * 100).toFixed(1)}% · $${(lockedMv / 1e6).toFixed(2)}M</strong>
+            <strong style="color:#a68fbf">🔒 Lock-up</strong>
+            <strong style="color:var(--text)">${(lockedMv / totalMv * 100).toFixed(1)}% · $${(lockedMv / 1e6).toFixed(2)}M</strong>
           </div>
           <table style="width:100%; border-collapse:collapse; font-size:11px">
             <thead>
@@ -1696,7 +1696,7 @@
             <tbody>${lockRows}</tbody>
           </table>
           <div style="margin-top:10px; padding-top:8px; border-top:1px solid var(--border); font-size:11px; color:var(--text-mute)">
-            Bloqueado hasta unlock: <strong style="color:#f59e0b">$${(lockedMv / 1e6).toFixed(2)}M</strong>
+            Bloqueado hasta unlock: <strong style="color:#e6a532">$${(lockedMv / 1e6).toFixed(2)}M</strong>
             (no rescatable sin penalty hasta su fecha)
           </div>
         </div>`;
