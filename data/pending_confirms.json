@@ -1,0 +1,19 @@
+{
+  "_description": "Ajustes manuales para trades en 'PENDING CONFIRM' de Pershing — la plata ya salió del cash (journal transferido al manager) pero el trade aún no settle formalmente, entonces el MV del holding no refleja el buy nuevo. Se suma al holding correspondiente para que el AUM total del dashboard coincida con el NAV oficial (Lynk).",
+  "_workflow": "Cuando el trade settle en Pershing, remover el item del array. El widget de Holdings va a mostrar el MV total sin necesidad de ajuste.",
+  "_maintained_manually": true,
+  "_lastReviewed": "2026-07-23",
+  "pending": [
+    {
+      "ticker": "FLEX",
+      "isin": "LU2966298809",
+      "cusip": "L4R58Q111",
+      "sleeve": "Alternatives",
+      "amount_usd": 130000.0,
+      "buy_date": "2026-07-06",
+      "eta_settle": "2026-08-01",
+      "source_txn_reference": "MFDJXD1013AJQZF1",
+      "note": "Journal debit 2026-07-06 (-$130k) + BUY pending confirm 2026-07-23 (qty 4160 @ $31.25). Cash ya descontado; MV del holding aún no incluye el nuevo taxlot."
+    }
+  ]
+}

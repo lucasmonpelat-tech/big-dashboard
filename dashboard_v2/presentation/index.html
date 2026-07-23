@@ -1861,6 +1861,24 @@
           }
         }
 
+        // pending_confirms.json — ajustes por trades pending confirm de Pershing
+        // (la plata ya salió del cash pero el MV del holding aún no la refleja).
+        // Se suma amount_usd al holding correspondiente por ISIN/CUSIP.
+        try { window.__pending = await loadLegacyJson("pending_confirms"); } catch (e) { window.__pending = null; }
+        if (window.__pending?.pending) {
+          for (const p of window.__pending.pending) {
+            const holding = positions.holdings.find(h =>
+              (p.isin && h.isin === p.isin) ||
+              (p.cusip && h.cusip === p.cusip)
+            );
+            if (holding) {
+              holding.market_value_usd = (holding.market_value_usd || 0) + p.amount_usd;
+              holding._pending_adjustment = (holding._pending_adjustment || 0) + p.amount_usd;
+              holding._pending_note = p.note;
+            }
+          }
+        }
+
         // holdings_returns.json — canonical v2, MV correcto de Pershing UGL + bench DW
         let hRetsV2 = null;
         try {
