@@ -609,8 +609,6 @@
               <th style="text-align:right">Maturity</th>
               <th style="text-align:left">Rating</th>
               <th style="text-align:right">Spread vs UST</th>
-              <th style="text-align:right">Contrib SI</th>
-              <th style="text-align:right">Contrib YTD</th>
             </tr></thead>
             <tbody id="fi-metrics-tbody"></tbody>
           </table>
@@ -1822,10 +1820,6 @@
           .filter(h => h.weight_pct > 0)
           .sort((a, b) => b.weight_pct - a.weight_pct)
           .map(h => {
-            const contribSI = h.contribution_pct != null ? `${h.contribution_pct >= 0 ? "+" : ""}${h.contribution_pct.toFixed(2)}%` : "—";
-            const contribYTD = h.ytd_contribution_pct != null ? `${h.ytd_contribution_pct >= 0 ? "+" : ""}${h.ytd_contribution_pct.toFixed(2)}%` : "—";
-            const cSICol = h.contribution_pct >= 0 ? "var(--green)" : "var(--red)";
-            const cYTDCol = h.ytd_contribution_pct >= 0 ? "var(--green)" : "var(--red)";
             return `<tr>
               <td style="text-align:left"><strong>${h.ticker}</strong><div style="font-size:10px;color:${MUTE}">${(h.name || "").slice(0, 40)}</div></td>
               <td class="num" style="font-weight:600">${h.weight_pct.toFixed(2)}%</td>
@@ -1834,8 +1828,6 @@
               <td class="num">${(h.maturity ?? 0).toFixed(2)}y</td>
               <td style="text-align:left"><span style="background:${BLUE};color:#0c1b2e;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700">${h.rating || "—"}</span></td>
               <td class="num">${(h.spread_vs_ust ?? 0).toFixed(2)}%</td>
-              <td class="num" style="color:${cSICol};font-weight:600">${contribSI}</td>
-              <td class="num" style="color:${cYTDCol};font-weight:600">${contribYTD}</td>
             </tr>`;
           }).join("");
         const tbody = document.getElementById("fi-metrics-tbody");
