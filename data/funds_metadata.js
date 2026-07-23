@@ -164,6 +164,8 @@ const CURRENT_YIELD = {
     "XS2324777171": { y: 8.00, t: "Current Yield",        n: "Tenac/Nico Dujovne (verify)",   m: true  },
     "IE00B29K0P99": { y: 6.21, t: "Current Yield",        n: "PIMCO website 31-Mar",          m: false },
     "LU2049315265": { y: 7.80, t: "Current Yield",        n: "Schroder factsheet (verify)",   m: false },
+    "US53656G4982": { y: 0.4,  t: "Dividend Yield",       n: "Roundhill MAGS — Mag7 weighted div yield (AAPL/MSFT pay small; NVDA/META/TSLA/AMZN/GOOGL ~0)", m: true  },
+    "US46434V8862": { y: 2.0,  t: "Distribution Yield",   n: "HEWJ = EWJ hedged; MSCI Japan div yield ~2%",  m: false },
     "CASH-USD":     { y: 4.3,  t: "Money Market",         n: "Fed Funds estimate",            m: false }
 };
 
@@ -298,6 +300,8 @@ const COUNTRY_EXPOSURE = {
     "XS2324777171": [{c:"US",p:40},{c:"UK",p:15},{c:"LatAm",p:15},{c:"EU",p:20},{c:"OTHER",p:10}],
     "IE00B29K0P99": [{c:"BR",p:16},{c:"MX",p:14},{c:"ID",p:9},{c:"IN",p:9},{c:"ZA",p:8},{c:"CL",p:7},{c:"PL",p:6},{c:"OTHER",p:31}],
     "LU2049315265": [{c:"US",p:80},{c:"JP",p:5},{c:"EU",p:10},{c:"OTHER",p:5}],
+    "US53656G4982": [{c:"US",p:100}],
+    "US46434V8862": [{c:"JP",p:100}],
     "CASH-USD":     [{c:"US",p:100}]
 };
 
