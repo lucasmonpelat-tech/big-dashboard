@@ -804,7 +804,7 @@
     const glClass = (v) => v > 0 ? "pos-val" : v < 0 ? "neg-val" : "";
 
     async function loadJson(name) {
-      const resp = await fetch(`${CANONICAL_BASE}/${name}.json`);
+      const resp = await fetch(`${CANONICAL_BASE}/${name}.json?_=${Date.now()}`);
       if (!resp.ok) throw new Error(`No pude cargar ${name}.json (${resp.status})`);
       return resp.json();
     }

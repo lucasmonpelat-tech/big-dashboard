@@ -137,8 +137,18 @@ def run(target_date: str) -> dict:
     results["costs"] = costs["totals"]
 
     # 5. Benchmark comparison (Total vs 60/40, Equity vs ACWI, FI vs AGG)
+    # PREVIO: interpolar sleeve TWR series para tener granularidad diaria.
+    # Sin esto, el pipeline viejo genera solo 1 punto por mes (o por evento)
+    # y los cálculos multi-period (1M/3M/6M) agarran fechas incorrectas
+    # cuando el pivot cae en un día sin data.
     print(f"\n  [5/6] Benchmark comparison...")
     try:
+        import subprocess
+        import sys as _sys
+        interp_script = ROOT / "scripts" / "interpolate_equity_series.py"
+        if interp_script.exists():
+            print(f"    Pre-step: interpolate sleeve TWR series (fill gaps daily)")
+            subprocess.run([_sys.executable, str(interp_script)], check=False, capture_output=True)
         bc = build_benchmark_comparison.build(as_of=target_date)
         write_json(bc, out_dir / "benchmark_comparison.json")
         print(f"    OK: 3 comparisons alineadas + rebased a 100")
