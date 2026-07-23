@@ -487,8 +487,32 @@
         </div>
       </div>
 
-      <!-- EQUITY-ONLY: composición del sleeve (top 10 por fondo, top 15 consolidado, breakdown) -->
+      <!-- EQUITY-ONLY: lookthrough al ACWI + composición del sleeve -->
       <div id="equity-lookthrough-block" style="display:none">
+        <div class="section">
+          <h2>🎯 BIG vs ACWI — Top 10 Lookthrough</h2>
+          <div style="font-size:13px;color:var(--text-mute);margin-bottom:12px;line-height:1.5">
+            ¿Cuánto de cada top 10 ACWI tenemos en BIG via los fondos equity que invertimos?
+            Si nuestro % es mucho menor → estamos <strong>UNDERWEIGHT mega-caps</strong> (lo que mueve ACWI).
+            <span style="color:#e6a532">⚠ CSPX exact (S&amp;P 500), UCITS ESTIMATED (verificar con factsheets).</span>
+          </div>
+          <div id="er-overlap-summary" style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap"></div>
+          <table>
+            <thead>
+              <tr>
+                <th style="text-align:left">#</th>
+                <th style="text-align:left">Ticker</th>
+                <th style="text-align:left">Name</th>
+                <th style="text-align:left">Sector</th>
+                <th style="text-align:right">ACWI %</th>
+                <th style="text-align:right">BIG %</th>
+                <th style="text-align:right">Diff (pp)</th>
+              </tr>
+            </thead>
+            <tbody id="er-overlap-body"></tbody>
+          </table>
+        </div>
+
         <div class="section">
           <h2>📦 Top 10 por Fondo — Lookthrough detallado</h2>
           <div style="font-size:13px;color:var(--text-mute);margin-bottom:12px;line-height:1.5">
@@ -1640,6 +1664,50 @@
 
       const NAVY = "var(--navy)", GOLD = "var(--gold)", MUTE = "var(--text-mute)";
       const POS = "#7fa88f", NEG = "#c96060", WARN = "#e6a532";
+
+      // === Widget: ACWI Top 10 Lookthrough Overlap ===
+      try {
+        const ov = await loadLegacyJson("acwi_overlap");
+        const summary = ov.summary;
+        const card = (label, val, color, sub) => `
+          <div style="flex:1;min-width:220px;background:#12243a;padding:14px;border-radius:6px;border-left:3px solid ${color}">
+            <div style="font-size:11px;color:${MUTE};margin-bottom:4px">${label}</div>
+            <div style="font-size:22px;font-weight:700;color:${color}">${val}</div>
+            ${sub ? `<div style="font-size:10px;color:${MUTE};margin-top:4px">${sub}</div>` : ""}
+          </div>`;
+        const diffColor = summary.diff_pp >= 0 ? POS : NEG;
+        document.getElementById("er-overlap-summary").innerHTML =
+          card("🌐 ACWI Top 10 weight", summary.total_acwi_top10.toFixed(1) + "%", "#7a9ec9", "% del ACWI (100% equity)") +
+          card("🎯 BIG Equity lookthrough", summary.total_big_top10_exposure.toFixed(1) + "%", "var(--gold)", "% del Equity Sleeve (100%, apples-to-apples)") +
+          card("⚠ Diff (BIG − ACWI)", (summary.diff_pp >= 0 ? "+" : "") + summary.diff_pp.toFixed(1) + "pp", diffColor,
+               summary.diff_pp < 0 ? "BIG UNDERWEIGHT en megacaps — explica parte del alpha vs ACWI" : "BIG OVERWEIGHT");
+
+        const rows = ov.overlap.map((h, i) => {
+          const dc = h.diff_pp >= 0 ? POS : NEG;
+          const ds = h.diff_pp >= 0 ? "+" : "";
+          return `<tr>
+            <td>${i + 1}</td>
+            <td style="text-align:left"><strong>${h.ticker}</strong></td>
+            <td style="text-align:left;font-size:11px">${h.name}</td>
+            <td style="text-align:left;font-size:10px;color:${MUTE}">${h.sector}</td>
+            <td class="num"><strong style="color:#7a9ec9">${h.weight_acwi.toFixed(2)}%</strong></td>
+            <td class="num"><strong style="color:var(--gold)">${h.weight_big.toFixed(2)}%</strong></td>
+            <td class="num"><strong style="color:${dc}">${ds}${h.diff_pp.toFixed(2)}pp</strong></td>
+          </tr>`;
+        }).join("");
+        const totalRow = `<tr style="border-top:2px solid var(--gold);background:rgba(212,175,55,0.08)">
+          <td colspan="4" style="text-align:left"><strong>TOTAL TOP 10</strong></td>
+          <td class="num"><strong style="color:#7a9ec9">${summary.total_acwi_top10.toFixed(2)}%</strong></td>
+          <td class="num"><strong style="color:var(--gold)">${summary.total_big_top10_exposure.toFixed(2)}%</strong></td>
+          <td class="num"><strong style="color:${diffColor}">${summary.diff_pp >= 0 ? "+" : ""}${summary.diff_pp.toFixed(2)}pp</strong></td>
+        </tr>`;
+        document.getElementById("er-overlap-body").innerHTML = rows + totalRow;
+      } catch (e) {
+        console.warn("acwi_overlap.json unavailable", e);
+        const body = document.getElementById("er-overlap-body");
+        if (body) body.innerHTML =
+          `<tr><td colspan="7" style="padding:20px;text-align:center;color:${WARN}">Data no disponible</td></tr>`;
+      }
 
       // === Widget: Top 10 por Fondo cards ===
       try {
