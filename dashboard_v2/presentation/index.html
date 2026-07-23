@@ -576,6 +576,85 @@
           </div>
         </div>
       </div>
+
+      <!-- FI-ONLY: métricas FI-específicas (YTW, Duration, Credit Quality, etc) -->
+      <div id="fi-metrics-block" style="display:none">
+        <div class="section">
+          <h2>📈 Métricas FI-específicas</h2>
+          <div style="font-size:12px;color:var(--text-mute);margin-bottom:12px">
+            YTW = yield to worst · Duration = sensibilidad a tasas · Spread vs UST 10Y = carry sobre Treasury.
+          </div>
+          <div class="kpi-grid" id="fi-metrics-kpis" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))"></div>
+        </div>
+
+        <div class="section">
+          <h2>🥧 Composición del FI Sleeve</h2>
+          <div style="font-size:12px;color:var(--text-mute);margin-bottom:12px">
+            Peso de cada fondo dentro del sleeve FI (total = 100%).
+          </div>
+          <div id="fi-pie-chart" style="min-height:380px"></div>
+        </div>
+
+        <div class="section">
+          <h2>💼 Holding Contributions — Métricas FI</h2>
+          <div style="font-size:12px;color:var(--text-mute);margin-bottom:12px">
+            Cada fondo con sus métricas subyacentes + contribución al retorno SI/YTD.
+          </div>
+          <table>
+            <thead><tr>
+              <th style="text-align:left">Ticker</th>
+              <th style="text-align:right">Weight</th>
+              <th style="text-align:right">YTW</th>
+              <th style="text-align:right">Duration</th>
+              <th style="text-align:right">Maturity</th>
+              <th style="text-align:left">Rating</th>
+              <th style="text-align:right">Spread vs UST</th>
+              <th style="text-align:right">Contrib SI</th>
+              <th style="text-align:right">Contrib YTD</th>
+            </tr></thead>
+            <tbody id="fi-metrics-tbody"></tbody>
+          </table>
+        </div>
+
+        <div class="section">
+          <h2>📊 Sub-Asset Class & Calidad Crediticia</h2>
+          <div style="font-size:12px;color:var(--text-mute);margin-bottom:12px">
+            Composición por sub-asset class y por rating vs AGG. <span style="color:var(--text-mute)">(Foto <span id="fi-breakdown-asof">—</span>)</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+            <div>
+              <h3 style="font-size:14px;color:var(--gold);margin-bottom:10px">Sub-Asset Class (%)</h3>
+              <div id="fi-subasset-bars"></div>
+            </div>
+            <div>
+              <h3 style="font-size:14px;color:var(--gold);margin-bottom:10px">Credit Quality (%)</h3>
+              <div id="fi-credit-bars"></div>
+            </div>
+          </div>
+          <div class="kpi-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));margin-top:16px">
+            <div class="kpi-card">
+              <div class="kpi-label">BIG Investment Grade</div>
+              <div class="kpi-value" id="fi-kpi-ig">—</div>
+              <div class="kpi-sub">AAA + AA + A + BBB</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">BIG High Yield / NR</div>
+              <div class="kpi-value" id="fi-kpi-hy">—</div>
+              <div class="kpi-sub">BB + B + CCC + NR</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Bmk (AGG) IG</div>
+              <div class="kpi-value" id="fi-kpi-bmk-ig">—</div>
+              <div class="kpi-sub">AAA + AA + A + BBB</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Bmk (AGG) HY / NR</div>
+              <div class="kpi-value" id="fi-kpi-bmk-hy">—</div>
+              <div class="kpi-sub">BB + B + CCC + NR</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- COSTOS TOTALES -->
@@ -1461,6 +1540,8 @@
       document.getElementById("alts-pie-block").style.display = isAlts ? "" : "none";
       document.getElementById("alts-conc-liq-block").style.display = isAlts ? "" : "none";
       document.getElementById("equity-lookthrough-block").style.display = isEquity ? "" : "none";
+      const fiBlock = document.getElementById("fi-metrics-block");
+      if (fiBlock) fiBlock.style.display = sleeveKey === "fi" ? "" : "none";
     }
 
     // KPIs simples para Alts (sin bench comparison — es un sleeve sin bench claro)
@@ -1652,6 +1733,168 @@
       if (sleeveKey === "equity") {
         renderEquityLookthrough();
       }
+
+      // FI-only: métricas FI-específicas + composición + credit quality
+      if (sleeveKey === "fi") {
+        renderFIMetrics();
+      }
+    }
+
+    // ============================================================
+    // FI METRICS — Widgets FI-específicos: KPIs, Pie, Métricas holdings, Sub-asset/Credit
+    // ============================================================
+    let _fiMetricsLoaded = false;
+    async function renderFIMetrics() {
+      if (_fiMetricsLoaded) return;
+
+      // Data sources
+      let race, breakdown;
+      try { race = await loadLegacyJson("fi_race"); } catch (e) { console.warn("fi_race.json no disp", e); }
+      try { breakdown = await loadLegacyJson("fi_breakdown_latest"); } catch (e) { console.warn("fi_breakdown_latest.json no disp", e); }
+
+      const GOLD = "#d4af37", BLUE = "#7a9ec9", MUTE = "var(--text-mute)";
+
+      // ==== KPIs FI (weighted por peso del holding) ====
+      if (race?.holdings) {
+        const holdings = race.holdings.filter(h => h.weight_pct > 0);
+        const wsum = holdings.reduce((s, h) => s + h.weight_pct, 0) || 1;
+        const w = (key) => holdings.reduce((s, h) => s + h.weight_pct * (h[key] || 0), 0) / wsum;
+        const ytw = w("ytw"), dur = w("duration"), mat = w("maturity"), spr = w("spread_vs_ust");
+        const aum = holdings.reduce((s, h) => s + (h.value_usd || 0), 0);
+        const ust10 = race.ust_reference?.value ?? null;
+
+        const kpis = document.getElementById("fi-metrics-kpis");
+        if (kpis) kpis.innerHTML = `
+          <div class="kpi-card pos">
+            <div class="label">Weighted YTW</div>
+            <div class="value">${ytw.toFixed(2)}%</div>
+            <div class="sub">${ust10 != null ? `UST 10Y ref: ${ust10.toFixed(2)}%` : "yield ponderado"}</div>
+          </div>
+          <div class="kpi-card">
+            <div class="label">Duration</div>
+            <div class="value">${dur.toFixed(2)}y</div>
+            <div class="sub">sensibilidad a tasas</div>
+          </div>
+          <div class="kpi-card">
+            <div class="label">Maturity</div>
+            <div class="value">${mat.toFixed(2)}y</div>
+            <div class="sub">vencimiento promedio</div>
+          </div>
+          <div class="kpi-card">
+            <div class="label">Spread vs UST</div>
+            <div class="value">${spr.toFixed(2)}%</div>
+            <div class="sub">carry sobre Treasury</div>
+          </div>
+          <div class="kpi-card info">
+            <div class="label">FI Sleeve AUM</div>
+            <div class="value">$${(aum / 1e6).toFixed(2)}M</div>
+            <div class="sub">${holdings.length} holdings</div>
+          </div>
+        `;
+      }
+
+      // ==== Pie composición ====
+      if (race?.holdings && typeof Plotly !== "undefined") {
+        const hs = race.holdings.filter(h => h.weight_pct > 0).sort((a, b) => b.weight_pct - a.weight_pct);
+        const palette = [GOLD, BLUE, "#7fa88f", "#c96060", "#a68fbf", "#e6a532", "#5abfbf", "#c95a91", "#8fa87f"];
+        Plotly.newPlot("fi-pie-chart", [{
+          type: "pie",
+          labels: hs.map(h => h.ticker),
+          values: hs.map(h => h.weight_pct),
+          text: hs.map(h => `${h.name}<br>$${(h.value_usd/1e6).toFixed(2)}M`),
+          hoverinfo: "label+percent+text",
+          textinfo: "label+percent",
+          textposition: "outside",
+          marker: { colors: palette, line: { color: "#0c1b2e", width: 2 } },
+          hole: 0.35,
+        }], {
+          margin: { t: 20, r: 20, b: 20, l: 20 },
+          paper_bgcolor: "rgba(0,0,0,0)",
+          plot_bgcolor: "rgba(0,0,0,0)",
+          font: { color: "#e0e8f0" },
+          showlegend: false,
+        }, { responsive: true, displaylogo: false });
+      }
+
+      // ==== Métricas por holding ====
+      if (race?.holdings) {
+        const rows = race.holdings
+          .filter(h => h.weight_pct > 0)
+          .sort((a, b) => b.weight_pct - a.weight_pct)
+          .map(h => {
+            const contribSI = h.contribution_pct != null ? `${h.contribution_pct >= 0 ? "+" : ""}${h.contribution_pct.toFixed(2)}%` : "—";
+            const contribYTD = h.ytd_contribution_pct != null ? `${h.ytd_contribution_pct >= 0 ? "+" : ""}${h.ytd_contribution_pct.toFixed(2)}%` : "—";
+            const cSICol = h.contribution_pct >= 0 ? "var(--green)" : "var(--red)";
+            const cYTDCol = h.ytd_contribution_pct >= 0 ? "var(--green)" : "var(--red)";
+            return `<tr>
+              <td style="text-align:left"><strong>${h.ticker}</strong><div style="font-size:10px;color:${MUTE}">${(h.name || "").slice(0, 40)}</div></td>
+              <td class="num" style="font-weight:600">${h.weight_pct.toFixed(2)}%</td>
+              <td class="num"><strong style="color:${GOLD}">${(h.ytw ?? 0).toFixed(2)}%</strong></td>
+              <td class="num">${(h.duration ?? 0).toFixed(2)}y</td>
+              <td class="num">${(h.maturity ?? 0).toFixed(2)}y</td>
+              <td style="text-align:left"><span style="background:${BLUE};color:#0c1b2e;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700">${h.rating || "—"}</span></td>
+              <td class="num">${(h.spread_vs_ust ?? 0).toFixed(2)}%</td>
+              <td class="num" style="color:${cSICol};font-weight:600">${contribSI}</td>
+              <td class="num" style="color:${cYTDCol};font-weight:600">${contribYTD}</td>
+            </tr>`;
+          }).join("");
+        const tbody = document.getElementById("fi-metrics-tbody");
+        if (tbody) tbody.innerHTML = rows;
+      }
+
+      // ==== Sub-asset & Credit Quality bars ====
+      if (breakdown) {
+        const asof = document.getElementById("fi-breakdown-asof");
+        if (asof) asof.textContent = breakdown.asOf || "—";
+
+        const renderBar = (label, bigVal, bmkVal, bigLabel = "BIG", bmkLabel = "Bmk") => {
+          const max = Math.max(Math.abs(bigVal), Math.abs(bmkVal), 1);
+          const bigW = Math.abs(bigVal) / max * 100;
+          const bmkW = Math.abs(bmkVal) / max * 100;
+          return `
+            <div style="margin-bottom:14px">
+              <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+                <span style="font-size:11px;font-weight:700">${label}</span>
+                <span style="font-size:10px;color:${MUTE}">
+                  <span style="color:${GOLD};font-weight:700">${bigLabel} ${bigVal}%</span>
+                  &nbsp;·&nbsp;
+                  <span style="color:${BLUE}">${bmkLabel} ${bmkVal}%</span>
+                </span>
+              </div>
+              <div style="position:relative;height:18px;background:#0c1b2e;border-radius:3px;overflow:hidden">
+                <div style="position:absolute;height:50%;top:0;left:0;width:${bigW}%;background:linear-gradient(90deg,${GOLD} 0%,${GOLD}dd 100%);border-radius:3px 0 0 0"></div>
+                <div style="position:absolute;height:50%;bottom:0;left:0;width:${bmkW}%;background:linear-gradient(90deg,${BLUE} 0%,${BLUE}dd 100%);border-radius:0 0 0 3px"></div>
+              </div>
+            </div>`;
+        };
+
+        const subasset = breakdown.sub_asset_class;
+        if (subasset?.rows) {
+          const html = subasset.rows.map(r => renderBar(r.category, r.big, r.agg, "BIG", "AGG")).join("");
+          const el = document.getElementById("fi-subasset-bars");
+          if (el) el.innerHTML = html;
+        }
+
+        const credit = breakdown.credit_quality;
+        if (credit?.rows) {
+          const html = credit.rows.map(r => renderBar(r.rating, r.big, r.bmk, "BIG", "Bmk")).join("");
+          const el = document.getElementById("fi-credit-bars");
+          if (el) el.innerHTML = html;
+
+          const IG = ["AAA", "AA", "A", "BBB"];
+          const bigIG = credit.rows.filter(r => IG.includes(r.rating)).reduce((s, r) => s + r.big, 0);
+          const bigHY = credit.rows.filter(r => !IG.includes(r.rating)).reduce((s, r) => s + r.big, 0);
+          const bmkIG = credit.rows.filter(r => IG.includes(r.rating)).reduce((s, r) => s + r.bmk, 0);
+          const bmkHY = credit.rows.filter(r => !IG.includes(r.rating)).reduce((s, r) => s + r.bmk, 0);
+          const setV = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v.toFixed(1) + "%"; };
+          setV("fi-kpi-ig", bigIG);
+          setV("fi-kpi-hy", bigHY);
+          setV("fi-kpi-bmk-ig", bmkIG);
+          setV("fi-kpi-bmk-hy", bmkHY);
+        }
+      }
+
+      _fiMetricsLoaded = true;
     }
 
     // ============================================================
