@@ -614,9 +614,22 @@
     // ============================================================
     // CONFIG
     // ============================================================
-    // Fecha del snapshot a mostrar (hardcoded por ahora; luego picker)
-    const SNAPSHOT_DATE = "2026-07-22";
-    const CANONICAL_BASE = `../../data/canonical/${SNAPSHOT_DATE}`;
+    // Fecha del snapshot: se resuelve dinámicamente desde data/_alerts/last_run.json
+    // (que el cron actualiza cada día). Fallback a la fecha hardcoded si falla el fetch.
+    let SNAPSHOT_DATE = "2026-07-23";
+    let CANONICAL_BASE = `../../data/canonical/${SNAPSHOT_DATE}`;
+    async function resolveSnapshotDate() {
+      try {
+        const r = await fetch(`../../data/_alerts/last_run.json?_=${Date.now()}`);
+        if (r.ok) {
+          const d = await r.json();
+          if (d.date && d.jobStatus === "success") {
+            SNAPSHOT_DATE = d.date;
+            CANONICAL_BASE = `../../data/canonical/${SNAPSHOT_DATE}`;
+          }
+        }
+      } catch (e) { console.warn("last_run.json no disponible, uso hardcoded", e); }
+    }
 
     // ============================================================
     // UTILS
@@ -1852,7 +1865,7 @@
         console.error(e);
       }
     }
-    main();
+    resolveSnapshotDate().then(main);
   </script>
 </body>
 </html>
