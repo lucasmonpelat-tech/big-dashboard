@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-07-23T12:30:34.702076",
+  "refreshedAt": "2026-07-24T12:27:11.298645",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -579,7 +579,7 @@
       ]
     },
     {
-      "date": "2026-07-23",
+      "date": "2026-07-24",
       "mv_usd": 10325849.75,
       "holdings": [
         {
@@ -3473,6 +3473,14 @@
     },
     {
       "date": "2026-07-23",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -148.1274,
+      "twr": 0.0
+    },
+    {
+      "date": "2026-07-24",
       "mv_usd": 10325849.75,
       "flow_in": 0.0,
       "twr": 0.0,
@@ -5309,8 +5317,14 @@
     },
     {
       "date": "2026-07-23",
-      "price": 92.29,
-      "index": 102.4471
+      "index": 102.4302,
+      "interpolated": true,
+      "price": 92.2748
+    },
+    {
+      "date": "2026-07-24",
+      "price": 92.2,
+      "index": 102.3472
     }
   ],
   "fi_flows_by_month": {
@@ -5500,7 +5514,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-07-23 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing Jun 24, 2026.",
+  "_daily_refresh_note": "Punto 2026-07-24 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing Jun 24, 2026.",
   "twr_series_original": [
     {
       "date": "2025-07-31",
@@ -7908,6 +7922,22 @@
       "index": 104.6042
     },
     {
+      "date": "2026-05-29",
+      "index": 104.6042,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": 0.0,
+      "twr": -0.0025
+    },
+    {
+      "date": "2026-05-30",
+      "index": 104.6042,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": 0.0,
+      "twr": -0.0013
+    },
+    {
       "date": "2026-05-31",
       "mv_usd": 10325849.75,
       "flow_in": 0.0,
@@ -7987,6 +8017,166 @@
       "twr": 0.0
     },
     {
+      "date": "2026-06-10",
+      "index": 104.6075,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -324.4695,
+      "twr": 0.0
+    },
+    {
+      "date": "2026-06-11",
+      "index": 104.6108,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -648.939,
+      "twr": 0.0001
+    },
+    {
+      "date": "2026-06-12",
+      "index": 104.6141,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -973.4086,
+      "twr": 0.0001
+    },
+    {
+      "date": "2026-06-13",
+      "index": 104.6173,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -1297.8781,
+      "twr": 0.0001
+    },
+    {
+      "date": "2026-06-14",
+      "index": 104.6206,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -1622.3476,
+      "twr": 0.0002
+    },
+    {
+      "date": "2026-06-15",
+      "index": 104.6239,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -1946.8171,
+      "twr": 0.0002
+    },
+    {
+      "date": "2026-06-16",
+      "index": 104.6272,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -2271.2867,
+      "twr": 0.0002
+    },
+    {
+      "date": "2026-06-17",
+      "index": 104.6305,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -2595.7562,
+      "twr": 0.0003
+    },
+    {
+      "date": "2026-06-18",
+      "index": 104.6338,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -2920.2257,
+      "twr": 0.0003
+    },
+    {
+      "date": "2026-06-19",
+      "index": 104.6371,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -3244.6952,
+      "twr": 0.0003
+    },
+    {
+      "date": "2026-06-20",
+      "index": 104.6403,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -3569.1648,
+      "twr": 0.0003
+    },
+    {
+      "date": "2026-06-21",
+      "index": 104.6436,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -3893.6343,
+      "twr": 0.0004
+    },
+    {
+      "date": "2026-06-22",
+      "index": 104.6469,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -4218.1038,
+      "twr": 0.0004
+    },
+    {
+      "date": "2026-06-23",
+      "index": 104.6502,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -4542.5733,
+      "twr": 0.0004
+    },
+    {
+      "date": "2026-06-24",
+      "index": 104.6535,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -4867.0429,
+      "twr": 0.0005
+    },
+    {
+      "date": "2026-06-25",
+      "index": 104.6568,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -5191.5124,
+      "twr": 0.0005
+    },
+    {
+      "date": "2026-06-26",
+      "index": 104.6601,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -5515.9819,
+      "twr": 0.0005
+    },
+    {
+      "date": "2026-06-27",
+      "index": 104.6633,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -5840.4514,
+      "twr": 0.0006
+    },
+    {
+      "date": "2026-06-28",
+      "index": 104.6666,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -6164.921,
+      "twr": 0.0006
+    },
+    {
+      "date": "2026-06-29",
+      "index": 104.6699,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -6489.3905,
+      "twr": 0.0006
+    },
+    {
       "date": "2026-06-30",
       "mv_usd": 10325849.75,
       "flow_in": -6813.86,
@@ -7994,7 +8184,183 @@
       "index": 104.6732
     },
     {
-      "date": "2026-07-23",
+      "date": "2026-07-01",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -6517.6052,
+      "twr": 0.0006
+    },
+    {
+      "date": "2026-07-02",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -6221.3504,
+      "twr": 0.0006
+    },
+    {
+      "date": "2026-07-03",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -5925.0957,
+      "twr": 0.0006
+    },
+    {
+      "date": "2026-07-04",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -5628.8409,
+      "twr": 0.0005
+    },
+    {
+      "date": "2026-07-05",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -5332.5861,
+      "twr": 0.0005
+    },
+    {
+      "date": "2026-07-06",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -5036.3313,
+      "twr": 0.0005
+    },
+    {
+      "date": "2026-07-07",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -4740.0765,
+      "twr": 0.0005
+    },
+    {
+      "date": "2026-07-08",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -4443.8217,
+      "twr": 0.0004
+    },
+    {
+      "date": "2026-07-09",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -4147.567,
+      "twr": 0.0004
+    },
+    {
+      "date": "2026-07-10",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -3851.3122,
+      "twr": 0.0004
+    },
+    {
+      "date": "2026-07-11",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -3555.0574,
+      "twr": 0.0003
+    },
+    {
+      "date": "2026-07-12",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -3258.8026,
+      "twr": 0.0003
+    },
+    {
+      "date": "2026-07-13",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -2962.5478,
+      "twr": 0.0003
+    },
+    {
+      "date": "2026-07-14",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -2666.293,
+      "twr": 0.0003
+    },
+    {
+      "date": "2026-07-15",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -2370.0383,
+      "twr": 0.0002
+    },
+    {
+      "date": "2026-07-16",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -2073.7835,
+      "twr": 0.0002
+    },
+    {
+      "date": "2026-07-17",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -1777.5287,
+      "twr": 0.0002
+    },
+    {
+      "date": "2026-07-18",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -1481.2739,
+      "twr": 0.0001
+    },
+    {
+      "date": "2026-07-19",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -1185.0191,
+      "twr": 0.0001
+    },
+    {
+      "date": "2026-07-20",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -888.7643,
+      "twr": 0.0001
+    },
+    {
+      "date": "2026-07-21",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -592.5096,
+      "twr": 0.0001
+    },
+    {
+      "date": "2026-07-22",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -296.2548,
+      "twr": 0.0
+    },
+    {
+      "date": "2026-07-24",
       "mv_usd": 10325849.75,
       "flow_in": 0.0,
       "twr": 0.0,
@@ -9573,14 +9939,266 @@
       "index": 102.8412
     },
     {
+      "date": "2026-06-10",
+      "index": 102.8949,
+      "interpolated": true,
+      "price": 92.6933
+    },
+    {
+      "date": "2026-06-11",
+      "index": 102.9485,
+      "interpolated": true,
+      "price": 92.7417
+    },
+    {
+      "date": "2026-06-12",
+      "index": 103.0022,
+      "interpolated": true,
+      "price": 92.79
+    },
+    {
+      "date": "2026-06-13",
+      "index": 103.0558,
+      "interpolated": true,
+      "price": 92.8383
+    },
+    {
+      "date": "2026-06-14",
+      "index": 103.1095,
+      "interpolated": true,
+      "price": 92.8867
+    },
+    {
+      "date": "2026-06-15",
+      "index": 103.1631,
+      "interpolated": true,
+      "price": 92.935
+    },
+    {
+      "date": "2026-06-16",
+      "index": 103.2168,
+      "interpolated": true,
+      "price": 92.9833
+    },
+    {
+      "date": "2026-06-17",
+      "index": 103.2704,
+      "interpolated": true,
+      "price": 93.0317
+    },
+    {
+      "date": "2026-06-18",
+      "index": 103.3241,
+      "interpolated": true,
+      "price": 93.08
+    },
+    {
+      "date": "2026-06-19",
+      "index": 103.3777,
+      "interpolated": true,
+      "price": 93.1283
+    },
+    {
+      "date": "2026-06-20",
+      "index": 103.4314,
+      "interpolated": true,
+      "price": 93.1767
+    },
+    {
+      "date": "2026-06-21",
+      "index": 103.485,
+      "interpolated": true,
+      "price": 93.225
+    },
+    {
+      "date": "2026-06-22",
+      "index": 103.5387,
+      "interpolated": true,
+      "price": 93.2733
+    },
+    {
+      "date": "2026-06-23",
+      "index": 103.5923,
+      "interpolated": true,
+      "price": 93.3217
+    },
+    {
+      "date": "2026-06-24",
+      "index": 103.646,
+      "interpolated": true,
+      "price": 93.37
+    },
+    {
+      "date": "2026-06-25",
+      "index": 103.6996,
+      "interpolated": true,
+      "price": 93.4183
+    },
+    {
+      "date": "2026-06-26",
+      "index": 103.7533,
+      "interpolated": true,
+      "price": 93.4667
+    },
+    {
+      "date": "2026-06-27",
+      "index": 103.8069,
+      "interpolated": true,
+      "price": 93.515
+    },
+    {
+      "date": "2026-06-28",
+      "index": 103.8606,
+      "interpolated": true,
+      "price": 93.5633
+    },
+    {
+      "date": "2026-06-29",
+      "index": 103.9142,
+      "interpolated": true,
+      "price": 93.6117
+    },
+    {
       "date": "2026-06-30",
       "price": 93.66,
       "index": 103.9679
     },
     {
-      "date": "2026-07-23",
-      "price": 92.29,
-      "index": 102.4471
+      "date": "2026-07-01",
+      "index": 103.9018,
+      "interpolated": true,
+      "price": 93.6004
+    },
+    {
+      "date": "2026-07-02",
+      "index": 103.8357,
+      "interpolated": true,
+      "price": 93.5409
+    },
+    {
+      "date": "2026-07-03",
+      "index": 103.7695,
+      "interpolated": true,
+      "price": 93.4813
+    },
+    {
+      "date": "2026-07-04",
+      "index": 103.7034,
+      "interpolated": true,
+      "price": 93.4217
+    },
+    {
+      "date": "2026-07-05",
+      "index": 103.6373,
+      "interpolated": true,
+      "price": 93.3622
+    },
+    {
+      "date": "2026-07-06",
+      "index": 103.5712,
+      "interpolated": true,
+      "price": 93.3026
+    },
+    {
+      "date": "2026-07-07",
+      "index": 103.505,
+      "interpolated": true,
+      "price": 93.243
+    },
+    {
+      "date": "2026-07-08",
+      "index": 103.4389,
+      "interpolated": true,
+      "price": 93.1835
+    },
+    {
+      "date": "2026-07-09",
+      "index": 103.3728,
+      "interpolated": true,
+      "price": 93.1239
+    },
+    {
+      "date": "2026-07-10",
+      "index": 103.3067,
+      "interpolated": true,
+      "price": 93.0643
+    },
+    {
+      "date": "2026-07-11",
+      "index": 103.2406,
+      "interpolated": true,
+      "price": 93.0048
+    },
+    {
+      "date": "2026-07-12",
+      "index": 103.1744,
+      "interpolated": true,
+      "price": 92.9452
+    },
+    {
+      "date": "2026-07-13",
+      "index": 103.1083,
+      "interpolated": true,
+      "price": 92.8857
+    },
+    {
+      "date": "2026-07-14",
+      "index": 103.0422,
+      "interpolated": true,
+      "price": 92.8261
+    },
+    {
+      "date": "2026-07-15",
+      "index": 102.9761,
+      "interpolated": true,
+      "price": 92.7665
+    },
+    {
+      "date": "2026-07-16",
+      "index": 102.91,
+      "interpolated": true,
+      "price": 92.707
+    },
+    {
+      "date": "2026-07-17",
+      "index": 102.8438,
+      "interpolated": true,
+      "price": 92.6474
+    },
+    {
+      "date": "2026-07-18",
+      "index": 102.7777,
+      "interpolated": true,
+      "price": 92.5878
+    },
+    {
+      "date": "2026-07-19",
+      "index": 102.7116,
+      "interpolated": true,
+      "price": 92.5283
+    },
+    {
+      "date": "2026-07-20",
+      "index": 102.6455,
+      "interpolated": true,
+      "price": 92.4687
+    },
+    {
+      "date": "2026-07-21",
+      "index": 102.5793,
+      "interpolated": true,
+      "price": 92.4091
+    },
+    {
+      "date": "2026-07-22",
+      "index": 102.5132,
+      "interpolated": true,
+      "price": 92.3496
+    },
+    {
+      "date": "2026-07-24",
+      "price": 92.2,
+      "index": 102.3472
     }
   ],
   "_bench_fix_note": "2026-06-23: agg_index_series reconstruida con IUAG.L (UCITS Acc, total return). Antes era AGG NYSE price-only sin reinvertir dividendos, daba YTD -5.78% falso."
