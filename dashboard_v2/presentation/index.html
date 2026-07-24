@@ -1715,8 +1715,12 @@
       // ==== KPIs FI (weighted por peso del holding) ====
       if (race?.holdings) {
         const holdings = race.holdings.filter(h => h.weight_pct > 0);
-        const wsum = holdings.reduce((s, h) => s + h.weight_pct, 0) || 1;
-        const w = (key) => holdings.reduce((s, h) => s + h.weight_pct * (h[key] || 0), 0) / wsum;
+        // Excluir holdings con data missing (YTW=0 y Duration=0) del cálculo
+        // weighted — sino contaminan el promedio con ceros espurios y arrastran
+        // el spread hacia negativo (típico de fondos nuevos no indexados en baha).
+        const withData = holdings.filter(h => (h.ytw && h.ytw > 0) || (h.duration && h.duration > 0));
+        const wsum = withData.reduce((s, h) => s + h.weight_pct, 0) || 1;
+        const w = (key) => withData.reduce((s, h) => s + h.weight_pct * (h[key] || 0), 0) / wsum;
         const ytw = w("ytw"), dur = w("duration"), mat = w("maturity"), spr = w("spread_vs_ust");
         const aum = holdings.reduce((s, h) => s + (h.value_usd || 0), 0);
         const ust10 = race.ust_reference?.value ?? null;
@@ -1776,18 +1780,28 @@
 
       // ==== Métricas por holding ====
       if (race?.holdings) {
+        const dash = `<span style="color:${MUTE}">—</span>`;
+        // Detección de "data missing": YTW=0 y Duration=0 significa que baha aún
+        // no lo tiene indexado (típico de holdings nuevos como MANEM). El spread
+        // se calcula como YTW - UST10Y, así que un YTW=0 genera un spread negativo
+        // espurio (~-4.5%). Preferimos mostrar "—" en vez de valores derivados falsos.
         const rows = race.holdings
           .filter(h => h.weight_pct > 0)
           .sort((a, b) => b.weight_pct - a.weight_pct)
           .map(h => {
+            const dataMissing = (!h.ytw || h.ytw === 0) && (!h.duration || h.duration === 0);
+            const ytwCell = dataMissing ? dash : `<strong style="color:${GOLD}">${h.ytw.toFixed(2)}%</strong>`;
+            const durCell = dataMissing ? dash : `${h.duration.toFixed(2)}y`;
+            const matCell = dataMissing || !h.maturity ? dash : `${h.maturity.toFixed(2)}y`;
+            const sprCell = dataMissing ? dash : `${(h.spread_vs_ust ?? 0).toFixed(2)}%`;
             return `<tr>
               <td style="text-align:left"><strong>${h.ticker}</strong><div style="font-size:10px;color:${MUTE}">${(h.name || "").slice(0, 40)}</div></td>
               <td class="num" style="font-weight:600">${h.weight_pct.toFixed(2)}%</td>
-              <td class="num"><strong style="color:${GOLD}">${(h.ytw ?? 0).toFixed(2)}%</strong></td>
-              <td class="num">${(h.duration ?? 0).toFixed(2)}y</td>
-              <td class="num">${(h.maturity ?? 0).toFixed(2)}y</td>
+              <td class="num">${ytwCell}</td>
+              <td class="num">${durCell}</td>
+              <td class="num">${matCell}</td>
               <td style="text-align:left"><span style="background:${BLUE};color:#0c1b2e;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700">${h.rating || "—"}</span></td>
-              <td class="num">${(h.spread_vs_ust ?? 0).toFixed(2)}%</td>
+              <td class="num">${sprCell}</td>
             </tr>`;
           }).join("");
         const tbody = document.getElementById("fi-metrics-tbody");
