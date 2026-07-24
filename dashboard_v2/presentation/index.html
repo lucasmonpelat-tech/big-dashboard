@@ -1392,6 +1392,7 @@
           <th style="${THR}">Weight</th>
           <th style="${THR}">Return SI</th>
           <th style="${THR}">Return YTD</th>
+          <th style="text-align:left">YTD as-of</th>
           <th style="${THR}">MV USD</th>
         </tr>`;
       } else {
@@ -1407,15 +1408,31 @@
         </tr>`;
       }
 
+      const fsYtd = (window.__altsFactsheetYtd?.overrides) || {};
+      const fmtAsOf = iso => {
+        if (!iso) return "";
+        const [y, m, d] = iso.split("-");
+        const M = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"][parseInt(m,10)-1] || m;
+        return `${d}-${M}-${y.slice(2)}`;
+      };
       const rows = sorted.map(h => {
         const weight = totalMv > 0 ? (h.mv_usd / totalMv) * 100 : 0;
         if (isAlts) {
+          // Override YTD desde factsheet cuando existe (para PE, infra, private credit).
+          // Los holdings líquidos (GLD, IBIT) se quedan con el YTD calculado (spot T-1).
+          const override = fsYtd[h.isin];
+          const ytdVal = override ? override.ytd_pct : h.ytd_pct;
+          const asOf = override ? fmtAsOf(override.as_of) : (h.ytd_pct != null ? "T-1" : "");
+          const asOfCell = override
+            ? `<span title="${override.source || ''}" style="font-size:11px;color:var(--gold)">${asOf}</span>`
+            : `<span style="font-size:11px;color:var(--text-mute)">${asOf}</span>`;
           return `<tr>
             <td style="text-align:left"><strong>${h.ticker || ""}</strong>
               <div style="font-size:11px;color:var(--text-mute)">${(h.name || "").trim()}</div></td>
             <td class="num">${_fmtNum(weight, 2)}%</td>
             <td class="num ${glClass(h.return_pct)}">${_fmtPct(h.return_pct)}</td>
-            <td class="num ${glClass(h.ytd_pct)}">${_fmtPct(h.ytd_pct)}</td>
+            <td class="num ${glClass(ytdVal)}">${_fmtPct(ytdVal)}</td>
+            <td>${asOfCell}</td>
             <td class="num">${fmtUsd(h.mv_usd, 0)}</td>
           </tr>`;
         }
@@ -1431,7 +1448,7 @@
           <td class="num ${glClass(h.alpha_ytd_pp)}"><strong>${_fmtBp(h.alpha_ytd_pp * 100)}</strong></td>
         </tr>`;
       }).join("");
-      const colspan = isAlts ? 5 : 8;
+      const colspan = isAlts ? 6 : 8;
       document.getElementById("sleeve-holdings-body").innerHTML = rows || `<tr><td colspan="${colspan}" style="text-align:center;color:var(--text-mute);padding:20px">No hay data disponible</td></tr>`;
     }
 
@@ -2110,6 +2127,11 @@
 
         // alts_external.json — holdings alternatives externos (CALP desde statement)
         try { window.__altsExt = await loadLegacyJson("alts_external"); } catch (e) { window.__altsExt = null; }
+
+        // alts_factsheet_ytd.json — YTD oficial reportado en factsheets (override
+        // manual para holdings ilíquidos tipo PE/Infra/Private Credit donde el YTD
+        // calculado desde precios no aplica).
+        try { window.__altsFactsheetYtd = await loadLegacyJson("alts_factsheet_ytd"); } catch (e) { window.__altsFactsheetYtd = null; }
 
         // Mergear externals a positions para que aparezcan en Overview (positions/AUM/alloc)
         if (window.__altsExt?.holdings) {

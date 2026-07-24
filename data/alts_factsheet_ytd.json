@@ -1,0 +1,29 @@
+{
+  "_description": "YTD oficial reportado en factsheets/statements de fondos alternativos (PE, infra, private credit). Override manual — el pipeline calcula un YTD desde precios spot, pero para holdings ilíquidos el número que reporta el manager es el que vale (no hay precio de mercado diario). Cuando salga un factsheet más nuevo, actualizar el as_of y el ytd_pct.",
+  "_maintained_manually": true,
+  "_lastReviewed": "2026-07-25",
+  "overrides": {
+    "LU2847068389": {
+      "ticker": "HLGPI",
+      "name": "Hamilton Lane Global Private Infrastructure Fund Class I (Acc)",
+      "ytd_pct": 5.33,
+      "as_of": "2026-04-30",
+      "source": "Hamilton Lane HLGPI Factsheet - April 2026"
+    },
+    "LU2966298809": {
+      "ticker": "FLEX",
+      "name": "Franklin Lexington PE Secondaries Fund Class I",
+      "ytd_pct": 6.1,
+      "as_of": "2026-05-31",
+      "source": "Franklin Lexington FLEX-I Factsheet doc 5, 31-May-2026"
+    },
+    "LU2827810776": {
+      "ticker": "CALP",
+      "name": "Carlyle AlpInvest PM Sub-Fund I Class B1",
+      "ytd_pct": 2.83,
+      "as_of": "2026-04-30",
+      "source": "Carlyle statement Abr-2026 (via alts_external.json)"
+    }
+  },
+  "_pending": ["HLEND", "BPCC", "GCRED"]
+}
