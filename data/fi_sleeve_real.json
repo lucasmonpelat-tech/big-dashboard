@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-07-24T12:27:11.298645",
+  "refreshedAt": "2026-07-25T12:09:00.214812",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -579,7 +579,7 @@
       ]
     },
     {
-      "date": "2026-07-24",
+      "date": "2026-07-25",
       "mv_usd": 10325849.75,
       "holdings": [
         {
@@ -3481,6 +3481,14 @@
     },
     {
       "date": "2026-07-24",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -74.0637,
+      "twr": 0.0
+    },
+    {
+      "date": "2026-07-25",
       "mv_usd": 10325849.75,
       "flow_in": 0.0,
       "twr": 0.0,
@@ -5323,8 +5331,14 @@
     },
     {
       "date": "2026-07-24",
-      "price": 92.2,
-      "index": 102.3472
+      "index": 102.5386,
+      "interpolated": true,
+      "price": 92.3724
+    },
+    {
+      "date": "2026-07-25",
+      "price": 92.47,
+      "index": 102.6469
     }
   ],
   "fi_flows_by_month": {
@@ -5514,7 +5528,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-07-24 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing Jun 24, 2026.",
+  "_daily_refresh_note": "Punto 2026-07-25 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing Jun 24, 2026.",
   "twr_series_original": [
     {
       "date": "2025-07-31",
@@ -8360,7 +8374,15 @@
       "twr": 0.0
     },
     {
-      "date": "2026-07-24",
+      "date": "2026-07-23",
+      "index": 104.6732,
+      "interpolated": true,
+      "mv_usd": 10325849.75,
+      "flow_in": -148.1274,
+      "twr": 0.0
+    },
+    {
+      "date": "2026-07-25",
       "mv_usd": 10325849.75,
       "flow_in": 0.0,
       "twr": 0.0,
@@ -10196,9 +10218,15 @@
       "price": 92.3496
     },
     {
-      "date": "2026-07-24",
-      "price": 92.2,
-      "index": 102.3472
+      "date": "2026-07-23",
+      "index": 102.4302,
+      "interpolated": true,
+      "price": 92.2748
+    },
+    {
+      "date": "2026-07-25",
+      "price": 92.47,
+      "index": 102.6469
     }
   ],
   "_bench_fix_note": "2026-06-23: agg_index_series reconstruida con IUAG.L (UCITS Acc, total return). Antes era AGG NYSE price-only sin reinvertir dividendos, daba YTD -5.78% falso."
