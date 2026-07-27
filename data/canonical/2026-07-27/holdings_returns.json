@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "as_of": "2026-07-27",
-  "generated_at": "2026-07-27T15:46:23Z",
+  "generated_at": "2026-07-27T15:52:01Z",
   "note": "Holdings con MV/return DIRECTO de Pershing UGL (canonical v2 pnl.json). Bench DW calculado desde buys_history + bench indices. Fixes bug de precio staleado del compute_holdings_returns.py viejo.",
   "sources": {
     "positions": "data/canonical/2026-07-27/positions.json",
@@ -702,14 +702,14 @@
           "isin": "LU2827810776",
           "status": "OPEN",
           "qty": 186706.497,
-          "mv_usd": 2709111.27,
+          "mv_usd": 2766990.29,
           "cost_basis_usd": 2500000.0,
-          "unrealized_gl_usd": 209111.27,
-          "return_pct": 8.36,
+          "unrealized_gl_usd": 266990.29,
+          "return_pct": 10.68,
           "bench_label": "ACWI",
           "bench_dw_pct": NaN,
           "alpha_real_pp": NaN,
-          "ytd_pct": 2.83,
+          "ytd_pct": 5.03,
           "bench_ytd_pct": NaN,
           "alpha_ytd_pp": NaN,
           "first_buy_date": "2025-08-29",
@@ -720,8 +720,8 @@
             }
           ],
           "_mv_source": "external_statement",
-          "_source_note": "Carlyle AlpInvest Statement Abril 2026 (Pro Capital)",
-          "_as_of": "2026-04-30"
+          "_source_note": "Carlyle AlpInvest Statement Junio 2026 (Pro Capital, TVS_P122202_2026-06-30)",
+          "_as_of": "2026-06-30"
         },
         {
           "ticker": "HLGPI",
