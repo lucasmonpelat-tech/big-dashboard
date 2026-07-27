@@ -497,6 +497,15 @@ def login_flow(page, verbose=True):
     # Si redirige a otp page, procesar
     if "otp" in current_url.lower() or try_selectors(page, OTP_SELECTORS, "fill", "test-check-only", timeout=1500):
         print("  OTP required")
+        # Registrar T0 AHORA, apenas detectamos OTP required. Pershing puede
+        # enviar el OTP en cualquier paso subsecuente (al cambiar de método,
+        # al seleccionar destinatario, o al click Send). El OTP tiene 9 minutos
+        # de validez, así que aceptar todo lo enviado desde este momento es seguro.
+        # BUG previo: si el T0 se marcaba después de seleccionar destinatario,
+        # Pershing ya podía haber enviado el email 5s antes → timeout falso.
+        from datetime import timezone as _tz
+        login_flow._otp_request_time = datetime.now(_tz.utc)
+        print(f"  [T0] Marcado al detectar OTP required: {login_flow._otp_request_time.isoformat()}")
         # Limpiar el campo si lo llenamos con test
         for sel in OTP_SELECTORS:
             try:
@@ -627,11 +636,10 @@ def login_flow(page, verbose=True):
 
             time.sleep(1)
 
-            # IMPORTANTE: registrar timestamp ANTES del Send OTP para que el reader
-            # ignore OTPs viejos de tests anteriores
-            from datetime import timezone
-            otp_request_time = datetime.now(timezone.utc)
-            print(f"  [T0] Request time: {otp_request_time.isoformat()}")
+            # T0 ya se marcó al detectar "OTP required" (más arriba). Pershing
+            # puede haber enviado el email al elegir "Lucas by Email" en el
+            # dropdown, ANTES del "Send OTP", así que el T0 temprano evita
+            # timeout falso.
 
             # Click "Send OTP"
             sent = False
@@ -651,8 +659,7 @@ def login_flow(page, verbose=True):
                 write_alert("send_otp_button_failed", "No encontre boton 'Send OTP'")
                 return False
 
-            # Guardar T0 para usar en read_otp_from_gmail
-            login_flow._otp_request_time = otp_request_time
+            # T0 ya está seteado en login_flow._otp_request_time desde el inicio
 
         # Leer OTP del Gmail (ahora deberia llegar a Lucas)
         # En debug mode con --skip-otp saltamos el read para no gastar tiempo
@@ -1171,6 +1178,17 @@ def download_from_tab(page, tab_config, out_dir: Path) -> bool:
 
     if not icon_clicked:
         print(f"  [{name}] No encontre icono download.")
+        # Guardar HTML + screenshot para debug post-mortem cuando Pershing
+        # cambia clases o layout — sin esto quedamos ciegos en el CI.
+        try:
+            debug_dir = ROOT / "data" / "netx360_session"
+            debug_dir.mkdir(parents=True, exist_ok=True)
+            page.screenshot(path=str(debug_dir / f"download_icon_missing_{name.lower()}.png"), full_page=True)
+            (debug_dir / f"download_icon_missing_{name.lower()}.html").write_text(
+                page.content(), encoding="utf-8", errors="replace")
+            print(f"  [{name}] Debug guardado en data/netx360_session/download_icon_missing_{name.lower()}.*")
+        except Exception as _e:
+            print(f"  [{name}] No pude guardar debug: {_e}")
         write_alert(f"download_icon_not_found_{name.lower()}",
                     f"No pude encontrar icono download en {url}")
         return False
