@@ -38,6 +38,18 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from pathlib import Path
 
+# =========================================================================
+# DIGEST TEMPORALMENTE DESACTIVADO — Jul-2026
+# Lucas quiere reimplementarlo cuando todo el pipeline esté 100% estable.
+# El step del cron sábado sigue existiendo pero este short-circuit hace que
+# el script salga sin mandar mail. Cuando se quiera reactivar: eliminar
+# este bloque y listo — el resto del script está intacto.
+# =========================================================================
+print("[weekly_digest] DESACTIVADO por ahora (short-circuit al inicio). "
+      "Reactivar removiendo el bloque en la cabecera cuando corresponda.")
+sys.exit(0)
+# =========================================================================
+
 ROOT = Path(__file__).parent.parent
 DATA = ROOT / "data"
 
