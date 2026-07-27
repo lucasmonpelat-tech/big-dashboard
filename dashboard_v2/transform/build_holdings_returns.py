@@ -49,13 +49,29 @@ def _load_bench_prices(path: Path, ticker: str) -> dict[str, float]:
     Retorna dict {YYYY-MM-DD: price} para el ticker del bench.
     equity_bench_indices.json: {indices: {ACWI: {series: [{date, price, index}]}}}
     fi_bench_indices.json:     idem con AGG.
+
+    Filtra NaN — yfinance a veces devuelve NaN puntual (rate limit / data hiccup)
+    y ese NaN se serializa literal en el JSON. Si dejamos el punto NaN, contamina
+    el "último precio" y todos los Bench SI/YTD del widget quedan en NaN.
     """
+    import math
     if not path.exists():
         return {}
     d = json.load(open(path, encoding='utf-8'))
     idx = d.get("indices", {}).get(ticker, {})
     series = idx.get("series", [])
-    return {pt["date"]: float(pt["price"]) for pt in series if pt.get("date") and pt.get("price") is not None}
+    out = {}
+    for pt in series:
+        if not pt.get("date") or pt.get("price") is None:
+            continue
+        try:
+            v = float(pt["price"])
+            if math.isnan(v) or math.isinf(v):
+                continue
+            out[pt["date"]] = v
+        except (TypeError, ValueError):
+            continue
+    return out
 
 
 def _price_on_or_before(prices: dict, target_date: str) -> float | None:

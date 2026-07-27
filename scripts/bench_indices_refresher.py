@@ -77,14 +77,20 @@ def asof_close(closes, target_iso):
 
 
 def build_series(closes, grid):
-    """Rebasea a 100 en grid[0] y devuelve [{date, index}] alineado al grid."""
+    """Rebasea a 100 en grid[0] y devuelve [{date, index}] alineado al grid.
+    Filtra NaN: yfinance devuelve puntualmente NaN a veces (rate limit / hiccup);
+    si se serializa a JSON queda "NaN" literal y contamina los cálculos aguas abajo.
+    """
+    import math
     base = asof_close(closes, grid[0])
-    if not base:
+    if base is None or (isinstance(base, float) and (math.isnan(base) or math.isinf(base))):
         return None
     series = []
     for d in grid:
         px = asof_close(closes, d)
         if px is None:
+            continue
+        if isinstance(px, float) and (math.isnan(px) or math.isinf(px)):
             continue
         series.append({"date": d, "price": round(px, 4),
                        "index": round(px / base * 100, 4)})
