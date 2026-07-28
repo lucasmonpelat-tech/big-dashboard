@@ -37,11 +37,12 @@
     "DE000A0Q4R85": {
       "ticker": "4BRZ",
       "name": "iShares MSCI Brazil UCITS",
-      "ytd_source_pct": null,
-      "price_2025_dec_31": null,
-      "qty_2025_dec_31": null,
-      "mv_2025_dec_31": null,
-      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+      "price_2025_dec_31": 44.5222,
+      "qty_2025_dec_31": 0.0,
+      "mv_2025_dec_31": 0.0,
+      "anchor_locked": true,
+      "ytd_source": "manual_verified",
+      "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, cierre 30-Dic-2025 (feriado Xetra 31-Dic/1-Ene), confirmado OK"
     },
     "IE00BF4KN675": {
       "ticker": "LGLI",
