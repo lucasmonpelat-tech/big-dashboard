@@ -1,25 +1,25 @@
 {
-  "refreshedAt": "2026-07-27T13:45:37.841385",
+  "refreshedAt": "2026-07-28T13:01:20.243747",
   "source": "Yahoo Finance AOR (iShares Core Growth Allocation 60/40)",
   "note": "Single ETF que replica 60% stocks / 40% bonds. Composicion: ITOT + IDEV + IEMG + IAGG + AGG. Reemplaza el calculo viejo 0.6*ACWI + 0.4*AGG.",
   "ticker": "AOR",
   "inception": "2025-06-27",
   "periods": {
-    "latest_date": "2026-07-23",
-    "latest_value": 114.8246,
+    "latest_date": "2026-07-27",
+    "latest_value": 115.0777,
     "returns": {
-      "1W": -1.05,
-      "1M": -0.32,
-      "3M": 2.06,
-      "6M": 4.21,
-      "YTD": 5.96,
-      "SI": 14.82,
-      "Annualized": 13.78
+      "1W": 0.0,
+      "1M": -0.24,
+      "3M": 1.76,
+      "6M": 3.96,
+      "YTD": 6.2,
+      "SI": 15.08,
+      "Annualized": 13.87
     },
-    "volatility": 8.88,
-    "sharpe_approx": 1.07
+    "volatility": 8.86,
+    "sharpe_approx": 1.08
   },
-  "series_length": 269,
+  "series_length": 270,
   "series": [
     {
       "date": "2025-06-27",
@@ -55,7 +55,7 @@
     },
     {
       "date": "2025-07-10",
-      "value": 100.901
+      "value": 100.9011
     },
     {
       "date": "2025-07-11",
@@ -99,7 +99,7 @@
     },
     {
       "date": "2025-07-25",
-      "value": 101.9691
+      "value": 101.969
     },
     {
       "date": "2025-07-28",
@@ -191,7 +191,7 @@
     },
     {
       "date": "2025-08-27",
-      "value": 103.2507
+      "value": 103.2506
     },
     {
       "date": "2025-08-28",
@@ -1096,6 +1096,10 @@
     {
       "date": "2026-07-23",
       "value": 114.8246
+    },
+    {
+      "date": "2026-07-27",
+      "value": 115.0777
     }
   ]
 }

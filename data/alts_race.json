@@ -1,20 +1,20 @@
 {
-  "refreshedAt": "2026-07-27T13:45:41.828855",
+  "refreshedAt": "2026-07-28T13:01:25.489721",
   "inception": "2025-06-30",
   "benchmark_primary": "60/40 blend (60% ACWI + 40% AGG)",
   "benchmark_secondary": "HFRX Global HF proxy (QAI ETF)",
   "portfolio_metrics": {
-    "total_alts_usd": 7693691,
+    "total_alts_usd": 7702208,
     "sub_class_breakdown_pct": {
-      "private_equity": 42.12,
-      "crypto": 10.06,
-      "commodity": 9.29,
-      "private_credit": 24.05,
-      "private_infra": 14.48
+      "private_equity": 42.08,
+      "crypto": 10.08,
+      "commodity": 9.36,
+      "private_credit": 24.02,
+      "private_infra": 14.47
     },
     "n_holdings": 8,
-    "ytd_return_pct": -1.27,
-    "si_return_pct": 3.22
+    "ytd_return_pct": -1.36,
+    "si_return_pct": 3.34
   },
   "stats_vs_6040": {
     "latest_month": "2026-06",
@@ -25,30 +25,30 @@
         "alpha": 1.41
       },
       "3M": {
-        "sleeve": -0.13,
+        "sleeve": -0.15,
         "bmk6040": 7.55,
-        "alpha": -7.68
+        "alpha": -7.7
       },
       "6M": {
-        "sleeve": -1.22,
+        "sleeve": -1.3,
         "bmk6040": 6.17,
-        "alpha": -7.39
+        "alpha": -7.47
       },
       "YTD": {
-        "sleeve": -1.22,
+        "sleeve": -1.3,
         "bmk6040": 6.17,
-        "alpha": -7.39
+        "alpha": -7.47
       },
       "SI": {
-        "sleeve": 3.22,
+        "sleeve": 3.34,
         "bmk6040": 14.39,
-        "alpha": -11.17
+        "alpha": -11.05
       }
     },
     "annualized": {
-      "sleeve": 3.22,
+      "sleeve": 3.34,
       "bmk6040": 14.39,
-      "alpha": -11.17
+      "alpha": -11.05
     }
   },
   "stats_vs_hfrx": {
@@ -88,18 +88,18 @@
   },
   "sleeve_index": {
     "2025-06": 100.0,
-    "2025-07": 100.6514,
-    "2025-08": 101.3028,
-    "2025-09": 101.9542,
-    "2025-10": 102.6056,
-    "2025-11": 103.257,
-    "2025-12": 104.49,
-    "2026-01": 103.7237,
-    "2026-02": 103.539,
-    "2026-03": 103.3542,
-    "2026-04": 103.1695,
-    "2026-05": 102.9847,
-    "2026-06": 103.22
+    "2025-07": 100.6805,
+    "2025-08": 101.361,
+    "2025-09": 102.0415,
+    "2025-10": 102.722,
+    "2025-11": 103.4024,
+    "2025-12": 104.7,
+    "2026-01": 103.8861,
+    "2026-02": 103.6893,
+    "2026-03": 103.4925,
+    "2026-04": 103.2956,
+    "2026-05": 103.0988,
+    "2026-06": 103.34
   },
   "bmk6040_index": {
     "2025-06": 100.0,
@@ -153,14 +153,14 @@
       "name": "Carlyle AlpInvest Private Markets",
       "sub_class": "private_equity",
       "value_usd": 2738984.31,
-      "weight_pct": 35.6,
+      "weight_pct": 35.56,
       "si_return_pct": 9.56,
       "ytd_return_pct": 3.97,
       "contribution_pct": 3.4,
       "ytd_contribution_pct": 1.41,
       "assumed_annual_pct": 12.0,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-27",
+      "valuation_date": "2026-07-28",
       "days_since_valuation": 0
     },
     {
@@ -168,15 +168,15 @@
       "ticker": "IBIT",
       "name": "iShares Bitcoin Trust",
       "sub_class": "crypto",
-      "value_usd": 773901.43,
-      "weight_pct": 10.06,
-      "si_return_pct": -32.03,
-      "ytd_return_pct": -25.16,
-      "contribution_pct": -3.22,
-      "ytd_contribution_pct": -2.53,
+      "value_usd": 776435.33,
+      "weight_pct": 10.08,
+      "si_return_pct": -31.81,
+      "ytd_return_pct": -25.94,
+      "contribution_pct": -3.21,
+      "ytd_contribution_pct": -2.61,
       "assumed_annual_pct": null,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-27",
+      "valuation_date": "2026-07-28",
       "days_since_valuation": 0
     },
     {
@@ -184,15 +184,15 @@
       "ticker": "GLD",
       "name": "SPDR Gold Shares",
       "sub_class": "commodity",
-      "value_usd": 714804.46,
-      "weight_pct": 9.29,
-      "si_return_pct": 20.17,
-      "ytd_return_pct": -5.39,
-      "contribution_pct": 1.87,
-      "ytd_contribution_pct": -0.5,
+      "value_usd": 720788.13,
+      "weight_pct": 9.36,
+      "si_return_pct": 21.18,
+      "ytd_return_pct": -5.47,
+      "contribution_pct": 1.98,
+      "ytd_contribution_pct": -0.51,
       "assumed_annual_pct": null,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-27",
+      "valuation_date": "2026-07-28",
       "days_since_valuation": 0
     },
     {
@@ -201,14 +201,14 @@
       "name": "HPS Corporate Lending Fund",
       "sub_class": "private_credit",
       "value_usd": 759172.36,
-      "weight_pct": 9.87,
+      "weight_pct": 9.86,
       "si_return_pct": 3.28,
       "ytd_return_pct": 0.62,
       "contribution_pct": 0.32,
       "ytd_contribution_pct": 0.06,
       "assumed_annual_pct": 9.5,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-27",
+      "valuation_date": "2026-07-28",
       "days_since_valuation": 0
     },
     {
@@ -217,14 +217,14 @@
       "name": "Barings Private Credit Corporation",
       "sub_class": "private_credit",
       "value_usd": 595348.04,
-      "weight_pct": 7.74,
+      "weight_pct": 7.73,
       "si_return_pct": 7.37,
-      "ytd_return_pct": 5.33,
+      "ytd_return_pct": 5.36,
       "contribution_pct": 0.57,
       "ytd_contribution_pct": 0.41,
       "assumed_annual_pct": 9.5,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-27",
+      "valuation_date": "2026-07-28",
       "days_since_valuation": 0
     },
     {
@@ -240,7 +240,7 @@
       "ytd_contribution_pct": 0.0,
       "assumed_annual_pct": 12.0,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-27",
+      "valuation_date": "2026-07-28",
       "days_since_valuation": 0
     },
     {
@@ -249,14 +249,14 @@
       "name": "Hamilton Lane Global Private Infrastructure",
       "sub_class": "private_infra",
       "value_usd": 1114198.98,
-      "weight_pct": 14.48,
+      "weight_pct": 14.47,
       "si_return_pct": 1.29,
       "ytd_return_pct": 0.0,
       "contribution_pct": 0.19,
       "ytd_contribution_pct": 0.0,
       "assumed_annual_pct": 11.0,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-27",
+      "valuation_date": "2026-07-28",
       "days_since_valuation": 0
     },
     {
@@ -265,18 +265,18 @@
       "name": "Golub Capital Private Credit",
       "sub_class": "private_credit",
       "value_usd": 495475.43,
-      "weight_pct": 6.44,
+      "weight_pct": 6.43,
       "si_return_pct": 1.11,
       "ytd_return_pct": -1.92,
       "contribution_pct": 0.07,
       "ytd_contribution_pct": -0.12,
       "assumed_annual_pct": 9.5,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-07-27",
+      "valuation_date": "2026-07-28",
       "days_since_valuation": 0
     }
   ],
-  "_sync_alts_ugl_at": "2026-07-27T13:45:44.418028",
+  "_sync_alts_ugl_at": "2026-07-28T13:01:28.836573",
   "_sync_alts_ugl_note": "Returns y sleeve YTD/SI sobreescritos con Pershing UGL (cost-basis weighted). sleeve_index mensual sigue siendo time-weighted con proxies (para charts históricos).",
-  "_daily_refresh_note": "Refresh diario 2026-07-27: 2 liquidos via Stooq T-1, 3 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $7,684,852."
+  "_daily_refresh_note": "Refresh diario 2026-07-28: 2 liquidos via Stooq T-1, 3 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $7,693,369."
 }
