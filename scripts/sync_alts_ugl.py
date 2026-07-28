@@ -53,6 +53,14 @@ def main():
     updates = 0
     for h in ar.get('holdings', []):
         tk = h['ticker']
+        # IBIT/GLD: value_usd/ytd_return_pct ya vienen frescos de Pershing
+        # (canonical positions.json) via refresh_alts_daily.py -- NO
+        # pisar con holdings_returns_alternatives.json, que tiene mv/qty
+        # desactualizados para estos dos (falta re-sync de transacciones,
+        # ver nota 2026-07-28). El SI de ese archivo tampoco es confiable
+        # por el mismo motivo, se deja como estaba.
+        if tk in ("IBIT", "GLD"):
+            continue
         if tk not in ha_by_tk:
             continue
         pers = ha_by_tk[tk]

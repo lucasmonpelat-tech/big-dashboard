@@ -5,7 +5,11 @@ Refresh diario del sleeve Alts. Cron-friendly.
 
 Diferencias clave vs refresh_equity_daily.py / refresh_fi_daily.py:
 - Alts vive en alts_race.json (no en *_sleeve_real.json).
-- Solo 2 holdings tienen precio T-1 publico (IBIT, GLD via Stooq).
+- IBIT, GLD: precio T-1 real via Pershing/NetX360 (canonical positions.json),
+  MISMO feed que el resto del universo BIG. (FIX 2026-07-28: antes usaban
+  Stooq via live_prices.json, un feed distinto al canonical -- Lucas:
+  "quiero que este todo con Pershing", esto generaba 2 numeros de sleeve YTD
+  ligeramente distintos entre alts_race.json y el dashboard.)
 - BPCC tiene precio T-1 desde Pershing pero no se mueve diariamente sin
   re-importar el Excel -> se mantiene como last-known.
 - HLEND, GCRED, FLEX, HLGPI = illiquidos puros -> carry-forward del ultimo
@@ -36,25 +40,54 @@ from pathlib import Path
 ROOT = Path(__file__).parent.parent
 ALTS_FILE = ROOT / "data" / "alts_race.json"
 POSITIONS_FILE = ROOT / "data" / "positions_latest.json"
-LIVE_PRICES_FILE = ROOT / "data" / "live_prices.json"
+CANONICAL_DIR = ROOT / "data" / "canonical"
+YEAR_START_ANCHORS_FILE = ROOT / "data" / "year_start_anchors.json"
 CARLYLE_FILE = ROOT / "data" / "alts_carlyle_statement.json"
 ICAPITAL_FILE = ROOT / "data" / "alts_icapital_statements.json"
 BPCC_FILE = ROOT / "data" / "alts_bpcc_statement.json"
 
 
-def load_stooq_prices():
-    """{ticker: (price, date_iso)} de live_prices.json (Stooq T-1 close)."""
-    try:
-        lp = json.load(open(LIVE_PRICES_FILE, encoding="utf-8"))
-    except Exception as e:
-        print(f"  live_prices skipped: {e}")
+def latest_canonical_positions():
+    """Ultimo data/canonical/{date}/positions.json disponible (Pershing/NetX360)."""
+    if not CANONICAL_DIR.exists():
+        return None, None
+    dates = sorted(p.name for p in CANONICAL_DIR.iterdir() if p.is_dir())
+    for d in reversed(dates):
+        f = CANONICAL_DIR / d / "positions.json"
+        if f.exists():
+            try:
+                return json.load(open(f, encoding="utf-8")), d
+            except Exception:
+                continue
+    return None, None
+
+
+def load_pershing_liquid_prices():
+    """{isin: {price, mv_usd, price_date}} para IBIT/GLD via canonical
+    positions.json (mismo feed Pershing/NetX360 que el resto del universo)."""
+    positions, snapshot_date = latest_canonical_positions()
+    if positions is None:
         return {}
-    prices = lp.get("prices", lp)
     out = {}
-    for tk, rec in prices.items():
-        if isinstance(rec, dict) and rec.get("price"):
-            out[tk] = (rec["price"], rec.get("date") or rec.get("as_of"))
+    for h in positions.get("holdings", []):
+        isin = h.get("isin")
+        if isin and h.get("market_price_ccy") and h.get("market_value_usd"):
+            out[isin] = {
+                "price": h["market_price_ccy"],
+                "mv_usd": h["market_value_usd"],
+                "price_date": h.get("price_date") or snapshot_date,
+            }
     return out
+
+
+def load_year_start_anchors():
+    """{isin: price_2025_dec_31} para YTD spot real."""
+    try:
+        d = json.load(open(YEAR_START_ANCHORS_FILE, encoding="utf-8"))
+        return {isin: v.get("price_2025_dec_31")
+                for isin, v in d.get("anchors_2026", {}).items()}
+    except Exception:
+        return {}
 
 
 def load_carlyle_latest():
@@ -140,13 +173,14 @@ def main():
     pl = json.load(open(POSITIONS_FILE, encoding="utf-8"))
     alts_qty = {p["ticker"]: p for p in pl["positions"]
                 if p["sleeve"] == "Alternatives"}
-    stooq = load_stooq_prices()
+    pershing_liquid = load_pershing_liquid_prices()  # {isin: {price, mv_usd, price_date}}
+    ytd_anchors = load_year_start_anchors()
     carlyle = load_carlyle_latest()
     icapital = load_icapital_latest()  # {HLEND: {...}, GCRED: {...}}
     bpcc = load_bpcc_latest()
 
     print(f"  Holdings Alts en positions: {len(alts_qty)}")
-    print(f"  Stooq prices disponibles: {sum(1 for tk in alts_qty if tk in stooq)}/{len(alts_qty)}")
+    print(f"  Pershing (canonical) precios disponibles: {len(pershing_liquid)}")
     if carlyle:
         print(f"  Carlyle (CALP) statement: {carlyle['valuation_date']} -> ${carlyle['mv_usd']:,.0f}")
     for tk, st in icapital.items():
@@ -157,7 +191,7 @@ def main():
     # Cargar alts_race.json
     ar = json.load(open(ALTS_FILE, encoding="utf-8"))
 
-    sources_summary = {"daily_close_stooq": [], "pershing_last": [],
+    sources_summary = {"daily_close_pershing": [], "pershing_last": [],
                        "carlyle_statement": [], "icapital_statement": [],
                        "frozen_statement": [],
                        "sold_skipped": [], "pending_confirm": []}
@@ -224,38 +258,31 @@ def main():
             sources_summary["icapital_statement"].append(tk)
             continue
 
-        # Holding liquido: precio fresco en Stooq -> recalc MV + YTD spot
+        # Holding liquido (IBIT, GLD): precio T-1 real via Pershing/NetX360
+        # (canonical positions.json) -> recalc MV + YTD spot desde anchor real.
+        # FIX 2026-07-28: antes usaba Stooq (live_prices.json) + anchor
+        # yfinance, un feed distinto al resto del universo BIG. Ahora mismo
+        # feed Pershing que todo lo demas + anchor real ya locked.
         pos = alts_qty.get(tk)
-        if pos and tk in stooq:
-            price, price_date = stooq[tk]
-            qty = pos.get("qty")
-            if qty and qty > 0:
-                new_mv = round(qty * price, 2)
-                h["value_usd"] = new_mv
-                h["valuation_date"] = price_date or today_iso
-                h["source"] = f"Stooq cierre {price_date or '(T-1)'}"
-                h["days_since_valuation"] = days_between(
-                    h["valuation_date"], today_iso)
-                # FIX 2026-07-01: YTD spot con yfinance para ETFs liquidos.
-                # Antes: ytd_return_pct venia stale del alts_race.py mensual.
-                # Ahora: (price_hoy / close_2025-12-31 - 1) * 100.
-                try:
-                    import yfinance as yf
-                    hist = yf.Ticker(tk).history(start="2025-12-28", end="2025-12-31")
-                    if len(hist):
-                        anchor = float(hist["Close"].iloc[-1])
-                        if anchor > 0:
-                            ytd_spot = round((price / anchor - 1) * 100, 2)
-                            old_ytd = h.get("ytd_return_pct")
-                            h["ytd_return_pct"] = ytd_spot
-                            # Reconstruir SI (cost basis weighted del holding_returns)
-                            print(f"  [ytd_spot] {tk}: {old_ytd}% -> {ytd_spot}% (price ${price:.2f} / anchor ${anchor:.2f})")
-                except Exception as e:
-                    print(f"  WARNING ytd_spot {tk}: {e}")
-                sources_summary["daily_close_stooq"].append(tk)
-                continue
+        isin = h.get("isin")
+        if tk in ("IBIT", "GLD") and isin and isin in pershing_liquid:
+            pl_rec = pershing_liquid[isin]
+            h["value_usd"] = round(pl_rec["mv_usd"], 2)
+            h["valuation_date"] = pl_rec["price_date"] or today_iso
+            h["source"] = f"Pershing T-1 ({pl_rec['price_date'] or today_iso})"
+            h["days_since_valuation"] = days_between(
+                h["valuation_date"], today_iso)
+            anchor = ytd_anchors.get(isin)
+            if anchor:
+                ytd_spot = round((pl_rec["price"] / anchor - 1) * 100, 2)
+                old_ytd = h.get("ytd_return_pct")
+                h["ytd_return_pct"] = ytd_spot
+                if old_ytd is not None and abs(old_ytd - ytd_spot) > 0.5:
+                    print(f"  [ytd_spot Pershing] {tk}: {old_ytd:+.2f}% -> {ytd_spot:+.2f}%")
+            sources_summary["daily_close_pershing"].append(tk)
+            continue
 
-        # Holding con valor en Pershing pero sin Stooq feed (FLEX, HLGPI)
+        # Holding con valor en Pershing pero sin feed diario propio (FLEX, HLGPI)
         # -> usar value de positions_latest.json (que es T-1 de Pershing)
         if pos and pos.get("value") and pos.get("price_as_of"):
             h["value_usd"] = round(pos["value"], 2)
@@ -313,7 +340,7 @@ def main():
     ar["refreshedAt"] = datetime.now().isoformat()
     ar["_daily_refresh_note"] = (
         f"Refresh diario {today_iso}: "
-        f"{len(sources_summary['daily_close_stooq'])} liquidos via Stooq T-1, "
+        f"{len(sources_summary['daily_close_pershing'])} liquidos via Pershing T-1, "
         f"{len(sources_summary['pershing_last'])} via Pershing T-1, "
         f"{len(sources_summary['carlyle_statement'])} via Carlyle statement, "
         f"{len(sources_summary['frozen_statement'])} frozen statement. "
