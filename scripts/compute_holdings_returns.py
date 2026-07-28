@@ -60,6 +60,8 @@ PERSHING_TO_MY = {
     'G594CD616':   ('MANEM',     'Fixed Income'),
     'G5478EAA2':   ('TGF',       'Fixed Income'),
     'L8147L735':   ('SGCB',      'Fixed Income'),
+    'HEWJ':        ('HEWJ',     'Equity'),
+    'MAGS':        ('MAGS',     'Equity'),
     # Alternatives
     'L4680C117':   ('HLGPI',    'Alternatives'),
     'L4R58Q111':   ('FLEX',     'Alternatives'),
@@ -298,6 +300,46 @@ def get_first_buy_date(transactions_list):
     return buys[0]['date']
 
 
+def load_existing_buys_history():
+    """Lee buys_history existente de los 3 holdings_returns_{sleeve}.json.
+
+    Necesario porque el Transactions.xlsx que baja el cron todos los dias
+    es SOLO 'ultimo mes' (no bootstrap/2-years) -- si escribieramos
+    directo perderiamos el historial de compras viejas. Este merge
+    incremental es lo que hace seguro correr este script todos los dias.
+
+    Returns: dict {my_ticker: [{date, cost}, ...]}
+    """
+    out = {}
+    for fname in ['holdings_returns_equity.json', 'holdings_returns_fixed_income.json',
+                  'holdings_returns_alternatives.json']:
+        try:
+            d = json.load(open(ROOT / 'data' / fname, encoding='utf-8'))
+        except Exception:
+            continue
+        for h in d.get('holdings', []):
+            tk = h.get('ticker')
+            buys = h.get('buys_history')
+            if tk and buys:
+                out[tk] = [{'date': b['date'], 'cost': b['cost']} for b in buys]
+    return out
+
+
+def merge_buys_history(existing, new_buys):
+    """Combina buys existentes + nuevos, dedupe por (date, cost redondeado),
+    ordenado por fecha. new_buys: lista de tx dicts (side='BUY') del run actual."""
+    combined = {}
+    for b in existing:
+        key = (b['date'], round(b['cost'], 2))
+        combined[key] = {'date': b['date'], 'cost': b['cost'], 'side': 'BUY'}
+    for t in new_buys:
+        if t['side'] != 'BUY':
+            continue
+        key = (t['date'], round(t['cost'], 2))
+        combined[key] = {'date': t['date'], 'cost': t['cost'], 'side': 'BUY'}
+    return sorted(combined.values(), key=lambda x: x['date'])
+
+
 def load_existing_ytd_per_holding():
     """Lee YTD por ticker de los archivos existentes (equity_race, fi_race, alts_race)."""
     ytd = {}
@@ -364,12 +406,26 @@ def main():
     closed_data = load_rgl_closed(args.rgl)
     print(f"  RGL: {len(closed_data)} CLOSED holdings cargados")
 
-    # 3. Load Transactions
+    # 3. Load Transactions (ventana del run actual -- puede ser solo "ultimo
+    #    mes" si el XLSX viene del cron diario, no bootstrap)
     tx_by_ticker = load_transactions(args.tx)
-    print(f"  TX: {len(tx_by_ticker)} tickers con transactions")
+    print(f"  TX (ventana de este run): {len(tx_by_ticker)} tickers con transactions")
 
-    # 4. Fetch ACWI and AGG history (1 year before earliest tx to cover all buys)
-    all_dates = [d['date'] for trades in tx_by_ticker.values() for d in trades]
+    # 3b. Merge con buys_history ya guardado (evita perder historia vieja
+    #     cuando el XLSX de este run es solo incremental -- ver docstring
+    #     de merge_buys_history). Necesario para poder correr esto TODOS
+    #     los dias via cron sin destruir el historial.
+    existing_buys = load_existing_buys_history()
+    merged_buys_by_ticker = {}
+    for ticker in set(list(open_data.keys()) + list(existing_buys.keys())):
+        new_buys = tx_by_ticker.get(ticker, [])
+        merged_buys_by_ticker[ticker] = merge_buys_history(
+            existing_buys.get(ticker, []), new_buys)
+    print(f"  Buys history mergeado: {sum(1 for v in merged_buys_by_ticker.values() if v)} tickers con historial")
+
+    # 4. Fetch ACWI and AGG history (1 year before earliest buy, considerando
+    #    el historial YA MERGEADO -- no solo la ventana de este run)
+    all_dates = [b['date'] for buys in merged_buys_by_ticker.values() for b in buys]
     if all_dates:
         earliest = min(all_dates)
         bench_start = date.fromisoformat(earliest) - timedelta(days=30)
@@ -400,7 +456,7 @@ def main():
         sleeve = data['sleeve']
         if sleeve == 'Cash':
             continue
-        txs = tx_by_ticker.get(ticker, [])
+        txs = merged_buys_by_ticker.get(ticker, [])
         bench_hist = agg_hist if sleeve == 'Fixed Income' else acwi_hist
         bench_label = 'AGG' if sleeve == 'Fixed Income' else 'ACWI'
         bench_dw = compute_bench_dw(txs, bench_hist, today_iso) if txs else None

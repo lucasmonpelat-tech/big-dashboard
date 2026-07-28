@@ -114,6 +114,33 @@ jobs:
         run: python scripts/bmk_refresher.py
         continue-on-error: true
 
+      # === PIPELINE V2 (NetX360+ Pershing → canonical JSONs) ===
+      # Movido mas temprano (antes: despues de Brinson Attribution) para que
+      # compute_holdings_returns.py y refresh_holdings_returns_daily.py usen
+      # el mismo download del dia (qty/cost basis 100% al dia, ver nota abajo).
+      - name: v2 — NetX360+ Pershing download (4 XLSX)
+        run: python dashboard_v2/ingest/netx360_auto.py
+        continue-on-error: true
+
+      # Reconstruye qty/cost_basis/buys_history desde el UGL+RGL+Transactions
+      # de HOY (merge incremental -- ver docstring de merge_buys_history en el
+      # script, seguro para correr todos los dias sin perder historial viejo).
+      # Fix 2026-07-28: sin este paso, holdings_returns_{sleeve}.json solo se
+      # actualizaba corriendo el script a mano, y quedaba con qty vieja
+      # (ej: IBIT/GLD/PIMCO-LD/MANIG/SGCB con compras recientes sin capturar).
+      - name: Reconcile qty/cost basis con Pershing (compute_holdings_returns, merge-safe)
+        run: |
+          RAW_DIR="data/raw/$(date -u +%Y-%m-%d)/netx360"
+          if [ -f "$RAW_DIR/Unrealized+Gain+Loss_JXD101380.xlsx" ]; then
+            python scripts/compute_holdings_returns.py \
+              --ugl "$RAW_DIR/Unrealized+Gain+Loss_JXD101380.xlsx" \
+              --rgl "$RAW_DIR/Realized+Gain+Loss_JXD101380.xlsx" \
+              --tx  "$RAW_DIR/Transactions_JXD101380.xlsx"
+          else
+            echo "No se descargaron los XLSX de NetX360 hoy -- se omite (holdings_returns_*.json queda con la ultima qty conocida)."
+          fi
+        continue-on-error: true
+
       # === RECOMPUTE ===
       - name: Recalc Equity sleeve daily NAV
         run: python scripts/refresh_equity_daily.py
@@ -144,11 +171,8 @@ jobs:
       - name: Brinson Attribution YTD
         run: python scripts/compute_attribution.py
         continue-on-error: true
-         # === PIPELINE V2 (NetX360+ Pershing → canonical JSONs) ===
-      - name: v2 — NetX360+ Pershing download (4 XLSX)
-        run: python dashboard_v2/ingest/netx360_auto.py
-        continue-on-error: true
 
+      # (El download de NetX360 se movio mas arriba, antes de RECOMPUTE — ver nota ahi)
       - name: v2 — Transform (parsers + benchmark_comparison + holdings_returns + snapshot)
         run: python -m dashboard_v2.transform.run_all
         continue-on-error: true

@@ -484,10 +484,19 @@ def build(as_of: str) -> dict:
         holdings_out = []
         legacy_isins_seen = set()
         legacy_descs_seen = set()  # match por description substring para holdings sin ISIN en legacy
+        legacy_tickers_seen = set()  # evita duplicar cuando un ticker tiene fila OPEN + fila CLOSED
 
         for h_legacy in hr.get("holdings", []):
-            # NO filtrar por status legacy — puede estar mal (ej: PIMCO-INC marcado CLOSED
-            # pero está en portfolio). El status real lo determina build_holding via positions.
+            # Un mismo ticker puede tener una fila OPEN (posicion actual) y una fila
+            # CLOSED (lote parcial vendido) en el legacy -- ambas matchean a la MISMA
+            # posicion viva via _find_position(), generando un duplicado. Procesamos
+            # cada ticker una sola vez (status real lo determina build_holding via
+            # positions, no el status legacy que puede estar mal, ej PIMCO-INC).
+            tk = h_legacy.get("ticker")
+            if tk and tk in legacy_tickers_seen:
+                continue
+            if tk:
+                legacy_tickers_seen.add(tk)
             hr_out = build_holding(h_legacy, positions, pnl_agg,
                                    bench_prices, v0_by_isin, bench_label,
                                    race_by_isin)

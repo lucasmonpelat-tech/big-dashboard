@@ -1,11 +1,38 @@
 {
-  "refreshedAt": "2026-07-28T17:41:24.935396",
+  "refreshedAt": "2026-07-28T17:47:17.855694",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Fixed Income",
   "period_end": "2026-07-28",
   "n_open": 7,
-  "n_closed": 2,
+  "n_closed": 3,
   "holdings": [
+    {
+      "ticker": "PIMCO-INC",
+      "sleeve": "Fixed Income",
+      "status": "OPEN",
+      "name": "PIMCO INCOME FUND INSTITUTIONAL CLASS (ACC)(USD)    ",
+      "qty": 159434.55,
+      "mv_usd": 3196662.73,
+      "cost_basis_usd": 3194047.88,
+      "unrealized_gl_usd": 2614.85,
+      "return_pct": 0.08,
+      "last_price_pershing": 20.05,
+      "bench_label": "AGG",
+      "bench_dw_pct": -0.46,
+      "alpha_real_pp": 0.54,
+      "ytd_pct": 0.2,
+      "bench_ytd_pct": -0.68,
+      "alpha_ytd_pp": 0.88,
+      "first_buy_date": "2026-07-07",
+      "period_end": "2026-07-28",
+      "n_trades": 1,
+      "buys_history": [
+        {
+          "date": "2026-07-07",
+          "cost": 150030.0
+        }
+      ]
+    },
     {
       "ticker": "PIMCO-LD",
       "sleeve": "Fixed Income",
@@ -17,13 +44,15 @@
       "unrealized_gl_usd": 27073.04,
       "return_pct": 0.87,
       "last_price_pershing": 14.0,
-      "_qty_mv_note": "qty/mv/cost corregidos 2026-07-28 desde canonical positions.json+pnl.json (Pershing) -- este archivo tenia una compra reciente sin capturar. buys_history NO actualizado (falta transactions.xlsx completo), bench_dw_pct puede estar levemente desalineado hasta re-sync.",
       "bench_label": "AGG",
       "bench_dw_pct": -0.29,
       "alpha_real_pp": 1.16,
+      "ytd_pct": 1.45,
+      "bench_ytd_pct": -0.68,
+      "alpha_ytd_pp": 2.13,
       "first_buy_date": "2026-01-30",
       "period_end": "2026-07-28",
-      "n_trades": 2,
+      "n_trades": 5,
       "buys_history": [
         {
           "date": "2026-01-30",
@@ -40,31 +69,12 @@
         {
           "date": "2026-02-10",
           "cost": 400030.0
+        },
+        {
+          "date": "2026-07-07",
+          "cost": 100030.0
         }
-      ],
-      "ytd_pct": 1.45,
-      "bench_ytd_pct": -0.68,
-      "alpha_ytd_pp": 2.13
-    },
-    {
-      "ticker": "PIMCO-INC",
-      "sleeve": "Fixed Income",
-      "status": "CLOSED",
-      "name": "PIMCO INCOME FUND INSTITUTIONAL CLASS (ACC)(USD)    ",
-      "cost_basis_usd": 3013771.85,
-      "proceeds_usd": 7200000.02,
-      "realized_gl_usd": 379929.10000000003,
-      "realized_gl_pct": 5.57,
-      "first_buy_date": "2025-07-07",
-      "last_sell_date": "2026-02-02",
-      "n_lots": 5,
-      "mv_usd": 3043889.19,
-      "qty": 150464.122,
-      "unrealized_gl_usd": 30117.34,
-      "return_pct": 1.0,
-      "last_price_pershing": 20.23,
-      "period_end": "2026-06-24",
-      "n_trades": 6
+      ]
     },
     {
       "ticker": "MANIG",
@@ -77,13 +87,15 @@
       "unrealized_gl_usd": 77167.77,
       "return_pct": 3.87,
       "last_price_pershing": 124.57,
-      "_qty_mv_note": "qty/mv/cost corregidos 2026-07-28 desde canonical positions.json+pnl.json (Pershing) -- este archivo tenia una compra reciente sin capturar. buys_history NO actualizado (falta transactions.xlsx completo), bench_dw_pct puede estar levemente desalineado hasta re-sync.",
       "bench_label": "AGG",
-      "bench_dw_pct": 2.28,
-      "alpha_real_pp": 1.59,
+      "bench_dw_pct": 2.05,
+      "alpha_real_pp": 1.82,
+      "ytd_pct": 1.6,
+      "bench_ytd_pct": -0.68,
+      "alpha_ytd_pp": 2.28,
       "first_buy_date": "2025-07-07",
       "period_end": "2026-07-28",
-      "n_trades": 9,
+      "n_trades": 10,
       "buys_history": [
         {
           "date": "2025-07-07",
@@ -120,11 +132,12 @@
         {
           "date": "2026-02-11",
           "cost": 250030.0
+        },
+        {
+          "date": "2026-07-07",
+          "cost": 200030.0
         }
-      ],
-      "ytd_pct": 1.6,
-      "bench_ytd_pct": -0.68,
-      "alpha_ytd_pp": 2.28
+      ]
     },
     {
       "ticker": "PIMCO-EM",
@@ -140,6 +153,9 @@
       "bench_label": "AGG",
       "bench_dw_pct": -0.42,
       "alpha_real_pp": -0.24,
+      "ytd_pct": 1.73,
+      "bench_ytd_pct": -0.68,
+      "alpha_ytd_pp": 2.41,
       "first_buy_date": "2026-01-30",
       "period_end": "2026-07-28",
       "n_trades": 2,
@@ -152,10 +168,7 @@
           "date": "2026-04-08",
           "cost": 138030.0
         }
-      ],
-      "ytd_pct": 1.73,
-      "bench_ytd_pct": -0.68,
-      "alpha_ytd_pp": 2.41
+      ]
     },
     {
       "ticker": "TGF",
@@ -163,14 +176,17 @@
       "status": "OPEN",
       "name": "LFEEDER DAC EURO MEDIUM TERM NOTE ISIN#XS2324777171 VARIABL ",
       "qty": 532000.0,
-      "mv_usd": 811823.88,
+      "mv_usd": 820429.12,
       "cost_basis_usd": 764206.53,
-      "unrealized_gl_usd": 47617.35,
-      "return_pct": 6.23,
-      "last_price_pershing": 1.526,
+      "unrealized_gl_usd": 56222.59,
+      "return_pct": 7.36,
+      "last_price_pershing": 154.216,
       "bench_label": "AGG",
       "bench_dw_pct": 3.37,
-      "alpha_real_pp": 2.86,
+      "alpha_real_pp": 3.99,
+      "ytd_pct": 3.53,
+      "bench_ytd_pct": -0.68,
+      "alpha_ytd_pp": 4.21,
       "first_buy_date": "2025-07-16",
       "period_end": "2026-07-28",
       "n_trades": 2,
@@ -183,10 +199,7 @@
           "date": "2025-08-20",
           "cost": 253920.0
         }
-      ],
-      "ytd_pct": 3.53,
-      "bench_ytd_pct": -0.68,
-      "alpha_ytd_pp": 4.21
+      ]
     },
     {
       "ticker": "SGCB",
@@ -199,22 +212,25 @@
       "unrealized_gl_usd": 10511.11,
       "return_pct": 1.84,
       "last_price_pershing": 2154.52,
-      "_qty_mv_note": "qty/mv/cost corregidos 2026-07-28 desde canonical positions.json+pnl.json (Pershing) -- este archivo tenia una compra reciente sin capturar. buys_history NO actualizado (falta transactions.xlsx completo), bench_dw_pct puede estar levemente desalineado hasta re-sync.",
       "bench_label": "AGG",
-      "bench_dw_pct": -0.36,
-      "alpha_real_pp": 2.2,
+      "bench_dw_pct": -0.32,
+      "alpha_real_pp": 2.16,
+      "ytd_pct": 3.62,
+      "bench_ytd_pct": -0.68,
+      "alpha_ytd_pp": 4.3,
       "first_buy_date": "2026-04-13",
       "period_end": "2026-07-28",
-      "n_trades": 1,
+      "n_trades": 2,
       "buys_history": [
         {
           "date": "2026-04-13",
           "cost": 519996.8
+        },
+        {
+          "date": "2026-07-13",
+          "cost": 50005.96
         }
-      ],
-      "ytd_pct": 3.62,
-      "bench_ytd_pct": -0.68,
-      "alpha_ytd_pp": 4.3
+      ]
     },
     {
       "ticker": "MANEM",
@@ -230,6 +246,9 @@
       "bench_label": "AGG",
       "bench_dw_pct": 0.04,
       "alpha_real_pp": 1.09,
+      "ytd_pct": 6.01,
+      "bench_ytd_pct": -0.68,
+      "alpha_ytd_pp": 6.69,
       "first_buy_date": "2026-05-13",
       "period_end": "2026-07-28",
       "n_trades": 1,
@@ -238,10 +257,20 @@
           "date": "2026-05-13",
           "cost": 20030.0
         }
-      ],
-      "bench_ytd_pct": -0.68,
-      "ytd_pct": 6.01,
-      "alpha_ytd_pp": 6.69
+      ]
+    },
+    {
+      "ticker": "PIMCO-INC",
+      "sleeve": "Fixed Income",
+      "status": "CLOSED",
+      "name": "PIMCO INCOME FUND INSTITUTIONAL CLASS (ACC)(USD)    ",
+      "cost_basis_usd": 6820070.92,
+      "proceeds_usd": 7200000.02,
+      "realized_gl_usd": 379929.10000000003,
+      "realized_gl_pct": 5.57,
+      "first_buy_date": "2026-07-07",
+      "last_sell_date": "2026-07-02",
+      "n_lots": 5
     },
     {
       "ticker": "WELLCRED",
@@ -249,15 +278,26 @@
       "status": "CLOSED",
       "name": "WELLINGTON CREDIT TOTAL RETURN FUND CLASS N (ACC)(USD)    ",
       "cost_basis_usd": 4316891.84,
-      "proceeds_usd": 4413699.219999999,
+      "proceeds_usd": 4413699.22,
       "realized_gl_usd": 96807.38,
       "realized_gl_pct": 2.24,
-      "first_buy_date": "2025-07-07",
-      "last_sell_date": "2026-01-30",
+      "first_buy_date": "Multiple",
+      "last_sell_date": "Multiple",
       "n_lots": 9
+    },
+    {
+      "ticker": "PIMCO-LD",
+      "sleeve": "Fixed Income",
+      "status": "CLOSED",
+      "name": "PIMCO LOW DURATION INCOME FUND INSTITUTIONAL CLASS (ACC)(USD",
+      "cost_basis_usd": 990007.13,
+      "proceeds_usd": 1000000.0,
+      "realized_gl_usd": 9992.87,
+      "realized_gl_pct": 1.01,
+      "first_buy_date": "2026-07-07",
+      "last_sell_date": "06/16/2026",
+      "n_lots": 1
     }
   ],
-  "_daily_refresh_note": "Daily refresh 2026-07-28: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
-  "_synced_to_positions": "2026-06-24: MVs sincronizados desde positions_latest.json (Pershing 24-Jun)",
-  "_ugl_refresh": "2026-06-24: cost basis + returns desde Pershing UGL (Multiple-row aggregates)"
+  "_daily_refresh_note": "Daily refresh 2026-07-28: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump."
 }

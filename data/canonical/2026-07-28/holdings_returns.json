@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "as_of": "2026-07-28",
-  "generated_at": "2026-07-28T20:41:33Z",
+  "generated_at": "2026-07-28T20:47:18Z",
   "note": "Holdings con MV/return DIRECTO de Pershing UGL (canonical v2 pnl.json). Bench DW calculado desde buys_history + bench indices. Fixes bug de precio staleado del compute_holdings_returns.py viejo.",
   "sources": {
     "positions": "data/canonical/2026-07-28/positions.json",
@@ -141,7 +141,7 @@
           "bench_ytd_pct": 9.98,
           "alpha_ytd_pp": 5.11,
           "first_buy_date": "2025-07-07",
-          "n_trades": 6,
+          "n_trades": 7,
           "buys_history": [
             {
               "date": "2025-07-07",
@@ -217,7 +217,7 @@
           "bench_ytd_pct": 9.98,
           "alpha_ytd_pp": 0.33,
           "first_buy_date": "2025-07-03",
-          "n_trades": 2,
+          "n_trades": 7,
           "buys_history": [
             {
               "date": "2025-07-03",
@@ -252,7 +252,7 @@
         },
         {
           "ticker": "LGLI",
-          "name": "LAZARD GLOBAL LISTED INFRASTRUCTURE FD CL A (USD)(ACC)",
+          "name": "LAZARD GLOBAL LISTED INFRASTRUCTURE FUND CLASS A (ACC)(USD)",
           "isin": "IE00BF4KN675",
           "status": "OPEN",
           "qty": 26511.134,
@@ -439,42 +439,14 @@
           "unrealized_gl_usd": 2614.85,
           "return_pct": 0.08,
           "bench_label": "AGG",
-          "bench_dw_pct": 3.05,
-          "alpha_real_pp": -2.97,
+          "bench_dw_pct": -0.53,
+          "alpha_real_pp": 0.61,
           "ytd_pct": 0.2,
           "bench_ytd_pct": -0.24,
           "alpha_ytd_pp": 0.44,
-          "first_buy_date": "2025-07-07",
-          "n_trades": 6,
+          "first_buy_date": "2026-07-07",
+          "n_trades": 1,
           "buys_history": [
-            {
-              "date": "2025-07-07",
-              "cost": 30246.03
-            },
-            {
-              "date": "2025-09-04",
-              "cost": 327651.85
-            },
-            {
-              "date": "2025-10-07",
-              "cost": 226030.0
-            },
-            {
-              "date": "2025-12-04",
-              "cost": 130030.0
-            },
-            {
-              "date": "2026-01-07",
-              "cost": 230030.0
-            },
-            {
-              "date": "2026-01-30",
-              "cost": 1100030.0
-            },
-            {
-              "date": "2026-06-18",
-              "cost": 1000000.0
-            },
             {
               "date": "2026-07-07",
               "cost": 150030.0
@@ -499,7 +471,7 @@
           "bench_ytd_pct": -0.24,
           "alpha_ytd_pp": 1.69,
           "first_buy_date": "2026-01-30",
-          "n_trades": 2,
+          "n_trades": 5,
           "buys_history": [
             {
               "date": "2026-01-30",
@@ -516,6 +488,10 @@
             {
               "date": "2026-02-10",
               "cost": 400030.0
+            },
+            {
+              "date": "2026-07-07",
+              "cost": 100030.0
             }
           ],
           "_mv_source": "pershing_ugl"
@@ -537,7 +513,7 @@
           "bench_ytd_pct": -0.24,
           "alpha_ytd_pp": 1.84,
           "first_buy_date": "2025-07-07",
-          "n_trades": 9,
+          "n_trades": 10,
           "buys_history": [
             {
               "date": "2025-07-07",
@@ -574,6 +550,10 @@
             {
               "date": "2026-02-11",
               "cost": 250030.0
+            },
+            {
+              "date": "2026-07-07",
+              "cost": 200030.0
             }
           ],
           "_mv_source": "pershing_ugl"
@@ -655,11 +635,15 @@
           "bench_ytd_pct": -0.24,
           "alpha_ytd_pp": 3.86,
           "first_buy_date": "2026-04-13",
-          "n_trades": 1,
+          "n_trades": 2,
           "buys_history": [
             {
               "date": "2026-04-13",
               "cost": 519996.8
+            },
+            {
+              "date": "2026-07-13",
+              "cost": 50005.96
             }
           ],
           "_mv_source": "pershing_ugl"
@@ -740,7 +724,7 @@
           "bench_ytd_pct": 9.98,
           "alpha_ytd_pp": -8.69,
           "first_buy_date": "2026-05-27",
-          "n_trades": 2,
+          "n_trades": 3,
           "buys_history": [
             {
               "date": "2026-05-27",
@@ -749,6 +733,10 @@
             {
               "date": "2026-06-17",
               "cost": 600000.0
+            },
+            {
+              "date": "2026-07-27",
+              "cost": 300000.0
             }
           ],
           "_mv_source": "pershing_ugl"
@@ -770,7 +758,7 @@
           "bench_ytd_pct": 9.98,
           "alpha_ytd_pp": -35.92,
           "first_buy_date": "2025-07-02",
-          "n_trades": 10,
+          "n_trades": 11,
           "buys_history": [
             {
               "date": "2025-07-02",
@@ -811,6 +799,10 @@
             {
               "date": "2026-06-03",
               "cost": 33660.77
+            },
+            {
+              "date": "2026-07-06",
+              "cost": 78698.6
             }
           ],
           "_mv_source": "pershing_ugl"
@@ -832,7 +824,7 @@
           "bench_ytd_pct": 9.98,
           "alpha_ytd_pp": -15.45,
           "first_buy_date": "2025-07-02",
-          "n_trades": 5,
+          "n_trades": 6,
           "buys_history": [
             {
               "date": "2025-07-02",
@@ -853,6 +845,10 @@
             {
               "date": "2025-12-02",
               "cost": 15175.39
+            },
+            {
+              "date": "2026-07-02",
+              "cost": 99909.75
             }
           ],
           "_mv_source": "pershing_ugl"
@@ -938,11 +934,15 @@
           "bench_ytd_pct": 9.98,
           "alpha_ytd_pp": -9.62,
           "first_buy_date": "2026-05-07",
-          "n_trades": 1,
+          "n_trades": 2,
           "buys_history": [
             {
               "date": "2026-05-07",
               "cost": 499999.99
+            },
+            {
+              "date": "2026-07-27",
+              "cost": 130000.0
             }
           ],
           "_mv_source": "pershing_ugl"

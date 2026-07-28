@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-07-28T17:41:24.936357",
+  "refreshedAt": "2026-07-28T17:47:17.857586",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Alternatives",
   "period_end": "2026-07-28",
@@ -7,32 +7,39 @@
   "n_closed": 2,
   "holdings": [
     {
-      "ticker": "CALP",
+      "ticker": "HLGPI",
       "sleeve": "Alternatives",
       "status": "OPEN",
-      "name": "Carlyle AlpInvest Private Markets Sub-Fund I Class B1",
-      "qty": 186706.497,
-      "mv_usd": 2738984.31,
-      "cost_basis_usd": 2499999.99,
-      "unrealized_gl_usd": 238984.32,
-      "return_pct": 9.56,
-      "last_price_pershing": 14.67,
+      "name": "HAMILTON LANE GLOBAL PRIVATE INFRASTRUCTURE FUND CLASS I (AC",
+      "qty": 8058.402,
+      "mv_usd": 1124101.95,
+      "cost_basis_usd": 1100000.13,
+      "unrealized_gl_usd": 24101.82,
+      "return_pct": 2.19,
+      "last_price_pershing": 139.4944,
       "bench_label": "ACWI",
-      "bench_dw_pct": 17.59,
-      "alpha_real_pp": -8.03,
-      "first_buy_date": "2025-08-29",
+      "bench_dw_pct": -0.83,
+      "alpha_real_pp": 3.02,
+      "ytd_pct": 1.29,
+      "bench_ytd_pct": 9.98,
+      "alpha_ytd_pp": -8.69,
+      "first_buy_date": "2026-05-27",
       "period_end": "2026-07-28",
-      "n_trades": 1,
+      "n_trades": 3,
       "buys_history": [
         {
-          "date": "2025-08-29",
-          "cost": 2499999.99
+          "date": "2026-05-27",
+          "cost": 500000.17
+        },
+        {
+          "date": "2026-06-17",
+          "cost": 600000.0
+        },
+        {
+          "date": "2026-07-27",
+          "cost": 300000.0
         }
-      ],
-      "ytd_pct": 5.03,
-      "bench_ytd_pct": 9.98,
-      "alpha_ytd_pp": -4.95,
-      "_source": "Carlyle AlpInvest statement (external, no Pershing UGL)"
+      ]
     },
     {
       "ticker": "IBIT",
@@ -45,13 +52,15 @@
       "unrealized_gl_usd": -358561.88,
       "return_pct": -29.45,
       "last_price_pershing": 36.77,
-      "_qty_mv_note": "qty/mv/cost corregidos 2026-07-28 desde canonical positions.json+pnl.json (Pershing) -- este archivo tenia una compra reciente sin capturar. buys_history NO actualizado (falta transactions.xlsx completo), bench_dw_pct puede estar levemente desalineado hasta re-sync.",
       "bench_label": "ACWI",
-      "bench_dw_pct": 15.9,
-      "alpha_real_pp": -45.35,
+      "bench_dw_pct": 14.97,
+      "alpha_real_pp": -44.42,
+      "ytd_pct": -25.94,
+      "bench_ytd_pct": 9.98,
+      "alpha_ytd_pp": -35.92,
       "first_buy_date": "2025-07-02",
       "period_end": "2026-07-28",
-      "n_trades": 10,
+      "n_trades": 11,
       "buys_history": [
         {
           "date": "2025-07-02",
@@ -92,11 +101,12 @@
         {
           "date": "2026-06-03",
           "cost": 33660.77
+        },
+        {
+          "date": "2026-07-06",
+          "cost": 78698.6
         }
-      ],
-      "ytd_pct": -25.94,
-      "bench_ytd_pct": 9.98,
-      "alpha_ytd_pp": -35.92
+      ]
     },
     {
       "ticker": "GLD",
@@ -109,13 +119,15 @@
       "unrealized_gl_usd": 125323.34,
       "return_pct": 18.04,
       "last_price_pershing": 374.63,
-      "_qty_mv_note": "qty/mv/cost corregidos 2026-07-28 desde canonical positions.json+pnl.json (Pershing) -- este archivo tenia una compra reciente sin capturar. buys_history NO actualizado (falta transactions.xlsx completo), bench_dw_pct puede estar levemente desalineado hasta re-sync.",
       "bench_label": "ACWI",
-      "bench_dw_pct": 20.77,
-      "alpha_real_pp": -2.73,
+      "bench_dw_pct": 19.22,
+      "alpha_real_pp": -1.18,
+      "ytd_pct": -5.47,
+      "bench_ytd_pct": 9.98,
+      "alpha_ytd_pp": -15.45,
       "first_buy_date": "2025-07-02",
       "period_end": "2026-07-28",
-      "n_trades": 5,
+      "n_trades": 6,
       "buys_history": [
         {
           "date": "2025-07-02",
@@ -136,11 +148,12 @@
         {
           "date": "2025-12-02",
           "cost": 15175.39
+        },
+        {
+          "date": "2026-07-02",
+          "cost": 99909.75
         }
-      ],
-      "ytd_pct": -5.47,
-      "bench_ytd_pct": 9.98,
-      "alpha_ytd_pp": -15.45
+      ]
     },
     {
       "ticker": "HLEND",
@@ -156,6 +169,9 @@
       "bench_label": "ACWI",
       "bench_dw_pct": 13.37,
       "alpha_real_pp": -10.09,
+      "ytd_pct": 2.49,
+      "bench_ytd_pct": 9.98,
+      "alpha_ytd_pp": -7.49,
       "first_buy_date": "2025-09-22",
       "period_end": "2026-07-28",
       "n_trades": 1,
@@ -164,10 +180,7 @@
           "date": "2025-09-22",
           "cost": 735050.0
         }
-      ],
-      "ytd_pct": 2.49,
-      "bench_ytd_pct": 9.98,
-      "alpha_ytd_pp": -7.49
+      ]
     },
     {
       "ticker": "BPCC",
@@ -179,11 +192,13 @@
       "cost_basis_usd": 554506.45,
       "unrealized_gl_usd": 44740.95,
       "return_pct": 8.07,
-      "last_price_pershing": 1.2909,
-      "_mv_source_note": "mv_usd corregido 2026-07-28: statement Pershing 30-Jun-2026 (129.09/100 * 464,209 face value). No se actualiza via daily_prices porque BPCC no esta en ucits_daily_nav.json/live_prices.json -- ver alts_bpcc_statement.json.",
+      "last_price_pershing": 129.09,
       "bench_label": "ACWI",
       "bench_dw_pct": 17.84,
       "alpha_real_pp": -9.77,
+      "ytd_pct": 3.07,
+      "bench_ytd_pct": 9.98,
+      "alpha_ytd_pp": -6.91,
       "first_buy_date": "2025-07-25",
       "period_end": "2026-07-28",
       "n_trades": 4,
@@ -204,10 +219,7 @@
           "date": "2025-10-24",
           "cost": 50030.36
         }
-      ],
-      "ytd_pct": 3.07,
-      "bench_ytd_pct": 9.98,
-      "alpha_ytd_pp": -6.91
+      ]
     },
     {
       "ticker": "FLEX",
@@ -215,58 +227,30 @@
       "status": "OPEN",
       "name": "FRANKLIN LEXINGTON PE SECONDARIES FUND CLASS I (ACC)(USD) IS",
       "qty": 16414.97,
-      "mv_usd": 501805.63,
+      "mv_usd": 512967.81,
       "cost_basis_usd": 499999.99,
-      "unrealized_gl_usd": 1805.64,
-      "return_pct": 0.36,
-      "last_price_pershing": 30.57,
+      "unrealized_gl_usd": 12967.82,
+      "return_pct": 2.59,
+      "last_price_pershing": 31.25,
       "bench_label": "ACWI",
-      "bench_dw_pct": 1.05,
-      "alpha_real_pp": -0.69,
-      "first_buy_date": "2026-05-07",
-      "period_end": "2026-07-28",
-      "n_trades": 1,
-      "buys_history": [
-        {
-          "date": "2026-05-07",
-          "cost": 499999.99
-        }
-      ],
+      "bench_dw_pct": 0.82,
+      "alpha_real_pp": 1.77,
       "ytd_pct": 0.36,
       "bench_ytd_pct": 9.98,
-      "alpha_ytd_pp": -9.62
-    },
-    {
-      "ticker": "HLGPI",
-      "sleeve": "Alternatives",
-      "status": "OPEN",
-      "name": "HAMILTON LANE GLOBAL PRIVATE INFRASTRUCTURE FUND CLASS I (AC",
-      "qty": 8058.402,
-      "mv_usd": 1114198.98,
-      "cost_basis_usd": 1100000.13,
-      "unrealized_gl_usd": 14198.85,
-      "return_pct": 1.29,
-      "last_price_pershing": 138.2655,
-      "bench_label": "ACWI",
-      "bench_dw_pct": -1.05,
-      "alpha_real_pp": 2.34,
-      "first_buy_date": "2026-05-27",
+      "alpha_ytd_pp": -9.62,
+      "first_buy_date": "2026-05-07",
       "period_end": "2026-07-28",
       "n_trades": 2,
       "buys_history": [
         {
-          "date": "2026-05-27",
-          "cost": 500000.17
+          "date": "2026-05-07",
+          "cost": 499999.99
         },
         {
-          "date": "2026-06-17",
-          "cost": 600000.0
+          "date": "2026-07-27",
+          "cost": 130000.0
         }
-      ],
-      "ytd_pct": 1.29,
-      "bench_ytd_pct": 9.98,
-      "alpha_ytd_pp": -8.69,
-      "_note_may_2026": "First tranche $500K (27-May) ganó 2.8% en May; settled second tranche $600K (17-Jun). Cost basis ponderado ahora $1.10M."
+      ]
     },
     {
       "ticker": "GCRED",
@@ -282,6 +266,9 @@
       "bench_label": "ACWI",
       "bench_dw_pct": 13.37,
       "alpha_real_pp": -12.26,
+      "ytd_pct": 1.12,
+      "bench_ytd_pct": 9.98,
+      "alpha_ytd_pp": -8.86,
       "first_buy_date": "2025-09-22",
       "period_end": "2026-07-28",
       "n_trades": 1,
@@ -290,10 +277,20 @@
           "date": "2025-09-22",
           "cost": 490050.0
         }
-      ],
-      "ytd_pct": 1.12,
-      "bench_ytd_pct": 9.98,
-      "alpha_ytd_pp": -8.86
+      ]
+    },
+    {
+      "ticker": "GLD",
+      "sleeve": "Alternatives",
+      "status": "CLOSED",
+      "name": "SPDR GOLD TR GOLD SHS     ",
+      "cost_basis_usd": 384479.78,
+      "proceeds_usd": 553839.0,
+      "realized_gl_usd": 169359.22,
+      "realized_gl_pct": 44.05,
+      "first_buy_date": "2026-07-02",
+      "last_sell_date": "Multiple",
+      "n_lots": 5
     },
     {
       "ticker": "NBPEA",
@@ -304,13 +301,10 @@
       "proceeds_usd": 862301.46,
       "realized_gl_usd": 60568.35,
       "realized_gl_pct": 7.55,
-      "first_buy_date": "2025-09-18",
-      "last_sell_date": "2026-05-26",
+      "first_buy_date": "08/29/2025",
+      "last_sell_date": "04/30/2026",
       "n_lots": 1
     }
   ],
-  "_daily_refresh_note": "Daily refresh 2026-07-28: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump.",
-  "_synced_to_positions": "2026-06-24: MVs sincronizados desde positions_latest.json (Pershing 24-Jun)",
-  "_ugl_refresh": "2026-06-24: cost basis + returns desde Pershing UGL (Multiple-row aggregates)",
-  "_calp_added": "2026-06-25: CALP agregado desde alts_carlyle_statement.json (external, no esta en Pershing UGL)"
+  "_daily_refresh_note": "Daily refresh 2026-07-28: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump."
 }
