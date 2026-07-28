@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-07-28T14:02:29.318485",
+  "refreshedAt": "2026-07-28T18:14:41.047347",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -580,29 +580,8 @@
     },
     {
       "date": "2026-07-28",
-      "mv_usd": 10430674.118229998,
+      "mv_usd": 10958714.634859998,
       "holdings": [
-        {
-          "ticker": "PIMCO-LD",
-          "qty": 216973.101,
-          "price": 14.0,
-          "mv": 3037623.414,
-          "source": "daily_close"
-        },
-        {
-          "ticker": "PIMCO-INC",
-          "qty": 150464.122,
-          "price": 20.05,
-          "mv": 3016805.6461,
-          "source": "daily_close"
-        },
-        {
-          "ticker": "MANIG",
-          "qty": 15027.986,
-          "price": 124.57,
-          "mv": 1872036.21602,
-          "source": "daily_close"
-        },
         {
           "ticker": "PIMCO-EM",
           "qty": 61949.011,
@@ -611,17 +590,17 @@
           "source": "daily_close"
         },
         {
-          "ticker": "TGF",
-          "qty": 532000.0,
-          "price": 1.5470813721804513,
-          "mv": 823047.29,
-          "source": "pershing_frozen"
+          "ticker": "MANIG",
+          "qty": 16621.485,
+          "price": 124.57,
+          "mv": 2070538.3864499999,
+          "source": "daily_close"
         },
         {
-          "ticker": "SGCB",
-          "qty": 246.15,
-          "price": 2154.52,
-          "mv": 530335.098,
+          "ticker": "PIMCO-INC",
+          "qty": 159434.55,
+          "price": 20.05,
+          "mv": 3196662.7275,
           "source": "daily_close"
         },
         {
@@ -630,6 +609,27 @@
           "price": 115.06,
           "mv": 20257.003360000002,
           "source": "daily_close"
+        },
+        {
+          "ticker": "PIMCO-LD",
+          "qty": 224080.422,
+          "price": 14.0,
+          "mv": 3137125.908,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "SGCB",
+          "qty": 269.44,
+          "price": 2154.52,
+          "mv": 580513.8687999999,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "TGF",
+          "qty": 532000.0,
+          "price": 1.5470813721804513,
+          "mv": 823047.29,
+          "source": "pershing_frozen"
         }
       ]
     }
@@ -3520,8 +3520,8 @@
     },
     {
       "date": "2026-07-28",
-      "mv_usd": 10430674.118229998,
-      "flow_in": 20257.0,
+      "mv_usd": 10958714.634859998,
+      "flow_in": 548297.52,
       "twr": 0.008189869784808623,
       "index": 105.5305
     }
@@ -5577,7 +5577,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-07-28 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing Jun 24, 2026.",
+  "_daily_refresh_note": "Punto 2026-07-28 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-07-28.",
   "twr_series_original": [
     {
       "date": "2025-07-31",

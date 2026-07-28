@@ -46,6 +46,8 @@ SECURITY_MAP = {
     "ILF":       ("Equity", "ILF",   "US4642873909", "ILF"),
     "4BRZ:DE":   ("Equity", "4BRZ",  "DE000A0Q4R85", "EWZ"),       # use EWZ as proxy
     "ARGT":      ("Equity", "ARGT",  "US37950E2596", "ARGT"),
+    "MAGS":      ("Equity", "MAGS",  "US53656G4982", "MAGS"),      # Roundhill Mag 7 ETF (entrada 2026-07-02)
+    "HEWJ":      ("Equity", "HEWJ",  "US46434V8862", "HEWJ"),      # iShares Currency Hedged MSCI Japan (entrada 2026-07-02)
 
     # ALTS
     "GLD":       ("Alternatives", "GLD",   "US78463V1070", "GLD"),

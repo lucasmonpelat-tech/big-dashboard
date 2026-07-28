@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-07-28T10:33:01.040080",
+  "refreshedAt": "2026-07-28T18:14:22.154265",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -841,29 +841,8 @@
     },
     {
       "date": "2026-07-28",
-      "mv_usd": 8150893.829334144,
+      "mv_usd": 8543212.165810738,
       "holdings": [
-        {
-          "ticker": "CSPX",
-          "qty": 3408.0,
-          "price": 796.6599731445312,
-          "mv": 2715017.1884765625,
-          "source": "daily_close"
-        },
-        {
-          "ticker": "NBGMT",
-          "qty": 58050.998,
-          "price": 23.99,
-          "mv": 1392643.44202,
-          "source": "daily_close"
-        },
-        {
-          "ticker": "MFSCV",
-          "qty": 4063.638,
-          "price": 306.11,
-          "mv": 1243920.22818,
-          "source": "daily_close"
-        },
         {
           "ticker": "THOR",
           "qty": 14410.584,
@@ -872,10 +851,10 @@
           "source": "daily_close"
         },
         {
-          "ticker": "JHGSC",
-          "qty": 10410.46,
-          "price": 54.98,
-          "mv": 572367.0907999999,
+          "ticker": "4BRZ",
+          "qty": 6979.0,
+          "price": 50.8,
+          "mv": 354533.19999999995,
           "source": "daily_close"
         },
         {
@@ -886,24 +865,59 @@
           "source": "daily_close"
         },
         {
-          "ticker": "ARGT",
-          "qty": 4000.0,
-          "price": 93.62999725341797,
-          "mv": 374519.9890136719,
-          "source": "daily_close"
-        },
-        {
           "ticker": "ILF",
           "qty": 10000.0,
-          "price": 34.810001373291016,
-          "mv": 348100.01373291016,
+          "price": 34.81,
+          "mv": 348100.0,
           "source": "daily_close"
         },
         {
-          "ticker": "4BRZ",
-          "qty": 6979.0,
-          "price": 50.8,
-          "mv": 354533.19999999995,
+          "ticker": "HEWJ",
+          "qty": 3125.0,
+          "price": 63.540000915527344,
+          "mv": 198562.50286102295,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "CSPX",
+          "qty": 3408.0,
+          "price": 796.66,
+          "mv": 2715017.28,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "NBGMT",
+          "qty": 58050.998,
+          "price": 23.99,
+          "mv": 1392643.44202,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MAGS",
+          "qty": 3075.0,
+          "price": 63.0099983215332,
+          "mv": 193755.7448387146,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "JHGSC",
+          "qty": 10410.46,
+          "price": 54.98,
+          "mv": 572367.0907999999,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "ARGT",
+          "qty": 4000.0,
+          "price": 93.63,
+          "mv": 374520.0,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MFSCV",
+          "qty": 4063.638,
+          "price": 306.11,
+          "mv": 1243920.22818,
           "source": "daily_close"
         }
       ]
@@ -3793,9 +3807,9 @@
     },
     {
       "date": "2026-07-28",
-      "mv_usd": 8150893.829334144,
-      "flow_in": 0.0,
-      "twr": 0.011049745472803796,
+      "mv_usd": 8543212.165810738,
+      "flow_in": 392318.25,
+      "twr": 0.011049756484825313,
       "index": 113.8313
     }
   ],
@@ -5959,8 +5973,8 @@
     },
     {
       "date": "2026-07-28",
-      "price": 153.77,
-      "index": 119.3606
+      "price": 154.54,
+      "index": 119.9583
     }
   ],
   "equity_flows_by_month": {
@@ -6151,7 +6165,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-07-28 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing Jun 24, 2026.",
+  "_daily_refresh_note": "Punto 2026-07-28 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing 2026-07-28.",
   "twr_series_original": [
     {
       "date": "2025-07-31",

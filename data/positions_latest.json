@@ -1,216 +1,210 @@
 {
-  "as_of": "Jun 24, 2026",
-  "as_of_date": "2026-06-24",
-  "refreshedAt": "2026-06-24T13:15:30.673420",
-  "source": "Pershing Excel export Positions_JXD101380 (5).xlsx + CALP external",
-  "total_aum": 26107486.99,
+  "as_of": "2026-07-28",
+  "as_of_date": "2026-07-28",
+  "refreshedAt": "2026-07-28T18:12:38.812456",
+  "source": "canonical/2026-07-28/positions.json (Pershing via NetX360)",
+  "total_aum": 24669138.78,
   "n_positions": 25,
   "positions": [
     {
-      "ticker": "CSPX",
-      "sleeve": "Equity",
-      "qty": 3408.0,
-      "price": 794.11,
-      "value": 2706326.88,
-      "price_as_of": "2026-06-24"
-    },
-    {
-      "ticker": "NBGMT",
-      "sleeve": "Equity",
-      "qty": 58050.998,
-      "price": 23.27,
-      "value": 1350846.72,
-      "price_as_of": "2026-06-24"
-    },
-    {
-      "ticker": "MFSCV",
-      "sleeve": "Equity",
-      "qty": 4063.638,
-      "price": 292.92,
-      "value": 1190320.84,
-      "price_as_of": "2026-06-24"
+      "ticker": "GCRED",
+      "sleeve": "Alternatives",
+      "qty": 495475.43,
+      "price": null,
+      "value": 495475.43,
+      "price_as_of": "2026-07-28"
     },
     {
       "ticker": "THOR",
       "sleeve": "Equity",
       "qty": 14410.584,
-      "price": 43.04,
-      "value": 620231.54,
-      "price_as_of": "2026-06-24"
+      "price": 43.81,
+      "value": 631327.69,
+      "price_as_of": "2026-07-24"
     },
     {
-      "ticker": "JHGSC",
-      "sleeve": "Equity",
-      "qty": 10410.46,
-      "price": 55.47,
-      "value": 577468.22,
-      "price_as_of": "2026-06-24"
-    },
-    {
-      "ticker": "LGLI",
-      "sleeve": "Equity",
-      "qty": 26511.134,
-      "price": 19.6867,
-      "value": 521916.74,
-      "price_as_of": "2026-06-24"
-    },
-    {
-      "ticker": "ARGT",
-      "sleeve": "Equity",
-      "qty": 4000.0,
-      "price": 90.9,
-      "value": 363600.0,
-      "price_as_of": "2026-06-24"
-    },
-    {
-      "ticker": "ILF",
-      "sleeve": "Equity",
-      "qty": 10000.0,
-      "price": 33.25,
-      "value": 332500.0,
-      "price_as_of": "2026-06-24"
-    },
-    {
-      "ticker": "4BRZ",
-      "sleeve": "Equity",
-      "qty": 6979.0,
-      "price": 48.3981,
-      "value": 337770.34,
-      "price_as_of": "2026-06-24"
-    },
-    {
-      "ticker": "PIMCO-LD",
-      "sleeve": "Fixed Income",
-      "qty": 216973.101,
-      "price": 14.02,
-      "value": 3041962.88,
-      "price_as_of": "2026-06-24"
-    },
-    {
-      "ticker": "PIMCO-INC",
-      "sleeve": "Fixed Income",
-      "qty": 150464.122,
-      "price": 20.23,
-      "value": 3043889.19,
-      "price_as_of": "2026-06-24"
-    },
-    {
-      "ticker": "MANIG",
-      "sleeve": "Fixed Income",
-      "qty": 15027.986,
-      "price": 125.11,
-      "value": 1880151.33,
-      "price_as_of": "2026-06-24"
+      "ticker": "IBIT",
+      "sleeve": "Alternatives",
+      "qty": 23356.0,
+      "price": 36.77,
+      "value": 858800.12,
+      "price_as_of": "2026-07-27"
     },
     {
       "ticker": "PIMCO-EM",
       "sleeve": "Fixed Income",
       "qty": 61949.011,
-      "price": 18.19,
-      "value": 1126852.51,
-      "price_as_of": "2026-06-24"
+      "price": 18.25,
+      "value": 1130569.45,
+      "price_as_of": "2026-07-27"
     },
     {
-      "ticker": "TGF",
-      "sleeve": "Fixed Income",
-      "qty": 532000.0,
-      "price": 1.526,
-      "value": 811823.88,
-      "price_as_of": "2026-06-24"
+      "ticker": "4BRZ",
+      "sleeve": "Equity",
+      "qty": 6979.0,
+      "price": 50.8,
+      "value": 354533.2,
+      "price_as_of": "2026-07-27"
     },
     {
-      "ticker": "SGCB",
-      "sleeve": "Fixed Income",
-      "qty": 246.15,
-      "price": 2133.76,
-      "value": 525225.02,
-      "price_as_of": "2026-06-24"
-    },
-    {
-      "ticker": "MANEM",
-      "sleeve": "Fixed Income",
-      "qty": 176.056,
-      "price": 114.71,
-      "value": 20195.38,
-      "price_as_of": "2026-06-24"
-    },
-    {
-      "isin": "LU2827810776",
-      "ticker": "CALP",
-      "name": "Carlyle AlpInvest Private Markets",
-      "sleeve": "Alternatives",
-      "value": 2722180.0,
-      "pct": 10.44,
-      "qty": null,
-      "price": null,
-      "ter_inst": 1.0,
-      "ter_a": null,
-      "source": "External (Carlyle SICAV)",
-      "price_as_of": "2026-04-30"
-    },
-    {
-      "ticker": "IBIT",
-      "sleeve": "Alternatives",
-      "qty": 21116.0,
-      "price": 34.145,
-      "value": 721005.82,
-      "price_as_of": "2026-06-24"
-    },
-    {
-      "ticker": "GLD",
-      "sleeve": "Alternatives",
-      "qty": 1924.0,
-      "price": 367.34,
-      "value": 706762.16,
-      "price_as_of": "2026-06-24"
-    },
-    {
-      "ticker": "HLEND",
-      "sleeve": "Alternatives",
-      "qty": 759172.36,
-      "price": 1.0,
-      "value": 759172.36,
-      "price_as_of": "2026-06-24"
+      "ticker": "LGLI",
+      "sleeve": "Equity",
+      "qty": 26511.134,
+      "price": 19.5565,
+      "value": 518464.99,
+      "price_as_of": "2026-07-24"
     },
     {
       "ticker": "BPCC",
       "sleeve": "Alternatives",
       "qty": 464209.0,
-      "price": 1.2825,
-      "value": 595348.04,
-      "price_as_of": "2026-06-24"
+      "price": 1.2909,
+      "value": 599247.4,
+      "price_as_of": "2026-07-27"
     },
     {
-      "ticker": "FLEX",
+      "ticker": "MANIG",
+      "sleeve": "Fixed Income",
+      "qty": 16621.485,
+      "price": 124.57,
+      "value": 2070538.39,
+      "price_as_of": "2026-07-24"
+    },
+    {
+      "ticker": "HLEND",
       "sleeve": "Alternatives",
-      "qty": 16414.97,
-      "price": 30.57,
-      "value": 501805.63,
-      "price_as_of": "2026-06-24"
+      "qty": 759172.36,
+      "price": null,
+      "value": 759172.36,
+      "price_as_of": "2026-07-28"
+    },
+    {
+      "ticker": "ILF",
+      "sleeve": "Equity",
+      "qty": 10000.0,
+      "price": 34.81,
+      "value": 348100.0,
+      "price_as_of": "2026-07-27"
+    },
+    {
+      "ticker": "HEWJ",
+      "sleeve": "Equity",
+      "qty": 3125.0,
+      "price": 63.54,
+      "value": 198562.5,
+      "price_as_of": "2026-07-27"
+    },
+    {
+      "ticker": "PIMCO-INC",
+      "sleeve": "Fixed Income",
+      "qty": 159434.55,
+      "price": 20.05,
+      "value": 3196662.73,
+      "price_as_of": "2026-07-27"
     },
     {
       "ticker": "HLGPI",
       "sleeve": "Alternatives",
       "qty": 8058.402,
-      "price": 138.2655,
-      "value": 1114198.98,
-      "price_as_of": "2026-06-24"
+      "price": 139.4944,
+      "value": 1124101.95,
+      "price_as_of": "2026-06-30"
     },
     {
-      "ticker": "GCRED",
+      "ticker": "MANEM",
+      "sleeve": "Fixed Income",
+      "qty": 176.056,
+      "price": 115.06,
+      "value": 20257.0,
+      "price_as_of": "2026-07-24"
+    },
+    {
+      "ticker": "CSPX",
+      "sleeve": "Equity",
+      "qty": 3408.0,
+      "price": 796.66,
+      "value": 2715017.28,
+      "price_as_of": "2026-07-27"
+    },
+    {
+      "ticker": "PIMCO-LD",
+      "sleeve": "Fixed Income",
+      "qty": 224080.422,
+      "price": 14.0,
+      "value": 3137125.91,
+      "price_as_of": "2026-07-27"
+    },
+    {
+      "ticker": "NBGMT",
+      "sleeve": "Equity",
+      "qty": 58050.998,
+      "price": 23.99,
+      "value": 1392643.44,
+      "price_as_of": "2026-07-24"
+    },
+    {
+      "ticker": "MAGS",
+      "sleeve": "Equity",
+      "qty": 3075.0,
+      "price": 63.01,
+      "value": 193755.75,
+      "price_as_of": "2026-07-27"
+    },
+    {
+      "ticker": "SGCB",
+      "sleeve": "Fixed Income",
+      "qty": 269.44,
+      "price": 2154.52,
+      "value": 580513.87,
+      "price_as_of": "2026-07-24"
+    },
+    {
+      "ticker": "JHGSC",
+      "sleeve": "Equity",
+      "qty": 10410.46,
+      "price": 54.98,
+      "value": 572367.09,
+      "price_as_of": "2026-07-27"
+    },
+    {
+      "ticker": "ARGT",
+      "sleeve": "Equity",
+      "qty": 4000.0,
+      "price": 93.63,
+      "value": 374520.0,
+      "price_as_of": "2026-07-27"
+    },
+    {
+      "ticker": "MFSCV",
+      "sleeve": "Equity",
+      "qty": 4063.638,
+      "price": 306.11,
+      "value": 1243920.23,
+      "price_as_of": "2026-07-24"
+    },
+    {
+      "ticker": "FLEX",
       "sleeve": "Alternatives",
-      "qty": 495475.43,
-      "price": 1.0,
-      "value": 495475.43,
-      "price_as_of": "2026-06-24"
+      "qty": 16414.97,
+      "price": 31.25,
+      "value": 512967.81,
+      "price_as_of": "2026-05-31"
     },
     {
-      "ticker": "CASH",
-      "sleeve": "Cash",
-      "qty": 40457.1,
-      "price": 40457.1,
-      "value": 40457.1,
-      "price_as_of": "2026-06-17"
+      "ticker": "GLD",
+      "sleeve": "Alternatives",
+      "qty": 2189.0,
+      "price": 374.63,
+      "value": 820065.07,
+      "price_as_of": "2026-07-27"
+    },
+    {
+      "ticker": "TGF",
+      "sleeve": "Fixed Income",
+      "qty": 532000.0,
+      "price": 1.54216,
+      "value": 820429.12,
+      "price_as_of": "2026-07-24"
     }
   ]
 }

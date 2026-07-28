@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-07-28T13:01:16.337877",
+  "refreshedAt": "2026-07-28T18:14:09.794118",
   "prices": {
     "ILF": {
       "price": 34.810001373291016,
@@ -30,7 +30,7 @@
       "open": 373.8900146484375,
       "high": 375.5299987792969,
       "low": 372.9100036621094,
-      "volume": 3684100.0,
+      "volume": 3700000.0,
       "source": "Yahoo Finance",
       "stale": false
     },
@@ -41,7 +41,7 @@
       "open": 36.7400016784668,
       "high": 37.20000076293945,
       "low": 36.439998626708984,
-      "volume": 27991500.0,
+      "volume": 28359300.0,
       "source": "Yahoo Finance",
       "stale": false
     },
@@ -78,12 +78,34 @@
       "source": "Yahoo Finance",
       "stale": false
     },
+    "MAGS": {
+      "price": 63.0099983215332,
+      "date": "2026-07-27",
+      "time": null,
+      "open": 63.95000076293945,
+      "high": 64.08499908447266,
+      "low": 62.959999084472656,
+      "volume": 4880200.0,
+      "source": "Yahoo Finance",
+      "stale": false
+    },
+    "HEWJ": {
+      "price": 63.540000915527344,
+      "date": "2026-07-27",
+      "time": null,
+      "open": 64.02999877929688,
+      "high": 64.02999877929688,
+      "low": 63.099998474121094,
+      "volume": 34800.0,
+      "source": "Yahoo Finance",
+      "stale": false
+    },
     "HLEND": null,
     "BPCC": null,
     "GCRED": null
   },
   "_meta": {
-    "fresh": 7,
+    "fresh": 9,
     "stale": 0,
     "guard_note": "Tickers con stale=true mantienen ultimo precio valido (yfinance retorno NaN)"
   }

@@ -40,6 +40,8 @@ STOOQ_TICKERS = {
     "CSPX":  {"symbol": "CSPX.L",  "currency": "USD"},  # London UCITS, denominated USD
     "THOR":  {"symbol": "TIBIX",   "currency": "USD"},
     "4BRZ":  {"symbol": "EWZ",     "currency": "USD"},  # US-listed proxy de MSCI Brazil
+    "MAGS":  {"symbol": "MAGS",    "currency": "USD"},  # Roundhill Mag 7 ETF (entrada 2026-07-02)
+    "HEWJ":  {"symbol": "HEWJ",    "currency": "USD"},  # iShares Currency Hedged MSCI Japan (entrada 2026-07-02)
     # Privados (BDCs) — no listados en Yahoo. Se manejan via fallback "last known price"
     # en el script consumer (refresh_equity/alts_daily.py).
     "HLEND": {"symbol": None,      "currency": "USD"},
