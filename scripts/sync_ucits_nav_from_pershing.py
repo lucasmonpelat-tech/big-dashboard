@@ -51,6 +51,12 @@ INSTRUMENTS = {
     "IE00BF4KN675": {"ticker": "LGLI",  "name": "Lazard Global Listed Infrastructure A Acc USD"},
     "IE00B6YCBF59": {"ticker": "THOR",  "name": "Thornburg Equity Income Builder I Acc USD"},
     "DE000A0Q4R85": {"ticker": "4BRZ",  "name": "iShares MSCI Brazil UCITS (DE)"},
+    # 2026-07-28: CSPX/ARGT/ILF usaban yfinance en paralelo (YMAP en
+    # refresh_equity_race_daily.py) -- Lucas: "quiero que este todo con
+    # Pershing", una sola fuente para todo el equity sleeve.
+    "IE00B5BMR087": {"ticker": "CSPX", "name": "iShares Core S&P 500 UCITS ETF"},
+    "US37950E2596": {"ticker": "ARGT", "name": "Global X MSCI Argentina ETF"},
+    "US4642873909": {"ticker": "ILF",  "name": "iShares Latin America 40 ETF"},
     # FI open-end funds (2026-07-28): mismo problema que las UCITS de arriba --
     # fi_fund_nav.json (baha) nunca trajo nada ("navs": {} desde siempre). NO se
     # incluyen aca TGF/BPCC (bonos, precio per-100-face, ya resueltos via
@@ -62,6 +68,10 @@ INSTRUMENTS = {
     "IE00B29K0P99": {"ticker": "PIMCO-EM",  "name": "PIMCO GIS Emerging Local Bond Inst Acc USD"},
     "LU2049315265": {"ticker": "SGCB",      "name": "Schroder GAIA Cat Bond C Acc USD"},
     "IE00089T5MA6": {"ticker": "MANEM",     "name": "Man EM Corporate Credit Alternative IV USD"},
+    # Alts liquidos (2026-07-28): antes via Stooq/Yahoo en live_prices.json.
+    # Mismo pedido de Lucas -- Pershing como unica fuente tambien para esto.
+    "US46438F1012": {"ticker": "IBIT", "name": "iShares Bitcoin Trust"},
+    "US78463V1070": {"ticker": "GLD",  "name": "SPDR Gold Trust"},
 }
 
 

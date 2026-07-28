@@ -23,7 +23,7 @@ Usage:
     python refresh_equity_race_daily.py
 """
 import json
-from datetime import date, datetime, timedelta
+from datetime import date, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
@@ -119,87 +119,46 @@ def main():
     print(f"  Close date: {close_date} | ACWI date: {acwi_date}")
     print(f"  Saved: {RACE_FILE}")
 
-    # FIX 2026-07-02: sobreescribir YTDs del equity_race.json con spot yfinance.
-    # Antes: equity_race.json quedaba stale desde el ultimo run manual de
-    # equity_race.py (mensual), y refresh_holdings_returns_daily.py leia esos
-    # YTDs stale y los mostraba en el UI.
+    # FIX 2026-07-28: UNA sola fuente para el YTD de TODO el equity sleeve --
+    # Pershing/NetX360 (ucits_daily_nav.json via sync_ucits_nav_from_pershing.py)
+    # + anchor 31-Dic-25 real (year_start_anchors.json). Antes CSPX/ARGT/ILF/4BRZ
+    # usaban yfinance en paralelo (YMAP) mientras el resto de los UCITS dependia
+    # de un scraper de baha que nunca funciono -- decision de Lucas 2026-07-28:
+    # "quiero que este todo con Pershing" (una sola fuente, sin depender de
+    # yfinance ni de baha para nada de esto).
     equity_race_file = ROOT / "data" / "equity_race.json"
     if equity_race_file.exists():
+        n_updated = 0
         try:
-            import yfinance as yf
-            YMAP = {
-                'CSPX': 'CSPX.L', 'ARGT': 'ARGT', 'ILF': 'ILF',
-                '4BRZ': '4BRZ.DE',
-                # UCITS sin yfinance decente -> no se pisa (fallback al legacy)
-            }
             er = json.load(open(equity_race_file, encoding='utf-8'))
-            n_updated = 0
+            navs = json.load(open(ROOT / 'data' / 'ucits_daily_nav.json', encoding='utf-8')).get('navs', {})
+            anchors = json.load(open(ROOT / 'data' / 'year_start_anchors.json', encoding='utf-8')).get('anchors_2026', {})
             for h in er.get('holdings', []):
                 tk = h.get('ticker')
-                sym = YMAP.get(tk)
-                if not sym:
+                isin = h.get('isin')
+                nav = (navs.get(isin) or {}).get('nav')
+                anchor_px = (anchors.get(isin) or {}).get('price_2025_dec_31')
+                if not (nav and anchor_px):
+                    # Sin anchor real -> se deja el YTD tal cual esta (NO se
+                    # sustituye por SI: el fondo existe desde antes del 31-Dic
+                    # aunque BIG lo haya comprado recien en 2026 -- YTD es el
+                    # retorno DEL FONDO desde el 1-Ene, no desde nuestra compra.
+                    # Pendiente: conseguir el NAV real 31-Dic-25 del fondo
+                    # (Lucas via baha / yfinance / factsheet) y plantarlo con
+                    # scripts/lock_year_start_anchor.py.
                     continue
-                try:
-                    t = yf.Ticker(sym)
-                    hist_dec = t.history(start='2025-12-28', end='2026-01-02', auto_adjust=True)
-                    # end=hoy (exclusivo) -> ultimo cierre OFICIAL T-1, nunca intradia
-                    hist_now = t.history(start=(date.today() - timedelta(days=7)).isoformat(),
-                                         end=date.today().isoformat(), auto_adjust=True)
-                    if len(hist_dec) and len(hist_now):
-                        anchor = float(hist_dec['Close'].iloc[-1])
-                        last = float(hist_now['Close'].iloc[-1])
-                        if anchor > 0:
-                            ytd_new = round((last / anchor - 1) * 100, 2)
-                            old = h.get('ytd_return_pct')
-                            h['ytd_return_pct'] = ytd_new
-                            if old is not None and abs(old - ytd_new) > 1:
-                                print(f"  [equity_race YTD spot] {tk}: {old:+.2f}% -> {ytd_new:+.2f}%")
-                            n_updated += 1
-                except Exception as e:
-                    print(f"    WARN {tk}: {str(e)[:50]}")
-
-            # FIX 2026-07-27/28: YTD spot para UCITS sin yfinance decente (NBGMT, MFSCV,
-            # THOR, JHGSC, LGLI): NAV T-1 de Pershing/NetX360 (ucits_daily_nav.json, ver
-            # sync_ucits_nav_from_pershing.py) / NAV 31-Dic (year_start_anchors.json).
-            # baha_nav_refresher.py (scrape directo a baha.com) nunca funciono en CI desde
-            # que se creo -- quedaba clavado en el NAV semilla de Mayo en silencio.
-            n_ucits = 0
-            try:
-                navs = json.load(open(ROOT / 'data' / 'ucits_daily_nav.json', encoding='utf-8')).get('navs', {})
-                anchors = json.load(open(ROOT / 'data' / 'year_start_anchors.json', encoding='utf-8')).get('anchors_2026', {})
-                for h in er.get('holdings', []):
-                    tk = h.get('ticker')
-                    if tk in YMAP:  # ya tiene spot yfinance
-                        continue
-                    isin = h.get('isin')
-                    nav = (navs.get(isin) or {}).get('nav')
-                    anchor_px = (anchors.get(isin) or {}).get('price_2025_dec_31')
-                    if not (nav and anchor_px):
-                        # Sin anchor real -> se deja el YTD tal cual esta (NO se
-                        # sustituye por SI: el fondo existe desde antes del 31-Dic
-                        # aunque BIG lo haya comprado recien en 2026 -- YTD es el
-                        # retorno DEL FONDO desde el 1-Ene, no desde nuestra compra.
-                        # Pendiente: conseguir el NAV real 31-Dic-25 del fondo
-                        # (Lucas via baha / factsheet) y plantarlo con
-                        # scripts/lock_year_start_anchor.py.
-                        continue
-                    ytd_new = round((nav / anchor_px - 1) * 100, 2)
-                    old = h.get('ytd_return_pct')
-                    h['ytd_return_pct'] = ytd_new
-                    n_ucits += 1
-                    if old is not None and abs(old - ytd_new) > 0.5:
-                        print(f"  [equity_race YTD spot ucits] {tk}: {old:+.2f}% -> {ytd_new:+.2f}%")
-            except Exception as e:
-                print(f"  WARN UCITS YTD spot: {e}")
+                ytd_new = round((nav / anchor_px - 1) * 100, 2)
+                old = h.get('ytd_return_pct')
+                h['ytd_return_pct'] = ytd_new
+                n_updated += 1
+                if old is not None and abs(old - ytd_new) > 0.5:
+                    print(f"  [equity_race YTD spot Pershing] {tk}: {old:+.2f}% -> {ytd_new:+.2f}%")
 
             er['refreshedAt'] = datetime.now().isoformat()
-            er['_ytd_spot_updated'] = (f'{datetime.now().date()}: {n_updated} holdings YTD spot via yfinance'
-                                       f' + {n_ucits} UCITS via Pershing NAV/anchor 31-Dic')
+            er['_ytd_spot_updated'] = f'{datetime.now().date()}: {n_updated} holdings YTD spot via Pershing NAV/anchor 31-Dic'
             with open(equity_race_file, 'w', encoding='utf-8') as f:
                 json.dump(er, f, indent=2, ensure_ascii=False)
-            print(f"  equity_race.json: {n_updated} holdings con YTD spot fresco")
-        except ImportError:
-            print("  yfinance no disponible, skip equity_race YTD spot")
+            print(f"  equity_race.json: {n_updated} holdings con YTD spot fresco (Pershing)")
         except Exception as e:
             print(f"  WARN equity_race YTD spot: {e}")
 

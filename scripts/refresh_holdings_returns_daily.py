@@ -127,12 +127,18 @@ def load_ytd_per_holding():
     quedaba stale semanas o meses (ej: equity_race.json = Jun-19, fi_race
     = May-21). GLD YTD dashboard +9.14% vs real -7.05% (gap +16pp).
 
-    AHORA: para cada ticker con precio yfinance publico, calcular YTD spot
-    on-the-fly. Para UCITS sin yfinance, usar ucits_daily_nav.json anchor
-    Dec-31-2025 si esta disponible. Fallback: leer stale race JSON.
+    FIX 2026-07-28: se saco yfinance de esta funcion por completo (antes
+    IBIT/GLD/ARGT/ILF/4BRZ/CSPX calculaban YTD via yfinance en paralelo al
+    resto de los UCITS). Lucas: "quiero que este todo con Pershing" -- una
+    sola fuente para MV y YTD de todo el universo BIG. Ahora: NAV/precio T-1
+    via Pershing/NetX360 (ucits_daily_nav.json, ver
+    sync_ucits_nav_from_pershing.py) + anchor 31-Dic-2025 real
+    (year_start_anchors.json). Fallback: leer stale race JSON si un ticker
+    todavia no tiene anchor real (no se sustituye por SI, ver nota en
+    refresh_equity_race_daily.py).
     """
     ytd = {}
-    # 1) Fallback: race JSONs (por si algun ticker no tiene yfinance)
+    # 1) Fallback: race JSONs (por si algun ticker no tiene anchor todavia)
     for fname in ['equity_race.json', 'fi_race.json', 'alts_race.json']:
         try:
             d = json.load(open(ROOT / 'data' / fname, encoding='utf-8'))
@@ -144,46 +150,9 @@ def load_ytd_per_holding():
         except Exception:
             pass
 
-    # 2) YTD SPOT via yfinance para tickers con precio publico
-    # Mapping ticker -> yahoo symbol (usa YAHOO_OVERRIDES si necesita, ej CSPX.L)
-    YAHOO_MAP = {
-        # Alts liquidos
-        'IBIT': 'IBIT', 'GLD': 'GLD',
-        # Equity ETFs
-        'ARGT': 'ARGT', 'ILF': 'ILF', '4BRZ': '4BRZ.DE',
-        'CSPX': 'CSPX.L',
-    }
-    try:
-        import yfinance as yf
-        for tk, sym in YAHOO_MAP.items():
-            try:
-                t = yf.Ticker(sym)
-                # anchor Dec-31-2025
-                hist_dec = t.history(start='2025-12-28', end='2026-01-02', auto_adjust=True)
-                if not len(hist_dec):
-                    continue
-                anchor = float(hist_dec['Close'].iloc[-1])
-                # end=hoy (exclusivo) -> ultimo cierre OFICIAL T-1, nunca intradia
-                hist_now = t.history(start=(date.today() - timedelta(days=7)).isoformat(),
-                                     end=date.today().isoformat(), auto_adjust=True)
-                if not len(hist_now):
-                    continue
-                last = float(hist_now['Close'].iloc[-1])
-                if anchor > 0 and last > 0:
-                    ytd_spot = round((last / anchor - 1) * 100, 2)
-                    old = ytd.get(tk)
-                    ytd[tk] = ytd_spot
-                    if old is not None and abs(old - ytd_spot) > 1:
-                        print(f"    [ytd_spot yf] {tk}: {old:+.2f}% -> {ytd_spot:+.2f}% ({sym})")
-            except Exception as e:
-                print(f"    WARNING yfinance {tk}: {str(e)[:60]}")
-    except ImportError:
-        pass
-
-    # 3) YTD SPOT para UCITS via ucits_daily_nav.json (NBGMT, MFSCV, THOR, JHGSC, LGLI)
-    #    NAV T-1 de Pershing/NetX360 (ver sync_ucits_nav_from_pershing.py) / NAV 31-Dic
-    #    de year_start_anchors.json. Solo pisa el valor del race si tenemos AMBOS datos;
-    #    sin anchor se queda el del race.
+    # 2) YTD SPOT via Pershing/NetX360: NAV T-1 (ucits_daily_nav.json) / anchor
+    #    31-Dic-2025 real (year_start_anchors.json). Cubre equity UCITS, ETFs
+    #    (CSPX/ARGT/ILF/4BRZ), FI open-end funds y alts liquidos (IBIT/GLD).
     try:
         navs = json.load(open(ROOT / 'data' / 'ucits_daily_nav.json', encoding='utf-8')).get('navs', {})
         anchors = json.load(open(ROOT / 'data' / 'year_start_anchors.json', encoding='utf-8')).get('anchors_2026', {})
@@ -191,15 +160,15 @@ def load_ytd_per_holding():
             tk = v.get('ticker')
             nav = v.get('nav')
             anchor_px = (anchors.get(isin) or {}).get('price_2025_dec_31')
-            if not (tk and nav and anchor_px) or tk in YAHOO_MAP:
+            if not (tk and nav and anchor_px):
                 continue
             ytd_spot = round((nav / anchor_px - 1) * 100, 2)
             old = ytd.get(tk)
             ytd[tk] = ytd_spot
             if old is not None and abs(old - ytd_spot) > 0.5:
-                print(f"    [ytd_spot ucits] {tk}: {old:+.2f}% -> {ytd_spot:+.2f}%")
+                print(f"    [ytd_spot Pershing] {tk}: {old:+.2f}% -> {ytd_spot:+.2f}%")
     except Exception as e:
-        print(f"    WARN UCITS YTD spot: {str(e)[:60]}")
+        print(f"    WARN Pershing YTD spot: {str(e)[:60]}")
 
     return ytd
 

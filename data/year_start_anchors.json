@@ -77,11 +77,12 @@
     "US4642873909": {
       "ticker": "ILF",
       "name": "iShares Latin America 40",
-      "ytd_source_pct": null,
-      "price_2025_dec_31": null,
-      "qty_2025_dec_31": null,
-      "mv_2025_dec_31": null,
-      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+      "price_2025_dec_31": 30.0664,
+      "qty_2025_dec_31": 0.0,
+      "mv_2025_dec_31": 0.0,
+      "anchor_locked": true,
+      "ytd_source": "manual_verified",
+      "note": "Anchor real verificado el 2026-07-28. Fuente: yfinance ILF cierre oficial 31-Dic-2025"
     },
     "US46434V8862": {
       "ticker": "HEWJ",
@@ -124,13 +125,12 @@
     "IE00B5BMR087": {
       "ticker": "CSPX",
       "name": "iShares Core S&P 500 UCITS",
-      "ytd_source_pct": 10.08,
-      "price_2025_dec_31": 723.710029,
+      "price_2025_dec_31": 738.53,
       "qty_2025_dec_31": 2271.0,
-      "mv_2025_dec_31": 1643545.48,
-      "ytd_source": "year_start_anchors",
-      "anchor_locked": false,
-      "note": "PROVISIONAL: derivado de ytd_source_pct (posiblemente stale), NO verificado contra un NAV real del 31-Dic. Reemplazar con anchor_locked=true + precio real en cuanto se consiga (ver Lucas / baha historico)."
+      "mv_2025_dec_31": 1677201.63,
+      "anchor_locked": true,
+      "ytd_source": "manual_verified",
+      "note": "Anchor real verificado el 2026-07-28. Fuente: Pershing statement oficial 31-Dic-2025 (LSERIES DAC, JXD-101380), pag 5"
     },
     "IE00BDT57R20": {
       "ticker": "PIMCO-LD",
@@ -184,11 +184,12 @@
     "US37950E2596": {
       "ticker": "ARGT",
       "name": "Global X MSCI Argentina",
-      "ytd_source_pct": null,
-      "price_2025_dec_31": null,
-      "qty_2025_dec_31": null,
-      "mv_2025_dec_31": null,
-      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+      "price_2025_dec_31": 91.0806,
+      "qty_2025_dec_31": 0.0,
+      "mv_2025_dec_31": 0.0,
+      "anchor_locked": true,
+      "ytd_source": "manual_verified",
+      "note": "Anchor real verificado el 2026-07-28. Fuente: yfinance ARGT cierre oficial 31-Dic-2025"
     },
     "LU1985812756": {
       "ticker": "MFSCV",

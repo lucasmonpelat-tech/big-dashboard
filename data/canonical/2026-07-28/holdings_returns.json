@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "as_of": "2026-07-28",
-  "generated_at": "2026-07-28T16:52:20Z",
+  "generated_at": "2026-07-28T17:03:04Z",
   "note": "Holdings con MV/return DIRECTO de Pershing UGL (canonical v2 pnl.json). Bench DW calculado desde buys_history + bench indices. Fixes bug de precio staleado del compute_holdings_returns.py viejo.",
   "sources": {
     "positions": "data/canonical/2026-07-28/positions.json",
@@ -327,9 +327,9 @@
           "bench_label": "ACWI",
           "bench_dw_pct": 7.51,
           "alpha_real_pp": -4.16,
-          "ytd_pct": 14.07,
+          "ytd_pct": 14.1,
           "bench_ytd_pct": 9.98,
-          "alpha_ytd_pp": 4.09,
+          "alpha_ytd_pp": 4.12,
           "first_buy_date": "2026-01-09",
           "n_trades": 2,
           "buys_history": [
