@@ -429,7 +429,7 @@
       <!-- ALTS-ONLY: Pie composición -->
       <div class="section" id="alts-pie-block" style="display:none">
         <h2>Composición del Sleeve</h2>
-        <div id="alts-pie-chart" style="min-height: 420px"></div>
+        <div id="alts-pie-chart" style="min-height: 480px"></div>
       </div>
 
       <!-- ALTS-ONLY: Concentration + Liquidity -->
@@ -1552,10 +1552,16 @@
         marker: { colors: colors.slice(0, sorted.length) },
         textinfo: "label+percent",
         textposition: "outside",
+        automargin: true,
         textfont: { size: 13, color: "#0a2540" },
         hovertemplate: "<b>%{label}</b><br>$%{value:,.0f}<br>%{percent}<extra></extra>",
       }], {
-        margin: { t: 10, r: 20, b: 10, l: 20 },
+        // FIX 2026-07-28: sin automargin + height explicito, las etiquetas
+        // "outside" de las porciones inferiores quedaban cortadas por el
+        // borde del contenedor (Plotly mide el alto ANTES de saber cuanto
+        // espacio necesitan las etiquetas afuera de la torta).
+        height: 480,
+        margin: { t: 40, r: 40, b: 40, l: 40 },
         showlegend: false,
         annotations: [{
           text: `<b>Alternatives</b><br><span style='font-size:16px'>$${(totalMv / 1e6).toFixed(2)}M</span><br><span style='font-size:12px;color:#888'>100%</span>`,

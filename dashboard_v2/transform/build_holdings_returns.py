@@ -284,6 +284,17 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
     race_h = race_by_isin.get(isin) if isin else None
     if race_h is not None and race_h.get("ytd_return_pct") is not None:
         ytd_pct = round(float(race_h["ytd_return_pct"]), 2)
+    elif h_legacy.get("ytd_pct") is not None:
+        # FIX 2026-07-28: alts (CALP, HLEND, GCRED, IBIT, GLD, FLEX, HLGPI...)
+        # no tienen race_by_isin (siempre {} para el sleeve alternativo, ver
+        # build() mas abajo), asi que ANTES caian directo al MWR Simple Dietz
+        # de abajo -- que da None para cualquier holding sin anchor en
+        # year_start_anchors.json (ej HLEND/GCRED, comprados en 2025 pero sin
+        # anchor cargado). El legacy holdings_returns_alternatives.json YA
+        # tiene el YTD correcto (Pershing UGL via sync_alts_ugl.py / refresh_
+        # holdings_returns_daily.py), simplemente nunca se leia aca. Usarlo
+        # como fuente antes de recalcular con MWR.
+        ytd_pct = round(float(h_legacy["ytd_pct"]), 2)
     elif pos and agg:
         cost_pre_ytd = agg.get("cost_pre_ytd", 0) or 0
         buys_ytd_list = agg.get("buys_ytd", [])

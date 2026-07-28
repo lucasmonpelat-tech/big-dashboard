@@ -13,31 +13,31 @@
       "private_infra": 14.47
     },
     "n_holdings": 8,
-    "ytd_return_pct": -1.36,
+    "ytd_return_pct": -1.15,
     "si_return_pct": 3.34
   },
   "stats_vs_6040": {
     "latest_month": "2026-06",
     "returns": {
       "1M": {
-        "sleeve": 0.23,
+        "sleeve": 0.26,
         "bmk6040": -1.18,
-        "alpha": 1.41
+        "alpha": 1.44
       },
       "3M": {
-        "sleeve": -0.15,
+        "sleeve": -0.06,
         "bmk6040": 7.55,
-        "alpha": -7.7
+        "alpha": -7.61
       },
       "6M": {
-        "sleeve": -1.3,
+        "sleeve": -1.1,
         "bmk6040": 6.17,
-        "alpha": -7.47
+        "alpha": -7.27
       },
       "YTD": {
-        "sleeve": -1.3,
+        "sleeve": -1.1,
         "bmk6040": 6.17,
-        "alpha": -7.47
+        "alpha": -7.27
       },
       "SI": {
         "sleeve": 3.34,
@@ -88,17 +88,17 @@
   },
   "sleeve_index": {
     "2025-06": 100.0,
-    "2025-07": 100.6812,
-    "2025-08": 101.3623,
-    "2025-09": 102.0435,
-    "2025-10": 102.7246,
-    "2025-11": 103.4058,
-    "2025-12": 104.7,
-    "2026-01": 103.8899,
-    "2026-02": 103.6928,
-    "2026-03": 103.4957,
-    "2026-04": 103.2985,
-    "2026-05": 103.1014,
+    "2025-07": 100.6514,
+    "2025-08": 101.3028,
+    "2025-09": 101.9542,
+    "2025-10": 102.6056,
+    "2025-11": 103.257,
+    "2025-12": 104.49,
+    "2026-01": 103.7411,
+    "2026-02": 103.5738,
+    "2026-03": 103.4064,
+    "2026-04": 103.239,
+    "2026-05": 103.0717,
     "2026-06": 103.34
   },
   "bmk6040_index": {
@@ -235,9 +235,9 @@
       "value_usd": 501805.63,
       "weight_pct": 6.52,
       "si_return_pct": 0.36,
-      "ytd_return_pct": 0.0,
+      "ytd_return_pct": 0.36,
       "contribution_pct": 0.02,
-      "ytd_contribution_pct": 0.0,
+      "ytd_contribution_pct": 0.02,
       "assumed_annual_pct": 12.0,
       "source": "Pershing UGL via sync_alts_ugl.py",
       "valuation_date": "2026-07-28",
@@ -251,9 +251,9 @@
       "value_usd": 1114198.98,
       "weight_pct": 14.47,
       "si_return_pct": 1.29,
-      "ytd_return_pct": 0.0,
+      "ytd_return_pct": 1.29,
       "contribution_pct": 0.19,
-      "ytd_contribution_pct": 0.0,
+      "ytd_contribution_pct": 0.19,
       "assumed_annual_pct": 11.0,
       "source": "Pershing UGL via sync_alts_ugl.py",
       "valuation_date": "2026-07-28",
@@ -276,7 +276,7 @@
       "days_since_valuation": 0
     }
   ],
-  "_sync_alts_ugl_at": "2026-07-28T14:02:42.317507",
+  "_sync_alts_ugl_at": "2026-07-28T15:21:24.934218",
   "_sync_alts_ugl_note": "Returns y sleeve YTD/SI sobreescritos con Pershing UGL (cost-basis weighted). sleeve_index mensual sigue siendo time-weighted con proxies (para charts históricos).",
   "_daily_refresh_note": "Refresh diario 2026-07-28: 2 liquidos via Stooq T-1, 3 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $7,693,369."
 }
