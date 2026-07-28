@@ -1,6 +1,6 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-07-28T10:33:47.777547",
+  "refreshedAt": "2026-07-28T12:39:51.760275",
   "as_of_date": "2026-07-28",
   "ytd_anchor": "2025-12-31",
   "days_ytd": 209,
@@ -129,9 +129,9 @@
     "bench_label": "60/40 (60% ACWI + 40% AGG)",
     "bench_ytd_aor_etf": 6.2,
     "acwi_ytd": 9.983,
-    "agg_ytd": -0.583,
+    "agg_ytd": -0.562,
     "bench_eq_contrib_pp": 5.99,
-    "bench_fi_contrib_pp": -0.233,
+    "bench_fi_contrib_pp": -0.225,
     "big_ytd": 1.37,
     "alpha_ytd_total_pp": -4.83,
     "components": [
@@ -145,9 +145,9 @@
       {
         "name": "Fixed Income",
         "big_contrib_pp": 0.22,
-        "bench_contrib_pp": -0.233,
-        "alpha_pp": 0.453,
-        "comment": "BIG 40.0% @ +0.55% vs 40% AGG @ -0.58%"
+        "bench_contrib_pp": -0.225,
+        "alpha_pp": 0.445,
+        "comment": "BIG 40.0% @ +0.55% vs 40% AGG @ -0.56%"
       },
       {
         "name": "Alternatives",
@@ -174,7 +174,7 @@
         "name": "Residual",
         "big_contrib_pp": null,
         "bench_contrib_pp": null,
-        "alpha_pp": 0.08,
+        "alpha_pp": 0.089,
         "comment": "Tracking error AOR vs (60% ACWI + 40% AGG teorico) + Lynk smoothing + cash approx + alts statement lag"
       }
     ]

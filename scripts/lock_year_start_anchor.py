@@ -74,8 +74,12 @@ def main():
 
     qty_pre = qty_pre_ytd(args.isin)
     if qty_pre is None:
-        print(f"ERROR: no encontre taxlots pre-2026 para {args.isin} en ningun canonical snapshot.")
-        return
+        # BIG no tenia posicion en este ISIN al 31-Dic-2025 (lo compro en 2026),
+        # pero el FONDO existia y tiene precio real -> el anchor sigue siendo
+        # valido para el calculo de YTD (price_today/price_anchor - 1), solo que
+        # qty/mv al 31-Dic son $0 (no lo teniamos).
+        print(f"  Nota: sin taxlots pre-2026 para {args.isin} -- qty/mv 31-Dic = 0 (BIG no tenia posicion aun)")
+        qty_pre = 0.0
 
     mv_prev = round(qty_pre * args.price, 2)
 

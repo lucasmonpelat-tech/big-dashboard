@@ -175,6 +175,13 @@ def main():
                     nav = (navs.get(isin) or {}).get('nav')
                     anchor_px = (anchors.get(isin) or {}).get('price_2025_dec_31')
                     if not (nav and anchor_px):
+                        # Sin anchor real -> se deja el YTD tal cual esta (NO se
+                        # sustituye por SI: el fondo existe desde antes del 31-Dic
+                        # aunque BIG lo haya comprado recien en 2026 -- YTD es el
+                        # retorno DEL FONDO desde el 1-Ene, no desde nuestra compra.
+                        # Pendiente: conseguir el NAV real 31-Dic-25 del fondo
+                        # (Lucas via baha / factsheet) y plantarlo con
+                        # scripts/lock_year_start_anchor.py.
                         continue
                     ytd_new = round((nav / anchor_px - 1) * 100, 2)
                     old = h.get('ytd_return_pct')
