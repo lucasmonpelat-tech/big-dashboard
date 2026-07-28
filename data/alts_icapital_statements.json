@@ -1,122 +1,78 @@
 {
-  "_description": "Source of truth para holdings Alts via iCapital (HLEND HPS Corporate Lending + GCRED Golub Capital Private Credit). Cada array es la historia mensual del NAV. El ultimo entry manda. Alimenta refresh_alts_daily.py.",
-  "refreshedAt": "2026-05-27T12:02:22.249497",
-  "source": "Statements oficiales BNY/iCapital (PDF) — extraidos automaticamente desde scripts/parse_factsheet o manual",
+  "_description": "Source of truth para holdings Alts via iCapital (HLEND HPS Corporate Lending + GCRED Golub Capital Private Credit). Cada array es la historia real verificada DIRECTO de los statements oficiales de Pershing (Alternative Investments Detail: Investment/Estimated Value/Valuation Date). El ultimo entry por 'as_of' manda. Alimenta refresh_alts_daily.py.",
+  "refreshedAt": "2026-07-28T00:00:00",
+  "source": "Statements oficiales Pershing (LSERIES DAC, JXD-101380), leidos directo 2026-07-28 desde C:/Users/lmonp/Dropbox/2026/Pampa BIG/Statements Pershing/{2025,2026}/",
+  "_reporting_lag_note": "Pershing NO recibe una marca nueva del administrador (iCapital) cada mes -- el statement solo repite la ultima 'Valuation Date' conocida hasta que llega una marca nueva, que a veces tarda 1-4 meses en reflejarse. Por eso la serie tiene saltos, no es un error. La serie previa de este archivo (con shares/nav_per_share en denominacion ~1000:1 y ytd calculado mes a mes) resulto ser un proxy sintetico no verificado -- se reemplaza integramente por los puntos confirmados leyendo los 4 statements oficiales de Pershing.",
   "statements": {
     "HLEND": [
       {
         "as_of": "2025-10-31",
-        "shares": 672.7601,
-        "nav_per_share": 1100.9903,
         "mv_usd": 740702.36,
-        "mtd_return_pct": 0.78,
-        "ytd_return_pct": 0.78,
-        "source_doc": "Statement-Oct-2025.pdf"
-      },
-      {
-        "as_of": "2025-11-30",
-        "shares": 672.7601,
-        "nav_per_share": 1109.5128,
-        "mv_usd": 746435.96,
-        "mtd_return_pct": 0.77,
-        "ytd_return_pct": 1.56,
-        "source_doc": "Statement-Nov-2025.pdf"
+        "valuation_date": "2025-10-31",
+        "source_doc": "2025 Big.pdf (statement 30-Jun-2025 a 31-Dic-2025) + 1.BIG Pershing.pdf (Enero-2026)",
+        "notes": "Inversion inicial 22-Sep-2025 $735,050. Valuation Date 10/31/25 se mantuvo IDENTICA (confirmado 3 veces: statements Dic-2025, Ene-2026 y Abr-2026) hasta Feb-2026 -- sin ambiguedad de lag para este punto."
       },
       {
         "as_of": "2025-12-31",
-        "shares": 672.7601,
-        "nav_per_share": 1115.6077,
-        "mv_usd": 750536.38,
-        "mtd_return_pct": 0.55,
-        "ytd_return_pct": 2.11,
-        "source_doc": "Statement-Dec-2025.pdf"
-      },
-      {
-        "as_of": "2026-01-31",
-        "shares": 672.7601,
-        "nav_per_share": 1123.8904,
-        "mv_usd": 756108.61,
-        "mtd_return_pct": 0.74,
-        "ytd_return_pct": 0.74,
-        "source_doc": "Statement-Jan-2026.pdf"
+        "mv_usd": 740702.36,
+        "valuation_date": "2025-10-31",
+        "source_doc": "2025 Big.pdf (Year-End Account Report, pag 8, Alternative Investments Detail)",
+        "notes": "ANCHOR REAL 31-Dic-2025 -- confirmado leyendo el statement oficial DOS VECES (mismo resultado). Valuation Date sigue en 10/31/25, es decir el valor economico real de HLEND al 31-Dic-25 SI es este (no hubo marca nueva entre Oct y Feb), sin ambiguedad de lag."
       },
       {
         "as_of": "2026-02-28",
-        "shares": 672.7601,
-        "nav_per_share": 1119.7686,
         "mv_usd": 753335.66,
-        "mtd_return_pct": -0.37,
-        "ytd_return_pct": 0.37,
-        "source_doc": "Statement-Feb-2026.pdf"
+        "valuation_date": "2026-02-28",
+        "source_doc": "4.BIG Pershing.pdf (Abril-2026), Portfolio Holdings + Alternative Investments Detail",
+        "notes": "Primera actualizacion real del administrador desde Oct-2025."
       },
       {
-        "as_of": "2026-03-31",
-        "shares": 672.7601,
-        "nav_per_share": 1122.5783,
-        "mv_usd": 755225.89,
-        "mtd_return_pct": 0.25,
-        "ytd_return_pct": 0.62,
-        "si_return_pct": 1.96,
-        "si_from_date": "2025-10-31",
-        "notes_si": "SI desde primer NAV reportado (31-Oct-2025 @ 1100.99). Si BIG compro antes, falta retorno previo. Pendiente confirmar fecha exacta de compra."
+        "as_of": "2026-04-30",
+        "mv_usd": 759172.36,
+        "valuation_date": "2026-04-30",
+        "ytd_return_pct": 2.49,
+        "si_return_pct": 3.28,
+        "source_doc": "6.BIG Pershing.pdf (Junio-2026), Portfolio Holdings + Alternative Investments Detail",
+        "notes": "YTD = 759172.36/740702.36 - 1 = +2.49% (ancla 31-Dic-25 = 740702.36, sin ambiguedad). SI = 759172.36/735050 - 1 = +3.28% (desde costo compra 22-Sep-2025). Corrige el YTD previo (+0.62%) que venia de una serie sintetica no verificada."
       }
     ],
     "GCRED": [
       {
-        "as_of": "2025-10-31",
-        "shares": 432.1639,
-        "nav_per_share": 1141.2585,
-        "mv_usd": 493210.73,
-        "mtd_return_pct": 0.66,
-        "ytd_return_pct": 0.66,
-        "source_doc": "Statement-Oct-2025.pdf"
-      },
-      {
-        "as_of": "2025-11-30",
-        "shares": 432.1639,
-        "nav_per_share": 1149.3284,
-        "mv_usd": 496698.25,
-        "mtd_return_pct": 0.71,
-        "ytd_return_pct": 1.37,
-        "source_doc": "Statement-Nov-2025.pdf"
+        "as_of": "2025-09-22",
+        "mv_usd": 490000.00,
+        "valuation_date": "2025-09-22",
+        "source_doc": "2025 Big.pdf, transacciones 22-Sep-2025",
+        "notes": "Inversion inicial, costo $490,050 (490,000 unidades @ $1.00 + fee)."
       },
       {
         "as_of": "2025-12-31",
-        "shares": 432.1639,
-        "nav_per_share": 1157.3905,
-        "mv_usd": 500182.39,
-        "mtd_return_pct": 0.7,
-        "ytd_return_pct": 2.08,
-        "source_doc": "Statement-Dec-2025.pdf"
+        "mv_usd": 490000.00,
+        "valuation_date": "2025-09-22",
+        "source_doc": "2025 Big.pdf (Year-End Account Report, pag 8, Alternative Investments Detail)",
+        "notes": "ANCHOR REAL 31-Dic-2025 -- confirmado leyendo el statement oficial DOS VECES (mismo resultado). Valuation Date sigue en 09/22/25 (compra inicial) -- OJO: el statement de Enero-2026 muestra que la marca real de Nov-30 ($496,698.25) YA EXISTIA pero todavia no habia llegado al libro de Pershing al momento de imprimir el statement de Dic-25 (lag de reporte). Se usa el valor OFICIAL del statement ($490,000) como anchor por consistencia metodologica con el resto del universo BIG (siempre 'lo que dice el statement oficial al 31-Dic', no una marca mas reciente pero de otra fecha)."
       },
       {
-        "as_of": "2026-01-31",
-        "shares": 432.1639,
-        "nav_per_share": 1160.3991,
-        "mv_usd": 501482.61,
-        "mtd_return_pct": 0.26,
-        "ytd_return_pct": 0.26,
-        "source_doc": "Statement-Jan-2026.pdf"
+        "as_of": "2025-11-30",
+        "mv_usd": 496698.25,
+        "valuation_date": "2025-11-30",
+        "source_doc": "1.BIG Pershing.pdf (Enero-2026), Portfolio Holdings + Alternative Investments Detail",
+        "notes": "Primera actualizacion real del administrador desde la compra. Este es el valor economico real ya vigente al cierre de Nov/Dic-2025, aunque el statement de Pershing del 31-Dic todavia no lo reflejaba (lag de reporte). Coincide exacto con la serie previa de este archivo para esta fecha."
       },
       {
         "as_of": "2026-02-28",
-        "shares": 432.1639,
-        "nav_per_share": 1147.8391,
-        "mv_usd": 496054.6,
-        "mtd_return_pct": -1.08,
-        "ytd_return_pct": -0.83,
-        "source_doc": "Statement-Feb-2026.pdf"
+        "mv_usd": 496054.60,
+        "valuation_date": "2026-02-28",
+        "source_doc": "4.BIG Pershing.pdf (Abril-2026), Portfolio Holdings + Alternative Investments Detail",
+        "notes": "Coincide exacto con la serie previa de este archivo para esta fecha."
       },
       {
-        "as_of": "2026-03-31",
-        "shares": 432.1639,
-        "nav_per_share": 1135.1782,
-        "mv_usd": 490583.01,
-        "mtd_return_pct": -1.1,
-        "ytd_return_pct": -1.92,
-        "si_return_pct": -0.53,
-        "si_from_date": "2025-10-31",
-        "notes_si": "SI desde primer NAV reportado (31-Oct-2025 @ 1141.26). Si BIG compro antes, falta retorno previo. Pendiente confirmar fecha exacta de compra."
+        "as_of": "2026-04-30",
+        "mv_usd": 495475.43,
+        "valuation_date": "2026-04-30",
+        "ytd_return_pct": 1.12,
+        "si_return_pct": 1.11,
+        "source_doc": "6.BIG Pershing.pdf (Junio-2026), Portfolio Holdings + Alternative Investments Detail",
+        "notes": "YTD = 495475.43/490000 - 1 = +1.12% (ancla 31-Dic-25 = 490000, statement oficial). SI = 495475.43/490050 - 1 = +1.11% (desde costo compra 22-Sep-2025). Corrige el YTD previo (-1.92%) que venia de una serie sintetica no verificada, cuyo ancla 31-Dic (500,182.39) no coincidia con el statement oficial Pershing."
       }
     ]
   }
