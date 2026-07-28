@@ -85,7 +85,20 @@ def get_ytd_for_isin(isin: str, anchors: dict, prev_year_str: str) -> tuple[floa
 
 def build_snapshot(anchor_year: int, today: str) -> dict:
     """Enriquece year_start_anchors con mv/price/qty al 31-Dic-(anchor_year-1).
-    anchor_year: año del snapshot (ej: 2026 → snapshot al 31-Dic-2025)."""
+    anchor_year: año del snapshot (ej: 2026 → snapshot al 31-Dic-2025).
+
+    FIX 2026-07-28: este script se corre a DIARIO desde run_all.py (pese a que
+    el docstring del modulo dice "1 vez al año"). Antes, cada corrida recalculaba
+    price_prev = price_hoy / (1+ytd_source_pct/100) con el price_hoy DE HOY --
+    como ytd_source_pct queda congelado para siempre, el "anchor" (que deberia
+    ser un precio fijo de una fecha pasada) terminaba flotando dia a dia junto
+    con el precio actual. Se detecto con MFSCV: precio Pershing casi sin cambios
+    en una semana (307.81 -> 306.11) pero el anchor "31-Dic" paso de 277.73 a
+    273.88 -- un precio de una fecha fija del pasado no puede cambiar.
+
+    Ahora: todo ISIN con anchor_locked=true en el archivo existente se copia
+    TAL CUAL, sin recalcular nada. Solo los ISIN sin anchor_locked (todavia sin
+    verificar / no_anchor_data) intentan derivarse con el metodo viejo."""
     prev_year = anchor_year - 1
     prev_year_str = str(prev_year)
     ytd_anchor = f"{anchor_year}-01-01"
@@ -116,6 +129,13 @@ def build_snapshot(anchor_year: int, today: str) -> dict:
         sid = h.get('security_id')
         if not isin or not sid:
             continue
+
+        # Anchor ya verificado y trabado -> copiar tal cual, NUNCA recalcular.
+        existing = anchors.get(isin, {})
+        if existing.get('anchor_locked'):
+            updates[isin] = existing
+            continue
+
         mv_hoy = h.get('market_value_usd')
         qty_hoy = h.get('quantity')
         if not (mv_hoy and qty_hoy and qty_hoy > 0):
@@ -155,6 +175,10 @@ def build_snapshot(anchor_year: int, today: str) -> dict:
             f"qty_{prev_year}_dec_31": round(qty_pre, 4),
             f"mv_{prev_year}_dec_31": mv_prev,
             "ytd_source": ytd_source,
+            "anchor_locked": False,
+            "note": "PROVISIONAL: derivado de ytd_source_pct (posiblemente stale), NO verificado "
+                    "contra un NAV real del 31-Dic. Reemplazar con anchor_locked=true + precio real "
+                    "en cuanto se consiga (ver Lucas / baha historico).",
         }
 
     ya[anchors_key] = updates
