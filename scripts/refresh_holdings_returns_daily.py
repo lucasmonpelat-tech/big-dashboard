@@ -162,8 +162,9 @@ def load_ytd_per_holding():
                 if not len(hist_dec):
                     continue
                 anchor = float(hist_dec['Close'].iloc[-1])
-                # hoy
-                hist_now = t.history(period='5d', auto_adjust=True)
+                # end=hoy (exclusivo) -> ultimo cierre OFICIAL T-1, nunca intradia
+                hist_now = t.history(start=(date.today() - timedelta(days=7)).isoformat(),
+                                     end=date.today().isoformat(), auto_adjust=True)
                 if not len(hist_now):
                     continue
                 last = float(hist_now['Close'].iloc[-1])
@@ -179,15 +180,24 @@ def load_ytd_per_holding():
         pass
 
     # 3) YTD SPOT para UCITS via ucits_daily_nav.json (NBGMT, MFSCV, THOR, JHGSC, LGLI)
-    # Necesita anchor Dec-31-2025 de baha. Si no lo tenemos, deja el stale.
+    #    NAV T-1 de baha / NAV 31-Dic de year_start_anchors.json. Solo pisa el valor
+    #    del race si tenemos AMBOS datos; sin anchor se queda el del race.
     try:
-        ud = json.load(open(ROOT / 'data' / 'ucits_daily_nav.json', encoding='utf-8'))
-        navs = ud.get('navs', {})
-        # Ancla historica (Dec-31-2025) — necesita venir del script mensual.
-        # Por ahora si no tenemos ancla, no pisamos el stale.
-        # TODO: mantener un ucits_ytd_anchor.json con NAV Dec-31 por fondo.
-    except Exception:
-        pass
+        navs = json.load(open(ROOT / 'data' / 'ucits_daily_nav.json', encoding='utf-8')).get('navs', {})
+        anchors = json.load(open(ROOT / 'data' / 'year_start_anchors.json', encoding='utf-8')).get('anchors_2026', {})
+        for isin, v in navs.items():
+            tk = v.get('ticker')
+            nav = v.get('nav')
+            anchor_px = (anchors.get(isin) or {}).get('price_2025_dec_31')
+            if not (tk and nav and anchor_px) or tk in YAHOO_MAP:
+                continue
+            ytd_spot = round((nav / anchor_px - 1) * 100, 2)
+            old = ytd.get(tk)
+            ytd[tk] = ytd_spot
+            if old is not None and abs(old - ytd_spot) > 0.5:
+                print(f"    [ytd_spot ucits] {tk}: {old:+.2f}% -> {ytd_spot:+.2f}%")
+    except Exception as e:
+        print(f"    WARN UCITS YTD spot: {str(e)[:60]}")
 
     return ytd
 
@@ -199,8 +209,10 @@ def fetch_bench_ytd_spot(ticker, ytd_anchor='2025-12-31'):
         import pandas as pd
         from datetime import date as _date, timedelta as _td
         t = yf.Ticker(ticker)
-        end = _date.today()
-        h = t.history(start='2025-12-28', end=(end + _td(days=2)).isoformat(), auto_adjust=True)
+        # end=hoy (exclusivo) -> ultimo cierre OFICIAL T-1, nunca intradia.
+        # (antes end=hoy+2 tomaba el precio intradia del dia actual y el bench YTD
+        # quedaba "adelantado" vs la politica T-1 del resto del dashboard)
+        h = t.history(start='2025-12-28', end=_date.today().isoformat(), auto_adjust=True)
         if h is None or h.empty:
             return None
         try:

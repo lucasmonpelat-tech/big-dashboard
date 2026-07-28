@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-07-27T13:45:38.689244",
+  "refreshedAt": "2026-07-28T09:45:18.181772",
   "source": "Buy-and-hold price race vs ACWI (transactions Pershing)",
   "method": "Asset Return = (end_price - first_buy_price) / first_buy_price. ACWI Return = same window. Alpha = Asset - ACWI. End = today if open / last sell if closed.",
   "period_start": "2025-07-02",
@@ -319,5 +319,5 @@
       "end_price": 472.435
     }
   ],
-  "_daily_refresh_note": "Race recalculado 2026-07-27 con cierre T-1 (2026-07-27) del sleeve + ACWI (2026-07-27). Anchors (first_buy) del ultimo full-run de transactions."
+  "_daily_refresh_note": "Race recalculado 2026-07-28 con cierre T-1 (2026-07-27) del sleeve + ACWI (2026-07-27). Anchors (first_buy) del ultimo full-run de transactions."
 }

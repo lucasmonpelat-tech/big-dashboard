@@ -108,7 +108,10 @@ def main():
     # si todavia no cerro. yfinance trata `end` como exclusivo, asi que end=last_date
     # garantiza que solo bajamos cierres oficiales <= last_date - 1 dia.
     start = (datetime.fromisoformat(base_date) - timedelta(days=7)).strftime("%Y-%m-%d")
-    end = last_date  # T-1 close: yfinance.history end es exclusivo
+    # La grilla ya termina en T-1 (el sleeve se refresca con cierres T-1), asi que
+    # end = last_date + 1 (exclusivo) incluye el cierre DE last_date sin tomar nada
+    # del dia actual. (Antes: end=last_date dejaba la serie un dia habil atras.)
+    end = (datetime.fromisoformat(last_date) + timedelta(days=1)).strftime("%Y-%m-%d")
 
     indices_out = {}
     for key, meta in INDICES.items():
@@ -138,6 +141,34 @@ def main():
         except Exception:
             pass
     merged = {**existing, **indices_out}
+
+    # ALERTA (2026-07-27): el merge de arriba preserva series viejas en silencio.
+    # Si un indice no trajo data fresca de Yahoo (o su serie preservada no llega al
+    # final de la grilla), dejar constancia en data/_alerts/ — el Bench SI/YTD del
+    # dashboard V2 se calcula de estas series y queda stale sin que nadie lo vea.
+    stale = sorted(set(
+        [k for k in INDICES if k not in indices_out] +
+        [k for k, v in merged.items()
+         if v.get("series") and v["series"][-1]["date"] < last_date]
+    ))
+    if stale:
+        detail = {k: (merged[k]["series"][-1]["date"]
+                      if k in merged and merged[k].get("series") else "sin serie")
+                  for k in stale}
+        alerts_dir = ROOT / "data" / "_alerts"
+        alerts_dir.mkdir(parents=True, exist_ok=True)
+        alert_file = alerts_dir / f"bench_indices_stale_{datetime.now().date()}.json"
+        with open(alert_file, "w", encoding="utf-8") as f:
+            json.dump({
+                "date": str(datetime.now().date()),
+                "source": "bench_indices_refresher.py",
+                "error": f"Yahoo no devolvio data fresca para: {', '.join(stale)}. "
+                         "Se preservo la ultima serie buena; el Bench SI/YTD equity del dashboard V2 queda stale.",
+                "accion": "Correr scripts/bench_indices_refresher.py manualmente y revisar yfinance / rate limit.",
+                "indices_last_date": detail,
+                "expected_last_date": last_date,
+            }, f, indent=2, ensure_ascii=False)
+        print(f"  ALERTA stale -> {alert_file.name}: {stale}")
 
     out = {
         "_description": "Series base-100 de indices de referencia alineadas a la grilla y fecha base del equity sleeve. Alimenta el grafico Normalized Performance.",

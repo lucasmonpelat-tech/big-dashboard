@@ -23,7 +23,7 @@ Usage:
     python refresh_equity_race_daily.py
 """
 import json
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
@@ -142,7 +142,9 @@ def main():
                 try:
                     t = yf.Ticker(sym)
                     hist_dec = t.history(start='2025-12-28', end='2026-01-02', auto_adjust=True)
-                    hist_now = t.history(period='5d', auto_adjust=True)
+                    # end=hoy (exclusivo) -> ultimo cierre OFICIAL T-1, nunca intradia
+                    hist_now = t.history(start=(date.today() - timedelta(days=7)).isoformat(),
+                                         end=date.today().isoformat(), auto_adjust=True)
                     if len(hist_dec) and len(hist_now):
                         anchor = float(hist_dec['Close'].iloc[-1])
                         last = float(hist_now['Close'].iloc[-1])
@@ -155,8 +157,36 @@ def main():
                             n_updated += 1
                 except Exception as e:
                     print(f"    WARN {tk}: {str(e)[:50]}")
+
+            # FIX 2026-07-27: YTD spot para UCITS sin yfinance decente (NBGMT, MFSCV,
+            # THOR, JHGSC, LGLI): NAV T-1 de baha (ucits_daily_nav.json) / NAV 31-Dic
+            # (year_start_anchors.json). Sin esto quedaban clavados en el ultimo
+            # scrape mensual de baha (NBGMT/MFSCV mostraban YTD de Mayo en Julio).
+            n_ucits = 0
+            try:
+                navs = json.load(open(ROOT / 'data' / 'ucits_daily_nav.json', encoding='utf-8')).get('navs', {})
+                anchors = json.load(open(ROOT / 'data' / 'year_start_anchors.json', encoding='utf-8')).get('anchors_2026', {})
+                for h in er.get('holdings', []):
+                    tk = h.get('ticker')
+                    if tk in YMAP:  # ya tiene spot yfinance
+                        continue
+                    isin = h.get('isin')
+                    nav = (navs.get(isin) or {}).get('nav')
+                    anchor_px = (anchors.get(isin) or {}).get('price_2025_dec_31')
+                    if not (nav and anchor_px):
+                        continue
+                    ytd_new = round((nav / anchor_px - 1) * 100, 2)
+                    old = h.get('ytd_return_pct')
+                    h['ytd_return_pct'] = ytd_new
+                    n_ucits += 1
+                    if old is not None and abs(old - ytd_new) > 0.5:
+                        print(f"  [equity_race YTD spot ucits] {tk}: {old:+.2f}% -> {ytd_new:+.2f}%")
+            except Exception as e:
+                print(f"  WARN UCITS YTD spot: {e}")
+
             er['refreshedAt'] = datetime.now().isoformat()
-            er['_ytd_spot_updated'] = f'{datetime.now().date()}: {n_updated} holdings YTD spot via yfinance'
+            er['_ytd_spot_updated'] = (f'{datetime.now().date()}: {n_updated} holdings YTD spot via yfinance'
+                                       f' + {n_ucits} UCITS via baha NAV/anchor 31-Dic')
             with open(equity_race_file, 'w', encoding='utf-8') as f:
                 json.dump(er, f, indent=2, ensure_ascii=False)
             print(f"  equity_race.json: {n_updated} holdings con YTD spot fresco")
