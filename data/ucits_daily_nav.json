@@ -1,44 +1,68 @@
 {
-  "_description": "NAV cierre anterior de cada UCITS/ETF-DE del equity sleeve, de baha.com. Alimenta el punto 'today' del equity sleeve (YTD al cierre anterior).",
-  "refreshedAt": "2026-07-28T13:01:13.965286",
-  "source": "baha.com (NAV puntual del title) via baha_nav_refresher.py",
+  "_description": "NAV T-1 (aprox) de cada UCITS/ETF-DE del equity sleeve, desde el precio oficial de Pershing (custodio) via NetX360. Reemplaza el scrape de baha.com (nunca funciono en CI, ver git history pre-2026-07-28).",
+  "refreshedAt": "2026-07-28T10:32:58.799689",
+  "source": "Pershing/NetX360 via canonical/2026-07-28/positions.json (sync_ucits_nav_from_pershing.py)",
+  "snapshot_date": "2026-07-28",
   "navs": {
     "IE00BFMHRK20": {
       "ticker": "NBGMT",
-      "nav": 23.37,
-      "baha_fund_id": "FU_100078877",
-      "name": "NB Global Equity Megatrends I USD"
+      "nav": 23.99,
+      "currency": "USD",
+      "baha_fund_id": null,
+      "name": "NB Global Equity Megatrends I USD",
+      "price_date": "2026-07-24",
+      "source": "pershing_netx360",
+      "scrapedAt": "2026-07-28T10:32:58.799639"
     },
     "LU1985812756": {
       "ticker": "MFSCV",
-      "nav": 290.86,
-      "baha_fund_id": "FU_100118890",
-      "name": "MFS Meridian Contrarian Value I1 USD"
+      "nav": 306.11,
+      "currency": "USD",
+      "baha_fund_id": null,
+      "name": "MFS Meridian Contrarian Value I1 USD",
+      "price_date": "2026-07-24",
+      "source": "pershing_netx360",
+      "scrapedAt": "2026-07-28T10:32:58.799666"
     },
     "LU2940405447": {
       "ticker": "JHGSC",
-      "nav": 54.4,
-      "baha_fund_id": "FU_100150010",
-      "name": "Janus Henderson Horizon Global Smaller Cos F2 USD"
+      "nav": 54.98,
+      "currency": "USD",
+      "baha_fund_id": null,
+      "name": "Janus Henderson Horizon Global Smaller Cos F2 USD",
+      "price_date": "2026-07-27",
+      "source": "pershing_netx360",
+      "scrapedAt": "2026-07-28T10:32:58.799674"
     },
     "IE00BF4KN675": {
       "ticker": "LGLI",
-      "nav": 20.0796,
-      "baha_fund_id": "FU_100074669",
-      "name": "Lazard Global Listed Infrastructure A Acc USD"
+      "nav": 19.5565,
+      "currency": "USD",
+      "baha_fund_id": null,
+      "name": "Lazard Global Listed Infrastructure A Acc USD",
+      "price_date": "2026-07-24",
+      "source": "pershing_netx360",
+      "scrapedAt": "2026-07-28T10:32:58.799677"
     },
     "IE00B6YCBF59": {
       "ticker": "THOR",
-      "nav": 43.14,
-      "baha_fund_id": "FU_100150054",
-      "name": "Thornburg Equity Income Builder I Acc USD"
+      "nav": 43.81,
+      "currency": "USD",
+      "baha_fund_id": null,
+      "name": "Thornburg Equity Income Builder I Acc USD",
+      "price_date": "2026-07-24",
+      "source": "pershing_netx360",
+      "scrapedAt": "2026-07-28T10:32:58.799682"
     },
     "DE000A0Q4R85": {
       "ticker": "4BRZ",
-      "nav": 50.87,
-      "baha_fund_id": "tts-152272624",
+      "nav": 50.8,
+      "currency": "USD",
+      "baha_fund_id": null,
       "name": "iShares MSCI Brazil UCITS (DE)",
-      "_note": "precio real baha — reemplaza el proxy EWZ de Stooq que subestimaba ~28%"
+      "price_date": "2026-07-27",
+      "source": "pershing_netx360",
+      "scrapedAt": "2026-07-28T10:32:58.799686"
     }
   }
 }

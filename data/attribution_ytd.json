@@ -1,6 +1,6 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-07-28T13:01:28.882362",
+  "refreshedAt": "2026-07-28T10:33:47.777547",
   "as_of_date": "2026-07-28",
   "ytd_anchor": "2025-12-31",
   "days_ytd": 209,
@@ -9,8 +9,8 @@
       "name": "Equity",
       "value_usd": 8000981.28,
       "weight_pct": 30.65,
-      "ytd_pct": 5.39,
-      "contribution_pp": 1.652
+      "ytd_pct": 6.69,
+      "contribution_pp": 2.05
     },
     {
       "name": "Fixed Income",
@@ -34,13 +34,13 @@
       "contribution_pp": 0.005
     }
   ],
-  "gross_reconstructed_pct": 1.479,
+  "gross_reconstructed_pct": 1.877,
   "mgmt_fee_pp": -1.031,
   "mgmt_fee_rate_annual_pct": 1.8,
-  "net_reconstructed_pct": 0.448,
+  "net_reconstructed_pct": 0.846,
   "lynk_ytd_pct": 1.37,
   "lynk_refreshed_at": "2026-07-28T12:57:22.021176",
-  "residual_pp": -0.922,
+  "residual_pp": -0.524,
   "alts_detail": [
     {
       "ticker": "CALP",
@@ -137,10 +137,10 @@
     "components": [
       {
         "name": "Equity",
-        "big_contrib_pp": 1.652,
+        "big_contrib_pp": 2.05,
         "bench_contrib_pp": 5.99,
-        "alpha_pp": -4.338,
-        "comment": "BIG 30.6% @ +5.39% vs 60% ACWI @ +9.98%"
+        "alpha_pp": -3.94,
+        "comment": "BIG 30.6% @ +6.69% vs 60% ACWI @ +9.98%"
       },
       {
         "name": "Fixed Income",
@@ -174,7 +174,7 @@
         "name": "Residual",
         "big_contrib_pp": null,
         "bench_contrib_pp": null,
-        "alpha_pp": 0.478,
+        "alpha_pp": 0.08,
         "comment": "Tracking error AOR vs (60% ACWI + 40% AGG teorico) + Lynk smoothing + cash approx + alts statement lag"
       }
     ]

@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-07-28T13:01:21.057962",
+  "refreshedAt": "2026-07-28T10:33:01.040080",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -841,7 +841,7 @@
     },
     {
       "date": "2026-07-28",
-      "mv_usd": 8051595.077189544,
+      "mv_usd": 8150893.829334144,
       "holdings": [
         {
           "ticker": "CSPX",
@@ -853,36 +853,36 @@
         {
           "ticker": "NBGMT",
           "qty": 58050.998,
-          "price": 23.37,
-          "mv": 1356651.82326,
+          "price": 23.99,
+          "mv": 1392643.44202,
           "source": "daily_close"
         },
         {
           "ticker": "MFSCV",
           "qty": 4063.638,
-          "price": 290.86,
-          "mv": 1181949.74868,
+          "price": 306.11,
+          "mv": 1243920.22818,
           "source": "daily_close"
         },
         {
           "ticker": "THOR",
           "qty": 14410.584,
-          "price": 43.14,
-          "mv": 621672.5937600001,
+          "price": 43.81,
+          "mv": 631327.68504,
           "source": "daily_close"
         },
         {
           "ticker": "JHGSC",
           "qty": 10410.46,
-          "price": 54.4,
-          "mv": 566329.024,
+          "price": 54.98,
+          "mv": 572367.0907999999,
           "source": "daily_close"
         },
         {
           "ticker": "LGLI",
           "qty": 26511.134,
-          "price": 20.0796,
-          "mv": 532332.9662664,
+          "price": 19.5565,
+          "mv": 518464.992071,
           "source": "daily_close"
         },
         {
@@ -902,8 +902,8 @@
         {
           "ticker": "4BRZ",
           "qty": 6979.0,
-          "price": 50.87,
-          "mv": 355021.73,
+          "price": 50.8,
+          "mv": 354533.19999999995,
           "source": "daily_close"
         }
       ]
@@ -3793,10 +3793,10 @@
     },
     {
       "date": "2026-07-28",
-      "mv_usd": 8051595.077189544,
+      "mv_usd": 8150893.829334144,
       "flow_in": 0.0,
-      "twr": -0.002531648511841067,
-      "index": 112.4445
+      "twr": 0.011049745472803796,
+      "index": 113.8313
     }
   ],
   "acwi_index_series": [
@@ -5959,8 +5959,8 @@
     },
     {
       "date": "2026-07-28",
-      "price": 154.61,
-      "index": 120.0126
+      "price": 153.77,
+      "index": 119.3606
     }
   ],
   "equity_flows_by_month": {
@@ -9027,11 +9027,19 @@
       "twr": -0.0002
     },
     {
-      "date": "2026-07-28",
-      "mv_usd": 8051595.077189544,
+      "date": "2026-07-27",
+      "index": 112.5872,
+      "interpolated": true,
+      "mv_usd": 8061812.8493,
       "flow_in": 0.0,
-      "twr": -0.002531648511841067,
-      "index": 112.4445
+      "twr": -0.0014
+    },
+    {
+      "date": "2026-07-28",
+      "mv_usd": 8150893.829334144,
+      "flow_in": 0.0,
+      "twr": 0.011049745472803796,
+      "index": 113.8313
     }
   ],
   "acwi_index_series_original": [
@@ -11187,9 +11195,15 @@
       "price": 155.2395
     },
     {
+      "date": "2026-07-27",
+      "index": 120.257,
+      "interpolated": true,
+      "price": 154.9248
+    },
+    {
       "date": "2026-07-28",
-      "price": 154.61,
-      "index": 120.0126
+      "price": 153.77,
+      "index": 119.3606
     }
   ]
 }
