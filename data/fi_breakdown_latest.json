@@ -1,58 +1,66 @@
 {
-  "asOf": "2026-04-30",
-  "source": "DEPRECATED — Maximus snapshot. NEEDS REBUILD FROM PRIMARY: per-fund FI factsheets × Pershing weights",
-  "deprecated": true,
-  "todo": "Reconstruir desde factsheets directos: PIMCO Income/LD/EM (PIMCO website), Man GLG, Schroder Cat Bond, Tenac (manual). Cada uno con su credit quality, sector, regional breakdown, ponderado por pesos BIG",
-  "note": "Datos al cierre de Abril 2026. NO usar como source of truth — usar mientras se rebuilda desde primarias.",
+  "asOf": "2026-07-28",
+  "source": "Sub-asset class y credit_quality.bmk: recalculados 2026-07-28 desde fi_subasset_lookup.json x pesos frescos Pershing (canonical/2026-07-28) + factsheet oficial iShares AGG (30-Jun-2026). fi_stats.big: ponderado desde fi_race.json (ytw/duration/maturity por fondo) x mismos pesos. credit_quality.big, fi_stats.bmk y regional: todavia sin refresh (ver notes por seccion).",
+  "note": "Ver 'source' por seccion para saber que esta fresco y que sigue siendo la aprobacion de Abril-2026 (Lucas, 28-Abr-2026, fi_breakdown_mar26.json).",
 
   "fi_stats": {
     "title": "Estadísticas Renta Fija",
+    "source": "big: ponderado 28-Jul-2026 (fi_race.json x fi_subasset_big.json pesos, ex-MANEM por falta de dato). bmk: AGG, sin refresh (Abril-2026).",
     "rows": [
-      { "metric": "YTW (%)",     "big": 6.95, "bmk": 3.71 },
-      { "metric": "Duración",    "big": 4.64, "bmk": 6.21 },
-      { "metric": "Vencimiento", "big": 6.69, "bmk": 8.36 }
+      { "metric": "YTW (%)",     "big": 7.22, "bmk": 3.71 },
+      { "metric": "Duración",    "big": 4.66, "bmk": 6.21 },
+      { "metric": "Vencimiento", "big": 6.63, "bmk": 8.36 }
     ]
   },
 
   "sub_asset_class": {
     "title": "Distribución por Sub-asset Class (Sectorial FI)",
     "subtitle": "BIG vs AGG (Bloomberg US Aggregate)",
-    "note": "Money Market incluye Cash/equivalentes. Derivados negativos = sleeve corto en duration via futuros (PIMCO).",
+    "source": "big: fi_subasset_lookup.json (breakdown por fondo, factsheets individuales) x pesos Pershing 28-Jul-2026. agg: factsheet oficial iShares AGG fund fact sheet, 30-Jun-2026 (TOP SECTORS x %), mapeado a las mismas 10 categorias.",
+    "note": "MANEM (0.18% del FI) sin factsheet propio todavia -- ver fi_subasset_lookup.json, estimado 'EM Local + Hard' ~90% por convencion del pitch book. Pendiente reemplazar cuando llegue el factsheet real.",
     "rows": [
-      { "category": "Securitized",     "big": 42, "agg": 12 },
-      { "category": "Money market",    "big": 36, "agg": 1  },
-      { "category": "Corporate",       "big": 31, "agg": 25 },
-      { "category": "Government",      "big": 22, "agg": 63 },
-      { "category": "Derivatives",     "big": -32, "agg": 0 }
+      { "category": "US Treasury",             "big": 1.84,  "agg": 46.26 },
+      { "category": "Govt-related",            "big": 8.04,  "agg": 2.59 },
+      { "category": "Govt Agency MBS",          "big": 16.62, "agg": 23.43 },
+      { "category": "Securitized Non-Agency",   "big": 11.21, "agg": 1.39 },
+      { "category": "Corporate IG",             "big": 22.03, "agg": 24.71 },
+      { "category": "Corporate HY",             "big": 2.95,  "agg": 0.0 },
+      { "category": "EM Local + Hard",          "big": 18.14, "agg": 0.0 },
+      { "category": "Cat Bonds",                "big": 4.65,  "agg": 0.0 },
+      { "category": "Bank Loans",               "big": 0.26,  "agg": 0.0 },
+      { "category": "Other",                    "big": 14.23, "agg": 1.62 }
     ],
-    "totals": { "big": 100, "agg": 100 }
+    "totals": { "big": 99.97, "agg": 100.0 }
   },
 
   "credit_quality": {
     "title": "Calidad Crediticia",
     "subtitle": "BIG vs BMK (AGG)",
+    "source": "big: aprobado por Lucas 28-Abr-2026 (fi_breakdown_mar26.json) -- sin refresh, ver TODO. bmk: factsheet oficial iShares AGG, 30-Jun-2026 (CREDIT RATINGS x %).",
+    "todo_big": "BIG credit_quality sigue con los numeros de Abril. Para refrescar hace falta la distribucion de rating POR FONDO (no solo el rating unico que hoy tenemos en data/funds/*.json) -- pedirle factsheet detallado a cada gestora o a Lucas.",
     "rows": [
-      { "rating": "AAA", "big": 15.8, "bmk": 10.7 },
-      { "rating": "AA",  "big": 37.2, "bmk": 36.4 },
-      { "rating": "A",   "big": 6.9,  "bmk": 26.7 },
-      { "rating": "BBB", "big": 20.7, "bmk": 11.3 },
-      { "rating": "BB",  "big": 8.7,  "bmk": 0.3  },
+      { "rating": "AAA", "big": 15.8, "bmk": 2.21 },
+      { "rating": "AA",  "big": 37.2, "bmk": 73.60 },
+      { "rating": "A",   "big": 6.9,  "bmk": 11.85 },
+      { "rating": "BBB", "big": 20.7, "bmk": 11.63 },
+      { "rating": "BB",  "big": 8.7,  "bmk": 0.0  },
       { "rating": "B",   "big": 3.6,  "bmk": 0.0  },
       { "rating": "CCC", "big": 6.6,  "bmk": 0.0  },
-      { "rating": "NR",  "big": 0.5,  "bmk": 14.3 }
+      { "rating": "NR",  "big": 0.5,  "bmk": 0.71  }
     ],
-    "totals": { "big": 100, "bmk": 100 },
+    "totals": { "big": 100, "bmk": 100.0 },
     "summary": {
       "big_ig": 81.1,
       "big_hy": 18.9,
-      "bmk_ig": 85.1,
-      "bmk_hy": 0.3
+      "bmk_ig": 99.29,
+      "bmk_hy": 0.0
     }
   },
 
   "regional": {
     "title": "Distribución Regional FI",
     "subtitle": "BIG vs ACWI 60%/40% AGG",
+    "source": "Sin refresh -- aprobado 28-Abr-2026 (fi_breakdown_mar26.json / Maximus).",
     "rows": [
       { "category": "North Am.",    "big": 35.9, "bmk": 44.9 },
       { "category": "Europe dev.",  "big": 22.4, "bmk": 4.5  },

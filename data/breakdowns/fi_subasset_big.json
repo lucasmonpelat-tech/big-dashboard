@@ -1,31 +1,31 @@
 {
-  "computed_at": "2026-06-03T16:42:32",
-  "source": "Weighted from fi_subasset_lookup.json x Pershing weights",
-  "pershing_file": "C:\\Users\\lmonp\\Downloads\\BIG_Posiciones_31May2026_para_Maximus.xlsx",
-  "fi_total_aum_usd": 10436696.02,
+  "computed_at": "2026-07-28T14:51:43",
+  "source": "Weighted from fi_subasset_lookup.json x Pershing canonical (28-Jul-2026, no Excel manual)",
+  "pershing_snapshot": "data/canonical/2026-07-28/positions.json",
+  "fi_total_aum_usd": 10956096.47,
   "fund_weights": {
-    "IE00BDT57R20": 38.65,
-    "IE00B87KCF77": 19.54,
-    "IE000OE87WX6": 17.93,
-    "IE00B29K0P99": 10.8,
-    "XS2324777171": 7.88,
-    "LU2049315265": 5.0,
-    "IE00089T5MA6": 0.19
+    "IE00B29K0P99": 10.32,
+    "IE000OE87WX6": 18.9,
+    "IE00B87KCF77": 29.18,
+    "IE00089T5MA6": 0.18,
+    "IE00BDT57R20": 28.63,
+    "LU2049315265": 5.3,
+    "XS2324777171": 7.49
   },
   "subasset_breakdown_big": {
-    "US Treasury": 1.23,
-    "Govt-related": 5.97,
-    "Govt Agency MBS": 18.92,
-    "Securitized Non-Agency": 12.38,
-    "Corporate IG": 22.43,
-    "Corporate HY": 3.6,
-    "EM Local + Hard": 19.45,
-    "Cat Bonds": 4.39,
-    "Bank Loans": 0.18,
-    "Other": 11.43
+    "US Treasury": 1.84,
+    "Govt-related": 8.04,
+    "Govt Agency MBS": 16.62,
+    "Securitized Non-Agency": 11.21,
+    "Corporate IG": 22.03,
+    "Corporate HY": 2.95,
+    "EM Local + Hard": 18.14,
+    "Cat Bonds": 4.65,
+    "Bank Loans": 0.26,
+    "Other": 14.23
   },
   "validation": {
-    "sum": 99.98,
+    "sum": 99.97,
     "ok": true
   }
 }
