@@ -18,6 +18,13 @@ baha_nav_refresher.py, para que TODOS los consumers (refresh_equity_daily,
 refresh_fi_daily, refresh_equity_race_daily, refresh_holdings_returns_daily,
 refresh_fi_race_daily, portfolio_reconstructor) sigan funcionando sin cambios.
 
+FIX 2026-07-28 (extension): Lucas pidio "unificar todo con Pershing" para FI y
+alts liquidos tambien -- se agregaron los fondos FI (MANIG, PIMCO-INC, TGF,
+BPCC, PIMCO-LD, PIMCO-EM, SGCB, MANEM) al mismo INSTRUMENTS dict. El nombre del
+archivo/output sigue siendo "ucits_daily_nav.json" por compatibilidad con los
+consumers existentes (varios ya leen ESTE archivo buscando tickers FI, solo que
+antes nunca matcheaban nada porque baha jamas los trajo).
+
 Si el price_date del positions.json usado queda mas viejo que MAX_STALE_BDAYS
 dias habiles, escribe data/_alerts/ucits_price_stale_YYYY-MM-DD.json.
 
@@ -44,6 +51,17 @@ INSTRUMENTS = {
     "IE00BF4KN675": {"ticker": "LGLI",  "name": "Lazard Global Listed Infrastructure A Acc USD"},
     "IE00B6YCBF59": {"ticker": "THOR",  "name": "Thornburg Equity Income Builder I Acc USD"},
     "DE000A0Q4R85": {"ticker": "4BRZ",  "name": "iShares MSCI Brazil UCITS (DE)"},
+    # FI open-end funds (2026-07-28): mismo problema que las UCITS de arriba --
+    # fi_fund_nav.json (baha) nunca trajo nada ("navs": {} desde siempre). NO se
+    # incluyen aca TGF/BPCC (bonos, precio per-100-face, ya resueltos via
+    # sync_alts_ugl.py con metodologia de devengo) ni IBIT/GLD (ETFs liquidos,
+    # ya tienen precio diario confiable via Yahoo en live_prices.json).
+    "IE000OE87WX6": {"ticker": "MANIG",     "name": "Man GLG Global Investment Grade Opportunities IVY USD"},
+    "IE00B87KCF77": {"ticker": "PIMCO-INC", "name": "PIMCO GIS Income Fund Inst Acc USD"},
+    "IE00BDT57R20": {"ticker": "PIMCO-LD",  "name": "PIMCO GIS Low Duration Income Inst Acc USD"},
+    "IE00B29K0P99": {"ticker": "PIMCO-EM",  "name": "PIMCO GIS Emerging Local Bond Inst Acc USD"},
+    "LU2049315265": {"ticker": "SGCB",      "name": "Schroder GAIA Cat Bond C Acc USD"},
+    "IE00089T5MA6": {"ticker": "MANEM",     "name": "Man EM Corporate Credit Alternative IV USD"},
 }
 
 

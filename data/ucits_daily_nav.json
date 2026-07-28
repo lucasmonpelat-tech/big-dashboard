@@ -1,6 +1,6 @@
 {
   "_description": "NAV T-1 (aprox) de cada UCITS/ETF-DE del equity sleeve, desde el precio oficial de Pershing (custodio) via NetX360. Reemplaza el scrape de baha.com (nunca funciono en CI, ver git history pre-2026-07-28).",
-  "refreshedAt": "2026-07-28T12:38:46.352239",
+  "refreshedAt": "2026-07-28T13:07:06.984593",
   "source": "Pershing/NetX360 via canonical/2026-07-28/positions.json (sync_ucits_nav_from_pershing.py)",
   "snapshot_date": "2026-07-28",
   "navs": {
@@ -12,7 +12,7 @@
       "name": "NB Global Equity Megatrends I USD",
       "price_date": "2026-07-24",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-07-28T12:38:46.351872"
+      "scrapedAt": "2026-07-28T13:07:06.984248"
     },
     "LU1985812756": {
       "ticker": "MFSCV",
@@ -22,7 +22,7 @@
       "name": "MFS Meridian Contrarian Value I1 USD",
       "price_date": "2026-07-24",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-07-28T12:38:46.352203"
+      "scrapedAt": "2026-07-28T13:07:06.984536"
     },
     "LU2940405447": {
       "ticker": "JHGSC",
@@ -32,7 +32,7 @@
       "name": "Janus Henderson Horizon Global Smaller Cos F2 USD",
       "price_date": "2026-07-27",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-07-28T12:38:46.352218"
+      "scrapedAt": "2026-07-28T13:07:06.984551"
     },
     "IE00BF4KN675": {
       "ticker": "LGLI",
@@ -42,7 +42,7 @@
       "name": "Lazard Global Listed Infrastructure A Acc USD",
       "price_date": "2026-07-24",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-07-28T12:38:46.352223"
+      "scrapedAt": "2026-07-28T13:07:06.984555"
     },
     "IE00B6YCBF59": {
       "ticker": "THOR",
@@ -52,7 +52,7 @@
       "name": "Thornburg Equity Income Builder I Acc USD",
       "price_date": "2026-07-24",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-07-28T12:38:46.352229"
+      "scrapedAt": "2026-07-28T13:07:06.984560"
     },
     "DE000A0Q4R85": {
       "ticker": "4BRZ",
@@ -62,7 +62,67 @@
       "name": "iShares MSCI Brazil UCITS (DE)",
       "price_date": "2026-07-27",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-07-28T12:38:46.352234"
+      "scrapedAt": "2026-07-28T13:07:06.984565"
+    },
+    "IE000OE87WX6": {
+      "ticker": "MANIG",
+      "nav": 124.57,
+      "currency": "USD",
+      "baha_fund_id": null,
+      "name": "Man GLG Global Investment Grade Opportunities IVY USD",
+      "price_date": "2026-07-24",
+      "source": "pershing_netx360",
+      "scrapedAt": "2026-07-28T13:07:06.984568"
+    },
+    "IE00B87KCF77": {
+      "ticker": "PIMCO-INC",
+      "nav": 20.05,
+      "currency": "USD",
+      "baha_fund_id": null,
+      "name": "PIMCO GIS Income Fund Inst Acc USD",
+      "price_date": "2026-07-27",
+      "source": "pershing_netx360",
+      "scrapedAt": "2026-07-28T13:07:06.984573"
+    },
+    "IE00BDT57R20": {
+      "ticker": "PIMCO-LD",
+      "nav": 14.0,
+      "currency": "USD",
+      "baha_fund_id": null,
+      "name": "PIMCO GIS Low Duration Income Inst Acc USD",
+      "price_date": "2026-07-27",
+      "source": "pershing_netx360",
+      "scrapedAt": "2026-07-28T13:07:06.984576"
+    },
+    "IE00B29K0P99": {
+      "ticker": "PIMCO-EM",
+      "nav": 18.25,
+      "currency": "USD",
+      "baha_fund_id": null,
+      "name": "PIMCO GIS Emerging Local Bond Inst Acc USD",
+      "price_date": "2026-07-27",
+      "source": "pershing_netx360",
+      "scrapedAt": "2026-07-28T13:07:06.984581"
+    },
+    "LU2049315265": {
+      "ticker": "SGCB",
+      "nav": 2154.52,
+      "currency": "USD",
+      "baha_fund_id": null,
+      "name": "Schroder GAIA Cat Bond C Acc USD",
+      "price_date": "2026-07-24",
+      "source": "pershing_netx360",
+      "scrapedAt": "2026-07-28T13:07:06.984584"
+    },
+    "IE00089T5MA6": {
+      "ticker": "MANEM",
+      "nav": 115.06,
+      "currency": "USD",
+      "baha_fund_id": null,
+      "name": "Man EM Corporate Credit Alternative IV USD",
+      "price_date": "2026-07-24",
+      "source": "pershing_netx360",
+      "scrapedAt": "2026-07-28T13:07:06.984589"
     }
   }
 }

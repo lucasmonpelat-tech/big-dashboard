@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-07-28T12:39:42.512336",
+  "refreshedAt": "2026-07-28T13:07:26.496388",
   "inception": "2025-06-30",
   "benchmark": "Bloomberg US Aggregate (via AGG ETF)",
   "ust_reference": "10Y US Treasury (^TNX)",
@@ -109,15 +109,19 @@
       "value_usd": 3999424.04,
       "weight_pct": 38.66,
       "si_return_pct": 5.45,
-      "ytd_return_pct": 0.94,
+      "ytd_return_pct": 1.45,
       "contribution_pct": 2.11,
-      "ytd_contribution_pct": 0.36,
+      "ytd_contribution_pct": 0.56,
       "ytw": 6.23,
       "duration": 2.7,
       "maturity": 3.81,
       "rating": "AA",
       "spread_vs_ust": 1.67,
-      "source": "baha:IE00BDT57R20"
+      "source": "baha:IE00BDT57R20",
+      "nav_t1": 14.0,
+      "nav_currency": "USD",
+      "nav_date": null,
+      "return_source": "baha_nav_dec31"
     },
     {
       "isin": "IE00B87KCF77",
@@ -126,15 +130,19 @@
       "value_usd": 2009538.12,
       "weight_pct": 19.42,
       "si_return_pct": 5.71,
-      "ytd_return_pct": 0.74,
+      "ytd_return_pct": 0.2,
       "contribution_pct": 1.11,
-      "ytd_contribution_pct": 0.14,
+      "ytd_contribution_pct": 0.04,
       "ytw": 7.0,
       "duration": 6.29,
       "maturity": 9.33,
       "rating": "AA-",
       "spread_vs_ust": 2.44,
-      "source": "baha:IE00B87KCF77"
+      "source": "baha:IE00B87KCF77",
+      "nav_t1": 20.05,
+      "nav_currency": "USD",
+      "nav_date": null,
+      "return_source": "baha_nav_dec31"
     },
     {
       "isin": "IE000OE87WX6",
@@ -143,15 +151,19 @@
       "value_usd": 1863470.26,
       "weight_pct": 18.01,
       "si_return_pct": 5.5,
-      "ytd_return_pct": 1.28,
+      "ytd_return_pct": 1.6,
       "contribution_pct": 0.99,
-      "ytd_contribution_pct": 0.23,
+      "ytd_contribution_pct": 0.29,
       "ytw": 7.1,
       "duration": 5.76,
       "maturity": 5.5,
       "rating": "BBB",
       "spread_vs_ust": 2.54,
-      "source": "baha:IE000OE87WX6"
+      "source": "baha:IE000OE87WX6",
+      "nav_t1": 124.57,
+      "nav_currency": "USD",
+      "nav_date": null,
+      "return_source": "baha_nav_dec31"
     },
     {
       "isin": "IE00B29K0P99",
@@ -160,15 +172,19 @@
       "value_usd": 1109506.79,
       "weight_pct": 10.72,
       "si_return_pct": 10.51,
-      "ytd_return_pct": 2.06,
+      "ytd_return_pct": 1.73,
       "contribution_pct": 1.13,
-      "ytd_contribution_pct": 0.22,
+      "ytd_contribution_pct": 0.19,
       "ytw": 8.51,
       "duration": 5.31,
       "maturity": 7.32,
       "rating": "BBB",
       "spread_vs_ust": 3.95,
-      "source": "baha:IE00B29K0P99"
+      "source": "baha:IE00B29K0P99",
+      "nav_t1": 18.25,
+      "nav_currency": "USD",
+      "nav_date": null,
+      "return_source": "baha_nav_dec31"
     },
     {
       "isin": "XS2324777171",
@@ -194,15 +210,19 @@
       "value_usd": 520863.25,
       "weight_pct": 5.03,
       "si_return_pct": 8.13,
-      "ytd_return_pct": 1.57,
+      "ytd_return_pct": 3.62,
       "contribution_pct": 0.41,
-      "ytd_contribution_pct": 0.08,
+      "ytd_contribution_pct": 0.18,
       "ytw": 9.7,
       "duration": 0.3,
       "maturity": 2.2,
       "rating": "NR",
       "spread_vs_ust": 5.14,
-      "source": "baha:LU2049315265"
+      "source": "baha:LU2049315265",
+      "nav_t1": 2154.52,
+      "nav_currency": "USD",
+      "nav_date": null,
+      "return_source": "baha_nav_dec31"
     },
     {
       "isin": "IE00089T5MA6",
@@ -211,17 +231,52 @@
       "value_usd": 20008.76,
       "weight_pct": 0.19,
       "si_return_pct": null,
-      "ytd_return_pct": null,
+      "ytd_return_pct": 6.01,
       "contribution_pct": null,
-      "ytd_contribution_pct": null,
+      "ytd_contribution_pct": 0.01,
       "ytw": 0,
       "duration": 0,
       "maturity": 0,
       "rating": null,
       "spread_vs_ust": -4.56,
-      "source": "baha:IE00089T5MA6"
+      "source": "baha:IE00089T5MA6",
+      "nav_t1": 115.06,
+      "nav_currency": "USD",
+      "nav_date": null,
+      "return_source": "baha_nav_dec31"
     }
   ],
-  "_daily_anchors": {},
-  "_daily_race_note": "Retornos por fondo recalculados 2026-07-28 con NAV vivo T-1 (baha). YTD exacto (ancla NAV 31-dic): —. YTD calibrado desde mensual 2026-04: —. Sin NAV vivo (carry/scrape): ['PIMCO-LD', 'PIMCO-INC', 'MANIG', 'PIMCO-EM', 'TGF', 'SGCB', 'MANEM']."
+  "_daily_anchors": {
+    "IE00BDT57R20": {
+      "nav_anchor_si": 13.276434329065909,
+      "basis_month": "2026-04",
+      "currency": "USD",
+      "anchor_date": "2026-07-28"
+    },
+    "IE00B87KCF77": {
+      "nav_anchor_si": 18.966985148046543,
+      "basis_month": "2026-04",
+      "currency": "USD",
+      "anchor_date": "2026-07-28"
+    },
+    "IE000OE87WX6": {
+      "nav_anchor_si": 118.07582938388626,
+      "basis_month": "2026-04",
+      "currency": "USD",
+      "anchor_date": "2026-07-28"
+    },
+    "IE00B29K0P99": {
+      "nav_anchor_si": 16.51434259343046,
+      "basis_month": "2026-04",
+      "currency": "USD",
+      "anchor_date": "2026-07-28"
+    },
+    "LU2049315265": {
+      "nav_anchor_si": 1992.5275131785816,
+      "basis_month": "2026-04",
+      "currency": "USD",
+      "anchor_date": "2026-07-28"
+    }
+  },
+  "_daily_race_note": "Retornos por fondo recalculados 2026-07-28 con NAV vivo T-1 (baha). YTD exacto (ancla NAV 31-dic): ['PIMCO-LD', 'PIMCO-INC', 'MANIG', 'PIMCO-EM', 'SGCB', 'MANEM']. YTD calibrado desde mensual 2026-04: —. Sin NAV vivo (carry/scrape): ['TGF']."
 }
