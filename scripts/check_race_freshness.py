@@ -25,7 +25,7 @@ DATA = ROOT / "data"
 FILES_TO_CHECK = [
     # Fuente cruda de precios
     ("live_prices.json", 3, "Stooq T-1 (ETFs)"),
-    ("ucits_daily_nav.json", 3, "baha T-1 (UCITS)"),
+    ("ucits_daily_nav.json", 3, "Pershing T-1 (UCITS, ex-baha)"),
     ("lynk_data.json", 3, "Lynk NAV oficial"),
     ("lynk_nav_series.json", 3, "Lynk serie NAV"),
 

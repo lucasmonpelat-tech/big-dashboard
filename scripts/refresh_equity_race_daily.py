@@ -158,10 +158,11 @@ def main():
                 except Exception as e:
                     print(f"    WARN {tk}: {str(e)[:50]}")
 
-            # FIX 2026-07-27: YTD spot para UCITS sin yfinance decente (NBGMT, MFSCV,
-            # THOR, JHGSC, LGLI): NAV T-1 de baha (ucits_daily_nav.json) / NAV 31-Dic
-            # (year_start_anchors.json). Sin esto quedaban clavados en el ultimo
-            # scrape mensual de baha (NBGMT/MFSCV mostraban YTD de Mayo en Julio).
+            # FIX 2026-07-27/28: YTD spot para UCITS sin yfinance decente (NBGMT, MFSCV,
+            # THOR, JHGSC, LGLI): NAV T-1 de Pershing/NetX360 (ucits_daily_nav.json, ver
+            # sync_ucits_nav_from_pershing.py) / NAV 31-Dic (year_start_anchors.json).
+            # baha_nav_refresher.py (scrape directo a baha.com) nunca funciono en CI desde
+            # que se creo -- quedaba clavado en el NAV semilla de Mayo en silencio.
             n_ucits = 0
             try:
                 navs = json.load(open(ROOT / 'data' / 'ucits_daily_nav.json', encoding='utf-8')).get('navs', {})
@@ -186,7 +187,7 @@ def main():
 
             er['refreshedAt'] = datetime.now().isoformat()
             er['_ytd_spot_updated'] = (f'{datetime.now().date()}: {n_updated} holdings YTD spot via yfinance'
-                                       f' + {n_ucits} UCITS via baha NAV/anchor 31-Dic')
+                                       f' + {n_ucits} UCITS via Pershing NAV/anchor 31-Dic')
             with open(equity_race_file, 'w', encoding='utf-8') as f:
                 json.dump(er, f, indent=2, ensure_ascii=False)
             print(f"  equity_race.json: {n_updated} holdings con YTD spot fresco")

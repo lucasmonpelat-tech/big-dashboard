@@ -10,7 +10,7 @@ name: 🔄 Daily Refresh BIG (Lynk + Sleeves + Alertas + Digest)
 #   1. Health-check (solo lunes): verifica que la corrida del sabado anterior haya
 #      terminado OK. Si no, deja un warning marker.
 #   2. Scrapea Lynk (NAV / YTD / SI / AUM / Vol / Sharpe) — KPIs principales.
-#   3. Scrapea baha (NAVs de equity + FI funds UCITS).
+#   3. Sync NAVs de equity UCITS desde Pershing/NetX360 (ex-baha, ver 2026-07-28).
 #   4. Stooq prices (ETFs liquidos).
 #   5. Yahoo bench indices (ACWI, AGG, SOFR para Normalized Performance).
 #   6. Recompute Equity sleeve daily NAV + Equity Race (buy-and-hold vs ACWI).
@@ -90,8 +90,12 @@ jobs:
         run: python scripts/lynk_nav_extractor.py --email "$LYNK_EMAIL"
         continue-on-error: true
 
-      - name: Baha NAV refresher (Equity + FI UCITS)
+      - name: Baha NAV refresher (Equity + FI UCITS) — best-effort, ver sync Pershing abajo
         run: python scripts/baha_nav_refresher.py
+        continue-on-error: true
+
+      - name: Sync UCITS NAV desde Pershing/NetX360 (reemplaza baha, ver 2026-07-28)
+        run: python scripts/sync_ucits_nav_from_pershing.py
         continue-on-error: true
 
       - name: Stooq prices (ETFs liquidos)

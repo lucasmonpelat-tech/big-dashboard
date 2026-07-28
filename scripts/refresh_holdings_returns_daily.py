@@ -47,13 +47,14 @@ def _is_valid(v):
 
 
 def load_daily_prices():
-    """Carga precios T-1: UCITS via baha + ETF via live_prices.json.
+    """Carga precios T-1: UCITS via Pershing/NetX360 (ucits_daily_nav.json, ver
+    sync_ucits_nav_from_pershing.py) + ETF via live_prices.json.
 
     Mapping ticker en holdings_returns_*.json -> precio.
     """
     px = {}
 
-    # UCITS NAVs (baha)
+    # UCITS NAVs (Pershing/NetX360, ex-baha)
     try:
         ud = json.load(open(ROOT / "data" / "ucits_daily_nav.json", encoding="utf-8"))
         for rec in ud.get("navs", {}).values():
@@ -180,8 +181,9 @@ def load_ytd_per_holding():
         pass
 
     # 3) YTD SPOT para UCITS via ucits_daily_nav.json (NBGMT, MFSCV, THOR, JHGSC, LGLI)
-    #    NAV T-1 de baha / NAV 31-Dic de year_start_anchors.json. Solo pisa el valor
-    #    del race si tenemos AMBOS datos; sin anchor se queda el del race.
+    #    NAV T-1 de Pershing/NetX360 (ver sync_ucits_nav_from_pershing.py) / NAV 31-Dic
+    #    de year_start_anchors.json. Solo pisa el valor del race si tenemos AMBOS datos;
+    #    sin anchor se queda el del race.
     try:
         navs = json.load(open(ROOT / 'data' / 'ucits_daily_nav.json', encoding='utf-8')).get('navs', {})
         anchors = json.load(open(ROOT / 'data' / 'year_start_anchors.json', encoding='utf-8')).get('anchors_2026', {})
