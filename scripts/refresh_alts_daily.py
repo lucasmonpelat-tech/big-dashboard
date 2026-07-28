@@ -39,6 +39,7 @@ POSITIONS_FILE = ROOT / "data" / "positions_latest.json"
 LIVE_PRICES_FILE = ROOT / "data" / "live_prices.json"
 CARLYLE_FILE = ROOT / "data" / "alts_carlyle_statement.json"
 ICAPITAL_FILE = ROOT / "data" / "alts_icapital_statements.json"
+BPCC_FILE = ROOT / "data" / "alts_bpcc_statement.json"
 
 
 def load_stooq_prices():
@@ -98,6 +99,27 @@ def load_icapital_latest():
     return out
 
 
+def load_bpcc_latest():
+    """Ultimo statement Pershing para BPCC (nota estructurada, precio
+    per-100-face). Devuelve dict {mv_usd, valuation_date, ytd_return_pct} o
+    None. SI NO se lee de aca -- se deja al calculo normal via Pershing UGL
+    (cost-basis), porque hubo compras adicionales en distintos lotes/precios
+    que un price-return simple no captura bien."""
+    try:
+        cs = json.load(open(BPCC_FILE, encoding="utf-8"))
+    except Exception:
+        return None
+    statements = cs.get("statements", {}).get("BPCC", [])
+    if not statements:
+        return None
+    latest = max(statements, key=lambda s: s.get("as_of", ""))
+    return {
+        "mv_usd": latest.get("mv_usd"),
+        "valuation_date": latest.get("as_of"),
+        "ytd_return_pct": latest.get("ytd_return_pct"),
+    }
+
+
 def days_between(iso_date, today_iso):
     """Dias entre iso_date y today_iso. None si iso_date invalido."""
     if not iso_date:
@@ -121,6 +143,7 @@ def main():
     stooq = load_stooq_prices()
     carlyle = load_carlyle_latest()
     icapital = load_icapital_latest()  # {HLEND: {...}, GCRED: {...}}
+    bpcc = load_bpcc_latest()
 
     print(f"  Holdings Alts en positions: {len(alts_qty)}")
     print(f"  Stooq prices disponibles: {sum(1 for tk in alts_qty if tk in stooq)}/{len(alts_qty)}")
@@ -128,6 +151,8 @@ def main():
         print(f"  Carlyle (CALP) statement: {carlyle['valuation_date']} -> ${carlyle['mv_usd']:,.0f}")
     for tk, st in icapital.items():
         print(f"  iCapital ({tk}) statement: {st['valuation_date']} -> ${st['mv_usd']:,.0f}")
+    if bpcc:
+        print(f"  Pershing (BPCC) statement: {bpcc['valuation_date']} -> ${bpcc['mv_usd']:,.0f}")
 
     # Cargar alts_race.json
     ar = json.load(open(ALTS_FILE, encoding="utf-8"))
@@ -183,6 +208,22 @@ def main():
             sources_summary["icapital_statement"].append(tk)
             continue
 
+        # BPCC -> statement Pershing real (nota per-100-face). Reemplaza el
+        # carry estimado sintetico (9.4%/yr) por price return real desde el
+        # anchor 31-Dic-2025 (ver alts_bpcc_statement.json).
+        if tk == "BPCC" and bpcc:
+            h["value_usd"] = round(bpcc["mv_usd"], 2)
+            h["valuation_date"] = bpcc["valuation_date"]
+            if bpcc.get("ytd_return_pct") is not None:
+                h["ytd_return_pct"] = bpcc["ytd_return_pct"]
+            # SI se deja sin tocar -> lo completa sync_alts_ugl.py con Pershing
+            # UGL (cost-basis), correcto porque hubo compras en distintos lotes.
+            h["source"] = f"Pershing statement ({bpcc['valuation_date']})"
+            h["days_since_valuation"] = days_between(
+                bpcc["valuation_date"], today_iso)
+            sources_summary["icapital_statement"].append(tk)
+            continue
+
         # Holding liquido: precio fresco en Stooq -> recalc MV + YTD spot
         pos = alts_qty.get(tk)
         if pos and tk in stooq:
@@ -214,7 +255,7 @@ def main():
                 sources_summary["daily_close_stooq"].append(tk)
                 continue
 
-        # Holding con valor en Pershing pero sin Stooq feed (BPCC, FLEX, HLGPI)
+        # Holding con valor en Pershing pero sin Stooq feed (FLEX, HLGPI)
         # -> usar value de positions_latest.json (que es T-1 de Pershing)
         if pos and pos.get("value") and pos.get("price_as_of"):
             h["value_usd"] = round(pos["value"], 2)
@@ -225,14 +266,6 @@ def main():
                 h["source"] = f"Entrada {tk} mayo-2026, sin valuation oficial aun (0%)"
                 h["ytd_return_pct"] = 0.0
                 h["si_return_pct"] = 0.0
-            elif tk == "BPCC":
-                # BPCC entro jul-2025. Sin statement, asumimos carry constante.
-                # YTD: 9.4% yield x (dias YTD / 365)
-                from datetime import date as _d
-                days_ytd = (_d.fromisoformat(today_iso) - _d(2026, 1, 1)).days
-                h["ytd_return_pct"] = round(9.4 * (days_ytd / 365), 2)
-                h["si_return_pct"] = None  # SI pending cost basis exacto
-                h["source"] = f"Pershing T-1 + carry estimado 9.4%/yr (entrada jul-2025)"
             else:
                 # Otros pending statement
                 h["source"] = f"Pershing T-1 ({pos['price_as_of']}) - SI/YTD pending statement"

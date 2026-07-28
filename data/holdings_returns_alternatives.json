@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-07-28T17:08:11.622893",
+  "refreshedAt": "2026-07-28T17:17:25.032905",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Alternatives",
   "period_end": "2026-07-28",
@@ -173,11 +173,12 @@
       "status": "OPEN",
       "name": "PM ALPHA DAC BARINGS BPCC ETN I ACC MEDIUM TERM NOTES VARIAB",
       "qty": 464209.0,
-      "mv_usd": 595348.04,
+      "mv_usd": 599247.40,
       "cost_basis_usd": 554506.45,
-      "unrealized_gl_usd": 40841.59,
-      "return_pct": 7.37,
-      "last_price_pershing": 1.2825,
+      "unrealized_gl_usd": 44740.95,
+      "return_pct": 8.07,
+      "last_price_pershing": 1.2909,
+      "_mv_source_note": "mv_usd corregido 2026-07-28: statement Pershing 30-Jun-2026 (129.09/100 * 464,209 face value). No se actualiza via daily_prices porque BPCC no esta en ucits_daily_nav.json/live_prices.json -- ver alts_bpcc_statement.json.",
       "bench_label": "ACWI",
       "bench_dw_pct": 17.84,
       "alpha_real_pp": -10.47,
@@ -202,9 +203,9 @@
           "cost": 50030.36
         }
       ],
-      "ytd_pct": 5.36,
+      "ytd_pct": 3.07,
       "bench_ytd_pct": 9.98,
-      "alpha_ytd_pp": -4.62
+      "alpha_ytd_pp": -6.91
     },
     {
       "ticker": "FLEX",

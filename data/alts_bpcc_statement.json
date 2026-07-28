@@ -1,0 +1,104 @@
+{
+  "_description": "Source of truth para BPCC (Barings Private Credit Corp ETN / PM Alpha DAC, ISIN XS2658535526). Nota estructurada -- precio cotiza per-100-face-value (mv = qty * price / 100). Cada entry es un statement mensual real; el ultimo por 'as_of' manda para ytd_return_pct. SI se deja a cargo del calculo normal via Pershing UGL/cost-basis (build_holdings_returns.py), NO se sobreescribe aca porque hubo compras adicionales en distintos lotes/precios (Jul, Sep, Oct 2025) que requieren cost-basis weighted, no price-return simple.",
+  "refreshedAt": "2026-07-28T00:00:00",
+  "source": "Statements oficiales Pershing (LSERIES DAC, JXD-101380), leidos directo 2026-07-28 desde C:/Users/lmonp/Dropbox/2026/Pampa BIG/Statements Pershing/{2025,2026}/, statements mensuales completos Jul-2025 a Jun-2026 (Portfolio Holdings)",
+  "statements": {
+    "BPCC": [
+      {
+        "as_of": "2025-07-31",
+        "price": 121.14,
+        "quantity": 376303.0,
+        "mv_usd": 455853.45,
+        "price_date": "2025-07-30",
+        "source_doc": "7.BIG Pershing.pdf",
+        "notes": "Primera compra 25-Jul-2025: dos lotes 94,636 + 281,667 face value @ 120.81 / 120.71."
+      },
+      {
+        "as_of": "2025-08-31",
+        "price": 122.40,
+        "quantity": 376303.0,
+        "mv_usd": 460594.87,
+        "source_doc": "8.BIG Pershing.pdf"
+      },
+      {
+        "as_of": "2025-09-30",
+        "price": 123.19,
+        "quantity": 423621.0,
+        "mv_usd": 521858.71,
+        "price_date": "2025-09-29",
+        "source_doc": "9.BIG Pershing.pdf",
+        "notes": "Compra adicional 19-Sep-2025: 47,318 face value @ 105.85."
+      },
+      {
+        "as_of": "2025-10-31",
+        "price": 123.74,
+        "quantity": 464209.0,
+        "mv_usd": 574412.22,
+        "source_doc": "10.BIG Pershing.pdf",
+        "notes": "Compra adicional 24-Oct-2025: 40,588 face value @ 123.19. Quantity queda constante (464,209) desde aca hasta Jun-2026."
+      },
+      {
+        "as_of": "2025-11-30",
+        "price": 124.68,
+        "quantity": 464209.0,
+        "mv_usd": 578775.78,
+        "source_doc": "11.BIG Pershing.pdf"
+      },
+      {
+        "as_of": "2025-12-31",
+        "price": 125.25,
+        "quantity": 464209.0,
+        "mv_usd": 581421.77,
+        "source_doc": "12. BIG Pershing.pdf / 2025 Big.pdf (Year-End Account Report, mismo documento ES/EN)",
+        "notes": "ANCHOR REAL 31-Dic-2025 -- coincide exacto con el anchor ya locked en year_start_anchors.json (verificado independientemente el mismo dia)."
+      },
+      {
+        "as_of": "2026-01-31",
+        "price": 125.25,
+        "quantity": 464209.0,
+        "mv_usd": 581421.77,
+        "price_date": "2026-01-29",
+        "source_doc": "1.BIG Pershing.pdf",
+        "notes": "Precio identico a Dic-2025 pese a fecha de precio distinta -- feed sin actualizacion real ese mes (normal para credito privado)."
+      },
+      {
+        "as_of": "2026-02-28",
+        "price": 126.57,
+        "quantity": 464209.0,
+        "mv_usd": 587549.33,
+        "source_doc": "2.BIG Pershing.pdf"
+      },
+      {
+        "as_of": "2026-03-31",
+        "price": 126.94,
+        "quantity": 464209.0,
+        "mv_usd": 589266.90,
+        "source_doc": "3.BIG Pershing.pdf"
+      },
+      {
+        "as_of": "2026-04-30",
+        "price": 127.10,
+        "quantity": 464209.0,
+        "mv_usd": 590009.64,
+        "source_doc": "4.BIG Pershing.pdf"
+      },
+      {
+        "as_of": "2026-05-31",
+        "price": 128.25,
+        "quantity": 464209.0,
+        "mv_usd": 595348.04,
+        "source_doc": "5. BIG Pershing.pdf"
+      },
+      {
+        "as_of": "2026-06-30",
+        "price": 129.09,
+        "quantity": 464209.0,
+        "mv_usd": 599247.40,
+        "price_date": "2026-06-29",
+        "ytd_return_pct": 3.07,
+        "source_doc": "6.BIG Pershing.pdf",
+        "notes": "Ultimo statement disponible (no hay Jul-2026 todavia). YTD = 129.09/125.25 - 1 = +3.07% (price return puro, quantity constante desde Oct-2025 -> sin distorsion de flujos entre el ancla y este punto). Corrige el YTD previo, que era un proxy sintetico (9.4%/yr de carry estimado x dias transcurridos), no basado en precio real."
+      }
+    ]
+  }
+}
