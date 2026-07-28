@@ -5,6 +5,22 @@
   "statements": {
     "CALP": [
       {
+        "as_of": "2025-12-31",
+        "isin": "LU2827810776",
+        "fund_name": "Carlyle AlpInvest PM Sub-Fund - I - Class B1",
+        "shares": 186706.497,
+        "nav_per_share": 14.11,
+        "mv_usd": 2634428.67,
+        "ytd_return_pct": 0.0,
+        "si_return_pct": 5.38,
+        "si_return_pct_carlyle_inception": 41.1,
+        "big_cost_basis_nav": 13.39,
+        "big_purchase_date": "2025-08-29",
+        "since_inception_date": "2025-08-29",
+        "source_doc": "Statement Carlyle Dic 25.pdf",
+        "notes": "ANCHOR real 31-Dic-2025 (statement oficial Carlyle, no derivado/estimado). Period End 31-Dec-2025 NAV 14.11. Confirma exacto la nota que ya traian los entries posteriores. YTD=0 por definicion (es el punto de ancla). SI desde compra BIG 29-Aug-2025 @ 13.39 -> 14.11 = +5.38%."
+      },
+      {
         "as_of": "2026-02-27",
         "isin": "LU2827810776",
         "fund_name": "Carlyle AlpInvest PM Sub-Fund - I - Class B1",
@@ -51,6 +67,22 @@
         "since_inception_date": "2025-08-29",
         "source_doc": "CAPM- May Fcatsheet.pdf",
         "notes": "Period End 29-May-2026. YTD vs 31-Dec-2025 NAV 14.11 (+3.97%). SI desde compra BIG 29-Aug-2025 @ 13.39 -> 14.67 = +9.56% (Carlyle inception 28-Jun-2024 @ 10.00 = +46.70%)."
+      },
+      {
+        "as_of": "2026-06-30",
+        "isin": "LU2827810776",
+        "fund_name": "Carlyle AlpInvest PM Sub-Fund - I - Class B1",
+        "shares": 186706.497,
+        "nav_per_share": 14.82,
+        "mv_usd": 2766990.29,
+        "ytd_return_pct": 5.03,
+        "si_return_pct": 10.68,
+        "si_return_pct_carlyle_inception": 48.2,
+        "big_cost_basis_nav": 13.39,
+        "big_purchase_date": "2025-08-29",
+        "since_inception_date": "2025-08-29",
+        "source_doc": "TVS_P122202_2026-06-30.pdf",
+        "notes": "Period End 30-Jun-2026. YTD vs 31-Dec-2025 NAV 14.11 (+5.03%, confirmado con el statement oficial, coincide con lo que ya estaba en alts_external.json). SI desde compra BIG 29-Aug-2025 @ 13.39 -> 14.82 = +10.68% (Carlyle inception 28-Jun-2024 @ 10.00 = +48.20%)."
       }
     ]
   }
