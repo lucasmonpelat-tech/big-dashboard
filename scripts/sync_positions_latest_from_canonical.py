@@ -36,6 +36,15 @@ from compute_holdings_returns import PERSHING_TO_MY  # noqa: E402
 # refresh_alts_daily.py / portfolio_reconstructor.py para estos 2 tickers).
 PAR_VALUE_TICKERS = {"TGF", "BPCC"}
 
+# GCRED/HLEND son fondos privados sin ISIN real en el feed de Pershing (solo
+# identificador interno). funds_metadata.js les puso un placeholder -- se
+# reusa el mismo para que el dual-source check (validate_data.py) los pueda
+# matchear en vez de comparar contra None.
+ISIN_PLACEHOLDER_BY_TICKER = {
+    "HLEND": "KYG4737U1085",
+    "GCRED": "GCRED-I",
+}
+
 
 def latest_canonical_positions():
     if not CANONICAL_DIR.exists():
@@ -78,8 +87,10 @@ def main():
         price = h.get("market_price_ccy")
         if ticker in PAR_VALUE_TICKERS and price:
             price = price / 100
+        isin = h.get("isin") or ISIN_PLACEHOLDER_BY_TICKER.get(ticker)
         out_positions.append({
             "ticker": ticker,
+            "isin": isin,
             "sleeve": sleeve,
             "qty": h.get("quantity"),
             "price": price,
