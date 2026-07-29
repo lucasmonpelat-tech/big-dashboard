@@ -1,8 +1,8 @@
 {
-  "refreshedAt": "2026-07-28T18:16:04.025653",
+  "refreshedAt": "2026-07-29T13:09:46.696316",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Alternatives",
-  "period_end": "2026-07-28",
+  "period_end": "2026-07-29",
   "n_open": 7,
   "n_closed": 2,
   "holdings": [
@@ -18,14 +18,14 @@
       "return_pct": 2.19,
       "last_price_pershing": 139.4944,
       "bench_label": "ACWI",
-      "bench_dw_pct": -0.83,
-      "alpha_real_pp": 3.02,
+      "bench_dw_pct": -0.69,
+      "alpha_real_pp": 2.88,
       "ytd_pct": 2.19,
-      "bench_ytd_pct": 9.98,
-      "alpha_ytd_pp": -7.79,
+      "bench_ytd_pct": 9.93,
+      "alpha_ytd_pp": -7.74,
       "first_buy_date": "2026-05-27",
-      "period_end": "2026-07-28",
-      "n_trades": 3,
+      "period_end": "2026-07-29",
+      "n_trades": 4,
       "buys_history": [
         {
           "date": "2026-05-27",
@@ -37,6 +37,10 @@
         },
         {
           "date": "2026-07-27",
+          "cost": 300000.0
+        },
+        {
+          "date": "2026-07-29",
           "cost": 300000.0
         }
       ]
@@ -56,10 +60,10 @@
       "bench_dw_pct": 14.97,
       "alpha_real_pp": -44.42,
       "ytd_pct": -25.94,
-      "bench_ytd_pct": 9.98,
-      "alpha_ytd_pp": -35.92,
+      "bench_ytd_pct": 9.93,
+      "alpha_ytd_pp": -35.87,
       "first_buy_date": "2025-07-02",
-      "period_end": "2026-07-28",
+      "period_end": "2026-07-29",
       "n_trades": 11,
       "buys_history": [
         {
@@ -123,10 +127,10 @@
       "bench_dw_pct": 19.22,
       "alpha_real_pp": -1.18,
       "ytd_pct": -5.47,
-      "bench_ytd_pct": 9.98,
-      "alpha_ytd_pp": -15.45,
+      "bench_ytd_pct": 9.93,
+      "alpha_ytd_pp": -15.4,
       "first_buy_date": "2025-07-02",
-      "period_end": "2026-07-28",
+      "period_end": "2026-07-29",
       "n_trades": 6,
       "buys_history": [
         {
@@ -170,10 +174,10 @@
       "bench_dw_pct": 13.37,
       "alpha_real_pp": -10.09,
       "ytd_pct": 2.49,
-      "bench_ytd_pct": 9.98,
-      "alpha_ytd_pp": -7.49,
+      "bench_ytd_pct": 9.93,
+      "alpha_ytd_pp": -7.44,
       "first_buy_date": "2025-09-22",
-      "period_end": "2026-07-28",
+      "period_end": "2026-07-29",
       "n_trades": 1,
       "buys_history": [
         {
@@ -197,10 +201,10 @@
       "bench_dw_pct": 17.84,
       "alpha_real_pp": -9.77,
       "ytd_pct": 3.07,
-      "bench_ytd_pct": 9.98,
-      "alpha_ytd_pp": -6.91,
+      "bench_ytd_pct": 9.93,
+      "alpha_ytd_pp": -6.86,
       "first_buy_date": "2025-07-25",
-      "period_end": "2026-07-28",
+      "period_end": "2026-07-29",
       "n_trades": 4,
       "buys_history": [
         {
@@ -233,14 +237,14 @@
       "return_pct": 2.59,
       "last_price_pershing": 31.25,
       "bench_label": "ACWI",
-      "bench_dw_pct": 0.82,
-      "alpha_real_pp": 1.77,
+      "bench_dw_pct": 0.68,
+      "alpha_real_pp": 1.91,
       "ytd_pct": 2.59,
-      "bench_ytd_pct": 9.98,
-      "alpha_ytd_pp": -7.39,
+      "bench_ytd_pct": 9.93,
+      "alpha_ytd_pp": -7.34,
       "first_buy_date": "2026-05-07",
-      "period_end": "2026-07-28",
-      "n_trades": 2,
+      "period_end": "2026-07-29",
+      "n_trades": 3,
       "buys_history": [
         {
           "date": "2026-05-07",
@@ -248,6 +252,10 @@
         },
         {
           "date": "2026-07-27",
+          "cost": 130000.0
+        },
+        {
+          "date": "2026-07-29",
           "cost": 130000.0
         }
       ]
@@ -267,10 +275,10 @@
       "bench_dw_pct": 13.37,
       "alpha_real_pp": -12.26,
       "ytd_pct": 1.12,
-      "bench_ytd_pct": 9.98,
-      "alpha_ytd_pp": -8.86,
+      "bench_ytd_pct": 9.93,
+      "alpha_ytd_pp": -8.81,
       "first_buy_date": "2025-09-22",
-      "period_end": "2026-07-28",
+      "period_end": "2026-07-29",
       "n_trades": 1,
       "buys_history": [
         {
@@ -306,5 +314,5 @@
       "n_lots": 1
     }
   ],
-  "_daily_refresh_note": "Daily refresh 2026-07-28: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump."
+  "_daily_refresh_note": "Daily refresh 2026-07-29: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump."
 }

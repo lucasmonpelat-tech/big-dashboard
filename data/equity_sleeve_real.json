@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-07-28T18:14:22.154265",
+  "refreshedAt": "2026-07-29T13:09:44.579657",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -840,8 +840,8 @@
       ]
     },
     {
-      "date": "2026-07-28",
-      "mv_usd": 8543212.165810738,
+      "date": "2026-07-29",
+      "mv_usd": 8541034.408166084,
       "holdings": [
         {
           "ticker": "THOR",
@@ -874,8 +874,8 @@
         {
           "ticker": "HEWJ",
           "qty": 3125.0,
-          "price": 63.540000915527344,
-          "mv": 198562.50286102295,
+          "price": 62.41999816894531,
+          "mv": 195062.4942779541,
           "source": "daily_close"
         },
         {
@@ -895,8 +895,8 @@
         {
           "ticker": "MAGS",
           "qty": 3075.0,
-          "price": 63.0099983215332,
-          "mv": 193755.7448387146,
+          "price": 63.439998626708984,
+          "mv": 195077.99577713013,
           "source": "daily_close"
         },
         {
@@ -3807,8 +3807,16 @@
     },
     {
       "date": "2026-07-28",
-      "mv_usd": 8543212.165810738,
-      "flow_in": 392318.25,
+      "index": 113.2092,
+      "interpolated": true,
+      "mv_usd": 8301423.6287,
+      "flow_in": 195070.245,
+      "twr": 0.0048
+    },
+    {
+      "date": "2026-07-29",
+      "mv_usd": 8541034.408166084,
+      "flow_in": 390140.49,
       "twr": 0.011049756484825313,
       "index": 113.8313
     }
@@ -5973,6 +5981,12 @@
     },
     {
       "date": "2026-07-28",
+      "index": 120.1077,
+      "interpolated": true,
+      "price": 154.7324
+    },
+    {
+      "date": "2026-07-29",
       "price": 154.54,
       "index": 119.9583
     }
@@ -6165,7 +6179,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-07-28 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing 2026-07-28.",
+  "_daily_refresh_note": "Punto 2026-07-29 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing 2026-07-28.",
   "twr_series_original": [
     {
       "date": "2025-07-31",
@@ -9049,10 +9063,10 @@
       "twr": -0.0014
     },
     {
-      "date": "2026-07-28",
-      "mv_usd": 8150893.829334144,
-      "flow_in": 0.0,
-      "twr": 0.011049745472803796,
+      "date": "2026-07-29",
+      "mv_usd": 8541034.408166084,
+      "flow_in": 390140.49,
+      "twr": 0.011049756484825313,
       "index": 113.8313
     }
   ],
@@ -11215,9 +11229,9 @@
       "price": 154.9248
     },
     {
-      "date": "2026-07-28",
-      "price": 153.77,
-      "index": 119.3606
+      "date": "2026-07-29",
+      "price": 154.54,
+      "index": 119.9583
     }
   ]
 }
