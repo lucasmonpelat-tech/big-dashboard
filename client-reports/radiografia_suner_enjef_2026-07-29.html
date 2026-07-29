@@ -294,10 +294,11 @@
         <tr><td>ENJEF CORP</td><td>0.13%</td><td>-0.96%</td><td>0.94%</td><td>0.72%</td><td>3.83%</td><td>N/D¹</td><td>N/D</td></tr>
         <tr><td>EUGENIO SUNER</td><td>-0.51%</td><td>1.03%</td><td>1.58%</td><td>3.46%</td><td>8.79%</td><td>10.00%</td><td>N/D</td></tr>
         <tr class="row-consolidado"><td>Consolidado²</td><td>-0.39%</td><td>0.66%</td><td>1.46%</td><td>2.96%</td><td>7.88%</td><td>—</td><td>—</td></tr>
+        <tr style="background:#1a1a1a; color:#90A4AE;"><td>Bmk³ 40% Eq / 60% FI</td><td>0.00%</td><td>4.95%</td><td>N/D</td><td>4.53%</td><td>11.76%</td><td>8.04%</td><td>4.84%</td></tr>
       </tbody>
     </table>
     <div style="font-size:10.5px; color:var(--text-ter); margin-top:10px; line-height:1.6;">
-      ¹ ENJEF CORP no tiene historial de 3/5 años (cuenta abierta 2T2025). &nbsp; ² Consolidado = promedio ponderado por AUM de cada cuenta (peso ENJEF 18.4% / SUNER 81.6%) — aproximación de foto puntual, no es un TWR encadenado real. Estos retornos vienen de Maximus tal cual, y para la posición BIG usan el nombre genérico "Balanced Income & Growth" (no refleja el retorno real del fondo).
+      ¹ ENJEF CORP no tiene historial de 3/5 años (cuenta abierta 2T2025). &nbsp; ² Consolidado = promedio ponderado por AUM de cada cuenta (peso ENJEF 18.4% / SUNER 81.6%) — aproximación de foto puntual, no es un TWR encadenado real. Estos retornos vienen de Maximus tal cual, y para la posición BIG usan el nombre genérico "Balanced Income & Growth" (no refleja el retorno real del fondo). &nbsp; ³ Benchmark = 40% ACWI (equity global) + 60% AGG (Bloomberg US Aggregate) — blend simple de retornos por período (no rebalanceo diario), retornos de mercado públicos aprox. a fines de julio 2026, 3a/5a anualizados. 6 meses de ACWI no disponible públicamente → N/D.
     </div>
 
     <div class="three-col" style="margin-top:18px;">
@@ -340,10 +341,10 @@
   </div>
 
   <div class="section">
-    <h2>🔬 Desglose de las 3 Posiciones Mixtas</h2>
-    <div style="font-size:11px; color:var(--text-ter); text-align:center; margin-bottom:18px;">Fuente: dashboard de BIG (composición propia) + factsheets oficiales PIMCO / Janus Henderson — no Maximus.</div>
+    <h2>🔬 Desglose de la Posición BIG</h2>
+    <div style="font-size:11px; color:var(--text-ter); text-align:center; margin-bottom:18px;">Fuente: dashboard de BIG en vivo (composición propia) — no Maximus.</div>
 
-    <div style="background:#12243A; border:1px solid #D4AF37; border-radius:6px; padding:16px; margin-bottom:16px;">
+    <div style="background:#12243A; border:1px solid #D4AF37; border-radius:6px; padding:16px;">
       <div style="color:#D4AF37; font-weight:bold; font-size:13px; margin-bottom:4px;">🏛️ BIG Fund — $539,684.91 (27.1% del total)</div>
       <div style="font-size:10.5px; color:var(--text-ter); margin-bottom:12px;">Sleeve real (dashboard v2 de BIG en vivo, 29-Jul-2026 — AUM fondo $27.95M): Fixed Income 39.3% ($211,934) · Equity 30.7% ($165,737) · Alternatives 28.8% ($155,267) · Cash 1.3% ($6,746). Mandato objetivo: 40/30/30/0.</div>
       <div class="three-col">
@@ -368,15 +369,21 @@
       </div>
       <div class="stat-row" style="margin-top:10px;"><span class="k">FI: YTW / Duración / Vencimiento</span><span class="v">7.22% / 4.66a / 6.63a</span></div>
     </div>
+  </div>
 
-    <div style="background:var(--card); border:1px solid #2A3F5A; border-radius:6px; padding:16px;">
-      <div style="color:var(--text-sec); font-weight:bold; font-size:12.5px; margin-bottom:4px;">Janus Henderson Balanced Fund E2 — $130,435.48 (SUNER)</div>
-      <div style="font-size:10.5px; color:var(--text-ter); margin-bottom:10px;">Factsheet oficial Janus Henderson (share class US, misma cartera subyacente), 30-Jun-2026</div>
-      <div class="stat-row"><span class="k">Equity</span><span class="v">65.07%</span></div>
-      <div class="stat-row"><span class="k">Fixed Income</span><span class="v">34.45%</span></div>
-      <div class="stat-row"><span class="k">Cash & Other</span><span class="v">0.48%</span></div>
-      <div class="stat-row"><span class="k">FI: YTW / Duración</span><span class="v">5.39% / 5.63a</span></div>
-      <div style="font-size:10.5px; color:var(--text-ter); margin-top:10px;">Top holdings equity: NVIDIA 5.67% · Alphabet 4.53% · Microsoft 3.37% · Amazon 3.11% · Apple 2.85% — sesgo growth/mega-cap tech, ≥80% US. Benchmark 60% S&P500 / 40% Bloomberg US Agg.</div>
+  <div class="section">
+    <h2>🎯 Top Holdings Consolidado (look-through single-stock)</h2>
+    <div style="font-size:11px; color:var(--text-ter); text-align:center; margin-bottom:14px;">
+      Compañías con mayor exposición sumando across TODOS los holdings de la cartera (directos + look-through de BIG, CSPX, PIMCO Balanced, Janus Henderson, New Capital, NB Next Gen, Lazard Infra). Fórmula: $ posición fondo × % holding en el fondo. Un nombre puede aparecer vía múltiples fondos.
+    </div>
+    <table>
+      <thead>
+        <tr><th>#</th><th>Holding</th><th>Vía (fondo · peso)</th><th class="num">% del Total</th><th>Bar</th></tr>
+      </thead>
+      <tbody id="top-holdings-tbody"></tbody>
+    </table>
+    <div style="font-size:10px; color:var(--text-ter); margin-top:10px; line-height:1.6;">
+      ⚠️ Para NB Next Generation Connectivity y Lazard Global Listed Infrastructure se usó como proxy el holdings del fondo hermano listado en EE.UU. (NBXG cerrado / GLIFX '40 Act) por no tener acceso directo al factsheet de la clase UCITS que tiene el cliente (IE00BMCTKC00 / IE00BF5GKW94) — misma casa gestora y estrategia, pero la composición exacta podría diferir levemente. Resto de fuentes (BIG, CSPX, PIMCO Balanced, Janus Henderson, New Capital) confirmadas contra el mismo ISIN/fondo que tiene el cliente.
     </div>
   </div>
 
@@ -551,6 +558,70 @@ sorted.forEach(h => {
     <td class="num" style="font-weight:bold; color:${h.mv < 0 ? '#EF5350' : '#E0E8F0'};">${pct}%</td>
   `;
   tbody.appendChild(tr);
+});
+
+// Top Holdings Consolidado (single-stock look-through across all sources)
+const topHoldingSources = [
+  // direct single stocks
+  ['Microsoft (MSFT)', 27523.30, 'Directo 100%'],
+  ['NVIDIA (NVDA)', 27386.80, 'Directo 100%'],
+  ['YPF (YPF)', 51210.00, 'Directo 100%'],
+];
+// CSPX direct $181,498.66
+[['NVIDIA (NVDA)',7.5],['Microsoft (MSFT)',6.0],['Apple (AAPL)',6.5],['Amazon (AMZN)',4.0],
+ ['Meta (META)',2.7],['Alphabet A (GOOGL)',2.3],['Broadcom (AVGO)',2.5]].forEach(([n,w]) =>
+  topHoldingSources.push([n, 181498.66*w/100, `CSPX ${w}%`]));
+// BIG equity contribution = 539684.91 * 0.3071
+const BIG_EQ = 539684.91*0.3071;
+[['NVIDIA (NVDA)',2.77],['Microsoft (MSFT)',2.28],['Apple (AAPL)',2.11],['Amazon (AMZN)',1.64],
+ ['Meta (META)',1.24],['Alphabet A (GOOGL)',1.08],['Broadcom (AVGO)',1.03],['MercadoLibre (MELI)',0.96],
+ ['Petrobras (PBR)',0.94],['Vale (VALE)',0.82],['Delta Air Lines (DAL)',0.79],['Gen Digital (GEN)',0.76],
+ ['Chewy (CHWY)',0.75],['Zeta Global (ZETA)',0.74],['ON Semiconductor (ON)',0.74]].forEach(([n,w]) =>
+  topHoldingSources.push([n, BIG_EQ*w/100, `BIG eq.sleeve ${w}%`]));
+// PIMCO Balanced Income & Growth $229,569.44
+[['NVIDIA (NVDA)',2.1],['TSMC (TSM)',1.7],['Apple (AAPL)',1.6]].forEach(([n,w]) =>
+  topHoldingSources.push([n, 229569.44*w/100, `PIMCO Bal. ${w}%`]));
+// Janus Henderson Balanced $130,435.48
+[['NVIDIA (NVDA)',5.67],['Alphabet A (GOOGL)',4.53],['Microsoft (MSFT)',3.37],
+ ['Amazon (AMZN)',3.11],['Apple (AAPL)',2.85]].forEach(([n,w]) =>
+  topHoldingSources.push([n, 130435.48*w/100, `Janus Hend. ${w}%`]));
+// New Capital Global Equity Conviction $52,816.73
+[['NVIDIA (NVDA)',7.29],['JPMorgan Chase (JPM)',4.68],['Alphabet A (GOOGL)',4.50],
+ ['TSMC (TSM)',4.49],['ING Groep (ING)',4.28],['Microsoft (MSFT)',4.10],
+ ['Broadcom (AVGO)',3.62],['Amazon (AMZN)',3.50],['Meta (META)',3.28],['Apple (AAPL)',3.18]].forEach(([n,w]) =>
+  topHoldingSources.push([n, 52816.73*w/100, `New Capital ${w}%`]));
+// NB Next Gen Connectivity $51,495.77 (proxy NBXG)
+[['Meta (META)',5.31],['NVIDIA (NVDA)',5.27],['Amazon (AMZN)',5.26],['SK Hynix',4.45],
+ ['TSMC (TSM)',4.31],['Robinhood (HOOD)',3.37],['Western Digital (WDC)',3.04],
+ ['AT&T (T)',2.88],['Live Nation (LYV)',2.82],['Microsoft (MSFT)',2.77]].forEach(([n,w]) =>
+  topHoldingSources.push([n, 51495.77*w/100, `NB NextGen ${w}%`]));
+// Lazard Global Listed Infra $55,560.90 (proxy GLIFX)
+[['National Grid (NG.)',8.31],['Canadian National Railway (CNI)',7.73],['Vinci (DG)',6.19],
+ ['Pinnacle West (PNW)',4.79],['CSX (CSX)',4.76],['OGE Energy (OGE)',4.64],
+ ['Portland General Electric (POR)',4.63],['Transurban (TCL)',4.30]].forEach(([n,w]) =>
+  topHoldingSources.push([n, 55560.90*w/100, `Lazard Infra ${w}%`]));
+
+const topAgg = {};
+topHoldingSources.forEach(([name, amt, via]) => {
+  if (!topAgg[name]) topAgg[name] = { amt: 0, vias: [] };
+  topAgg[name].amt += amt;
+  topAgg[name].vias.push(via);
+});
+const topRanked = Object.entries(topAgg).sort((a,b) => b[1].amt - a[1].amt).slice(0, 15);
+const topMax = topRanked[0][1].amt;
+const thTbody = document.getElementById('top-holdings-tbody');
+topRanked.forEach(([name, d], i) => {
+  const pct = (d.amt/total*100);
+  const barPct = (d.amt/topMax*100).toFixed(0);
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td>${i+1}</td>
+    <td><b>${name}</b></td>
+    <td style="color:#90CAF9; font-size:11px;">${d.vias.join(' + ')}</td>
+    <td class="num" style="font-weight:bold;">${pct.toFixed(2)}%</td>
+    <td><div class="mini-bar-track" style="max-width:140px;"><div class="mini-bar-fill" style="width:${barPct}%;"></div></div></td>
+  `;
+  thTbody.appendChild(tr);
 });
 
 // Mini bar chart renderer
