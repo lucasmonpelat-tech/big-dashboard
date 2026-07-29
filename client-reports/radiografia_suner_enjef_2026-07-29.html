@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Radiografía de Cartera — Cuentas JXD084578 + JXD091995</title>
+<meta name="robots" content="noindex, nofollow">
+<script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+<style>
+  :root {
+    --bg: #0D1B2A;
+    --card: #1A2A3D;
+    --header: #1F3864;
+    --gold: #D4AF37;
+    --text: #E0E8F0;
+    --text-sec: #90CAF9;
+    --text-ter: #6B88A8;
+    --equity: #64B5F6;
+    --fi: #81C784;
+    --alts: #FFA726;
+    --multi: #BA68C8;
+    --cash: #CE93D8;
+    --big: #D4AF37;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    padding: 24px;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+
+  .title-block {
+    text-align: center;
+    padding: 20px 0 24px;
+    border-bottom: 1px solid #2A3F5A;
+    margin-bottom: 24px;
+  }
+  .title-block h1 {
+    color: var(--gold);
+    margin: 0 0 6px;
+    font-size: 24px;
+    letter-spacing: 0.5px;
+  }
+  .title-block .sub {
+    color: var(--text-sec);
+    font-size: 13px;
+  }
+  .title-block .accounts {
+    color: var(--text-ter);
+    font-size: 12px;
+    margin-top: 8px;
+  }
+
+  .freshness-banner {
+    background: #12243A;
+    border: 1px solid #1F3864;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 11px;
+    color: var(--text-ter);
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .freshness-banner b { color: var(--text-sec); }
+
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+  .kpi-card {
+    background: var(--card);
+    border-left: 3px solid var(--gold);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+  .kpi-card .label {
+    text-transform: uppercase;
+    font-size: 9.5px;
+    color: var(--text-ter);
+    letter-spacing: 0.5px;
+  }
+  .kpi-card .value {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--text);
+    margin-top: 4px;
+  }
+  .kpi-card .sub {
+    font-style: italic;
+    font-size: 10px;
+    color: var(--text-sec);
+    margin-top: 2px;
+  }
+
+  .section {
+    background: var(--card);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 22px;
+  }
+  .section h2 {
+    color: var(--gold);
+    font-size: 15px;
+    margin: 0 0 16px;
+    text-align: center;
+  }
+  .section h3 {
+    color: var(--text-sec);
+    font-size: 12.5px;
+    text-align: center;
+    margin: 0 0 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 20px;
+  }
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 900px) { .two-col, .three-col { grid-template-columns: 1fr; } }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+  thead th {
+    background: var(--header);
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-size: 10px;
+    padding: 7px 10px;
+    text-align: left;
+  }
+  thead th.num { text-align: center; }
+  tbody td {
+    padding: 7px 10px;
+    border-bottom: 1px solid #22364C;
+  }
+  tbody td.num { text-align: center; }
+  tbody tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+  .sleeve-tag {
+    border-left: 3px solid;
+    padding-left: 8px;
+  }
+  .sleeve-tag.Equity { border-color: var(--equity); }
+  .sleeve-tag.FixedIncome { border-color: var(--fi); }
+  .sleeve-tag.Alternatives { border-color: var(--alts); }
+  .sleeve-tag.MultiAsset { border-color: var(--multi); }
+  .sleeve-tag.Cash { border-color: var(--cash); }
+  .sleeve-tag.BIGFund { border-color: var(--big); }
+
+  .perf-table th, .perf-table td { text-align: center; }
+  .perf-table td:first-child, .perf-table th:first-child { text-align: left; }
+  .row-consolidado { background: #112240; }
+  .row-consolidado td:first-child { color: var(--gold); font-weight: bold; }
+
+  .sleeve-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .sleeve-bar-label { width: 130px; font-size: 12px; color: var(--text-sec); flex-shrink: 0; }
+  .sleeve-bar-track { flex: 1; background: #0D1B2A; border-radius: 4px; height: 20px; position: relative; overflow: hidden; }
+  .sleeve-bar-fill { height: 100%; border-radius: 4px; }
+  .sleeve-bar-pct { width: 70px; text-align: right; font-size: 12px; font-weight: bold; flex-shrink: 0; }
+
+  .mini-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 11px; }
+  .mini-bar-label { width: 110px; flex-shrink: 0; color: var(--text-sec); }
+  .mini-bar-track { flex: 1; background: #0D1B2A; border-radius: 3px; height: 13px; position: relative; }
+  .mini-bar-fill { height: 100%; border-radius: 3px; background: var(--gold); }
+  .mini-bar-fill.neg { background: #EF5350; }
+  .mini-bar-pct { width: 46px; text-align: right; flex-shrink: 0; font-weight: bold; }
+
+  .stat-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #22364C; font-size: 12.5px; }
+  .stat-row .k { color: var(--text-ter); }
+  .stat-row .v { font-weight: bold; }
+
+  .footnotes {
+    font-size: 11px;
+    color: var(--text-ter);
+    line-height: 1.7;
+  }
+  .footnotes b { color: var(--text-sec); }
+  .concentration-flag {
+    background: #2A2110;
+    border: 1px solid #FFA726;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #FFD48A;
+    margin-bottom: 18px;
+  }
+  .correction-flag {
+    background: #12243A;
+    border: 1px solid #64B5F6;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 11.5px;
+    color: #C7E2FB;
+    margin-bottom: 18px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="title-block">
+    <h1>🩺 Radiografía de Cartera Consolidada</h1>
+    <div class="sub">ENJEF CORP + EUGENIO SUNER — vista consolidada como cuenta única</div>
+    <div class="accounts">Cuenta JXD084578 (ENJEF CORP) + Cuenta JXD091995 (EUGENIO SUNER) · Pershing · Base Currency USD</div>
+  </div>
+
+  <div class="freshness-banner">
+    <b>POSICIONES</b> as-of 29-Jul-2026 9:45 AM EDT (NetX360) &nbsp;·&nbsp;
+    <b>PERFORMANCE cuentas</b> reportes Maximus "Julio 2026" &nbsp;·&nbsp;
+    <b>BIG + PIMCO + Janus Henderson</b> dashboard BIG en vivo + factsheets oficiales (29-Jul-2026) &nbsp;·&nbsp;
+    No incluye cuenta BAFSA (1 bono, monto no material)
+  </div>
+
+  <div class="correction-flag">
+    🔍 <b>Corrección de clasificación (post cruce con Maximus):</b> dos instrumentos que Pershing/NetX360 muestra con descripciones genéricas de bono resultaron ser otra cosa:
+    <br>• <b>"LSeries DAC" (XS3037627794)</b> → Maximus la etiqueta <b>"Balanced Income & Growth"</b>, pero en realidad <b>es la nota Lynk del propio fondo BIG de Pampa Capital</b> (mismo ISIN, mismo NAV que el dashboard v2 de BIG en vivo: 105.325, AUM $27,949,639). El cliente tiene <b>27.1% de su cartera consolidada invertido directamente en BIG</b>. Reclasificado de Fixed Income → línea propia <b>"BIG Fund"</b>, con performance real tomada del dashboard de BIG (no de Maximus).
+    <br>• <b>"PM Alpha DAC Barings ETN" (XS2658535799)</b> → es el <b>Barings Private Credit Corporation ETN (BPCC)</b>, exposición a <b>Private Credit</b>. Reclasificado de Fixed Income → <b>Alternatives</b>.
+    <br>Esto cambia la asignación de activos de forma material — ver más abajo.
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="label">AUM Total (Posiciones Pershing 29-Jul)</div>
+      <div class="value">$1,994,212.70</div>
+      <div class="sub">2 cuentas Pershing</div>
+    </div>
+    <div class="kpi-card">
+      <div class="label"># Posiciones (consolidadas)</div>
+      <div class="value">18</div>
+      <div class="sub">de 22 líneas originales</div>
+    </div>
+    <div class="kpi-card" style="border-left-color: var(--big);">
+      <div class="label">Mayor Posición</div>
+      <div class="value">27.1%</div>
+      <div class="sub">🏛️ BIG Fund (Pampa Capital)</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🥧 Asset Allocation — Posiciones Pershing (29-Jul-2026, corregida)</h2>
+    <div class="two-col">
+      <div id="pie-chart" style="height: 420px;"></div>
+      <div style="display:flex; flex-direction:column; justify-content:center;">
+        <div class="sleeve-bar-row"><div class="sleeve-bar-label" style="color:#D4AF37;">🏛️ BIG Fund</div><div class="sleeve-bar-track"><div class="sleeve-bar-fill" style="width:27.1%; background:#D4AF37;"></div></div><div class="sleeve-bar-pct">27.1%</div></div>
+        <div class="sleeve-bar-row"><div class="sleeve-bar-label" style="color:#64B5F6;">Equity</div><div class="sleeve-bar-track"><div class="sleeve-bar-fill" style="width:22.4%; background:#64B5F6;"></div></div><div class="sleeve-bar-pct">22.4%</div></div>
+        <div class="sleeve-bar-row"><div class="sleeve-bar-label" style="color:#BA68C8;">Multi-Asset (otros)</div><div class="sleeve-bar-track"><div class="sleeve-bar-fill" style="width:18.1%; background:#BA68C8;"></div></div><div class="sleeve-bar-pct">18.1%</div></div>
+        <div class="sleeve-bar-row"><div class="sleeve-bar-label" style="color:#81C784;">Fixed Income</div><div class="sleeve-bar-track"><div class="sleeve-bar-fill" style="width:16.8%; background:#81C784;"></div></div><div class="sleeve-bar-pct">16.8%</div></div>
+        <div class="sleeve-bar-row"><div class="sleeve-bar-label" style="color:#FFA726;">Alternatives</div><div class="sleeve-bar-track"><div class="sleeve-bar-fill" style="width:13.1%; background:#FFA726;"></div></div><div class="sleeve-bar-pct">13.1%</div></div>
+        <div class="sleeve-bar-row"><div class="sleeve-bar-label" style="color:#CE93D8;">Cash</div><div class="sleeve-bar-track"><div class="sleeve-bar-fill" style="width:2.6%; background:#CE93D8;"></div></div><div class="sleeve-bar-pct">2.6%</div></div>
+        <div style="font-size:10.5px; color:var(--text-ter); margin-top:14px; line-height:1.6;">
+          Vista <b>por wrapper/instrumento</b> tal cual aparece en custodia Pershing. "BIG Fund" se separó como línea propia por ser el fondo de Pampa Capital. "Multi-Asset (otros)" agrupa los 2 fondos balanceados de terceros (PIMCO Balanced Income & Growth, Janus Henderson Balanced) sin look-through — para eso ver la vista de Maximus abajo.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>📋 Holdings Consolidados (por Sleeve)</h2>
+    <table id="holdings-table">
+      <thead>
+        <tr>
+          <th>Posición</th>
+          <th>Sub-Categoría</th>
+          <th class="num">Cuenta(s)</th>
+          <th class="num">Market Value</th>
+          <th class="num">% del Total</th>
+        </tr>
+      </thead>
+      <tbody id="holdings-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>📈 Performance (fuente: Maximus, reportes "Julio 2026")</h2>
+    <table class="perf-table">
+      <thead>
+        <tr><th>Cuenta</th><th>1 mes</th><th>3 meses</th><th>6 meses</th><th>YTD</th><th>1 año</th><th>3 años</th><th>5 años</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>ENJEF CORP</td><td>0.13%</td><td>-0.96%</td><td>0.94%</td><td>0.72%</td><td>3.83%</td><td>N/D¹</td><td>N/D</td></tr>
+        <tr><td>EUGENIO SUNER</td><td>-0.51%</td><td>1.03%</td><td>1.58%</td><td>3.46%</td><td>8.79%</td><td>10.00%</td><td>N/D</td></tr>
+        <tr class="row-consolidado"><td>Consolidado²</td><td>-0.39%</td><td>0.66%</td><td>1.46%</td><td>2.96%</td><td>7.88%</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:10.5px; color:var(--text-ter); margin-top:10px; line-height:1.6;">
+      ¹ ENJEF CORP no tiene historial de 3/5 años (cuenta abierta 2T2025). &nbsp; ² Consolidado = promedio ponderado por AUM de cada cuenta (peso ENJEF 18.4% / SUNER 81.6%) — aproximación de foto puntual, no es un TWR encadenado real. Estos retornos vienen de Maximus tal cual, y para la posición BIG usan el nombre genérico "Balanced Income & Growth" (no refleja el retorno real del fondo).
+    </div>
+
+    <div class="three-col" style="margin-top:18px;">
+      <div>
+        <h3>Vol. / Sharpe / Max DD (3 años)</h3>
+        <div class="stat-row"><span class="k">EUGENIO SUNER — Vol.</span><span class="v">9.06%</span></div>
+        <div class="stat-row"><span class="k">EUGENIO SUNER — Sharpe</span><span class="v">0.65</span></div>
+        <div class="stat-row"><span class="k">EUGENIO SUNER — Max DD</span><span class="v" style="color:#EF5350;">-6.92%</span></div>
+        <div style="font-size:10px; color:var(--text-ter); margin-top:6px;">ENJEF CORP: N/D (cuenta &lt;3 años de historial)</div>
+      </div>
+      <div>
+        <h3>Renta Fija — YTW / Duración / Venc. (blend ponderado por $ RF)</h3>
+        <div class="stat-row"><span class="k">YTW</span><span class="v">6.22%</span></div>
+        <div class="stat-row"><span class="k">Duración</span><span class="v">3.94 años</span></div>
+        <div class="stat-row"><span class="k">Vencimiento prom.</span><span class="v">7.32 años</span></div>
+      </div>
+      <div>
+        <h3>Renta Variable — P/E / P/B / P/S (blend ponderado por $ RV)</h3>
+        <div class="stat-row"><span class="k">P/E</span><span class="v">24.80x</span></div>
+        <div class="stat-row"><span class="k">P/B</span><span class="v">4.65x</span></div>
+        <div class="stat-row"><span class="k">P/S</span><span class="v">3.57x</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🎯 Asset Allocation Look-Through Consolidada — REAL, posición por posición</h2>
+    <div class="two-col">
+      <div id="pie-lookthrough" style="height: 420px;"></div>
+      <div style="display:flex; flex-direction:column; justify-content:center;">
+        <div class="sleeve-bar-row"><div class="sleeve-bar-label" style="color:#64B5F6;">Equity</div><div class="sleeve-bar-track"><div class="sleeve-bar-fill" style="width:42.6%; background:#64B5F6;"></div></div><div class="sleeve-bar-pct">42.6%</div></div>
+        <div class="sleeve-bar-row"><div class="sleeve-bar-label" style="color:#81C784;">Fixed Income</div><div class="sleeve-bar-track"><div class="sleeve-bar-fill" style="width:36.7%; background:#81C784;"></div></div><div class="sleeve-bar-pct">36.7%</div></div>
+        <div class="sleeve-bar-row"><div class="sleeve-bar-label" style="color:#FFA726;">Alternatives</div><div class="sleeve-bar-track"><div class="sleeve-bar-fill" style="width:20.9%; background:#FFA726;"></div></div><div class="sleeve-bar-pct">20.9%</div></div>
+        <div class="sleeve-bar-row"><div class="sleeve-bar-label" style="color:#EF5350;">Cash neto</div><div class="sleeve-bar-track"><div class="sleeve-bar-fill" style="width:0.2%; background:#EF5350;"></div></div><div class="sleeve-bar-pct">-0.2%</div></div>
+        <div style="font-size:10.5px; color:var(--text-ter); margin-top:14px; line-height:1.6;">
+          Esta vista ya <b>NO usa la caja negra de Maximus</b>: cada una de las 3 posiciones mixtas (BIG, PIMCO Balanced Income & Growth, Janus Henderson Balanced) se decompuso con su <b>composición real</b> (dashboard v2 de BIG en vivo + factsheets oficiales PIMCO/Janus Henderson — ver desglose detallado abajo). El resto de las posiciones (single stocks, ETFs, fondos puros) ya eran exactas. Cash neto da levemente negativo por el apalancamiento del fondo PIMCO (-27% cash, usa futuros) + el margin debit de JXD091995, neteado contra el cash de BIG.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🔬 Desglose de las 3 Posiciones Mixtas</h2>
+    <div style="font-size:11px; color:var(--text-ter); text-align:center; margin-bottom:18px;">Fuente: dashboard de BIG (composición propia) + factsheets oficiales PIMCO / Janus Henderson — no Maximus.</div>
+
+    <div style="background:#12243A; border:1px solid #D4AF37; border-radius:6px; padding:16px; margin-bottom:16px;">
+      <div style="color:#D4AF37; font-weight:bold; font-size:13px; margin-bottom:4px;">🏛️ BIG Fund — $539,684.91 (27.1% del total)</div>
+      <div style="font-size:10.5px; color:var(--text-ter); margin-bottom:12px;">Sleeve real (dashboard v2 de BIG en vivo, 29-Jul-2026 — AUM fondo $27.95M): Fixed Income 39.3% ($211,934) · Equity 30.7% ($165,737) · Alternatives 28.8% ($155,267) · Cash 1.3% ($6,746). Mandato objetivo: 40/30/30/0.</div>
+      <div class="three-col">
+        <div>
+          <h3>Equity — Estilo</h3>
+          <div id="big-eq-style"></div>
+          <h3 style="margin-top:14px;">Equity — Sectores</h3>
+          <div id="big-eq-sector"></div>
+        </div>
+        <div>
+          <h3>Equity — Regiones</h3>
+          <div id="big-eq-region"></div>
+          <h3 style="margin-top:14px;">FI — Sub-Asset Class</h3>
+          <div id="big-fi-subasset"></div>
+        </div>
+        <div>
+          <h3>FI — Calidad Crediticia</h3>
+          <div id="big-fi-rating"></div>
+          <h3 style="margin-top:14px;">Alternatives — Composición</h3>
+          <div id="big-alts"></div>
+        </div>
+      </div>
+      <div class="stat-row" style="margin-top:10px;"><span class="k">FI: YTW / Duración / Vencimiento</span><span class="v">7.22% / 4.66a / 6.63a</span></div>
+    </div>
+
+    <div style="background:var(--card); border:1px solid #2A3F5A; border-radius:6px; padding:16px;">
+      <div style="color:var(--text-sec); font-weight:bold; font-size:12.5px; margin-bottom:4px;">Janus Henderson Balanced Fund E2 — $130,435.48 (SUNER)</div>
+      <div style="font-size:10.5px; color:var(--text-ter); margin-bottom:10px;">Factsheet oficial Janus Henderson (share class US, misma cartera subyacente), 30-Jun-2026</div>
+      <div class="stat-row"><span class="k">Equity</span><span class="v">65.07%</span></div>
+      <div class="stat-row"><span class="k">Fixed Income</span><span class="v">34.45%</span></div>
+      <div class="stat-row"><span class="k">Cash & Other</span><span class="v">0.48%</span></div>
+      <div class="stat-row"><span class="k">FI: YTW / Duración</span><span class="v">5.39% / 5.63a</span></div>
+      <div style="font-size:10.5px; color:var(--text-ter); margin-top:10px;">Top holdings equity: NVIDIA 5.67% · Alphabet 4.53% · Microsoft 3.37% · Amazon 3.11% · Apple 2.85% — sesgo growth/mega-cap tech, ≥80% US. Benchmark 60% S&P500 / 40% Bloomberg US Agg.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>💎 Renta Fija — Breakdown Consolidado (look-through, Maximus)</h2>
+    <div class="three-col">
+      <div>
+        <h3>Regiones</h3>
+        <div id="rf-regions-bars"></div>
+      </div>
+      <div>
+        <h3>Sectores</h3>
+        <div id="rf-sectors-bars"></div>
+      </div>
+      <div>
+        <h3>Calificaciones</h3>
+        <div id="rf-ratings-bars"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>📊 Renta Variable — Breakdown Consolidado (look-through, Maximus)</h2>
+    <div class="three-col">
+      <div>
+        <h3>Estilo</h3>
+        <div id="rv-style-bars"></div>
+      </div>
+      <div>
+        <h3>Sectores</h3>
+        <div id="rv-sectors-bars"></div>
+      </div>
+      <div>
+        <h3>Regiones</h3>
+        <div id="rv-regions-bars"></div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<script>
+const holdings = [
+  {"name":"BIG Fund (Pampa Capital) — Nota Lynk","sleeve":"BIG Fund","bucket":"Inversión directa en BIG (ISIN XS3037627794, NAV 105.325)","mv":539684.91,"accounts":["JXD084578","JXD091995"]},
+  {"name":"PIMCO Balanced Income and Growth Fund","sleeve":"Multi-Asset","bucket":"Balanced / Income","mv":229569.44,"accounts":["JXD091995"]},
+  {"name":"PIMCO Low Duration Income Fund","sleeve":"Fixed Income","bucket":"Short Duration","mv":212416.82,"accounts":["JXD084578","JXD091995"]},
+  {"name":"iShares Core S&P 500 UCITS ETF","sleeve":"Equity","bucket":"US Large Cap","mv":181498.66,"accounts":["JXD091995"]},
+  {"name":"Janus Henderson Balanced Fund","sleeve":"Multi-Asset","bucket":"Balanced / Income","mv":130435.48,"accounts":["JXD091995"]},
+  {"name":"Neuberger Berman Strategic Income Fund","sleeve":"Fixed Income","bucket":"Multisector / Strategic Income","mv":121976.02,"accounts":["JXD091995"]},
+  {"name":"BNY Mellon U.S. Treasury Fund","sleeve":"Cash","bucket":"Money Market","mv":103464.07,"accounts":["JXD084578"]},
+  {"name":"GAM Star Swiss Re Cat Bond Fund","sleeve":"Alternatives","bucket":"Insurance-Linked / Cat Bonds","mv":80770.84,"accounts":["JXD091995"]},
+  {"name":"Neuberger Berman Global Private Equity Access Fund","sleeve":"Alternatives","bucket":"Private Equity","mv":63099.5,"accounts":["JXD091995"]},
+  {"name":"Barings Private Credit Corporation ETN (BPCC)","sleeve":"Alternatives","bucket":"Private Credit","mv":60455.85,"accounts":["JXD091995"]},
+  {"name":"SPDR Gold Trust","sleeve":"Alternatives","bucket":"Gold / Commodities","mv":56692.02,"accounts":["JXD091995"]},
+  {"name":"Lazard Global Listed Infrastructure Fund","sleeve":"Equity","bucket":"Global Infrastructure","mv":55560.9,"accounts":["JXD091995"]},
+  {"name":"New Capital Global Equity Conviction Fund","sleeve":"Equity","bucket":"Global Equity","mv":52816.73,"accounts":["JXD091995"]},
+  {"name":"Neuberger Berman Next Generation Connectivity Fund","sleeve":"Equity","bucket":"Thematic - Connectivity/Tech","mv":51495.77,"accounts":["JXD091995"]},
+  {"name":"YPF Sociedad Anonima (ADR)","sleeve":"Equity","bucket":"EM / LatAm - Single Stock","mv":51210.0,"accounts":["JXD091995"]},
+  {"name":"Microsoft Corp","sleeve":"Equity","bucket":"US Large Cap - Single Stock","mv":27523.3,"accounts":["JXD091995"]},
+  {"name":"NVIDIA Corp","sleeve":"Equity","bucket":"US Large Cap - Single Stock","mv":27386.8,"accounts":["JXD091995"]},
+  {"name":"USD Cash / Margin Debit","sleeve":"Cash","bucket":"Cash","mv":-51844.41,"accounts":["JXD091995"]}
+];
+const total = holdings.reduce((s,h) => s + h.mv, 0);
+
+const sleeveColors = {
+  'BIG Fund': '#D4AF37',
+  'Equity': '#64B5F6',
+  'Fixed Income': '#81C784',
+  'Alternatives': '#FFA726',
+  'Multi-Asset': '#BA68C8',
+  'Cash': '#CE93D8',
+};
+
+// Pie chart - by sleeve (Pershing wrapper view)
+const bySleeve = {};
+holdings.forEach(h => { bySleeve[h.sleeve] = (bySleeve[h.sleeve]||0) + h.mv; });
+const sleeveOrder = ['BIG Fund','Equity','Multi-Asset','Fixed Income','Alternatives','Cash'];
+const pieLabels = sleeveOrder.filter(s => bySleeve[s]);
+const pieValues = pieLabels.map(s => bySleeve[s]);
+const pieColors = pieLabels.map(s => sleeveColors[s]);
+
+Plotly.newPlot('pie-chart', [{
+  type: 'pie',
+  hole: 0.45,
+  labels: pieLabels,
+  values: pieValues,
+  marker: { colors: pieColors, line: { color: '#0D1B2A', width: 2 } },
+  textinfo: 'label+percent',
+  textposition: 'outside',
+  textfont: { size: 12, color: '#E0E8F0' },
+  hovertemplate: '<b>%{label}</b><br>$%{value:,.0f}<br>%{percent}<extra></extra>',
+}], {
+  paper_bgcolor: 'rgba(0,0,0,0)',
+  plot_bgcolor: 'rgba(0,0,0,0)',
+  showlegend: false,
+  margin: { t: 30, b: 30, l: 60, r: 60 },
+  annotations: [{
+    text: `<b>Total</b><br>$${(total/1e6).toFixed(2)}M<br>100%`,
+    showarrow: false,
+    font: { color: '#D4AF37', size: 13 },
+    x: 0.5, y: 0.5,
+  }],
+  font: { color: '#E0E8F0' },
+}, { displayModeBar: false, responsive: true });
+
+// Look-through pie (REAL, bottoms-up posición por posición)
+const ltLabels = ['Equity','Fixed Income','Alternatives'];
+const ltValues = [42.59, 36.69, 20.87];
+const ltColors = ['#64B5F6','#81C784','#FFA726'];
+Plotly.newPlot('pie-lookthrough', [{
+  type: 'pie',
+  hole: 0.45,
+  labels: ltLabels,
+  values: ltValues,
+  marker: { colors: ltColors, line: { color: '#0D1B2A', width: 2 } },
+  textinfo: 'label+percent',
+  textposition: 'outside',
+  textfont: { size: 12, color: '#E0E8F0' },
+  hovertemplate: '<b>%{label}</b><br>%{percent}<extra></extra>',
+}], {
+  paper_bgcolor: 'rgba(0,0,0,0)',
+  plot_bgcolor: 'rgba(0,0,0,0)',
+  showlegend: false,
+  margin: { t: 30, b: 30, l: 60, r: 60 },
+  annotations: [{
+    text: `<b>Look-Through</b><br>Real`,
+    showarrow: false,
+    font: { color: '#D4AF37', size: 12 },
+    x: 0.5, y: 0.5,
+  }],
+  font: { color: '#E0E8F0' },
+}, { displayModeBar: false, responsive: true });
+
+// BIG Fund detailed breakdown (real, dashboard BIG)
+renderMiniBars('big-eq-style', [
+  ['Growth',39.4],['Value',30.2],['Blend',30.4],
+]);
+renderMiniBars('big-eq-sector', [
+  ['Technology',22.3],['Industrials',13.8],['Financial',12.6],['Cons. Cyc.',10.8],
+  ['Health',8.4],['Comm. Serv.',8.1],['Cons. Def.',5.6],['Utilities',5.5],
+  ['Energy',4.6],['Basic Mat.',4.6],['Real estate',1.9],['Other',1.8],
+]);
+renderMiniBars('big-eq-region', [
+  ['N. America',57.5],['LatAm',11.8],['Europe dev.',11.8],['Otros',7.2],['Japan',6.3],['UK',5.4],
+]);
+renderMiniBars('big-fi-subasset', [
+  ['Corporate IG',22.03],['EM Local+Hard',18.14],['Govt Agency MBS',16.62],['Other',14.23],
+  ['Securitized Non-Agy',11.21],['Govt-related',8.04],['Cat Bonds',4.65],['Corporate HY',2.95],
+  ['US Treasury',1.84],['Bank Loans',0.26],
+]);
+renderMiniBars('big-fi-rating', [
+  ['AA',37.2],['BBB',20.7],['AAA',15.8],['BB',8.7],['A',6.9],['CCC',6.6],['B',3.6],['NR',0.5],
+]);
+renderMiniBars('big-alts', [
+  ['Carlyle AlpInvest (PE)',34.41],['Priv. Infrastructure',13.98],['Bitcoin',10.50],['Gold',10.06],
+  ['Priv. Credit (HPS)',9.44],['PE Secondaries',8.00],['Priv. Credit (BPCC)',7.45],['Priv. Credit (Golub)',6.16],
+]);
+
+// Holdings table
+const sleeveClass = s => s.replace(/[^a-zA-Z]/g,'');
+const sorted = [...holdings].sort((a,b) => b.mv - a.mv);
+const tbody = document.getElementById('holdings-tbody');
+sorted.forEach(h => {
+  const pct = (h.mv/total*100).toFixed(1);
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td class="sleeve-tag ${sleeveClass(h.sleeve)}"><b>${h.name}</b><br><span style="font-size:10px;color:#6B88A8;">${h.sleeve}</span></td>
+    <td style="color:#90CAF9; font-size:11.5px;">${h.bucket}</td>
+    <td class="num" style="font-size:11px; color:#6B88A8;">${h.accounts.join(' + ')}</td>
+    <td class="num">$${h.mv.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}</td>
+    <td class="num" style="font-weight:bold; color:${h.mv < 0 ? '#EF5350' : '#E0E8F0'};">${pct}%</td>
+  `;
+  tbody.appendChild(tr);
+});
+
+// Mini bar chart renderer
+function renderMiniBars(containerId, data) {
+  const el = document.getElementById(containerId);
+  const maxAbs = Math.max(...data.map(d => Math.abs(d[1])), 1);
+  data.sort((a,b) => b[1]-a[1]);
+  data.forEach(([label, val]) => {
+    const pct = Math.min(Math.abs(val)/maxAbs*100, 100);
+    const row = document.createElement('div');
+    row.className = 'mini-bar-row';
+    row.innerHTML = `
+      <div class="mini-bar-label">${label}</div>
+      <div class="mini-bar-track"><div class="mini-bar-fill ${val<0?'neg':''}" style="width:${pct}%;"></div></div>
+      <div class="mini-bar-pct">${val.toFixed(1)}%</div>
+    `;
+    el.appendChild(row);
+  });
+}
+
+renderMiniBars('rf-regions-bars', [
+  ['North Am.',65.56],['Europe dev.',14.26],['UK',9.67],['Latin Am.',6.24],
+  ['Others',3.02],['Australasia',3.51],['Asia dev.',1.69],['Africa/ME',1.56],
+  ['Asia emerg.',0.44],['Europe emrg.',0.49],['Japan',-5.79],
+]);
+renderMiniBars('rf-sectors-bars', [
+  ['Securitized',50.27],['Corporate',33.16],['Money market',25.89],
+  ['Government',15.29],['Derivatives',-14.00],
+]);
+renderMiniBars('rf-ratings-bars', [
+  ['AA',47.37],['BBB',16.30],['AAA',11.15],['A',8.03],['BB',6.04],
+  ['B',4.73],['CCC',3.53],['NR',2.85],
+]);
+renderMiniBars('rv-style-bars', [
+  ['Growth',44.93],['Value',32.23],['Blend',22.83],
+]);
+renderMiniBars('rv-sectors-bars', [
+  ['Technology',29.09],['Financial',11.95],['Industrials',10.88],['Energy',9.62],
+  ['Comm. Serv.',8.34],['Health',7.73],['Cons. Cyc.',7.80],['Utilities',5.29],
+  ['Cons. Def.',4.06],['Real estate',3.02],['Basic Mat.',2.22],
+]);
+renderMiniBars('rv-regions-bars', [
+  ['North Am.',72.16],['Europe dev.',9.72],['Latin Am.',6.58],['UK',2.71],
+  ['Others',2.51],['Asia emerg.',2.47],['Japan',0.59],['Asia dev.',0.62],
+  ['Africa/ME',0.20],['Europe emrg.',0.10],
+]);
+</script>
+</body>
+</html>
