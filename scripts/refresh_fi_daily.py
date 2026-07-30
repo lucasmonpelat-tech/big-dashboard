@@ -105,6 +105,58 @@ def fetch_agg_close():
         return None, str(e)[:60]
 
 
+def _load_buys_since(holdings_file, anchor_date):
+    """Lee buys_history de holdings_returns_fixed_income.json (ya confiable,
+    merge incremental + filtro PENDING CONFIRM, ver compute_holdings_returns.py),
+    filtrando compras con fecha posterior a anchor_date.
+
+    Returns: list de {ticker, date, cost}.
+    """
+    try:
+        d = json.load(open(holdings_file, encoding="utf-8"))
+    except Exception:
+        return []
+    out = []
+    for h in d.get("holdings", []):
+        for b in h.get("buys_history", []) or []:
+            if b.get("date", "") > anchor_date:
+                out.append({"ticker": h.get("ticker"), "date": b["date"], "cost": b["cost"]})
+    return out
+
+
+def _modified_dietz_return(mv_start, mv_end, flows, anchor_date, today_iso):
+    """Modified Dietz ponderando cada flow por su fecha real dentro del
+    periodo -- evita el sesgo de asumir que TODO el flow entro al final
+    (formula previa), que se vuelve grande cuando el periodo es largo.
+    Ver fix 2026-07-30 (anchor quedo pegado ~1 mes por corte de
+    ucits_daily_nav.json, generando un FI YTD negativo ficticio).
+
+    flows: list de {date, cost} (solo BUYS, cost positivo = entra plata).
+    Returns: (return_pct_decimal, total_flow_usd).
+    """
+    d0 = date.fromisoformat(anchor_date)
+    d1 = date.fromisoformat(today_iso)
+    total_days = (d1 - d0).days
+    if total_days <= 0:
+        return 0.0, 0.0
+    total_flow = 0.0
+    weighted_flow = 0.0
+    for f in flows:
+        try:
+            fd = date.fromisoformat(f["date"][:10])
+        except Exception:
+            continue
+        days_remaining = (d1 - fd).days
+        weight = max(0.0, min(1.0, days_remaining / total_days))
+        total_flow += f["cost"]
+        weighted_flow += f["cost"] * weight
+    denom = mv_start + weighted_flow
+    if denom <= 0:
+        return 0.0, total_flow
+    ret = (mv_end - mv_start - total_flow) / denom
+    return ret, total_flow
+
+
 def main():
     print(f"[{datetime.now().isoformat()}] Refresh FI daily...")
     data = json.load(open(SLEEVE_FILE, encoding="utf-8"))
@@ -164,29 +216,23 @@ def main():
         anchor = twr[-2]           # ultimo punto es un "today" previo -> lo reemplazamos
         append_new = False
 
-    # FIX: compute flow_in entre anchor y today comparando qty (Modified Dietz, flow al final).
-    # Sin esto, los buy/sell intra-mes inflan/desinflan el TWR. Ej en May 2026: MANEM +176sh
-    # agregaba ~$20K spurious. Mismo fix que refresh_equity_daily.py.
-    # 2026-06-10: cambio a "ultimo <= anchor date" porque sleeve_series puede tener gaps.
-    anchor_sleeve = None
-    for s in sleeve:
-        if s["date"] <= anchor["date"]:
-            anchor_sleeve = s
-    anchor_holdings = {h["ticker"]: h for h in (anchor_sleeve or {}).get("holdings", [])}
-    flow_in = 0.0
-    for tk, qty_today in fi_qty.items():
-        if not qty_today or qty_today <= 0:
-            continue
-        qty_anchor = (anchor_holdings.get(tk) or {}).get("qty") or 0
-        delta = qty_today - qty_anchor
-        if abs(delta) > 0.001:
-            px = daily_px.get(tk) or (anchor_holdings.get(tk) or {}).get("price") or 0
-            flow_in += delta * px
-    if abs(flow_in) > 1:
-        print(f"  flow_in detectado desde {anchor['date']}: ${flow_in:+,.0f}")
-
+    # FIX 2026-07-30: Modified Dietz ponderando cada flow por su fecha real
+    # (antes: comparaba qty vs un "anchor_sleeve" separado que se podia
+    # quedar viejo por semanas si el refresh diario fallaba -- ej: se quedo
+    # pegado en 30-Jun por 1 mes por el corte de ucits_daily_nav.json,
+    # generando un FI YTD -1% ficticio el dia que volvio a andar, porque la
+    # formula vieja asumia que TODO el flow acumulado en el mes entraba de
+    # una al final del periodo). Ahora usa las fechas reales de
+    # holdings_returns_fixed_income.json (buys_history, ya confiable).
+    days_gap = (date.fromisoformat(today_iso) - date.fromisoformat(anchor["date"])).days
+    if days_gap > 5:
+        print(f"  WARNING: anchor tiene {days_gap} dias de antiguedad -- revisar por que el refresh diario no corrio antes")
+    holdings_file = ROOT / "data" / "holdings_returns_fixed_income.json"
+    buys_since_anchor = _load_buys_since(holdings_file, anchor["date"])
     mv_anchor = anchor["mv_usd"]
-    twr_today = ((mv_today - flow_in) / mv_anchor - 1) if mv_anchor else 0
+    twr_today, flow_in = _modified_dietz_return(mv_anchor, mv_today, buys_since_anchor, anchor["date"], today_iso)
+    if abs(flow_in) > 1:
+        print(f"  flow_in detectado desde {anchor['date']}: ${flow_in:+,.0f} ({len(buys_since_anchor)} buys, Modified Dietz ponderado por fecha)")
     index_today = anchor["index"] * (1 + twr_today)
 
     # Guard final: abort si calculos resultan NaN/0 (NO sobreescribir el JSON con basura)

@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-07-30T12:55:14.749543",
+  "refreshedAt": "2026-07-30T15:54:52.120748",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -3520,26 +3520,29 @@
     },
     {
       "date": "2026-07-28",
-      "index": 105.1018,
+      "index": 106.0559,
       "interpolated": true,
       "mv_usd": 10642282.1924,
-      "flow_in": 274142.5881,
-      "twr": 0.0041
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Reconstruido 2026-07-30: el flow_in original (comparando qty vs un anchor_sleeve pegado en 30-Jun) sobreestimaba el flujo real, generando un index demasiado bajo. Se interpola linealmente entre el ultimo punto real confiable (30-Jun, index 104.6732) y el 30-Jul recalculado con Modified Dietz correcto (index 106.1547)."
     },
     {
       "date": "2026-07-29",
-      "index": 104.0437,
+      "index": 106.1053,
       "interpolated": true,
       "mv_usd": 10809830.979,
-      "flow_in": 411755.859,
-      "twr": -0.008
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Reconstruido 2026-07-30: el flow_in original (comparando qty vs un anchor_sleeve pegado en 30-Jun) sobreestimaba el flujo real, generando un index demasiado bajo. Se interpola linealmente entre el ultimo punto real confiable (30-Jun, index 104.6732) y el 30-Jul recalculado con Modified Dietz correcto (index 106.1547)."
     },
     {
       "date": "2026-07-30",
       "mv_usd": 10977379.765609998,
-      "flow_in": 549369.13,
-      "twr": -0.020133986072368826,
-      "index": 102.9857
+      "flow_in": 500095.96,
+      "twr": 0.014154,
+      "index": 106.1547,
+      "_fix_note": "Recalculado 2026-07-30 con Modified Dietz ponderado por fecha real de cada flow (anchor correcto: 30-Jun, no 29-Jul que estaba corrupto). Ver scripts/refresh_fi_daily.py _modified_dietz_return()."
     }
   ],
   "agg_index_series": [
@@ -5414,8 +5417,8 @@
     },
     {
       "date": "2026-07-30",
-      "price": 92.4,
-      "index": 102.5692
+      "price": 92.32,
+      "index": 102.4804
     }
   ],
   "fi_flows_by_month": {

@@ -3807,26 +3807,29 @@
     },
     {
       "date": "2026-07-28",
-      "index": 113.2092,
+      "index": 114.0275,
       "interpolated": true,
       "mv_usd": 8301423.6287,
-      "flow_in": 195070.245,
-      "twr": 0.0048
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Reconstruido 2026-07-30: el flow_in original (comparando qty vs un anchor_sleeve pegado en 30-Jun) sobreestimaba el flujo real, generando un index demasiado bajo. Se interpola linealmente entre el ultimo punto real confiable (30-Jun, index 112.1992) y el 30-Jul recalculado con Modified Dietz correcto (index 114.1581)."
     },
     {
       "date": "2026-07-29",
-      "index": 112.4804,
+      "index": 114.0928,
       "interpolated": true,
       "mv_usd": 8441015.5188,
-      "flow_in": 290564.8725,
-      "twr": -0.004
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Reconstruido 2026-07-30: el flow_in original (comparando qty vs un anchor_sleeve pegado en 30-Jun) sobreestimaba el flujo real, generando un index demasiado bajo. Se interpola linealmente entre el ultimo punto real confiable (30-Jun, index 112.1992) y el 30-Jul recalculado con Modified Dietz correcto (index 114.1581)."
     },
     {
       "date": "2026-07-30",
       "mv_usd": 8580607.408842558,
-      "flow_in": 386059.5,
-      "twr": -0.012874384856147558,
-      "index": 111.7517
+      "flow_in": 399787.94,
+      "twr": 0.017459,
+      "index": 114.1581,
+      "_fix_note": "Recalculado 2026-07-30 con Modified Dietz ponderado por fecha real de cada flow (anchor correcto: 30-Jun, no un anchor corrupto). Ver scripts/refresh_equity_daily.py _modified_dietz_return()."
     }
   ],
   "acwi_index_series": [

@@ -147,9 +147,17 @@ def load_rgl_closed(rgl_path):
     df = pd.read_excel(rgl_path, header=14)
     df = df.dropna(subset=['Security Identifier'])
 
-    # Para CLOSED: tomar la fila agregada (Quantity Total - Opening = 0)
-    # o el row "Multiple" que agrega todo
-    # En el sample que vi, BRK B tiene Quantity y Total Quantity Opening/Closing
+    # Igual que load_ugl_open(): si un CUSIP tiene fila "Multiple" (agregado de
+    # todos los lots), usar SOLO esa -- no sumarla ademas de los lots
+    # individuales. FIX 2026-07-30: antes se sumaban las 2 (Multiple + cada
+    # lot individual), duplicando cost/proceeds/gl (ej: PIMCO-INC mostraba
+    # cost=$6.82M/proceeds=$7.2M cuando el real, segun la fila Multiple, era
+    # $3.41M/$3.6M).
+    multi = df[df['Opening Date'].astype(str) == 'Multiple']
+    multi_cusips = set(multi['Cusip'].unique())
+    single = df[~df['Cusip'].isin(multi_cusips)]
+    df = pd.concat([multi, single])
+
     out = {}
     for _, row in df.iterrows():
         ticker, sleeve = _identify_ticker(row)
