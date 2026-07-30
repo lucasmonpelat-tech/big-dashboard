@@ -90,14 +90,40 @@ def main():
     cash_ytd = SOFR_RATE_ANNUAL * days_ytd / 365
 
     # ============ Weights — positions_latest ============
+    # FIX 2026-07-30: positions_latest.json viene de Pershing/NetX360 puro
+    # (sync_positions_latest_from_canonical.py) -- NUNCA incluye CALP (external,
+    # statement Carlyle, no esta en Pershing UGL) ni Cash (excluido a proposito
+    # en el sync). Usarlo como total_aum/sleeve_mv de Alternativas subestimaba
+    # ese sleeve en ~$2.77M (CALP) y hacia que Equity/FI/Alts pesaran de mas
+    # sobre un AUM incompleto -- distorsionaba el residual vs Lynk. Alternatives
+    # ya se computa bien mas arriba (total_alts_mv incluye CALP via alts_race.json);
+    # Cash se toma del canonical positions.json (unica fuente con el cash real).
     pl = load_json(ROOT / "data" / "positions_latest.json")
-    total_aum = pl["total_aum"]
     sleeve_mv = {}
-    for s in ["Equity", "Fixed Income", "Alternatives", "Cash"]:
+    for s in ["Equity", "Fixed Income"]:
         sleeve_mv[s] = sum(
             p["value"] for p in pl["positions"]
             if p["sleeve"] == s and p.get("status") != "sold"
         )
+    sleeve_mv["Alternatives"] = total_alts_mv
+
+    canonical_dir = ROOT / "data" / "canonical"
+    cash_mv = 0.0
+    if canonical_dir.exists():
+        snapshot_dates = sorted(p.name for p in canonical_dir.iterdir() if p.is_dir())
+        for snap_date in reversed(snapshot_dates):
+            pos_file = canonical_dir / snap_date / "positions.json"
+            if pos_file.exists():
+                canon_pos = load_json(pos_file)
+                cash_mv = sum(
+                    h.get("market_value_usd") or 0
+                    for h in canon_pos.get("holdings", [])
+                    if h.get("security_type") == "Cash"
+                )
+                break
+    sleeve_mv["Cash"] = cash_mv
+
+    total_aum = sleeve_mv["Equity"] + sleeve_mv["Fixed Income"] + sleeve_mv["Alternatives"] + sleeve_mv["Cash"]
 
     sleeves = []
     sleeve_specs = [
