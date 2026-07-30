@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-07-29T13:09:45.407484",
+  "refreshedAt": "2026-07-30T12:55:14.749543",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -579,42 +579,42 @@
       ]
     },
     {
-      "date": "2026-07-29",
-      "mv_usd": 10958714.634859998,
+      "date": "2026-07-30",
+      "mv_usd": 10977379.765609998,
       "holdings": [
         {
           "ticker": "PIMCO-EM",
           "qty": 61949.011,
-          "price": 18.25,
-          "mv": 1130569.45075,
+          "price": 18.26,
+          "mv": 1131188.94086,
           "source": "daily_close"
         },
         {
           "ticker": "MANIG",
           "qty": 16621.485,
-          "price": 124.57,
-          "mv": 2070538.3864499999,
+          "price": 124.81,
+          "mv": 2074527.54285,
           "source": "daily_close"
         },
         {
           "ticker": "PIMCO-INC",
           "qty": 159434.55,
-          "price": 20.05,
-          "mv": 3196662.7275,
+          "price": 20.11,
+          "mv": 3206228.8005,
           "source": "daily_close"
         },
         {
           "ticker": "MANEM",
           "qty": 176.056,
-          "price": 115.06,
-          "mv": 20257.003360000002,
+          "price": 115.11,
+          "mv": 20265.80616,
           "source": "daily_close"
         },
         {
           "ticker": "PIMCO-LD",
           "qty": 224080.422,
-          "price": 14.0,
-          "mv": 3137125.908,
+          "price": 14.02,
+          "mv": 3141607.51644,
           "source": "daily_close"
         },
         {
@@ -3528,10 +3528,18 @@
     },
     {
       "date": "2026-07-29",
-      "mv_usd": 10958714.634859998,
-      "flow_in": 548297.52,
-      "twr": 0.008189869784808623,
-      "index": 105.5305
+      "index": 104.0437,
+      "interpolated": true,
+      "mv_usd": 10809830.979,
+      "flow_in": 411755.859,
+      "twr": -0.008
+    },
+    {
+      "date": "2026-07-30",
+      "mv_usd": 10977379.765609998,
+      "flow_in": 549369.13,
+      "twr": -0.020133986072368826,
+      "index": 102.9857
     }
   ],
   "agg_index_series": [
@@ -5400,8 +5408,14 @@
     },
     {
       "date": "2026-07-29",
-      "price": 92.49,
-      "index": 102.6691
+      "index": 102.6179,
+      "interpolated": true,
+      "price": 92.4438
+    },
+    {
+      "date": "2026-07-30",
+      "price": 92.4,
+      "index": 102.5692
     }
   ],
   "fi_flows_by_month": {
@@ -5591,7 +5605,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-07-29 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-07-28.",
+  "_daily_refresh_note": "Punto 2026-07-30 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-07-29.",
   "twr_series_original": [
     {
       "date": "2025-07-31",
@@ -8477,11 +8491,19 @@
       "twr": 0.0
     },
     {
-      "date": "2026-07-29",
-      "mv_usd": 10958714.634859998,
-      "flow_in": 548297.52,
-      "twr": 0.008189869784808623,
-      "index": 105.5305
+      "date": "2026-07-28",
+      "index": 105.1018,
+      "interpolated": true,
+      "mv_usd": 10642282.1924,
+      "flow_in": 274142.5881,
+      "twr": 0.0041
+    },
+    {
+      "date": "2026-07-30",
+      "mv_usd": 10977379.765609998,
+      "flow_in": 549369.13,
+      "twr": -0.020133986072368826,
+      "index": 102.9857
     }
   ],
   "agg_index_series_original": [
@@ -10343,9 +10365,15 @@
       "price": 92.4854
     },
     {
-      "date": "2026-07-29",
-      "price": 92.49,
-      "index": 102.6691
+      "date": "2026-07-28",
+      "index": 102.6666,
+      "interpolated": true,
+      "price": 92.4877
+    },
+    {
+      "date": "2026-07-30",
+      "price": 92.4,
+      "index": 102.5692
     }
   ],
   "_bench_fix_note": "2026-06-23: agg_index_series reconstruida con IUAG.L (UCITS Acc, total return). Antes era AGG NYSE price-only sin reinvertir dividendos, daba YTD -5.78% falso."

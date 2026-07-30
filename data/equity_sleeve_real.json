@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-07-29T13:09:44.579657",
+  "refreshedAt": "2026-07-30T12:55:13.929073",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -840,84 +840,84 @@
       ]
     },
     {
-      "date": "2026-07-29",
-      "mv_usd": 8541034.408166084,
+      "date": "2026-07-30",
+      "mv_usd": 8580607.408842558,
       "holdings": [
         {
           "ticker": "THOR",
           "qty": 14410.584,
-          "price": 43.81,
-          "mv": 631327.68504,
+          "price": 43.99,
+          "mv": 633921.59016,
           "source": "daily_close"
         },
         {
           "ticker": "4BRZ",
           "qty": 6979.0,
-          "price": 50.8,
-          "mv": 354533.19999999995,
+          "price": 51.26,
+          "mv": 357743.54,
           "source": "daily_close"
         },
         {
           "ticker": "LGLI",
           "qty": 26511.134,
-          "price": 19.5565,
-          "mv": 518464.992071,
+          "price": 19.4553,
+          "mv": 515782.0653102,
           "source": "daily_close"
         },
         {
           "ticker": "ILF",
           "qty": 10000.0,
-          "price": 34.81,
-          "mv": 348100.0,
+          "price": 34.88,
+          "mv": 348800.0,
           "source": "daily_close"
         },
         {
           "ticker": "HEWJ",
           "qty": 3125.0,
-          "price": 62.41999816894531,
-          "mv": 195062.4942779541,
+          "price": 61.97999954223633,
+          "mv": 193687.49856948853,
           "source": "daily_close"
         },
         {
           "ticker": "CSPX",
           "qty": 3408.0,
-          "price": 796.66,
-          "mv": 2715017.28,
+          "price": 800.91,
+          "mv": 2729501.28,
           "source": "daily_close"
         },
         {
           "ticker": "NBGMT",
           "qty": 58050.998,
-          "price": 23.99,
-          "mv": 1392643.44202,
+          "price": 24.41,
+          "mv": 1417024.86118,
           "source": "daily_close"
         },
         {
           "ticker": "MAGS",
           "qty": 3075.0,
-          "price": 63.439998626708984,
-          "mv": 195077.99577713013,
+          "price": 62.560001373291016,
+          "mv": 192372.00422286987,
           "source": "daily_close"
         },
         {
           "ticker": "JHGSC",
           "qty": 10410.46,
-          "price": 54.98,
-          "mv": 572367.0907999999,
+          "price": 54.43,
+          "mv": 566641.3378,
           "source": "daily_close"
         },
         {
           "ticker": "ARGT",
           "qty": 4000.0,
-          "price": 93.63,
-          "mv": 374520.0,
+          "price": 93.18,
+          "mv": 372720.0,
           "source": "daily_close"
         },
         {
           "ticker": "MFSCV",
           "qty": 4063.638,
-          "price": 306.11,
-          "mv": 1243920.22818,
+          "price": 308.2,
+          "mv": 1252413.2315999998,
           "source": "daily_close"
         }
       ]
@@ -3815,10 +3815,18 @@
     },
     {
       "date": "2026-07-29",
-      "mv_usd": 8541034.408166084,
-      "flow_in": 390140.49,
-      "twr": 0.011049756484825313,
-      "index": 113.8313
+      "index": 112.4804,
+      "interpolated": true,
+      "mv_usd": 8441015.5188,
+      "flow_in": 290564.8725,
+      "twr": -0.004
+    },
+    {
+      "date": "2026-07-30",
+      "mv_usd": 8580607.408842558,
+      "flow_in": 386059.5,
+      "twr": -0.012874384856147558,
+      "index": 111.7517
     }
   ],
   "acwi_index_series": [
@@ -5987,8 +5995,14 @@
     },
     {
       "date": "2026-07-29",
-      "price": 154.54,
-      "index": 119.9583
+      "index": 119.2296,
+      "interpolated": true,
+      "price": 153.6012
+    },
+    {
+      "date": "2026-07-30",
+      "price": 152.47,
+      "index": 118.3515
     }
   ],
   "equity_flows_by_month": {
@@ -6179,7 +6193,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-07-29 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing 2026-07-28.",
+  "_daily_refresh_note": "Punto 2026-07-30 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing 2026-07-29.",
   "twr_series_original": [
     {
       "date": "2025-07-31",
@@ -9063,11 +9077,19 @@
       "twr": -0.0014
     },
     {
-      "date": "2026-07-29",
-      "mv_usd": 8541034.408166084,
-      "flow_in": 390140.49,
-      "twr": 0.011049756484825313,
-      "index": 113.8313
+      "date": "2026-07-28",
+      "index": 113.2092,
+      "interpolated": true,
+      "mv_usd": 8301423.6287,
+      "flow_in": 195070.245,
+      "twr": 0.0048
+    },
+    {
+      "date": "2026-07-30",
+      "mv_usd": 8580607.408842558,
+      "flow_in": 386059.5,
+      "twr": -0.012874384856147558,
+      "index": 111.7517
     }
   ],
   "acwi_index_series_original": [
@@ -11229,9 +11251,15 @@
       "price": 154.9248
     },
     {
-      "date": "2026-07-29",
-      "price": 154.54,
-      "index": 119.9583
+      "date": "2026-07-28",
+      "index": 120.1077,
+      "interpolated": true,
+      "price": 154.7324
+    },
+    {
+      "date": "2026-07-30",
+      "price": 152.47,
+      "index": 118.3515
     }
   ]
 }
