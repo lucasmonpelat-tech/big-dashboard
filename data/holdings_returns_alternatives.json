@@ -25,7 +25,8 @@
       "alpha_ytd_pp": -6.27,
       "first_buy_date": "2026-05-27",
       "period_end": "2026-07-30",
-      "n_trades": 5,
+      "n_trades": 2,
+      "_pending_note": "Hay un 3er tramo de $300K PENDING CONFIRM (Hamilton Lane) desde el 27-Jul, todavia no liquidado -- Pershing no lo suma a cost_basis_usd hasta que confirme. No se agrega a buys_history mientras este pendiente (aparecia repetido en el export diario, no es una compra nueva cada dia -- ver fix 2026-07-30 en compute_holdings_returns.py). Se va a agregar solo cuando aparezca como trade confirmado real.",
       "buys_history": [
         {
           "date": "2026-05-27",
@@ -34,18 +35,6 @@
         {
           "date": "2026-06-17",
           "cost": 600000.0
-        },
-        {
-          "date": "2026-07-27",
-          "cost": 300000.0
-        },
-        {
-          "date": "2026-07-29",
-          "cost": 300000.0
-        },
-        {
-          "date": "2026-07-30",
-          "cost": 300000.0
         }
       ]
     },
@@ -248,23 +237,12 @@
       "alpha_ytd_pp": -5.87,
       "first_buy_date": "2026-05-07",
       "period_end": "2026-07-30",
-      "n_trades": 4,
+      "n_trades": 1,
+      "_pending_note": "Hay un 2do tramo de $130K PENDING CONFIRM (Franklin Lexington) desde el 27-Jul, todavia no liquidado -- Pershing no lo suma a cost_basis_usd hasta que confirme. No se agrega a buys_history mientras este pendiente (aparecia repetido en el export diario, no es una compra nueva cada dia -- ver fix 2026-07-30 en compute_holdings_returns.py). Se va a agregar solo cuando aparezca como trade confirmado real.",
       "buys_history": [
         {
           "date": "2026-05-07",
           "cost": 499999.99
-        },
-        {
-          "date": "2026-07-27",
-          "cost": 130000.0
-        },
-        {
-          "date": "2026-07-29",
-          "cost": 130000.0
-        },
-        {
-          "date": "2026-07-30",
-          "cost": 130000.0
         }
       ]
     },

@@ -198,6 +198,16 @@ def load_transactions(tx_path):
         ticker, sleeve = _identify_ticker(row)
         if not ticker or sleeve == 'SKIP':
             continue
+        # PENDING CONFIRM: Pershing repite esta fila TODOS los dias (con el
+        # Process Date de ESE dia) mientras el trade siga pendiente de
+        # confirmar -- no es una compra nueva cada vez. Si la contamos,
+        # buys_history/bench_dw se infla con la misma plata varias veces
+        # (ej: HLGPI/FLEX mostraban 3 "compras" identicas de $300K/$130K en
+        # 3 dias seguidos). Se ignora hasta que aparezca el trade real
+        # confirmado (misma fila sin "PENDING CONFIRM" en la descripcion).
+        tx_desc = str(row.get('Transaction Description') or '').upper()
+        if 'PENDING CONFIRM' in tx_desc:
+            continue
         date_raw = row.get('Process Date') or row.get('Trade Date')
         if pd.isna(date_raw):
             continue

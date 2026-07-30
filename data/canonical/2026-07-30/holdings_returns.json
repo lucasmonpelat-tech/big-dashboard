@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "as_of": "2026-07-30",
-  "generated_at": "2026-07-30T12:55:16Z",
+  "generated_at": "2026-07-30T15:45:55Z",
   "note": "Holdings con MV/return DIRECTO de Pershing UGL (canonical v2 pnl.json). Bench DW calculado desde buys_history + bench indices. Fixes bug de precio staleado del compute_holdings_returns.py viejo.",
   "sources": {
     "positions": "data/canonical/2026-07-30/positions.json",
@@ -724,7 +724,7 @@
           "bench_ytd_pct": 8.46,
           "alpha_ytd_pp": -6.27,
           "first_buy_date": "2026-05-27",
-          "n_trades": 5,
+          "n_trades": 2,
           "buys_history": [
             {
               "date": "2026-05-27",
@@ -733,18 +733,6 @@
             {
               "date": "2026-06-17",
               "cost": 600000.0
-            },
-            {
-              "date": "2026-07-27",
-              "cost": 300000.0
-            },
-            {
-              "date": "2026-07-29",
-              "cost": 300000.0
-            },
-            {
-              "date": "2026-07-30",
-              "cost": 300000.0
             }
           ],
           "_mv_source": "pershing_ugl"
@@ -942,23 +930,11 @@
           "bench_ytd_pct": 8.46,
           "alpha_ytd_pp": -5.87,
           "first_buy_date": "2026-05-07",
-          "n_trades": 4,
+          "n_trades": 1,
           "buys_history": [
             {
               "date": "2026-05-07",
               "cost": 499999.99
-            },
-            {
-              "date": "2026-07-27",
-              "cost": 130000.0
-            },
-            {
-              "date": "2026-07-29",
-              "cost": 130000.0
-            },
-            {
-              "date": "2026-07-30",
-              "cost": 130000.0
             }
           ],
           "_mv_source": "pershing_ugl"
