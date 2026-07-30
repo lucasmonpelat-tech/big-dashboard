@@ -3584,279 +3584,280 @@
     },
     {
       "date": "2026-06-30",
-      "mv_usd": 8034034.572306732,
+      "mv_usd": 8106900.8,
       "flow_in": 0.0,
       "twr": 0.0018960394418703341,
-      "index": 112.1992
+      "index": 112.1992,
+      "_fix_note": "mv_usd corregido 2026-07-30 con el valor OFICIAL del statement Pershing 30-Jun-2026 (el valor anterior venia de un pipeline roto desde antes de mayo, con precios stale para PIMCO-LD/PIMCO-INC)."
     },
     {
       "date": "2026-07-01",
-      "index": 112.2645,
+      "index": 112.2318,
       "interpolated": true,
-      "mv_usd": 8052253.67,
+      "mv_usd": 8122691.02,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-02",
-      "index": 112.3298,
+      "index": 112.2644,
       "interpolated": true,
-      "mv_usd": 8070472.76,
+      "mv_usd": 8138481.24,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-03",
-      "index": 112.3951,
+      "index": 112.297,
       "interpolated": true,
-      "mv_usd": 8088691.86,
+      "mv_usd": 8154271.46,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-04",
-      "index": 112.4604,
+      "index": 112.3296,
       "interpolated": true,
-      "mv_usd": 8106910.95,
+      "mv_usd": 8170061.68,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-05",
-      "index": 112.5257,
+      "index": 112.3622,
       "interpolated": true,
-      "mv_usd": 8125130.05,
+      "mv_usd": 8185851.9,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-06",
-      "index": 112.591,
+      "index": 112.3948,
       "interpolated": true,
-      "mv_usd": 8143349.14,
+      "mv_usd": 8201642.12,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-07",
-      "index": 112.6563,
+      "index": 112.4274,
       "interpolated": true,
-      "mv_usd": 8161568.23,
+      "mv_usd": 8217432.34,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-08",
-      "index": 112.7216,
+      "index": 112.46,
       "interpolated": true,
-      "mv_usd": 8179787.33,
+      "mv_usd": 8233222.56,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-09",
-      "index": 112.7869,
+      "index": 112.4926,
       "interpolated": true,
-      "mv_usd": 8198006.42,
+      "mv_usd": 8249012.78,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-10",
-      "index": 112.8522,
+      "index": 112.5252,
       "interpolated": true,
-      "mv_usd": 8216225.52,
+      "mv_usd": 8264803.0,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-11",
-      "index": 112.9175,
+      "index": 112.5578,
       "interpolated": true,
-      "mv_usd": 8234444.61,
+      "mv_usd": 8280593.22,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-12",
-      "index": 112.9828,
+      "index": 112.5904,
       "interpolated": true,
-      "mv_usd": 8252663.71,
+      "mv_usd": 8296383.44,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-13",
-      "index": 113.0481,
+      "index": 112.623,
       "interpolated": true,
-      "mv_usd": 8270882.8,
+      "mv_usd": 8312173.66,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-14",
-      "index": 113.1134,
+      "index": 112.6556,
       "interpolated": true,
-      "mv_usd": 8289101.9,
+      "mv_usd": 8327963.88,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-15",
-      "index": 113.1787,
+      "index": 112.6882,
       "interpolated": true,
-      "mv_usd": 8307320.99,
+      "mv_usd": 8343754.1,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-16",
-      "index": 113.2439,
+      "index": 112.7208,
       "interpolated": true,
-      "mv_usd": 8325540.09,
+      "mv_usd": 8359544.32,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-17",
-      "index": 113.3092,
+      "index": 112.7534,
       "interpolated": true,
-      "mv_usd": 8343759.18,
+      "mv_usd": 8375334.55,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-18",
-      "index": 113.3745,
+      "index": 112.786,
       "interpolated": true,
-      "mv_usd": 8361978.27,
+      "mv_usd": 8391124.77,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-19",
-      "index": 113.4398,
+      "index": 112.8186,
       "interpolated": true,
-      "mv_usd": 8380197.37,
+      "mv_usd": 8406914.99,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-20",
-      "index": 113.5051,
+      "index": 112.8512,
       "interpolated": true,
-      "mv_usd": 8398416.46,
+      "mv_usd": 8422705.21,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-21",
-      "index": 113.5704,
+      "index": 112.8838,
       "interpolated": true,
-      "mv_usd": 8416635.56,
+      "mv_usd": 8438495.43,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-22",
-      "index": 113.6357,
+      "index": 112.9164,
       "interpolated": true,
-      "mv_usd": 8434854.65,
+      "mv_usd": 8454285.65,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-23",
-      "index": 113.701,
+      "index": 112.949,
       "interpolated": true,
-      "mv_usd": 8453073.75,
+      "mv_usd": 8470075.87,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-24",
-      "index": 113.7663,
+      "index": 112.9816,
       "interpolated": true,
-      "mv_usd": 8471292.84,
+      "mv_usd": 8485866.09,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-25",
-      "index": 113.8316,
+      "index": 113.0142,
       "interpolated": true,
-      "mv_usd": 8489511.94,
+      "mv_usd": 8501656.31,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-26",
-      "index": 113.8969,
+      "index": 113.0468,
       "interpolated": true,
-      "mv_usd": 8507731.03,
+      "mv_usd": 8517446.53,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-27",
-      "index": 113.9622,
+      "index": 113.0794,
       "interpolated": true,
-      "mv_usd": 8525950.13,
+      "mv_usd": 8533236.75,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-28",
-      "index": 114.0275,
+      "index": 113.112,
       "interpolated": true,
-      "mv_usd": 8544169.22,
+      "mv_usd": 8549026.97,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-29",
-      "index": 114.0928,
+      "index": 113.1446,
       "interpolated": true,
-      "mv_usd": 8562388.31,
+      "mv_usd": 8564817.19,
       "flow_in": 0.0,
       "twr": null,
-      "_fix_note": "Interpolacion lineal limpia 2026-07-30 entre el ultimo punto real confiable (2026-06-30, index 112.1992) y el 2026-07-30 recalculado con Modified Dietz correcto (index 114.1581). Reemplaza el placeholder previo (flat o parcialmente real) que generaba un cliff visual en el chart."
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-30",
-      "mv_usd": 8580607.408842558,
+      "mv_usd": 8580607.41,
       "flow_in": 399787.94,
-      "twr": 0.017459,
-      "index": 114.1581,
-      "_fix_note": "Recalculado 2026-07-30 con Modified Dietz ponderado por fecha real de cada flow (anchor correcto: 30-Jun, no un anchor corrupto). Ver scripts/refresh_equity_daily.py _modified_dietz_return()."
+      "twr": 0.008717,
+      "index": 113.1772,
+      "_fix_note": "Recalculado 2026-07-30 con el anchor CORRECTO (statement oficial Pershing 30-Jun, no el valor stale del pipeline roto). Ver conversacion -- Lucas detecto la inconsistencia comparando contra baha."
     }
   ],
   "acwi_index_series": [
