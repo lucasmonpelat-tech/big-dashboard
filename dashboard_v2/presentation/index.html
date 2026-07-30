@@ -231,6 +231,7 @@
     .perf-table tr.attr-row td.pos { color: var(--green); font-weight: 600; }
     .perf-table tr.attr-row td.neg { color: var(--red); font-weight: 600; }
     .perf-table tr.attr-total td { background: rgba(212,175,55,0.08); color: var(--text); font-weight: 700; border-top: 2px solid var(--gold); }
+    .perf-table tr.attr-subtotal td { color: var(--text); font-weight: 700; border-top: 1px solid var(--border); }
 
     /* Loading */
     .loading {
@@ -1142,7 +1143,8 @@
           ? _fmtPct(c.big_contrib_pp) : "—";
         const benchC = c.bench_contrib_pp !== null && c.bench_contrib_pp !== undefined
           ? _fmtPct(c.bench_contrib_pp) : "—";
-        return `<tr class="attr-row">
+        const rowCls = c.is_subtotal ? "attr-row attr-subtotal" : "attr-row";
+        return `<tr class="${rowCls}">
           <td class="left"><strong>${c.name}</strong></td>
           <td>${bigC}</td>
           <td>${benchC}</td>

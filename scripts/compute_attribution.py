@@ -246,11 +246,19 @@ def main():
                     "comment": f"Lynk mgmt fee {MGMT_FEE_ANNUAL}%/yr (bench AOR fee 0.15% no incluido)"
                 },
                 {
+                    "name": "Nuestro Cálculo (NET)",
+                    "big_contrib_pp": round(net_reconstructed, 3),
+                    "bench_contrib_pp": None,
+                    "alpha_pp": None,
+                    "is_subtotal": True,
+                    "comment": f"Suma Equity+FI+Alts+Cash+Fee = reconstruccion bottom-up (vs Lynk oficial {lynk_ytd:+.2f}%)"
+                },
+                {
                     "name": "Residual",
-                    "big_contrib_pp": None,
+                    "big_contrib_pp": round(residual, 3) if residual is not None else None,
                     "bench_contrib_pp": None,
                     "alpha_pp": round(alpha_residual, 3) if alpha_residual is not None else None,
-                    "comment": "Tracking error AOR vs (60% ACWI + 40% AGG teorico) + Lynk smoothing + cash approx + alts statement lag"
+                    "comment": f"Nuestro calculo ({net_reconstructed:+.2f}%) - Lynk oficial ({lynk_ytd:+.2f}%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
                 }
             ]
         }
@@ -261,7 +269,8 @@ def main():
         print(f"  ALPHA TOTAL:    {actual_alpha:+.2f}pp")
         print()
         for c in alpha_attribution["components"]:
-            print(f"  {c['name']:<13} alpha={c['alpha_pp']:>+7.3f}pp  ({c['comment'][:70]})")
+            alpha_str = f"{c['alpha_pp']:>+7.3f}pp" if c['alpha_pp'] is not None else "    N/A "
+            print(f"  {c['name']:<22} alpha={alpha_str}  ({c['comment'][:70]})")
     except Exception as e:
         print(f"  WARN: alpha_attribution skipped ({e})")
 

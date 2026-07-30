@@ -1,6 +1,6 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-07-30T16:29:37.285162",
+  "refreshedAt": "2026-07-30T16:38:21.171571",
   "as_of_date": "2026-07-30",
   "ytd_anchor": "2025-12-31",
   "days_ytd": 211,
@@ -171,11 +171,19 @@
         "comment": "Lynk mgmt fee 1.8%/yr (bench AOR fee 0.15% no incluido)"
       },
       {
+        "name": "Nuestro Cálculo (NET)",
+        "big_contrib_pp": 1.702,
+        "bench_contrib_pp": null,
+        "alpha_pp": null,
+        "is_subtotal": true,
+        "comment": "Suma Equity+FI+Alts+Cash+Fee = reconstruccion bottom-up (vs Lynk oficial +1.52%)"
+      },
+      {
         "name": "Residual",
-        "big_contrib_pp": null,
+        "big_contrib_pp": 0.182,
         "bench_contrib_pp": null,
         "alpha_pp": -0.706,
-        "comment": "Tracking error AOR vs (60% ACWI + 40% AGG teorico) + Lynk smoothing + cash approx + alts statement lag"
+        "comment": "Nuestro calculo (+1.70%) - Lynk oficial (+1.52%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
       }
     ]
   }
