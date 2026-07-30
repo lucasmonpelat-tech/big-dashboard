@@ -174,7 +174,17 @@ jobs:
       - name: Refresh holdings returns T-1 (cost basis methodology)
         run: python scripts/refresh_holdings_returns_daily.py
         continue-on-error: true
-        
+
+      # Cross-check del Sleeve SI/YTD (equity_sleeve_real.json / fi_sleeve_real.json)
+      # contra el metodo independiente cost-basis ponderado. Fix 2026-07-30: un bug
+      # de anchor Modified Dietz dio un FI YTD -1.09% ficticio durante dias sin que
+      # nadie lo notara (Fer lo vio antes que Lucas) -- este paso escribe una alerta
+      # en data/_alerts/ si algo similar vuelve a pasar, para que se detecte ANTES
+      # de llegar a produccion sin avisar. Ver memoria bug_twr_anchor_gap_modified_dietz.
+      - name: Validar Sleeve SI/YTD (cross-check anti anchor-drift)
+        run: python scripts/validate_sleeve_returns.py
+        continue-on-error: true
+
       - name: Sync alts_race con Pershing UGL (cost-basis weighted)
         run: python scripts/sync_alts_ugl.py
         continue-on-error: true
