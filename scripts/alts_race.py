@@ -11,12 +11,11 @@ Sub-asset class composition de Alts (al 2026-05-05):
   - Liquid alts:      IBIT (Bitcoin), GLD (Gold)
 
 Sources:
-  - IBIT, GLD: Yahoo Finance (monthly close)
-  - Privates: monthly return proxy basado en sub-asset class index:
-      * PE  -> S&P Listed Private Equity Index (PSP ETF) proxy with PE smoothing
-      * PC  -> Cliffwater Direct Lending CDLI proxy ~9.5%/yr carry
-      (privates do not publish public monthly NAVs; we use carry/proxy)
-  - 60/40 -> 0.6*ACWI + 0.4*AGG monthly returns blended
+  - sleeve_index / sleeve_monthly_returns: reconstruccion REAL desde
+    data/alts_sleeve_real.json (12 statements oficiales de Pershing + transacciones
+    reales NetX360 + 8 statements oficiales de Carlyle para CALP, Modified Dietz
+    mensual). Ver compute_sleeve_index() y la reconstruccion completa 2026-07-31.
+  - HFRX / 60-40 (benchmarks): Yahoo Finance (QAI, ACWI, AGG monthly close).
 
 Output: data/alts_race.json
 """
@@ -72,33 +71,6 @@ def fetch_yahoo_monthly(ticker, start, end):
     return rets
 
 
-def pe_proxy_monthly_returns(months_list, annual_pct):
-    """
-    Private Equity proxy: PSP ETF (S&P Listed PE) when available, fallback to smoothed monthly.
-    Smoothing: use 70% of PSP return + 30% carry (privates report smoothed NAVs vs listed).
-    """
-    try:
-        psp = fetch_yahoo_monthly("PSP", BIG_INCEPTION - timedelta(days=60), date.today())
-    except Exception:
-        psp = {}
-
-    monthly_carry = (1 + annual_pct / 100) ** (1 / 12) - 1
-    out = {}
-    for m in months_list:
-        if m in psp:
-            # Smoothed: 70% PSP, 30% carry (typical PE NAV smoothing factor)
-            out[m] = 0.7 * psp[m] + 0.3 * monthly_carry
-        else:
-            out[m] = monthly_carry
-    return out
-
-
-def pc_carry_monthly_returns(months_list, annual_pct):
-    """Private Credit: stable carry ~annual_pct/12 (BDCs report mostly income return)."""
-    monthly = (1 + annual_pct / 100) ** (1 / 12) - 1
-    return {m: monthly for m in months_list}
-
-
 def month_range(start, end):
     y, m = start.year, start.month
     while True:
@@ -112,57 +84,50 @@ def month_range(start, end):
 
 
 def compute_sleeve_index(inception, end):
-    months_list = list(month_range(date(inception.year, inception.month, 1), end))
-    returns_by_holding = {}
-    holding_sources = {}
+    """Lee la reconstruccion REAL (statements Pershing + Carlyle, Modified Dietz)
+    desde data/alts_sleeve_real.json en vez de calcular proxies (PSP/carry).
 
-    for isin, ticker, name, value, sub_class, src, ann_pct in ALTS_HOLDINGS:
-        if src == "yahoo_monthly":
-            rets = fetch_yahoo_monthly(ticker, inception - timedelta(days=60), end)
-            source = f"yahoo:{ticker}"
-        elif src == "pe_proxy":
-            rets = pe_proxy_monthly_returns(months_list, ann_pct)
-            source = f"PE proxy (PSP 70% + carry 30% @ {ann_pct}%)"
-        elif src == "pc_carry":
-            rets = pc_carry_monthly_returns(months_list, ann_pct)
-            source = f"PC carry @ {ann_pct}%/yr"
+    Fix 2026-07-31: antes esta funcion recomputaba TODA la historia con proxies
+    en cada corrida del cron, y sync_alts_ugl.py aplicaba un parche "85% proxy +
+    15% forma real" para que el chart no se viera tan falso. Con la reconstruccion
+    completa (12 statements oficiales + transacciones reales + CALP Carlyle) ya
+    no hace falta ningun proxy ni parche -- ver alts_sleeve_real.json.
+
+    holding_returns/holding_sources quedan vacios: se usaban solo para el
+    fallback de compute_holding_contributions(), que igual se sobre-escribe
+    con datos reales en sync_alts_ugl.py (Pershing UGL cost-basis).
+    """
+    real_file = ROOT / "data" / "alts_sleeve_real.json"
+    real = json.load(open(real_file, encoding="utf-8"))
+    twr_series = real["twr_series"]
+
+    # Ultimo punto disponible por mes calendario (incluye "hoy" si ya corrio
+    # refresh_alts_sleeve_daily.py; si no, queda el ultimo punto conocido).
+    by_month = {}
+    for pt in twr_series:
+        ym = pt["date"][:7]
+        by_month[ym] = pt  # el ultimo del mes gana (twr_series viene ordenado por fecha)
+
+    index = {ym: pt["index"] for ym, pt in by_month.items()}
+    monthly_returns = {}
+    prev_val = None
+    for ym in sorted(index.keys()):
+        if prev_val is None:
+            monthly_returns[ym] = None
         else:
-            rets = {}
-            source = "unknown"
-        returns_by_holding[isin] = rets
-        holding_sources[isin] = source
-        print(f"  {ticker:8s} ({sub_class:16s}, {source[:40]}): {len(rets)} months")
+            monthly_returns[ym] = round(index[ym] / prev_val - 1, 6)
+        prev_val = index[ym]
 
-    total_alts = sum(h[3] for h in ALTS_HOLDINGS)
-
-    start_month = f"{inception.year}-{inception.month:02d}"
-    sleeve_rets = {}
-    for month in months_list:
-        weighted = 0
-        known_w = 0
-        for isin, ticker, name, value, sub_class, src, ann_pct in ALTS_HOLDINGS:
-            w = value / total_alts
-            if month in returns_by_holding[isin]:
-                weighted += w * returns_by_holding[isin][month]
-                known_w += w
-        sleeve_rets[month] = weighted / known_w if 0.5 < known_w < 1 else (weighted if known_w >= 1 else None)
-
-    # Index base 100
-    index = {start_month: 100.0}
-    val = 100.0
-    for month in months_list:
-        if month == start_month:
-            continue
-        r = sleeve_rets.get(month)
-        if r is None:
-            continue
-        val *= (1 + r)
-        index[month] = round(val, 4)
+    holding_returns = {isin: {} for isin, *_ in ALTS_HOLDINGS}
+    holding_sources = {isin: "Reconstruccion real (statements Pershing + Carlyle, ver alts_sleeve_real.json)"
+                        for isin, *_ in ALTS_HOLDINGS}
+    print(f"  Reconstruccion real cargada desde alts_sleeve_real.json: {len(index)} meses "
+          f"({sorted(index.keys())[0]} a {sorted(index.keys())[-1]})")
 
     return {
-        "monthly_returns": {m: round(r, 6) if r is not None else None for m, r in sleeve_rets.items()},
+        "monthly_returns": monthly_returns,
         "index": index,
-        "holding_returns": returns_by_holding,
+        "holding_returns": holding_returns,
         "holding_sources": holding_sources,
     }
 

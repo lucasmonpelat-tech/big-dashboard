@@ -1,19 +1,19 @@
 """
 sync_alts_ugl.py — POST alts_race.py daily refresh hook.
 
-CONTEXT: alts_race.py construye la serie mensual con PROXIES (PSP, carry%
-hardcoded por sub-class). Eso funciona para charts históricos pero NO refleja
-los returns reales de los privates que sí trackeamos en Pershing UGL.
-
-Este script SOBREESCRIBE el último punto del sleeve_index + stats con los
-datos REALES de holdings_returns_alternatives.json (que vienen de Pershing
-UGL via refresh_holdings_returns_daily.py).
+CONTEXT (actualizado 2026-07-31): alts_race.py ya carga sleeve_index real desde
+data/alts_sleeve_real.json (statements Pershing + Carlyle, Modified Dietz) --
+ya no hace falta ningun parche de sleeve_index aca. Este script se encarga de
+lo que SI sigue siendo su trabajo: sincronizar el SI/YTD por HOLDING (cost-basis
+via Pershing UGL) y recomputar los stats agregados desde el sleeve_index real.
 
 Flow del cron diario:
   1. compute_holdings_returns.py (manual cuando hay UGL nuevo)
   2. refresh_holdings_returns_daily.py (cron: refreshea MV con T-1)
-  3. alts_race.py (cron: construye serie histórica con proxies)
-  4. sync_alts_ugl.py (cron: pisa último punto + stats con datos reales) ← este
+  3. alts_race.py (cron: carga sleeve_index real desde alts_sleeve_real.json)
+  4. sync_alts_ugl.py (cron: sync per-holding cost-basis + stats) ← este
+  5. refresh_alts_sleeve_daily.py (cron: extiende alts_sleeve_real.json con el
+     punto de hoy, usando el total_alts_usd ya fresco de los pasos anteriores)
 """
 import json
 from datetime import datetime
@@ -104,42 +104,11 @@ def main():
     sleeve_ytd_cb = sum(h.get('ytd_contribution_pct', 0) or 0 for h in ar['holdings'])
     sleeve_si_cb = sum(h.get('contribution_pct', 0) or 0 for h in ar['holdings'])
 
-    # 4) Reconstruir sleeve_index COHERENTE con SI/YTD reales.
-    #    Los proxies del alts_race.py generan swings mensuales artificiales
-    #    que hacen que el chart Base 100 muestre drops que no son reales.
-    #    Rebuild: interpolación lineal 100 -> Dec-25 -> hoy, con 15% de la
-    #    forma original para preservar textura.
-    si_idx = ar.get('sleeve_index', {})
-    if si_idx:
-        keys_sorted = sorted(si_idx.keys())
-        if len(keys_sorted) >= 2:
-            si_to_dec = sleeve_si_cb - sleeve_ytd_cb  # SI del período pre-Dec25
-            first_key = keys_sorted[0]
-            try:
-                idx_dec = keys_sorted.index('2025-12')
-            except ValueError:
-                idx_dec = len(keys_sorted) // 2
-            si_new = {}
-            for i, k in enumerate(keys_sorted):
-                if k == first_key:
-                    si_new[k] = 100.0
-                    continue
-                if i <= idx_dec:
-                    frac = i / idx_dec
-                    expected = 100 + frac * si_to_dec
-                else:
-                    frac = (i - idx_dec) / (len(keys_sorted) - 1 - idx_dec)
-                    expected = (100 + si_to_dec) + frac * sleeve_ytd_cb
-                original_delta = si_idx[k] - 100
-                original_normalized = 100 + original_delta * 0.15
-                si_new[k] = round(0.85 * expected + 0.15 * original_normalized, 4)
-            si_new[first_key] = 100.0
-            if '2025-12' in si_new:
-                si_new['2025-12'] = round(100 + si_to_dec, 4)
-            si_new[keys_sorted[-1]] = round(100 + sleeve_si_cb, 4)
-            ar['sleeve_index'] = si_new
+    # 4) sleeve_index ya NO necesita parche (fix 2026-07-31): alts_race.py lo
+    #    carga real desde data/alts_sleeve_real.json (statements Pershing +
+    #    Carlyle, Modified Dietz), no proxies. Se deja tal cual lo dejo alts_race.py.
 
-    # 5) Recompute todos los stats desde el nuevo sleeve_index (coherente)
+    # 5) Recompute todos los stats desde el sleeve_index real
     stats = ar.setdefault('stats_vs_6040', {})
     returns = stats.setdefault('returns', {})
     si_final = ar.get('sleeve_index', {})

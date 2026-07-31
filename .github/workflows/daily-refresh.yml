@@ -192,6 +192,17 @@ jobs:
         run: python scripts/validate_sleeve_returns.py
         continue-on-error: true
 
+      # Extiende el TWR real de Alts (data/alts_sleeve_real.json, reconstruccion
+      # completa 2026-07-31 desde statements Pershing + Carlyle) con el punto de
+      # hoy, y propaga sleeve_index/sleeve_monthly_returns a alts_race.json --
+      # ese archivo ya NO se reconstruye con proxies en cada corrida (alts_race.py
+      # no esta en el cron), asi que sin este paso quedaria congelado.
+      # Debe correr ANTES de sync_alts_ugl.py (que calcula stats 1M/3M/6M/YTD/SI
+      # leyendo sleeve_index).
+      - name: Extender Alts sleeve TWR real (jun-30 anchor Pershing+Carlyle)
+        run: python scripts/refresh_alts_sleeve_daily.py
+        continue-on-error: true
+
       - name: Sync alts_race con Pershing UGL (cost-basis weighted)
         run: python scripts/sync_alts_ugl.py
         continue-on-error: true
