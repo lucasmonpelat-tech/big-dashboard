@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-07-30T15:54:52.120748",
+  "refreshedAt": "2026-07-31T13:05:19.870118",
   "source": "Reconstructed from Pershing Transactions export",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -579,42 +579,42 @@
       ]
     },
     {
-      "date": "2026-07-30",
-      "mv_usd": 10977379.765609998,
+      "date": "2026-07-31",
+      "mv_usd": 10962797.873499997,
       "holdings": [
         {
           "ticker": "PIMCO-EM",
           "qty": 61949.011,
-          "price": 18.26,
-          "mv": 1131188.94086,
+          "price": 18.2,
+          "mv": 1127472.0002,
           "source": "daily_close"
         },
         {
           "ticker": "MANIG",
           "qty": 16621.485,
-          "price": 124.81,
-          "mv": 2074527.54285,
+          "price": 125.0,
+          "mv": 2077685.625,
           "source": "daily_close"
         },
         {
           "ticker": "PIMCO-INC",
           "qty": 159434.55,
-          "price": 20.11,
-          "mv": 3206228.8005,
+          "price": 20.05,
+          "mv": 3196662.7275,
           "source": "daily_close"
         },
         {
           "ticker": "MANEM",
           "qty": 176.056,
-          "price": 115.11,
-          "mv": 20265.80616,
+          "price": 115.25,
+          "mv": 20290.454,
           "source": "daily_close"
         },
         {
           "ticker": "PIMCO-LD",
           "qty": 224080.422,
-          "price": 14.02,
-          "mv": 3141607.51644,
+          "price": 14.0,
+          "mv": 3137125.908,
           "source": "daily_close"
         },
         {
@@ -3566,11 +3566,17 @@
     },
     {
       "date": "2026-07-30",
-      "mv_usd": 10977379.77,
-      "flow_in": 500095.96,
-      "twr": -0.000821,
-      "index": 104.5873,
-      "_fix_note": "Recalculado 2026-07-30 con el anchor CORRECTO (statement oficial Pershing 30-Jun, no el valor stale del pipeline roto). Ver conversacion -- Lucas detecto la inconsistencia comparando contra baha."
+      "index": 104.5987,
+      "interpolated": true,
+      "mv_usd": 10961902.3567,
+      "flow_in": 0.0
+    },
+    {
+      "date": "2026-07-31",
+      "mv_usd": 10962797.873499997,
+      "flow_in": 0.0,
+      "twr": 0.00016340045455140955,
+      "index": 104.6073
     }
   ],
   "agg_index_series": [
@@ -5445,8 +5451,14 @@
     },
     {
       "date": "2026-07-30",
-      "price": 92.32,
-      "index": 102.4804
+      "index": 102.5159,
+      "interpolated": true,
+      "price": 92.3519
+    },
+    {
+      "date": "2026-07-31",
+      "price": 92.26,
+      "index": 102.4138
     }
   ],
   "fi_flows_by_month": {
@@ -5636,7 +5648,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-07-30 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-07-29.",
+  "_daily_refresh_note": "Punto 2026-07-31 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-07-30.",
   "twr_series_original": [
     {
       "date": "2025-07-31",
@@ -8300,241 +8312,279 @@
     },
     {
       "date": "2026-06-30",
-      "mv_usd": 10325849.75,
+      "mv_usd": 10486191.92,
       "flow_in": -6813.86,
       "twr": 0.0006598835120577018,
-      "index": 104.6732
+      "index": 104.6732,
+      "_fix_note": "mv_usd corregido 2026-07-30 con el valor OFICIAL del statement Pershing 30-Jun-2026 (el valor anterior venia de un pipeline roto desde antes de mayo, con precios stale para PIMCO-LD/PIMCO-INC)."
     },
     {
       "date": "2026-07-01",
-      "index": 104.6732,
+      "index": 104.6703,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -6517.6052,
-      "twr": 0.0006
+      "mv_usd": 10502564.85,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-02",
-      "index": 104.6732,
+      "index": 104.6675,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -6221.3504,
-      "twr": 0.0006
+      "mv_usd": 10518937.78,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-03",
-      "index": 104.6732,
+      "index": 104.6646,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -5925.0957,
-      "twr": 0.0006
+      "mv_usd": 10535310.7,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-04",
-      "index": 104.6732,
+      "index": 104.6617,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -5628.8409,
-      "twr": 0.0005
+      "mv_usd": 10551683.63,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-05",
-      "index": 104.6732,
+      "index": 104.6589,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -5332.5861,
-      "twr": 0.0005
+      "mv_usd": 10568056.56,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-06",
-      "index": 104.6732,
+      "index": 104.656,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -5036.3313,
-      "twr": 0.0005
+      "mv_usd": 10584429.49,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-07",
-      "index": 104.6732,
+      "index": 104.6532,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -4740.0765,
-      "twr": 0.0005
+      "mv_usd": 10600802.42,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-08",
-      "index": 104.6732,
+      "index": 104.6503,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -4443.8217,
-      "twr": 0.0004
+      "mv_usd": 10617175.35,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-09",
-      "index": 104.6732,
+      "index": 104.6474,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -4147.567,
-      "twr": 0.0004
+      "mv_usd": 10633548.27,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-10",
-      "index": 104.6732,
+      "index": 104.6446,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -3851.3122,
-      "twr": 0.0004
+      "mv_usd": 10649921.2,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-11",
-      "index": 104.6732,
+      "index": 104.6417,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -3555.0574,
-      "twr": 0.0003
+      "mv_usd": 10666294.13,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-12",
-      "index": 104.6732,
+      "index": 104.6388,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -3258.8026,
-      "twr": 0.0003
+      "mv_usd": 10682667.06,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-13",
-      "index": 104.6732,
+      "index": 104.636,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -2962.5478,
-      "twr": 0.0003
+      "mv_usd": 10699039.99,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-14",
-      "index": 104.6732,
+      "index": 104.6331,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -2666.293,
-      "twr": 0.0003
+      "mv_usd": 10715412.91,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-15",
-      "index": 104.6732,
+      "index": 104.6302,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -2370.0383,
-      "twr": 0.0002
+      "mv_usd": 10731785.84,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-16",
-      "index": 104.6732,
+      "index": 104.6274,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -2073.7835,
-      "twr": 0.0002
+      "mv_usd": 10748158.77,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-17",
-      "index": 104.6732,
+      "index": 104.6245,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -1777.5287,
-      "twr": 0.0002
+      "mv_usd": 10764531.7,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-18",
-      "index": 104.6732,
+      "index": 104.6217,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -1481.2739,
-      "twr": 0.0001
+      "mv_usd": 10780904.63,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-19",
-      "index": 104.6732,
+      "index": 104.6188,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -1185.0191,
-      "twr": 0.0001
+      "mv_usd": 10797277.56,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-20",
-      "index": 104.6732,
+      "index": 104.6159,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -888.7643,
-      "twr": 0.0001
+      "mv_usd": 10813650.48,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-21",
-      "index": 104.6732,
+      "index": 104.6131,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -592.5096,
-      "twr": 0.0001
+      "mv_usd": 10830023.41,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-22",
-      "index": 104.6732,
+      "index": 104.6102,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -296.2548,
-      "twr": 0.0
+      "mv_usd": 10846396.34,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-23",
-      "index": 104.6732,
+      "index": 104.6073,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -148.1274,
-      "twr": 0.0
+      "mv_usd": 10862769.27,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-24",
-      "index": 104.6732,
+      "index": 104.6045,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -74.0637,
-      "twr": 0.0
+      "mv_usd": 10879142.2,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-25",
-      "index": 104.6732,
+      "index": 104.6016,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -49.3758,
-      "twr": 0.0
+      "mv_usd": 10895515.12,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-26",
-      "index": 104.6732,
+      "index": 104.5988,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -24.6879,
-      "twr": 0.0
+      "mv_usd": 10911888.05,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-27",
-      "index": 104.6732,
+      "index": 104.5959,
       "interpolated": true,
-      "mv_usd": 10325849.75,
-      "flow_in": -12.3439,
-      "twr": 0.0
+      "mv_usd": 10928260.98,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
       "date": "2026-07-28",
-      "index": 105.1018,
+      "index": 104.593,
       "interpolated": true,
-      "mv_usd": 10642282.1924,
-      "flow_in": 274142.5881,
-      "twr": 0.0041
+      "mv_usd": 10944633.91,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
     },
     {
-      "date": "2026-07-30",
-      "mv_usd": 10977379.765609998,
-      "flow_in": 549369.13,
-      "twr": -0.020133986072368826,
-      "index": 102.9857
+      "date": "2026-07-29",
+      "index": 104.5902,
+      "interpolated": true,
+      "mv_usd": 10961006.84,
+      "flow_in": 0.0,
+      "twr": null,
+      "_fix_note": "Interpolacion lineal 2026-07-30 (v2, con anchor oficial Pershing) entre 30-Jun corregido y 30-Jul recalculado."
+    },
+    {
+      "date": "2026-07-31",
+      "mv_usd": 10962797.873499997,
+      "flow_in": 0.0,
+      "twr": 0.00016340045455140955,
+      "index": 104.6073
     }
   ],
   "agg_index_series_original": [
@@ -10402,9 +10452,15 @@
       "price": 92.4877
     },
     {
-      "date": "2026-07-30",
-      "price": 92.4,
-      "index": 102.5692
+      "date": "2026-07-29",
+      "index": 102.6179,
+      "interpolated": true,
+      "price": 92.4438
+    },
+    {
+      "date": "2026-07-31",
+      "price": 92.26,
+      "index": 102.4138
     }
   ],
   "_bench_fix_note": "2026-06-23: agg_index_series reconstruida con IUAG.L (UCITS Acc, total return). Antes era AGG NYSE price-only sin reinvertir dividendos, daba YTD -5.78% falso."
