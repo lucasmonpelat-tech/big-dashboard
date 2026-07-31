@@ -1,6 +1,6 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-07-31T13:05:21.221712",
+  "refreshedAt": "2026-07-31T14:55:43.755285",
   "as_of_date": "2026-07-31",
   "ytd_anchor": "2025-12-31",
   "days_ytd": 212,
@@ -9,15 +9,15 @@
       "name": "Equity",
       "value_usd": 8608988.3,
       "weight_pct": 30.92,
-      "ytd_pct": 6.68,
-      "contribution_pp": 2.067
+      "ytd_pct": 5.22,
+      "contribution_pp": 1.614
     },
     {
       "name": "Fixed Income",
       "value_usd": 10960179.71,
       "weight_pct": 39.37,
-      "ytd_pct": 0.49,
-      "contribution_pp": 0.191
+      "ytd_pct": 1.39,
+      "contribution_pp": 0.547
     },
     {
       "name": "Alternatives",
@@ -34,13 +34,13 @@
       "contribution_pp": 0.039
     }
   ],
-  "gross_reconstructed_pct": 2.083,
+  "gross_reconstructed_pct": 1.986,
   "mgmt_fee_pp": -1.045,
   "mgmt_fee_rate_annual_pct": 1.8,
-  "net_reconstructed_pct": 1.038,
+  "net_reconstructed_pct": 0.941,
   "lynk_ytd_pct": 1.91,
   "lynk_refreshed_at": "2026-07-31T12:59:07.351289",
-  "residual_pp": -0.872,
+  "residual_pp": -0.969,
   "alts_detail": [
     {
       "ticker": "CALP",
@@ -137,17 +137,17 @@
     "components": [
       {
         "name": "Equity",
-        "big_contrib_pp": 2.067,
+        "big_contrib_pp": 1.614,
         "bench_contrib_pp": 6.438,
-        "alpha_pp": -4.371,
-        "comment": "BIG 30.9% @ +6.68% vs 60% ACWI @ +10.73%"
+        "alpha_pp": -4.824,
+        "comment": "BIG 30.9% @ +5.22% vs 60% ACWI @ +10.73%"
       },
       {
         "name": "Fixed Income",
-        "big_contrib_pp": 0.191,
+        "big_contrib_pp": 0.547,
         "bench_contrib_pp": -0.345,
-        "alpha_pp": 0.536,
-        "comment": "BIG 39.4% @ +0.49% vs 40% AGG @ -0.86%"
+        "alpha_pp": 0.892,
+        "comment": "BIG 39.4% @ +1.39% vs 40% AGG @ -0.86%"
       },
       {
         "name": "Alternatives",
@@ -172,7 +172,7 @@
       },
       {
         "name": "Nuestro Cálculo (NET)",
-        "big_contrib_pp": 1.038,
+        "big_contrib_pp": 0.941,
         "bench_contrib_pp": null,
         "alpha_pp": null,
         "is_subtotal": true,
@@ -180,10 +180,10 @@
       },
       {
         "name": "Residual",
-        "big_contrib_pp": -0.872,
+        "big_contrib_pp": -0.969,
         "bench_contrib_pp": null,
-        "alpha_pp": 0.305,
-        "comment": "Nuestro calculo (+1.04%) - Lynk oficial (+1.91%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
+        "alpha_pp": 0.402,
+        "comment": "Nuestro calculo (+0.94%) - Lynk oficial (+1.91%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
       }
     ]
   }
