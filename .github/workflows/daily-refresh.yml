@@ -19,11 +19,18 @@ name: 🔄 Daily Refresh BIG (Lynk + Sleeves + Alertas + Digest)
 #   9. Brinson Attribution YTD.
 #   10. Commit + push (data/) — los charts del dashboard se actualizan solos.
 #   11. Record run status (success/failure marker en data/_alerts/).
-#   12. Weekly digest (solo sabados): mail a Lucas + Fer con resumen semanal.
+#   12. Alerta inmediata por mail (todos los dias) si hubo alguna alerta hoy.
+#   13. Weekly digest (solo sabados, ACTUALMENTE DESACTIVADO -- ver weekly_digest.py).
 #
 # Alertas:
 #   - Si algo falla, queda marker en data/_alerts/cron_failure_YYYY-MM-DD.json
-#   - Claude lo detecta al inicio de sesion (regla en MEMORY.md) y avisa a Lucas.
+#     (y otros scripts dejan sus propios markers: sleeve_return_anomaly_*,
+#     health_check_warning_*, bench_indices_stale_*, netx360_download_*, etc.)
+#   - send_failure_alert.py manda mail a Lucas + Fer EL MISMO DIA si aparece
+#     cualquiera de esos markers (2026-07-31, agregado porque Lucas se va de
+#     vacaciones y varios steps tienen continue-on-error: true -- el job puede
+#     terminar "success" aunque algo se haya roto en silencio).
+#   - Ademas, Claude lo detecta al inicio de sesion (regla en MEMORY.md) y avisa.
 
 on:
   schedule:
@@ -236,6 +243,17 @@ jobs:
             if git push origin HEAD:main; then exit 0; fi
             sleep 3
           done
+
+      # === ALERTA INMEDIATA (todos los dias, si hubo alguna alerta hoy) ===
+      # No usa `if: failure()` porque la mayoria de los steps de arriba tienen
+      # continue-on-error: true -- el job puede terminar "success" aunque varios
+      # hayan fallado en silencio. Este step manda mail el mismo dia que se
+      # escribio CUALQUIER alerta en data/_alerts/ (cron_failure, sleeve anomaly,
+      # health check, bench indices stale, netx360 download, etc.), sin esperar
+      # a que alguien abra una sesion de Claude Code para verla.
+      - name: Alerta inmediata por mail si hubo alertas hoy
+        if: always()
+        run: python scripts/send_failure_alert.py
 
       # === WEEKLY DIGEST (solo sabados) ===
       - name: Weekly digest mail (Saturdays only)
