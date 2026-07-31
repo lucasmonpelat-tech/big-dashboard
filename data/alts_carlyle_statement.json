@@ -1,9 +1,25 @@
 {
   "_description": "Source of truth para CALP (Carlyle AlpInvest) — unico holding Alts cuya valuation llega por fuera de Pershing. Cada entry es un statement; el ultimo por 'as_of' manda. Alimenta alts_race.json en refresh_alts_daily.py.",
-  "refreshedAt": "2026-06-26T15:30:56.575559",
+  "refreshedAt": "2026-07-31T17:30:00",
   "source": "Statements oficiales Carlyle AlpInvest (PDF)",
   "statements": {
     "CALP": [
+      {
+        "as_of": "2025-11-28",
+        "isin": "LU2827810776",
+        "fund_name": "Carlyle AlpInvest PM Sub-Fund - I - Class B1",
+        "shares": 186706.497,
+        "nav_per_share": 13.81,
+        "mv_usd": 2578416.72,
+        "ytd_return_pct": null,
+        "si_return_pct": 3.14,
+        "si_return_pct_carlyle_inception": 38.10,
+        "big_cost_basis_nav": 13.39,
+        "big_purchase_date": "2025-08-29",
+        "since_inception_date": "2025-08-29",
+        "source_doc": "TVS_P122202_2025-11-28.pdf",
+        "notes": "Period End 28-Nov-2025. Anterior al anchor de 31-Dic-2025 -> ytd_return_pct no aplica (null). SI desde compra BIG 29-Aug-2025 @ 13.39 -> 13.81 = +3.14%. Fondo reporta Inception 28-Jun-2024 @ 10.00 = +38.10%."
+      },
       {
         "as_of": "2025-12-31",
         "isin": "LU2827810776",
@@ -21,6 +37,22 @@
         "notes": "ANCHOR real 31-Dic-2025 (statement oficial Carlyle, no derivado/estimado). Period End 31-Dec-2025 NAV 14.11. Confirma exacto la nota que ya traian los entries posteriores. YTD=0 por definicion (es el punto de ancla). SI desde compra BIG 29-Aug-2025 @ 13.39 -> 14.11 = +5.38%."
       },
       {
+        "as_of": "2026-01-30",
+        "isin": "LU2827810776",
+        "fund_name": "Carlyle AlpInvest PM Sub-Fund - I - Class B1",
+        "shares": 186706.497,
+        "nav_per_share": 14.30,
+        "mv_usd": 2669902.91,
+        "ytd_return_pct": 1.35,
+        "si_return_pct": 6.80,
+        "si_return_pct_carlyle_inception": 43.00,
+        "big_cost_basis_nav": 13.39,
+        "big_purchase_date": "2025-08-29",
+        "since_inception_date": "2025-08-29",
+        "source_doc": "TVS_P122202_2026-01-30.pdf",
+        "notes": "Period End 30-Ene-2026. YTD vs 31-Dic-2025 NAV 14.11 (+1.35%, coincide exacto con el propio PDF del fondo). SI desde compra BIG 29-Aug-2025 @ 13.39 -> 14.30 = +6.80%."
+      },
+      {
         "as_of": "2026-02-27",
         "isin": "LU2827810776",
         "fund_name": "Carlyle AlpInvest PM Sub-Fund - I - Class B1",
@@ -35,6 +67,22 @@
         "since_inception_date": "2025-08-29",
         "source_doc": "Statement Carlyle  Mar 26.pdf",
         "notes": "YTD vs 31-Dec-2025 NAV 14.11. SI desde compra BIG 29-Aug-2025 @ 13.39 (NO desde inception del fondo Carlyle Jun-2024 @ 10.00)."
+      },
+      {
+        "as_of": "2026-03-31",
+        "isin": "LU2827810776",
+        "fund_name": "Carlyle AlpInvest PM Sub-Fund - I - Class B1",
+        "shares": 186706.497,
+        "nav_per_share": 14.38,
+        "mv_usd": 2684839.43,
+        "ytd_return_pct": 1.91,
+        "si_return_pct": 7.39,
+        "si_return_pct_carlyle_inception": 43.80,
+        "big_cost_basis_nav": 13.39,
+        "big_purchase_date": "2025-08-29",
+        "since_inception_date": "2025-08-29",
+        "source_doc": "TVS_P122202_2026-03-31.pdf",
+        "notes": "Period End 31-Mar-2026. YTD vs 31-Dic-2025 NAV 14.11 (+1.91%, coincide exacto con el propio PDF del fondo). SI desde compra BIG 29-Aug-2025 @ 13.39 -> 14.38 = +7.39%."
       },
       {
         "as_of": "2026-04-30",
