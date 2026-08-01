@@ -1,0 +1,971 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-08-01",
+  "generated_at": "2026-08-01T12:11:09Z",
+  "note": "Holdings con MV/return DIRECTO de Pershing UGL (canonical v2 pnl.json). Bench DW calculado desde buys_history + bench indices. Fixes bug de precio staleado del compute_holdings_returns.py viejo.",
+  "sources": {
+    "positions": "data/canonical/2026-08-01/positions.json",
+    "pnl": "data/canonical/2026-08-01/pnl.json"
+  },
+  "sleeves": {
+    "equity": {
+      "bench_label": "ACWI",
+      "n_open": 11,
+      "holdings": [
+        {
+          "ticker": "CSPX",
+          "name": "ISHARES VII PLC CORE S&P 500 UCITS ETF ISIN#IE00B5BMR087",
+          "isin": "IE00B5BMR087",
+          "status": "OPEN",
+          "qty": 3408.0,
+          "mv_usd": 2728206.24,
+          "cost_basis_usd": 2384387.73,
+          "unrealized_gl_usd": 361839.67,
+          "return_pct": 15.18,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 22.21,
+          "alpha_real_pp": -7.03,
+          "ytd_pct": 7.72,
+          "bench_ytd_pct": 11.28,
+          "alpha_ytd_pp": -3.56,
+          "first_buy_date": "2025-07-03",
+          "n_trades": 9,
+          "buys_history": [
+            {
+              "date": "2025-07-03",
+              "cost": 1711093.01
+            },
+            {
+              "date": "2025-07-31",
+              "cost": 113774.84
+            },
+            {
+              "date": "2025-08-19",
+              "cost": 73593.92
+            },
+            {
+              "date": "2025-09-03",
+              "cost": 215751.38
+            },
+            {
+              "date": "2025-10-02",
+              "cost": 43821.78
+            },
+            {
+              "date": "2025-12-02",
+              "cost": 134713.0
+            },
+            {
+              "date": "2026-01-06",
+              "cost": 40014.16
+            },
+            {
+              "date": "2026-04-07",
+              "cost": 198130.6
+            },
+            {
+              "date": "2026-04-17",
+              "cost": 607997.98
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "NBGMT",
+          "name": "NEUBERGER BERMAN GLOBAL EQUITY MEGATRENDS FUND CLASS I (ACC)",
+          "isin": "IE00BFMHRK20",
+          "status": "OPEN",
+          "qty": 58050.998,
+          "mv_usd": 1441986.79,
+          "cost_basis_usd": 1302618.18,
+          "unrealized_gl_usd": 139368.61,
+          "return_pct": 10.7,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 22.21,
+          "alpha_real_pp": -11.51,
+          "ytd_pct": 8.04,
+          "bench_ytd_pct": 11.28,
+          "alpha_ytd_pp": -3.24,
+          "first_buy_date": "2025-07-07",
+          "n_trades": 8,
+          "buys_history": [
+            {
+              "date": "2025-07-07",
+              "cost": 850030.0
+            },
+            {
+              "date": "2025-08-01",
+              "cost": 292030.0
+            },
+            {
+              "date": "2025-08-20",
+              "cost": 68030.0
+            },
+            {
+              "date": "2025-09-03",
+              "cost": 110030.0
+            },
+            {
+              "date": "2025-10-02",
+              "cost": 45030.0
+            },
+            {
+              "date": "2026-01-07",
+              "cost": 20030.0
+            },
+            {
+              "date": "2026-02-04",
+              "cost": 150030.0
+            },
+            {
+              "date": "2026-05-07",
+              "cost": 144030.0
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "MFSCV",
+          "name": "MFS MERIDIAN CONTRARIAN VALUE FUND CLASS I1",
+          "isin": "LU1985812756",
+          "status": "OPEN",
+          "qty": 4063.638,
+          "mv_usd": 1290855.25,
+          "cost_basis_usd": 1013561.84,
+          "unrealized_gl_usd": 277293.41,
+          "return_pct": 27.36,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 22.21,
+          "alpha_real_pp": 5.15,
+          "ytd_pct": 18.42,
+          "bench_ytd_pct": 11.28,
+          "alpha_ytd_pp": 7.14,
+          "first_buy_date": "2025-07-07",
+          "n_trades": 7,
+          "buys_history": [
+            {
+              "date": "2025-07-07",
+              "cost": 10030.0
+            },
+            {
+              "date": "2025-07-15",
+              "cost": 840030.0
+            },
+            {
+              "date": "2025-08-01",
+              "cost": 295030.0
+            },
+            {
+              "date": "2025-08-19",
+              "cost": 44030.0
+            },
+            {
+              "date": "2025-09-03",
+              "cost": 142030.0
+            },
+            {
+              "date": "2025-10-02",
+              "cost": 53030.0
+            },
+            {
+              "date": "2026-01-06",
+              "cost": 20030.0
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "THOR",
+          "name": "THORNBURG INVESTMENT INCOME BUILDER FUND CLASS I (USD)",
+          "isin": "IE00B6YCBF59",
+          "status": "OPEN",
+          "qty": 14410.584,
+          "mv_usd": 639829.93,
+          "cost_basis_usd": 610030.0,
+          "unrealized_gl_usd": 29799.93,
+          "return_pct": 4.88,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 4.68,
+          "alpha_real_pp": 0.2,
+          "ytd_pct": 19.03,
+          "bench_ytd_pct": 11.28,
+          "alpha_ytd_pp": 7.75,
+          "first_buy_date": "2026-04-20",
+          "n_trades": 1,
+          "buys_history": [
+            {
+              "date": "2026-04-20",
+              "cost": 610030.0
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "JHGSC",
+          "name": "JANUS HENDERSON HORIZON GLOBAL SMALLER COMPANIES FUND CLASS",
+          "isin": "LU2940405447",
+          "status": "OPEN",
+          "qty": 10410.46,
+          "mv_usd": 572991.72,
+          "cost_basis_usd": 542060.0,
+          "unrealized_gl_usd": 30931.72,
+          "return_pct": 5.71,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 22.21,
+          "alpha_real_pp": -16.5,
+          "ytd_pct": 9.71,
+          "bench_ytd_pct": 11.28,
+          "alpha_ytd_pp": -1.57,
+          "first_buy_date": "2025-07-03",
+          "n_trades": 7,
+          "buys_history": [
+            {
+              "date": "2025-07-03",
+              "cost": 340030.0
+            },
+            {
+              "date": "2025-07-31",
+              "cost": 119030.0
+            },
+            {
+              "date": "2025-08-19",
+              "cost": 10030.0
+            },
+            {
+              "date": "2025-09-03",
+              "cost": 47030.0
+            },
+            {
+              "date": "2025-10-02",
+              "cost": 18030.0
+            },
+            {
+              "date": "2026-02-03",
+              "cost": 450030.0
+            },
+            {
+              "date": "2026-04-07",
+              "cost": 92030.0
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "LGLI",
+          "name": "LAZARD GLOBAL LISTED INFRASTRUCTURE FUND CLASS A (ACC)(USD)",
+          "isin": "IE00BF4KN675",
+          "status": "OPEN",
+          "qty": 26511.134,
+          "mv_usd": 523046.12,
+          "cost_basis_usd": 515000.0,
+          "unrealized_gl_usd": 8046.11,
+          "return_pct": 1.56,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 8.59,
+          "alpha_real_pp": -7.03,
+          "ytd_pct": 7.15,
+          "bench_ytd_pct": 11.28,
+          "alpha_ytd_pp": -4.13,
+          "first_buy_date": "2026-02-04",
+          "n_trades": 2,
+          "buys_history": [
+            {
+              "date": "2026-02-04",
+              "cost": 450000.0
+            },
+            {
+              "date": "2026-04-08",
+              "cost": 65000.0
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "ARGT",
+          "name": "GLOBAL X FDS MSCI ARGENTINA ETF",
+          "isin": "US37950E2596",
+          "status": "OPEN",
+          "qty": 4000.0,
+          "mv_usd": 380600.0,
+          "cost_basis_usd": 377841.38,
+          "unrealized_gl_usd": 2758.62,
+          "return_pct": 0.73,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 8.77,
+          "alpha_real_pp": -8.04,
+          "ytd_pct": 5.57,
+          "bench_ytd_pct": 11.28,
+          "alpha_ytd_pp": -5.71,
+          "first_buy_date": "2026-01-09",
+          "n_trades": 3,
+          "buys_history": [
+            {
+              "date": "2026-01-09",
+              "cost": 198934.42
+            },
+            {
+              "date": "2026-02-03",
+              "cost": 154033.0
+            },
+            {
+              "date": "2026-03-04",
+              "cost": 24873.96
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "4BRZ",
+          "name": "ISHARES MSCI BRAZIL UCITS ETF (DE) ACCUMULATING UNITS ISIN#D",
+          "isin": "DE000A0Q4R85",
+          "status": "OPEN",
+          "qty": 6979.0,
+          "mv_usd": 361791.36,
+          "cost_basis_usd": 343054.45,
+          "unrealized_gl_usd": 18736.91,
+          "return_pct": 5.46,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 8.77,
+          "alpha_real_pp": -3.31,
+          "ytd_pct": 14.95,
+          "bench_ytd_pct": 11.28,
+          "alpha_ytd_pp": 3.67,
+          "first_buy_date": "2026-01-09",
+          "n_trades": 2,
+          "buys_history": [
+            {
+              "date": "2026-01-09",
+              "cost": 203412.93
+            },
+            {
+              "date": "2026-02-03",
+              "cost": 139641.52
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "ILF",
+          "name": "ISHARES TR LATIN AMER 40 ETF",
+          "isin": "US4642873909",
+          "status": "OPEN",
+          "qty": 10000.0,
+          "mv_usd": 353700.0,
+          "cost_basis_usd": 367141.0,
+          "unrealized_gl_usd": -13441.0,
+          "return_pct": -3.66,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 8.18,
+          "alpha_real_pp": -11.84,
+          "ytd_pct": 17.67,
+          "bench_ytd_pct": 11.28,
+          "alpha_ytd_pp": 6.39,
+          "first_buy_date": "2026-02-03",
+          "n_trades": 1,
+          "buys_history": [
+            {
+              "date": "2026-02-03",
+              "cost": 367141.0
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "MAGS",
+          "name": "LISTED FDS TR ROUNDHILL MAGNIFICENT SEVEN ETF",
+          "isin": "US53656G4982",
+          "status": "OPEN",
+          "qty": 3075.0,
+          "mv_usd": 202827.0,
+          "cost_basis_usd": 199608.19,
+          "unrealized_gl_usd": 3218.81,
+          "return_pct": 1.61,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 0.18,
+          "alpha_real_pp": 1.43,
+          "ytd_pct": 1.61,
+          "bench_ytd_pct": 11.28,
+          "alpha_ytd_pp": -9.67,
+          "first_buy_date": "2026-07-02",
+          "n_trades": 1,
+          "buys_history": [
+            {
+              "date": "2026-07-02",
+              "cost": 199608.19
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "HEWJ",
+          "name": "ISHARES TR ISHARES CURRENCY HEDGED MSCI JAPAN ETF",
+          "isin": "US46434V8862",
+          "status": "OPEN",
+          "qty": 3125.0,
+          "mv_usd": 194906.25,
+          "cost_basis_usd": 200179.75,
+          "unrealized_gl_usd": -5273.5,
+          "return_pct": -2.63,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 0.18,
+          "alpha_real_pp": -2.81,
+          "ytd_pct": -2.63,
+          "bench_ytd_pct": 11.28,
+          "alpha_ytd_pp": -13.91,
+          "first_buy_date": "2026-07-02",
+          "n_trades": 1,
+          "buys_history": [
+            {
+              "date": "2026-07-02",
+              "cost": 200179.75
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        }
+      ]
+    },
+    "fixed_income": {
+      "bench_label": "AGG",
+      "n_open": 7,
+      "holdings": [
+        {
+          "ticker": "PIMCO-INC",
+          "name": "PIMCO INCOME FUND INSTITUTIONAL CLASS (ACC)(USD)",
+          "isin": "IE00B87KCF77",
+          "status": "OPEN",
+          "qty": 159434.55,
+          "mv_usd": 3195068.38,
+          "cost_basis_usd": 3194047.88,
+          "unrealized_gl_usd": 1020.5,
+          "return_pct": 0.03,
+          "bench_label": "AGG",
+          "bench_dw_pct": -0.86,
+          "alpha_real_pp": 0.89,
+          "ytd_pct": 0.4,
+          "bench_ytd_pct": -0.56,
+          "alpha_ytd_pp": 0.96,
+          "first_buy_date": "2026-07-07",
+          "n_trades": 1,
+          "buys_history": [
+            {
+              "date": "2026-07-07",
+              "cost": 150030.0
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "PIMCO-LD",
+          "name": "PIMCO LOW DURATION INCOME FUND INSTITUTIONAL CLASS (ACC)(USD",
+          "isin": "IE00BDT57R20",
+          "status": "OPEN",
+          "qty": 224080.422,
+          "mv_usd": 3137125.91,
+          "cost_basis_usd": 3110052.87,
+          "unrealized_gl_usd": 27073.03,
+          "return_pct": 0.87,
+          "bench_label": "AGG",
+          "bench_dw_pct": -0.81,
+          "alpha_real_pp": 1.68,
+          "ytd_pct": 1.59,
+          "bench_ytd_pct": -0.56,
+          "alpha_ytd_pp": 2.15,
+          "first_buy_date": "2026-01-30",
+          "n_trades": 5,
+          "buys_history": [
+            {
+              "date": "2026-01-30",
+              "cost": 4535806.59
+            },
+            {
+              "date": "2026-02-02",
+              "cost": 3600000.0
+            },
+            {
+              "date": "2026-02-02",
+              "cost": 4535806.59
+            },
+            {
+              "date": "2026-02-10",
+              "cost": 400030.0
+            },
+            {
+              "date": "2026-07-07",
+              "cost": 100030.0
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "MANIG",
+          "name": "MAN GLG GLOBAL INVESTMENT GRADE OPPORTUNITIES FUND CLASS IVY",
+          "isin": "IE000OE87WX6",
+          "status": "OPEN",
+          "qty": 16621.485,
+          "mv_usd": 2072034.32,
+          "cost_basis_usd": 1993370.62,
+          "unrealized_gl_usd": 78663.7,
+          "return_pct": 3.95,
+          "bench_label": "AGG",
+          "bench_dw_pct": 2.71,
+          "alpha_real_pp": 1.24,
+          "ytd_pct": 1.79,
+          "bench_ytd_pct": -0.56,
+          "alpha_ytd_pp": 2.35,
+          "first_buy_date": "2025-07-07",
+          "n_trades": 10,
+          "buys_history": [
+            {
+              "date": "2025-07-07",
+              "cost": 1190030.0
+            },
+            {
+              "date": "2025-08-05",
+              "cost": 433030.0
+            },
+            {
+              "date": "2025-08-21",
+              "cost": 70030.0
+            },
+            {
+              "date": "2025-09-05",
+              "cost": 187030.0
+            },
+            {
+              "date": "2025-10-08",
+              "cost": 81030.0
+            },
+            {
+              "date": "2025-12-05",
+              "cost": 20030.0
+            },
+            {
+              "date": "2026-01-08",
+              "cost": 20030.0
+            },
+            {
+              "date": "2026-02-06",
+              "cost": 25030.0
+            },
+            {
+              "date": "2026-02-11",
+              "cost": 250030.0
+            },
+            {
+              "date": "2026-07-07",
+              "cost": 200030.0
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "PIMCO-EM",
+          "name": "PIMCO EMERGING LOCAL BOND FUND INSTITUTIONAL CLASS (ACC)(USD",
+          "isin": "IE00B29K0P99",
+          "status": "OPEN",
+          "qty": 61949.011,
+          "mv_usd": 1138622.82,
+          "cost_basis_usd": 1138060.0,
+          "unrealized_gl_usd": 562.82,
+          "return_pct": 0.05,
+          "bench_label": "AGG",
+          "bench_dw_pct": -0.81,
+          "alpha_real_pp": 0.86,
+          "ytd_pct": 2.34,
+          "bench_ytd_pct": -0.56,
+          "alpha_ytd_pp": 2.9,
+          "first_buy_date": "2026-01-30",
+          "n_trades": 2,
+          "buys_history": [
+            {
+              "date": "2026-01-30",
+              "cost": 1000030.0
+            },
+            {
+              "date": "2026-04-08",
+              "cost": 138030.0
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "TGF",
+          "name": "LFEEDER DAC EURO MEDIUM TERM NOTE ISIN#XS2324777171 VARIABL",
+          "isin": "XS2324777171",
+          "status": "OPEN",
+          "qty": 532000.0,
+          "mv_usd": 820429.12,
+          "cost_basis_usd": 764206.53,
+          "unrealized_gl_usd": 56222.59,
+          "return_pct": 7.36,
+          "bench_label": "AGG",
+          "bench_dw_pct": 2.71,
+          "alpha_real_pp": 4.65,
+          "ytd_pct": 3.53,
+          "bench_ytd_pct": -0.56,
+          "alpha_ytd_pp": 4.09,
+          "first_buy_date": "2025-07-16",
+          "n_trades": 2,
+          "buys_history": [
+            {
+              "date": "2025-07-16",
+              "cost": 510286.53
+            },
+            {
+              "date": "2025-08-20",
+              "cost": 253920.0
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "SGCB",
+          "name": "SCHRODER GAIA CAT BOND FUND CLASS C (USD)(ACC) ISIN LU204931",
+          "isin": "LU2049315265",
+          "status": "OPEN",
+          "qty": 269.44,
+          "mv_usd": 580513.87,
+          "cost_basis_usd": 570002.76,
+          "unrealized_gl_usd": 10511.11,
+          "return_pct": 1.84,
+          "bench_label": "AGG",
+          "bench_dw_pct": -1.17,
+          "alpha_real_pp": 3.01,
+          "ytd_pct": 3.62,
+          "bench_ytd_pct": -0.56,
+          "alpha_ytd_pp": 4.18,
+          "first_buy_date": "2026-04-13",
+          "n_trades": 2,
+          "buys_history": [
+            {
+              "date": "2026-04-13",
+              "cost": 519996.8
+            },
+            {
+              "date": "2026-07-13",
+              "cost": 50005.96
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "MANEM",
+          "name": "MAN EMERGING MARKETS CORPORATE CREDIT ALTERNATIVE FUND CLASS",
+          "isin": "IE00089T5MA6",
+          "status": "OPEN",
+          "qty": 176.056,
+          "mv_usd": 20281.65,
+          "cost_basis_usd": 20030.0,
+          "unrealized_gl_usd": 251.65,
+          "return_pct": 1.26,
+          "bench_label": "AGG",
+          "bench_dw_pct": -0.65,
+          "alpha_real_pp": 1.91,
+          "ytd_pct": 6.16,
+          "bench_ytd_pct": -0.56,
+          "alpha_ytd_pp": 6.72,
+          "first_buy_date": "2026-05-13",
+          "n_trades": 1,
+          "buys_history": [
+            {
+              "date": "2026-05-13",
+              "cost": 20030.0
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        }
+      ]
+    },
+    "alternatives": {
+      "bench_label": "ACWI",
+      "n_open": 8,
+      "holdings": [
+        {
+          "ticker": "CALP",
+          "name": "Carlyle AlpInvest PM Sub-Fund - I - Class B1",
+          "isin": "LU2827810776",
+          "status": "OPEN",
+          "qty": 186706.497,
+          "mv_usd": 2766990.29,
+          "cost_basis_usd": 2500000.0,
+          "unrealized_gl_usd": 266990.29,
+          "return_pct": 10.68,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 19.03,
+          "alpha_real_pp": -8.35,
+          "ytd_pct": 5.03,
+          "bench_ytd_pct": 11.28,
+          "alpha_ytd_pp": -6.25,
+          "first_buy_date": "2025-08-29",
+          "buys_history": [
+            {
+              "date": "2025-08-29",
+              "cost": 2500000.0
+            }
+          ],
+          "_mv_source": "external_statement",
+          "_source_note": "Carlyle AlpInvest Statement Junio 2026 (Pro Capital, TVS_P122202_2026-06-30)",
+          "_as_of": "2026-06-30"
+        },
+        {
+          "ticker": "HLGPI",
+          "name": "HAMILTON LANE GLOBAL PRIVATE INFRASTRUCTURE FUND CLASS I (AC",
+          "isin": "LU2847068389",
+          "status": "OPEN",
+          "qty": 8058.402,
+          "mv_usd": 1124101.95,
+          "cost_basis_usd": 1100000.13,
+          "unrealized_gl_usd": 24101.82,
+          "return_pct": 2.19,
+          "bench_label": "ACWI",
+          "bench_dw_pct": -0.12,
+          "alpha_real_pp": 2.31,
+          "ytd_pct": 2.19,
+          "bench_ytd_pct": 11.28,
+          "alpha_ytd_pp": -9.09,
+          "first_buy_date": "2026-05-27",
+          "n_trades": 2,
+          "buys_history": [
+            {
+              "date": "2026-05-27",
+              "cost": 500000.17
+            },
+            {
+              "date": "2026-06-17",
+              "cost": 600000.0
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "IBIT",
+          "name": "ISHARES BITCOIN TR ETF SHS BEN INT",
+          "isin": "US46438F1012",
+          "status": "OPEN",
+          "qty": 23356.0,
+          "mv_usd": 832407.84,
+          "cost_basis_usd": 1217362.0,
+          "unrealized_gl_usd": -384954.16,
+          "return_pct": -31.62,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 22.21,
+          "alpha_real_pp": -53.83,
+          "ytd_pct": -26.08,
+          "bench_ytd_pct": 11.28,
+          "alpha_ytd_pp": -37.36,
+          "first_buy_date": "2025-07-02",
+          "n_trades": 11,
+          "buys_history": [
+            {
+              "date": "2025-07-02",
+              "cost": 514745.37
+            },
+            {
+              "date": "2025-07-30",
+              "cost": 142380.86
+            },
+            {
+              "date": "2025-08-18",
+              "cost": 49017.9
+            },
+            {
+              "date": "2025-09-03",
+              "cost": 116577.4
+            },
+            {
+              "date": "2025-11-14",
+              "cost": 120145.74
+            },
+            {
+              "date": "2025-11-20",
+              "cost": 64720.87
+            },
+            {
+              "date": "2025-12-02",
+              "cost": 214290.05
+            },
+            {
+              "date": "2026-02-03",
+              "cost": 118639.86
+            },
+            {
+              "date": "2026-02-06",
+              "cost": 72086.2
+            },
+            {
+              "date": "2026-06-03",
+              "cost": 33660.77
+            },
+            {
+              "date": "2026-07-06",
+              "cost": 78698.6
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "GLD",
+          "name": "SPDR GOLD TR GOLD SHS",
+          "isin": "US78463V1070",
+          "status": "OPEN",
+          "qty": 2189.0,
+          "mv_usd": 813301.06,
+          "cost_basis_usd": 694741.73,
+          "unrealized_gl_usd": 118559.33,
+          "return_pct": 17.07,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 22.21,
+          "alpha_real_pp": -5.14,
+          "ytd_pct": -4.83,
+          "bench_ytd_pct": 11.28,
+          "alpha_ytd_pp": -16.11,
+          "first_buy_date": "2025-07-02",
+          "n_trades": 6,
+          "buys_history": [
+            {
+              "date": "2025-07-02",
+              "cost": 850907.91
+            },
+            {
+              "date": "2025-07-30",
+              "cost": 325195.64
+            },
+            {
+              "date": "2025-08-18",
+              "cost": 50042.88
+            },
+            {
+              "date": "2025-09-03",
+              "cost": 65167.4
+            },
+            {
+              "date": "2025-12-02",
+              "cost": 15175.39
+            },
+            {
+              "date": "2026-07-02",
+              "cost": 99909.75
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "HLEND",
+          "name": "ICAPITAL HPS CORPORATE LENDING OFFSHORE ACCESS FUND SP1",
+          "isin": null,
+          "status": "OPEN",
+          "qty": 759172.36,
+          "mv_usd": 759172.36,
+          "cost_basis_usd": 735050.0,
+          "unrealized_gl_usd": 24122.36,
+          "return_pct": 3.28,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 14.75,
+          "alpha_real_pp": -11.47,
+          "ytd_pct": 2.49,
+          "bench_ytd_pct": 11.28,
+          "alpha_ytd_pp": -8.79,
+          "first_buy_date": "2025-09-22",
+          "n_trades": 1,
+          "buys_history": [
+            {
+              "date": "2025-09-22",
+              "cost": 735050.0
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "BPCC",
+          "name": "PM ALPHA DAC BARINGS BPCC ETN I ACC MEDIUM TERM NOTES VARIAB",
+          "isin": "XS2658535526",
+          "status": "OPEN",
+          "qty": 464209.0,
+          "mv_usd": 600407.92,
+          "cost_basis_usd": 554506.45,
+          "unrealized_gl_usd": 45901.47,
+          "return_pct": 8.28,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 22.21,
+          "alpha_real_pp": -13.93,
+          "ytd_pct": 3.07,
+          "bench_ytd_pct": 11.28,
+          "alpha_ytd_pp": -8.21,
+          "first_buy_date": "2025-07-25",
+          "n_trades": 4,
+          "buys_history": [
+            {
+              "date": "2025-07-25",
+              "cost": 340000.24
+            },
+            {
+              "date": "2025-07-25",
+              "cost": 114359.75
+            },
+            {
+              "date": "2025-09-19",
+              "cost": 50116.1
+            },
+            {
+              "date": "2025-10-24",
+              "cost": 50030.36
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "FLEX",
+          "name": "FRANKLIN LEXINGTON PE SECONDARIES FUND CLASS I (ACC)(USD) IS",
+          "isin": "LU2966298809",
+          "status": "OPEN",
+          "qty": 16414.97,
+          "mv_usd": 515922.51,
+          "cost_basis_usd": 499999.99,
+          "unrealized_gl_usd": 15922.52,
+          "return_pct": 3.18,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 2.28,
+          "alpha_real_pp": 0.9,
+          "ytd_pct": 3.18,
+          "bench_ytd_pct": 11.28,
+          "alpha_ytd_pp": -8.1,
+          "first_buy_date": "2026-05-07",
+          "n_trades": 1,
+          "buys_history": [
+            {
+              "date": "2026-05-07",
+              "cost": 499999.99
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        },
+        {
+          "ticker": "GCRED",
+          "name": "GOLUB CAPITAL PRIVATE CREDIT ICAPITAL OFFSHORE ACCESS FUND S",
+          "isin": null,
+          "status": "OPEN",
+          "qty": 500276.97,
+          "mv_usd": 500276.97,
+          "cost_basis_usd": 490050.0,
+          "unrealized_gl_usd": 10226.97,
+          "return_pct": 2.09,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 14.75,
+          "alpha_real_pp": -12.66,
+          "ytd_pct": 1.12,
+          "bench_ytd_pct": 11.28,
+          "alpha_ytd_pp": -10.16,
+          "first_buy_date": "2025-09-22",
+          "n_trades": 1,
+          "buys_history": [
+            {
+              "date": "2025-09-22",
+              "cost": 490050.0
+            }
+          ],
+          "_mv_source": "pershing_ugl"
+        }
+      ]
+    }
+  }
+}
