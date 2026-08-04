@@ -390,6 +390,14 @@ def login_flow(page, verbose=True):
         return False
     print(f"  Password ingresado en {sel_pass}")
 
+    # Esperar a que Angular procese el input de password (change detection +
+    # habilitacion del boton) antes de buscarlo. Fix 2026-08-04: sin esta espera,
+    # find_button_in_scope() a veces no encontraba el boton "Login" (visible
+    # segun un diagnostico con la misma pagina 1s despues) -- race condition
+    # contra el render de Angular, causa raiz de que NetX360 dejara de
+    # descargar en silencio desde el 2026-07-27 (continue-on-error en el cron).
+    page.wait_for_timeout(1500)
+
     # Antes de intentar el botón, guardamos el HTML del form para debug offline
     try:
         html_dump = page.content()
