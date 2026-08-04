@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-08-03T13:50:14.142240",
+  "refreshedAt": "2026-08-04T13:11:44.133588",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -634,7 +634,7 @@
       ]
     },
     {
-      "date": "2026-08-03",
+      "date": "2026-08-04",
       "mv_usd": 10966694.242279999,
       "holdings": [
         {
@@ -3626,9 +3626,17 @@
     },
     {
       "date": "2026-08-03",
+      "index": 105.3135,
+      "interpolated": true,
+      "mv_usd": 10966044.8469,
+      "flow_in": 83349.3267,
+      "twr": -0.0002
+    },
+    {
+      "date": "2026-08-04",
       "mv_usd": 10966694.242279999,
       "flow_in": 0.0,
-      "twr": 0.0003554176886415382,
+      "twr": 0.00011844449985803834,
       "index": 105.3198
     }
   ],
@@ -5527,8 +5535,14 @@
     },
     {
       "date": "2026-08-03",
-      "price": 92.41,
-      "index": 102.5803
+      "index": 102.547,
+      "interpolated": true,
+      "price": 92.38
+    },
+    {
+      "date": "2026-08-04",
+      "price": 92.4,
+      "index": 102.5692
     }
   ],
   "fi_flows_by_month": {
@@ -5718,7 +5732,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-08-03 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-08-01.",
+  "_daily_refresh_note": "Punto 2026-08-04 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-08-03.",
   "_bench_fix_note": "2026-06-23: agg_index_series reconstruida con IUAG.L (UCITS Acc, total return). Antes era AGG NYSE price-only sin reinvertir dividendos, daba YTD -5.78% falso.",
   "_rebuild_note": "Reconstruccion completa 2026-07-31: reemplaza integramente el pipeline legacy (portfolio_reconstructor.py / sleeve_series desincronizado). Los 12 checkpoints mensuales estan verificados al centavo contra los statements oficiales de Pershing. Flujos calculados como -sum(Net Amount) de las transacciones reales del sleeve en cada periodo (auto-neutraliza fund exchanges internos). Excepcion: 3 transacciones de ene-2026 (venta WELLCRED + compras PIMCO-INC/PIMCO-EM) reclasificadas a feb-2026 tras verificar contra el statement oficial de febrero que asi procesaron realmente (Pershing las emitio como Cancel/Correct). Periodo oct-dic-2025 combinado en un solo calculo por el retiro grande de capital que distorsionaba el corte de fin de mes.",
   "twr_series_original": [
@@ -8641,10 +8655,26 @@
       "_note": "Modified Dietz jun30->jul31 (anchor jun-30 = reconstruccion completa Pershing; mv_usd 31-jul y buys_history de julio via pipeline V2 diario)."
     },
     {
-      "date": "2026-08-03",
+      "date": "2026-08-01",
+      "index": 105.2949,
+      "interpolated": true,
+      "mv_usd": 10964096.6608,
+      "flow_in": 333397.3067,
+      "twr": -0.0013
+    },
+    {
+      "date": "2026-08-02",
+      "index": 105.3073,
+      "interpolated": true,
+      "mv_usd": 10965395.4515,
+      "flow_in": 166698.6533,
+      "twr": -0.0005
+    },
+    {
+      "date": "2026-08-04",
       "mv_usd": 10966694.242279999,
       "flow_in": 0.0,
-      "twr": 0.0003554176886415382,
+      "twr": 0.00011844449985803834,
       "index": 105.3198
     }
   ],
@@ -10530,9 +10560,21 @@
       "index": 102.4138
     },
     {
-      "date": "2026-08-03",
-      "price": 92.41,
-      "index": 102.5803
+      "date": "2026-08-01",
+      "index": 102.4693,
+      "interpolated": true,
+      "price": 92.31
+    },
+    {
+      "date": "2026-08-02",
+      "index": 102.5248,
+      "interpolated": true,
+      "price": 92.36
+    },
+    {
+      "date": "2026-08-04",
+      "price": 92.4,
+      "index": 102.5692
     }
   ]
 }
