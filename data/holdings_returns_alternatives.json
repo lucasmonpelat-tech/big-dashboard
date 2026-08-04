@@ -1,8 +1,8 @@
 {
-  "refreshedAt": "2026-08-03T13:50:15.270750",
+  "refreshedAt": "2026-08-04T09:34:08.326067",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Alternatives",
-  "period_end": "2026-08-03",
+  "period_end": "2026-08-04",
   "n_open": 7,
   "n_closed": 2,
   "holdings": [
@@ -18,14 +18,14 @@
       "return_pct": 2.19,
       "last_price_pershing": 139.4944,
       "bench_label": "ACWI",
-      "bench_dw_pct": 0.41,
-      "alpha_real_pp": 1.78,
+      "bench_dw_pct": 0.89,
+      "alpha_real_pp": 1.3,
       "ytd_pct": 2.19,
-      "bench_ytd_pct": 11.28,
-      "alpha_ytd_pp": -9.09,
+      "bench_ytd_pct": 12.35,
+      "alpha_ytd_pp": -10.16,
       "first_buy_date": "2026-05-27",
-      "period_end": "2026-08-03",
-      "n_trades": 2,
+      "period_end": "2026-08-04",
+      "n_trades": 3,
       "buys_history": [
         {
           "date": "2026-05-27",
@@ -34,6 +34,10 @@
         {
           "date": "2026-06-17",
           "cost": 600000.0
+        },
+        {
+          "date": "2026-08-04",
+          "cost": 300000.0
         }
       ]
     },
@@ -43,19 +47,19 @@
       "status": "OPEN",
       "name": "ISHARES BITCOIN TR ETF SHS BEN INT     ",
       "qty": 23356.0,
-      "mv_usd": 832407.84,
+      "mv_usd": 844552.96,
       "cost_basis_usd": 1217362.0,
-      "unrealized_gl_usd": -384954.16,
-      "return_pct": -31.62,
-      "last_price_pershing": 35.64,
+      "unrealized_gl_usd": -372809.04,
+      "return_pct": -30.62,
+      "last_price_pershing": 36.16,
       "bench_label": "ACWI",
-      "bench_dw_pct": 16.67,
-      "alpha_real_pp": -48.29,
+      "bench_dw_pct": 17.5,
+      "alpha_real_pp": -48.12,
       "ytd_pct": -28.22,
-      "bench_ytd_pct": 11.28,
-      "alpha_ytd_pp": -39.5,
+      "bench_ytd_pct": 12.35,
+      "alpha_ytd_pp": -40.57,
       "first_buy_date": "2025-07-02",
-      "period_end": "2026-08-03",
+      "period_end": "2026-08-04",
       "n_trades": 11,
       "buys_history": [
         {
@@ -110,19 +114,19 @@
       "status": "OPEN",
       "name": "SPDR GOLD TR GOLD SHS     ",
       "qty": 2189.0,
-      "mv_usd": 813301.06,
+      "mv_usd": 813673.19,
       "cost_basis_usd": 694741.73,
-      "unrealized_gl_usd": 118559.33,
-      "return_pct": 17.07,
-      "last_price_pershing": 371.54,
+      "unrealized_gl_usd": 118931.46,
+      "return_pct": 17.12,
+      "last_price_pershing": 371.71,
       "bench_label": "ACWI",
-      "bench_dw_pct": 20.98,
-      "alpha_real_pp": -3.91,
+      "bench_dw_pct": 21.85,
+      "alpha_real_pp": -4.73,
       "ytd_pct": -6.25,
-      "bench_ytd_pct": 11.28,
-      "alpha_ytd_pp": -17.53,
+      "bench_ytd_pct": 12.35,
+      "alpha_ytd_pp": -18.6,
       "first_buy_date": "2025-07-02",
-      "period_end": "2026-08-03",
+      "period_end": "2026-08-04",
       "n_trades": 6,
       "buys_history": [
         {
@@ -163,13 +167,13 @@
       "return_pct": 3.28,
       "last_price_pershing": 1.0,
       "bench_label": "ACWI",
-      "bench_dw_pct": 15.04,
-      "alpha_real_pp": -11.76,
+      "bench_dw_pct": 15.86,
+      "alpha_real_pp": -12.58,
       "ytd_pct": 2.49,
-      "bench_ytd_pct": 11.28,
-      "alpha_ytd_pp": -8.79,
+      "bench_ytd_pct": 12.35,
+      "alpha_ytd_pp": -9.86,
       "first_buy_date": "2025-09-22",
-      "period_end": "2026-08-03",
+      "period_end": "2026-08-04",
       "n_trades": 1,
       "buys_history": [
         {
@@ -190,13 +194,13 @@
       "return_pct": 8.28,
       "last_price_pershing": 129.34,
       "bench_label": "ACWI",
-      "bench_dw_pct": 19.57,
-      "alpha_real_pp": -11.29,
+      "bench_dw_pct": 20.43,
+      "alpha_real_pp": -12.15,
       "ytd_pct": 3.07,
-      "bench_ytd_pct": 11.28,
-      "alpha_ytd_pp": -8.21,
+      "bench_ytd_pct": 12.35,
+      "alpha_ytd_pp": -9.28,
       "first_buy_date": "2025-07-25",
-      "period_end": "2026-08-03",
+      "period_end": "2026-08-04",
       "n_trades": 4,
       "buys_history": [
         {
@@ -229,18 +233,22 @@
       "return_pct": 3.18,
       "last_price_pershing": 31.43,
       "bench_label": "ACWI",
-      "bench_dw_pct": 2.54,
-      "alpha_real_pp": 0.64,
+      "bench_dw_pct": 2.6,
+      "alpha_real_pp": 0.58,
       "ytd_pct": 3.18,
-      "bench_ytd_pct": 11.28,
-      "alpha_ytd_pp": -8.1,
+      "bench_ytd_pct": 12.35,
+      "alpha_ytd_pp": -9.17,
       "first_buy_date": "2026-05-07",
-      "period_end": "2026-08-03",
-      "n_trades": 1,
+      "period_end": "2026-08-04",
+      "n_trades": 2,
       "buys_history": [
         {
           "date": "2026-05-07",
           "cost": 499999.99
+        },
+        {
+          "date": "2026-08-04",
+          "cost": 130000.0
         }
       ]
     },
@@ -256,13 +264,13 @@
       "return_pct": 2.09,
       "last_price_pershing": 1.0,
       "bench_label": "ACWI",
-      "bench_dw_pct": 15.04,
-      "alpha_real_pp": -12.95,
+      "bench_dw_pct": 15.86,
+      "alpha_real_pp": -13.77,
       "ytd_pct": 1.12,
-      "bench_ytd_pct": 11.28,
-      "alpha_ytd_pp": -10.16,
+      "bench_ytd_pct": 12.35,
+      "alpha_ytd_pp": -11.23,
       "first_buy_date": "2025-09-22",
-      "period_end": "2026-08-03",
+      "period_end": "2026-08-04",
       "n_trades": 1,
       "buys_history": [
         {
@@ -280,7 +288,7 @@
       "proceeds_usd": 276919.5,
       "realized_gl_usd": 84679.61,
       "realized_gl_pct": 44.05,
-      "first_buy_date": "2026-07-02",
+      "first_buy_date": "Multiple",
       "last_sell_date": "Multiple",
       "n_lots": 1
     },
@@ -297,6 +305,5 @@
       "last_sell_date": "04/30/2026",
       "n_lots": 1
     }
-  ],
-  "_daily_refresh_note": "Daily refresh 2026-08-03: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump."
+  ]
 }

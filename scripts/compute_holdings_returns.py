@@ -31,6 +31,7 @@ Usage:
 import argparse
 import json
 import math
+import re
 from datetime import date, datetime, timedelta
 from pathlib import Path
 
@@ -193,12 +194,53 @@ def load_rgl_closed(rgl_path):
     return out
 
 
+# Fix 2026-08-04: netx360_auto.py (descarga automatica del cron, reporte
+# "Duration: 1 Month") NO trae columna 'Buy/Sell' ni 'Quantity'/'Price'
+# separadas -- viene todo embebido como texto en 'Transaction Type', ej:
+# "Buy 2150.62400 share(s) of L4680C117 at 139.4944" (a veces sin "share(s)",
+# ej SGCB: "Buy 23.29000 of L8147L735 at 2147.1000"). Esto es DISTINTO del
+# export manual "Last 2 Years" de Lucas (44 columnas, con Buy/Sell/Quantity/
+# Price separados) que este script se escribio originalmente para leer.
+# Se detecta el formato por la presencia de la columna 'Buy/Sell' y se
+# parsea con regex si no esta. No se encontro "PENDING CONFIRM" en ninguna
+# fila de este formato en pruebas (1 mes de datos) -- puede ser que este
+# reporte solo muestre transacciones ya confirmadas; se deja el check por
+# si acaso aparece en 'Transaction Type' en el futuro.
+_TX_TYPE_RE = re.compile(
+    r'^(Buy|Sell)\s+([\d.]+)\s+(?:share\(s\)\s+)?of\s+(\S+)\s+at\s+([\d.]+)',
+    re.IGNORECASE,
+)
+
+
+def _parse_compact_tx_type(tx_type):
+    m = _TX_TYPE_RE.match(str(tx_type).strip())
+    if not m:
+        return None
+    side_raw, qty, sec_id, price = m.groups()
+    return {
+        'side': 'BUY' if side_raw.upper() == 'BUY' else 'SELL',
+        'qty': float(qty),
+        'security_id': sec_id,
+        'price': float(price),
+    }
+
+
 def load_transactions(tx_path):
     """Lee transactions y agrupa por ticker.
 
     Returns: dict {my_ticker: list of {date, qty, price, cost (abs), side}}
     """
     tx = pd.read_excel(tx_path, header=10)
+    compact_format = 'Buy/Sell' not in tx.columns
+
+    if compact_format:
+        parsed = tx['Transaction Type'].apply(_parse_compact_tx_type)
+        tx = tx[parsed.notna()].copy()
+        tx['Security Identifier'] = [p['security_id'] for p in parsed[parsed.notna()]]
+        tx['Buy/Sell'] = [p['side'] for p in parsed[parsed.notna()]]
+        tx['Quantity'] = [p['qty'] for p in parsed[parsed.notna()]]
+        tx['Price (Transaction Currency)'] = [p['price'] for p in parsed[parsed.notna()]]
+
     tx_trades = tx[tx['Buy/Sell'].isin(['BUY', 'SELL'])].copy()
 
     out = {}
@@ -213,7 +255,7 @@ def load_transactions(tx_path):
         # (ej: HLGPI/FLEX mostraban 3 "compras" identicas de $300K/$130K en
         # 3 dias seguidos). Se ignora hasta que aparezca el trade real
         # confirmado (misma fila sin "PENDING CONFIRM" en la descripcion).
-        tx_desc = str(row.get('Transaction Description') or '').upper()
+        tx_desc = str(row.get('Transaction Description') or row.get('Transaction Type') or '').upper()
         if 'PENDING CONFIRM' in tx_desc:
             continue
         date_raw = row.get('Process Date') or row.get('Trade Date')
