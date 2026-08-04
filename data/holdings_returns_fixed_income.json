@@ -1,8 +1,8 @@
 {
-  "refreshedAt": "2026-08-03T13:50:15.270049",
+  "refreshedAt": "2026-08-04T13:11:45.262349",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Fixed Income",
-  "period_end": "2026-08-03",
+  "period_end": "2026-08-04",
   "n_open": 7,
   "n_closed": 3,
   "holdings": [
@@ -18,13 +18,13 @@
       "return_pct": 0.03,
       "last_price_pershing": 20.04,
       "bench_label": "AGG",
-      "bench_dw_pct": -0.7,
-      "alpha_real_pp": 0.73,
+      "bench_dw_pct": -0.71,
+      "alpha_real_pp": 0.74,
       "ytd_pct": 0.15,
       "bench_ytd_pct": -1.05,
       "alpha_ytd_pp": 1.2,
       "first_buy_date": "2026-07-07",
-      "period_end": "2026-08-03",
+      "period_end": "2026-08-04",
       "n_trades": 1,
       "buys_history": [
         {
@@ -45,13 +45,13 @@
       "return_pct": 0.87,
       "last_price_pershing": 14.0,
       "bench_label": "AGG",
-      "bench_dw_pct": -0.53,
-      "alpha_real_pp": 1.4,
+      "bench_dw_pct": -0.54,
+      "alpha_real_pp": 1.41,
       "ytd_pct": 1.45,
       "bench_ytd_pct": -1.05,
       "alpha_ytd_pp": 2.5,
       "first_buy_date": "2026-01-30",
-      "period_end": "2026-08-03",
+      "period_end": "2026-08-04",
       "n_trades": 5,
       "buys_history": [
         {
@@ -88,13 +88,13 @@
       "return_pct": 3.95,
       "last_price_pershing": 124.66,
       "bench_label": "AGG",
-      "bench_dw_pct": 1.81,
-      "alpha_real_pp": 2.14,
+      "bench_dw_pct": 1.8,
+      "alpha_real_pp": 2.15,
       "ytd_pct": 1.67,
       "bench_ytd_pct": -1.05,
       "alpha_ytd_pp": 2.72,
       "first_buy_date": "2025-07-07",
-      "period_end": "2026-08-03",
+      "period_end": "2026-08-04",
       "n_trades": 10,
       "buys_history": [
         {
@@ -151,13 +151,13 @@
       "return_pct": 0.05,
       "last_price_pershing": 18.38,
       "bench_label": "AGG",
-      "bench_dw_pct": -0.66,
-      "alpha_real_pp": 0.71,
+      "bench_dw_pct": -0.67,
+      "alpha_real_pp": 0.72,
       "ytd_pct": 2.45,
       "bench_ytd_pct": -1.05,
       "alpha_ytd_pp": 3.5,
       "first_buy_date": "2026-01-30",
-      "period_end": "2026-08-03",
+      "period_end": "2026-08-04",
       "n_trades": 2,
       "buys_history": [
         {
@@ -182,13 +182,13 @@
       "return_pct": 7.36,
       "last_price_pershing": 154.216,
       "bench_label": "AGG",
-      "bench_dw_pct": 3.12,
-      "alpha_real_pp": 4.24,
+      "bench_dw_pct": 3.11,
+      "alpha_real_pp": 4.25,
       "ytd_pct": 3.53,
       "bench_ytd_pct": -1.05,
       "alpha_ytd_pp": 4.58,
       "first_buy_date": "2025-07-16",
-      "period_end": "2026-08-03",
+      "period_end": "2026-08-04",
       "n_trades": 2,
       "buys_history": [
         {
@@ -213,13 +213,13 @@
       "return_pct": 1.84,
       "last_price_pershing": 2154.52,
       "bench_label": "AGG",
-      "bench_dw_pct": -0.56,
-      "alpha_real_pp": 2.4,
+      "bench_dw_pct": -0.57,
+      "alpha_real_pp": 2.41,
       "ytd_pct": 3.62,
       "bench_ytd_pct": -1.05,
       "alpha_ytd_pp": 4.67,
       "first_buy_date": "2026-04-13",
-      "period_end": "2026-08-03",
+      "period_end": "2026-08-04",
       "n_trades": 2,
       "buys_history": [
         {
@@ -244,13 +244,13 @@
       "return_pct": 1.26,
       "last_price_pershing": 115.2,
       "bench_label": "AGG",
-      "bench_dw_pct": -0.2,
-      "alpha_real_pp": 1.46,
+      "bench_dw_pct": -0.21,
+      "alpha_real_pp": 1.47,
       "ytd_pct": 6.14,
       "bench_ytd_pct": -1.05,
       "alpha_ytd_pp": 7.19,
       "first_buy_date": "2026-05-13",
-      "period_end": "2026-08-03",
+      "period_end": "2026-08-04",
       "n_trades": 1,
       "buys_history": [
         {
@@ -299,5 +299,5 @@
       "n_lots": 1
     }
   ],
-  "_daily_refresh_note": "Daily refresh 2026-08-03: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump."
+  "_daily_refresh_note": "Daily refresh 2026-08-04: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump."
 }
