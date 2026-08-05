@@ -1,48 +1,48 @@
 {
   "_description": "NAV T-1 (aprox) de cada UCITS/ETF-DE del equity sleeve, desde el precio oficial de Pershing (custodio) via NetX360. Reemplaza el scrape de baha.com (nunca funciono en CI, ver git history pre-2026-07-28).",
-  "refreshedAt": "2026-08-04T13:09:20.856633",
-  "source": "Pershing/NetX360 via canonical/2026-08-03/positions.json (sync_ucits_nav_from_pershing.py)",
-  "snapshot_date": "2026-08-03",
+  "refreshedAt": "2026-08-05T13:02:02.958255",
+  "source": "Pershing/NetX360 via canonical/2026-08-04/positions.json (sync_ucits_nav_from_pershing.py)",
+  "snapshot_date": "2026-08-04",
   "navs": {
     "IE00BFMHRK20": {
       "ticker": "NBGMT",
-      "nav": 24.84,
+      "nav": 24.95,
       "currency": "USD",
       "baha_fund_id": null,
       "name": "NB Global Equity Megatrends I USD",
-      "price_date": "2026-07-30",
+      "price_date": "2026-07-31",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-08-04T13:09:20.856496"
+      "scrapedAt": "2026-08-05T13:02:02.958103"
     },
     "LU1985812756": {
       "ticker": "MFSCV",
-      "nav": 317.66,
+      "nav": 318.4,
       "currency": "USD",
       "baha_fund_id": null,
       "name": "MFS Meridian Contrarian Value I1 USD",
-      "price_date": "2026-07-30",
+      "price_date": "2026-08-03",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-08-04T13:09:20.856525"
+      "scrapedAt": "2026-08-05T13:02:02.958152"
     },
     "LU2940405447": {
       "ticker": "JHGSC",
-      "nav": 55.04,
+      "nav": 55.35,
       "currency": "USD",
       "baha_fund_id": null,
       "name": "Janus Henderson Horizon Global Smaller Cos F2 USD",
-      "price_date": "2026-07-31",
+      "price_date": "2026-08-03",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-08-04T13:09:20.856536"
+      "scrapedAt": "2026-08-05T13:02:02.958163"
     },
     "IE00BF4KN675": {
       "ticker": "LGLI",
-      "nav": 19.7293,
+      "nav": 19.6809,
       "currency": "USD",
       "baha_fund_id": null,
       "name": "Lazard Global Listed Infrastructure A Acc USD",
-      "price_date": "2026-07-30",
+      "price_date": "2026-07-31",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-08-04T13:09:20.856544"
+      "scrapedAt": "2026-08-05T13:02:02.958169"
     },
     "IE00B6YCBF59": {
       "ticker": "THOR",
@@ -52,47 +52,47 @@
       "name": "Thornburg Equity Income Builder I Acc USD",
       "price_date": "2026-07-30",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-08-04T13:09:20.856551"
+      "scrapedAt": "2026-08-05T13:02:02.958177"
     },
     "DE000A0Q4R85": {
       "ticker": "4BRZ",
-      "nav": 51.84,
+      "nav": 51.5742,
       "currency": "USD",
       "baha_fund_id": null,
       "name": "iShares MSCI Brazil UCITS (DE)",
-      "price_date": "2026-07-31",
+      "price_date": "2026-08-03",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-08-04T13:09:20.856558"
+      "scrapedAt": "2026-08-05T13:02:02.958184"
     },
     "IE00B5BMR087": {
       "ticker": "CSPX",
-      "nav": 800.53,
+      "nav": 815.92,
       "currency": "USD",
       "baha_fund_id": null,
       "name": "iShares Core S&P 500 UCITS ETF",
-      "price_date": "2026-07-31",
+      "price_date": "2026-08-03",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-08-04T13:09:20.856564"
+      "scrapedAt": "2026-08-05T13:02:02.958189"
     },
     "US37950E2596": {
       "ticker": "ARGT",
-      "nav": 94.915,
+      "nav": 95.16,
       "currency": "USD",
       "baha_fund_id": null,
       "name": "Global X MSCI Argentina ETF",
       "price_date": "2026-08-03",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-08-04T13:09:20.856570"
+      "scrapedAt": "2026-08-05T13:02:02.958194"
     },
     "US4642873909": {
       "ticker": "ILF",
-      "nav": 35.12,
+      "nav": 35.16,
       "currency": "USD",
       "baha_fund_id": null,
       "name": "iShares Latin America 40 ETF",
       "price_date": "2026-08-03",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-08-04T13:09:20.856574"
+      "scrapedAt": "2026-08-05T13:02:02.958199"
     },
     "IE000OE87WX6": {
       "ticker": "MANIG",
@@ -102,47 +102,47 @@
       "name": "Man GLG Global Investment Grade Opportunities IVY USD",
       "price_date": "2026-07-30",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-08-04T13:09:20.856578"
+      "scrapedAt": "2026-08-05T13:02:02.958203"
     },
     "IE00B87KCF77": {
       "ticker": "PIMCO-INC",
-      "nav": 20.04,
+      "nav": 20.13,
       "currency": "USD",
       "baha_fund_id": null,
       "name": "PIMCO GIS Income Fund Inst Acc USD",
-      "price_date": "2026-07-31",
+      "price_date": "2026-08-03",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-08-04T13:09:20.856584"
+      "scrapedAt": "2026-08-05T13:02:02.958210"
     },
     "IE00BDT57R20": {
       "ticker": "PIMCO-LD",
-      "nav": 14.0,
+      "nav": 14.04,
       "currency": "USD",
       "baha_fund_id": null,
       "name": "PIMCO GIS Low Duration Income Inst Acc USD",
-      "price_date": "2026-07-31",
+      "price_date": "2026-08-03",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-08-04T13:09:20.856590"
+      "scrapedAt": "2026-08-05T13:02:02.958216"
     },
     "IE00B29K0P99": {
       "ticker": "PIMCO-EM",
-      "nav": 18.38,
+      "nav": 18.43,
       "currency": "USD",
       "baha_fund_id": null,
       "name": "PIMCO GIS Emerging Local Bond Inst Acc USD",
-      "price_date": "2026-07-31",
+      "price_date": "2026-08-03",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-08-04T13:09:20.856596"
+      "scrapedAt": "2026-08-05T13:02:02.958220"
     },
     "LU2049315265": {
       "ticker": "SGCB",
-      "nav": 2154.52,
+      "nav": 2160.28,
       "currency": "USD",
       "baha_fund_id": null,
       "name": "Schroder GAIA Cat Bond C Acc USD",
-      "price_date": "2026-07-24",
+      "price_date": "2026-07-31",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-08-04T13:09:20.856601"
+      "scrapedAt": "2026-08-05T13:02:02.958225"
     },
     "IE00089T5MA6": {
       "ticker": "MANEM",
@@ -152,27 +152,27 @@
       "name": "Man EM Corporate Credit Alternative IV USD",
       "price_date": "2026-07-30",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-08-04T13:09:20.856612"
+      "scrapedAt": "2026-08-05T13:02:02.958236"
     },
     "US46438F1012": {
       "ticker": "IBIT",
-      "nav": 35.47,
+      "nav": 36.16,
       "currency": "USD",
       "baha_fund_id": null,
       "name": "iShares Bitcoin Trust",
       "price_date": "2026-08-03",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-08-04T13:09:20.856622"
+      "scrapedAt": "2026-08-05T13:02:02.958243"
     },
     "US78463V1070": {
       "ticker": "GLD",
-      "nav": 369.69,
+      "nav": 371.71,
       "currency": "USD",
       "baha_fund_id": null,
       "name": "SPDR Gold Trust",
       "price_date": "2026-08-03",
       "source": "pershing_netx360",
-      "scrapedAt": "2026-08-04T13:09:20.856629"
+      "scrapedAt": "2026-08-05T13:02:02.958250"
     }
   }
 }
