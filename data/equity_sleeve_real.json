@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-08-06T13:06:08.872289",
+  "refreshedAt": "2026-08-07T11:56:28.423017",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -923,84 +923,84 @@
       ]
     },
     {
-      "date": "2026-08-06",
-      "mv_usd": 8902192.52188525,
+      "date": "2026-08-07",
+      "mv_usd": 8975868.537867282,
       "holdings": [
-        {
-          "ticker": "MAGS",
-          "qty": 4025.0,
-          "price": 68.41999816894531,
-          "mv": 275390.4926300049,
-          "source": "daily_close"
-        },
         {
           "ticker": "THOR",
           "qty": 14410.584,
-          "price": 44.47,
-          "mv": 640838.67048,
+          "price": 44.65,
+          "mv": 643432.5756,
           "source": "daily_close"
         },
         {
           "ticker": "4BRZ",
           "qty": 6979.0,
-          "price": 51.57,
-          "mv": 359907.03,
+          "price": 51.52,
+          "mv": 359558.08,
           "source": "daily_close"
         },
         {
           "ticker": "LGLI",
           "qty": 26511.134,
-          "price": 19.6998,
-          "mv": 522264.03757319995,
+          "price": 19.7817,
+          "mv": 524435.2994478,
           "source": "daily_close"
         },
         {
           "ticker": "ILF",
           "qty": 10000.0,
-          "price": 35.08,
-          "mv": 350800.0,
+          "price": 35.09,
+          "mv": 350900.00000000006,
           "source": "daily_close"
         },
         {
           "ticker": "HEWJ",
           "qty": 3125.0,
-          "price": 63.58000183105469,
-          "mv": 198687.5057220459,
+          "price": 63.97999954223633,
+          "mv": 199937.49856948853,
           "source": "daily_close"
         },
         {
           "ticker": "CSPX",
           "qty": 3408.0,
-          "price": 829.27,
-          "mv": 2826152.16,
+          "price": 834.15,
+          "mv": 2842783.1999999997,
           "source": "daily_close"
         },
         {
           "ticker": "NBGMT",
           "qty": 58050.998,
-          "price": 25.46,
-          "mv": 1477978.4090800001,
+          "price": 26.06,
+          "mv": 1512809.00788,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MAGS",
+          "qty": 4025.0,
+          "price": 68.58000183105469,
+          "mv": 276034.5073699951,
           "source": "daily_close"
         },
         {
           "ticker": "JHGSC",
           "qty": 10410.46,
-          "price": 55.82,
-          "mv": 581111.8772,
+          "price": 56.86,
+          "mv": 591938.7555999999,
           "source": "daily_close"
         },
         {
           "ticker": "ARGT",
           "qty": 4000.0,
-          "price": 93.8,
-          "mv": 375200.0,
+          "price": 94.13,
+          "mv": 376520.0,
           "source": "daily_close"
         },
         {
           "ticker": "MFSCV",
           "qty": 4063.638,
-          "price": 318.4,
-          "mv": 1293862.3391999998,
+          "price": 319.3,
+          "mv": 1297519.6134,
           "source": "daily_close"
         }
       ]
@@ -3967,10 +3967,18 @@
     },
     {
       "date": "2026-08-06",
-      "mv_usd": 8902192.52188525,
+      "index": 118.5491,
+      "interpolated": true,
+      "mv_usd": 8893731.5633,
+      "flow_in": 16537.8842,
+      "twr": 0.0156
+    },
+    {
+      "date": "2026-08-07",
+      "mv_usd": 8975868.537867282,
       "flow_in": 0.0,
-      "twr": 0.020776967729341293,
-      "index": 118.6619
+      "twr": 0.01864293090334437,
+      "index": 119.644
     }
   ],
   "acwi_index_series": [
@@ -6186,8 +6194,14 @@
     },
     {
       "date": "2026-08-06",
-      "price": 160.5,
-      "index": 124.5846
+      "index": 124.1205,
+      "interpolated": true,
+      "price": 159.9021
+    },
+    {
+      "date": "2026-08-07",
+      "price": 160.1,
+      "index": 124.2741
     }
   ],
   "equity_flows_by_month": {
@@ -6378,7 +6392,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-08-06 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing 2026-08-05.",
+  "_daily_refresh_note": "Punto 2026-08-07 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing 2026-08-06.",
   "_rebuild_note": "Reconstruccion completa 2026-07-31: reemplaza integramente el pipeline legacy (portfolio_reconstructor.py / sleeve_series desincronizado). Los 12 checkpoints mensuales estan verificados al centavo contra los statements oficiales de Pershing. Flujos calculados como -sum(Net Amount) de las transacciones reales del sleeve en cada periodo (auto-neutraliza fund exchanges internos). Excepcion: 3 transacciones de ene-2026 (venta WELLCRED + compras PIMCO-INC/PIMCO-EM) reclasificadas a feb-2026 tras verificar contra el statement oficial de febrero que asi procesaron realmente (Pershing las emitio como Cancel/Correct). Periodo oct-dic-2025 combinado en un solo calculo por el retiro grande de capital que distorsionaba el corte de fin de mes.",
   "twr_series_original": [
     {
@@ -9332,11 +9346,19 @@
       "twr": 0.0043
     },
     {
-      "date": "2026-08-06",
-      "mv_usd": 8902192.52188525,
+      "date": "2026-08-05",
+      "index": 117.4543,
+      "interpolated": true,
+      "mv_usd": 8811594.5888,
+      "flow_in": 33075.7683,
+      "twr": 0.0125
+    },
+    {
+      "date": "2026-08-07",
+      "mv_usd": 8975868.537867282,
       "flow_in": 0.0,
-      "twr": 0.020776967729341293,
-      "index": 118.6619
+      "twr": 0.01864293090334437,
+      "index": 119.644
     }
   ],
   "acwi_index_series_original": [
@@ -11545,9 +11567,15 @@
       "price": 158.9083
     },
     {
-      "date": "2026-08-06",
-      "price": 160.5,
-      "index": 124.5846
+      "date": "2026-08-05",
+      "index": 123.9668,
+      "interpolated": true,
+      "price": 159.7041
+    },
+    {
+      "date": "2026-08-07",
+      "price": 160.1,
+      "index": 124.2741
     }
   ]
 }

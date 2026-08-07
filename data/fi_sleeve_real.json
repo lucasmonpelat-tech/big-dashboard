@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-08-06T13:06:09.650951",
+  "refreshedAt": "2026-08-07T11:56:29.374082",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -634,42 +634,42 @@
       ]
     },
     {
-      "date": "2026-08-06",
-      "mv_usd": 11014697.310460001,
+      "date": "2026-08-07",
+      "mv_usd": 11043263.17475,
       "holdings": [
         {
           "ticker": "PIMCO-EM",
           "qty": 61949.011,
-          "price": 18.49,
-          "mv": 1145437.21339,
+          "price": 18.56,
+          "mv": 1149773.64416,
           "source": "daily_close"
         },
         {
           "ticker": "MANIG",
           "qty": 16621.485,
-          "price": 124.47,
-          "mv": 2068876.23795,
+          "price": 125.29,
+          "mv": 2082505.8556500003,
           "source": "daily_close"
         },
         {
           "ticker": "MANEM",
           "qty": 176.056,
-          "price": 115.23,
-          "mv": 20286.93288,
+          "price": 115.47,
+          "mv": 20329.18632,
           "source": "daily_close"
         },
         {
           "ticker": "PIMCO-INC",
           "qty": 159434.55,
-          "price": 20.21,
-          "mv": 3222172.2555,
+          "price": 20.22,
+          "mv": 3223766.601,
           "source": "daily_close"
         },
         {
           "ticker": "PIMCO-LD",
           "qty": 224080.422,
-          "price": 14.07,
-          "mv": 3152811.53754,
+          "price": 14.11,
+          "mv": 3161774.7544199997,
           "source": "daily_close"
         },
         {
@@ -3650,10 +3650,18 @@
     },
     {
       "date": "2026-08-06",
-      "mv_usd": 11014697.310460001,
+      "index": 105.8354,
+      "interpolated": true,
+      "mv_usd": 11020393.5201,
+      "flow_in": 10418.6658,
+      "twr": 0.0032
+    },
+    {
+      "date": "2026-08-07",
+      "mv_usd": 11043263.17475,
       "flow_in": 0.0,
-      "twr": 0.003128032243534119,
-      "index": 105.7808
+      "twr": 0.004159055248236743,
+      "index": 106.0551
     }
   ],
   "agg_index_series": [
@@ -5569,8 +5577,14 @@
     },
     {
       "date": "2026-08-06",
-      "price": 92.8502,
-      "index": 103.069
+      "index": 102.8542,
+      "interpolated": true,
+      "price": 92.6567
+    },
+    {
+      "date": "2026-08-07",
+      "price": 92.5828,
+      "index": 102.7721
     }
   ],
   "fi_flows_by_month": {
@@ -5760,7 +5774,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-08-06 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-08-05.",
+  "_daily_refresh_note": "Punto 2026-08-07 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-08-06.",
   "_bench_fix_note": "2026-06-23: agg_index_series reconstruida con IUAG.L (UCITS Acc, total return). Antes era AGG NYSE price-only sin reinvertir dividendos, daba YTD -5.78% falso.",
   "_rebuild_note": "Reconstruccion completa 2026-07-31: reemplaza integramente el pipeline legacy (portfolio_reconstructor.py / sleeve_series desincronizado). Los 12 checkpoints mensuales estan verificados al centavo contra los statements oficiales de Pershing. Flujos calculados como -sum(Net Amount) de las transacciones reales del sleeve en cada periodo (auto-neutraliza fund exchanges internos). Excepcion: 3 transacciones de ene-2026 (venta WELLCRED + compras PIMCO-INC/PIMCO-EM) reclasificadas a feb-2026 tras verificar contra el statement oficial de febrero que asi procesaron realmente (Pershing las emitio como Cancel/Correct). Periodo oct-dic-2025 combinado en un solo calculo por el retiro grande de capital que distorsionaba el corte de fin de mes.",
   "twr_series_original": [
@@ -8715,11 +8729,19 @@
       "twr": 0.0012
     },
     {
-      "date": "2026-08-06",
-      "mv_usd": 11014697.310460001,
+      "date": "2026-08-05",
+      "index": 105.6158,
+      "interpolated": true,
+      "mv_usd": 10997523.8654,
+      "flow_in": 20837.3317,
+      "twr": 0.0022
+    },
+    {
+      "date": "2026-08-07",
+      "mv_usd": 11043263.17475,
       "flow_in": 0.0,
-      "twr": 0.003128032243534119,
-      "index": 105.7808
+      "twr": 0.004159055248236743,
+      "index": 106.0551
     }
   ],
   "agg_index_series_original": [
@@ -10628,9 +10650,15 @@
       "price": 92.6111
     },
     {
-      "date": "2026-08-06",
-      "price": 92.8502,
-      "index": 103.069
+      "date": "2026-08-05",
+      "index": 102.9363,
+      "interpolated": true,
+      "price": 92.7306
+    },
+    {
+      "date": "2026-08-07",
+      "price": 92.5828,
+      "index": 102.7721
     }
   ]
 }
