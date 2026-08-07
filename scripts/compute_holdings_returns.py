@@ -240,6 +240,20 @@ def load_transactions(tx_path):
         tx['Buy/Sell'] = [p['side'] for p in parsed[parsed.notna()]]
         tx['Quantity'] = [p['qty'] for p in parsed[parsed.notna()]]
         tx['Price (Transaction Currency)'] = [p['price'] for p in parsed[parsed.notna()]]
+        # PENDING/no confirmado (fix 2026-08-07): este formato no tiene texto
+        # "PENDING CONFIRM" como el manual, pero un trade sin confirmar sale con
+        # 'Reference Number' y 'Settlement Date' en '-' (placeholder) en vez de
+        # un valor real. Pershing repite esta fila TODOS los dias con el
+        # Process Date de ESE dia mientras siga pendiente (mismo comportamiento
+        # que "PENDING CONFIRM" en el formato manual) -- si no se filtra,
+        # merge_buys_history() lo cuenta como una compra nueva cada dia porque
+        # el date cambia (dedupe es por date+cost). Confirmado con HLGPI/FLEX:
+        # el mismo trade de $300K/$130K aparecio 3 dias seguidos con fechas
+        # distintas, triplicando el flow_in en refresh_alts_sleeve_daily.py.
+        pending = (tx['Settlement Date'].astype(str) == '-') | (tx['Reference Number'].astype(str) == '-')
+        if pending.any():
+            print(f"  [PENDING] {pending.sum()} transaccion(es) sin confirmar (Settlement Date/Reference Number '-'), excluidas")
+        tx = tx[~pending].copy()
 
     tx_trades = tx[tx['Buy/Sell'].isin(['BUY', 'SELL'])].copy()
 

@@ -47,6 +47,27 @@ def _is_valid_price(value) -> bool:
         return False
 
 
+def _find_last_real_month_end(twr_series):
+    """Busca hacia ATRAS por FECHA (no por posicion) el ultimo punto que sea
+    fin de mes calendario real con mv_usd valido.
+
+    Fix 2026-08-06: la version anterior usaba `twr[-2]` (posicion fija en el
+    array), asumiendo que la serie SIEMPRE tiene exactamente "ultimo mes
+    cerrado + un dia en curso". Eso se rompe en cuanto otro script
+    (interpolate_equity_series.py, que corre TODOS los dias dentro de
+    dashboard_v2.transform.run_all) inserta o saca puntos intermedios -- el
+    ancla empieza a apuntar a un dia sintetico/interpolado en vez del ultimo
+    mes real, y el error se compone dia a dia sin que nadie lo note (mismo
+    patron que el bug de julio-2026, ver memoria
+    bug_twr_anchor_gap_modified_dietz.md). Buscar por fecha en vez de por
+    posicion es inmune a cuantos puntos haya en el medio.
+    """
+    for pt in reversed(twr_series):
+        if _is_month_end(pt["date"]) and pt.get("mv_usd") is not None:
+            return pt
+    return twr_series[0] if twr_series else None
+
+
 def _is_month_end(date_str):
     """True solo si date_str es el ULTIMO dia real del mes calendario.
 
@@ -214,13 +235,14 @@ def main():
 
     today_iso = date.today().isoformat()
 
-    # Determinar ancla: el ultimo punto month-end (no el "today" previo)
-    if _is_month_end(twr[-1]["date"]):
-        anchor = twr[-1]            # ultimo punto es fin de mes -> agregamos today nuevo
-        append_new = True
-    else:
-        anchor = twr[-2]           # ultimo punto es un "today" previo -> lo reemplazamos
-        append_new = False
+    # Determinar ancla: el ultimo punto month-end REAL, buscado por fecha
+    # (fix 2026-08-06, ver _find_last_real_month_end -- antes usaba twr[-2]
+    # a ciegas, lo que dejaba de corresponder al ultimo mes real en cuanto
+    # interpolate_equity_series.py insertaba/sacaba puntos intermedios).
+    anchor = _find_last_real_month_end(twr)
+    if anchor is None:
+        print("  ABORT: no se encontro ningun anchor month-end valido en twr_series.")
+        return
 
     # FIX 2026-07-30: Modified Dietz ponderando cada flow por su fecha real
     # (antes: comparaba qty vs un "anchor_sleeve" separado que se podia
@@ -245,12 +267,16 @@ def main():
                      "twr": twr_today, "index": round(index_today, 4)}
     new_sleeve_point = {"date": today_iso, "mv_usd": mv_today, "holdings": holdings_today}
 
-    if append_new:
-        twr.append(new_twr_point)
-        sleeve.append(new_sleeve_point)
-    else:
+    # Un punto por dia calendario: si ya hay un punto de HOY (re-corrida el
+    # mismo dia), se reemplaza; si no, se agrega uno nuevo. Nunca se descarta
+    # el punto de AYER para calcular el de hoy -- eso es lo que rompia el
+    # ancla de _find_last_real_month_end() dia tras dia (ver arriba).
+    if twr[-1]["date"] == today_iso:
         twr[-1] = new_twr_point
         sleeve[-1] = new_sleeve_point
+    else:
+        twr.append(new_twr_point)
+        sleeve.append(new_sleeve_point)
 
     # ACWI today (Yahoo, rebaseado al primer punto)
     acwi_price, err = fetch_acwi_close()

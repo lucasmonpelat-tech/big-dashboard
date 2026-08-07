@@ -32,6 +32,16 @@ ROOT = Path(__file__).parent.parent
 SLEEVE_FILE = ROOT / "data" / "fi_sleeve_real.json"
 
 
+def _find_last_real_month_end(twr_series):
+    """Busca hacia ATRAS por FECHA (no por posicion) el ultimo punto que sea
+    fin de mes calendario real con mv_usd valido. Ver refresh_equity_daily.py
+    (mismo fix, mismo bug, aplicado 2026-08-06)."""
+    for pt in reversed(twr_series):
+        if _is_month_end(pt["date"]) and pt.get("mv_usd") is not None:
+            return pt
+    return twr_series[0] if twr_series else None
+
+
 def _is_month_end(date_str):
     """True solo si date_str es el ultimo dia REAL del mes calendario.
 
@@ -208,13 +218,12 @@ def main():
 
     today_iso = date.today().isoformat()
 
-    # Determinar ancla: el ultimo punto month-end (no el "today" previo)
-    if _is_month_end(twr[-1]["date"]):
-        anchor = twr[-1]            # ultimo punto es fin de mes -> agregamos today nuevo
-        append_new = True
-    else:
-        anchor = twr[-2]           # ultimo punto es un "today" previo -> lo reemplazamos
-        append_new = False
+    # Determinar ancla: el ultimo punto month-end REAL, buscado por fecha
+    # (fix 2026-08-06 -- antes usaba twr[-2] a ciegas, ver refresh_equity_daily.py).
+    anchor = _find_last_real_month_end(twr)
+    if anchor is None:
+        print("  ABORT: no se encontro ningun anchor month-end valido en twr_series.")
+        return
 
     # FIX 2026-07-30: Modified Dietz ponderando cada flow por su fecha real
     # (antes: comparaba qty vs un "anchor_sleeve" separado que se podia
@@ -244,12 +253,13 @@ def main():
                      "twr": twr_today, "index": round(index_today, 4)}
     new_sleeve_point = {"date": today_iso, "mv_usd": mv_today, "holdings": holdings_today}
 
-    if append_new:
-        twr.append(new_twr_point)
-        sleeve.append(new_sleeve_point)
-    else:
+    # Un punto por dia calendario -- ver refresh_equity_daily.py (mismo fix).
+    if twr[-1]["date"] == today_iso:
         twr[-1] = new_twr_point
         sleeve[-1] = new_sleeve_point
+    else:
+        twr.append(new_twr_point)
+        sleeve.append(new_sleeve_point)
 
     # AGG today (Yahoo, rebaseado al primer punto)
     agg_price, err = fetch_agg_close()

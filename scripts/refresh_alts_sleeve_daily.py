@@ -42,6 +42,17 @@ def _is_month_end(date_str):
     return d == calendar.monthrange(y, m)[1]
 
 
+def _find_last_real_month_end(twr_series):
+    """Busca hacia ATRAS por FECHA (no por posicion) el ultimo punto que sea
+    fin de mes calendario real con mv_usd valido. Mismo fix que
+    refresh_equity_daily.py / refresh_fi_daily.py (2026-08-06): usar `twr[-2]`
+    a ciegas rompe en cuanto la serie tiene algun punto intermedio inesperado."""
+    for pt in reversed(twr_series):
+        if _is_month_end(pt["date"]) and pt.get("mv_usd") is not None:
+            return pt
+    return twr_series[0] if twr_series else None
+
+
 def _load_buys_since(anchor_date):
     try:
         d = json.load(open(HOLDINGS_FILE, encoding="utf-8"))
@@ -100,12 +111,10 @@ def main():
 
     today_iso = date.today().isoformat()
 
-    if _is_month_end(twr[-1]["date"]):
-        anchor = twr[-1]
-        append_new = True
-    else:
-        anchor = twr[-2]
-        append_new = False
+    anchor = _find_last_real_month_end(twr)
+    if anchor is None:
+        print("  ABORT: no se encontro ningun anchor month-end valido en twr_series.")
+        return
 
     days_gap = (date.fromisoformat(today_iso) - date.fromisoformat(anchor["date"])).days
     if days_gap > 5:
@@ -121,10 +130,11 @@ def main():
     new_point = {"date": today_iso, "mv_usd": round(mv_today, 2), "flow_in": round(flow_in, 2),
                  "twr": twr_today, "index": round(index_today, 4)}
 
-    if append_new:
-        twr.append(new_point)
-    else:
+    # Un punto por dia calendario -- ver refresh_equity_daily.py (mismo fix 2026-08-06).
+    if twr[-1]["date"] == today_iso:
         twr[-1] = new_point
+    else:
+        twr.append(new_point)
 
     data["refreshedAt"] = datetime.now().isoformat()
     data["_daily_refresh_note"] = f"Punto {today_iso} recalculado con total_alts_usd de alts_race.json (T-1 IBIT/GLD + ultimo statement CALP/GCRED/HLEND/BPCC/HLGPI/FLEX)."
