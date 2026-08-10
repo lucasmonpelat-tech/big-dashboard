@@ -324,15 +324,21 @@ def main():
             # Refresh YTD: del activo y bench
             h_ytd = ytd_per_holding.get(ticker)
 
-            # FIX 2026-07-28 (alts privados/ilíquidos, ej FLEX/HLGPI): sin precio
-            # público diario, el YTD viene de un proxy mensual (alts_race.py) que
-            # devuelve 0.0 (no None) cuando el holding se compro DENTRO del anio
-            # en curso -- ese 0.0 quedaba pegado para siempre (0.0 no es None,
-            # asi que "if h_ytd is not None" lo tomaba como dato valido). Para un
-            # fondo de acceso/privado comprado este anio, no existe un "precio al
-            # 1-Ene" independiente de nuestra compra (a diferencia de un UCITS
-            # publico) -> YTD = SI es la unica definicion que tiene sentido.
-            if (sleeve_key == 'alternatives' and (h_ytd is None or h_ytd == 0)
+            # FIX 2026-07-28 (alts privados/ilíquidos, ej FLEX/HLGPI), EXTENDIDO
+            # 2026-08-10 a TODOS los sleeves (encontrado con MAGS/HEWJ, equity,
+            # compradas 2026-07-02): sin precio publico al 1-Ene (el holding
+            # todavia no existia esa fecha), el YTD "de fuente" (equity_race.py/
+            # fi_race.py/alts_race.py, via ytd_per_holding) devuelve 0.0 (no
+            # None) para un holding comprado DENTRO del anio en curso -- ese 0.0
+            # quedaba pegado para siempre (0.0 no es None, asi que "if h_ytd is
+            # not None" lo tomaba como dato valido, generando un YTD ficticio de
+            # 0% en vez del real). La condicion original solo cubria
+            # sleeve_key == 'alternatives', pero el mismo problema aplica a
+            # cualquier sleeve: para un holding comprado este anio, no existe un
+            # "precio al 1-Ene" independiente de nuestra compra -> YTD = SI
+            # (return desde la primera compra) es la unica definicion que tiene
+            # sentido, sea Equity, FI o Alternatives.
+            if ((h_ytd is None or h_ytd == 0)
                     and h.get('first_buy_date', '') >= f'{date.today().year}-01-01'
                     and h.get('return_pct') is not None):
                 h_ytd = h['return_pct']
