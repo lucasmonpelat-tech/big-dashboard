@@ -1,29 +1,49 @@
 """
 validate_sleeve_returns.py
 ===========================
-Chequeo de integridad del ultimo paso del daily cron: verifica que el
-"Sleeve SI/YTD" (equity_vs_acwi / fi_vs_agg en benchmark_comparison.json)
-no se haya corrompido, cruzandolo contra un metodo INDEPENDIENTE (cost basis
-ponderado, ya verificado confiable via holdings_returns_{sleeve}.json).
+Chequeo de integridad del ultimo paso del daily cron: verifica que el TWR de
+Equity/FI/Alts (equity_sleeve_real.json, fi_sleeve_real.json,
+alts_sleeve_real.json) no se haya corrompido.
 
 Motivo (2026-07-30): el bug del anchor de Modified Dietz pegado ~1 mes
 (ver memoria bug_twr_anchor_gap_modified_dietz) genero un FI YTD -1.09%
-ficticio durante DIAS sin que nadie lo notara -- Fer lo vio antes que
-Lucas. Este script existe para que la proxima vez que algo similar rompa
-la cadena TWR, quede un alert ANTES de que un numero raro llegue a
-producción sin avisar.
+ficticio durante DIAS sin que nadie lo notara -- Fer lo vio antes que Lucas.
+Este script existe para que la proxima vez que algo similar rompa la cadena
+TWR, quede un alert ANTES de que un numero raro llegue a produccion sin
+avisar.
+
+FIX 2026-08-10: la version anterior comparaba el YTD del TWR contra un YTD
+"cost-basis" independiente (holdings_returns_{sleeve}.json). Lucas: ese
+cross-check usa una metodologia DISTINTA a proposito (no pondera por fecha
+de cada flujo), asi que diverge del TWR cada vez que entra plata nueva en
+distintos momentos del año -- generaba alertas falsas sin señal real, y
+Lucas prefiere UN numero preciso (el TWR) con chequeos de integridad
+directos sobre ESE calculo, en vez de compararlo contra otro método que
+mide algo distinto a proposito. Se reemplaza el cross-check por chequeos
+que apuntan directo a las 2 causas raiz que ya rompieron el TWR esta
+temporada:
+  (a) anchor drift -- el ancla usada para Modified Dietz deja de ser el
+      ultimo mes-end real (ver refresh_equity_daily.py _find_last_real_month_end).
+  (b) transacciones pendientes de confirmar contadas mas de una vez en
+      buys_history (Pershing repite la fila con fecha nueva cada dia
+      mientras siga pendiente).
 
 Que chequea:
-  1. Anchor age: si el ultimo punto "real" (no interpolado) de
-     twr_series es viejo (>5 dias), el refresh diario no esta corriendo.
-  2. Cross-check de metodologia: el "SI" de benchmark_comparison.json
-     (TWR chain) vs el SI cost-basis ponderado de holdings_returns_*.json
-     (independiente, ya auditado). Si difieren mas de MAX_DIVERGENCE_PP
-     puntos porcentuales, algo esta roto en una de las 2 cadenas.
+  1. Anchor age: si el ultimo punto "real" (no interpolado) de twr_series
+     es viejo (>5 dias), el refresh diario no esta corriendo.
+  2. Salto de indice dia a dia implausible: compara el ultimo punto real
+     contra el real anterior (ignorando interpolados) -- un salto mayor a
+     MAX_DAILY_INDEX_MOVE_PP en un dia es la firma de un anchor roto o un
+     mv_usd mal calculado, no de un movimiento de mercado real para un
+     sleeve diversificado.
   3. Flow_in sospechoso: si el flow_in del ultimo punto es > 15% del MV
-     del sleeve en un solo dia, es una señal de anchor-drift (la firma
-     del bug de julio: flow_in creciendo dia a dia sin trades reales
-     de ese tamaño).
+     del sleeve en un solo dia, es señal de anchor-drift o double-count.
+  4. Transacciones pendientes duplicadas en buys_history: mismo ticker +
+     mismo costo (redondeado) apareciendo con 2+ fechas distintas dentro
+     de una ventana corta -- firma exacta del bug de HLGPI/FLEX
+     (2026-08-07): Pershing repite una fila no confirmada todos los dias
+     con el Process Date de ESE dia, y sin filtro eso se cuenta como
+     compra nueva cada vez.
 
 Si algo falla: escribe data/_alerts/sleeve_return_anomaly_YYYY-MM-DD.json
 (mismo patron que el resto de las alertas del proyecto -- Claude las lee
@@ -41,33 +61,14 @@ DATA_DIR = ROOT / "data"
 ALERTS_DIR = DATA_DIR / "_alerts"
 
 MAX_ANCHOR_AGE_DAYS = 5
-MAX_DIVERGENCE_PP = 5.0       # puntos porcentuales de diferencia entre YTD TWR vs YTD cost-basis
-MAX_FLOW_PCT_OF_MV = 0.15     # 15% del MV del sleeve en un solo dia = sospechoso
+MAX_DAILY_INDEX_MOVE_PP = 5.0   # % de cambio dia a dia en el indice, entre 2 puntos REALES consecutivos
+MAX_FLOW_PCT_OF_MV = 0.15       # 15% del MV del sleeve en un solo dia = sospechoso
 
 SLEEVES = [
     ("equity", "equity_sleeve_real.json", "holdings_returns_equity.json"),
     ("fixed_income", "fi_sleeve_real.json", "holdings_returns_fixed_income.json"),
+    ("alternatives", "alts_sleeve_real.json", "holdings_returns_alternatives.json"),
 ]
-
-
-def _cost_basis_weighted_ytd(holdings_file):
-    """YTD cost-basis ponderado por MV, desde holdings_returns_{sleeve}.json
-    (metodo independiente ya auditado -- ver project_big_holdings_returns_system).
-    Se usa YTD en vez de SI: SI acumula 13 meses de cambios de composicion del
-    portfolio (holdings nuevos entrando en distintas fechas), lo que genera
-    divergencia METODOLOGICA legitima frente al TWR chain (no es un bug).
-    YTD es una ventana mas corta con mucho menos drift estructural, mejor
-    señal para detectar errores reales."""
-    try:
-        d = json.load(open(DATA_DIR / holdings_file, encoding="utf-8"))
-    except Exception:
-        return None
-    holdings = [h for h in d.get("holdings", []) if h.get("status") == "OPEN"]
-    total_mv = sum(h.get("mv_usd") or 0 for h in holdings)
-    if total_mv <= 0:
-        return None
-    weighted = sum((h.get("mv_usd") or 0) * (h.get("ytd_pct") or 0) for h in holdings)
-    return weighted / total_mv
 
 
 def _last_real_point(twr_series):
@@ -76,6 +77,64 @@ def _last_real_point(twr_series):
         if not p.get("interpolated"):
             return p
     return twr_series[-1] if twr_series else None
+
+
+def _real_points_desc(twr_series):
+    """Generador de puntos NO interpolados, del mas reciente al mas viejo."""
+    for p in reversed(twr_series):
+        if not p.get("interpolated"):
+            yield p
+
+
+def check_duplicate_pending_buys(holdings_file):
+    """Detecta la misma compra (ticker + costo redondeado) apareciendo en
+    2+ dias CALENDARIO CONSECUTIVOS -- firma exacta de una transaccion
+    pendiente de confirmar que Pershing repite todos los dias con el
+    Process Date de ESE dia mientras no se confirme (ver
+    compute_holdings_returns.py, fix 2026-08-07: caso real HLGPI/FLEX,
+    mismo monto 3 dias seguidos).
+
+    Exige dias CONSECUTIVOS (no solo "dentro de una ventana") para evitar
+    falsos positivos con correcciones legitimas de Pershing que reusan el
+    mismo monto en fechas separadas por mas de 1 dia (ej: el fund exchange
+    PIMCO-INC<->PIMCO-LD de $4,535,807 cancelado el 30-ene y re-emitido el
+    2-feb-2026, verificado contra el statement oficial -- 3 dias de gap,
+    no consecutivo, no es un duplicado)."""
+    try:
+        d = json.load(open(DATA_DIR / holdings_file, encoding="utf-8"))
+    except Exception:
+        return []
+    issues = []
+    for h in d.get("holdings", []):
+        buys = h.get("buys_history", []) or []
+        by_cost = {}
+        for b in buys:
+            key = round(b.get("cost", 0), 2)
+            by_cost.setdefault(key, []).append(b.get("date"))
+        for cost, dates in by_cost.items():
+            if len(dates) < 2:
+                continue
+            try:
+                dates_sorted = sorted(date.fromisoformat(dd) for dd in dates if dd)
+            except Exception:
+                continue
+            # buscar 2+ fechas consecutivas (gap de exactamente 1 dia) dentro de la lista
+            consecutive_run = [dates_sorted[0]]
+            for dd in dates_sorted[1:]:
+                if (dd - consecutive_run[-1]).days == 1:
+                    consecutive_run.append(dd)
+                else:
+                    if len(consecutive_run) >= 2:
+                        break
+                    consecutive_run = [dd]
+            if len(consecutive_run) >= 2:
+                fechas = ', '.join(dd.isoformat() for dd in consecutive_run)
+                issues.append(
+                    f"{h.get('ticker')}: el mismo monto (${cost:,.0f}) aparece en "
+                    f"{len(consecutive_run)} dias CONSECUTIVOS en buys_history ({fechas}) -- "
+                    f"probable transaccion pendiente de confirmar contada mas de una vez."
+                )
+    return issues
 
 
 def check_sleeve(sleeve_key, sleeve_file, holdings_file, today_iso):
@@ -121,20 +180,25 @@ def check_sleeve(sleeve_key, sleeve_file, holdings_file, today_iso):
             except Exception:
                 pass
 
-    # 2) Cross-check TWR YTD vs cost-basis YTD (ventana corta, poco drift metodologico)
-    dec = next((p for p in twr if p["date"] == "2025-12-31"), None)
-    ytd_twr = (last["index"] / dec["index"] - 1) * 100 if dec and dec.get("index") else None
-    ytd_cb = _cost_basis_weighted_ytd(holdings_file)
-    if ytd_twr is not None and ytd_cb is not None:
-        divergence = abs(ytd_twr - ytd_cb)
-        if divergence > MAX_DIVERGENCE_PP:
-            issues.append(
-                f"{sleeve_key}: YTD TWR ({ytd_twr:+.2f}%) vs YTD cost-basis independiente "
-                f"({ytd_cb:+.2f}%) difieren {divergence:.2f}pp (umbral {MAX_DIVERGENCE_PP}pp) -- "
-                f"revisar cual de las 2 cadenas esta mal."
-            )
+    # 2) Salto de indice dia a dia implausible entre 2 puntos REALES
+    #    consecutivos (ignora los interpolados de en medio -- esos ya se
+    #    reportan aparte en el chequeo de hueco). Firma directa de anchor
+    #    drift o mv_usd mal calculado: un sleeve diversificado no deberia
+    #    moverse mas de unos pocos % de un dia real al siguiente.
+    real_points = list(_real_points_desc(twr))
+    if len(real_points) >= 2:
+        cur, prev = real_points[0], real_points[1]
+        if cur.get("index") and prev.get("index"):
+            move_pct = (cur["index"] / prev["index"] - 1) * 100
+            if abs(move_pct) > MAX_DAILY_INDEX_MOVE_PP:
+                issues.append(
+                    f"{sleeve_key}: el indice salto {move_pct:+.2f}% entre {prev['date']} y "
+                    f"{cur['date']} (umbral {MAX_DAILY_INDEX_MOVE_PP}pp) -- revisar el anchor y el "
+                    f"mv_usd de ese dia, no parece un movimiento de mercado real."
+                )
 
-    # 3) Flow_in sospechoso (firma del bug de anchor-drift: crece dia a dia sin trade real)
+    # 3) Flow_in sospechoso (firma del bug de anchor-drift/double-count:
+    #    crece sin trades reales de ese tamaño)
     mv_today = last.get("mv_usd") or 0
     flow_in = abs(last.get("flow_in") or 0)
     if mv_today > 0 and flow_in / mv_today > MAX_FLOW_PCT_OF_MV:
@@ -144,12 +208,16 @@ def check_sleeve(sleeve_key, sleeve_file, holdings_file, today_iso):
             f"real grande o un anchor roto."
         )
 
+    # 4) Transacciones pendientes duplicadas en buys_history (fix 2026-08-10,
+    #    firma exacta del bug de HLGPI/FLEX)
+    issues.extend(check_duplicate_pending_buys(holdings_file))
+
     return issues
 
 
 def main():
     today_iso = date.today().isoformat()
-    print(f"[{datetime.now().isoformat()}] Validando sleeve returns (Equity/FI)...")
+    print(f"[{datetime.now().isoformat()}] Validando sleeve returns (Equity/FI/Alts)...")
 
     all_issues = []
     for sleeve_key, sleeve_file, holdings_file in SLEEVES:
