@@ -43,6 +43,18 @@ ALERTS_DIR = ROOT / "data" / "_alerts"
 
 MAX_STALE_BDAYS = 5
 
+# Excepciones por ticker: algunos fondos simplemente no marcan NAV todos los
+# dias (dealing frequency propia), asi que 5 dias habiles es un umbral falso
+# positivo para ellos -- no es que el download de NetX360 este fallando.
+# SGCB (Schroder GAIA Cat Bond): confirmado 2026-08-10 con el fund facts del
+# fondo -- "Dealing frequency: Fortnightly on the 2nd and 4th Friday in a
+# month" (mas el ultimo dia habil del mes). Peor caso entre dos dealing dates
+# (4to viernes de un mes -> 2do viernes del siguiente) puede ser ~15 dias
+# habiles; se deja margen a 16 para no generar falsos positivos.
+MAX_STALE_BDAYS_OVERRIDE = {
+    "SGCB": 16,
+}
+
 # ISINs que antes scrapeaba baha_nav_refresher.py (equity sleeve UCITS + 4BRZ).
 INSTRUMENTS = {
     "IE00BFMHRK20": {"ticker": "NBGMT", "name": "NB Global Equity Megatrends I USD"},
@@ -139,7 +151,8 @@ def main():
             except ValueError:
                 pass
         flag = ""
-        if bdays_old is not None and bdays_old > MAX_STALE_BDAYS:
+        max_stale = MAX_STALE_BDAYS_OVERRIDE.get(meta["ticker"], MAX_STALE_BDAYS)
+        if bdays_old is not None and bdays_old > max_stale:
             stale[meta["ticker"]] = {"isin": isin, "price_date": price_date_iso, "bdays_old": bdays_old}
             flag = f"  [STALE {bdays_old}bd]"
         print(f"  {meta['ticker']:<8} {h['market_price_ccy']:>12.4f}  price_date={price_date_iso}{flag}")
