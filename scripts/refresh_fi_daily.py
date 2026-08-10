@@ -37,7 +37,7 @@ def _find_last_real_month_end(twr_series):
     fin de mes calendario real con mv_usd valido. Ver refresh_equity_daily.py
     (mismo fix, mismo bug, aplicado 2026-08-06)."""
     for pt in reversed(twr_series):
-        if _is_month_end(pt["date"]) and pt.get("mv_usd") is not None:
+        if _is_month_end(pt["date"]) and pt.get("mv_usd") is not None and not pt.get("interpolated"):
             return pt
     return twr_series[0] if twr_series else None
 

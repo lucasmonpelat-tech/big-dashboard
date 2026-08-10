@@ -63,7 +63,7 @@ def _find_last_real_month_end(twr_series):
     posicion es inmune a cuantos puntos haya en el medio.
     """
     for pt in reversed(twr_series):
-        if _is_month_end(pt["date"]) and pt.get("mv_usd") is not None:
+        if _is_month_end(pt["date"]) and pt.get("mv_usd") is not None and not pt.get("interpolated"):
             return pt
     return twr_series[0] if twr_series else None
 
