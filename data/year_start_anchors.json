@@ -4,6 +4,16 @@
   "_source": "Pershing UGL + year_start_anchors legacy + baha monthlyReturns",
   "_generation_rule": "Cada 1-Ene guardar el precio 31-Dec del anio anterior en este archivo (script snapshot_year_start_prices.py).",
   "anchors_2026": {
+    "DE000A0Q4R85": {
+      "ticker": "4BRZ",
+      "name": "iShares MSCI Brazil UCITS",
+      "price_2025_dec_31": 44.5222,
+      "qty_2025_dec_31": 0.0,
+      "mv_2025_dec_31": 0.0,
+      "anchor_locked": true,
+      "ytd_source": "manual_verified",
+      "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, cierre 30-Dic-2025 (feriado Xetra 31-Dic/1-Ene), confirmado OK"
+    },
     "IE00B6YCBF59": {
       "ticker": "THOR",
       "name": "Thornburg Income Builder",
@@ -34,16 +44,6 @@
       "ytd_source": "manual_verified",
       "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, 31-Dic-2025"
     },
-    "DE000A0Q4R85": {
-      "ticker": "4BRZ",
-      "name": "iShares MSCI Brazil UCITS",
-      "price_2025_dec_31": 44.5222,
-      "qty_2025_dec_31": 0.0,
-      "mv_2025_dec_31": 0.0,
-      "anchor_locked": true,
-      "ytd_source": "manual_verified",
-      "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, cierre 30-Dic-2025 (feriado Xetra 31-Dic/1-Ene), confirmado OK"
-    },
     "IE00BF4KN675": {
       "ticker": "LGLI",
       "name": "Lazard Global Listed Infra",
@@ -73,6 +73,16 @@
       "anchor_locked": true,
       "ytd_source": "manual_verified",
       "note": "Anchor real verificado el 2026-07-28. Fuente: Pershing statement oficial 31-Dic-2025 (LSERIES DAC, JXD-101380), pag 4 (MAN GLG Global IG Opps)"
+    },
+    "IE00089T5MA6": {
+      "ticker": "MANEM",
+      "name": "Man EM Corp Credit Alt",
+      "price_2025_dec_31": 108.54,
+      "qty_2025_dec_31": 0.0,
+      "mv_2025_dec_31": 0.0,
+      "anchor_locked": true,
+      "ytd_source": "manual_verified",
+      "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, 31-Dic-2025"
     },
     "US4642873909": {
       "ticker": "ILF",
@@ -111,16 +121,6 @@
       "qty_2025_dec_31": null,
       "mv_2025_dec_31": null,
       "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
-    },
-    "IE00089T5MA6": {
-      "ticker": "MANEM",
-      "name": "Man EM Corp Credit Alt",
-      "price_2025_dec_31": 108.54,
-      "qty_2025_dec_31": 0.0,
-      "mv_2025_dec_31": 0.0,
-      "anchor_locked": true,
-      "ytd_source": "manual_verified",
-      "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, 31-Dic-2025"
     },
     "IE00B5BMR087": {
       "ticker": "CSPX",

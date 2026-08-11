@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-08-10T11:57:34.951498",
+  "refreshedAt": "2026-08-11T11:53:56.012544",
   "inception": "2025-06-30",
   "benchmark_primary": "60/40 blend (60% ACWI + 40% AGG)",
   "benchmark_secondary": "HFRX Global HF proxy (QAI ETF)",
@@ -100,7 +100,7 @@
     "2026-05": 107.2746,
     "2026-06": 104.2844,
     "2026-07": 105.7688,
-    "2026-08": 100.6656
+    "2026-08": 100.5907
   },
   "bmk6040_index": {
     "2025-06": 100.0,
@@ -148,7 +148,7 @@
     "2026-05": -0.000391,
     "2026-06": -0.027874,
     "2026-07": 0.014234,
-    "2026-08": -0.048249
+    "2026-08": -0.048957
   },
   "holdings": [
     {
@@ -164,7 +164,7 @@
       "ytd_contribution_pct": 1.73,
       "assumed_annual_pct": 12.0,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-08-10",
+      "valuation_date": "2026-08-11",
       "days_since_valuation": 0
     },
     {
@@ -181,7 +181,7 @@
       "assumed_annual_pct": null,
       "source": "Pershing T-1 (2026-08-07)",
       "valuation_date": "2026-08-07",
-      "days_since_valuation": 3
+      "days_since_valuation": 4
     },
     {
       "isin": "US78463V1070",
@@ -197,7 +197,7 @@
       "assumed_annual_pct": null,
       "source": "Pershing T-1 (2026-08-07)",
       "valuation_date": "2026-08-07",
-      "days_since_valuation": 3
+      "days_since_valuation": 4
     },
     {
       "isin": "KYG4737U1085",
@@ -212,7 +212,7 @@
       "ytd_contribution_pct": 0.23,
       "assumed_annual_pct": 9.5,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-08-10",
+      "valuation_date": "2026-08-11",
       "days_since_valuation": 0
     },
     {
@@ -228,7 +228,7 @@
       "ytd_contribution_pct": 0.23,
       "assumed_annual_pct": 9.5,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-08-10",
+      "valuation_date": "2026-08-11",
       "days_since_valuation": 0
     },
     {
@@ -244,7 +244,7 @@
       "ytd_contribution_pct": 0.2,
       "assumed_annual_pct": 12.0,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-08-10",
+      "valuation_date": "2026-08-11",
       "days_since_valuation": 0
     },
     {
@@ -260,7 +260,7 @@
       "ytd_contribution_pct": 0.31,
       "assumed_annual_pct": 11.0,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-08-10",
+      "valuation_date": "2026-08-11",
       "days_since_valuation": 0
     },
     {
@@ -276,11 +276,11 @@
       "ytd_contribution_pct": 0.07,
       "assumed_annual_pct": 9.5,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-08-10",
+      "valuation_date": "2026-08-11",
       "days_since_valuation": 0
     }
   ],
-  "_sync_alts_ugl_at": "2026-08-10T11:57:36.097448",
+  "_sync_alts_ugl_at": "2026-08-11T11:53:57.191876",
   "_sync_alts_ugl_note": "Returns y sleeve YTD/SI sobreescritos con Pershing UGL (cost-basis weighted). sleeve_index mensual sigue siendo time-weighted con proxies (para charts históricos).",
-  "_daily_refresh_note": "Refresh diario 2026-08-10: 2 liquidos via Pershing T-1, 2 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $8,060,003."
+  "_daily_refresh_note": "Refresh diario 2026-08-11: 2 liquidos via Pershing T-1, 2 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $8,060,003."
 }
