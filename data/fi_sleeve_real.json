@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-08-11T11:53:55.810555",
+  "refreshedAt": "2026-08-12T11:57:01.230317",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -897,6 +897,61 @@
           "qty": 269.44,
           "price": 2160.28,
           "mv": 582065.8432,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "TGF",
+          "qty": 532000.0,
+          "price": 1.5470813721804513,
+          "mv": 823047.29,
+          "source": "pershing_frozen"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-12",
+      "mv_usd": 11024093.514319997,
+      "holdings": [
+        {
+          "ticker": "PIMCO-EM",
+          "qty": 61949.011,
+          "price": 18.63,
+          "mv": 1154110.07493,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MANIG",
+          "qty": 16621.485,
+          "price": 125.33,
+          "mv": 2083170.71505,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MANEM",
+          "qty": 176.056,
+          "price": 115.79,
+          "mv": 20385.524240000002,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "PIMCO-INC",
+          "qty": 159434.55,
+          "price": 20.14,
+          "mv": 3211011.837,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "PIMCO-LD",
+          "qty": 224080.422,
+          "price": 14.05,
+          "mv": 3148329.9291,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "SGCB",
+          "qty": 269.44,
+          "price": 2167.6,
+          "mv": 584038.144,
           "source": "daily_close"
         },
         {
@@ -3911,6 +3966,13 @@
       "flow_in": 0.0,
       "twr": 0.006815689714983407,
       "index": 106.0
+    },
+    {
+      "date": "2026-08-12",
+      "mv_usd": 11024093.514319997,
+      "flow_in": 0.0,
+      "twr": 0.005591240944771529,
+      "index": 105.8711
     }
   ],
   "agg_index_series": [
@@ -5855,9 +5917,9 @@
       "price": 92.4589
     },
     {
-      "date": "2026-08-11",
-      "price": 92.3,
-      "index": 102.4582
+      "date": "2026-08-12",
+      "price": 92.62,
+      "index": 102.8134
     }
   ],
   "fi_flows_by_month": {
@@ -6047,7 +6109,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-08-11 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-08-10.",
+  "_daily_refresh_note": "Punto 2026-08-12 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-08-11.",
   "_bench_fix_note": "2026-06-23: agg_index_series reconstruida con IUAG.L (UCITS Acc, total return). Antes era AGG NYSE price-only sin reinvertir dividendos, daba YTD -5.78% falso.",
   "_rebuild_note": "Reconstruccion completa 2026-07-31: reemplaza integramente el pipeline legacy (portfolio_reconstructor.py / sleeve_series desincronizado). Los 12 checkpoints mensuales estan verificados al centavo contra los statements oficiales de Pershing. Flujos calculados como -sum(Net Amount) de las transacciones reales del sleeve en cada periodo (auto-neutraliza fund exchanges internos). Excepcion: 3 transacciones de ene-2026 (venta WELLCRED + compras PIMCO-INC/PIMCO-EM) reclasificadas a feb-2026 tras verificar contra el statement oficial de febrero que asi procesaron realmente (Pershing las emitio como Cancel/Correct). Periodo oct-dic-2025 combinado en un solo calculo por el retiro grande de capital que distorsionaba el corte de fin de mes. | FIX 2026-08-07: se truncaron los puntos 01-ago a 07-ago (calculados con un anchor que iba driftando dia a dia por un bug en refresh_equity_daily.py/refresh_fi_daily.py, ya corregido -- ver _find_last_real_month_end). El proximo refresh diario recalcula bien desde el anchor real de 31-jul.",
   "twr_series_original": [
