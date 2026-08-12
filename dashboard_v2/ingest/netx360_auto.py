@@ -1172,17 +1172,28 @@ def download_from_tab(page, tab_config, out_dir: Path) -> bool:
     time.sleep(wait)
 
     # PASO 1: click en el icono download (abre el mat-menu, no descarga aun)
+    # Fix 2026-08-12: fallo intermitente en produccion (funciono perfecto al
+    # reintentar a mano manutos despues, mismo codigo) -- pinta de timing
+    # flaky contra el sitio en vivo, no de un cambio de layout permanente
+    # (a diferencia del bug de login de 2026-08-04, que era 100% reproducible).
+    # Se agrega un reintento con espera extra antes de rendirse y alertar.
     icon_clicked = False
-    for sel in EXPORT_ICON_SELECTORS:
-        try:
-            el = page.locator(sel).first
-            if el.is_visible(timeout=2000):
-                el.click()
-                print(f"  [{name}] Icono download clickeado ({sel})")
-                icon_clicked = True
-                break
-        except Exception:
-            continue
+    for attempt in range(2):
+        if attempt > 0:
+            print(f"  [{name}] Icono no encontrado, reintentando tras espera extra...")
+            time.sleep(3)
+        for sel in EXPORT_ICON_SELECTORS:
+            try:
+                el = page.locator(sel).first
+                if el.is_visible(timeout=2000):
+                    el.click()
+                    print(f"  [{name}] Icono download clickeado ({sel})")
+                    icon_clicked = True
+                    break
+            except Exception:
+                continue
+        if icon_clicked:
+            break
 
     if not icon_clicked:
         print(f"  [{name}] No encontre icono download.")

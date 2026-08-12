@@ -1,0 +1,6404 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-08-12",
+  "generated_at": "2026-08-12T14:25:24Z",
+  "note": "Comparaciones portfolio vs benchmark con fechas alineadas y rebased 100 en fecha comun. Fixes bug del dashboard viejo (arrays x separados sin intersect ni rebase).",
+  "comparisons": {
+    "total_vs_6040": {
+      "portfolio_name": "BIG Total (Lynk NAV)",
+      "benchmark_name": "60/40 Global (AOR ETF)",
+      "portfolio_source": "data/lynk_nav_series.json",
+      "benchmark_source": "data/bmk_6040.json",
+      "inception": "2025-06-30",
+      "as_of": "2026-08-11",
+      "n_observations": 280,
+      "series": [
+        {
+          "date": "2025-06-30",
+          "portfolio": 100.0,
+          "benchmark": 100.0,
+          "alpha_bp": 0.0
+        },
+        {
+          "date": "2025-07-01",
+          "portfolio": 100.0,
+          "benchmark": 99.9513,
+          "alpha_bp": 4.87
+        },
+        {
+          "date": "2025-07-02",
+          "portfolio": 100.0,
+          "benchmark": 100.4259,
+          "alpha_bp": -42.59
+        },
+        {
+          "date": "2025-07-03",
+          "portfolio": 100.123,
+          "benchmark": 100.5568,
+          "alpha_bp": -43.38
+        },
+        {
+          "date": "2025-07-07",
+          "portfolio": 99.906,
+          "benchmark": 99.8204,
+          "alpha_bp": 8.56
+        },
+        {
+          "date": "2025-07-08",
+          "portfolio": 99.748,
+          "benchmark": 100.0004,
+          "alpha_bp": -25.24
+        },
+        {
+          "date": "2025-07-09",
+          "portfolio": 99.979,
+          "benchmark": 100.655,
+          "alpha_bp": -67.6
+        },
+        {
+          "date": "2025-07-10",
+          "portfolio": 100.133,
+          "benchmark": 100.5078,
+          "alpha_bp": -37.48
+        },
+        {
+          "date": "2025-07-11",
+          "portfolio": 100.223,
+          "benchmark": 100.0332,
+          "alpha_bp": 18.98
+        },
+        {
+          "date": "2025-07-14",
+          "portfolio": 100.147,
+          "benchmark": 100.1477,
+          "alpha_bp": -0.07
+        },
+        {
+          "date": "2025-07-15",
+          "portfolio": 99.929,
+          "benchmark": 99.8367,
+          "alpha_bp": 9.23
+        },
+        {
+          "date": "2025-07-16",
+          "portfolio": 99.893,
+          "benchmark": 100.0823,
+          "alpha_bp": -18.93
+        },
+        {
+          "date": "2025-07-17",
+          "portfolio": 100.084,
+          "benchmark": 100.4259,
+          "alpha_bp": -34.19
+        },
+        {
+          "date": "2025-07-18",
+          "portfolio": 100.218,
+          "benchmark": 100.3605,
+          "alpha_bp": -14.25
+        },
+        {
+          "date": "2025-07-21",
+          "portfolio": 100.444,
+          "benchmark": 100.6224,
+          "alpha_bp": -17.84
+        },
+        {
+          "date": "2025-07-22",
+          "portfolio": 100.652,
+          "benchmark": 100.9006,
+          "alpha_bp": -24.86
+        },
+        {
+          "date": "2025-07-23",
+          "portfolio": 100.85,
+          "benchmark": 101.4734,
+          "alpha_bp": -62.34
+        },
+        {
+          "date": "2025-07-24",
+          "portfolio": 100.914,
+          "benchmark": 101.3589,
+          "alpha_bp": -44.49
+        },
+        {
+          "date": "2025-07-25",
+          "portfolio": 100.821,
+          "benchmark": 101.5717,
+          "alpha_bp": -75.07
+        },
+        {
+          "date": "2025-07-28",
+          "portfolio": 100.75,
+          "benchmark": 101.1461,
+          "alpha_bp": -39.61
+        },
+        {
+          "date": "2025-07-29",
+          "portfolio": 100.724,
+          "benchmark": 101.1788,
+          "alpha_bp": -45.48
+        },
+        {
+          "date": "2025-07-30",
+          "portfolio": 100.621,
+          "benchmark": 100.8515,
+          "alpha_bp": -23.05
+        },
+        {
+          "date": "2025-07-31",
+          "portfolio": 100.578,
+          "benchmark": 100.5896,
+          "alpha_bp": -1.16
+        },
+        {
+          "date": "2025-08-01",
+          "portfolio": 100.347,
+          "benchmark": 100.115,
+          "alpha_bp": 23.2
+        },
+        {
+          "date": "2025-08-04",
+          "portfolio": 100.345,
+          "benchmark": 101.0479,
+          "alpha_bp": -70.29
+        },
+        {
+          "date": "2025-08-05",
+          "portfolio": 100.57,
+          "benchmark": 100.9006,
+          "alpha_bp": -33.06
+        },
+        {
+          "date": "2025-08-06",
+          "portfolio": 100.754,
+          "benchmark": 101.1625,
+          "alpha_bp": -40.85
+        },
+        {
+          "date": "2025-08-07",
+          "portfolio": 100.793,
+          "benchmark": 101.3589,
+          "alpha_bp": -56.59
+        },
+        {
+          "date": "2025-08-08",
+          "portfolio": 100.88,
+          "benchmark": 101.7353,
+          "alpha_bp": -85.53
+        },
+        {
+          "date": "2025-08-11",
+          "portfolio": 100.82,
+          "benchmark": 101.588,
+          "alpha_bp": -76.8
+        },
+        {
+          "date": "2025-08-12",
+          "portfolio": 101.013,
+          "benchmark": 102.259,
+          "alpha_bp": -124.6
+        },
+        {
+          "date": "2025-08-13",
+          "portfolio": 101.517,
+          "benchmark": 102.7827,
+          "alpha_bp": -126.57
+        },
+        {
+          "date": "2025-08-14",
+          "portfolio": 101.442,
+          "benchmark": 102.5373,
+          "alpha_bp": -109.53
+        },
+        {
+          "date": "2025-08-15",
+          "portfolio": 101.223,
+          "benchmark": 102.4391,
+          "alpha_bp": -121.61
+        },
+        {
+          "date": "2025-08-18",
+          "portfolio": 101.197,
+          "benchmark": 102.5045,
+          "alpha_bp": -130.75
+        },
+        {
+          "date": "2025-08-19",
+          "portfolio": 101.252,
+          "benchmark": 102.2917,
+          "alpha_bp": -103.97
+        },
+        {
+          "date": "2025-08-20",
+          "portfolio": 101.408,
+          "benchmark": 102.2263,
+          "alpha_bp": -81.83
+        },
+        {
+          "date": "2025-08-21",
+          "portfolio": 101.311,
+          "benchmark": 101.899,
+          "alpha_bp": -58.8
+        },
+        {
+          "date": "2025-08-22",
+          "portfolio": 101.698,
+          "benchmark": 103.0937,
+          "alpha_bp": -139.57
+        },
+        {
+          "date": "2025-08-25",
+          "portfolio": 101.642,
+          "benchmark": 102.6518,
+          "alpha_bp": -100.98
+        },
+        {
+          "date": "2025-08-26",
+          "portfolio": 101.735,
+          "benchmark": 102.8646,
+          "alpha_bp": -112.96
+        },
+        {
+          "date": "2025-08-27",
+          "portfolio": 101.848,
+          "benchmark": 102.8482,
+          "alpha_bp": -100.02
+        },
+        {
+          "date": "2025-08-28",
+          "portfolio": 102.032,
+          "benchmark": 103.1265,
+          "alpha_bp": -109.45
+        },
+        {
+          "date": "2025-08-29",
+          "portfolio": 101.989,
+          "benchmark": 102.8155,
+          "alpha_bp": -82.65
+        },
+        {
+          "date": "2025-09-02",
+          "portfolio": 101.979,
+          "benchmark": 102.2099,
+          "alpha_bp": -23.09
+        },
+        {
+          "date": "2025-09-03",
+          "portfolio": 101.898,
+          "benchmark": 102.5536,
+          "alpha_bp": -65.56
+        },
+        {
+          "date": "2025-09-04",
+          "portfolio": 102.212,
+          "benchmark": 103.2082,
+          "alpha_bp": -99.62
+        },
+        {
+          "date": "2025-09-05",
+          "portfolio": 102.42,
+          "benchmark": 103.4701,
+          "alpha_bp": -105.01
+        },
+        {
+          "date": "2025-09-08",
+          "portfolio": 102.62,
+          "benchmark": 103.8793,
+          "alpha_bp": -125.93
+        },
+        {
+          "date": "2025-09-09",
+          "portfolio": 102.566,
+          "benchmark": 103.8629,
+          "alpha_bp": -129.69
+        },
+        {
+          "date": "2025-09-10",
+          "portfolio": 103.082,
+          "benchmark": 104.0593,
+          "alpha_bp": -97.73
+        },
+        {
+          "date": "2025-09-11",
+          "portfolio": 102.945,
+          "benchmark": 104.7631,
+          "alpha_bp": -181.81
+        },
+        {
+          "date": "2025-09-12",
+          "portfolio": 103.082,
+          "benchmark": 104.534,
+          "alpha_bp": -145.2
+        },
+        {
+          "date": "2025-09-15",
+          "portfolio": 103.072,
+          "benchmark": 105.0577,
+          "alpha_bp": -198.57
+        },
+        {
+          "date": "2025-09-16",
+          "portfolio": 103.175,
+          "benchmark": 104.9923,
+          "alpha_bp": -181.73
+        },
+        {
+          "date": "2025-09-17",
+          "portfolio": 103.113,
+          "benchmark": 104.8777,
+          "alpha_bp": -176.47
+        },
+        {
+          "date": "2025-09-18",
+          "portfolio": 103.111,
+          "benchmark": 105.074,
+          "alpha_bp": -196.3
+        },
+        {
+          "date": "2025-09-19",
+          "portfolio": 103.11,
+          "benchmark": 105.1559,
+          "alpha_bp": -204.59
+        },
+        {
+          "date": "2025-09-22",
+          "portfolio": 103.196,
+          "benchmark": 105.385,
+          "alpha_bp": -218.9
+        },
+        {
+          "date": "2025-09-23",
+          "portfolio": 103.304,
+          "benchmark": 105.2377,
+          "alpha_bp": -193.37
+        },
+        {
+          "date": "2025-09-24",
+          "portfolio": 103.237,
+          "benchmark": 104.7795,
+          "alpha_bp": -154.25
+        },
+        {
+          "date": "2025-09-25",
+          "portfolio": 102.849,
+          "benchmark": 104.4357,
+          "alpha_bp": -158.67
+        },
+        {
+          "date": "2025-09-26",
+          "portfolio": 102.927,
+          "benchmark": 104.7304,
+          "alpha_bp": -180.34
+        },
+        {
+          "date": "2025-09-29",
+          "portfolio": 103.303,
+          "benchmark": 105.1232,
+          "alpha_bp": -182.02
+        },
+        {
+          "date": "2025-09-30",
+          "portfolio": 103.439,
+          "benchmark": 105.3687,
+          "alpha_bp": -192.97
+        },
+        {
+          "date": "2025-10-01",
+          "portfolio": 103.606,
+          "benchmark": 105.7615,
+          "alpha_bp": -215.55
+        },
+        {
+          "date": "2025-10-02",
+          "portfolio": 103.779,
+          "benchmark": 105.9225,
+          "alpha_bp": -214.35
+        },
+        {
+          "date": "2025-10-03",
+          "portfolio": 103.916,
+          "benchmark": 106.0704,
+          "alpha_bp": -215.44
+        },
+        {
+          "date": "2025-10-06",
+          "portfolio": 104.19,
+          "benchmark": 106.1691,
+          "alpha_bp": -197.91
+        },
+        {
+          "date": "2025-10-07",
+          "portfolio": 104.095,
+          "benchmark": 105.8239,
+          "alpha_bp": -172.89
+        },
+        {
+          "date": "2025-10-08",
+          "portfolio": 104.165,
+          "benchmark": 106.2677,
+          "alpha_bp": -210.27
+        },
+        {
+          "date": "2025-10-09",
+          "portfolio": 103.949,
+          "benchmark": 105.8897,
+          "alpha_bp": -194.07
+        },
+        {
+          "date": "2025-10-10",
+          "portfolio": 103.439,
+          "benchmark": 104.2462,
+          "alpha_bp": -80.72
+        },
+        {
+          "date": "2025-10-14",
+          "portfolio": 103.556,
+          "benchmark": 105.3144,
+          "alpha_bp": -175.84
+        },
+        {
+          "date": "2025-10-15",
+          "portfolio": 103.88,
+          "benchmark": 105.7582,
+          "alpha_bp": -187.82
+        },
+        {
+          "date": "2025-10-16",
+          "portfolio": 103.958,
+          "benchmark": 105.6596,
+          "alpha_bp": -170.16
+        },
+        {
+          "date": "2025-10-17",
+          "portfolio": 103.831,
+          "benchmark": 105.8403,
+          "alpha_bp": -200.93
+        },
+        {
+          "date": "2025-10-20",
+          "portfolio": 104.376,
+          "benchmark": 106.5964,
+          "alpha_bp": -222.04
+        },
+        {
+          "date": "2025-10-21",
+          "portfolio": 104.119,
+          "benchmark": 106.3663,
+          "alpha_bp": -224.73
+        },
+        {
+          "date": "2025-10-22",
+          "portfolio": 103.979,
+          "benchmark": 106.1526,
+          "alpha_bp": -217.36
+        },
+        {
+          "date": "2025-10-23",
+          "portfolio": 104.017,
+          "benchmark": 106.4978,
+          "alpha_bp": -248.08
+        },
+        {
+          "date": "2025-10-24",
+          "portfolio": 104.192,
+          "benchmark": 106.9744,
+          "alpha_bp": -278.24
+        },
+        {
+          "date": "2025-10-27",
+          "portfolio": 104.244,
+          "benchmark": 107.8125,
+          "alpha_bp": -356.85
+        },
+        {
+          "date": "2025-10-28",
+          "portfolio": 104.163,
+          "benchmark": 107.6975,
+          "alpha_bp": -353.45
+        },
+        {
+          "date": "2025-10-29",
+          "portfolio": 103.758,
+          "benchmark": 107.4674,
+          "alpha_bp": -370.94
+        },
+        {
+          "date": "2025-10-30",
+          "portfolio": 103.558,
+          "benchmark": 106.8922,
+          "alpha_bp": -333.42
+        },
+        {
+          "date": "2025-10-31",
+          "portfolio": 103.502,
+          "benchmark": 106.9744,
+          "alpha_bp": -347.24
+        },
+        {
+          "date": "2025-11-03",
+          "portfolio": 103.386,
+          "benchmark": 107.0073,
+          "alpha_bp": -362.13
+        },
+        {
+          "date": "2025-11-04",
+          "portfolio": 103.2,
+          "benchmark": 106.2348,
+          "alpha_bp": -303.48
+        },
+        {
+          "date": "2025-11-05",
+          "portfolio": 103.218,
+          "benchmark": 106.4813,
+          "alpha_bp": -326.33
+        },
+        {
+          "date": "2025-11-06",
+          "portfolio": 103.124,
+          "benchmark": 106.0869,
+          "alpha_bp": -296.29
+        },
+        {
+          "date": "2025-11-07",
+          "portfolio": 103.228,
+          "benchmark": 106.1691,
+          "alpha_bp": -294.11
+        },
+        {
+          "date": "2025-11-10",
+          "portfolio": 103.59,
+          "benchmark": 107.0729,
+          "alpha_bp": -348.29
+        },
+        {
+          "date": "2025-11-12",
+          "portfolio": 103.979,
+          "benchmark": 107.5003,
+          "alpha_bp": -352.13
+        },
+        {
+          "date": "2025-11-13",
+          "portfolio": 103.896,
+          "benchmark": 106.432,
+          "alpha_bp": -253.6
+        },
+        {
+          "date": "2025-11-14",
+          "portfolio": 103.382,
+          "benchmark": 106.3499,
+          "alpha_bp": -296.79
+        },
+        {
+          "date": "2025-11-17",
+          "portfolio": 102.951,
+          "benchmark": 105.6596,
+          "alpha_bp": -270.86
+        },
+        {
+          "date": "2025-11-18",
+          "portfolio": 102.728,
+          "benchmark": 105.1665,
+          "alpha_bp": -243.85
+        },
+        {
+          "date": "2025-11-19",
+          "portfolio": 102.592,
+          "benchmark": 105.2158,
+          "alpha_bp": -262.38
+        },
+        {
+          "date": "2025-11-20",
+          "portfolio": 102.452,
+          "benchmark": 104.3612,
+          "alpha_bp": -190.92
+        },
+        {
+          "date": "2025-11-21",
+          "portfolio": 102.339,
+          "benchmark": 105.1336,
+          "alpha_bp": -279.46
+        },
+        {
+          "date": "2025-11-24",
+          "portfolio": 102.961,
+          "benchmark": 105.8568,
+          "alpha_bp": -289.58
+        },
+        {
+          "date": "2025-11-25",
+          "portfolio": 103.12,
+          "benchmark": 106.5635,
+          "alpha_bp": -344.35
+        },
+        {
+          "date": "2025-11-26",
+          "portfolio": 103.501,
+          "benchmark": 107.1222,
+          "alpha_bp": -362.12
+        },
+        {
+          "date": "2025-11-28",
+          "portfolio": 103.577,
+          "benchmark": 107.566,
+          "alpha_bp": -398.9
+        },
+        {
+          "date": "2025-12-01",
+          "portfolio": 103.382,
+          "benchmark": 106.9415,
+          "alpha_bp": -355.95
+        },
+        {
+          "date": "2025-12-02",
+          "portfolio": 103.389,
+          "benchmark": 107.1058,
+          "alpha_bp": -371.68
+        },
+        {
+          "date": "2025-12-03",
+          "portfolio": 103.502,
+          "benchmark": 107.4509,
+          "alpha_bp": -394.89
+        },
+        {
+          "date": "2025-12-04",
+          "portfolio": 103.591,
+          "benchmark": 107.4509,
+          "alpha_bp": -385.99
+        },
+        {
+          "date": "2025-12-05",
+          "portfolio": 103.439,
+          "benchmark": 107.5167,
+          "alpha_bp": -407.77
+        },
+        {
+          "date": "2025-12-08",
+          "portfolio": 103.249,
+          "benchmark": 107.188,
+          "alpha_bp": -393.9
+        },
+        {
+          "date": "2025-12-09",
+          "portfolio": 103.189,
+          "benchmark": 107.188,
+          "alpha_bp": -399.9
+        },
+        {
+          "date": "2025-12-10",
+          "portfolio": 103.181,
+          "benchmark": 107.8454,
+          "alpha_bp": -466.44
+        },
+        {
+          "date": "2025-12-11",
+          "portfolio": 103.533,
+          "benchmark": 108.0591,
+          "alpha_bp": -452.61
+        },
+        {
+          "date": "2025-12-12",
+          "portfolio": 103.533,
+          "benchmark": 107.3523,
+          "alpha_bp": -381.93
+        },
+        {
+          "date": "2025-12-15",
+          "portfolio": 103.382,
+          "benchmark": 107.4016,
+          "alpha_bp": -401.96
+        },
+        {
+          "date": "2025-12-16",
+          "portfolio": 103.285,
+          "benchmark": 107.2044,
+          "alpha_bp": -391.94
+        },
+        {
+          "date": "2025-12-17",
+          "portfolio": 103.276,
+          "benchmark": 106.5964,
+          "alpha_bp": -332.04
+        },
+        {
+          "date": "2025-12-18",
+          "portfolio": 103.375,
+          "benchmark": 107.188,
+          "alpha_bp": -381.3
+        },
+        {
+          "date": "2025-12-19",
+          "portfolio": 103.417,
+          "benchmark": 107.6646,
+          "alpha_bp": -424.76
+        },
+        {
+          "date": "2025-12-22",
+          "portfolio": 103.659,
+          "benchmark": 107.9933,
+          "alpha_bp": -433.43
+        },
+        {
+          "date": "2025-12-23",
+          "portfolio": 103.803,
+          "benchmark": 108.2906,
+          "alpha_bp": -448.76
+        },
+        {
+          "date": "2025-12-24",
+          "portfolio": 103.85,
+          "benchmark": 108.606,
+          "alpha_bp": -475.6
+        },
+        {
+          "date": "2025-12-26",
+          "portfolio": 103.882,
+          "benchmark": 108.6558,
+          "alpha_bp": -477.38
+        },
+        {
+          "date": "2025-12-29",
+          "portfolio": 103.678,
+          "benchmark": 108.5064,
+          "alpha_bp": -482.84
+        },
+        {
+          "date": "2025-12-30",
+          "portfolio": 103.856,
+          "benchmark": 108.4566,
+          "alpha_bp": -460.06
+        },
+        {
+          "date": "2025-12-31",
+          "portfolio": 103.781,
+          "benchmark": 107.9418,
+          "alpha_bp": -416.08
+        },
+        {
+          "date": "2026-01-02",
+          "portfolio": 103.643,
+          "benchmark": 108.4067,
+          "alpha_bp": -476.37
+        },
+        {
+          "date": "2026-01-05",
+          "portfolio": 104.141,
+          "benchmark": 109.0211,
+          "alpha_bp": -488.01
+        },
+        {
+          "date": "2026-01-06",
+          "portfolio": 104.307,
+          "benchmark": 109.3034,
+          "alpha_bp": -499.64
+        },
+        {
+          "date": "2026-01-07",
+          "portfolio": 104.284,
+          "benchmark": 109.1705,
+          "alpha_bp": -488.65
+        },
+        {
+          "date": "2026-01-08",
+          "portfolio": 104.631,
+          "benchmark": 109.1041,
+          "alpha_bp": -447.31
+        },
+        {
+          "date": "2026-01-09",
+          "portfolio": 104.787,
+          "benchmark": 109.6022,
+          "alpha_bp": -481.52
+        },
+        {
+          "date": "2026-01-12",
+          "portfolio": 105.036,
+          "benchmark": 109.9343,
+          "alpha_bp": -489.83
+        },
+        {
+          "date": "2026-01-13",
+          "portfolio": 105.068,
+          "benchmark": 109.7516,
+          "alpha_bp": -468.36
+        },
+        {
+          "date": "2026-01-14",
+          "portfolio": 105.283,
+          "benchmark": 109.7351,
+          "alpha_bp": -445.21
+        },
+        {
+          "date": "2026-01-15",
+          "portfolio": 105.227,
+          "benchmark": 109.8513,
+          "alpha_bp": -462.43
+        },
+        {
+          "date": "2026-01-16",
+          "portfolio": 105.258,
+          "benchmark": 109.7849,
+          "alpha_bp": -452.69
+        },
+        {
+          "date": "2026-01-20",
+          "portfolio": 104.846,
+          "benchmark": 108.44,
+          "alpha_bp": -359.4
+        },
+        {
+          "date": "2026-01-21",
+          "portfolio": 104.94,
+          "benchmark": 109.3864,
+          "alpha_bp": -444.64
+        },
+        {
+          "date": "2026-01-22",
+          "portfolio": 105.368,
+          "benchmark": 109.7516,
+          "alpha_bp": -438.36
+        },
+        {
+          "date": "2026-01-23",
+          "portfolio": 105.759,
+          "benchmark": 109.9012,
+          "alpha_bp": -414.22
+        },
+        {
+          "date": "2026-01-26",
+          "portfolio": 105.896,
+          "benchmark": 110.2664,
+          "alpha_bp": -437.04
+        },
+        {
+          "date": "2026-01-27",
+          "portfolio": 106.148,
+          "benchmark": 110.8309,
+          "alpha_bp": -468.29
+        },
+        {
+          "date": "2026-01-28",
+          "portfolio": 106.238,
+          "benchmark": 110.6649,
+          "alpha_bp": -442.69
+        },
+        {
+          "date": "2026-01-29",
+          "portfolio": 106.022,
+          "benchmark": 110.7147,
+          "alpha_bp": -469.27
+        },
+        {
+          "date": "2026-01-30",
+          "portfolio": 105.392,
+          "benchmark": 110.1834,
+          "alpha_bp": -479.14
+        },
+        {
+          "date": "2026-02-02",
+          "portfolio": 104.944,
+          "benchmark": 110.4158,
+          "alpha_bp": -547.18
+        },
+        {
+          "date": "2026-02-03",
+          "portfolio": 105.309,
+          "benchmark": 110.2498,
+          "alpha_bp": -494.08
+        },
+        {
+          "date": "2026-02-04",
+          "portfolio": 105.128,
+          "benchmark": 110.0339,
+          "alpha_bp": -490.59
+        },
+        {
+          "date": "2026-02-05",
+          "portfolio": 104.399,
+          "benchmark": 109.3366,
+          "alpha_bp": -493.76
+        },
+        {
+          "date": "2026-02-06",
+          "portfolio": 105.086,
+          "benchmark": 110.7977,
+          "alpha_bp": -571.17
+        },
+        {
+          "date": "2026-02-09",
+          "portfolio": 105.511,
+          "benchmark": 111.3124,
+          "alpha_bp": -580.14
+        },
+        {
+          "date": "2026-02-10",
+          "portfolio": 105.604,
+          "benchmark": 111.3789,
+          "alpha_bp": -577.49
+        },
+        {
+          "date": "2026-02-11",
+          "portfolio": 105.735,
+          "benchmark": 111.4618,
+          "alpha_bp": -572.68
+        },
+        {
+          "date": "2026-02-12",
+          "portfolio": 105.485,
+          "benchmark": 110.7479,
+          "alpha_bp": -526.29
+        },
+        {
+          "date": "2026-02-13",
+          "portfolio": 105.479,
+          "benchmark": 110.997,
+          "alpha_bp": -551.8
+        },
+        {
+          "date": "2026-02-17",
+          "portfolio": 105.356,
+          "benchmark": 111.0468,
+          "alpha_bp": -569.08
+        },
+        {
+          "date": "2026-02-18",
+          "portfolio": 105.347,
+          "benchmark": 111.3124,
+          "alpha_bp": -596.54
+        },
+        {
+          "date": "2026-02-19",
+          "portfolio": 105.421,
+          "benchmark": 111.1797,
+          "alpha_bp": -575.87
+        },
+        {
+          "date": "2026-02-20",
+          "portfolio": 105.727,
+          "benchmark": 111.7773,
+          "alpha_bp": -605.03
+        },
+        {
+          "date": "2026-02-23",
+          "portfolio": 105.582,
+          "benchmark": 111.246,
+          "alpha_bp": -566.4
+        },
+        {
+          "date": "2026-02-24",
+          "portfolio": 105.741,
+          "benchmark": 111.7275,
+          "alpha_bp": -598.65
+        },
+        {
+          "date": "2026-02-25",
+          "portfolio": 106.111,
+          "benchmark": 112.2588,
+          "alpha_bp": -614.78
+        },
+        {
+          "date": "2026-02-26",
+          "portfolio": 106.126,
+          "benchmark": 112.0264,
+          "alpha_bp": -590.04
+        },
+        {
+          "date": "2026-02-27",
+          "portfolio": 106.06,
+          "benchmark": 111.8438,
+          "alpha_bp": -578.38
+        },
+        {
+          "date": "2026-03-02",
+          "portfolio": 105.644,
+          "benchmark": 111.2792,
+          "alpha_bp": -563.52
+        },
+        {
+          "date": "2026-03-03",
+          "portfolio": 104.65,
+          "benchmark": 109.8679,
+          "alpha_bp": -521.79
+        },
+        {
+          "date": "2026-03-04",
+          "portfolio": 105.168,
+          "benchmark": 110.449,
+          "alpha_bp": -528.1
+        },
+        {
+          "date": "2026-03-05",
+          "portfolio": 104.903,
+          "benchmark": 109.5026,
+          "alpha_bp": -459.96
+        },
+        {
+          "date": "2026-03-06",
+          "portfolio": 104.497,
+          "benchmark": 108.7056,
+          "alpha_bp": -420.86
+        },
+        {
+          "date": "2026-03-09",
+          "portfolio": 104.277,
+          "benchmark": 109.3532,
+          "alpha_bp": -507.62
+        },
+        {
+          "date": "2026-03-10",
+          "portfolio": 104.723,
+          "benchmark": 109.3034,
+          "alpha_bp": -458.04
+        },
+        {
+          "date": "2026-03-11",
+          "portfolio": 104.496,
+          "benchmark": 108.9879,
+          "alpha_bp": -449.19
+        },
+        {
+          "date": "2026-03-12",
+          "portfolio": 103.841,
+          "benchmark": 107.6928,
+          "alpha_bp": -385.18
+        },
+        {
+          "date": "2026-03-13",
+          "portfolio": 103.405,
+          "benchmark": 107.2113,
+          "alpha_bp": -380.63
+        },
+        {
+          "date": "2026-03-16",
+          "portfolio": 103.69,
+          "benchmark": 108.2573,
+          "alpha_bp": -456.73
+        },
+        {
+          "date": "2026-03-17",
+          "portfolio": 104.031,
+          "benchmark": 108.5728,
+          "alpha_bp": -454.18
+        },
+        {
+          "date": "2026-03-18",
+          "portfolio": 103.431,
+          "benchmark": 107.394,
+          "alpha_bp": -396.3
+        },
+        {
+          "date": "2026-03-19",
+          "portfolio": 102.925,
+          "benchmark": 107.3109,
+          "alpha_bp": -438.59
+        },
+        {
+          "date": "2026-03-20",
+          "portfolio": 100.071,
+          "benchmark": 105.5509,
+          "alpha_bp": -547.99
+        },
+        {
+          "date": "2026-03-23",
+          "portfolio": 102.421,
+          "benchmark": 106.846,
+          "alpha_bp": -442.5
+        },
+        {
+          "date": "2026-03-24",
+          "portfolio": 102.399,
+          "benchmark": 106.3645,
+          "alpha_bp": -396.55
+        },
+        {
+          "date": "2026-03-25",
+          "portfolio": 102.955,
+          "benchmark": 107.1615,
+          "alpha_bp": -420.65
+        },
+        {
+          "date": "2026-03-26",
+          "portfolio": 102.575,
+          "benchmark": 105.6671,
+          "alpha_bp": -309.21
+        },
+        {
+          "date": "2026-03-27",
+          "portfolio": 99.842,
+          "benchmark": 104.8037,
+          "alpha_bp": -496.17
+        },
+        {
+          "date": "2026-03-30",
+          "portfolio": 101.969,
+          "benchmark": 104.8037,
+          "alpha_bp": -283.47
+        },
+        {
+          "date": "2026-03-31",
+          "portfolio": 102.533,
+          "benchmark": 106.846,
+          "alpha_bp": -431.3
+        },
+        {
+          "date": "2026-04-01",
+          "portfolio": 103.312,
+          "benchmark": 107.4936,
+          "alpha_bp": -418.16
+        },
+        {
+          "date": "2026-04-02",
+          "portfolio": 103.23,
+          "benchmark": 107.4251,
+          "alpha_bp": -419.51
+        },
+        {
+          "date": "2026-04-03",
+          "portfolio": 103.225,
+          "benchmark": 107.4251,
+          "alpha_bp": -420.01
+        },
+        {
+          "date": "2026-04-06",
+          "portfolio": 103.17,
+          "benchmark": 107.6754,
+          "alpha_bp": -450.54
+        },
+        {
+          "date": "2026-04-07",
+          "portfolio": 103.155,
+          "benchmark": 107.7755,
+          "alpha_bp": -462.05
+        },
+        {
+          "date": "2026-04-08",
+          "portfolio": 104.211,
+          "benchmark": 109.9778,
+          "alpha_bp": -576.68
+        },
+        {
+          "date": "2026-04-09",
+          "portfolio": 104.609,
+          "benchmark": 110.1946,
+          "alpha_bp": -558.56
+        },
+        {
+          "date": "2026-04-10",
+          "portfolio": 104.722,
+          "benchmark": 110.1279,
+          "alpha_bp": -540.59
+        },
+        {
+          "date": "2026-04-13",
+          "portfolio": 104.687,
+          "benchmark": 110.8453,
+          "alpha_bp": -615.83
+        },
+        {
+          "date": "2026-04-14",
+          "portfolio": 105.256,
+          "benchmark": 111.7128,
+          "alpha_bp": -645.68
+        },
+        {
+          "date": "2026-04-15",
+          "portfolio": 105.269,
+          "benchmark": 111.9297,
+          "alpha_bp": -666.07
+        },
+        {
+          "date": "2026-04-16",
+          "portfolio": 105.341,
+          "benchmark": 111.9631,
+          "alpha_bp": -662.21
+        },
+        {
+          "date": "2026-04-17",
+          "portfolio": 105.855,
+          "benchmark": 113.0308,
+          "alpha_bp": -717.58
+        },
+        {
+          "date": "2026-04-20",
+          "portfolio": 105.925,
+          "benchmark": 112.814,
+          "alpha_bp": -688.9
+        },
+        {
+          "date": "2026-04-21",
+          "portfolio": 105.683,
+          "benchmark": 111.8963,
+          "alpha_bp": -621.33
+        },
+        {
+          "date": "2026-04-22",
+          "portfolio": 105.71,
+          "benchmark": 112.5303,
+          "alpha_bp": -682.03
+        },
+        {
+          "date": "2026-04-23",
+          "portfolio": 105.55,
+          "benchmark": 112.0632,
+          "alpha_bp": -651.32
+        },
+        {
+          "date": "2026-04-24",
+          "portfolio": 105.404,
+          "benchmark": 112.7139,
+          "alpha_bp": -730.99
+        },
+        {
+          "date": "2026-04-27",
+          "portfolio": 105.4,
+          "benchmark": 112.6471,
+          "alpha_bp": -724.71
+        },
+        {
+          "date": "2026-04-28",
+          "portfolio": 105.087,
+          "benchmark": 112.2299,
+          "alpha_bp": -714.29
+        },
+        {
+          "date": "2026-04-29",
+          "portfolio": 104.618,
+          "benchmark": 111.8296,
+          "alpha_bp": -721.16
+        },
+        {
+          "date": "2026-04-30",
+          "portfolio": 104.799,
+          "benchmark": 112.9307,
+          "alpha_bp": -813.17
+        },
+        {
+          "date": "2026-05-01",
+          "portfolio": 105.329,
+          "benchmark": 113.0642,
+          "alpha_bp": -773.52
+        },
+        {
+          "date": "2026-05-04",
+          "portfolio": 105.217,
+          "benchmark": 112.547,
+          "alpha_bp": -733.0
+        },
+        {
+          "date": "2026-05-05",
+          "portfolio": 105.432,
+          "benchmark": 113.3311,
+          "alpha_bp": -789.91
+        },
+        {
+          "date": "2026-05-06",
+          "portfolio": 106.053,
+          "benchmark": 114.8159,
+          "alpha_bp": -876.29
+        },
+        {
+          "date": "2026-05-07",
+          "portfolio": 107.99,
+          "benchmark": 114.0985,
+          "alpha_bp": -610.85
+        },
+        {
+          "date": "2026-05-08",
+          "portfolio": 105.972,
+          "benchmark": 114.8493,
+          "alpha_bp": -887.73
+        },
+        {
+          "date": "2026-05-11",
+          "portfolio": 105.962,
+          "benchmark": 114.866,
+          "alpha_bp": -890.4
+        },
+        {
+          "date": "2026-05-12",
+          "portfolio": 105.501,
+          "benchmark": 114.2987,
+          "alpha_bp": -879.77
+        },
+        {
+          "date": "2026-05-13",
+          "portfolio": 105.356,
+          "benchmark": 114.7492,
+          "alpha_bp": -939.32
+        },
+        {
+          "date": "2026-05-14",
+          "portfolio": 105.553,
+          "benchmark": 115.0661,
+          "alpha_bp": -951.31
+        },
+        {
+          "date": "2026-05-15",
+          "portfolio": 104.922,
+          "benchmark": 113.6647,
+          "alpha_bp": -874.27
+        },
+        {
+          "date": "2026-05-18",
+          "portfolio": 104.651,
+          "benchmark": 113.7648,
+          "alpha_bp": -911.38
+        },
+        {
+          "date": "2026-05-19",
+          "portfolio": 104.394,
+          "benchmark": 113.1643,
+          "alpha_bp": -877.03
+        },
+        {
+          "date": "2026-05-20",
+          "portfolio": 104.809,
+          "benchmark": 114.2654,
+          "alpha_bp": -945.64
+        },
+        {
+          "date": "2026-05-21",
+          "portfolio": 105.091,
+          "benchmark": 114.5823,
+          "alpha_bp": -949.13
+        },
+        {
+          "date": "2026-05-22",
+          "portfolio": 105.198,
+          "benchmark": 114.7659,
+          "alpha_bp": -956.79
+        },
+        {
+          "date": "2026-05-26",
+          "portfolio": 105.501,
+          "benchmark": 115.7335,
+          "alpha_bp": -1023.25
+        },
+        {
+          "date": "2026-05-27",
+          "portfolio": 105.555,
+          "benchmark": 115.6334,
+          "alpha_bp": -1007.84
+        },
+        {
+          "date": "2026-05-28",
+          "portfolio": 105.561,
+          "benchmark": 115.9838,
+          "alpha_bp": -1042.28
+        },
+        {
+          "date": "2026-05-29",
+          "portfolio": 105.849,
+          "benchmark": 116.134,
+          "alpha_bp": -1028.5
+        },
+        {
+          "date": "2026-06-01",
+          "portfolio": 105.67,
+          "benchmark": 116.2841,
+          "alpha_bp": -1061.41
+        },
+        {
+          "date": "2026-06-02",
+          "portfolio": 105.642,
+          "benchmark": 116.5343,
+          "alpha_bp": -1089.23
+        },
+        {
+          "date": "2026-06-03",
+          "portfolio": 105.267,
+          "benchmark": 115.917,
+          "alpha_bp": -1065.0
+        },
+        {
+          "date": "2026-06-04",
+          "portfolio": 105.156,
+          "benchmark": 116.2007,
+          "alpha_bp": -1104.47
+        },
+        {
+          "date": "2026-06-05",
+          "portfolio": 104.596,
+          "benchmark": 113.9151,
+          "alpha_bp": -931.91
+        },
+        {
+          "date": "2026-06-08",
+          "portfolio": 104.308,
+          "benchmark": 114.232,
+          "alpha_bp": -992.4
+        },
+        {
+          "date": "2026-06-09",
+          "portfolio": 104.131,
+          "benchmark": 114.232,
+          "alpha_bp": -1010.1
+        },
+        {
+          "date": "2026-06-10",
+          "portfolio": 103.911,
+          "benchmark": 113.1809,
+          "alpha_bp": -926.99
+        },
+        {
+          "date": "2026-06-11",
+          "portfolio": 104.189,
+          "benchmark": 115.0161,
+          "alpha_bp": -1082.71
+        },
+        {
+          "date": "2026-06-12",
+          "portfolio": 104.737,
+          "benchmark": 115.3165,
+          "alpha_bp": -1057.95
+        },
+        {
+          "date": "2026-06-15",
+          "portfolio": 105.386,
+          "benchmark": 116.4176,
+          "alpha_bp": -1103.16
+        },
+        {
+          "date": "2026-06-16",
+          "portfolio": 105.336,
+          "benchmark": 116.2007,
+          "alpha_bp": -1086.47
+        },
+        {
+          "date": "2026-06-17",
+          "portfolio": 105.031,
+          "benchmark": 115.3832,
+          "alpha_bp": -1035.22
+        },
+        {
+          "date": "2026-06-18",
+          "portfolio": 104.637,
+          "benchmark": 116.3842,
+          "alpha_bp": -1174.72
+        },
+        {
+          "date": "2026-06-22",
+          "portfolio": 104.774,
+          "benchmark": 116.1172,
+          "alpha_bp": -1134.32
+        },
+        {
+          "date": "2026-06-23",
+          "portfolio": 104.397,
+          "benchmark": 114.7492,
+          "alpha_bp": -1035.22
+        },
+        {
+          "date": "2026-06-24",
+          "portfolio": 104.165,
+          "benchmark": 114.8827,
+          "alpha_bp": -1071.77
+        },
+        {
+          "date": "2026-06-25",
+          "portfolio": 104.393,
+          "benchmark": 115.1496,
+          "alpha_bp": -1075.66
+        },
+        {
+          "date": "2026-06-26",
+          "portfolio": 104.665,
+          "benchmark": 114.8994,
+          "alpha_bp": -1023.44
+        },
+        {
+          "date": "2026-06-29",
+          "portfolio": 104.718,
+          "benchmark": 115.6334,
+          "alpha_bp": -1091.54
+        },
+        {
+          "date": "2026-06-30",
+          "portfolio": 104.833,
+          "benchmark": 115.9504,
+          "alpha_bp": -1111.74
+        },
+        {
+          "date": "2026-07-01",
+          "portfolio": 104.881,
+          "benchmark": 115.4999,
+          "alpha_bp": -1061.89
+        },
+        {
+          "date": "2026-07-02",
+          "portfolio": 105.133,
+          "benchmark": 116.4447,
+          "alpha_bp": -1131.17
+        },
+        {
+          "date": "2026-07-06",
+          "portfolio": 105.147,
+          "benchmark": 116.4615,
+          "alpha_bp": -1131.45
+        },
+        {
+          "date": "2026-07-07",
+          "portfolio": 105.487,
+          "benchmark": 115.5706,
+          "alpha_bp": -1008.36
+        },
+        {
+          "date": "2026-07-08",
+          "portfolio": 105.001,
+          "benchmark": 115.2344,
+          "alpha_bp": -1023.34
+        },
+        {
+          "date": "2026-07-09",
+          "portfolio": 105.232,
+          "benchmark": 115.8732,
+          "alpha_bp": -1064.12
+        },
+        {
+          "date": "2026-07-10",
+          "portfolio": 105.535,
+          "benchmark": 116.159,
+          "alpha_bp": -1062.4
+        },
+        {
+          "date": "2026-07-13",
+          "portfolio": 105.305,
+          "benchmark": 115.1672,
+          "alpha_bp": -986.22
+        },
+        {
+          "date": "2026-07-14",
+          "portfolio": 105.529,
+          "benchmark": 115.7387,
+          "alpha_bp": -1020.97
+        },
+        {
+          "date": "2026-07-15",
+          "portfolio": 105.644,
+          "benchmark": 116.0917,
+          "alpha_bp": -1044.77
+        },
+        {
+          "date": "2026-07-16",
+          "portfolio": 105.625,
+          "benchmark": 115.5874,
+          "alpha_bp": -996.24
+        },
+        {
+          "date": "2026-07-17",
+          "portfolio": 105.378,
+          "benchmark": 114.999,
+          "alpha_bp": -962.1
+        },
+        {
+          "date": "2026-07-20",
+          "portfolio": 105.375,
+          "benchmark": 114.6292,
+          "alpha_bp": -925.42
+        },
+        {
+          "date": "2026-07-21",
+          "portfolio": 105.519,
+          "benchmark": 115.352,
+          "alpha_bp": -983.3
+        },
+        {
+          "date": "2026-07-22",
+          "portfolio": 105.572,
+          "benchmark": 115.3185,
+          "alpha_bp": -974.65
+        },
+        {
+          "date": "2026-07-23",
+          "portfolio": 105.0,
+          "benchmark": 114.377,
+          "alpha_bp": -937.7
+        },
+        {
+          "date": "2026-07-24",
+          "portfolio": 105.056,
+          "benchmark": 114.4106,
+          "alpha_bp": -935.46
+        },
+        {
+          "date": "2026-07-27",
+          "portfolio": 105.202,
+          "benchmark": 114.6292,
+          "alpha_bp": -942.72
+        },
+        {
+          "date": "2026-07-28",
+          "portfolio": 105.325,
+          "benchmark": 114.6964,
+          "alpha_bp": -937.14
+        },
+        {
+          "date": "2026-07-29",
+          "portfolio": 105.358,
+          "benchmark": 113.6373,
+          "alpha_bp": -827.93
+        },
+        {
+          "date": "2026-07-30",
+          "portfolio": 105.564,
+          "benchmark": 115.1335,
+          "alpha_bp": -956.95
+        },
+        {
+          "date": "2026-07-31",
+          "portfolio": 105.677,
+          "benchmark": 115.2007,
+          "alpha_bp": -952.37
+        },
+        {
+          "date": "2026-08-03",
+          "portfolio": 106.059,
+          "benchmark": 116.0917,
+          "alpha_bp": -1003.27
+        },
+        {
+          "date": "2026-08-04",
+          "portfolio": 106.475,
+          "benchmark": 117.487,
+          "alpha_bp": -1101.2
+        },
+        {
+          "date": "2026-08-05",
+          "portfolio": 106.999,
+          "benchmark": 117.4533,
+          "alpha_bp": -1045.43
+        },
+        {
+          "date": "2026-08-06",
+          "portfolio": 106.823,
+          "benchmark": 117.2012,
+          "alpha_bp": -1037.82
+        },
+        {
+          "date": "2026-08-07",
+          "portfolio": 106.979,
+          "benchmark": 117.8736,
+          "alpha_bp": -1089.46
+        },
+        {
+          "date": "2026-08-10",
+          "portfolio": 107.045,
+          "benchmark": 117.5374,
+          "alpha_bp": -1049.24
+        },
+        {
+          "date": "2026-08-11",
+          "portfolio": 106.861,
+          "benchmark": 117.5037,
+          "alpha_bp": -1064.27
+        }
+      ],
+      "returns": {
+        "1M": {
+          "portfolio_pct": 1.26,
+          "benchmark_pct": 1.16,
+          "alpha_bp": 9.9,
+          "ref_date": "2026-07-10"
+        },
+        "3M": {
+          "portfolio_pct": 1.29,
+          "benchmark_pct": 2.8,
+          "alpha_bp": -151.5,
+          "ref_date": "2026-05-12"
+        },
+        "6M": {
+          "portfolio_pct": 1.19,
+          "benchmark_pct": 5.5,
+          "alpha_bp": -430.9,
+          "ref_date": "2026-02-10"
+        },
+        "YTD": {
+          "portfolio_pct": 2.97,
+          "benchmark_pct": 8.86,
+          "alpha_bp": -589.1,
+          "ref_date": "2025-12-31"
+        },
+        "LTM": {
+          "portfolio_pct": 5.99,
+          "benchmark_pct": 15.67,
+          "alpha_bp": -967.5,
+          "ref_date": "2025-08-11"
+        },
+        "SI": {
+          "portfolio_pct": 6.86,
+          "benchmark_pct": 17.5,
+          "alpha_bp": -1064.3,
+          "ref_date": "2025-06-30"
+        }
+      },
+      "stats": {
+        "n_days": 279,
+        "tracking_error_pct_ann": 7.95,
+        "info_ratio": -1.1,
+        "sharpe_portfolio": 0.911,
+        "sharpe_benchmark": 1.67,
+        "beta": 0.398,
+        "correlation": 0.521,
+        "volatility_portfolio_pct_ann": 6.84,
+        "volatility_benchmark_pct_ann": 8.96
+      }
+    },
+    "equity_vs_acwi": {
+      "portfolio_name": "Equity Sleeve TWR",
+      "benchmark_name": "ACWI",
+      "portfolio_source": "data/equity_sleeve_real.json -> twr_series",
+      "benchmark_source": "data/equity_sleeve_real.json -> acwi_index_series",
+      "inception": "2025-07-31",
+      "as_of": "2026-08-12",
+      "n_observations": 378,
+      "series": [
+        {
+          "date": "2025-07-31",
+          "portfolio": 100.0,
+          "benchmark": 100.0,
+          "alpha_bp": 0.0
+        },
+        {
+          "date": "2025-08-01",
+          "portfolio": 100.2147,
+          "benchmark": 100.0864,
+          "alpha_bp": 12.83
+        },
+        {
+          "date": "2025-08-02",
+          "portfolio": 100.4295,
+          "benchmark": 100.1728,
+          "alpha_bp": 25.67
+        },
+        {
+          "date": "2025-08-03",
+          "portfolio": 100.6442,
+          "benchmark": 100.2591,
+          "alpha_bp": 38.51
+        },
+        {
+          "date": "2025-08-04",
+          "portfolio": 100.8589,
+          "benchmark": 100.3455,
+          "alpha_bp": 51.34
+        },
+        {
+          "date": "2025-08-05",
+          "portfolio": 101.0737,
+          "benchmark": 100.4319,
+          "alpha_bp": 64.18
+        },
+        {
+          "date": "2025-08-06",
+          "portfolio": 101.2884,
+          "benchmark": 100.5183,
+          "alpha_bp": 77.01
+        },
+        {
+          "date": "2025-08-07",
+          "portfolio": 101.5031,
+          "benchmark": 100.6046,
+          "alpha_bp": 89.85
+        },
+        {
+          "date": "2025-08-08",
+          "portfolio": 101.7179,
+          "benchmark": 100.691,
+          "alpha_bp": 102.69
+        },
+        {
+          "date": "2025-08-09",
+          "portfolio": 101.9326,
+          "benchmark": 100.7774,
+          "alpha_bp": 115.52
+        },
+        {
+          "date": "2025-08-10",
+          "portfolio": 102.1473,
+          "benchmark": 100.8638,
+          "alpha_bp": 128.35
+        },
+        {
+          "date": "2025-08-11",
+          "portfolio": 102.362,
+          "benchmark": 100.9502,
+          "alpha_bp": 141.18
+        },
+        {
+          "date": "2025-08-12",
+          "portfolio": 102.5768,
+          "benchmark": 101.0365,
+          "alpha_bp": 154.03
+        },
+        {
+          "date": "2025-08-13",
+          "portfolio": 102.7915,
+          "benchmark": 101.1229,
+          "alpha_bp": 166.86
+        },
+        {
+          "date": "2025-08-14",
+          "portfolio": 103.0062,
+          "benchmark": 101.2093,
+          "alpha_bp": 179.69
+        },
+        {
+          "date": "2025-08-15",
+          "portfolio": 103.221,
+          "benchmark": 101.2957,
+          "alpha_bp": 192.53
+        },
+        {
+          "date": "2025-08-16",
+          "portfolio": 103.4357,
+          "benchmark": 101.382,
+          "alpha_bp": 205.37
+        },
+        {
+          "date": "2025-08-17",
+          "portfolio": 103.6504,
+          "benchmark": 101.4684,
+          "alpha_bp": 218.2
+        },
+        {
+          "date": "2025-08-18",
+          "portfolio": 103.8652,
+          "benchmark": 101.5548,
+          "alpha_bp": 231.04
+        },
+        {
+          "date": "2025-08-19",
+          "portfolio": 104.0799,
+          "benchmark": 101.6412,
+          "alpha_bp": 243.87
+        },
+        {
+          "date": "2025-08-20",
+          "portfolio": 104.2946,
+          "benchmark": 101.7275,
+          "alpha_bp": 256.71
+        },
+        {
+          "date": "2025-08-21",
+          "portfolio": 104.5094,
+          "benchmark": 101.8139,
+          "alpha_bp": 269.55
+        },
+        {
+          "date": "2025-08-22",
+          "portfolio": 104.7241,
+          "benchmark": 101.9003,
+          "alpha_bp": 282.38
+        },
+        {
+          "date": "2025-08-23",
+          "portfolio": 104.9388,
+          "benchmark": 101.9867,
+          "alpha_bp": 295.21
+        },
+        {
+          "date": "2025-08-24",
+          "portfolio": 105.1536,
+          "benchmark": 102.0731,
+          "alpha_bp": 308.05
+        },
+        {
+          "date": "2025-08-25",
+          "portfolio": 105.3683,
+          "benchmark": 102.1594,
+          "alpha_bp": 320.89
+        },
+        {
+          "date": "2025-08-26",
+          "portfolio": 105.583,
+          "benchmark": 102.2458,
+          "alpha_bp": 333.72
+        },
+        {
+          "date": "2025-08-27",
+          "portfolio": 105.7978,
+          "benchmark": 102.3322,
+          "alpha_bp": 346.56
+        },
+        {
+          "date": "2025-08-28",
+          "portfolio": 106.0125,
+          "benchmark": 102.4186,
+          "alpha_bp": 359.39
+        },
+        {
+          "date": "2025-08-29",
+          "portfolio": 106.2272,
+          "benchmark": 102.5049,
+          "alpha_bp": 372.23
+        },
+        {
+          "date": "2025-08-30",
+          "portfolio": 106.4419,
+          "benchmark": 102.5913,
+          "alpha_bp": 385.06
+        },
+        {
+          "date": "2025-08-31",
+          "portfolio": 106.6567,
+          "benchmark": 102.6777,
+          "alpha_bp": 397.9
+        },
+        {
+          "date": "2025-09-01",
+          "portfolio": 106.7088,
+          "benchmark": 102.8008,
+          "alpha_bp": 390.8
+        },
+        {
+          "date": "2025-09-02",
+          "portfolio": 106.7608,
+          "benchmark": 102.9239,
+          "alpha_bp": 383.69
+        },
+        {
+          "date": "2025-09-03",
+          "portfolio": 106.8129,
+          "benchmark": 103.047,
+          "alpha_bp": 376.59
+        },
+        {
+          "date": "2025-09-04",
+          "portfolio": 106.865,
+          "benchmark": 103.1702,
+          "alpha_bp": 369.48
+        },
+        {
+          "date": "2025-09-05",
+          "portfolio": 106.9171,
+          "benchmark": 103.2933,
+          "alpha_bp": 362.38
+        },
+        {
+          "date": "2025-09-06",
+          "portfolio": 106.9691,
+          "benchmark": 103.4164,
+          "alpha_bp": 355.27
+        },
+        {
+          "date": "2025-09-07",
+          "portfolio": 107.0212,
+          "benchmark": 103.5395,
+          "alpha_bp": 348.17
+        },
+        {
+          "date": "2025-09-08",
+          "portfolio": 107.0733,
+          "benchmark": 103.6626,
+          "alpha_bp": 341.07
+        },
+        {
+          "date": "2025-09-09",
+          "portfolio": 107.1254,
+          "benchmark": 103.7858,
+          "alpha_bp": 333.96
+        },
+        {
+          "date": "2025-09-10",
+          "portfolio": 107.1774,
+          "benchmark": 103.9089,
+          "alpha_bp": 326.85
+        },
+        {
+          "date": "2025-09-11",
+          "portfolio": 107.2295,
+          "benchmark": 104.032,
+          "alpha_bp": 319.75
+        },
+        {
+          "date": "2025-09-12",
+          "portfolio": 107.2816,
+          "benchmark": 104.1551,
+          "alpha_bp": 312.65
+        },
+        {
+          "date": "2025-09-13",
+          "portfolio": 107.3337,
+          "benchmark": 104.2782,
+          "alpha_bp": 305.55
+        },
+        {
+          "date": "2025-09-14",
+          "portfolio": 107.3857,
+          "benchmark": 104.4013,
+          "alpha_bp": 298.44
+        },
+        {
+          "date": "2025-09-15",
+          "portfolio": 107.4378,
+          "benchmark": 104.5245,
+          "alpha_bp": 291.33
+        },
+        {
+          "date": "2025-09-16",
+          "portfolio": 107.4899,
+          "benchmark": 104.6476,
+          "alpha_bp": 284.23
+        },
+        {
+          "date": "2025-09-17",
+          "portfolio": 107.542,
+          "benchmark": 104.7707,
+          "alpha_bp": 277.13
+        },
+        {
+          "date": "2025-09-18",
+          "portfolio": 107.594,
+          "benchmark": 104.8938,
+          "alpha_bp": 270.02
+        },
+        {
+          "date": "2025-09-19",
+          "portfolio": 107.6461,
+          "benchmark": 105.0169,
+          "alpha_bp": 262.92
+        },
+        {
+          "date": "2025-09-20",
+          "portfolio": 107.6982,
+          "benchmark": 105.14,
+          "alpha_bp": 255.82
+        },
+        {
+          "date": "2025-09-21",
+          "portfolio": 107.7503,
+          "benchmark": 105.2631,
+          "alpha_bp": 248.72
+        },
+        {
+          "date": "2025-09-22",
+          "portfolio": 107.8023,
+          "benchmark": 105.3863,
+          "alpha_bp": 241.6
+        },
+        {
+          "date": "2025-09-23",
+          "portfolio": 107.8544,
+          "benchmark": 105.5094,
+          "alpha_bp": 234.5
+        },
+        {
+          "date": "2025-09-24",
+          "portfolio": 107.9065,
+          "benchmark": 105.6325,
+          "alpha_bp": 227.4
+        },
+        {
+          "date": "2025-09-25",
+          "portfolio": 107.9586,
+          "benchmark": 105.7556,
+          "alpha_bp": 220.3
+        },
+        {
+          "date": "2025-09-26",
+          "portfolio": 108.0106,
+          "benchmark": 105.8787,
+          "alpha_bp": 213.19
+        },
+        {
+          "date": "2025-09-27",
+          "portfolio": 108.0627,
+          "benchmark": 106.0019,
+          "alpha_bp": 206.08
+        },
+        {
+          "date": "2025-09-28",
+          "portfolio": 108.1148,
+          "benchmark": 106.125,
+          "alpha_bp": 198.98
+        },
+        {
+          "date": "2025-09-29",
+          "portfolio": 108.1669,
+          "benchmark": 106.2481,
+          "alpha_bp": 191.88
+        },
+        {
+          "date": "2025-09-30",
+          "portfolio": 108.219,
+          "benchmark": 106.3712,
+          "alpha_bp": 184.78
+        },
+        {
+          "date": "2025-10-01",
+          "portfolio": 108.2053,
+          "benchmark": 106.4499,
+          "alpha_bp": 175.54
+        },
+        {
+          "date": "2025-10-02",
+          "portfolio": 108.1917,
+          "benchmark": 106.5286,
+          "alpha_bp": 166.31
+        },
+        {
+          "date": "2025-10-03",
+          "portfolio": 108.178,
+          "benchmark": 106.6073,
+          "alpha_bp": 157.07
+        },
+        {
+          "date": "2025-10-04",
+          "portfolio": 108.1644,
+          "benchmark": 106.6859,
+          "alpha_bp": 147.85
+        },
+        {
+          "date": "2025-10-05",
+          "portfolio": 108.1507,
+          "benchmark": 106.7646,
+          "alpha_bp": 138.61
+        },
+        {
+          "date": "2025-10-06",
+          "portfolio": 108.1371,
+          "benchmark": 106.8433,
+          "alpha_bp": 129.38
+        },
+        {
+          "date": "2025-10-07",
+          "portfolio": 108.1234,
+          "benchmark": 106.922,
+          "alpha_bp": 120.14
+        },
+        {
+          "date": "2025-10-08",
+          "portfolio": 108.1098,
+          "benchmark": 107.0007,
+          "alpha_bp": 110.91
+        },
+        {
+          "date": "2025-10-09",
+          "portfolio": 108.0961,
+          "benchmark": 107.0794,
+          "alpha_bp": 101.67
+        },
+        {
+          "date": "2025-10-10",
+          "portfolio": 108.0825,
+          "benchmark": 107.158,
+          "alpha_bp": 92.45
+        },
+        {
+          "date": "2025-10-11",
+          "portfolio": 108.0688,
+          "benchmark": 107.2367,
+          "alpha_bp": 83.21
+        },
+        {
+          "date": "2025-10-12",
+          "portfolio": 108.0552,
+          "benchmark": 107.3154,
+          "alpha_bp": 73.98
+        },
+        {
+          "date": "2025-10-13",
+          "portfolio": 108.0416,
+          "benchmark": 107.3941,
+          "alpha_bp": 64.75
+        },
+        {
+          "date": "2025-10-14",
+          "portfolio": 108.0279,
+          "benchmark": 107.4728,
+          "alpha_bp": 55.51
+        },
+        {
+          "date": "2025-10-15",
+          "portfolio": 108.0143,
+          "benchmark": 107.5515,
+          "alpha_bp": 46.28
+        },
+        {
+          "date": "2025-10-16",
+          "portfolio": 108.0006,
+          "benchmark": 107.6301,
+          "alpha_bp": 37.05
+        },
+        {
+          "date": "2025-10-17",
+          "portfolio": 107.987,
+          "benchmark": 107.7088,
+          "alpha_bp": 27.82
+        },
+        {
+          "date": "2025-10-18",
+          "portfolio": 107.9733,
+          "benchmark": 107.7875,
+          "alpha_bp": 18.58
+        },
+        {
+          "date": "2025-10-19",
+          "portfolio": 107.9597,
+          "benchmark": 107.8662,
+          "alpha_bp": 9.35
+        },
+        {
+          "date": "2025-10-20",
+          "portfolio": 107.946,
+          "benchmark": 107.9449,
+          "alpha_bp": 0.11
+        },
+        {
+          "date": "2025-10-21",
+          "portfolio": 107.9324,
+          "benchmark": 108.0236,
+          "alpha_bp": -9.12
+        },
+        {
+          "date": "2025-10-22",
+          "portfolio": 107.9187,
+          "benchmark": 108.1022,
+          "alpha_bp": -18.35
+        },
+        {
+          "date": "2025-10-23",
+          "portfolio": 107.9051,
+          "benchmark": 108.1809,
+          "alpha_bp": -27.58
+        },
+        {
+          "date": "2025-10-24",
+          "portfolio": 107.8914,
+          "benchmark": 108.2596,
+          "alpha_bp": -36.82
+        },
+        {
+          "date": "2025-10-25",
+          "portfolio": 107.8778,
+          "benchmark": 108.3383,
+          "alpha_bp": -46.05
+        },
+        {
+          "date": "2025-10-26",
+          "portfolio": 107.8642,
+          "benchmark": 108.417,
+          "alpha_bp": -55.28
+        },
+        {
+          "date": "2025-10-27",
+          "portfolio": 107.8505,
+          "benchmark": 108.4957,
+          "alpha_bp": -64.52
+        },
+        {
+          "date": "2025-10-28",
+          "portfolio": 107.8369,
+          "benchmark": 108.5743,
+          "alpha_bp": -73.74
+        },
+        {
+          "date": "2025-10-29",
+          "portfolio": 107.8232,
+          "benchmark": 108.653,
+          "alpha_bp": -82.98
+        },
+        {
+          "date": "2025-10-30",
+          "portfolio": 107.8096,
+          "benchmark": 108.7317,
+          "alpha_bp": -92.21
+        },
+        {
+          "date": "2025-10-31",
+          "portfolio": 107.7959,
+          "benchmark": 108.8104,
+          "alpha_bp": -101.45
+        },
+        {
+          "date": "2025-11-01",
+          "portfolio": 107.8253,
+          "benchmark": 108.8119,
+          "alpha_bp": -98.66
+        },
+        {
+          "date": "2025-11-02",
+          "portfolio": 107.8547,
+          "benchmark": 108.8135,
+          "alpha_bp": -95.88
+        },
+        {
+          "date": "2025-11-03",
+          "portfolio": 107.8841,
+          "benchmark": 108.815,
+          "alpha_bp": -93.09
+        },
+        {
+          "date": "2025-11-04",
+          "portfolio": 107.9135,
+          "benchmark": 108.8166,
+          "alpha_bp": -90.31
+        },
+        {
+          "date": "2025-11-05",
+          "portfolio": 107.9429,
+          "benchmark": 108.8181,
+          "alpha_bp": -87.52
+        },
+        {
+          "date": "2025-11-06",
+          "portfolio": 107.9723,
+          "benchmark": 108.8196,
+          "alpha_bp": -84.73
+        },
+        {
+          "date": "2025-11-07",
+          "portfolio": 108.0017,
+          "benchmark": 108.8212,
+          "alpha_bp": -81.95
+        },
+        {
+          "date": "2025-11-08",
+          "portfolio": 108.0311,
+          "benchmark": 108.8227,
+          "alpha_bp": -79.16
+        },
+        {
+          "date": "2025-11-09",
+          "portfolio": 108.0605,
+          "benchmark": 108.8243,
+          "alpha_bp": -76.38
+        },
+        {
+          "date": "2025-11-10",
+          "portfolio": 108.0899,
+          "benchmark": 108.8258,
+          "alpha_bp": -73.59
+        },
+        {
+          "date": "2025-11-11",
+          "portfolio": 108.1193,
+          "benchmark": 108.8273,
+          "alpha_bp": -70.8
+        },
+        {
+          "date": "2025-11-12",
+          "portfolio": 108.1487,
+          "benchmark": 108.8289,
+          "alpha_bp": -68.02
+        },
+        {
+          "date": "2025-11-13",
+          "portfolio": 108.1781,
+          "benchmark": 108.8304,
+          "alpha_bp": -65.23
+        },
+        {
+          "date": "2025-11-14",
+          "portfolio": 108.2075,
+          "benchmark": 108.832,
+          "alpha_bp": -62.45
+        },
+        {
+          "date": "2025-11-15",
+          "portfolio": 108.2369,
+          "benchmark": 108.8335,
+          "alpha_bp": -59.66
+        },
+        {
+          "date": "2025-11-16",
+          "portfolio": 108.2663,
+          "benchmark": 108.835,
+          "alpha_bp": -56.87
+        },
+        {
+          "date": "2025-11-17",
+          "portfolio": 108.2957,
+          "benchmark": 108.8366,
+          "alpha_bp": -54.09
+        },
+        {
+          "date": "2025-11-18",
+          "portfolio": 108.3251,
+          "benchmark": 108.8381,
+          "alpha_bp": -51.3
+        },
+        {
+          "date": "2025-11-19",
+          "portfolio": 108.3545,
+          "benchmark": 108.8397,
+          "alpha_bp": -48.52
+        },
+        {
+          "date": "2025-11-20",
+          "portfolio": 108.3839,
+          "benchmark": 108.8412,
+          "alpha_bp": -45.73
+        },
+        {
+          "date": "2025-11-21",
+          "portfolio": 108.4133,
+          "benchmark": 108.8427,
+          "alpha_bp": -42.94
+        },
+        {
+          "date": "2025-11-22",
+          "portfolio": 108.4426,
+          "benchmark": 108.8443,
+          "alpha_bp": -40.17
+        },
+        {
+          "date": "2025-11-23",
+          "portfolio": 108.472,
+          "benchmark": 108.8458,
+          "alpha_bp": -37.38
+        },
+        {
+          "date": "2025-11-24",
+          "portfolio": 108.5014,
+          "benchmark": 108.8474,
+          "alpha_bp": -34.6
+        },
+        {
+          "date": "2025-11-25",
+          "portfolio": 108.5308,
+          "benchmark": 108.8489,
+          "alpha_bp": -31.81
+        },
+        {
+          "date": "2025-11-26",
+          "portfolio": 108.5602,
+          "benchmark": 108.8504,
+          "alpha_bp": -29.02
+        },
+        {
+          "date": "2025-11-27",
+          "portfolio": 108.5896,
+          "benchmark": 108.852,
+          "alpha_bp": -26.24
+        },
+        {
+          "date": "2025-11-28",
+          "portfolio": 108.619,
+          "benchmark": 108.8535,
+          "alpha_bp": -23.45
+        },
+        {
+          "date": "2025-11-29",
+          "portfolio": 108.6484,
+          "benchmark": 108.8551,
+          "alpha_bp": -20.67
+        },
+        {
+          "date": "2025-11-30",
+          "portfolio": 108.6778,
+          "benchmark": 108.8566,
+          "alpha_bp": -17.88
+        },
+        {
+          "date": "2025-12-01",
+          "portfolio": 108.7065,
+          "benchmark": 108.888,
+          "alpha_bp": -18.15
+        },
+        {
+          "date": "2025-12-02",
+          "portfolio": 108.7352,
+          "benchmark": 108.9193,
+          "alpha_bp": -18.41
+        },
+        {
+          "date": "2025-12-03",
+          "portfolio": 108.7639,
+          "benchmark": 108.9507,
+          "alpha_bp": -18.68
+        },
+        {
+          "date": "2025-12-04",
+          "portfolio": 108.7925,
+          "benchmark": 108.982,
+          "alpha_bp": -18.95
+        },
+        {
+          "date": "2025-12-05",
+          "portfolio": 108.8212,
+          "benchmark": 109.0134,
+          "alpha_bp": -19.22
+        },
+        {
+          "date": "2025-12-06",
+          "portfolio": 108.8499,
+          "benchmark": 109.0447,
+          "alpha_bp": -19.48
+        },
+        {
+          "date": "2025-12-07",
+          "portfolio": 108.8786,
+          "benchmark": 109.0761,
+          "alpha_bp": -19.75
+        },
+        {
+          "date": "2025-12-08",
+          "portfolio": 108.9073,
+          "benchmark": 109.1074,
+          "alpha_bp": -20.01
+        },
+        {
+          "date": "2025-12-09",
+          "portfolio": 108.936,
+          "benchmark": 109.1388,
+          "alpha_bp": -20.28
+        },
+        {
+          "date": "2025-12-10",
+          "portfolio": 108.9646,
+          "benchmark": 109.1701,
+          "alpha_bp": -20.55
+        },
+        {
+          "date": "2025-12-11",
+          "portfolio": 108.9933,
+          "benchmark": 109.2015,
+          "alpha_bp": -20.82
+        },
+        {
+          "date": "2025-12-12",
+          "portfolio": 109.022,
+          "benchmark": 109.2328,
+          "alpha_bp": -21.08
+        },
+        {
+          "date": "2025-12-13",
+          "portfolio": 109.0507,
+          "benchmark": 109.2642,
+          "alpha_bp": -21.35
+        },
+        {
+          "date": "2025-12-14",
+          "portfolio": 109.0794,
+          "benchmark": 109.2955,
+          "alpha_bp": -21.61
+        },
+        {
+          "date": "2025-12-15",
+          "portfolio": 109.108,
+          "benchmark": 109.3269,
+          "alpha_bp": -21.89
+        },
+        {
+          "date": "2025-12-16",
+          "portfolio": 109.1367,
+          "benchmark": 109.3582,
+          "alpha_bp": -22.15
+        },
+        {
+          "date": "2025-12-17",
+          "portfolio": 109.1654,
+          "benchmark": 109.3896,
+          "alpha_bp": -22.42
+        },
+        {
+          "date": "2025-12-18",
+          "portfolio": 109.1941,
+          "benchmark": 109.4209,
+          "alpha_bp": -22.68
+        },
+        {
+          "date": "2025-12-19",
+          "portfolio": 109.2228,
+          "benchmark": 109.4523,
+          "alpha_bp": -22.95
+        },
+        {
+          "date": "2025-12-20",
+          "portfolio": 109.2514,
+          "benchmark": 109.4836,
+          "alpha_bp": -23.22
+        },
+        {
+          "date": "2025-12-21",
+          "portfolio": 109.2801,
+          "benchmark": 109.515,
+          "alpha_bp": -23.49
+        },
+        {
+          "date": "2025-12-22",
+          "portfolio": 109.3088,
+          "benchmark": 109.5463,
+          "alpha_bp": -23.75
+        },
+        {
+          "date": "2025-12-23",
+          "portfolio": 109.3375,
+          "benchmark": 109.5777,
+          "alpha_bp": -24.02
+        },
+        {
+          "date": "2025-12-24",
+          "portfolio": 109.3662,
+          "benchmark": 109.609,
+          "alpha_bp": -24.28
+        },
+        {
+          "date": "2025-12-25",
+          "portfolio": 109.3949,
+          "benchmark": 109.6404,
+          "alpha_bp": -24.55
+        },
+        {
+          "date": "2025-12-26",
+          "portfolio": 109.4235,
+          "benchmark": 109.6717,
+          "alpha_bp": -24.82
+        },
+        {
+          "date": "2025-12-27",
+          "portfolio": 109.4522,
+          "benchmark": 109.7031,
+          "alpha_bp": -25.09
+        },
+        {
+          "date": "2025-12-28",
+          "portfolio": 109.4809,
+          "benchmark": 109.7344,
+          "alpha_bp": -25.35
+        },
+        {
+          "date": "2025-12-29",
+          "portfolio": 109.5096,
+          "benchmark": 109.7658,
+          "alpha_bp": -25.62
+        },
+        {
+          "date": "2025-12-30",
+          "portfolio": 109.5383,
+          "benchmark": 109.7971,
+          "alpha_bp": -25.88
+        },
+        {
+          "date": "2025-12-31",
+          "portfolio": 109.5669,
+          "benchmark": 109.8285,
+          "alpha_bp": -26.16
+        },
+        {
+          "date": "2026-01-01",
+          "portfolio": 109.487,
+          "benchmark": 109.9289,
+          "alpha_bp": -44.19
+        },
+        {
+          "date": "2026-01-02",
+          "portfolio": 109.407,
+          "benchmark": 110.0293,
+          "alpha_bp": -62.23
+        },
+        {
+          "date": "2026-01-03",
+          "portfolio": 109.3271,
+          "benchmark": 110.1297,
+          "alpha_bp": -80.26
+        },
+        {
+          "date": "2026-01-04",
+          "portfolio": 109.2471,
+          "benchmark": 110.2301,
+          "alpha_bp": -98.3
+        },
+        {
+          "date": "2026-01-05",
+          "portfolio": 109.1672,
+          "benchmark": 110.3305,
+          "alpha_bp": -116.33
+        },
+        {
+          "date": "2026-01-06",
+          "portfolio": 109.0872,
+          "benchmark": 110.431,
+          "alpha_bp": -134.38
+        },
+        {
+          "date": "2026-01-07",
+          "portfolio": 109.0073,
+          "benchmark": 110.5314,
+          "alpha_bp": -152.41
+        },
+        {
+          "date": "2026-01-08",
+          "portfolio": 108.9273,
+          "benchmark": 110.6318,
+          "alpha_bp": -170.45
+        },
+        {
+          "date": "2026-01-09",
+          "portfolio": 108.8474,
+          "benchmark": 110.7322,
+          "alpha_bp": -188.48
+        },
+        {
+          "date": "2026-01-10",
+          "portfolio": 108.7674,
+          "benchmark": 110.8326,
+          "alpha_bp": -206.52
+        },
+        {
+          "date": "2026-01-11",
+          "portfolio": 108.6875,
+          "benchmark": 110.933,
+          "alpha_bp": -224.55
+        },
+        {
+          "date": "2026-01-12",
+          "portfolio": 108.6075,
+          "benchmark": 111.0334,
+          "alpha_bp": -242.59
+        },
+        {
+          "date": "2026-01-13",
+          "portfolio": 108.5276,
+          "benchmark": 111.1338,
+          "alpha_bp": -260.62
+        },
+        {
+          "date": "2026-01-14",
+          "portfolio": 108.4476,
+          "benchmark": 111.2342,
+          "alpha_bp": -278.66
+        },
+        {
+          "date": "2026-01-15",
+          "portfolio": 108.3677,
+          "benchmark": 111.3346,
+          "alpha_bp": -296.69
+        },
+        {
+          "date": "2026-01-16",
+          "portfolio": 108.2877,
+          "benchmark": 111.4351,
+          "alpha_bp": -314.74
+        },
+        {
+          "date": "2026-01-17",
+          "portfolio": 108.2078,
+          "benchmark": 111.5355,
+          "alpha_bp": -332.77
+        },
+        {
+          "date": "2026-01-18",
+          "portfolio": 108.1278,
+          "benchmark": 111.6359,
+          "alpha_bp": -350.81
+        },
+        {
+          "date": "2026-01-19",
+          "portfolio": 108.0479,
+          "benchmark": 111.7363,
+          "alpha_bp": -368.84
+        },
+        {
+          "date": "2026-01-20",
+          "portfolio": 107.9679,
+          "benchmark": 111.8367,
+          "alpha_bp": -386.88
+        },
+        {
+          "date": "2026-01-21",
+          "portfolio": 107.888,
+          "benchmark": 111.9371,
+          "alpha_bp": -404.91
+        },
+        {
+          "date": "2026-01-22",
+          "portfolio": 107.808,
+          "benchmark": 112.0375,
+          "alpha_bp": -422.95
+        },
+        {
+          "date": "2026-01-23",
+          "portfolio": 107.7281,
+          "benchmark": 112.1379,
+          "alpha_bp": -440.98
+        },
+        {
+          "date": "2026-01-24",
+          "portfolio": 107.6481,
+          "benchmark": 112.2383,
+          "alpha_bp": -459.02
+        },
+        {
+          "date": "2026-01-25",
+          "portfolio": 107.5682,
+          "benchmark": 112.3387,
+          "alpha_bp": -477.05
+        },
+        {
+          "date": "2026-01-26",
+          "portfolio": 107.4882,
+          "benchmark": 112.4392,
+          "alpha_bp": -495.1
+        },
+        {
+          "date": "2026-01-27",
+          "portfolio": 107.4083,
+          "benchmark": 112.5396,
+          "alpha_bp": -513.13
+        },
+        {
+          "date": "2026-01-28",
+          "portfolio": 107.3283,
+          "benchmark": 112.64,
+          "alpha_bp": -531.17
+        },
+        {
+          "date": "2026-01-29",
+          "portfolio": 107.2484,
+          "benchmark": 112.7404,
+          "alpha_bp": -549.2
+        },
+        {
+          "date": "2026-01-30",
+          "portfolio": 107.1684,
+          "benchmark": 112.8408,
+          "alpha_bp": -567.24
+        },
+        {
+          "date": "2026-01-31",
+          "portfolio": 107.0885,
+          "benchmark": 112.9412,
+          "alpha_bp": -585.27
+        },
+        {
+          "date": "2026-02-01",
+          "portfolio": 107.2691,
+          "benchmark": 112.9933,
+          "alpha_bp": -572.42
+        },
+        {
+          "date": "2026-02-02",
+          "portfolio": 107.4497,
+          "benchmark": 113.0454,
+          "alpha_bp": -559.57
+        },
+        {
+          "date": "2026-02-03",
+          "portfolio": 107.6303,
+          "benchmark": 113.0976,
+          "alpha_bp": -546.73
+        },
+        {
+          "date": "2026-02-04",
+          "portfolio": 107.8109,
+          "benchmark": 113.1497,
+          "alpha_bp": -533.88
+        },
+        {
+          "date": "2026-02-05",
+          "portfolio": 107.9916,
+          "benchmark": 113.2018,
+          "alpha_bp": -521.02
+        },
+        {
+          "date": "2026-02-06",
+          "portfolio": 108.1722,
+          "benchmark": 113.2539,
+          "alpha_bp": -508.17
+        },
+        {
+          "date": "2026-02-07",
+          "portfolio": 108.3528,
+          "benchmark": 113.306,
+          "alpha_bp": -495.32
+        },
+        {
+          "date": "2026-02-08",
+          "portfolio": 108.5334,
+          "benchmark": 113.3581,
+          "alpha_bp": -482.47
+        },
+        {
+          "date": "2026-02-09",
+          "portfolio": 108.714,
+          "benchmark": 113.4103,
+          "alpha_bp": -469.63
+        },
+        {
+          "date": "2026-02-10",
+          "portfolio": 108.8946,
+          "benchmark": 113.4624,
+          "alpha_bp": -456.78
+        },
+        {
+          "date": "2026-02-11",
+          "portfolio": 109.0752,
+          "benchmark": 113.5145,
+          "alpha_bp": -443.93
+        },
+        {
+          "date": "2026-02-12",
+          "portfolio": 109.2558,
+          "benchmark": 113.5666,
+          "alpha_bp": -431.08
+        },
+        {
+          "date": "2026-02-13",
+          "portfolio": 109.4365,
+          "benchmark": 113.6187,
+          "alpha_bp": -418.22
+        },
+        {
+          "date": "2026-02-14",
+          "portfolio": 109.6171,
+          "benchmark": 113.6709,
+          "alpha_bp": -405.38
+        },
+        {
+          "date": "2026-02-15",
+          "portfolio": 109.7977,
+          "benchmark": 113.723,
+          "alpha_bp": -392.53
+        },
+        {
+          "date": "2026-02-16",
+          "portfolio": 109.9783,
+          "benchmark": 113.7751,
+          "alpha_bp": -379.68
+        },
+        {
+          "date": "2026-02-17",
+          "portfolio": 110.1589,
+          "benchmark": 113.8272,
+          "alpha_bp": -366.83
+        },
+        {
+          "date": "2026-02-18",
+          "portfolio": 110.3395,
+          "benchmark": 113.8793,
+          "alpha_bp": -353.98
+        },
+        {
+          "date": "2026-02-19",
+          "portfolio": 110.5201,
+          "benchmark": 113.9314,
+          "alpha_bp": -341.13
+        },
+        {
+          "date": "2026-02-20",
+          "portfolio": 110.7008,
+          "benchmark": 113.9836,
+          "alpha_bp": -328.28
+        },
+        {
+          "date": "2026-02-21",
+          "portfolio": 110.8814,
+          "benchmark": 114.0357,
+          "alpha_bp": -315.43
+        },
+        {
+          "date": "2026-02-22",
+          "portfolio": 111.062,
+          "benchmark": 114.0878,
+          "alpha_bp": -302.58
+        },
+        {
+          "date": "2026-02-23",
+          "portfolio": 111.2426,
+          "benchmark": 114.1399,
+          "alpha_bp": -289.73
+        },
+        {
+          "date": "2026-02-24",
+          "portfolio": 111.4232,
+          "benchmark": 114.192,
+          "alpha_bp": -276.88
+        },
+        {
+          "date": "2026-02-25",
+          "portfolio": 111.6038,
+          "benchmark": 114.2441,
+          "alpha_bp": -264.03
+        },
+        {
+          "date": "2026-02-26",
+          "portfolio": 111.7844,
+          "benchmark": 114.2963,
+          "alpha_bp": -251.19
+        },
+        {
+          "date": "2026-02-27",
+          "portfolio": 111.965,
+          "benchmark": 114.3484,
+          "alpha_bp": -238.34
+        },
+        {
+          "date": "2026-02-28",
+          "portfolio": 112.1457,
+          "benchmark": 114.4005,
+          "alpha_bp": -225.48
+        },
+        {
+          "date": "2026-03-01",
+          "portfolio": 111.8877,
+          "benchmark": 114.1749,
+          "alpha_bp": -228.72
+        },
+        {
+          "date": "2026-03-02",
+          "portfolio": 111.6298,
+          "benchmark": 113.9493,
+          "alpha_bp": -231.95
+        },
+        {
+          "date": "2026-03-03",
+          "portfolio": 111.3719,
+          "benchmark": 113.7237,
+          "alpha_bp": -235.18
+        },
+        {
+          "date": "2026-03-04",
+          "portfolio": 111.1139,
+          "benchmark": 113.4981,
+          "alpha_bp": -238.42
+        },
+        {
+          "date": "2026-03-05",
+          "portfolio": 110.856,
+          "benchmark": 113.2725,
+          "alpha_bp": -241.65
+        },
+        {
+          "date": "2026-03-06",
+          "portfolio": 110.5981,
+          "benchmark": 113.0469,
+          "alpha_bp": -244.88
+        },
+        {
+          "date": "2026-03-07",
+          "portfolio": 110.3401,
+          "benchmark": 112.8213,
+          "alpha_bp": -248.12
+        },
+        {
+          "date": "2026-03-08",
+          "portfolio": 110.0822,
+          "benchmark": 112.5956,
+          "alpha_bp": -251.34
+        },
+        {
+          "date": "2026-03-09",
+          "portfolio": 109.8243,
+          "benchmark": 112.37,
+          "alpha_bp": -254.57
+        },
+        {
+          "date": "2026-03-10",
+          "portfolio": 109.5663,
+          "benchmark": 112.1444,
+          "alpha_bp": -257.81
+        },
+        {
+          "date": "2026-03-11",
+          "portfolio": 109.3084,
+          "benchmark": 111.9188,
+          "alpha_bp": -261.04
+        },
+        {
+          "date": "2026-03-12",
+          "portfolio": 109.0505,
+          "benchmark": 111.6932,
+          "alpha_bp": -264.27
+        },
+        {
+          "date": "2026-03-13",
+          "portfolio": 108.7925,
+          "benchmark": 111.4676,
+          "alpha_bp": -267.51
+        },
+        {
+          "date": "2026-03-14",
+          "portfolio": 108.5346,
+          "benchmark": 111.242,
+          "alpha_bp": -270.74
+        },
+        {
+          "date": "2026-03-15",
+          "portfolio": 108.2767,
+          "benchmark": 111.0164,
+          "alpha_bp": -273.97
+        },
+        {
+          "date": "2026-03-16",
+          "portfolio": 108.0187,
+          "benchmark": 110.7908,
+          "alpha_bp": -277.21
+        },
+        {
+          "date": "2026-03-17",
+          "portfolio": 107.7608,
+          "benchmark": 110.5652,
+          "alpha_bp": -280.44
+        },
+        {
+          "date": "2026-03-18",
+          "portfolio": 107.5029,
+          "benchmark": 110.3396,
+          "alpha_bp": -283.67
+        },
+        {
+          "date": "2026-03-19",
+          "portfolio": 107.2449,
+          "benchmark": 110.114,
+          "alpha_bp": -286.91
+        },
+        {
+          "date": "2026-03-20",
+          "portfolio": 106.987,
+          "benchmark": 109.8884,
+          "alpha_bp": -290.14
+        },
+        {
+          "date": "2026-03-21",
+          "portfolio": 106.7291,
+          "benchmark": 109.6628,
+          "alpha_bp": -293.37
+        },
+        {
+          "date": "2026-03-22",
+          "portfolio": 106.4711,
+          "benchmark": 109.4372,
+          "alpha_bp": -296.61
+        },
+        {
+          "date": "2026-03-23",
+          "portfolio": 106.2132,
+          "benchmark": 109.2116,
+          "alpha_bp": -299.84
+        },
+        {
+          "date": "2026-03-24",
+          "portfolio": 105.9553,
+          "benchmark": 108.9859,
+          "alpha_bp": -303.06
+        },
+        {
+          "date": "2026-03-25",
+          "portfolio": 105.6973,
+          "benchmark": 108.7603,
+          "alpha_bp": -306.3
+        },
+        {
+          "date": "2026-03-26",
+          "portfolio": 105.4394,
+          "benchmark": 108.5347,
+          "alpha_bp": -309.53
+        },
+        {
+          "date": "2026-03-27",
+          "portfolio": 105.1815,
+          "benchmark": 108.3091,
+          "alpha_bp": -312.76
+        },
+        {
+          "date": "2026-03-28",
+          "portfolio": 104.9235,
+          "benchmark": 108.0835,
+          "alpha_bp": -316.0
+        },
+        {
+          "date": "2026-03-29",
+          "portfolio": 104.6656,
+          "benchmark": 107.8579,
+          "alpha_bp": -319.23
+        },
+        {
+          "date": "2026-03-30",
+          "portfolio": 104.4077,
+          "benchmark": 107.6323,
+          "alpha_bp": -322.46
+        },
+        {
+          "date": "2026-03-31",
+          "portfolio": 104.1497,
+          "benchmark": 107.4067,
+          "alpha_bp": -325.7
+        },
+        {
+          "date": "2026-04-01",
+          "portfolio": 104.3777,
+          "benchmark": 107.7475,
+          "alpha_bp": -336.98
+        },
+        {
+          "date": "2026-04-02",
+          "portfolio": 104.6056,
+          "benchmark": 108.0882,
+          "alpha_bp": -348.26
+        },
+        {
+          "date": "2026-04-03",
+          "portfolio": 104.8335,
+          "benchmark": 108.429,
+          "alpha_bp": -359.55
+        },
+        {
+          "date": "2026-04-04",
+          "portfolio": 105.0614,
+          "benchmark": 108.7698,
+          "alpha_bp": -370.84
+        },
+        {
+          "date": "2026-04-05",
+          "portfolio": 105.2893,
+          "benchmark": 109.1105,
+          "alpha_bp": -382.12
+        },
+        {
+          "date": "2026-04-06",
+          "portfolio": 105.5172,
+          "benchmark": 109.4513,
+          "alpha_bp": -393.41
+        },
+        {
+          "date": "2026-04-07",
+          "portfolio": 105.7452,
+          "benchmark": 109.792,
+          "alpha_bp": -404.68
+        },
+        {
+          "date": "2026-04-08",
+          "portfolio": 105.9731,
+          "benchmark": 110.1328,
+          "alpha_bp": -415.97
+        },
+        {
+          "date": "2026-04-09",
+          "portfolio": 106.201,
+          "benchmark": 110.4736,
+          "alpha_bp": -427.26
+        },
+        {
+          "date": "2026-04-10",
+          "portfolio": 106.4289,
+          "benchmark": 110.8143,
+          "alpha_bp": -438.54
+        },
+        {
+          "date": "2026-04-11",
+          "portfolio": 106.6568,
+          "benchmark": 111.1551,
+          "alpha_bp": -449.83
+        },
+        {
+          "date": "2026-04-12",
+          "portfolio": 106.8848,
+          "benchmark": 111.4959,
+          "alpha_bp": -461.11
+        },
+        {
+          "date": "2026-04-13",
+          "portfolio": 107.1127,
+          "benchmark": 111.8366,
+          "alpha_bp": -472.39
+        },
+        {
+          "date": "2026-04-14",
+          "portfolio": 107.3406,
+          "benchmark": 112.1774,
+          "alpha_bp": -483.68
+        },
+        {
+          "date": "2026-04-15",
+          "portfolio": 107.5685,
+          "benchmark": 112.5181,
+          "alpha_bp": -494.96
+        },
+        {
+          "date": "2026-04-16",
+          "portfolio": 107.7964,
+          "benchmark": 112.8589,
+          "alpha_bp": -506.25
+        },
+        {
+          "date": "2026-04-17",
+          "portfolio": 108.0243,
+          "benchmark": 113.1997,
+          "alpha_bp": -517.54
+        },
+        {
+          "date": "2026-04-18",
+          "portfolio": 108.2523,
+          "benchmark": 113.5404,
+          "alpha_bp": -528.81
+        },
+        {
+          "date": "2026-04-19",
+          "portfolio": 108.4802,
+          "benchmark": 113.8812,
+          "alpha_bp": -540.1
+        },
+        {
+          "date": "2026-04-20",
+          "portfolio": 108.7081,
+          "benchmark": 114.222,
+          "alpha_bp": -551.39
+        },
+        {
+          "date": "2026-04-21",
+          "portfolio": 108.936,
+          "benchmark": 114.5627,
+          "alpha_bp": -562.67
+        },
+        {
+          "date": "2026-04-22",
+          "portfolio": 109.1639,
+          "benchmark": 114.9035,
+          "alpha_bp": -573.96
+        },
+        {
+          "date": "2026-04-23",
+          "portfolio": 109.3918,
+          "benchmark": 115.2443,
+          "alpha_bp": -585.25
+        },
+        {
+          "date": "2026-04-24",
+          "portfolio": 109.6198,
+          "benchmark": 115.585,
+          "alpha_bp": -596.52
+        },
+        {
+          "date": "2026-04-25",
+          "portfolio": 109.8477,
+          "benchmark": 115.9258,
+          "alpha_bp": -607.81
+        },
+        {
+          "date": "2026-04-26",
+          "portfolio": 110.0756,
+          "benchmark": 116.2665,
+          "alpha_bp": -619.09
+        },
+        {
+          "date": "2026-04-27",
+          "portfolio": 110.3035,
+          "benchmark": 116.6073,
+          "alpha_bp": -630.38
+        },
+        {
+          "date": "2026-04-28",
+          "portfolio": 110.5314,
+          "benchmark": 116.9481,
+          "alpha_bp": -641.67
+        },
+        {
+          "date": "2026-04-29",
+          "portfolio": 110.7593,
+          "benchmark": 117.2888,
+          "alpha_bp": -652.95
+        },
+        {
+          "date": "2026-04-30",
+          "portfolio": 110.9873,
+          "benchmark": 117.6296,
+          "alpha_bp": -664.23
+        },
+        {
+          "date": "2026-05-01",
+          "portfolio": 111.1068,
+          "benchmark": 117.8165,
+          "alpha_bp": -670.97
+        },
+        {
+          "date": "2026-05-02",
+          "portfolio": 111.2264,
+          "benchmark": 118.0033,
+          "alpha_bp": -677.69
+        },
+        {
+          "date": "2026-05-03",
+          "portfolio": 111.3459,
+          "benchmark": 118.1902,
+          "alpha_bp": -684.43
+        },
+        {
+          "date": "2026-05-04",
+          "portfolio": 111.4655,
+          "benchmark": 118.377,
+          "alpha_bp": -691.15
+        },
+        {
+          "date": "2026-05-05",
+          "portfolio": 111.585,
+          "benchmark": 118.5639,
+          "alpha_bp": -697.89
+        },
+        {
+          "date": "2026-05-06",
+          "portfolio": 111.7046,
+          "benchmark": 118.7507,
+          "alpha_bp": -704.61
+        },
+        {
+          "date": "2026-05-07",
+          "portfolio": 111.8241,
+          "benchmark": 118.9376,
+          "alpha_bp": -711.35
+        },
+        {
+          "date": "2026-05-08",
+          "portfolio": 111.9437,
+          "benchmark": 119.1244,
+          "alpha_bp": -718.07
+        },
+        {
+          "date": "2026-05-09",
+          "portfolio": 112.0633,
+          "benchmark": 119.3113,
+          "alpha_bp": -724.8
+        },
+        {
+          "date": "2026-05-10",
+          "portfolio": 112.1828,
+          "benchmark": 119.4981,
+          "alpha_bp": -731.53
+        },
+        {
+          "date": "2026-05-11",
+          "portfolio": 112.3024,
+          "benchmark": 119.685,
+          "alpha_bp": -738.26
+        },
+        {
+          "date": "2026-05-12",
+          "portfolio": 112.4219,
+          "benchmark": 119.8718,
+          "alpha_bp": -744.99
+        },
+        {
+          "date": "2026-05-13",
+          "portfolio": 112.5415,
+          "benchmark": 120.0587,
+          "alpha_bp": -751.72
+        },
+        {
+          "date": "2026-05-14",
+          "portfolio": 112.661,
+          "benchmark": 120.2455,
+          "alpha_bp": -758.45
+        },
+        {
+          "date": "2026-05-15",
+          "portfolio": 112.7806,
+          "benchmark": 120.4323,
+          "alpha_bp": -765.17
+        },
+        {
+          "date": "2026-05-16",
+          "portfolio": 112.9001,
+          "benchmark": 120.6192,
+          "alpha_bp": -771.91
+        },
+        {
+          "date": "2026-05-17",
+          "portfolio": 113.0197,
+          "benchmark": 120.806,
+          "alpha_bp": -778.63
+        },
+        {
+          "date": "2026-05-18",
+          "portfolio": 113.1393,
+          "benchmark": 120.9929,
+          "alpha_bp": -785.36
+        },
+        {
+          "date": "2026-05-19",
+          "portfolio": 113.2588,
+          "benchmark": 121.1797,
+          "alpha_bp": -792.09
+        },
+        {
+          "date": "2026-05-20",
+          "portfolio": 113.3784,
+          "benchmark": 121.3666,
+          "alpha_bp": -798.82
+        },
+        {
+          "date": "2026-05-21",
+          "portfolio": 113.4979,
+          "benchmark": 121.5534,
+          "alpha_bp": -805.55
+        },
+        {
+          "date": "2026-05-22",
+          "portfolio": 113.6175,
+          "benchmark": 121.7403,
+          "alpha_bp": -812.28
+        },
+        {
+          "date": "2026-05-23",
+          "portfolio": 113.737,
+          "benchmark": 121.9271,
+          "alpha_bp": -819.01
+        },
+        {
+          "date": "2026-05-24",
+          "portfolio": 113.8566,
+          "benchmark": 122.114,
+          "alpha_bp": -825.74
+        },
+        {
+          "date": "2026-05-25",
+          "portfolio": 113.9761,
+          "benchmark": 122.3008,
+          "alpha_bp": -832.47
+        },
+        {
+          "date": "2026-05-26",
+          "portfolio": 114.0957,
+          "benchmark": 122.4877,
+          "alpha_bp": -839.2
+        },
+        {
+          "date": "2026-05-27",
+          "portfolio": 114.2152,
+          "benchmark": 122.6746,
+          "alpha_bp": -845.94
+        },
+        {
+          "date": "2026-05-28",
+          "portfolio": 114.3348,
+          "benchmark": 122.8614,
+          "alpha_bp": -852.66
+        },
+        {
+          "date": "2026-05-29",
+          "portfolio": 114.4544,
+          "benchmark": 123.1098,
+          "alpha_bp": -865.54
+        },
+        {
+          "date": "2026-05-30",
+          "portfolio": 114.5739,
+          "benchmark": 123.0632,
+          "alpha_bp": -848.93
+        },
+        {
+          "date": "2026-05-31",
+          "portfolio": 114.6935,
+          "benchmark": 123.0632,
+          "alpha_bp": -836.97
+        },
+        {
+          "date": "2026-06-01",
+          "portfolio": 114.6642,
+          "benchmark": 122.6277,
+          "alpha_bp": -796.35
+        },
+        {
+          "date": "2026-06-02",
+          "portfolio": 114.6349,
+          "benchmark": 122.1923,
+          "alpha_bp": -755.74
+        },
+        {
+          "date": "2026-06-03",
+          "portfolio": 114.6056,
+          "benchmark": 121.7568,
+          "alpha_bp": -715.12
+        },
+        {
+          "date": "2026-06-04",
+          "portfolio": 114.5763,
+          "benchmark": 121.3213,
+          "alpha_bp": -674.5
+        },
+        {
+          "date": "2026-06-05",
+          "portfolio": 114.547,
+          "benchmark": 120.8859,
+          "alpha_bp": -633.89
+        },
+        {
+          "date": "2026-06-06",
+          "portfolio": 114.5177,
+          "benchmark": 120.4504,
+          "alpha_bp": -593.27
+        },
+        {
+          "date": "2026-06-07",
+          "portfolio": 114.4884,
+          "benchmark": 120.0149,
+          "alpha_bp": -552.65
+        },
+        {
+          "date": "2026-06-08",
+          "portfolio": 114.4591,
+          "benchmark": 119.5794,
+          "alpha_bp": -512.03
+        },
+        {
+          "date": "2026-06-09",
+          "portfolio": 114.4298,
+          "benchmark": 119.6418,
+          "alpha_bp": -521.2
+        },
+        {
+          "date": "2026-06-10",
+          "portfolio": 114.4005,
+          "benchmark": 119.7042,
+          "alpha_bp": -530.37
+        },
+        {
+          "date": "2026-06-11",
+          "portfolio": 114.3712,
+          "benchmark": 119.7666,
+          "alpha_bp": -539.54
+        },
+        {
+          "date": "2026-06-12",
+          "portfolio": 114.3419,
+          "benchmark": 119.8289,
+          "alpha_bp": -548.7
+        },
+        {
+          "date": "2026-06-13",
+          "portfolio": 114.3126,
+          "benchmark": 119.8913,
+          "alpha_bp": -557.87
+        },
+        {
+          "date": "2026-06-14",
+          "portfolio": 114.2833,
+          "benchmark": 119.9537,
+          "alpha_bp": -567.04
+        },
+        {
+          "date": "2026-06-15",
+          "portfolio": 114.254,
+          "benchmark": 120.0161,
+          "alpha_bp": -576.21
+        },
+        {
+          "date": "2026-06-16",
+          "portfolio": 114.2248,
+          "benchmark": 120.0785,
+          "alpha_bp": -585.37
+        },
+        {
+          "date": "2026-06-17",
+          "portfolio": 114.1955,
+          "benchmark": 120.1409,
+          "alpha_bp": -594.54
+        },
+        {
+          "date": "2026-06-18",
+          "portfolio": 114.1662,
+          "benchmark": 120.2033,
+          "alpha_bp": -603.71
+        },
+        {
+          "date": "2026-06-19",
+          "portfolio": 114.1369,
+          "benchmark": 120.2656,
+          "alpha_bp": -612.87
+        },
+        {
+          "date": "2026-06-20",
+          "portfolio": 114.1076,
+          "benchmark": 120.328,
+          "alpha_bp": -622.04
+        },
+        {
+          "date": "2026-06-21",
+          "portfolio": 114.0783,
+          "benchmark": 120.3904,
+          "alpha_bp": -631.21
+        },
+        {
+          "date": "2026-06-22",
+          "portfolio": 114.049,
+          "benchmark": 120.4528,
+          "alpha_bp": -640.38
+        },
+        {
+          "date": "2026-06-23",
+          "portfolio": 114.0197,
+          "benchmark": 120.5152,
+          "alpha_bp": -649.55
+        },
+        {
+          "date": "2026-06-24",
+          "portfolio": 113.9904,
+          "benchmark": 120.5776,
+          "alpha_bp": -658.72
+        },
+        {
+          "date": "2026-06-25",
+          "portfolio": 113.9611,
+          "benchmark": 120.64,
+          "alpha_bp": -667.89
+        },
+        {
+          "date": "2026-06-26",
+          "portfolio": 113.9318,
+          "benchmark": 120.7024,
+          "alpha_bp": -677.06
+        },
+        {
+          "date": "2026-06-27",
+          "portfolio": 113.9025,
+          "benchmark": 120.7647,
+          "alpha_bp": -686.22
+        },
+        {
+          "date": "2026-06-28",
+          "portfolio": 113.8732,
+          "benchmark": 120.8271,
+          "alpha_bp": -695.39
+        },
+        {
+          "date": "2026-06-29",
+          "portfolio": 113.8439,
+          "benchmark": 120.8895,
+          "alpha_bp": -704.56
+        },
+        {
+          "date": "2026-06-30",
+          "portfolio": 113.8146,
+          "benchmark": 120.9519,
+          "alpha_bp": -713.73
+        },
+        {
+          "date": "2026-07-01",
+          "portfolio": 113.8621,
+          "benchmark": 120.9644,
+          "alpha_bp": -710.23
+        },
+        {
+          "date": "2026-07-02",
+          "portfolio": 113.9095,
+          "benchmark": 120.9769,
+          "alpha_bp": -706.74
+        },
+        {
+          "date": "2026-07-03",
+          "portfolio": 113.9569,
+          "benchmark": 120.9894,
+          "alpha_bp": -703.25
+        },
+        {
+          "date": "2026-07-04",
+          "portfolio": 114.0044,
+          "benchmark": 121.0018,
+          "alpha_bp": -699.74
+        },
+        {
+          "date": "2026-07-05",
+          "portfolio": 114.0518,
+          "benchmark": 121.0143,
+          "alpha_bp": -696.25
+        },
+        {
+          "date": "2026-07-06",
+          "portfolio": 114.0992,
+          "benchmark": 121.0268,
+          "alpha_bp": -692.76
+        },
+        {
+          "date": "2026-07-07",
+          "portfolio": 114.1467,
+          "benchmark": 121.0393,
+          "alpha_bp": -689.26
+        },
+        {
+          "date": "2026-07-08",
+          "portfolio": 114.1941,
+          "benchmark": 121.0518,
+          "alpha_bp": -685.77
+        },
+        {
+          "date": "2026-07-09",
+          "portfolio": 114.2415,
+          "benchmark": 121.0643,
+          "alpha_bp": -682.28
+        },
+        {
+          "date": "2026-07-10",
+          "portfolio": 114.289,
+          "benchmark": 121.0768,
+          "alpha_bp": -678.78
+        },
+        {
+          "date": "2026-07-11",
+          "portfolio": 114.3364,
+          "benchmark": 121.0893,
+          "alpha_bp": -675.29
+        },
+        {
+          "date": "2026-07-12",
+          "portfolio": 114.3839,
+          "benchmark": 121.1017,
+          "alpha_bp": -671.78
+        },
+        {
+          "date": "2026-07-13",
+          "portfolio": 114.4313,
+          "benchmark": 121.1142,
+          "alpha_bp": -668.29
+        },
+        {
+          "date": "2026-07-14",
+          "portfolio": 114.4787,
+          "benchmark": 121.1267,
+          "alpha_bp": -664.8
+        },
+        {
+          "date": "2026-07-15",
+          "portfolio": 114.5262,
+          "benchmark": 121.1392,
+          "alpha_bp": -661.3
+        },
+        {
+          "date": "2026-07-16",
+          "portfolio": 114.5736,
+          "benchmark": 121.1517,
+          "alpha_bp": -657.81
+        },
+        {
+          "date": "2026-07-17",
+          "portfolio": 114.621,
+          "benchmark": 121.1642,
+          "alpha_bp": -654.32
+        },
+        {
+          "date": "2026-07-18",
+          "portfolio": 114.6685,
+          "benchmark": 121.1767,
+          "alpha_bp": -650.82
+        },
+        {
+          "date": "2026-07-19",
+          "portfolio": 114.7159,
+          "benchmark": 121.1892,
+          "alpha_bp": -647.33
+        },
+        {
+          "date": "2026-07-20",
+          "portfolio": 114.7633,
+          "benchmark": 121.2016,
+          "alpha_bp": -643.83
+        },
+        {
+          "date": "2026-07-21",
+          "portfolio": 114.8108,
+          "benchmark": 121.2141,
+          "alpha_bp": -640.33
+        },
+        {
+          "date": "2026-07-22",
+          "portfolio": 114.8582,
+          "benchmark": 121.2266,
+          "alpha_bp": -636.84
+        },
+        {
+          "date": "2026-07-23",
+          "portfolio": 114.9056,
+          "benchmark": 120.5148,
+          "alpha_bp": -560.92
+        },
+        {
+          "date": "2026-07-24",
+          "portfolio": 114.9531,
+          "benchmark": 120.1434,
+          "alpha_bp": -519.03
+        },
+        {
+          "date": "2026-07-25",
+          "portfolio": 115.0005,
+          "benchmark": 120.3223,
+          "alpha_bp": -532.18
+        },
+        {
+          "date": "2026-07-26",
+          "portfolio": 115.048,
+          "benchmark": 120.5013,
+          "alpha_bp": -545.33
+        },
+        {
+          "date": "2026-07-27",
+          "portfolio": 115.0954,
+          "benchmark": 120.257,
+          "alpha_bp": -516.16
+        },
+        {
+          "date": "2026-07-28",
+          "portfolio": 115.1428,
+          "benchmark": 120.1077,
+          "alpha_bp": -496.49
+        },
+        {
+          "date": "2026-07-29",
+          "portfolio": 115.1903,
+          "benchmark": 119.2296,
+          "alpha_bp": -403.93
+        },
+        {
+          "date": "2026-07-30",
+          "portfolio": 115.2377,
+          "benchmark": 120.0286,
+          "alpha_bp": -479.09
+        },
+        {
+          "date": "2026-07-31",
+          "portfolio": 115.2851,
+          "benchmark": 120.8277,
+          "alpha_bp": -554.26
+        },
+        {
+          "date": "2026-08-01",
+          "portfolio": 115.8451,
+          "benchmark": 121.1278,
+          "alpha_bp": -528.27
+        },
+        {
+          "date": "2026-08-02",
+          "portfolio": 116.4051,
+          "benchmark": 121.428,
+          "alpha_bp": -502.29
+        },
+        {
+          "date": "2026-08-03",
+          "portfolio": 116.9651,
+          "benchmark": 122.0127,
+          "alpha_bp": -504.76
+        },
+        {
+          "date": "2026-08-04",
+          "portfolio": 117.5251,
+          "benchmark": 123.3491,
+          "alpha_bp": -582.4
+        },
+        {
+          "date": "2026-08-05",
+          "portfolio": 118.0851,
+          "benchmark": 123.9668,
+          "alpha_bp": -588.17
+        },
+        {
+          "date": "2026-08-06",
+          "portfolio": 118.6451,
+          "benchmark": 124.1205,
+          "alpha_bp": -547.54
+        },
+        {
+          "date": "2026-08-07",
+          "portfolio": 119.2051,
+          "benchmark": 124.7174,
+          "alpha_bp": -551.23
+        },
+        {
+          "date": "2026-08-08",
+          "portfolio": 118.3043,
+          "benchmark": 124.9164,
+          "alpha_bp": -661.21
+        },
+        {
+          "date": "2026-08-09",
+          "portfolio": 118.2816,
+          "benchmark": 125.1153,
+          "alpha_bp": -683.37
+        },
+        {
+          "date": "2026-08-10",
+          "portfolio": 118.2589,
+          "benchmark": 125.0828,
+          "alpha_bp": -682.39
+        },
+        {
+          "date": "2026-08-11",
+          "portfolio": 118.2631,
+          "benchmark": 124.9851,
+          "alpha_bp": -672.2
+        },
+        {
+          "date": "2026-08-12",
+          "portfolio": 118.7752,
+          "benchmark": 124.8873,
+          "alpha_bp": -611.21
+        }
+      ],
+      "returns": {
+        "1M": {
+          "portfolio_pct": 3.8,
+          "benchmark_pct": 3.12,
+          "alpha_bp": 68.1,
+          "ref_date": "2026-07-13"
+        },
+        "3M": {
+          "portfolio_pct": 5.54,
+          "benchmark_pct": 4.02,
+          "alpha_bp": 151.7,
+          "ref_date": "2026-05-13"
+        },
+        "6M": {
+          "portfolio_pct": 8.89,
+          "benchmark_pct": 10.02,
+          "alpha_bp": -112.6,
+          "ref_date": "2026-02-11"
+        },
+        "YTD": {
+          "portfolio_pct": 8.48,
+          "benchmark_pct": 13.61,
+          "alpha_bp": -512.4,
+          "ref_date": "2026-01-01"
+        },
+        "LTM": {
+          "portfolio_pct": 15.79,
+          "benchmark_pct": 23.61,
+          "alpha_bp": -781.5,
+          "ref_date": "2025-08-12"
+        },
+        "SI": {
+          "portfolio_pct": 18.78,
+          "benchmark_pct": 24.89,
+          "alpha_bp": -611.2,
+          "ref_date": "2025-07-31"
+        }
+      },
+      "stats": {
+        "n_days": 377,
+        "tracking_error_pct_ann": 2.2,
+        "info_ratio": -1.529,
+        "sharpe_portfolio": 5.142,
+        "sharpe_benchmark": 5.821,
+        "beta": 0.514,
+        "correlation": 0.587,
+        "volatility_portfolio_pct_ann": 2.24,
+        "volatility_benchmark_pct_ann": 2.56
+      }
+    },
+    "fi_vs_agg": {
+      "portfolio_name": "FI Sleeve TWR",
+      "benchmark_name": "AGG (Bloomberg Global Aggregate)",
+      "portfolio_source": "data/fi_sleeve_real.json -> twr_series",
+      "benchmark_source": "data/fi_sleeve_real.json -> agg_index_series",
+      "inception": "2025-07-31",
+      "as_of": "2026-08-12",
+      "n_observations": 378,
+      "series": [
+        {
+          "date": "2025-07-31",
+          "portfolio": 100.0,
+          "benchmark": 100.0,
+          "alpha_bp": 0.0
+        },
+        {
+          "date": "2025-08-01",
+          "portfolio": 100.045,
+          "benchmark": 100.502,
+          "alpha_bp": -45.7
+        },
+        {
+          "date": "2025-08-02",
+          "portfolio": 100.0899,
+          "benchmark": 100.502,
+          "alpha_bp": -41.21
+        },
+        {
+          "date": "2025-08-03",
+          "portfolio": 100.1349,
+          "benchmark": 100.502,
+          "alpha_bp": -36.71
+        },
+        {
+          "date": "2025-08-04",
+          "portfolio": 100.1798,
+          "benchmark": 100.5875,
+          "alpha_bp": -40.77
+        },
+        {
+          "date": "2025-08-05",
+          "portfolio": 100.2248,
+          "benchmark": 100.6729,
+          "alpha_bp": -44.81
+        },
+        {
+          "date": "2025-08-06",
+          "portfolio": 100.2697,
+          "benchmark": 100.5661,
+          "alpha_bp": -29.64
+        },
+        {
+          "date": "2025-08-07",
+          "portfolio": 100.3147,
+          "benchmark": 100.7904,
+          "alpha_bp": -47.57
+        },
+        {
+          "date": "2025-08-08",
+          "portfolio": 100.3596,
+          "benchmark": 100.5661,
+          "alpha_bp": -20.65
+        },
+        {
+          "date": "2025-08-09",
+          "portfolio": 100.4046,
+          "benchmark": 100.5661,
+          "alpha_bp": -16.15
+        },
+        {
+          "date": "2025-08-10",
+          "portfolio": 100.4495,
+          "benchmark": 100.5661,
+          "alpha_bp": -11.66
+        },
+        {
+          "date": "2025-08-11",
+          "portfolio": 100.4945,
+          "benchmark": 100.4273,
+          "alpha_bp": 6.72
+        },
+        {
+          "date": "2025-08-12",
+          "portfolio": 100.5394,
+          "benchmark": 100.3311,
+          "alpha_bp": 20.83
+        },
+        {
+          "date": "2025-08-13",
+          "portfolio": 100.5844,
+          "benchmark": 100.8652,
+          "alpha_bp": -28.08
+        },
+        {
+          "date": "2025-08-14",
+          "portfolio": 100.6293,
+          "benchmark": 100.7584,
+          "alpha_bp": -12.91
+        },
+        {
+          "date": "2025-08-15",
+          "portfolio": 100.6743,
+          "benchmark": 100.47,
+          "alpha_bp": 20.43
+        },
+        {
+          "date": "2025-08-16",
+          "portfolio": 100.7192,
+          "benchmark": 100.47,
+          "alpha_bp": 24.92
+        },
+        {
+          "date": "2025-08-17",
+          "portfolio": 100.7642,
+          "benchmark": 100.47,
+          "alpha_bp": 29.42
+        },
+        {
+          "date": "2025-08-18",
+          "portfolio": 100.8091,
+          "benchmark": 100.2136,
+          "alpha_bp": 59.55
+        },
+        {
+          "date": "2025-08-19",
+          "portfolio": 100.8541,
+          "benchmark": 100.3632,
+          "alpha_bp": 49.09
+        },
+        {
+          "date": "2025-08-20",
+          "portfolio": 100.899,
+          "benchmark": 100.5554,
+          "alpha_bp": 34.36
+        },
+        {
+          "date": "2025-08-21",
+          "portfolio": 100.944,
+          "benchmark": 100.2243,
+          "alpha_bp": 71.97
+        },
+        {
+          "date": "2025-08-22",
+          "portfolio": 100.9889,
+          "benchmark": 100.8438,
+          "alpha_bp": 14.51
+        },
+        {
+          "date": "2025-08-23",
+          "portfolio": 101.0339,
+          "benchmark": 100.8438,
+          "alpha_bp": 19.01
+        },
+        {
+          "date": "2025-08-24",
+          "portfolio": 101.0788,
+          "benchmark": 100.8438,
+          "alpha_bp": 23.5
+        },
+        {
+          "date": "2025-08-25",
+          "portfolio": 101.1238,
+          "benchmark": 100.8438,
+          "alpha_bp": 28.0
+        },
+        {
+          "date": "2025-08-26",
+          "portfolio": 101.1687,
+          "benchmark": 100.6622,
+          "alpha_bp": 50.65
+        },
+        {
+          "date": "2025-08-27",
+          "portfolio": 101.2137,
+          "benchmark": 100.7584,
+          "alpha_bp": 45.53
+        },
+        {
+          "date": "2025-08-28",
+          "portfolio": 101.2586,
+          "benchmark": 101.0575,
+          "alpha_bp": 20.11
+        },
+        {
+          "date": "2025-08-29",
+          "portfolio": 101.3036,
+          "benchmark": 100.8545,
+          "alpha_bp": 44.91
+        },
+        {
+          "date": "2025-08-30",
+          "portfolio": 101.3485,
+          "benchmark": 100.8545,
+          "alpha_bp": 49.4
+        },
+        {
+          "date": "2025-08-31",
+          "portfolio": 101.3935,
+          "benchmark": 100.8545,
+          "alpha_bp": 53.9
+        },
+        {
+          "date": "2025-09-01",
+          "portfolio": 101.4258,
+          "benchmark": 100.8332,
+          "alpha_bp": 59.26
+        },
+        {
+          "date": "2025-09-02",
+          "portfolio": 101.4581,
+          "benchmark": 100.5875,
+          "alpha_bp": 87.06
+        },
+        {
+          "date": "2025-09-03",
+          "portfolio": 101.4905,
+          "benchmark": 101.0041,
+          "alpha_bp": 48.64
+        },
+        {
+          "date": "2025-09-04",
+          "portfolio": 101.5228,
+          "benchmark": 101.1429,
+          "alpha_bp": 37.99
+        },
+        {
+          "date": "2025-09-05",
+          "portfolio": 101.5552,
+          "benchmark": 101.9333,
+          "alpha_bp": -37.81
+        },
+        {
+          "date": "2025-09-06",
+          "portfolio": 101.5875,
+          "benchmark": 101.9333,
+          "alpha_bp": -34.58
+        },
+        {
+          "date": "2025-09-07",
+          "portfolio": 101.6198,
+          "benchmark": 101.9333,
+          "alpha_bp": -31.35
+        },
+        {
+          "date": "2025-09-08",
+          "portfolio": 101.6522,
+          "benchmark": 102.2217,
+          "alpha_bp": -56.95
+        },
+        {
+          "date": "2025-09-09",
+          "portfolio": 101.6845,
+          "benchmark": 102.0722,
+          "alpha_bp": -38.77
+        },
+        {
+          "date": "2025-09-10",
+          "portfolio": 101.7169,
+          "benchmark": 102.1042,
+          "alpha_bp": -38.73
+        },
+        {
+          "date": "2025-09-11",
+          "portfolio": 101.7492,
+          "benchmark": 102.414,
+          "alpha_bp": -66.48
+        },
+        {
+          "date": "2025-09-12",
+          "portfolio": 101.7815,
+          "benchmark": 102.2752,
+          "alpha_bp": -49.37
+        },
+        {
+          "date": "2025-09-13",
+          "portfolio": 101.8139,
+          "benchmark": 102.2752,
+          "alpha_bp": -46.13
+        },
+        {
+          "date": "2025-09-14",
+          "portfolio": 101.8462,
+          "benchmark": 102.2752,
+          "alpha_bp": -42.9
+        },
+        {
+          "date": "2025-09-15",
+          "portfolio": 101.8786,
+          "benchmark": 102.4781,
+          "alpha_bp": -59.95
+        },
+        {
+          "date": "2025-09-16",
+          "portfolio": 101.9109,
+          "benchmark": 102.5529,
+          "alpha_bp": -64.2
+        },
+        {
+          "date": "2025-09-17",
+          "portfolio": 101.9432,
+          "benchmark": 102.617,
+          "alpha_bp": -67.38
+        },
+        {
+          "date": "2025-09-18",
+          "portfolio": 101.9756,
+          "benchmark": 102.0936,
+          "alpha_bp": -11.8
+        },
+        {
+          "date": "2025-09-19",
+          "portfolio": 102.0079,
+          "benchmark": 101.9868,
+          "alpha_bp": 2.11
+        },
+        {
+          "date": "2025-09-20",
+          "portfolio": 102.0403,
+          "benchmark": 101.9868,
+          "alpha_bp": 5.35
+        },
+        {
+          "date": "2025-09-21",
+          "portfolio": 102.0726,
+          "benchmark": 101.9868,
+          "alpha_bp": 8.58
+        },
+        {
+          "date": "2025-09-22",
+          "portfolio": 102.1049,
+          "benchmark": 101.912,
+          "alpha_bp": 19.29
+        },
+        {
+          "date": "2025-09-23",
+          "portfolio": 102.1373,
+          "benchmark": 101.912,
+          "alpha_bp": 22.53
+        },
+        {
+          "date": "2025-09-24",
+          "portfolio": 102.1696,
+          "benchmark": 102.1149,
+          "alpha_bp": 5.47
+        },
+        {
+          "date": "2025-09-25",
+          "portfolio": 102.202,
+          "benchmark": 101.6343,
+          "alpha_bp": 56.77
+        },
+        {
+          "date": "2025-09-26",
+          "portfolio": 102.2343,
+          "benchmark": 101.8052,
+          "alpha_bp": 42.91
+        },
+        {
+          "date": "2025-09-27",
+          "portfolio": 102.2667,
+          "benchmark": 101.8052,
+          "alpha_bp": 46.15
+        },
+        {
+          "date": "2025-09-28",
+          "portfolio": 102.299,
+          "benchmark": 101.8052,
+          "alpha_bp": 49.38
+        },
+        {
+          "date": "2025-09-29",
+          "portfolio": 102.3313,
+          "benchmark": 102.0508,
+          "alpha_bp": 28.05
+        },
+        {
+          "date": "2025-09-30",
+          "portfolio": 102.3637,
+          "benchmark": 102.1256,
+          "alpha_bp": 23.81
+        },
+        {
+          "date": "2025-10-01",
+          "portfolio": 102.3854,
+          "benchmark": 102.1042,
+          "alpha_bp": 28.12
+        },
+        {
+          "date": "2025-10-02",
+          "portfolio": 102.4072,
+          "benchmark": 102.4033,
+          "alpha_bp": 0.39
+        },
+        {
+          "date": "2025-10-03",
+          "portfolio": 102.4289,
+          "benchmark": 102.3713,
+          "alpha_bp": 5.76
+        },
+        {
+          "date": "2025-10-04",
+          "portfolio": 102.4506,
+          "benchmark": 102.3713,
+          "alpha_bp": 7.93
+        },
+        {
+          "date": "2025-10-05",
+          "portfolio": 102.4724,
+          "benchmark": 102.3713,
+          "alpha_bp": 10.11
+        },
+        {
+          "date": "2025-10-06",
+          "portfolio": 102.4941,
+          "benchmark": 102.195,
+          "alpha_bp": 29.91
+        },
+        {
+          "date": "2025-10-07",
+          "portfolio": 102.5159,
+          "benchmark": 102.2324,
+          "alpha_bp": 28.35
+        },
+        {
+          "date": "2025-10-08",
+          "portfolio": 102.5376,
+          "benchmark": 102.414,
+          "alpha_bp": 12.36
+        },
+        {
+          "date": "2025-10-09",
+          "portfolio": 102.5594,
+          "benchmark": 102.1897,
+          "alpha_bp": 36.97
+        },
+        {
+          "date": "2025-10-10",
+          "portfolio": 102.5811,
+          "benchmark": 102.6116,
+          "alpha_bp": -3.05
+        },
+        {
+          "date": "2025-10-11",
+          "portfolio": 102.6028,
+          "benchmark": 102.6116,
+          "alpha_bp": -0.88
+        },
+        {
+          "date": "2025-10-12",
+          "portfolio": 102.6246,
+          "benchmark": 102.6116,
+          "alpha_bp": 1.3
+        },
+        {
+          "date": "2025-10-13",
+          "portfolio": 102.6463,
+          "benchmark": 102.6383,
+          "alpha_bp": 0.8
+        },
+        {
+          "date": "2025-10-14",
+          "portfolio": 102.6681,
+          "benchmark": 102.7665,
+          "alpha_bp": -9.84
+        },
+        {
+          "date": "2025-10-15",
+          "portfolio": 102.6898,
+          "benchmark": 103.0015,
+          "alpha_bp": -31.17
+        },
+        {
+          "date": "2025-10-16",
+          "portfolio": 102.7116,
+          "benchmark": 102.9374,
+          "alpha_bp": -22.58
+        },
+        {
+          "date": "2025-10-17",
+          "portfolio": 102.7333,
+          "benchmark": 103.0442,
+          "alpha_bp": -31.09
+        },
+        {
+          "date": "2025-10-18",
+          "portfolio": 102.755,
+          "benchmark": 103.0442,
+          "alpha_bp": -28.92
+        },
+        {
+          "date": "2025-10-19",
+          "portfolio": 102.7768,
+          "benchmark": 103.0442,
+          "alpha_bp": -26.74
+        },
+        {
+          "date": "2025-10-20",
+          "portfolio": 102.7985,
+          "benchmark": 103.2151,
+          "alpha_bp": -41.66
+        },
+        {
+          "date": "2025-10-21",
+          "portfolio": 102.8203,
+          "benchmark": 103.4822,
+          "alpha_bp": -66.19
+        },
+        {
+          "date": "2025-10-22",
+          "portfolio": 102.842,
+          "benchmark": 103.2578,
+          "alpha_bp": -41.58
+        },
+        {
+          "date": "2025-10-23",
+          "portfolio": 102.8638,
+          "benchmark": 103.2151,
+          "alpha_bp": -35.13
+        },
+        {
+          "date": "2025-10-24",
+          "portfolio": 102.8855,
+          "benchmark": 103.2489,
+          "alpha_bp": -36.34
+        },
+        {
+          "date": "2025-10-25",
+          "portfolio": 102.9072,
+          "benchmark": 103.2489,
+          "alpha_bp": -34.17
+        },
+        {
+          "date": "2025-10-26",
+          "portfolio": 102.929,
+          "benchmark": 103.2489,
+          "alpha_bp": -31.99
+        },
+        {
+          "date": "2025-10-27",
+          "portfolio": 102.9507,
+          "benchmark": 103.2845,
+          "alpha_bp": -33.38
+        },
+        {
+          "date": "2025-10-28",
+          "portfolio": 102.9725,
+          "benchmark": 103.3753,
+          "alpha_bp": -40.28
+        },
+        {
+          "date": "2025-10-29",
+          "portfolio": 102.9942,
+          "benchmark": 103.3006,
+          "alpha_bp": -30.64
+        },
+        {
+          "date": "2025-10-30",
+          "portfolio": 103.016,
+          "benchmark": 102.8733,
+          "alpha_bp": 14.27
+        },
+        {
+          "date": "2025-10-31",
+          "portfolio": 103.0377,
+          "benchmark": 102.6383,
+          "alpha_bp": 39.94
+        },
+        {
+          "date": "2025-11-01",
+          "portfolio": 103.051,
+          "benchmark": 102.6383,
+          "alpha_bp": 41.27
+        },
+        {
+          "date": "2025-11-02",
+          "portfolio": 103.0644,
+          "benchmark": 102.6383,
+          "alpha_bp": 42.61
+        },
+        {
+          "date": "2025-11-03",
+          "portfolio": 103.0778,
+          "benchmark": 102.4461,
+          "alpha_bp": 63.17
+        },
+        {
+          "date": "2025-11-04",
+          "portfolio": 103.0911,
+          "benchmark": 102.6864,
+          "alpha_bp": 40.47
+        },
+        {
+          "date": "2025-11-05",
+          "portfolio": 103.1045,
+          "benchmark": 102.2965,
+          "alpha_bp": 80.8
+        },
+        {
+          "date": "2025-11-06",
+          "portfolio": 103.1178,
+          "benchmark": 102.681,
+          "alpha_bp": 43.68
+        },
+        {
+          "date": "2025-11-07",
+          "portfolio": 103.1312,
+          "benchmark": 102.7238,
+          "alpha_bp": 40.74
+        },
+        {
+          "date": "2025-11-08",
+          "portfolio": 103.1445,
+          "benchmark": 102.7238,
+          "alpha_bp": 42.07
+        },
+        {
+          "date": "2025-11-09",
+          "portfolio": 103.1579,
+          "benchmark": 102.7238,
+          "alpha_bp": 43.41
+        },
+        {
+          "date": "2025-11-10",
+          "portfolio": 103.1712,
+          "benchmark": 102.5956,
+          "alpha_bp": 57.56
+        },
+        {
+          "date": "2025-11-11",
+          "portfolio": 103.1846,
+          "benchmark": 102.8359,
+          "alpha_bp": 34.87
+        },
+        {
+          "date": "2025-11-12",
+          "portfolio": 103.198,
+          "benchmark": 102.8733,
+          "alpha_bp": 32.47
+        },
+        {
+          "date": "2025-11-13",
+          "portfolio": 103.2113,
+          "benchmark": 102.6301,
+          "alpha_bp": 58.12
+        },
+        {
+          "date": "2025-11-14",
+          "portfolio": 103.2247,
+          "benchmark": 102.4777,
+          "alpha_bp": 74.7
+        },
+        {
+          "date": "2025-11-15",
+          "portfolio": 103.238,
+          "benchmark": 102.4777,
+          "alpha_bp": 76.03
+        },
+        {
+          "date": "2025-11-16",
+          "portfolio": 103.2514,
+          "benchmark": 102.4777,
+          "alpha_bp": 77.37
+        },
+        {
+          "date": "2025-11-17",
+          "portfolio": 103.2647,
+          "benchmark": 102.4886,
+          "alpha_bp": 77.61
+        },
+        {
+          "date": "2025-11-18",
+          "portfolio": 103.2781,
+          "benchmark": 102.4233,
+          "alpha_bp": 85.48
+        },
+        {
+          "date": "2025-11-19",
+          "portfolio": 103.2914,
+          "benchmark": 102.641,
+          "alpha_bp": 65.04
+        },
+        {
+          "date": "2025-11-20",
+          "portfolio": 103.3048,
+          "benchmark": 102.7172,
+          "alpha_bp": 58.76
+        },
+        {
+          "date": "2025-11-21",
+          "portfolio": 103.3182,
+          "benchmark": 102.6846,
+          "alpha_bp": 63.36
+        },
+        {
+          "date": "2025-11-22",
+          "portfolio": 103.3315,
+          "benchmark": 102.6846,
+          "alpha_bp": 64.69
+        },
+        {
+          "date": "2025-11-23",
+          "portfolio": 103.3449,
+          "benchmark": 102.6846,
+          "alpha_bp": 66.03
+        },
+        {
+          "date": "2025-11-24",
+          "portfolio": 103.3582,
+          "benchmark": 102.8152,
+          "alpha_bp": 54.3
+        },
+        {
+          "date": "2025-11-25",
+          "portfolio": 103.3716,
+          "benchmark": 103.305,
+          "alpha_bp": 6.66
+        },
+        {
+          "date": "2025-11-26",
+          "portfolio": 103.3849,
+          "benchmark": 103.3159,
+          "alpha_bp": 6.9
+        },
+        {
+          "date": "2025-11-27",
+          "portfolio": 103.3983,
+          "benchmark": 103.4901,
+          "alpha_bp": -9.18
+        },
+        {
+          "date": "2025-11-28",
+          "portfolio": 103.4116,
+          "benchmark": 103.305,
+          "alpha_bp": 10.66
+        },
+        {
+          "date": "2025-11-29",
+          "portfolio": 103.425,
+          "benchmark": 103.305,
+          "alpha_bp": 12.0
+        },
+        {
+          "date": "2025-11-30",
+          "portfolio": 103.4383,
+          "benchmark": 103.305,
+          "alpha_bp": 13.33
+        },
+        {
+          "date": "2025-12-01",
+          "portfolio": 103.4513,
+          "benchmark": 102.9023,
+          "alpha_bp": 54.9
+        },
+        {
+          "date": "2025-12-02",
+          "portfolio": 103.4643,
+          "benchmark": 102.9132,
+          "alpha_bp": 55.11
+        },
+        {
+          "date": "2025-12-03",
+          "portfolio": 103.4773,
+          "benchmark": 103.022,
+          "alpha_bp": 45.53
+        },
+        {
+          "date": "2025-12-04",
+          "portfolio": 103.4902,
+          "benchmark": 102.8914,
+          "alpha_bp": 59.88
+        },
+        {
+          "date": "2025-12-05",
+          "portfolio": 103.5032,
+          "benchmark": 102.7063,
+          "alpha_bp": 79.69
+        },
+        {
+          "date": "2025-12-06",
+          "portfolio": 103.5162,
+          "benchmark": 102.7063,
+          "alpha_bp": 80.99
+        },
+        {
+          "date": "2025-12-07",
+          "portfolio": 103.5292,
+          "benchmark": 102.7063,
+          "alpha_bp": 82.29
+        },
+        {
+          "date": "2025-12-08",
+          "portfolio": 103.5421,
+          "benchmark": 102.4886,
+          "alpha_bp": 105.35
+        },
+        {
+          "date": "2025-12-09",
+          "portfolio": 103.5551,
+          "benchmark": 102.6301,
+          "alpha_bp": 92.5
+        },
+        {
+          "date": "2025-12-10",
+          "portfolio": 103.5681,
+          "benchmark": 102.5648,
+          "alpha_bp": 100.33
+        },
+        {
+          "date": "2025-12-11",
+          "portfolio": 103.5811,
+          "benchmark": 102.9785,
+          "alpha_bp": 60.26
+        },
+        {
+          "date": "2025-12-12",
+          "portfolio": 103.594,
+          "benchmark": 102.4995,
+          "alpha_bp": 109.45
+        },
+        {
+          "date": "2025-12-13",
+          "portfolio": 103.607,
+          "benchmark": 102.4995,
+          "alpha_bp": 110.75
+        },
+        {
+          "date": "2025-12-14",
+          "portfolio": 103.62,
+          "benchmark": 102.4995,
+          "alpha_bp": 112.05
+        },
+        {
+          "date": "2025-12-15",
+          "portfolio": 103.633,
+          "benchmark": 102.6737,
+          "alpha_bp": 95.93
+        },
+        {
+          "date": "2025-12-16",
+          "portfolio": 103.6459,
+          "benchmark": 102.8043,
+          "alpha_bp": 84.16
+        },
+        {
+          "date": "2025-12-17",
+          "portfolio": 103.6589,
+          "benchmark": 102.8206,
+          "alpha_bp": 83.83
+        },
+        {
+          "date": "2025-12-18",
+          "portfolio": 103.6719,
+          "benchmark": 103.0329,
+          "alpha_bp": 63.9
+        },
+        {
+          "date": "2025-12-19",
+          "portfolio": 103.6849,
+          "benchmark": 103.0656,
+          "alpha_bp": 61.93
+        },
+        {
+          "date": "2025-12-20",
+          "portfolio": 103.6978,
+          "benchmark": 103.0656,
+          "alpha_bp": 63.22
+        },
+        {
+          "date": "2025-12-21",
+          "portfolio": 103.7108,
+          "benchmark": 103.0656,
+          "alpha_bp": 64.52
+        },
+        {
+          "date": "2025-12-22",
+          "portfolio": 103.7238,
+          "benchmark": 102.8043,
+          "alpha_bp": 91.95
+        },
+        {
+          "date": "2025-12-23",
+          "portfolio": 103.7368,
+          "benchmark": 102.8859,
+          "alpha_bp": 85.09
+        },
+        {
+          "date": "2025-12-24",
+          "portfolio": 103.7497,
+          "benchmark": 102.9349,
+          "alpha_bp": 81.48
+        },
+        {
+          "date": "2025-12-25",
+          "portfolio": 103.7627,
+          "benchmark": 102.9349,
+          "alpha_bp": 82.78
+        },
+        {
+          "date": "2025-12-26",
+          "portfolio": 103.7757,
+          "benchmark": 102.9349,
+          "alpha_bp": 84.08
+        },
+        {
+          "date": "2025-12-27",
+          "portfolio": 103.7887,
+          "benchmark": 102.9349,
+          "alpha_bp": 85.38
+        },
+        {
+          "date": "2025-12-28",
+          "portfolio": 103.8016,
+          "benchmark": 102.9349,
+          "alpha_bp": 86.67
+        },
+        {
+          "date": "2025-12-29",
+          "portfolio": 103.8146,
+          "benchmark": 103.1309,
+          "alpha_bp": 68.37
+        },
+        {
+          "date": "2025-12-30",
+          "portfolio": 103.8276,
+          "benchmark": 103.2071,
+          "alpha_bp": 62.05
+        },
+        {
+          "date": "2025-12-31",
+          "portfolio": 103.8406,
+          "benchmark": 103.305,
+          "alpha_bp": 53.56
+        },
+        {
+          "date": "2026-01-01",
+          "portfolio": 103.8623,
+          "benchmark": 103.305,
+          "alpha_bp": 55.73
+        },
+        {
+          "date": "2026-01-02",
+          "portfolio": 103.8841,
+          "benchmark": 102.9458,
+          "alpha_bp": 93.83
+        },
+        {
+          "date": "2026-01-03",
+          "portfolio": 103.9058,
+          "benchmark": 102.9458,
+          "alpha_bp": 96.0
+        },
+        {
+          "date": "2026-01-04",
+          "portfolio": 103.9276,
+          "benchmark": 102.9458,
+          "alpha_bp": 98.18
+        },
+        {
+          "date": "2026-01-05",
+          "portfolio": 103.9494,
+          "benchmark": 103.0329,
+          "alpha_bp": 91.65
+        },
+        {
+          "date": "2026-01-06",
+          "portfolio": 103.9711,
+          "benchmark": 102.8805,
+          "alpha_bp": 109.06
+        },
+        {
+          "date": "2026-01-07",
+          "portfolio": 103.9929,
+          "benchmark": 103.2288,
+          "alpha_bp": 76.41
+        },
+        {
+          "date": "2026-01-08",
+          "portfolio": 104.0146,
+          "benchmark": 103.0329,
+          "alpha_bp": 98.17
+        },
+        {
+          "date": "2026-01-09",
+          "portfolio": 104.0364,
+          "benchmark": 103.3595,
+          "alpha_bp": 67.69
+        },
+        {
+          "date": "2026-01-10",
+          "portfolio": 104.0582,
+          "benchmark": 103.3595,
+          "alpha_bp": 69.87
+        },
+        {
+          "date": "2026-01-11",
+          "portfolio": 104.0799,
+          "benchmark": 103.3595,
+          "alpha_bp": 72.04
+        },
+        {
+          "date": "2026-01-12",
+          "portfolio": 104.1017,
+          "benchmark": 103.0982,
+          "alpha_bp": 100.35
+        },
+        {
+          "date": "2026-01-13",
+          "portfolio": 104.1235,
+          "benchmark": 103.1526,
+          "alpha_bp": 97.09
+        },
+        {
+          "date": "2026-01-14",
+          "portfolio": 104.1452,
+          "benchmark": 103.4139,
+          "alpha_bp": 73.13
+        },
+        {
+          "date": "2026-01-15",
+          "portfolio": 104.167,
+          "benchmark": 103.3377,
+          "alpha_bp": 82.93
+        },
+        {
+          "date": "2026-01-16",
+          "portfolio": 104.1887,
+          "benchmark": 103.3268,
+          "alpha_bp": 86.19
+        },
+        {
+          "date": "2026-01-17",
+          "portfolio": 104.2105,
+          "benchmark": 103.3268,
+          "alpha_bp": 88.37
+        },
+        {
+          "date": "2026-01-18",
+          "portfolio": 104.2323,
+          "benchmark": 103.3268,
+          "alpha_bp": 90.55
+        },
+        {
+          "date": "2026-01-19",
+          "portfolio": 104.254,
+          "benchmark": 102.9349,
+          "alpha_bp": 131.91
+        },
+        {
+          "date": "2026-01-20",
+          "portfolio": 104.2758,
+          "benchmark": 102.8261,
+          "alpha_bp": 144.97
+        },
+        {
+          "date": "2026-01-21",
+          "portfolio": 104.2975,
+          "benchmark": 102.924,
+          "alpha_bp": 137.35
+        },
+        {
+          "date": "2026-01-22",
+          "portfolio": 104.3193,
+          "benchmark": 103.0057,
+          "alpha_bp": 131.36
+        },
+        {
+          "date": "2026-01-23",
+          "portfolio": 104.3411,
+          "benchmark": 103.1744,
+          "alpha_bp": 116.67
+        },
+        {
+          "date": "2026-01-24",
+          "portfolio": 104.3628,
+          "benchmark": 103.1744,
+          "alpha_bp": 118.84
+        },
+        {
+          "date": "2026-01-25",
+          "portfolio": 104.3846,
+          "benchmark": 103.1744,
+          "alpha_bp": 121.02
+        },
+        {
+          "date": "2026-01-26",
+          "portfolio": 104.4063,
+          "benchmark": 103.1744,
+          "alpha_bp": 123.19
+        },
+        {
+          "date": "2026-01-27",
+          "portfolio": 104.4281,
+          "benchmark": 103.403,
+          "alpha_bp": 102.51
+        },
+        {
+          "date": "2026-01-28",
+          "portfolio": 104.4499,
+          "benchmark": 103.12,
+          "alpha_bp": 132.99
+        },
+        {
+          "date": "2026-01-29",
+          "portfolio": 104.4716,
+          "benchmark": 103.2833,
+          "alpha_bp": 118.83
+        },
+        {
+          "date": "2026-01-30",
+          "portfolio": 104.4934,
+          "benchmark": 103.2288,
+          "alpha_bp": 126.46
+        },
+        {
+          "date": "2026-01-31",
+          "portfolio": 104.5151,
+          "benchmark": 103.2288,
+          "alpha_bp": 128.63
+        },
+        {
+          "date": "2026-02-01",
+          "portfolio": 104.5601,
+          "benchmark": 103.2288,
+          "alpha_bp": 133.13
+        },
+        {
+          "date": "2026-02-02",
+          "portfolio": 104.6051,
+          "benchmark": 103.0329,
+          "alpha_bp": 157.22
+        },
+        {
+          "date": "2026-02-03",
+          "portfolio": 104.6501,
+          "benchmark": 103.0764,
+          "alpha_bp": 157.37
+        },
+        {
+          "date": "2026-02-04",
+          "portfolio": 104.6951,
+          "benchmark": 102.9894,
+          "alpha_bp": 170.57
+        },
+        {
+          "date": "2026-02-05",
+          "portfolio": 104.7401,
+          "benchmark": 103.2942,
+          "alpha_bp": 144.59
+        },
+        {
+          "date": "2026-02-06",
+          "portfolio": 104.7851,
+          "benchmark": 103.3377,
+          "alpha_bp": 144.74
+        },
+        {
+          "date": "2026-02-07",
+          "portfolio": 104.83,
+          "benchmark": 103.3377,
+          "alpha_bp": 149.23
+        },
+        {
+          "date": "2026-02-08",
+          "portfolio": 104.875,
+          "benchmark": 103.3377,
+          "alpha_bp": 153.73
+        },
+        {
+          "date": "2026-02-09",
+          "portfolio": 104.92,
+          "benchmark": 103.4139,
+          "alpha_bp": 150.61
+        },
+        {
+          "date": "2026-02-10",
+          "portfolio": 104.965,
+          "benchmark": 103.7949,
+          "alpha_bp": 117.01
+        },
+        {
+          "date": "2026-02-11",
+          "portfolio": 105.01,
+          "benchmark": 103.6316,
+          "alpha_bp": 137.84
+        },
+        {
+          "date": "2026-02-12",
+          "portfolio": 105.055,
+          "benchmark": 103.9146,
+          "alpha_bp": 114.04
+        },
+        {
+          "date": "2026-02-13",
+          "portfolio": 105.1,
+          "benchmark": 104.2848,
+          "alpha_bp": 81.52
+        },
+        {
+          "date": "2026-02-14",
+          "portfolio": 105.1449,
+          "benchmark": 104.2848,
+          "alpha_bp": 86.01
+        },
+        {
+          "date": "2026-02-15",
+          "portfolio": 105.1899,
+          "benchmark": 104.2848,
+          "alpha_bp": 90.51
+        },
+        {
+          "date": "2026-02-16",
+          "portfolio": 105.2349,
+          "benchmark": 104.6113,
+          "alpha_bp": 62.36
+        },
+        {
+          "date": "2026-02-17",
+          "portfolio": 105.2799,
+          "benchmark": 104.3773,
+          "alpha_bp": 90.26
+        },
+        {
+          "date": "2026-02-18",
+          "portfolio": 105.3249,
+          "benchmark": 104.3065,
+          "alpha_bp": 101.84
+        },
+        {
+          "date": "2026-02-19",
+          "portfolio": 105.3699,
+          "benchmark": 104.3283,
+          "alpha_bp": 104.16
+        },
+        {
+          "date": "2026-02-20",
+          "portfolio": 105.4149,
+          "benchmark": 104.1977,
+          "alpha_bp": 121.72
+        },
+        {
+          "date": "2026-02-21",
+          "portfolio": 105.4598,
+          "benchmark": 104.1977,
+          "alpha_bp": 126.21
+        },
+        {
+          "date": "2026-02-22",
+          "portfolio": 105.5048,
+          "benchmark": 104.1977,
+          "alpha_bp": 130.71
+        },
+        {
+          "date": "2026-02-23",
+          "portfolio": 105.5498,
+          "benchmark": 104.4589,
+          "alpha_bp": 109.09
+        },
+        {
+          "date": "2026-02-24",
+          "portfolio": 105.5948,
+          "benchmark": 104.644,
+          "alpha_bp": 95.08
+        },
+        {
+          "date": "2026-02-25",
+          "portfolio": 105.6398,
+          "benchmark": 104.4644,
+          "alpha_bp": 117.54
+        },
+        {
+          "date": "2026-02-26",
+          "portfolio": 105.6848,
+          "benchmark": 104.5787,
+          "alpha_bp": 110.61
+        },
+        {
+          "date": "2026-02-27",
+          "portfolio": 105.7298,
+          "benchmark": 104.9705,
+          "alpha_bp": 75.93
+        },
+        {
+          "date": "2026-02-28",
+          "portfolio": 105.7747,
+          "benchmark": 104.9705,
+          "alpha_bp": 80.42
+        },
+        {
+          "date": "2026-03-01",
+          "portfolio": 105.6916,
+          "benchmark": 104.9705,
+          "alpha_bp": 72.11
+        },
+        {
+          "date": "2026-03-02",
+          "portfolio": 105.6084,
+          "benchmark": 104.2684,
+          "alpha_bp": 134.0
+        },
+        {
+          "date": "2026-03-03",
+          "portfolio": 105.5252,
+          "benchmark": 104.3174,
+          "alpha_bp": 120.78
+        },
+        {
+          "date": "2026-03-04",
+          "portfolio": 105.4421,
+          "benchmark": 104.3936,
+          "alpha_bp": 104.85
+        },
+        {
+          "date": "2026-03-05",
+          "portfolio": 105.3589,
+          "benchmark": 103.8711,
+          "alpha_bp": 148.78
+        },
+        {
+          "date": "2026-03-06",
+          "portfolio": 105.2757,
+          "benchmark": 103.9908,
+          "alpha_bp": 128.49
+        },
+        {
+          "date": "2026-03-07",
+          "portfolio": 105.1926,
+          "benchmark": 103.9908,
+          "alpha_bp": 120.18
+        },
+        {
+          "date": "2026-03-08",
+          "portfolio": 105.1094,
+          "benchmark": 103.9908,
+          "alpha_bp": 111.86
+        },
+        {
+          "date": "2026-03-09",
+          "portfolio": 105.0262,
+          "benchmark": 103.8384,
+          "alpha_bp": 118.78
+        },
+        {
+          "date": "2026-03-10",
+          "portfolio": 104.9431,
+          "benchmark": 104.2194,
+          "alpha_bp": 72.37
+        },
+        {
+          "date": "2026-03-11",
+          "portfolio": 104.8599,
+          "benchmark": 103.4139,
+          "alpha_bp": 144.6
+        },
+        {
+          "date": "2026-03-12",
+          "portfolio": 104.7767,
+          "benchmark": 103.0656,
+          "alpha_bp": 171.11
+        },
+        {
+          "date": "2026-03-13",
+          "portfolio": 104.6936,
+          "benchmark": 102.8043,
+          "alpha_bp": 188.93
+        },
+        {
+          "date": "2026-03-14",
+          "portfolio": 104.6104,
+          "benchmark": 102.8043,
+          "alpha_bp": 180.61
+        },
+        {
+          "date": "2026-03-15",
+          "portfolio": 104.5272,
+          "benchmark": 102.8043,
+          "alpha_bp": 172.29
+        },
+        {
+          "date": "2026-03-16",
+          "portfolio": 104.4441,
+          "benchmark": 103.0873,
+          "alpha_bp": 135.68
+        },
+        {
+          "date": "2026-03-17",
+          "portfolio": 104.3609,
+          "benchmark": 103.5663,
+          "alpha_bp": 79.46
+        },
+        {
+          "date": "2026-03-18",
+          "portfolio": 104.2777,
+          "benchmark": 103.218,
+          "alpha_bp": 105.97
+        },
+        {
+          "date": "2026-03-19",
+          "portfolio": 104.1946,
+          "benchmark": 103.0002,
+          "alpha_bp": 119.44
+        },
+        {
+          "date": "2026-03-20",
+          "portfolio": 104.1114,
+          "benchmark": 102.3906,
+          "alpha_bp": 172.08
+        },
+        {
+          "date": "2026-03-21",
+          "portfolio": 104.0282,
+          "benchmark": 102.3906,
+          "alpha_bp": 163.76
+        },
+        {
+          "date": "2026-03-22",
+          "portfolio": 103.9451,
+          "benchmark": 102.3906,
+          "alpha_bp": 155.45
+        },
+        {
+          "date": "2026-03-23",
+          "portfolio": 103.8619,
+          "benchmark": 102.5975,
+          "alpha_bp": 126.44
+        },
+        {
+          "date": "2026-03-24",
+          "portfolio": 103.7787,
+          "benchmark": 102.3471,
+          "alpha_bp": 143.16
+        },
+        {
+          "date": "2026-03-25",
+          "portfolio": 103.6956,
+          "benchmark": 102.7825,
+          "alpha_bp": 91.31
+        },
+        {
+          "date": "2026-03-26",
+          "portfolio": 103.6124,
+          "benchmark": 102.4233,
+          "alpha_bp": 118.91
+        },
+        {
+          "date": "2026-03-27",
+          "portfolio": 103.5292,
+          "benchmark": 102.2709,
+          "alpha_bp": 125.83
+        },
+        {
+          "date": "2026-03-28",
+          "portfolio": 103.4461,
+          "benchmark": 102.2709,
+          "alpha_bp": 117.52
+        },
+        {
+          "date": "2026-03-29",
+          "portfolio": 103.3629,
+          "benchmark": 102.2709,
+          "alpha_bp": 109.2
+        },
+        {
+          "date": "2026-03-30",
+          "portfolio": 103.2797,
+          "benchmark": 102.7499,
+          "alpha_bp": 52.98
+        },
+        {
+          "date": "2026-03-31",
+          "portfolio": 103.1966,
+          "benchmark": 102.9023,
+          "alpha_bp": 29.43
+        },
+        {
+          "date": "2026-04-01",
+          "portfolio": 103.2405,
+          "benchmark": 103.1526,
+          "alpha_bp": 8.79
+        },
+        {
+          "date": "2026-04-02",
+          "portfolio": 103.2845,
+          "benchmark": 103.2125,
+          "alpha_bp": 7.2
+        },
+        {
+          "date": "2026-04-03",
+          "portfolio": 103.3284,
+          "benchmark": 103.2125,
+          "alpha_bp": 11.59
+        },
+        {
+          "date": "2026-04-04",
+          "portfolio": 103.3724,
+          "benchmark": 103.2125,
+          "alpha_bp": 15.99
+        },
+        {
+          "date": "2026-04-05",
+          "portfolio": 103.4163,
+          "benchmark": 103.2125,
+          "alpha_bp": 20.38
+        },
+        {
+          "date": "2026-04-06",
+          "portfolio": 103.4603,
+          "benchmark": 103.2125,
+          "alpha_bp": 24.78
+        },
+        {
+          "date": "2026-04-07",
+          "portfolio": 103.5042,
+          "benchmark": 102.739,
+          "alpha_bp": 76.52
+        },
+        {
+          "date": "2026-04-08",
+          "portfolio": 103.5482,
+          "benchmark": 103.4792,
+          "alpha_bp": 6.9
+        },
+        {
+          "date": "2026-04-09",
+          "portfolio": 103.5921,
+          "benchmark": 103.3812,
+          "alpha_bp": 21.09
+        },
+        {
+          "date": "2026-04-10",
+          "portfolio": 103.6361,
+          "benchmark": 103.4683,
+          "alpha_bp": 16.78
+        },
+        {
+          "date": "2026-04-11",
+          "portfolio": 103.68,
+          "benchmark": 103.4683,
+          "alpha_bp": 21.17
+        },
+        {
+          "date": "2026-04-12",
+          "portfolio": 103.724,
+          "benchmark": 103.4683,
+          "alpha_bp": 25.57
+        },
+        {
+          "date": "2026-04-13",
+          "portfolio": 103.7679,
+          "benchmark": 103.1962,
+          "alpha_bp": 57.17
+        },
+        {
+          "date": "2026-04-14",
+          "portfolio": 103.8119,
+          "benchmark": 103.6207,
+          "alpha_bp": 19.12
+        },
+        {
+          "date": "2026-04-15",
+          "portfolio": 103.8558,
+          "benchmark": 103.599,
+          "alpha_bp": 25.68
+        },
+        {
+          "date": "2026-04-16",
+          "portfolio": 103.8998,
+          "benchmark": 103.6207,
+          "alpha_bp": 27.91
+        },
+        {
+          "date": "2026-04-17",
+          "portfolio": 103.9437,
+          "benchmark": 103.9255,
+          "alpha_bp": 1.82
+        },
+        {
+          "date": "2026-04-18",
+          "portfolio": 103.9877,
+          "benchmark": 103.9255,
+          "alpha_bp": 6.22
+        },
+        {
+          "date": "2026-04-19",
+          "portfolio": 104.0316,
+          "benchmark": 103.9255,
+          "alpha_bp": 10.61
+        },
+        {
+          "date": "2026-04-20",
+          "portfolio": 104.0756,
+          "benchmark": 103.8493,
+          "alpha_bp": 22.63
+        },
+        {
+          "date": "2026-04-21",
+          "portfolio": 104.1195,
+          "benchmark": 103.5772,
+          "alpha_bp": 54.23
+        },
+        {
+          "date": "2026-04-22",
+          "portfolio": 104.1635,
+          "benchmark": 103.5554,
+          "alpha_bp": 60.81
+        },
+        {
+          "date": "2026-04-23",
+          "portfolio": 104.2074,
+          "benchmark": 103.6316,
+          "alpha_bp": 57.58
+        },
+        {
+          "date": "2026-04-24",
+          "portfolio": 104.2514,
+          "benchmark": 103.5554,
+          "alpha_bp": 69.6
+        },
+        {
+          "date": "2026-04-25",
+          "portfolio": 104.2954,
+          "benchmark": 103.5554,
+          "alpha_bp": 74.0
+        },
+        {
+          "date": "2026-04-26",
+          "portfolio": 104.3393,
+          "benchmark": 103.5554,
+          "alpha_bp": 78.39
+        },
+        {
+          "date": "2026-04-27",
+          "portfolio": 104.3833,
+          "benchmark": 103.3704,
+          "alpha_bp": 101.29
+        },
+        {
+          "date": "2026-04-28",
+          "portfolio": 104.4272,
+          "benchmark": 103.2288,
+          "alpha_bp": 119.84
+        },
+        {
+          "date": "2026-04-29",
+          "portfolio": 104.4712,
+          "benchmark": 103.1363,
+          "alpha_bp": 133.49
+        },
+        {
+          "date": "2026-04-30",
+          "portfolio": 104.5151,
+          "benchmark": 103.2288,
+          "alpha_bp": 128.63
+        },
+        {
+          "date": "2026-05-01",
+          "portfolio": 104.5312,
+          "benchmark": 103.2561,
+          "alpha_bp": 127.51
+        },
+        {
+          "date": "2026-05-02",
+          "portfolio": 104.5472,
+          "benchmark": 103.2561,
+          "alpha_bp": 129.11
+        },
+        {
+          "date": "2026-05-03",
+          "portfolio": 104.5632,
+          "benchmark": 103.2561,
+          "alpha_bp": 130.71
+        },
+        {
+          "date": "2026-05-04",
+          "portfolio": 104.5793,
+          "benchmark": 103.2561,
+          "alpha_bp": 132.32
+        },
+        {
+          "date": "2026-05-05",
+          "portfolio": 104.5953,
+          "benchmark": 103.0982,
+          "alpha_bp": 149.71
+        },
+        {
+          "date": "2026-05-06",
+          "portfolio": 104.6114,
+          "benchmark": 103.501,
+          "alpha_bp": 111.04
+        },
+        {
+          "date": "2026-05-07",
+          "portfolio": 104.6274,
+          "benchmark": 103.4466,
+          "alpha_bp": 118.08
+        },
+        {
+          "date": "2026-05-08",
+          "portfolio": 104.6435,
+          "benchmark": 103.4574,
+          "alpha_bp": 118.61
+        },
+        {
+          "date": "2026-05-09",
+          "portfolio": 104.6595,
+          "benchmark": 103.4574,
+          "alpha_bp": 120.21
+        },
+        {
+          "date": "2026-05-10",
+          "portfolio": 104.6756,
+          "benchmark": 103.4574,
+          "alpha_bp": 121.82
+        },
+        {
+          "date": "2026-05-11",
+          "portfolio": 104.6916,
+          "benchmark": 103.4357,
+          "alpha_bp": 125.59
+        },
+        {
+          "date": "2026-05-12",
+          "portfolio": 104.7077,
+          "benchmark": 103.0111,
+          "alpha_bp": 169.66
+        },
+        {
+          "date": "2026-05-13",
+          "portfolio": 104.7237,
+          "benchmark": 102.7825,
+          "alpha_bp": 194.12
+        },
+        {
+          "date": "2026-05-14",
+          "portfolio": 104.7398,
+          "benchmark": 103.1744,
+          "alpha_bp": 156.54
+        },
+        {
+          "date": "2026-05-15",
+          "portfolio": 104.7558,
+          "benchmark": 102.4451,
+          "alpha_bp": 231.07
+        },
+        {
+          "date": "2026-05-16",
+          "portfolio": 104.7718,
+          "benchmark": 102.4451,
+          "alpha_bp": 232.67
+        },
+        {
+          "date": "2026-05-17",
+          "portfolio": 104.7879,
+          "benchmark": 102.4451,
+          "alpha_bp": 234.28
+        },
+        {
+          "date": "2026-05-18",
+          "portfolio": 104.8039,
+          "benchmark": 102.2382,
+          "alpha_bp": 256.57
+        },
+        {
+          "date": "2026-05-19",
+          "portfolio": 104.82,
+          "benchmark": 101.8028,
+          "alpha_bp": 301.72
+        },
+        {
+          "date": "2026-05-20",
+          "portfolio": 104.836,
+          "benchmark": 102.3362,
+          "alpha_bp": 249.98
+        },
+        {
+          "date": "2026-05-21",
+          "portfolio": 104.8521,
+          "benchmark": 102.2528,
+          "alpha_bp": 259.93
+        },
+        {
+          "date": "2026-05-22",
+          "portfolio": 104.8681,
+          "benchmark": 102.436,
+          "alpha_bp": 243.21
+        },
+        {
+          "date": "2026-05-23",
+          "portfolio": 104.8842,
+          "benchmark": 102.436,
+          "alpha_bp": 244.82
+        },
+        {
+          "date": "2026-05-24",
+          "portfolio": 104.9002,
+          "benchmark": 102.436,
+          "alpha_bp": 246.42
+        },
+        {
+          "date": "2026-05-25",
+          "portfolio": 104.9163,
+          "benchmark": 102.436,
+          "alpha_bp": 248.03
+        },
+        {
+          "date": "2026-05-26",
+          "portfolio": 104.9323,
+          "benchmark": 102.8689,
+          "alpha_bp": 206.34
+        },
+        {
+          "date": "2026-05-27",
+          "portfolio": 104.9483,
+          "benchmark": 103.0465,
+          "alpha_bp": 190.18
+        },
+        {
+          "date": "2026-05-28",
+          "portfolio": 104.9644,
+          "benchmark": 103.2241,
+          "alpha_bp": 174.03
+        },
+        {
+          "date": "2026-05-29",
+          "portfolio": 104.9804,
+          "benchmark": 103.5794,
+          "alpha_bp": 140.1
+        },
+        {
+          "date": "2026-05-30",
+          "portfolio": 104.9965,
+          "benchmark": 103.5794,
+          "alpha_bp": 141.71
+        },
+        {
+          "date": "2026-05-31",
+          "portfolio": 105.0125,
+          "benchmark": 103.5794,
+          "alpha_bp": 143.31
+        },
+        {
+          "date": "2026-06-01",
+          "portfolio": 105.0291,
+          "benchmark": 103.2574,
+          "alpha_bp": 177.17
+        },
+        {
+          "date": "2026-06-02",
+          "portfolio": 105.0457,
+          "benchmark": 103.424,
+          "alpha_bp": 162.17
+        },
+        {
+          "date": "2026-06-03",
+          "portfolio": 105.0623,
+          "benchmark": 103.1242,
+          "alpha_bp": 193.81
+        },
+        {
+          "date": "2026-06-04",
+          "portfolio": 105.0789,
+          "benchmark": 103.3463,
+          "alpha_bp": 173.26
+        },
+        {
+          "date": "2026-06-05",
+          "portfolio": 105.0955,
+          "benchmark": 102.8911,
+          "alpha_bp": 220.44
+        },
+        {
+          "date": "2026-06-06",
+          "portfolio": 105.1121,
+          "benchmark": 102.8911,
+          "alpha_bp": 222.1
+        },
+        {
+          "date": "2026-06-07",
+          "portfolio": 105.1287,
+          "benchmark": 102.8911,
+          "alpha_bp": 223.76
+        },
+        {
+          "date": "2026-06-08",
+          "portfolio": 105.1453,
+          "benchmark": 102.7912,
+          "alpha_bp": 235.41
+        },
+        {
+          "date": "2026-06-09",
+          "portfolio": 105.1619,
+          "benchmark": 102.8412,
+          "alpha_bp": 232.07
+        },
+        {
+          "date": "2026-06-10",
+          "portfolio": 105.1785,
+          "benchmark": 102.8949,
+          "alpha_bp": 228.36
+        },
+        {
+          "date": "2026-06-11",
+          "portfolio": 105.1951,
+          "benchmark": 102.9485,
+          "alpha_bp": 224.66
+        },
+        {
+          "date": "2026-06-12",
+          "portfolio": 105.2117,
+          "benchmark": 103.0022,
+          "alpha_bp": 220.95
+        },
+        {
+          "date": "2026-06-13",
+          "portfolio": 105.2283,
+          "benchmark": 103.0558,
+          "alpha_bp": 217.25
+        },
+        {
+          "date": "2026-06-14",
+          "portfolio": 105.2449,
+          "benchmark": 103.1095,
+          "alpha_bp": 213.54
+        },
+        {
+          "date": "2026-06-15",
+          "portfolio": 105.2615,
+          "benchmark": 103.1631,
+          "alpha_bp": 209.84
+        },
+        {
+          "date": "2026-06-16",
+          "portfolio": 105.2781,
+          "benchmark": 103.2168,
+          "alpha_bp": 206.13
+        },
+        {
+          "date": "2026-06-17",
+          "portfolio": 105.2947,
+          "benchmark": 103.2704,
+          "alpha_bp": 202.43
+        },
+        {
+          "date": "2026-06-18",
+          "portfolio": 105.3113,
+          "benchmark": 103.3241,
+          "alpha_bp": 198.72
+        },
+        {
+          "date": "2026-06-19",
+          "portfolio": 105.3279,
+          "benchmark": 103.3777,
+          "alpha_bp": 195.02
+        },
+        {
+          "date": "2026-06-20",
+          "portfolio": 105.3445,
+          "benchmark": 103.4314,
+          "alpha_bp": 191.31
+        },
+        {
+          "date": "2026-06-21",
+          "portfolio": 105.3611,
+          "benchmark": 103.485,
+          "alpha_bp": 187.61
+        },
+        {
+          "date": "2026-06-22",
+          "portfolio": 105.3777,
+          "benchmark": 103.5387,
+          "alpha_bp": 183.9
+        },
+        {
+          "date": "2026-06-23",
+          "portfolio": 105.3943,
+          "benchmark": 103.5923,
+          "alpha_bp": 180.2
+        },
+        {
+          "date": "2026-06-24",
+          "portfolio": 105.4109,
+          "benchmark": 103.646,
+          "alpha_bp": 176.49
+        },
+        {
+          "date": "2026-06-25",
+          "portfolio": 105.4275,
+          "benchmark": 103.6996,
+          "alpha_bp": 172.79
+        },
+        {
+          "date": "2026-06-26",
+          "portfolio": 105.4441,
+          "benchmark": 103.7533,
+          "alpha_bp": 169.08
+        },
+        {
+          "date": "2026-06-27",
+          "portfolio": 105.4607,
+          "benchmark": 103.8069,
+          "alpha_bp": 165.38
+        },
+        {
+          "date": "2026-06-28",
+          "portfolio": 105.4773,
+          "benchmark": 103.8606,
+          "alpha_bp": 161.67
+        },
+        {
+          "date": "2026-06-29",
+          "portfolio": 105.4939,
+          "benchmark": 103.9142,
+          "alpha_bp": 157.97
+        },
+        {
+          "date": "2026-06-30",
+          "portfolio": 105.5105,
+          "benchmark": 103.9679,
+          "alpha_bp": 154.26
+        },
+        {
+          "date": "2026-07-01",
+          "portfolio": 105.5032,
+          "benchmark": 103.9018,
+          "alpha_bp": 160.14
+        },
+        {
+          "date": "2026-07-02",
+          "portfolio": 105.4958,
+          "benchmark": 103.8357,
+          "alpha_bp": 166.01
+        },
+        {
+          "date": "2026-07-03",
+          "portfolio": 105.4885,
+          "benchmark": 103.7695,
+          "alpha_bp": 171.9
+        },
+        {
+          "date": "2026-07-04",
+          "portfolio": 105.4811,
+          "benchmark": 103.7034,
+          "alpha_bp": 177.77
+        },
+        {
+          "date": "2026-07-05",
+          "portfolio": 105.4738,
+          "benchmark": 103.6373,
+          "alpha_bp": 183.65
+        },
+        {
+          "date": "2026-07-06",
+          "portfolio": 105.4664,
+          "benchmark": 103.5712,
+          "alpha_bp": 189.52
+        },
+        {
+          "date": "2026-07-07",
+          "portfolio": 105.459,
+          "benchmark": 103.505,
+          "alpha_bp": 195.4
+        },
+        {
+          "date": "2026-07-08",
+          "portfolio": 105.4517,
+          "benchmark": 103.4389,
+          "alpha_bp": 201.28
+        },
+        {
+          "date": "2026-07-09",
+          "portfolio": 105.4443,
+          "benchmark": 103.3728,
+          "alpha_bp": 207.15
+        },
+        {
+          "date": "2026-07-10",
+          "portfolio": 105.437,
+          "benchmark": 103.3067,
+          "alpha_bp": 213.03
+        },
+        {
+          "date": "2026-07-11",
+          "portfolio": 105.4296,
+          "benchmark": 103.2406,
+          "alpha_bp": 218.9
+        },
+        {
+          "date": "2026-07-12",
+          "portfolio": 105.4222,
+          "benchmark": 103.1744,
+          "alpha_bp": 224.78
+        },
+        {
+          "date": "2026-07-13",
+          "portfolio": 105.4149,
+          "benchmark": 103.1083,
+          "alpha_bp": 230.66
+        },
+        {
+          "date": "2026-07-14",
+          "portfolio": 105.4075,
+          "benchmark": 103.0422,
+          "alpha_bp": 236.53
+        },
+        {
+          "date": "2026-07-15",
+          "portfolio": 105.4002,
+          "benchmark": 102.9761,
+          "alpha_bp": 242.41
+        },
+        {
+          "date": "2026-07-16",
+          "portfolio": 105.3928,
+          "benchmark": 102.91,
+          "alpha_bp": 248.28
+        },
+        {
+          "date": "2026-07-17",
+          "portfolio": 105.3854,
+          "benchmark": 102.8438,
+          "alpha_bp": 254.16
+        },
+        {
+          "date": "2026-07-18",
+          "portfolio": 105.3781,
+          "benchmark": 102.7777,
+          "alpha_bp": 260.04
+        },
+        {
+          "date": "2026-07-19",
+          "portfolio": 105.3707,
+          "benchmark": 102.7116,
+          "alpha_bp": 265.91
+        },
+        {
+          "date": "2026-07-20",
+          "portfolio": 105.3634,
+          "benchmark": 102.6455,
+          "alpha_bp": 271.79
+        },
+        {
+          "date": "2026-07-21",
+          "portfolio": 105.356,
+          "benchmark": 102.5793,
+          "alpha_bp": 277.67
+        },
+        {
+          "date": "2026-07-22",
+          "portfolio": 105.3486,
+          "benchmark": 102.5132,
+          "alpha_bp": 283.54
+        },
+        {
+          "date": "2026-07-23",
+          "portfolio": 105.3413,
+          "benchmark": 102.4302,
+          "alpha_bp": 291.11
+        },
+        {
+          "date": "2026-07-24",
+          "portfolio": 105.3339,
+          "benchmark": 102.5386,
+          "alpha_bp": 279.53
+        },
+        {
+          "date": "2026-07-25",
+          "portfolio": 105.3266,
+          "benchmark": 102.5821,
+          "alpha_bp": 274.45
+        },
+        {
+          "date": "2026-07-26",
+          "portfolio": 105.3192,
+          "benchmark": 102.6256,
+          "alpha_bp": 269.36
+        },
+        {
+          "date": "2026-07-27",
+          "portfolio": 105.3118,
+          "benchmark": 102.664,
+          "alpha_bp": 264.78
+        },
+        {
+          "date": "2026-07-28",
+          "portfolio": 105.3045,
+          "benchmark": 102.6666,
+          "alpha_bp": 263.79
+        },
+        {
+          "date": "2026-07-29",
+          "portfolio": 105.2971,
+          "benchmark": 102.6179,
+          "alpha_bp": 267.92
+        },
+        {
+          "date": "2026-07-30",
+          "portfolio": 105.2898,
+          "benchmark": 102.5159,
+          "alpha_bp": 277.39
+        },
+        {
+          "date": "2026-07-31",
+          "portfolio": 105.2824,
+          "benchmark": 102.4138,
+          "alpha_bp": 286.86
+        },
+        {
+          "date": "2026-08-01",
+          "portfolio": 105.3928,
+          "benchmark": 102.4693,
+          "alpha_bp": 292.35
+        },
+        {
+          "date": "2026-08-02",
+          "portfolio": 105.5032,
+          "benchmark": 102.5248,
+          "alpha_bp": 297.84
+        },
+        {
+          "date": "2026-08-03",
+          "portfolio": 105.6136,
+          "benchmark": 102.547,
+          "alpha_bp": 306.66
+        },
+        {
+          "date": "2026-08-04",
+          "portfolio": 105.724,
+          "benchmark": 102.8036,
+          "alpha_bp": 292.04
+        },
+        {
+          "date": "2026-08-05",
+          "portfolio": 105.8344,
+          "benchmark": 102.9363,
+          "alpha_bp": 289.81
+        },
+        {
+          "date": "2026-08-06",
+          "portfolio": 105.9448,
+          "benchmark": 102.8542,
+          "alpha_bp": 309.06
+        },
+        {
+          "date": "2026-08-07",
+          "portfolio": 106.0552,
+          "benchmark": 102.9171,
+          "alpha_bp": 313.81
+        },
+        {
+          "date": "2026-08-08",
+          "portfolio": 105.8679,
+          "benchmark": 102.864,
+          "alpha_bp": 300.39
+        },
+        {
+          "date": "2026-08-09",
+          "portfolio": 105.934,
+          "benchmark": 102.811,
+          "alpha_bp": 312.3
+        },
+        {
+          "date": "2026-08-10",
+          "portfolio": 106.0,
+          "benchmark": 102.6346,
+          "alpha_bp": 336.54
+        },
+        {
+          "date": "2026-08-11",
+          "portfolio": 106.0,
+          "benchmark": 102.724,
+          "alpha_bp": 327.6
+        },
+        {
+          "date": "2026-08-12",
+          "portfolio": 105.8711,
+          "benchmark": 102.8134,
+          "alpha_bp": 305.77
+        }
+      ],
+      "returns": {
+        "1M": {
+          "portfolio_pct": 0.43,
+          "benchmark_pct": -0.29,
+          "alpha_bp": 71.9,
+          "ref_date": "2026-07-13"
+        },
+        "3M": {
+          "portfolio_pct": 1.1,
+          "benchmark_pct": 0.03,
+          "alpha_bp": 106.6,
+          "ref_date": "2026-05-13"
+        },
+        "6M": {
+          "portfolio_pct": 0.82,
+          "benchmark_pct": -0.79,
+          "alpha_bp": 161.0,
+          "ref_date": "2026-02-11"
+        },
+        "YTD": {
+          "portfolio_pct": 1.93,
+          "benchmark_pct": -0.48,
+          "alpha_bp": 241.0,
+          "ref_date": "2026-01-01"
+        },
+        "LTM": {
+          "portfolio_pct": 5.3,
+          "benchmark_pct": 2.47,
+          "alpha_bp": 282.9,
+          "ref_date": "2025-08-12"
+        },
+        "SI": {
+          "portfolio_pct": 5.87,
+          "benchmark_pct": 2.81,
+          "alpha_bp": 305.8,
+          "ref_date": "2025-07-31"
+        }
+      },
+      "stats": {
+        "n_days": 377,
+        "tracking_error_pct_ann": 3.13,
+        "info_ratio": 0.61,
+        "sharpe_portfolio": 6.653,
+        "sharpe_benchmark": 0.604,
+        "beta": 0.024,
+        "correlation": 0.131,
+        "volatility_portfolio_pct_ann": 0.57,
+        "volatility_benchmark_pct_ann": 3.16
+      }
+    }
+  }
+}
