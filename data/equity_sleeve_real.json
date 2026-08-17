@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-08-15T11:29:32.883746",
+  "refreshedAt": "2026-08-17T11:36:46.494817",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -1665,6 +1665,89 @@
           "qty": 4063.638,
           "price": 321.26,
           "mv": 1305484.3438799998,
+          "source": "daily_close"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-17",
+      "mv_usd": 8937426.926405676,
+      "holdings": [
+        {
+          "ticker": "THOR",
+          "qty": 14410.584,
+          "price": 44.8,
+          "mv": 645594.1632,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "4BRZ",
+          "qty": 6000.0,
+          "price": 47.855,
+          "mv": 287130.0,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "LGLI",
+          "qty": 26511.134,
+          "price": 19.67,
+          "mv": 521474.00578,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "ILF",
+          "qty": 10000.0,
+          "price": 33.6,
+          "mv": 336000.0,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "HEWJ",
+          "qty": 3125.0,
+          "price": 66.36000061035156,
+          "mv": 207375.00190734863,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "CSPX",
+          "qty": 3408.0,
+          "price": 838.69,
+          "mv": 2858255.52,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "NBGMT",
+          "qty": 58050.998,
+          "price": 26.57,
+          "mv": 1542415.01686,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MAGS",
+          "qty": 4025.0,
+          "price": 68.26000213623047,
+          "mv": 274746.50859832764,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "JHGSC",
+          "qty": 10410.46,
+          "price": 57.04,
+          "mv": 593812.6383999999,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "ARGT",
+          "qty": 4000.0,
+          "price": 90.97,
+          "mv": 363880.0,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MFSCV",
+          "qty": 4063.638,
+          "price": 321.57,
+          "mv": 1306744.07166,
           "source": "daily_close"
         }
       ]
@@ -4939,6 +5022,21 @@
       "flow_in": 65671.75,
       "twr": 0.02644441824385937,
       "index": 119.798
+    },
+    {
+      "date": "2026-08-16",
+      "index": 119.9751,
+      "interpolated": true,
+      "mv_usd": 8924244.1753,
+      "flow_in": 65671.75,
+      "twr": 0.028
+    },
+    {
+      "date": "2026-08-17",
+      "mv_usd": 8937426.926405676,
+      "flow_in": 65671.75,
+      "twr": 0.029480369178431793,
+      "index": 120.1523
     }
   ],
   "acwi_index_series": [
@@ -7367,6 +7465,18 @@
     },
     {
       "date": "2026-08-15",
+      "index": 128.1021,
+      "interpolated": true,
+      "price": 162.1622
+    },
+    {
+      "date": "2026-08-16",
+      "index": 128.1526,
+      "interpolated": true,
+      "price": 162.2261
+    },
+    {
+      "date": "2026-08-17",
       "price": 162.29,
       "index": 128.2031
     }
@@ -7559,7 +7669,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-08-15 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing 2026-08-14.",
+  "_daily_refresh_note": "Punto 2026-08-17 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing 2026-08-15.",
   "_rebuild_note": "Reconstruccion completa 2026-07-31: reemplaza integramente el pipeline legacy (portfolio_reconstructor.py / sleeve_series desincronizado). Los 12 checkpoints mensuales estan verificados al centavo contra los statements oficiales de Pershing. Flujos calculados como -sum(Net Amount) de las transacciones reales del sleeve en cada periodo (auto-neutraliza fund exchanges internos). Excepcion: 3 transacciones de ene-2026 (venta WELLCRED + compras PIMCO-INC/PIMCO-EM) reclasificadas a feb-2026 tras verificar contra el statement oficial de febrero que asi procesaron realmente (Pershing las emitio como Cancel/Correct). Periodo oct-dic-2025 combinado en un solo calculo por el retiro grande de capital que distorsionaba el corte de fin de mes. | FIX 2026-08-07: se truncaron los puntos 01-ago a 07-ago (calculados con un anchor que iba driftando dia a dia por un bug en refresh_equity_daily.py/refresh_fi_daily.py, ya corregido -- ver _find_last_real_month_end). El proximo refresh diario recalcula bien desde el anchor real de 31-jul.",
   "twr_series_original": [
     {
@@ -10830,6 +10940,13 @@
       "flow_in": 65671.75,
       "twr": 0.02644441824385937,
       "index": 119.798
+    },
+    {
+      "date": "2026-08-17",
+      "mv_usd": 8937426.926405676,
+      "flow_in": 65671.75,
+      "twr": 0.029480369178431793,
+      "index": 120.1523
     }
   ],
   "acwi_index_series_original": [
@@ -10847,6 +10964,24 @@
       "date": "2025-07-03",
       "price": 127.82910919189453,
       "index": 100.9803
+    },
+    {
+      "date": "2025-07-04",
+      "index": 100.7605,
+      "interpolated": true,
+      "price": 127.5509
+    },
+    {
+      "date": "2025-07-05",
+      "index": 100.5408,
+      "interpolated": true,
+      "price": 127.2727
+    },
+    {
+      "date": "2025-07-06",
+      "index": 100.321,
+      "interpolated": true,
+      "price": 126.9944
     },
     {
       "date": "2025-07-07",
@@ -10874,6 +11009,18 @@
       "index": 100.5213
     },
     {
+      "date": "2025-07-12",
+      "index": 100.568,
+      "interpolated": true,
+      "price": 127.3071
+    },
+    {
+      "date": "2025-07-13",
+      "index": 100.6146,
+      "interpolated": true,
+      "price": 127.3662
+    },
+    {
       "date": "2025-07-14",
       "price": 127.42532348632812,
       "index": 100.6613
@@ -10899,6 +11046,18 @@
       "index": 100.957
     },
     {
+      "date": "2025-07-19",
+      "index": 101.0529,
+      "interpolated": true,
+      "price": 127.921
+    },
+    {
+      "date": "2025-07-20",
+      "index": 101.1489,
+      "interpolated": true,
+      "price": 128.0425
+    },
+    {
       "date": "2025-07-21",
       "price": 128.1639862060547,
       "index": 101.2448
@@ -10922,6 +11081,18 @@
       "date": "2025-07-25",
       "price": 129.88754272460938,
       "index": 102.6064
+    },
+    {
+      "date": "2025-07-26",
+      "index": 102.4534,
+      "interpolated": true,
+      "price": 129.6938
+    },
+    {
+      "date": "2025-07-27",
+      "index": 102.3004,
+      "interpolated": true,
+      "price": 129.5002
     },
     {
       "date": "2025-07-28",
@@ -13197,7 +13368,13 @@
       "price": 161.9065
     },
     {
-      "date": "2026-08-15",
+      "date": "2026-08-14",
+      "index": 128.0516,
+      "interpolated": true,
+      "price": 162.0983
+    },
+    {
+      "date": "2026-08-17",
       "price": 162.29,
       "index": 128.2031
     }
