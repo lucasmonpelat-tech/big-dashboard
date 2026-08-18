@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Radiografía de Cartera — Harfuch (SANFRAN 10 CORP + personal)</title>
+<meta name="robots" content="noindex, nofollow">
+<script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+<style>
+  :root {
+    --bg: #0D1B2A;
+    --card: #1A2A3D;
+    --header: #1F3864;
+    --gold: #D4AF37;
+    --text: #E0E8F0;
+    --text-sec: #90CAF9;
+    --text-ter: #6B88A8;
+    --equity: #64B5F6;
+    --fi: #81C784;
+    --alts: #FFA726;
+    --multi: #BA68C8;
+    --cash: #CE93D8;
+    --big: #D4AF37;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Arial, sans-serif; padding: 24px; }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  .title-block { text-align: center; padding: 20px 0 24px; border-bottom: 1px solid #2A3F5A; margin-bottom: 24px; }
+  .title-block h1 { color: var(--gold); margin: 0 0 6px; font-size: 24px; letter-spacing: 0.5px; }
+  .title-block .sub { color: var(--text-sec); font-size: 13px; }
+  .title-block .accounts { color: var(--text-ter); font-size: 12px; margin-top: 8px; }
+  .freshness-banner { background: #12243A; border: 1px solid #1F3864; border-radius: 6px; padding: 8px 14px; font-size: 11px; color: var(--text-ter); text-align: center; margin-bottom: 24px; }
+  .freshness-banner b { color: var(--text-sec); }
+  .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 22px; }
+  .kpi-card { background: var(--card); border-left: 3px solid var(--gold); border-radius: 6px; padding: 14px 16px; }
+  .kpi-card .label { text-transform: uppercase; font-size: 9.5px; color: var(--text-ter); letter-spacing: 0.5px; }
+  .kpi-card .value { font-size: 20px; font-weight: bold; color: var(--text); margin-top: 4px; }
+  .kpi-card .sub { font-style: italic; font-size: 10px; color: var(--text-sec); margin-top: 2px; }
+  .section { background: var(--card); border-radius: 8px; padding: 20px; margin-bottom: 22px; }
+  .section h2 { color: var(--gold); font-size: 15px; margin: 0 0 16px; text-align: center; }
+  .section h3 { color: var(--text-sec); font-size: 12.5px; text-align: center; margin: 0 0 12px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .two-col { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  @media (max-width: 900px) { .two-col, .three-col { grid-template-columns: 1fr; } }
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  thead th { background: var(--header); color: #FFFFFF; text-transform: uppercase; font-size: 10px; padding: 7px 10px; text-align: left; }
+  thead th.num { text-align: center; }
+  tbody td { padding: 7px 10px; border-bottom: 1px solid #22364C; }
+  tbody td.num { text-align: center; }
+  tbody tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+  .sleeve-tag { border-left: 3px solid; padding-left: 8px; }
+  .sleeve-tag.Equity { border-color: var(--equity); }
+  .sleeve-tag.FixedIncome { border-color: var(--fi); }
+  .sleeve-tag.Alternatives { border-color: var(--alts); }
+  .sleeve-tag.MultiAsset { border-color: var(--multi); }
+  .sleeve-tag.Cash { border-color: var(--cash); }
+  .sleeve-tag.BIGFund { border-color: var(--big); }
+  .perf-table th, .perf-table td { text-align: center; }
+  .perf-table td:first-child, .perf-table th:first-child { text-align: left; }
+  .row-consolidado { background: #112240; }
+  .row-consolidado td:first-child { color: var(--gold); font-weight: bold; }
+  .sleeve-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .sleeve-bar-label { width: 130px; font-size: 12px; color: var(--text-sec); flex-shrink: 0; }
+  .sleeve-bar-track { flex: 1; background: #0D1B2A; border-radius: 4px; height: 20px; position: relative; overflow: hidden; }
+  .sleeve-bar-fill { height: 100%; border-radius: 4px; }
+  .sleeve-bar-pct { width: 70px; text-align: right; font-size: 12px; font-weight: bold; flex-shrink: 0; }
+  .mini-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 11px; }
+  .mini-bar-label { width: 110px; flex-shrink: 0; color: var(--text-sec); }
+  .mini-bar-track { flex: 1; background: #0D1B2A; border-radius: 3px; height: 13px; position: relative; }
+  .mini-bar-fill { height: 100%; border-radius: 3px; background: var(--gold); }
+  .mini-bar-fill.neg { background: #EF5350; }
+  .mini-bar-pct { width: 46px; text-align: right; flex-shrink: 0; font-weight: bold; }
+  .stat-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #22364C; font-size: 12.5px; }
+  .stat-row .k { color: var(--text-ter); }
+  .stat-row .v { font-weight: bold; }
+  .footnotes { font-size: 11px; color: var(--text-ter); line-height: 1.7; }
+  .footnotes b { color: var(--text-sec); }
+  .concentration-flag { background: #2A2110; border: 1px solid #FFA726; border-radius: 6px; padding: 10px 14px; font-size: 12px; color: #FFD48A; margin-bottom: 18px; }
+  .correction-flag { background: #12243A; border: 1px solid #64B5F6; border-radius: 6px; padding: 10px 14px; font-size: 11.5px; color: #C7E2FB; margin-bottom: 18px; line-height: 1.6; }
+  .note { font-size: 10.5px; color: var(--text-ter); margin-top: 14px; line-height: 1.6; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="wrap" id="root"></div>
+
+<script id="report-data" type="application/json">{"meta": {"title": "🩺 Radiografía de Cartera Consolidada", "subtitle": "MARCELO HARFUCH — SANFRAN 10 CORP + cuenta personal, consolidado como cartera única", "accounts_line": "Cuenta SANFRAN 10 CORP + Cuenta Marcelo Harfuch · Pershing (vía Maximus) · Base Currency USD", "page_title": "Radiografía de Cartera — Harfuch (SANFRAN 10 CORP + personal)", "as_of_short": "Ago-2026", "freshness": [{"label": "POSICIONES + PERFORMANCE", "text": "reportes Maximus \"Agosto 2026\" (cierre mensual)"}, {"label": "Composición BIG", "text": "dashboard BIG en vivo (sleeve Ago-2026, breakdowns Jul-2026)"}, {"label": "Look-through fondos", "text": "factsheets ARGT/MFS (Jun/May-2026) + ACWI stockanalysis.com"}], "freshness_tail": "Posiciones tomadas del portafolio de Maximus (con ISIN) — no de NetX360"}, "sleeve_order": ["BIG Fund", "Equity", "Fixed Income", "Alternatives", "Cash"], "correction_intro": "instrumentos que Maximus lista con etiqueta genérica o en el sleeve equivocado:", "corrections": [{"html": "<b>\"Balanced Income &amp; Growth\" (XS3037627794)<\/b> → es la <b>nota Lynk del propio fondo BIG de Pampa Capital<\/b> (mismo ISIN y NAV que el dashboard). Es la mayor posición del cliente: <b>47.8% ($2.96M) directo en BIG<\/b>. Reclasificado de \"Mixed Allocation\" → línea propia <b>\"BIG Fund\"<\/b>, decompuesto con la composición real del dashboard."}, {"html": "<b>Schroder GAIA Cat Bond<\/b> y <b>GAM Swiss Re Cat Bond<\/b> → Maximus los pone en Fixed Income, pero son <b>Insurance-Linked / Cat Bonds<\/b> → reclasificados a <b>Alternatives<\/b>."}, {"html": "<b>Money Market DUTG<\/b> → Maximus lo lista en Fixed Income; es un <b>fondo money market<\/b> → reclasificado a <b>Cash<\/b>."}], "correction_outro": "El BPCC (Barings Private Credit) Maximus ya lo tiene bien en Alternatives, y la nota <b>\"Tenac Global Fund\" (XS2324777171)<\/b> es renta fija (confirmado) → queda en Fixed Income. Todo esto cambia el asset allocation — ver abajo.", "kpis": [{"label": "AUM Total (consolidado, Ago-2026)", "value": "$6,190,907.54", "sub": "2 cuentas (SANFRAN + Harfuch)"}, {"label": "# Posiciones (consolidadas)", "value": "22", "sub": "de 26 líneas originales"}, {"label": "Mayor Posición", "value": "47.8%", "sub": "🏛️ BIG Fund (Pampa Capital)", "gold": true}], "holdings": [{"name": "BIG Fund (Pampa Capital) — Nota Lynk", "sleeve": "BIG Fund", "bucket": "Inversión directa en BIG (ISIN XS3037627794, NAV 107.021)", "mv": 2960729.93, "accounts": ["SANFRAN", "HARFUCH"]}, {"name": "NB Strategic Income Fund M", "sleeve": "Fixed Income", "bucket": "Multisector / Strategic Income", "mv": 408559.27, "accounts": ["SANFRAN"]}, {"name": "NB Global Private Equity Access Fund", "sleeve": "Alternatives", "bucket": "Private Equity", "mv": 252398.0, "accounts": ["SANFRAN"]}, {"name": "PIMCO GIS Low Duration Income", "sleeve": "Fixed Income", "bucket": "Short Duration", "mv": 227625.22, "accounts": ["SANFRAN", "HARFUCH"]}, {"name": "Barings Private Credit Corporation ETN (BPCC)", "sleeve": "Alternatives", "bucket": "Private Credit", "mv": 225928.52, "accounts": ["SANFRAN"]}, {"name": "Money Market DUTG", "sleeve": "Cash", "bucket": "Money Market", "mv": 211869.15, "accounts": ["SANFRAN", "HARFUCH"]}, {"name": "iShares Bitcoin Trust (IBIT)", "sleeve": "Alternatives", "bucket": "Bitcoin / Crypto", "mv": 196668.0, "accounts": ["SANFRAN"]}, {"name": "Nu Holdings Ltd", "sleeve": "Equity", "bucket": "EM / LatAm - Single Stock", "mv": 196042.0, "accounts": ["SANFRAN", "HARFUCH"]}, {"name": "Schroder GAIA Cat Bond A", "sleeve": "Alternatives", "bucket": "Insurance-Linked / Cat Bonds", "mv": 156924.65, "accounts": ["SANFRAN"]}, {"name": "SPDR Gold Shares (GLD)", "sleeve": "Alternatives", "bucket": "Gold / Commodities", "mv": 145976.4, "accounts": ["SANFRAN"]}, {"name": "Alphabet Inc", "sleeve": "Equity", "bucket": "US Large Cap - Single Stock", "mv": 136580.0, "accounts": ["SANFRAN"]}, {"name": "MFS Meridian Contrarian Value N1", "sleeve": "Equity", "bucket": "Global Value (fondo)", "mv": 134913.2, "accounts": ["SANFRAN"]}, {"name": "Microsoft Corp", "sleeve": "Equity", "bucket": "US Large Cap - Single Stock", "mv": 120087.5, "accounts": ["SANFRAN"]}, {"name": "Global X MSCI Argentina ETF (ARGT)", "sleeve": "Equity", "bucket": "LatAm / Argentina (ETF)", "mv": 109596.0, "accounts": ["HARFUCH"]}, {"name": "MercadoLibre Inc", "sleeve": "Equity", "bucket": "EM / LatAm - Single Stock", "mv": 107254.2, "accounts": ["SANFRAN"]}, {"name": "YPF SA", "sleeve": "Equity", "bucket": "EM / LatAm - Single Stock", "mv": 105400.0, "accounts": ["HARFUCH"]}, {"name": "Pampa Energía", "sleeve": "Equity", "bucket": "EM / LatAm - Single Stock", "mv": 103818.0, "accounts": ["HARFUCH"]}, {"name": "Man GLG Global Inv. Grade Opps DW", "sleeve": "Fixed Income", "bucket": "Corporate IG (fondo)", "mv": 100000.06, "accounts": ["HARFUCH"]}, {"name": "Tenac Global Fund (nota LFEEDER)", "sleeve": "Fixed Income", "bucket": "Renta fija (nota LFEEDER)", "mv": 171179.76, "accounts": ["SANFRAN"]}, {"name": "GAM Swiss Re Cat Bond A", "sleeve": "Alternatives", "bucket": "Insurance-Linked / Cat Bonds", "mv": 51045.18, "accounts": ["HARFUCH"]}, {"name": "Grayscale Ethereum Mini (ETH)", "sleeve": "Alternatives", "bucket": "Ethereum / Crypto", "mv": 34561.0, "accounts": ["SANFRAN"]}, {"name": "NVIDIA Corp", "sleeve": "Equity", "bucket": "US Large Cap - Single Stock", "mv": 33751.5, "accounts": ["SANFRAN"]}], "wrapper_alloc_note": "Vista <b>por wrapper/instrumento<\/b> tal cual la clasifica Maximus (con las correcciones de arriba). El <b>47.8% en BIG<\/b> es una sola línea; en el look-through de abajo se abre en sus sleeves reales. No hay fondos balanceados de terceros — el resto de las posiciones ya son sleeves puros.", "lookthrough_real": {"rows": [["Equity", 31.1, "#64B5F6"], ["Fixed Income", 33.7, "#81C784"], ["Alternatives", 31.0, "#FFA726"], ["Cash", 4.2, "#CE93D8"]], "note": "Se abre la posición BIG (47.8%) en sus sleeves reales (Equity/FI/Alts/Cash del dashboard). El resto ya eran puros. Resultado: una cartera sorprendentemente balanceada (~31% Equity / ~34% FI / ~31% Alternativos), con exposición a alternativos <b>muy por encima de una 60/40 clásica<\/b>, empujada por BIG + los alts directos (IBIT, GLD, BPCC, PE, Cat bonds)."}, "big_breakdown": {"header": "🏛️ BIG Fund — $2,960,729.93 (47.8% del total)", "sleeve_note": "Sleeve real (dashboard BIG, ~Ago-2026 — AUM fondo ~$27.85M): Fixed Income 39.9% ($1,179,851) · Equity 29.7% ($878,152) · Alternatives 28.9% ($855,355) · Cash 1.6% ($47,372). Mandato objetivo: 40/30/30/0.", "eq_style": [["Growth", 39.4], ["Blend", 30.4], ["Value", 30.2]], "eq_sector": [["Technology", 22.3], ["Industrials", 13.8], ["Financial", 12.6], ["Cons. Cyc.", 10.8], ["Health", 8.4], ["Comm. Serv.", 8.1], ["Cons. Def.", 5.6], ["Utilities", 5.5], ["Energy", 4.6], ["Basic Mat.", 4.6], ["Real estate", 1.9], ["Other", 1.8]], "eq_region": [["N. America", 57.5], ["LatAm", 11.8], ["Europe dev.", 11.8], ["Otros", 7.2], ["Japan", 6.3], ["UK", 5.4]], "fi_subasset": [["Corporate IG", 22.03], ["EM Local+Hard", 18.14], ["Govt Agency MBS", 16.62], ["Other", 14.23], ["Securitized Non-Agy", 11.21], ["Govt-related", 8.04], ["Cat Bonds", 4.65], ["Corporate HY", 2.95], ["US Treasury", 1.84], ["Bank Loans", 0.26]], "fi_rating": [["AA", 37.2], ["BBB", 20.7], ["AAA", 15.8], ["BB", 8.7], ["A", 6.9], ["CCC", 6.6], ["B", 3.6], ["NR", 0.5]], "alts": [["Carlyle AlpInvest (PE)", 34.39], ["Priv. Infrastructure", 13.97], ["Gold", 11.77], ["Bitcoin", 10.34], ["Priv. Credit (HPS)", 9.44], ["Priv. Credit (BPCC)", 7.46], ["PE Secondaries", 6.41], ["Priv. Credit (Golub)", 6.22]], "fi_stats": "7.22% / 4.66a / 6.63a"}, "performance": {"source_label": "fuente: Maximus, reportes \"Agosto 2026\"", "columns": ["1 mes", "3 meses", "6 meses", "YTD", "1 año", "3 años", "5 años"], "rows": [{"name": "SANFRAN 10 CORP", "type": "account", "cells": ["1.01%", "0.87%", "0.96%", "1.52%", "3.17%", "9.92%", "N/D"]}, {"name": "MARCELO HARFUCH", "type": "account", "cells": ["-0.71%", "1.10%", "15.60%", "18.64%", "39.48%", "31.22%", "N/D"]}, {"name": "Consolidado¹", "type": "consolidado", "cells": ["0.73%", "0.91%", "3.37%", "4.34%", "9.15%", "13.43%", "—"]}], "footnotes_html": "¹ Consolidado = promedio ponderado por AUM (SANFRAN 83.5% / Harfuch 16.5%) — foto puntual, no TWR encadenado. Mezcla <b>dos perfiles muy distintos<\/b> (SANFRAN conservador, vol 10% / Harfuch agresivo, vol 26%): leer con cuidado. Para la posición BIG, Maximus usa el nombre genérico \"Balanced Income &amp; Growth\" y NO refleja el retorno real del fondo. &nbsp; <b>Sin benchmark único:<\/b> con 47.8% en BIG + ~31% en alternativos, ningún índice estándar (60/40) representa bien esta cartera — se puede armar un blend a medida si lo querés. &nbsp; 5 años N/D (ambas cuentas &lt;5a).", "risk_stats": {"title": "Vol / Sharpe / Max DD (3a) — por cuenta", "rows": [["SANFRAN — Vol 3a", "10.31%"], ["SANFRAN — Sharpe 3a", "0.55"], ["SANFRAN — Max DD 3a", "-7.82%", "#EF5350"], ["Harfuch — Vol 3a", "25.53%"], ["Harfuch — Sharpe 3a", "1.06"], ["Harfuch — Max DD 3a", "-16.63%", "#EF5350"]], "note": "Riesgo por cuenta (vol/sharpe no se promedian). 5a N/D."}, "fi_stats": {"title": "Renta Fija — YTW / Dur / Venc (por cuenta, Maximus)", "rows": [["SANFRAN — YTW", "6.52%"], ["SANFRAN — Dur / Venc", "4.52a / 9.17a"], ["Harfuch — YTW", "6.41%"], ["Harfuch — Dur / Venc", "3.79a / 5.30a"]]}, "rv_stats": {"title": "Renta Variable — P/E / P/B / P/S (por cuenta, Maximus)", "rows": [["SANFRAN — P/E · P/B · P/S", "26.37x · 5.12x · 4.48x"], ["Harfuch — P/E · P/B · P/S", "16.70x · 2.74x · 2.38x"]]}}, "top_holdings": {"note_html": "Compañías con mayor exposición sumando todos los holdings (single stocks directos + look-through de BIG, ARGT y MFS Contrarian). Fórmula: $ fondo × % holding. Un nombre puede venir por varias vías — ojo la <b>concentración argentina<\/b> (MELI/YPF/Pampa aparecen directas Y vía ARGT).", "top_n": 15, "direct": [["Alphabet (GOOGL)", 136580.0], ["MercadoLibre (MELI)", 107254.2], ["Microsoft (MSFT)", 120087.5], ["NVIDIA (NVDA)", 33751.5], ["Nu Holdings (NU)", 196042.0], ["YPF (YPF)", 105400.0], ["Pampa Energía (PAM)", 103818.0]], "funds": [{"via": "BIG eq.sleeve", "dollars": 878152.5, "holdings": [["NVIDIA (NVDA)", 2.77], ["Microsoft (MSFT)", 2.28], ["Apple (AAPL)", 2.11], ["Amazon (AMZN)", 1.64], ["Meta (META)", 1.24], ["Alphabet (GOOGL)", 1.08], ["Broadcom (AVGO)", 1.03], ["MercadoLibre (MELI)", 0.96], ["Petrobras (PBR)", 0.94], ["Vale (VALE)", 0.82], ["Delta Air Lines (DAL)", 0.79], ["Gen Digital (GEN)", 0.76], ["Chewy (CHWY)", 0.75], ["Zeta Global (ZETA)", 0.74], ["ON Semiconductor (ON)", 0.74]]}, {"via": "ARGT", "dollars": 109596.0, "holdings": [["MercadoLibre (MELI)", 21.01], ["YPF (YPF)", 9.12], ["Galicia (GGAL)", 7.09], ["Vista Energy (VIST)", 5.87], ["Banco Macro (BMA)", 5.47], ["Pampa Energía (PAM)", 4.3], ["BBVA Argentina (BBAR)", 4.15], ["TGS", 3.92], ["Central Puerto (CEPU)", 3.59], ["SSR Mining", 3.17]]}, {"via": "MFS Contrarian", "dollars": 134913.2, "holdings": [["Michelin", 4.4], ["Davide Campari", 4.3], ["IMCD", 4.3], ["Deutsche Post", 3.7], ["Merck KGaA", 3.5], ["Zalando", 3.4], ["Howden Joinery", 3.3], ["Croda International", 3.2], ["AB InBev", 3.1], ["Symrise", 3.1]]}], "acwi_weights": {"NVIDIA (NVDA)": 4.75, "Apple (AAPL)": 4.86, "Microsoft (MSFT)": 2.68, "Amazon (AMZN)": 2.23, "Alphabet (GOOGL)": 1.85, "Broadcom (AVGO)": 1.71, "Meta (META)": 1.3}, "footnote_html": "Look-through de BIG = sleeve equity del dashboard. ARGT y MFS Contrarian con top-10 de factsheet (Jun/May-2026). Los nombres argentinos y los europeos de MFS Contrarian no están en el top-20 de ACWI → marcados con <b>*<\/b> (Over/Under ≈ 100% del peso del portfolio). % ACWI: iShares MSCI ACWI, stockanalysis.com, aprox. 2026."}, "pending_sections": [{"title": "💎 Renta Fija — Breakdown Consolidado (look-through)", "note": "Regiones · Sectores · Calificaciones. Requiere el export de composición \"en torta\" de Maximus (reporte Resumen, no el de Rentabilidad). Se agrega apenas llegue."}, {"title": "📊 Renta Variable — Breakdown Consolidado (look-through)", "note": "Estilo · Sectores · Regiones. Requiere el export de composición \"en torta\" de Maximus (reporte Resumen, no el de Rentabilidad). Se agrega apenas llegue."}]}</script>
+<script>
+const REPORT = JSON.parse(document.getElementById('report-data').textContent);
+const root = document.getElementById('root');
+
+const sleeveColors = {
+  'BIG Fund': '#D4AF37', 'Equity': '#64B5F6', 'Fixed Income': '#81C784',
+  'Alternatives': '#FFA726', 'Multi-Asset': '#BA68C8', 'Cash': '#CE93D8',
+};
+const sleeveClass = s => s.replace(/[^a-zA-Z]/g, '');
+const fmtMoney = v => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const el = (html) => { const d = document.createElement('div'); d.innerHTML = html.trim(); return d.firstChild; };
+
+// ---------- Title + freshness ----------
+function renderHeader() {
+  const m = REPORT.meta;
+  root.appendChild(el(`<div class="title-block">
+    <h1>${m.title}</h1>
+    <div class="sub">${m.subtitle}</div>
+    <div class="accounts">${m.accounts_line}</div>
+  </div>`));
+  const fresh = (m.freshness || []).map(f => `<b>${f.label}</b> ${f.text}`).join(' &nbsp;·&nbsp; ');
+  const tail = m.freshness_tail ? ' &nbsp;·&nbsp; ' + m.freshness_tail : '';
+  root.appendChild(el(`<div class="freshness-banner">${fresh}${tail}</div>`));
+}
+
+// ---------- Correction flag ----------
+function renderCorrections() {
+  if (!REPORT.corrections || !REPORT.corrections.length) return;
+  const bullets = REPORT.corrections.map(c => `<br>• ${c.html}`).join('');
+  const intro = REPORT.correction_intro || '';
+  const outro = REPORT.correction_outro ? `<br>${REPORT.correction_outro}` : '';
+  root.appendChild(el(`<div class="correction-flag">🔍 <b>Corrección de clasificación (post cruce con Maximus):</b> ${intro}${bullets}${outro}</div>`));
+}
+
+// ---------- KPI grid ----------
+function renderKpis() {
+  const grid = el('<div class="kpi-grid"></div>');
+  REPORT.kpis.forEach(k => {
+    const style = k.gold ? ' style="border-left-color: var(--big);"' : '';
+    grid.appendChild(el(`<div class="kpi-card"${style}>
+      <div class="label">${k.label}</div>
+      <div class="value">${k.value}</div>
+      <div class="sub">${k.sub || ''}</div>
+    </div>`));
+  });
+  root.appendChild(grid);
+}
+
+// ---------- helpers: sleeve bars ----------
+function sleeveBars(rows) {
+  // rows: [label, pct, color]
+  return rows.map(([label, pct, color]) => `
+    <div class="sleeve-bar-row">
+      <div class="sleeve-bar-label" style="color:${color};">${label}</div>
+      <div class="sleeve-bar-track"><div class="sleeve-bar-fill" style="width:${Math.max(Math.abs(pct),0)}%; background:${color};"></div></div>
+      <div class="sleeve-bar-pct">${pct}%</div>
+    </div>`).join('');
+}
+
+// ---------- Asset allocation (Pershing wrapper view) ----------
+function renderWrapperAlloc() {
+  const holdings = REPORT.holdings;
+  const total = holdings.reduce((s, h) => s + h.mv, 0);
+  const bySleeve = {};
+  holdings.forEach(h => { bySleeve[h.sleeve] = (bySleeve[h.sleeve] || 0) + h.mv; });
+  const order = REPORT.sleeve_order || ['BIG Fund', 'Equity', 'Multi-Asset', 'Fixed Income', 'Alternatives', 'Cash'];
+  const labels = order.filter(s => bySleeve[s] !== undefined);
+  const barRows = labels.map(s => [s === 'BIG Fund' ? '🏛️ BIG Fund' : s, +(bySleeve[s] / total * 100).toFixed(1), sleeveColors[s] || '#888']);
+
+  const sec = el(`<div class="section">
+    <h2>🥧 Asset Allocation — Posiciones Pershing (${REPORT.meta.as_of_short || ''}, corregida)</h2>
+    <div class="two-col">
+      <div id="pie-chart" style="height: 420px;"></div>
+      <div style="display:flex; flex-direction:column; justify-content:center;">
+        ${sleeveBars(barRows)}
+        <div class="note">${REPORT.wrapper_alloc_note || ''}</div>
+      </div>
+    </div>
+  </div>`);
+  root.appendChild(sec);
+
+  const pv = labels.map(s => bySleeve[s]);
+  const pc = labels.map(s => sleeveColors[s] || '#888');
+  Plotly.newPlot('pie-chart', [{
+    type: 'pie', hole: 0.45, labels, values: pv,
+    marker: { colors: pc, line: { color: '#0D1B2A', width: 2 } },
+    textinfo: 'label+percent', textposition: 'outside',
+    textfont: { size: 12, color: '#E0E8F0' },
+    hovertemplate: '<b>%{label}</b><br>$%{value:,.0f}<br>%{percent}<extra></extra>',
+  }], {
+    paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', showlegend: false,
+    margin: { t: 30, b: 30, l: 60, r: 60 },
+    annotations: [{ text: `<b>Total</b><br>$${(total / 1e6).toFixed(2)}M<br>100%`, showarrow: false, font: { color: '#D4AF37', size: 13 }, x: 0.5, y: 0.5 }],
+    font: { color: '#E0E8F0' },
+  }, { displayModeBar: false, responsive: true });
+}
+
+// ---------- Holdings table ----------
+function renderHoldingsTable() {
+  const holdings = REPORT.holdings;
+  const total = holdings.reduce((s, h) => s + h.mv, 0);
+  const sec = el(`<div class="section">
+    <h2>📋 Holdings Consolidados (por Sleeve)</h2>
+    <table><thead><tr>
+      <th>Posición</th><th>Sub-Categoría</th><th class="num">Cuenta(s)</th>
+      <th class="num">Market Value</th><th class="num">% del Total</th>
+    </tr></thead><tbody id="holdings-tbody"></tbody></table>
+  </div>`);
+  root.appendChild(sec);
+  const tb = sec.querySelector('#holdings-tbody');
+  [...holdings].sort((a, b) => b.mv - a.mv).forEach(h => {
+    const pct = (h.mv / total * 100).toFixed(1);
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="sleeve-tag ${sleeveClass(h.sleeve)}"><b>${h.name}</b><br><span style="font-size:10px;color:#6B88A8;">${h.sleeve}</span></td>
+      <td style="color:#90CAF9; font-size:11.5px;">${h.bucket}</td>
+      <td class="num" style="font-size:11px; color:#6B88A8;">${h.accounts.join(' + ')}</td>
+      <td class="num">${fmtMoney(h.mv)}</td>
+      <td class="num" style="font-weight:bold; color:${h.mv < 0 ? '#EF5350' : '#E0E8F0'};">${pct}%</td>`;
+    tb.appendChild(tr);
+  });
+}
+
+// ---------- Performance ----------
+function renderPerformance() {
+  const p = REPORT.performance;
+  if (!p) return;
+  const cols = p.columns.map(c => `<th>${c}</th>`).join('');
+  const rowHtml = r => {
+    const cells = r.cells.map(c => `<td>${c}</td>`).join('');
+    if (r.type === 'consolidado') return `<tr class="row-consolidado"><td>${r.name}</td>${cells}</tr>`;
+    if (r.type === 'benchmark') return `<tr style="background:#1a1a1a; color:#90A4AE;"><td>${r.name}</td>${cells}</tr>`;
+    return `<tr><td>${r.name}</td>${cells}</tr>`;
+  };
+  const statBlock = s => s ? `<div><h3>${s.title}</h3>${s.rows.map(([k, v, color]) => `<div class="stat-row"><span class="k">${k}</span><span class="v"${color ? ` style="color:${color};"` : ''}>${v}</span></div>`).join('')}${s.note ? `<div style="font-size:10px; color:var(--text-ter); margin-top:6px;">${s.note}</div>` : ''}</div>` : '<div></div>';
+  const sec = el(`<div class="section">
+    <h2>📈 Performance (${p.source_label})</h2>
+    <table class="perf-table"><thead><tr><th>Cuenta</th>${cols}</tr></thead>
+      <tbody>${p.rows.map(rowHtml).join('')}</tbody></table>
+    <div class="note">${p.footnotes_html || ''}</div>
+    <div class="three-col" style="margin-top:18px;">
+      ${statBlock(p.risk_stats)}${statBlock(p.fi_stats)}${statBlock(p.rv_stats)}
+    </div>
+  </div>`);
+  root.appendChild(sec);
+}
+
+// ---------- Look-through real ----------
+function renderLookthroughReal() {
+  const lt = REPORT.lookthrough_real;
+  if (!lt) return;
+  const sec = el(`<div class="section">
+    <h2>🎯 Asset Allocation Look-Through Consolidada — REAL, posición por posición</h2>
+    <div class="two-col">
+      <div id="pie-lookthrough" style="height: 420px;"></div>
+      <div style="display:flex; flex-direction:column; justify-content:center;">
+        ${sleeveBars(lt.rows)}
+        <div class="note">${lt.note || ''}</div>
+      </div>
+    </div>
+  </div>`);
+  root.appendChild(sec);
+  const labels = lt.rows.filter(r => r[1] >= 0).map(r => r[0]);
+  const values = lt.rows.filter(r => r[1] >= 0).map(r => r[1]);
+  const colors = lt.rows.filter(r => r[1] >= 0).map(r => r[2]);
+  Plotly.newPlot('pie-lookthrough', [{
+    type: 'pie', hole: 0.45, labels, values,
+    marker: { colors, line: { color: '#0D1B2A', width: 2 } },
+    textinfo: 'label+percent', textposition: 'outside',
+    textfont: { size: 12, color: '#E0E8F0' },
+    hovertemplate: '<b>%{label}</b><br>%{percent}<extra></extra>',
+  }], {
+    paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', showlegend: false,
+    margin: { t: 30, b: 30, l: 60, r: 60 },
+    annotations: [{ text: `<b>Look-Through</b><br>Real`, showarrow: false, font: { color: '#D4AF37', size: 12 }, x: 0.5, y: 0.5 }],
+    font: { color: '#E0E8F0' },
+  }, { displayModeBar: false, responsive: true });
+}
+
+// ---------- mini bars ----------
+function renderMiniBars(container, data) {
+  const maxAbs = Math.max(...data.map(d => Math.abs(d[1])), 1);
+  [...data].sort((a, b) => b[1] - a[1]).forEach(([label, val]) => {
+    const pct = Math.min(Math.abs(val) / maxAbs * 100, 100);
+    container.appendChild(el(`<div class="mini-bar-row">
+      <div class="mini-bar-label">${label}</div>
+      <div class="mini-bar-track"><div class="mini-bar-fill ${val < 0 ? 'neg' : ''}" style="width:${pct}%;"></div></div>
+      <div class="mini-bar-pct">${val.toFixed(1)}%</div>
+    </div>`));
+  });
+}
+
+// ---------- BIG breakdown ----------
+function renderBigBreakdown() {
+  const b = REPORT.big_breakdown;
+  if (!b) return;
+  const sec = el(`<div class="section">
+    <h2>🔬 Desglose de la Posición BIG</h2>
+    <div style="font-size:11px; color:var(--text-ter); text-align:center; margin-bottom:18px;">Fuente: dashboard de BIG en vivo (composición propia) — no Maximus.</div>
+    <div style="background:#12243A; border:1px solid #D4AF37; border-radius:6px; padding:16px;">
+      <div style="color:#D4AF37; font-weight:bold; font-size:13px; margin-bottom:4px;">${b.header}</div>
+      <div style="font-size:10.5px; color:var(--text-ter); margin-bottom:12px;">${b.sleeve_note}</div>
+      <div class="three-col">
+        <div><h3>Equity — Estilo</h3><div id="big-eq-style"></div><h3 style="margin-top:14px;">Equity — Sectores</h3><div id="big-eq-sector"></div></div>
+        <div><h3>Equity — Regiones</h3><div id="big-eq-region"></div><h3 style="margin-top:14px;">FI — Sub-Asset Class</h3><div id="big-fi-subasset"></div></div>
+        <div><h3>FI — Calidad Crediticia</h3><div id="big-fi-rating"></div><h3 style="margin-top:14px;">Alternatives — Composición</h3><div id="big-alts"></div></div>
+      </div>
+      ${b.fi_stats ? `<div class="stat-row" style="margin-top:10px;"><span class="k">FI: YTW / Duración / Vencimiento</span><span class="v">${b.fi_stats}</span></div>` : ''}
+    </div>
+  </div>`);
+  root.appendChild(sec);
+  const map = { 'big-eq-style': b.eq_style, 'big-eq-sector': b.eq_sector, 'big-eq-region': b.eq_region, 'big-fi-subasset': b.fi_subasset, 'big-fi-rating': b.fi_rating, 'big-alts': b.alts };
+  Object.entries(map).forEach(([id, data]) => { if (data) renderMiniBars(sec.querySelector('#' + id), data); });
+}
+
+// ---------- Top holdings look-through ----------
+function renderTopHoldings() {
+  const t = REPORT.top_holdings;
+  if (!t) return;
+  const total = REPORT.holdings.reduce((s, h) => s + h.mv, 0);
+  const sources = [];
+  (t.direct || []).forEach(([name, amt]) => sources.push([name, amt, 'Directo 100%']));
+  (t.funds || []).forEach(f => (f.holdings || []).forEach(([name, w]) => sources.push([name, f.dollars * w / 100, `${f.via} ${w}%`])));
+  const agg = {};
+  sources.forEach(([name, amt, via]) => { if (!agg[name]) agg[name] = { amt: 0, vias: [] }; agg[name].amt += amt; agg[name].vias.push(via); });
+  const ranked = Object.entries(agg).sort((a, b) => b[1].amt - a[1].amt).slice(0, t.top_n || 15);
+  const maxAmt = ranked[0][1].amt;
+  const acwi = t.acwi_weights || {};
+
+  const sec = el(`<div class="section">
+    <h2>🎯 Top Holdings Consolidado (look-through single-stock)</h2>
+    <div style="font-size:11px; color:var(--text-ter); text-align:center; margin-bottom:14px;">${t.note_html || ''}</div>
+    <table><thead><tr><th>#</th><th>Holding</th><th>Vía (fondo · peso)</th><th class="num">% del Total</th><th class="num">% ACWI</th><th class="num">Over/Under</th><th>Bar</th></tr></thead>
+      <tbody id="top-holdings-tbody"></tbody></table>
+    <div style="font-size:10px; color:var(--text-ter); margin-top:10px; line-height:1.6;">${t.footnote_html || ''}</div>
+  </div>`);
+  root.appendChild(sec);
+  const tb = sec.querySelector('#top-holdings-tbody');
+  ranked.forEach(([name, d], i) => {
+    const pct = d.amt / total * 100;
+    const barPct = (d.amt / maxAmt * 100).toFixed(0);
+    const w = acwi[name];
+    const acwiCell = w !== undefined ? `${w.toFixed(2)}%` : '&lt;0.05%*';
+    const delta = w !== undefined ? (pct - w) : null;
+    const deltaCell = delta !== null
+      ? `<span style="color:${delta >= 0 ? '#81C784' : '#EF5350'};font-weight:bold;">${delta >= 0 ? '+' : ''}${delta.toFixed(2)}pp</span>`
+      : `<span style="color:#81C784;font-weight:bold;">+${pct.toFixed(2)}pp*</span>`;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${i + 1}</td><td><b>${name}</b></td>
+      <td style="color:#90CAF9; font-size:11px;">${d.vias.join(' + ')}</td>
+      <td class="num" style="font-weight:bold;">${pct.toFixed(2)}%</td>
+      <td class="num" style="color:#90A4AE;">${acwiCell}</td>
+      <td class="num">${deltaCell}</td>
+      <td><div class="mini-bar-track" style="max-width:140px;"><div class="mini-bar-fill" style="width:${barPct}%;"></div></div></td>`;
+    tb.appendChild(tr);
+  });
+}
+
+// ---------- RF / RV breakdowns ----------
+function renderThreeColBars(title, note, blocks) {
+  // blocks: [ [h3, data], ... ]
+  const sec = el(`<div class="section"><h2>${title}</h2>${note ? `<div style="font-size:11px; color:var(--text-ter); text-align:center; margin-bottom:14px;">${note}</div>` : ''}<div class="three-col"></div></div>`);
+  const cont = sec.querySelector('.three-col');
+  const ids = [];
+  blocks.forEach(([h3], i) => { ids.push('tc-' + Math.random().toString(36).slice(2)); cont.appendChild(el(`<div><h3>${h3}</h3><div id="${ids[i]}"></div></div>`)); });
+  root.appendChild(sec);
+  blocks.forEach(([, data], i) => renderMiniBars(sec.querySelector('#' + ids[i]), data));
+}
+
+function renderRf() {
+  const r = REPORT.rf_breakdown;
+  if (!r) return;
+  renderThreeColBars('💎 Renta Fija — Breakdown Consolidado (look-through, Maximus)', r.note, [['Regiones', r.regions], ['Sectores', r.sectors], ['Calificaciones', r.ratings]]);
+}
+function renderRv() {
+  const r = REPORT.rv_breakdown;
+  if (!r) return;
+  renderThreeColBars('📊 Renta Variable — Breakdown Consolidado (look-through, Maximus)', r.note, [['Estilo', r.style], ['Sectores', r.sectors], ['Regiones', r.regions]]);
+}
+
+// ---------- Pending sections (data aún no disponible) ----------
+function renderPending() {
+  (REPORT.pending_sections || []).forEach(p => {
+    root.appendChild(el(`<div class="section" style="opacity:0.75;">
+      <h2>${p.title}</h2>
+      <div style="text-align:center; padding:14px 10px; border:1px dashed #3A567A; border-radius:8px; color:var(--text-ter); font-size:12px; line-height:1.6;">
+        ⏳ <b style="color:var(--text-sec);">Pendiente</b> — ${p.note}
+      </div>
+    </div>`));
+  });
+}
+
+// ---------- render everything ----------
+renderHeader();
+renderCorrections();
+renderKpis();
+renderWrapperAlloc();
+renderHoldingsTable();
+renderPerformance();
+renderLookthroughReal();
+renderBigBreakdown();
+renderTopHoldings();
+renderRf();
+renderRv();
+renderPending();
+</script>
+</body>
+</html>
