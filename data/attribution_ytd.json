@@ -1,6 +1,6 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-08-18T13:55:20.575384",
+  "refreshedAt": "2026-08-18T15:34:48.568519",
   "as_of_date": "2026-08-18",
   "ytd_anchor": "2025-12-31",
   "days_ytd": 230,
@@ -38,9 +38,9 @@
   "mgmt_fee_pp": -1.134,
   "mgmt_fee_rate_annual_pct": 1.8,
   "net_reconstructed_pct": 2.37,
-  "lynk_ytd_pct": 3.13,
-  "lynk_refreshed_at": "2026-08-18T11:29:17.046887",
-  "residual_pp": -0.76,
+  "lynk_ytd_pct": 3.15,
+  "lynk_refreshed_at": "2026-08-18T15:34:38.970226",
+  "residual_pp": -0.78,
   "alts_detail": [
     {
       "ticker": "CALP",
@@ -127,13 +127,13 @@
   "alpha_attribution": {
     "_description": "Decomposicion del alpha YTD por asset class. Bench teorico = 60% ACWI + 40% AGG.",
     "bench_label": "60/40 (60% ACWI + 40% AGG)",
-    "bench_ytd_aor_etf": 9.47,
+    "bench_ytd_aor_etf": 9.22,
     "acwi_ytd": 14.069,
     "agg_ytd": -0.593,
     "bench_eq_contrib_pp": 8.442,
     "bench_fi_contrib_pp": -0.237,
-    "big_ytd": 3.13,
-    "alpha_ytd_total_pp": -6.34,
+    "big_ytd": 3.15,
+    "alpha_ytd_total_pp": -6.07,
     "components": [
       {
         "name": "Equity",
@@ -176,14 +176,14 @@
         "bench_contrib_pp": null,
         "alpha_pp": null,
         "is_subtotal": true,
-        "comment": "Suma Equity+FI+Alts+Cash+Fee = reconstruccion bottom-up (vs Lynk oficial +3.13%)"
+        "comment": "Suma Equity+FI+Alts+Cash+Fee = reconstruccion bottom-up (vs Lynk oficial +3.15%)"
       },
       {
         "name": "Residual",
-        "big_contrib_pp": -0.76,
+        "big_contrib_pp": -0.78,
         "bench_contrib_pp": null,
-        "alpha_pp": -0.505,
-        "comment": "Nuestro calculo (+2.37%) - Lynk oficial (+3.13%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
+        "alpha_pp": -0.235,
+        "comment": "Nuestro calculo (+2.37%) - Lynk oficial (+3.15%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
       }
     ]
   }
