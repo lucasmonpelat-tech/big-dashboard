@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "as_of": "2026-08-18",
-  "generated_at": "2026-08-18T16:52:52Z",
+  "generated_at": "2026-08-18T17:31:36Z",
   "note": "Comparaciones portfolio vs benchmark con fechas alineadas y rebased 100 en fecha comun. Fixes bug del dashboard viejo (arrays x separados sin intersect ni rebase).",
   "comparisons": {
     "total_vs_6040": {
@@ -82,8 +82,8 @@
         {
           "date": "2025-07-16",
           "portfolio": 99.893,
-          "benchmark": 100.0822,
-          "alpha_bp": -18.92
+          "benchmark": 100.0823,
+          "alpha_bp": -18.93
         },
         {
           "date": "2025-07-17",
@@ -118,8 +118,8 @@
         {
           "date": "2025-07-24",
           "portfolio": 100.914,
-          "benchmark": 101.3588,
-          "alpha_bp": -44.48
+          "benchmark": 101.3589,
+          "alpha_bp": -44.49
         },
         {
           "date": "2025-07-25",
@@ -178,8 +178,8 @@
         {
           "date": "2025-08-07",
           "portfolio": 100.793,
-          "benchmark": 101.3588,
-          "alpha_bp": -56.58
+          "benchmark": 101.3589,
+          "alpha_bp": -56.59
         },
         {
           "date": "2025-08-08",
@@ -1600,14 +1600,14 @@
         {
           "date": "2026-07-21",
           "portfolio": 105.519,
-          "benchmark": 115.352,
-          "alpha_bp": -983.3
+          "benchmark": 114.6292,
+          "alpha_bp": -911.02
         },
         {
           "date": "2026-07-22",
           "portfolio": 105.572,
-          "benchmark": 115.3184,
-          "alpha_bp": -974.64
+          "benchmark": 114.6292,
+          "alpha_bp": -905.72
         },
         {
           "date": "2026-07-23",
@@ -1648,8 +1648,8 @@
         {
           "date": "2026-07-31",
           "portfolio": 105.677,
-          "benchmark": 115.2007,
-          "alpha_bp": -952.37
+          "benchmark": 115.1335,
+          "alpha_bp": -945.65
         },
         {
           "date": "2026-08-03",
@@ -1752,14 +1752,14 @@
       },
       "stats": {
         "n_days": 282,
-        "tracking_error_pct_ann": 7.92,
+        "tracking_error_pct_ann": 7.91,
         "info_ratio": -1.139,
         "sharpe_portfolio": 0.926,
-        "sharpe_benchmark": 1.715,
-        "beta": 0.397,
-        "correlation": 0.521,
+        "sharpe_benchmark": 1.724,
+        "beta": 0.396,
+        "correlation": 0.518,
         "volatility_portfolio_pct_ann": 6.8,
-        "volatility_benchmark_pct_ann": 8.93
+        "volatility_benchmark_pct_ann": 8.88
       }
     },
     "equity_vs_acwi": {
