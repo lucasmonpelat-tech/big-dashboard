@@ -1,7 +1,11 @@
 name: 🔄 Daily Refresh BIG (Lynk + Sleeves + Alertas + Digest)
 
 # Routine unificada de actualizacion del dashboard de BIG.
-# Corre los Lunes a Sabado a las 8 AM ART (= 11 UTC).
+# Corre los Lunes a Sabado a las 9:30 AM ART (= 12:30 UTC).
+# CAMBIO 2026-08-18: antes corria 8 AM ART -- ese dia Lynk y Yahoo (AOR/ACWI/
+# NASDAQ100/SP500) todavia no habian terminado de publicar el cierre T-1,
+# dejando varios archivos pegados 1 dia atras hasta que alguien lo notaba y
+# corria todo a mano de nuevo. Se corre mas tarde para dar mas margen.
 # Reemplaza los workflows viejos:
 #   - lynk-daily-refresh.yml
 #   - equity-daily-refresh.yml
@@ -34,8 +38,8 @@ name: 🔄 Daily Refresh BIG (Lynk + Sleeves + Alertas + Digest)
 
 on:
   schedule:
-    # 11:00 UTC = 08:00 ART, Lunes a Sabado (1-6 en cron weekday).
-    - cron: '0 11 * * 1-6'
+    # 12:30 UTC = 09:30 ART, Lunes a Sabado (1-6 en cron weekday).
+    - cron: '30 12 * * 1-6'
   workflow_dispatch:
 
 permissions:
