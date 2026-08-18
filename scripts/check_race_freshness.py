@@ -48,6 +48,9 @@ FILES_TO_CHECK = [
 
     # Positions
     ("positions_latest.json", 30, "Pershing positions (mensual)"),
+
+    # Benchmark 60/40 (AOR ETF) — tab "Rendimientos vs Benchmark" + Overview
+    ("bmk_6040.json", 3, "Benchmark 60/40 (AOR)"),
 ]
 
 
