@@ -1737,9 +1737,37 @@
 
       const GOLD = "#d4af37", BLUE = "#7a9ec9", MUTE = "var(--text-mute)";
 
-      // ==== KPIs FI (weighted por peso del holding) ====
-      if (race?.holdings) {
-        const holdings = race.holdings.filter(h => h.weight_pct > 0);
+      // ==== Peso/MV en vivo (holdings_returns_fixed_income.json, refrescado a diario) ====
+      // FIX 2026-08-18: fi_race.json trae weight_pct/value_usd calculados desde
+      // positions_latest.json, pero el UNICO script que los recalcula (fi_race.py,
+      // el completo) no corre en el cron diario -- solo corre refresh_fi_race_daily.py,
+      // que actualiza YTD/SI via NAV vivo pero nunca toca weight_pct/value_usd. Quedaron
+      // congelados desde 2026-05-05 (PIMCO-LD mostraba 38.7% / PIMCO-INC 19.4%, cuando la
+      // realidad de hoy es casi al reves: ~28.6% / ~29.2% -- Fer lo detecto comparando
+      // contra la tabla "Holdings del Sleeve", que si esta viva). Se reconstruye el peso
+      // real desde el mismo archivo canonico que ya usa esa tabla, y se cruza por ticker
+      // con fi_race.json solo para YTW/Duration/Maturity/Rating, que no tienen otra fuente.
+      const liveHoldings = (window.__hRets?.fi?.holdings || []).filter(h => (h.status || "OPEN") === "OPEN");
+      const liveTotalMv = liveHoldings.reduce((s, h) => s + (h.mv_usd || 0), 0);
+      const raceByTicker = {};
+      (race?.holdings || []).forEach(h => { raceByTicker[h.ticker] = h; });
+      const holdings = liveHoldings.map(h => {
+        const rh = raceByTicker[h.ticker] || {};
+        return {
+          ticker: h.ticker,
+          name: rh.name || h.name,
+          value_usd: h.mv_usd,
+          weight_pct: liveTotalMv > 0 ? (h.mv_usd / liveTotalMv) * 100 : 0,
+          ytw: rh.ytw || 0,
+          duration: rh.duration || 0,
+          maturity: rh.maturity || 0,
+          rating: rh.rating || "—",
+          spread_vs_ust: rh.spread_vs_ust,
+        };
+      }).filter(h => h.weight_pct > 0);
+
+      // ==== KPIs FI (weighted por peso real del holding) ====
+      if (holdings.length) {
         // Excluir holdings con data missing (YTW=0 y Duration=0) del cálculo
         // weighted — sino contaminan el promedio con ceros espurios y arrastran
         // el spread hacia negativo (típico de fondos nuevos no indexados en baha).
@@ -1747,8 +1775,8 @@
         const wsum = withData.reduce((s, h) => s + h.weight_pct, 0) || 1;
         const w = (key) => withData.reduce((s, h) => s + h.weight_pct * (h[key] || 0), 0) / wsum;
         const ytw = w("ytw"), dur = w("duration"), mat = w("maturity"), spr = w("spread_vs_ust");
-        const aum = holdings.reduce((s, h) => s + (h.value_usd || 0), 0);
-        const ust10 = race.ust_reference?.value ?? null;
+        const aum = liveTotalMv;
+        const ust10 = race?.ust_reference?.value ?? null;
 
         const kpis = document.getElementById("fi-metrics-kpis");
         if (kpis) kpis.innerHTML = `
@@ -1781,14 +1809,14 @@
       }
 
       // ==== Pie composición ====
-      if (race?.holdings && typeof Plotly !== "undefined") {
-        const hs = race.holdings.filter(h => h.weight_pct > 0).sort((a, b) => b.weight_pct - a.weight_pct);
+      if (holdings.length && typeof Plotly !== "undefined") {
+        const hs = [...holdings].sort((a, b) => b.weight_pct - a.weight_pct);
         const palette = [GOLD, BLUE, "#7fa88f", "#c96060", "#a68fbf", "#e6a532", "#5abfbf", "#c95a91", "#8fa87f"];
         Plotly.newPlot("fi-pie-chart", [{
           type: "pie",
           labels: hs.map(h => h.ticker),
           values: hs.map(h => h.weight_pct),
-          text: hs.map(h => `${h.name}<br>$${(h.value_usd/1e6).toFixed(2)}M`),
+          text: hs.map(h => `${h.name || ""}<br>$${(h.value_usd/1e6).toFixed(2)}M`),
           hoverinfo: "label+percent+text",
           textinfo: "label+percent",
           textposition: "outside",
@@ -1804,14 +1832,13 @@
       }
 
       // ==== Métricas por holding ====
-      if (race?.holdings) {
+      if (holdings.length) {
         const dash = `<span style="color:${MUTE}">—</span>`;
         // Detección de "data missing": YTW=0 y Duration=0 significa que baha aún
         // no lo tiene indexado (típico de holdings nuevos como MANEM). El spread
         // se calcula como YTW - UST10Y, así que un YTW=0 genera un spread negativo
         // espurio (~-4.5%). Preferimos mostrar "—" en vez de valores derivados falsos.
-        const rows = race.holdings
-          .filter(h => h.weight_pct > 0)
+        const rows = [...holdings]
           .sort((a, b) => b.weight_pct - a.weight_pct)
           .map(h => {
             const dataMissing = (!h.ytw || h.ytw === 0) && (!h.duration || h.duration === 0);
