@@ -8,8 +8,10 @@ Output: data/attribution_ytd.json
 Logica:
 - Equity YTD: equity_sleeve_real.json twr_series (last index / Dec-31 index - 1)
 - FI YTD:     fi_sleeve_real.json idem
-- Alts YTD:   sum(holding_value * holding_ytd_pct) / sum(holding_value)
-              de alts_race.json (real statements, no proxies)
+- Alts YTD:   alts_sleeve_real.json twr_series idem (FIX 2026-08-18: antes
+              era sum(peso_hoy * ytd_holding_propio) via alts_race.json --
+              mismo bug de peso congelado/dollar-weighted que FI. Ver
+              memoria bug_fi_race_frozen_weights / comentario en el codigo.)
 - Cash YTD:   SOFR proxy ~5.3%/yr pro-rated por days_ytd
 - Weights:    positions_latest.json (sleeve_value / total_aum)
 - Gross:      sum(w * r)
@@ -63,7 +65,29 @@ def main():
     fi_anchor = get_index(fi, YTD_ANCHOR)
     fi_ytd = (fi[-1]["index"] / fi_anchor - 1) * 100 if fi_anchor else None
 
-    # ============ Alts YTD (weighted holdings) ============
+    # ============ Alts YTD ============
+    # FIX 2026-08-18: antes se calculaba como sum(peso_hoy * ytd_holding_propio)
+    # -- igual que el bug que arreglamos en el pie/tabla de FI (fi_race.json
+    # congelado). Ponderar por el peso de HOY sobre-representa a holdings que
+    # entraron tarde con buena performance (ver alts_detail mas abajo: HLGPI/
+    # FLEX no existian en enero). Ahora usa la cadena TWR de alts_sleeve_real.json,
+    # igual que Equity/FI -- verificado a mano contra statements reales de
+    # Pershing/Carlyle (dic-25 exacto al centavo, abr/may-26 dentro de 0.1%,
+    # jun-26 contra precios reales de Yahoo IBIT/GLD dentro de 0.04pp). Da
+    # -4.67% YTD (vs +0.01% del metodo viejo) -- la caida real de IBIT+GLD en
+    # jun-jul-2026 quedaba diluida por el peso de hoy de CALP/HLGPI, que
+    # entraron despues.
+    alts = load_json(ROOT / "data" / "alts_sleeve_real.json")["twr_series"]
+    alts_anchor = get_index(alts, YTD_ANCHOR)
+    alts_real = [p for p in alts if not p.get("interpolated")]
+    alts_ytd = (alts_real[-1]["index"] / alts_anchor - 1) * 100 if alts_anchor else None
+
+    # ============ Alts detail por holding (informativo, weighted por MV de hoy) ============
+    # OJO: esto sigue siendo dollar-weighted por peso ACTUAL, NO es la fuente
+    # de alts_ytd (arriba) desde el fix. Se deja solo para ver que holding
+    # pesa cuanto y como le fue desde su propia compra -- no sumar
+    # contribution_pp esperando que de alts_ytd, son 2 metodologias distintas
+    # a proposito.
     ar = load_json(ROOT / "data" / "alts_race.json")
     holdings = [h for h in ar["holdings"] if h.get("status") != "sold"]
     total_alts_mv = sum(h["value_usd"] for h in holdings)
@@ -83,8 +107,6 @@ def main():
             "source": h.get("source", "")[:60],
             "valuation_date": h.get("valuation_date", ""),
         })
-
-    alts_ytd = sum(d["contribution_pp"] for d in alts_detail)
 
     # ============ Cash YTD ============
     cash_ytd = SOFR_RATE_ANNUAL * days_ytd / 365
