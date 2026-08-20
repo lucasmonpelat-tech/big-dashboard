@@ -101,10 +101,6 @@ jobs:
         run: python scripts/lynk_nav_extractor.py --email "$LYNK_EMAIL"
         continue-on-error: true
 
-      - name: Baha NAV refresher (Equity + FI UCITS) — best-effort, ver sync Pershing abajo
-        run: python scripts/baha_nav_refresher.py
-        continue-on-error: true
-
       - name: Sync UCITS NAV desde Pershing/NetX360 (reemplaza baha, ver 2026-07-28)
         run: python scripts/sync_ucits_nav_from_pershing.py
         continue-on-error: true
