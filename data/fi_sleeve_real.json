@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-08-19T00:00:00",
+  "refreshedAt": "2026-08-20T13:35:22.366915",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -1268,6 +1268,61 @@
           "qty": 176.056,
           "price": 115.69,
           "mv": 20367.91864,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "PIMCO-LD",
+          "qty": 224080.422,
+          "price": 14.07,
+          "mv": 3152811.53754,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "SGCB",
+          "qty": 269.44,
+          "price": 2175.9,
+          "mv": 586274.496,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "TGF",
+          "qty": 532000.0,
+          "price": 1.5470813721804513,
+          "mv": 823047.29,
+          "source": "pershing_frozen"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-20",
+      "mv_usd": 11027934.58861,
+      "holdings": [
+        {
+          "ticker": "PIMCO-EM",
+          "qty": 61949.011,
+          "price": 18.6,
+          "mv": 1152251.6046,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MANIG",
+          "qty": 16621.485,
+          "price": 125.27,
+          "mv": 2082173.42595,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "PIMCO-INC",
+          "qty": 159434.55,
+          "price": 20.14,
+          "mv": 3211011.837,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MANEM",
+          "qty": 176.056,
+          "price": 115.67,
+          "mv": 20364.397520000002,
           "source": "daily_close"
         },
         {
@@ -4592,6 +4647,13 @@
       "flow_in": 0.0,
       "twr": 0.006551850616214738,
       "index": 106.3266
+    },
+    {
+      "date": "2026-08-20",
+      "mv_usd": 11027934.58861,
+      "flow_in": 0.0,
+      "twr": 0.005941614484040627,
+      "index": 106.2621
     }
   ],
   "agg_index_series": [
@@ -6667,8 +6729,14 @@
     },
     {
       "date": "2026-08-19",
-      "price": 92.8682,
-      "index": 103.1771
+      "index": 102.7348,
+      "interpolated": true,
+      "price": 92.47
+    },
+    {
+      "date": "2026-08-20",
+      "price": 92.5,
+      "index": 102.7681
     }
   ],
   "fi_flows_by_month": {
@@ -6858,7 +6926,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-08-19 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-08-18.",
+  "_daily_refresh_note": "Punto 2026-08-20 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-08-19.",
   "_bench_fix_note": "2026-06-23: agg_index_series reconstruida con IUAG.L (UCITS Acc, total return). Antes era AGG NYSE price-only sin reinvertir dividendos, daba YTD -5.78% falso.",
   "_rebuild_note": "Reconstruccion completa 2026-07-31: reemplaza integramente el pipeline legacy (portfolio_reconstructor.py / sleeve_series desincronizado). Los 12 checkpoints mensuales estan verificados al centavo contra los statements oficiales de Pershing. Flujos calculados como -sum(Net Amount) de las transacciones reales del sleeve en cada periodo (auto-neutraliza fund exchanges internos). Excepcion: 3 transacciones de ene-2026 (venta WELLCRED + compras PIMCO-INC/PIMCO-EM) reclasificadas a feb-2026 tras verificar contra el statement oficial de febrero que asi procesaron realmente (Pershing las emitio como Cancel/Correct). Periodo oct-dic-2025 combinado en un solo calculo por el retiro grande de capital que distorsionaba el corte de fin de mes. | FIX 2026-08-07: se truncaron los puntos 01-ago a 07-ago (calculados con un anchor que iba driftando dia a dia por un bug en refresh_equity_daily.py/refresh_fi_daily.py, ya corregido -- ver _find_last_real_month_end). El proximo refresh diario recalcula bien desde el anchor real de 31-jul.",
   "twr_series_original": [
@@ -10159,2078 +10227,2090 @@
       "flow_in": 0.0,
       "twr": 0.006551850616214738,
       "index": 106.3266
+    },
+    {
+      "date": "2026-08-20",
+      "mv_usd": 11027934.58861,
+      "flow_in": 0.0,
+      "twr": 0.005941614484040627,
+      "index": 106.2621
     }
   ],
   "agg_index_series_original": [
     {
       "date": "2025-07-01",
-      "price": 94.9611,
+      "price": 90.0085,
       "index": 100.0
     },
     {
       "date": "2025-07-02",
-      "price": 94.8458,
-      "index": 99.8785
+      "price": 89.9219,
+      "index": 99.9038
     },
     {
       "date": "2025-07-03",
-      "price": 94.6535,
-      "index": 99.6761
+      "price": 89.768,
+      "index": 99.7327
     },
     {
       "date": "2025-07-04",
-      "price": 94.6535,
-      "index": 99.6761
+      "price": 89.8161,
+      "index": 99.7862
     },
     {
       "date": "2025-07-05",
-      "price": 94.6535,
-      "index": 99.6761
+      "price": 89.8161,
+      "index": 99.7862
     },
     {
       "date": "2025-07-06",
-      "price": 94.6535,
-      "index": 99.6761
+      "price": 89.8161,
+      "index": 99.7862
     },
     {
       "date": "2025-07-07",
-      "price": 94.3171,
-      "index": 99.3218
+      "price": 89.5563,
+      "index": 99.4975
     },
     {
       "date": "2025-07-08",
-      "price": 94.2786,
-      "index": 99.2813
+      "price": 89.3446,
+      "index": 99.2623
     },
     {
       "date": "2025-07-09",
-      "price": 94.6728,
-      "index": 99.6963
+      "price": 89.5274,
+      "index": 99.4655
     },
     {
       "date": "2025-07-10",
-      "price": 94.6439,
-      "index": 99.666
+      "price": 89.6814,
+      "index": 99.6365
     },
     {
       "date": "2025-07-11",
-      "price": 94.2498,
-      "index": 99.251
+      "price": 89.5948,
+      "index": 99.5403
     },
     {
       "date": "2025-07-12",
-      "price": 94.2498,
-      "index": 99.251
+      "price": 89.5948,
+      "index": 99.5403
     },
     {
       "date": "2025-07-13",
-      "price": 94.2498,
-      "index": 99.251
+      "price": 89.5948,
+      "index": 99.5403
     },
     {
       "date": "2025-07-14",
-      "price": 94.2402,
-      "index": 99.2408
+      "price": 89.5082,
+      "index": 99.4441
     },
     {
       "date": "2025-07-15",
-      "price": 93.9614,
-      "index": 98.9473
+      "price": 89.0367,
+      "index": 98.9202
     },
     {
       "date": "2025-07-16",
-      "price": 94.096,
-      "index": 99.089
+      "price": 89.1329,
+      "index": 99.0271
     },
     {
       "date": "2025-07-17",
-      "price": 94.1345,
-      "index": 99.1295
+      "price": 89.3301,
+      "index": 99.2463
     },
     {
       "date": "2025-07-18",
-      "price": 94.3075,
-      "index": 99.3117
+      "price": 89.4216,
+      "index": 99.3479
     },
     {
       "date": "2025-07-19",
-      "price": 94.3075,
-      "index": 99.3117
+      "price": 89.4216,
+      "index": 99.3479
     },
     {
       "date": "2025-07-20",
-      "price": 94.3075,
-      "index": 99.3117
+      "price": 89.4216,
+      "index": 99.3479
     },
     {
       "date": "2025-07-21",
-      "price": 94.567,
-      "index": 99.585
+      "price": 89.7295,
+      "index": 99.69
     },
     {
       "date": "2025-07-22",
-      "price": 94.7497,
-      "index": 99.7773
+      "price": 89.8738,
+      "index": 99.8503
     },
     {
       "date": "2025-07-23",
-      "price": 94.5382,
-      "index": 99.5546
+      "price": 89.7006,
+      "index": 99.6579
     },
     {
       "date": "2025-07-24",
-      "price": 94.4805,
-      "index": 99.4939
+      "price": 89.6477,
+      "index": 99.5991
     },
     {
       "date": "2025-07-25",
-      "price": 94.6343,
-      "index": 99.6558
+      "price": 89.6188,
+      "index": 99.567
     },
     {
       "date": "2025-07-26",
-      "price": 94.6343,
-      "index": 99.6558
+      "price": 89.6188,
+      "index": 99.567
     },
     {
       "date": "2025-07-27",
-      "price": 94.6343,
-      "index": 99.6558
+      "price": 89.6188,
+      "index": 99.567
     },
     {
       "date": "2025-07-28",
-      "price": 94.5093,
-      "index": 99.5242
+      "price": 89.6429,
+      "index": 99.5938
     },
     {
       "date": "2025-07-29",
-      "price": 95.0188,
-      "index": 100.0607
+      "price": 89.9604,
+      "index": 99.9465
     },
     {
       "date": "2025-07-30",
-      "price": 94.7497,
-      "index": 99.7773
+      "price": 89.9797,
+      "index": 99.9679
     },
     {
       "date": "2025-07-31",
-      "price": 94.7977,
-      "index": 99.8279
+      "price": 90.0855,
+      "index": 100.0855
     },
     {
       "date": "2025-08-01",
-      "price": 95.6175,
-      "index": 100.6912
+      "price": 90.5378,
+      "index": 100.588
     },
     {
       "date": "2025-08-02",
-      "price": 95.6175,
-      "index": 100.6912
+      "price": 90.5378,
+      "index": 100.588
     },
     {
       "date": "2025-08-03",
-      "price": 95.6175,
-      "index": 100.6912
+      "price": 90.5378,
+      "index": 100.588
     },
     {
       "date": "2025-08-04",
-      "price": 95.6947,
-      "index": 100.7725
+      "price": 90.6147,
+      "index": 100.6735
     },
     {
       "date": "2025-08-05",
-      "price": 95.7236,
-      "index": 100.8029
+      "price": 90.6917,
+      "index": 100.759
     },
     {
       "date": "2025-08-06",
-      "price": 95.685,
-      "index": 100.7623
+      "price": 90.5955,
+      "index": 100.6521
     },
     {
       "date": "2025-08-07",
-      "price": 95.6079,
-      "index": 100.681
+      "price": 90.7976,
+      "index": 100.8766
     },
     {
       "date": "2025-08-08",
-      "price": 95.4246,
-      "index": 100.4881
+      "price": 90.5955,
+      "index": 100.6521
     },
     {
       "date": "2025-08-09",
-      "price": 95.4246,
-      "index": 100.4881
+      "price": 90.5955,
+      "index": 100.6521
     },
     {
       "date": "2025-08-10",
-      "price": 95.4246,
-      "index": 100.4881
+      "price": 90.5955,
+      "index": 100.6521
     },
     {
       "date": "2025-08-11",
-      "price": 95.4921,
-      "index": 100.5592
+      "price": 90.4704,
+      "index": 100.5131
     },
     {
       "date": "2025-08-12",
-      "price": 95.4921,
-      "index": 100.5592
+      "price": 90.3838,
+      "index": 100.4169
     },
     {
       "date": "2025-08-13",
-      "price": 95.8393,
-      "index": 100.9248
+      "price": 90.8649,
+      "index": 100.9515
     },
     {
       "date": "2025-08-14",
-      "price": 95.5693,
-      "index": 100.6404
+      "price": 90.7687,
+      "index": 100.8446
     },
     {
       "date": "2025-08-15",
-      "price": 95.4246,
-      "index": 100.4881
+      "price": 90.5089,
+      "index": 100.5559
     },
     {
       "date": "2025-08-16",
-      "price": 95.4246,
-      "index": 100.4881
+      "price": 90.5089,
+      "index": 100.5559
     },
     {
       "date": "2025-08-17",
-      "price": 95.4246,
-      "index": 100.4881
+      "price": 90.5089,
+      "index": 100.5559
     },
     {
       "date": "2025-08-18",
-      "price": 95.3185,
-      "index": 100.3764
+      "price": 90.278,
+      "index": 100.2993
     },
     {
       "date": "2025-08-19",
-      "price": 95.5018,
-      "index": 100.5693
+      "price": 90.4127,
+      "index": 100.449
     },
     {
       "date": "2025-08-20",
-      "price": 95.5597,
-      "index": 100.6303
+      "price": 90.5859,
+      "index": 100.6414
     },
     {
       "date": "2025-08-21",
-      "price": 95.3378,
-      "index": 100.3967
+      "price": 90.2876,
+      "index": 100.31
     },
     {
       "date": "2025-08-22",
-      "price": 95.8683,
-      "index": 100.9553
+      "price": 90.8457,
+      "index": 100.9301
     },
     {
       "date": "2025-08-23",
-      "price": 95.8683,
-      "index": 100.9553
+      "price": 90.8457,
+      "index": 100.9301
     },
     {
       "date": "2025-08-24",
-      "price": 95.8683,
-      "index": 100.9553
+      "price": 90.8457,
+      "index": 100.9301
     },
     {
       "date": "2025-08-25",
-      "price": 95.7236,
-      "index": 100.8029
+      "price": 90.8457,
+      "index": 100.9301
     },
     {
       "date": "2025-08-26",
-      "price": 95.8393,
-      "index": 100.9248
+      "price": 90.6821,
+      "index": 100.7483
     },
     {
       "date": "2025-08-27",
-      "price": 95.9358,
-      "index": 101.0264
+      "price": 90.7687,
+      "index": 100.8446
     },
     {
       "date": "2025-08-28",
-      "price": 96.0515,
-      "index": 101.1483
+      "price": 91.0381,
+      "index": 101.1439
     },
     {
       "date": "2025-08-29",
-      "price": 95.9262,
-      "index": 101.0162
+      "price": 90.8553,
+      "index": 100.9408
     },
     {
       "date": "2025-08-30",
-      "price": 95.9262,
-      "index": 101.0162
+      "price": 90.8553,
+      "index": 100.9408
     },
     {
       "date": "2025-08-31",
-      "price": 95.9262,
-      "index": 101.0162
+      "price": 90.8553,
+      "index": 100.9408
     },
     {
       "date": "2025-09-01",
-      "price": 95.9262,
-      "index": 101.0162
+      "price": 90.8361,
+      "index": 100.9194
     },
     {
       "date": "2025-09-02",
-      "price": 95.6717,
-      "index": 100.7482
+      "price": 90.6147,
+      "index": 100.6735
     },
     {
       "date": "2025-09-03",
-      "price": 96.02,
-      "index": 101.1151
+      "price": 90.99,
+      "index": 101.0904
     },
     {
       "date": "2025-09-04",
-      "price": 96.4071,
-      "index": 101.5227
+      "price": 91.1151,
+      "index": 101.2294
     },
     {
       "date": "2025-09-05",
-      "price": 96.8619,
-      "index": 102.0016
+      "price": 91.8272,
+      "index": 102.0205
     },
     {
       "date": "2025-09-06",
-      "price": 96.8619,
-      "index": 102.0016
+      "price": 91.8272,
+      "index": 102.0205
     },
     {
       "date": "2025-09-07",
-      "price": 96.8619,
-      "index": 102.0016
+      "price": 91.8272,
+      "index": 102.0205
     },
     {
       "date": "2025-09-08",
-      "price": 97.1909,
-      "index": 102.3481
+      "price": 92.087,
+      "index": 102.3092
     },
     {
       "date": "2025-09-09",
-      "price": 96.9974,
-      "index": 102.1443
+      "price": 91.9523,
+      "index": 102.1595
     },
     {
       "date": "2025-09-10",
-      "price": 97.1909,
-      "index": 102.3481
+      "price": 91.9811,
+      "index": 102.1916
     },
     {
       "date": "2025-09-11",
-      "price": 97.3747,
-      "index": 102.5417
+      "price": 92.2602,
+      "index": 102.5016
     },
     {
       "date": "2025-09-12",
-      "price": 97.2877,
-      "index": 102.45
+      "price": 92.1351,
+      "index": 102.3626
     },
     {
       "date": "2025-09-13",
-      "price": 97.2877,
-      "index": 102.45
+      "price": 92.1351,
+      "index": 102.3626
     },
     {
       "date": "2025-09-14",
-      "price": 97.2877,
-      "index": 102.45
+      "price": 92.1351,
+      "index": 102.3626
     },
     {
       "date": "2025-09-15",
-      "price": 97.4521,
-      "index": 102.6232
+      "price": 92.3179,
+      "index": 102.5657
     },
     {
       "date": "2025-09-16",
-      "price": 97.4909,
-      "index": 102.6639
+      "price": 92.3853,
+      "index": 102.6406
     },
     {
       "date": "2025-09-17",
-      "price": 97.3167,
-      "index": 102.4805
+      "price": 92.443,
+      "index": 102.7047
     },
     {
       "date": "2025-09-18",
-      "price": 97.0457,
-      "index": 102.1952
+      "price": 91.9715,
+      "index": 102.1809
     },
     {
       "date": "2025-09-19",
-      "price": 97.0457,
-      "index": 102.1952
+      "price": 91.8753,
+      "index": 102.074
     },
     {
       "date": "2025-09-20",
-      "price": 97.0457,
-      "index": 102.1952
+      "price": 91.8753,
+      "index": 102.074
     },
     {
       "date": "2025-09-21",
-      "price": 97.0457,
-      "index": 102.1952
+      "price": 91.8753,
+      "index": 102.074
     },
     {
       "date": "2025-09-22",
-      "price": 96.9296,
-      "index": 102.0729
+      "price": 91.8079,
+      "index": 101.9991
     },
     {
       "date": "2025-09-23",
-      "price": 97.0844,
-      "index": 102.236
+      "price": 91.8079,
+      "index": 101.9991
     },
     {
       "date": "2025-09-24",
-      "price": 96.9006,
-      "index": 102.0423
+      "price": 91.9908,
+      "index": 102.2023
     },
     {
       "date": "2025-09-25",
-      "price": 96.7651,
-      "index": 101.8997
+      "price": 91.5577,
+      "index": 101.7212
     },
     {
       "date": "2025-09-26",
-      "price": 96.8329,
-      "index": 101.971
+      "price": 91.7117,
+      "index": 101.8922
     },
     {
       "date": "2025-09-27",
-      "price": 96.8329,
-      "index": 101.971
+      "price": 91.7117,
+      "index": 101.8922
     },
     {
       "date": "2025-09-28",
-      "price": 96.8329,
-      "index": 101.971
+      "price": 91.7117,
+      "index": 101.8922
     },
     {
       "date": "2025-09-29",
-      "price": 97.0167,
-      "index": 102.1646
+      "price": 91.933,
+      "index": 102.1381
     },
     {
       "date": "2025-09-30",
-      "price": 97.007,
-      "index": 102.1544
+      "price": 92.0004,
+      "index": 102.213
     },
     {
       "date": "2025-10-01",
-      "price": 97.2546,
-      "index": 102.4152
+      "price": 91.9811,
+      "index": 102.1916
     },
     {
       "date": "2025-10-02",
-      "price": 97.3614,
-      "index": 102.5276
+      "price": 92.2506,
+      "index": 102.4909
     },
     {
       "date": "2025-10-03",
-      "price": 97.2546,
-      "index": 102.4152
+      "price": 92.2217,
+      "index": 102.4588
     },
     {
       "date": "2025-10-04",
-      "price": 97.2546,
-      "index": 102.4152
+      "price": 92.2217,
+      "index": 102.4588
     },
     {
       "date": "2025-10-05",
-      "price": 97.2546,
-      "index": 102.4152
+      "price": 92.2217,
+      "index": 102.4588
     },
     {
       "date": "2025-10-06",
-      "price": 97.041,
-      "index": 102.1902
+      "price": 92.0629,
+      "index": 102.2824
     },
     {
       "date": "2025-10-07",
-      "price": 97.206,
-      "index": 102.364
+      "price": 92.0966,
+      "index": 102.3199
     },
     {
       "date": "2025-10-08",
-      "price": 97.2157,
-      "index": 102.3742
+      "price": 92.2602,
+      "index": 102.5016
     },
     {
       "date": "2025-10-09",
-      "price": 97.0992,
-      "index": 102.2516
+      "price": 92.0581,
+      "index": 102.2771
     },
     {
       "date": "2025-10-10",
-      "price": 97.4973,
-      "index": 102.6707
+      "price": 92.4382,
+      "index": 102.6994
     },
     {
       "date": "2025-10-11",
-      "price": 97.4973,
-      "index": 102.6707
+      "price": 92.4382,
+      "index": 102.6994
     },
     {
       "date": "2025-10-12",
-      "price": 97.4973,
-      "index": 102.6707
+      "price": 92.4382,
+      "index": 102.6994
     },
     {
       "date": "2025-10-13",
-      "price": 97.6817,
-      "index": 102.865
+      "price": 92.4622,
+      "index": 102.7261
     },
     {
       "date": "2025-10-14",
-      "price": 97.8371,
-      "index": 103.0285
+      "price": 92.5777,
+      "index": 102.8544
     },
     {
       "date": "2025-10-15",
-      "price": 97.7982,
-      "index": 102.9876
+      "price": 92.7894,
+      "index": 103.0896
     },
     {
       "date": "2025-10-16",
-      "price": 98.1477,
-      "index": 103.3557
+      "price": 92.7317,
+      "index": 103.0254
     },
     {
       "date": "2025-10-17",
-      "price": 98.0118,
-      "index": 103.2125
+      "price": 92.8279,
+      "index": 103.1323
     },
     {
       "date": "2025-10-18",
-      "price": 98.0118,
-      "index": 103.2125
+      "price": 92.8279,
+      "index": 103.1323
     },
     {
       "date": "2025-10-19",
-      "price": 98.0118,
-      "index": 103.2125
+      "price": 92.8279,
+      "index": 103.1323
     },
     {
       "date": "2025-10-20",
-      "price": 98.1768,
-      "index": 103.3863
+      "price": 92.9819,
+      "index": 103.3034
     },
     {
       "date": "2025-10-21",
-      "price": 98.2739,
-      "index": 103.4886
+      "price": 93.2224,
+      "index": 103.5707
     },
     {
       "date": "2025-10-22",
-      "price": 98.2642,
-      "index": 103.4783
+      "price": 93.0204,
+      "index": 103.3462
     },
     {
       "date": "2025-10-23",
-      "price": 98.0895,
-      "index": 103.2943
+      "price": 92.9819,
+      "index": 103.3034
     },
     {
       "date": "2025-10-24",
-      "price": 98.1865,
-      "index": 103.3966
+      "price": 93.0123,
+      "index": 103.3372
     },
     {
       "date": "2025-10-25",
-      "price": 98.1865,
-      "index": 103.3966
+      "price": 93.0123,
+      "index": 103.3372
     },
     {
       "date": "2025-10-26",
-      "price": 98.1865,
-      "index": 103.3966
+      "price": 93.0123,
+      "index": 103.3372
     },
     {
       "date": "2025-10-27",
-      "price": 98.2545,
-      "index": 103.4681
+      "price": 93.0444,
+      "index": 103.3729
     },
     {
       "date": "2025-10-28",
-      "price": 98.3127,
-      "index": 103.5294
+      "price": 93.1262,
+      "index": 103.4638
     },
     {
       "date": "2025-10-29",
-      "price": 97.8467,
-      "index": 103.0387
+      "price": 93.0588,
+      "index": 103.3889
     },
     {
       "date": "2025-10-30",
-      "price": 97.6623,
-      "index": 102.8445
+      "price": 92.6739,
+      "index": 102.9613
     },
     {
       "date": "2025-10-31",
-      "price": 97.6041,
-      "index": 102.7832
+      "price": 92.4622,
+      "index": 102.7261
     },
     {
       "date": "2025-11-01",
-      "price": 97.6041,
-      "index": 102.7832
+      "price": 92.4622,
+      "index": 102.7261
     },
     {
       "date": "2025-11-02",
-      "price": 97.6041,
-      "index": 102.7832
+      "price": 92.4622,
+      "index": 102.7261
     },
     {
       "date": "2025-11-03",
-      "price": 97.4843,
-      "index": 102.657
+      "price": 92.2891,
+      "index": 102.5337
     },
     {
       "date": "2025-11-04",
-      "price": 97.533,
-      "index": 102.7083
+      "price": 92.5056,
+      "index": 102.7742
     },
     {
       "date": "2025-11-05",
-      "price": 97.27,
-      "index": 102.4314
+      "price": 92.1543,
+      "index": 102.384
     },
     {
       "date": "2025-11-06",
-      "price": 97.6304,
-      "index": 102.8109
+      "price": 92.5007,
+      "index": 102.7689
     },
     {
       "date": "2025-11-07",
-      "price": 97.5914,
-      "index": 102.7698
+      "price": 92.5392,
+      "index": 102.8116
     },
     {
       "date": "2025-11-08",
-      "price": 97.5914,
-      "index": 102.7698
+      "price": 92.5392,
+      "index": 102.8116
     },
     {
       "date": "2025-11-09",
-      "price": 97.5914,
-      "index": 102.7698
+      "price": 92.5392,
+      "index": 102.8116
     },
     {
       "date": "2025-11-10",
-      "price": 97.5524,
-      "index": 102.7288
+      "price": 92.4238,
+      "index": 102.6833
     },
     {
       "date": "2025-11-11",
-      "price": 97.8446,
-      "index": 103.0365
+      "price": 92.6403,
+      "index": 102.9239
     },
     {
       "date": "2025-11-12",
-      "price": 97.8057,
-      "index": 102.9955
+      "price": 92.6739,
+      "index": 102.9613
     },
     {
       "date": "2025-11-13",
-      "price": 97.5135,
-      "index": 102.6878
+      "price": 92.4549,
+      "index": 102.7179
     },
     {
       "date": "2025-11-14",
-      "price": 97.3966,
-      "index": 102.5647
+      "price": 92.3176,
+      "index": 102.5654
     },
     {
       "date": "2025-11-15",
-      "price": 97.3966,
-      "index": 102.5647
+      "price": 92.3176,
+      "index": 102.5654
     },
     {
       "date": "2025-11-16",
-      "price": 97.3966,
-      "index": 102.5647
+      "price": 92.3176,
+      "index": 102.5654
     },
     {
       "date": "2025-11-17",
-      "price": 97.4161,
-      "index": 102.5852
+      "price": 92.3274,
+      "index": 102.5763
     },
     {
       "date": "2025-11-18",
-      "price": 97.4745,
-      "index": 102.6468
+      "price": 92.2685,
+      "index": 102.5109
     },
     {
       "date": "2025-11-19",
-      "price": 97.4745,
-      "index": 102.6468
+      "price": 92.4647,
+      "index": 102.7288
     },
     {
       "date": "2025-11-20",
-      "price": 97.5914,
-      "index": 102.7698
+      "price": 92.5333,
+      "index": 102.8051
     },
     {
       "date": "2025-11-21",
-      "price": 97.8251,
-      "index": 103.016
+      "price": 92.5039,
+      "index": 102.7724
     },
     {
       "date": "2025-11-22",
-      "price": 97.8251,
-      "index": 103.016
+      "price": 92.5039,
+      "index": 102.7724
     },
     {
       "date": "2025-11-23",
-      "price": 97.8251,
-      "index": 103.016
+      "price": 92.5039,
+      "index": 102.7724
     },
     {
       "date": "2025-11-24",
-      "price": 98.02,
-      "index": 103.2211
+      "price": 92.6216,
+      "index": 102.9031
     },
     {
       "date": "2025-11-25",
-      "price": 98.1758,
-      "index": 103.3852
+      "price": 93.0629,
+      "index": 103.3934
     },
     {
       "date": "2025-11-26",
-      "price": 98.3316,
-      "index": 103.5493
+      "price": 93.0727,
+      "index": 103.4043
     },
     {
       "date": "2025-11-27",
-      "price": 98.3316,
-      "index": 103.5493
+      "price": 93.2296,
+      "index": 103.5786
     },
     {
       "date": "2025-11-28",
-      "price": 98.1953,
-      "index": 103.4057
+      "price": 93.0629,
+      "index": 103.3934
     },
     {
       "date": "2025-11-29",
-      "price": 98.1953,
-      "index": 103.4057
+      "price": 93.0629,
+      "index": 103.3934
     },
     {
       "date": "2025-11-30",
-      "price": 98.1953,
-      "index": 103.4057
+      "price": 93.0629,
+      "index": 103.3934
     },
     {
       "date": "2025-12-01",
-      "price": 97.7712,
-      "index": 102.9592
+      "price": 92.7,
+      "index": 102.9903
     },
     {
       "date": "2025-12-02",
-      "price": 97.8982,
-      "index": 103.0929
+      "price": 92.7098,
+      "index": 103.0012
     },
     {
       "date": "2025-12-03",
-      "price": 98.0839,
-      "index": 103.2884
+      "price": 92.8079,
+      "index": 103.1101
     },
     {
       "date": "2025-12-04",
-      "price": 97.8494,
-      "index": 103.0415
+      "price": 92.6902,
+      "index": 102.9794
     },
     {
       "date": "2025-12-05",
-      "price": 97.7419,
-      "index": 102.9283
+      "price": 92.5235,
+      "index": 102.7942
     },
     {
       "date": "2025-12-06",
-      "price": 97.7419,
-      "index": 102.9283
+      "price": 92.5235,
+      "index": 102.7942
     },
     {
       "date": "2025-12-07",
-      "price": 97.7419,
-      "index": 102.9283
+      "price": 92.5235,
+      "index": 102.7942
     },
     {
       "date": "2025-12-08",
-      "price": 97.5855,
-      "index": 102.7637
+      "price": 92.3274,
+      "index": 102.5763
     },
     {
       "date": "2025-12-09",
-      "price": 97.4976,
-      "index": 102.671
+      "price": 92.4549,
+      "index": 102.7179
     },
     {
       "date": "2025-12-10",
-      "price": 97.8103,
-      "index": 103.0003
+      "price": 92.396,
+      "index": 102.6525
     },
     {
       "date": "2025-12-11",
-      "price": 97.8298,
-      "index": 103.0209
+      "price": 92.7687,
+      "index": 103.0665
     },
     {
       "date": "2025-12-12",
-      "price": 97.5269,
-      "index": 102.7019
+      "price": 92.3372,
+      "index": 102.5872
     },
     {
       "date": "2025-12-13",
-      "price": 97.5269,
-      "index": 102.7019
+      "price": 92.3372,
+      "index": 102.5872
     },
     {
       "date": "2025-12-14",
-      "price": 97.5269,
-      "index": 102.7019
+      "price": 92.3372,
+      "index": 102.5872
     },
     {
       "date": "2025-12-15",
-      "price": 97.6246,
-      "index": 102.8048
+      "price": 92.4941,
+      "index": 102.7615
     },
     {
       "date": "2025-12-16",
-      "price": 97.8103,
-      "index": 103.0003
+      "price": 92.6118,
+      "index": 102.8922
     },
     {
       "date": "2025-12-17",
-      "price": 97.781,
-      "index": 102.9695
+      "price": 92.6265,
+      "index": 102.9086
     },
     {
       "date": "2025-12-18",
-      "price": 98.0252,
-      "index": 103.2267
+      "price": 92.8177,
+      "index": 103.121
     },
     {
       "date": "2025-12-19",
-      "price": 97.8821,
-      "index": 103.076
+      "price": 92.8471,
+      "index": 103.1537
     },
     {
       "date": "2025-12-20",
-      "price": 97.8821,
-      "index": 103.076
+      "price": 92.8471,
+      "index": 103.1537
     },
     {
       "date": "2025-12-21",
-      "price": 97.8821,
-      "index": 103.076
+      "price": 92.8471,
+      "index": 103.1537
     },
     {
       "date": "2025-12-22",
-      "price": 97.8429,
-      "index": 103.0347
+      "price": 92.6118,
+      "index": 102.8922
     },
     {
       "date": "2025-12-23",
-      "price": 97.8429,
-      "index": 103.0347
+      "price": 92.6853,
+      "index": 102.9739
     },
     {
       "date": "2025-12-24",
-      "price": 98.0586,
-      "index": 103.2618
+      "price": 92.7295,
+      "index": 103.023
     },
     {
       "date": "2025-12-25",
-      "price": 98.0586,
-      "index": 103.2618
+      "price": 92.7295,
+      "index": 103.023
     },
     {
       "date": "2025-12-26",
-      "price": 98.0782,
-      "index": 103.2824
+      "price": 92.7295,
+      "index": 103.023
     },
     {
       "date": "2025-12-27",
-      "price": 98.0782,
-      "index": 103.2824
+      "price": 92.7295,
+      "index": 103.023
     },
     {
       "date": "2025-12-28",
-      "price": 98.0782,
-      "index": 103.2824
+      "price": 92.7295,
+      "index": 103.023
     },
     {
       "date": "2025-12-29",
-      "price": 98.1958,
-      "index": 103.4063
+      "price": 92.906,
+      "index": 103.2191
     },
     {
       "date": "2025-12-30",
-      "price": 98.1566,
-      "index": 103.365
+      "price": 92.9746,
+      "index": 103.2953
     },
     {
       "date": "2025-12-31",
-      "price": 97.9213,
-      "index": 103.1173
+      "price": 93.0629,
+      "index": 103.3934
     },
     {
       "date": "2026-01-01",
-      "price": 97.9213,
-      "index": 103.1173
+      "price": 93.0629,
+      "index": 103.3934
     },
     {
       "date": "2026-01-02",
-      "price": 97.8919,
-      "index": 103.0863
+      "price": 92.7393,
+      "index": 103.0339
     },
     {
       "date": "2026-01-03",
-      "price": 97.8919,
-      "index": 103.0863
+      "price": 92.7393,
+      "index": 103.0339
     },
     {
       "date": "2026-01-04",
-      "price": 97.8919,
-      "index": 103.0863
+      "price": 92.7393,
+      "index": 103.0339
     },
     {
       "date": "2026-01-05",
-      "price": 98.0782,
-      "index": 103.2824
+      "price": 92.8177,
+      "index": 103.121
     },
     {
       "date": "2026-01-06",
-      "price": 98.0586,
-      "index": 103.2618
+      "price": 92.6804,
+      "index": 102.9685
     },
     {
       "date": "2026-01-07",
-      "price": 98.1566,
-      "index": 103.365
+      "price": 92.9942,
+      "index": 103.3171
     },
     {
       "date": "2026-01-08",
-      "price": 97.9801,
-      "index": 103.1792
+      "price": 92.8177,
+      "index": 103.121
     },
     {
       "date": "2026-01-09",
-      "price": 98.1958,
-      "index": 103.4063
+      "price": 93.1119,
+      "index": 103.4479
     },
     {
       "date": "2026-01-10",
-      "price": 98.1958,
-      "index": 103.4063
+      "price": 93.1119,
+      "index": 103.4479
     },
     {
       "date": "2026-01-11",
-      "price": 98.1958,
-      "index": 103.4063
+      "price": 93.1119,
+      "index": 103.4479
     },
     {
       "date": "2026-01-12",
-      "price": 98.1468,
-      "index": 103.3547
+      "price": 92.8765,
+      "index": 103.1864
     },
     {
       "date": "2026-01-13",
-      "price": 98.235,
-      "index": 103.4476
+      "price": 92.9256,
+      "index": 103.2409
     },
     {
       "date": "2026-01-14",
-      "price": 98.3821,
-      "index": 103.6025
+      "price": 93.1609,
+      "index": 103.5023
     },
     {
       "date": "2026-01-15",
-      "price": 98.2546,
-      "index": 103.4683
+      "price": 93.0923,
+      "index": 103.4261
     },
     {
       "date": "2026-01-16",
-      "price": 98.088,
-      "index": 103.2928
+      "price": 93.0825,
+      "index": 103.4152
     },
     {
       "date": "2026-01-17",
-      "price": 98.088,
-      "index": 103.2928
+      "price": 93.0825,
+      "index": 103.4152
     },
     {
       "date": "2026-01-18",
-      "price": 98.088,
-      "index": 103.2928
+      "price": 93.0825,
+      "index": 103.4152
     },
     {
       "date": "2026-01-19",
-      "price": 98.088,
-      "index": 103.2928
+      "price": 92.7295,
+      "index": 103.023
     },
     {
       "date": "2026-01-20",
-      "price": 97.7154,
-      "index": 102.9005
+      "price": 92.6314,
+      "index": 102.914
     },
     {
       "date": "2026-01-21",
-      "price": 98.039,
-      "index": 103.2412
+      "price": 92.7197,
+      "index": 103.0121
     },
     {
       "date": "2026-01-22",
-      "price": 98.0586,
-      "index": 103.2618
+      "price": 92.7932,
+      "index": 103.0938
     },
     {
       "date": "2026-01-23",
-      "price": 98.1468,
-      "index": 103.3547
+      "price": 92.9452,
+      "index": 103.2626
     },
     {
       "date": "2026-01-24",
-      "price": 98.1468,
-      "index": 103.3547
+      "price": 92.9452,
+      "index": 103.2626
     },
     {
       "date": "2026-01-25",
-      "price": 98.1468,
-      "index": 103.3547
+      "price": 92.9452,
+      "index": 103.2626
     },
     {
       "date": "2026-01-26",
-      "price": 98.2939,
-      "index": 103.5096
+      "price": 92.9452,
+      "index": 103.2626
     },
     {
       "date": "2026-01-27",
-      "price": 98.2252,
-      "index": 103.4373
+      "price": 93.1511,
+      "index": 103.4914
     },
     {
       "date": "2026-01-28",
-      "price": 98.186,
-      "index": 103.396
+      "price": 92.8962,
+      "index": 103.2082
     },
     {
       "date": "2026-01-29",
-      "price": 98.186,
-      "index": 103.396
+      "price": 93.0433,
+      "index": 103.3716
     },
     {
       "date": "2026-01-30",
-      "price": 98.1664,
-      "index": 103.3754
+      "price": 92.9942,
+      "index": 103.3171
     },
     {
       "date": "2026-01-31",
-      "price": 98.1664,
-      "index": 103.3754
+      "price": 92.9942,
+      "index": 103.3171
     },
     {
       "date": "2026-02-01",
-      "price": 98.1664,
-      "index": 103.3754
+      "price": 92.9942,
+      "index": 103.3171
     },
     {
       "date": "2026-02-02",
-      "price": 98.0533,
-      "index": 103.2562
+      "price": 92.8177,
+      "index": 103.121
     },
     {
       "date": "2026-02-03",
-      "price": 98.0631,
-      "index": 103.2666
+      "price": 92.8569,
+      "index": 103.1646
     },
     {
       "date": "2026-02-04",
-      "price": 98.0041,
-      "index": 103.2045
+      "price": 92.7785,
+      "index": 103.0774
     },
     {
       "date": "2026-02-05",
-      "price": 98.4271,
-      "index": 103.6498
+      "price": 93.0531,
+      "index": 103.3825
     },
     {
       "date": "2026-02-06",
-      "price": 98.4861,
-      "index": 103.712
+      "price": 93.0923,
+      "index": 103.4261
     },
     {
       "date": "2026-02-07",
-      "price": 98.4861,
-      "index": 103.712
+      "price": 93.0923,
+      "index": 103.4261
     },
     {
       "date": "2026-02-08",
-      "price": 98.4861,
-      "index": 103.712
+      "price": 93.0923,
+      "index": 103.4261
     },
     {
       "date": "2026-02-09",
-      "price": 98.5156,
-      "index": 103.7431
+      "price": 93.1609,
+      "index": 103.5023
     },
     {
       "date": "2026-02-10",
-      "price": 98.8008,
-      "index": 104.0434
+      "price": 93.5042,
+      "index": 103.8837
     },
     {
       "date": "2026-02-11",
-      "price": 98.5746,
-      "index": 103.8052
+      "price": 93.3571,
+      "index": 103.7202
     },
     {
       "date": "2026-02-12",
-      "price": 99.0172,
-      "index": 104.2713
+      "price": 93.612,
+      "index": 104.0035
     },
     {
       "date": "2026-02-13",
-      "price": 99.332,
-      "index": 104.6028
+      "price": 93.9454,
+      "index": 104.3739
     },
     {
       "date": "2026-02-14",
-      "price": 99.332,
-      "index": 104.6028
+      "price": 93.9454,
+      "index": 104.3739
     },
     {
       "date": "2026-02-15",
-      "price": 99.332,
-      "index": 104.6028
+      "price": 93.9454,
+      "index": 104.3739
     },
     {
       "date": "2026-02-16",
-      "price": 99.332,
-      "index": 104.6028
+      "price": 94.2396,
+      "index": 104.7008
     },
     {
       "date": "2026-02-17",
-      "price": 99.3418,
-      "index": 104.6131
+      "price": 94.0288,
+      "index": 104.4666
     },
     {
       "date": "2026-02-18",
-      "price": 99.2041,
-      "index": 104.4681
+      "price": 93.9651,
+      "index": 104.3957
     },
     {
       "date": "2026-02-19",
-      "price": 99.2238,
-      "index": 104.4888
+      "price": 93.9847,
+      "index": 104.4175
     },
     {
       "date": "2026-02-20",
-      "price": 99.2434,
-      "index": 104.5095
+      "price": 93.867,
+      "index": 104.2868
     },
     {
       "date": "2026-02-21",
-      "price": 99.2434,
-      "index": 104.5095
+      "price": 93.867,
+      "index": 104.2868
     },
     {
       "date": "2026-02-22",
-      "price": 99.2434,
-      "index": 104.5095
+      "price": 93.867,
+      "index": 104.2868
     },
     {
       "date": "2026-02-23",
-      "price": 99.4402,
-      "index": 104.7167
+      "price": 94.1023,
+      "index": 104.5483
     },
     {
       "date": "2026-02-24",
-      "price": 99.4303,
-      "index": 104.7063
+      "price": 94.2691,
+      "index": 104.7335
     },
     {
       "date": "2026-02-25",
-      "price": 99.3811,
-      "index": 104.6545
+      "price": 94.1073,
+      "index": 104.5537
     },
     {
       "date": "2026-02-26",
-      "price": 99.5385,
-      "index": 104.8203
+      "price": 94.2102,
+      "index": 104.6681
     },
     {
       "date": "2026-02-27",
-      "price": 99.7352,
-      "index": 105.0274
+      "price": 94.5633,
+      "index": 105.0603
     },
     {
       "date": "2026-02-28",
-      "price": 99.7352,
-      "index": 105.0274
+      "price": 94.5633,
+      "index": 105.0603
     },
     {
       "date": "2026-03-01",
-      "price": 99.7352,
-      "index": 105.0274
+      "price": 94.5633,
+      "index": 105.0603
     },
     {
       "date": "2026-03-02",
-      "price": 99.3366,
-      "index": 104.6077
+      "price": 93.9307,
+      "index": 104.3576
     },
     {
       "date": "2026-03-03",
-      "price": 99.2281,
-      "index": 104.4934
+      "price": 93.9749,
+      "index": 104.4066
     },
     {
       "date": "2026-03-04",
-      "price": 99.1886,
-      "index": 104.4518
+      "price": 94.0435,
+      "index": 104.4829
     },
     {
       "date": "2026-03-05",
-      "price": 98.9025,
-      "index": 104.1505
+      "price": 93.5728,
+      "index": 103.9599
     },
     {
       "date": "2026-03-06",
-      "price": 98.7841,
-      "index": 104.0258
+      "price": 93.6807,
+      "index": 104.0798
     },
     {
       "date": "2026-03-07",
-      "price": 98.7841,
-      "index": 104.0258
+      "price": 93.6807,
+      "index": 104.0798
     },
     {
       "date": "2026-03-08",
-      "price": 98.7841,
-      "index": 104.0258
+      "price": 93.6807,
+      "index": 104.0798
     },
     {
       "date": "2026-03-09",
-      "price": 99.0998,
-      "index": 104.3583
+      "price": 93.5434,
+      "index": 103.9272
     },
     {
       "date": "2026-03-10",
-      "price": 98.7742,
-      "index": 104.0154
+      "price": 93.8866,
+      "index": 104.3086
     },
     {
       "date": "2026-03-11",
-      "price": 98.3302,
-      "index": 103.5479
+      "price": 93.1609,
+      "index": 103.5023
     },
     {
       "date": "2026-03-12",
-      "price": 97.9652,
-      "index": 103.1634
+      "price": 92.8471,
+      "index": 103.1537
     },
     {
       "date": "2026-03-13",
-      "price": 97.8862,
-      "index": 103.0803
+      "price": 92.6118,
+      "index": 102.8922
     },
     {
       "date": "2026-03-14",
-      "price": 97.8862,
-      "index": 103.0803
+      "price": 92.6118,
+      "index": 102.8922
     },
     {
       "date": "2026-03-15",
-      "price": 97.8862,
-      "index": 103.0803
+      "price": 92.6118,
+      "index": 102.8922
     },
     {
       "date": "2026-03-16",
-      "price": 98.271,
-      "index": 103.4855
+      "price": 92.8667,
+      "index": 103.1755
     },
     {
       "date": "2026-03-17",
-      "price": 98.4684,
-      "index": 103.6933
+      "price": 93.2982,
+      "index": 103.6549
     },
     {
       "date": "2026-03-18",
-      "price": 98.054,
-      "index": 103.2569
+      "price": 92.9844,
+      "index": 103.3062
     },
     {
       "date": "2026-03-19",
-      "price": 98.1625,
-      "index": 103.3712
+      "price": 92.7883,
+      "index": 103.0883
     },
     {
       "date": "2026-03-20",
-      "price": 97.3436,
-      "index": 102.5089
+      "price": 92.2391,
+      "index": 102.4782
     },
     {
       "date": "2026-03-21",
-      "price": 97.3436,
-      "index": 102.5089
+      "price": 92.2391,
+      "index": 102.4782
     },
     {
       "date": "2026-03-22",
-      "price": 97.3436,
-      "index": 102.5089
+      "price": 92.2391,
+      "index": 102.4782
     },
     {
       "date": "2026-03-23",
-      "price": 97.7086,
-      "index": 102.8933
+      "price": 92.4255,
+      "index": 102.6852
     },
     {
       "date": "2026-03-24",
-      "price": 97.4423,
-      "index": 102.6128
+      "price": 92.1999,
+      "index": 102.4346
     },
     {
       "date": "2026-03-25",
-      "price": 97.7876,
-      "index": 102.9764
+      "price": 92.5922,
+      "index": 102.8704
     },
     {
       "date": "2026-03-26",
-      "price": 97.235,
-      "index": 102.3946
+      "price": 92.2685,
+      "index": 102.5109
     },
     {
       "date": "2026-03-27",
-      "price": 97.2252,
-      "index": 102.3842
+      "price": 92.1313,
+      "index": 102.3584
     },
     {
       "date": "2026-03-28",
-      "price": 97.2252,
-      "index": 102.3842
+      "price": 92.1313,
+      "index": 102.3584
     },
     {
       "date": "2026-03-29",
-      "price": 97.2252,
-      "index": 102.3842
+      "price": 92.1313,
+      "index": 102.3584
     },
     {
       "date": "2026-03-30",
-      "price": 97.7185,
-      "index": 102.9037
+      "price": 92.5627,
+      "index": 102.8377
     },
     {
       "date": "2026-03-31",
-      "price": 97.9454,
-      "index": 103.1427
+      "price": 92.7,
+      "index": 102.9903
     },
     {
       "date": "2026-04-01",
-      "price": 98.0118,
-      "index": 103.2125
+      "price": 92.9256,
+      "index": 103.2409
     },
     {
       "date": "2026-04-02",
-      "price": 98.2395,
-      "index": 103.4523
+      "price": 92.9795,
+      "index": 103.3008
     },
     {
       "date": "2026-04-03",
-      "price": 98.2395,
-      "index": 103.4523
+      "price": 92.9795,
+      "index": 103.3008
     },
     {
       "date": "2026-04-04",
-      "price": 98.2395,
-      "index": 103.4523
+      "price": 92.9795,
+      "index": 103.3008
     },
     {
       "date": "2026-04-05",
-      "price": 98.2395,
-      "index": 103.4523
+      "price": 92.9795,
+      "index": 103.3008
     },
     {
       "date": "2026-04-06",
-      "price": 98.0613,
-      "index": 103.2646
+      "price": 92.9795,
+      "index": 103.3008
     },
     {
       "date": "2026-04-07",
-      "price": 98.1801,
-      "index": 103.3897
+      "price": 92.5529,
+      "index": 102.8268
     },
     {
       "date": "2026-04-08",
-      "price": 98.4375,
-      "index": 103.6608
+      "price": 93.2198,
+      "index": 103.5677
     },
     {
       "date": "2026-04-09",
-      "price": 98.4969,
-      "index": 103.7234
+      "price": 93.1315,
+      "index": 103.4697
     },
     {
       "date": "2026-04-10",
-      "price": 98.3286,
-      "index": 103.5461
+      "price": 93.21,
+      "index": 103.5568
     },
     {
       "date": "2026-04-11",
-      "price": 98.3286,
-      "index": 103.5461
+      "price": 93.21,
+      "index": 103.5568
     },
     {
       "date": "2026-04-12",
-      "price": 98.3286,
-      "index": 103.5461
+      "price": 93.21,
+      "index": 103.5568
     },
     {
       "date": "2026-04-13",
-      "price": 98.5266,
-      "index": 103.7546
+      "price": 92.9648,
+      "index": 103.2844
     },
     {
       "date": "2026-04-14",
-      "price": 98.784,
-      "index": 104.0257
+      "price": 93.3473,
+      "index": 103.7093
     },
     {
       "date": "2026-04-15",
-      "price": 98.6256,
-      "index": 103.8589
+      "price": 93.3276,
+      "index": 103.6876
     },
     {
       "date": "2026-04-16",
-      "price": 98.487,
-      "index": 103.7129
+      "price": 93.3473,
+      "index": 103.7093
     },
     {
       "date": "2026-04-17",
-      "price": 98.8533,
-      "index": 104.0987
+      "price": 93.6218,
+      "index": 104.0144
     },
     {
       "date": "2026-04-18",
-      "price": 98.8533,
-      "index": 104.0987
+      "price": 93.6218,
+      "index": 104.0144
     },
     {
       "date": "2026-04-19",
-      "price": 98.8533,
-      "index": 104.0987
+      "price": 93.6218,
+      "index": 104.0144
     },
     {
       "date": "2026-04-20",
-      "price": 98.8434,
-      "index": 104.0882
+      "price": 93.5532,
+      "index": 103.9381
     },
     {
       "date": "2026-04-21",
-      "price": 98.4771,
-      "index": 103.7025
+      "price": 93.308,
+      "index": 103.6658
     },
     {
       "date": "2026-04-22",
-      "price": 98.6157,
-      "index": 103.8485
+      "price": 93.2884,
+      "index": 103.644
     },
     {
       "date": "2026-04-23",
-      "price": 98.4573,
-      "index": 103.6816
+      "price": 93.3571,
+      "index": 103.7202
     },
     {
       "date": "2026-04-24",
-      "price": 98.5959,
-      "index": 103.8276
+      "price": 93.2884,
+      "index": 103.644
     },
     {
       "date": "2026-04-25",
-      "price": 98.5959,
-      "index": 103.8276
+      "price": 93.2884,
+      "index": 103.644
     },
     {
       "date": "2026-04-26",
-      "price": 98.5959,
-      "index": 103.8276
+      "price": 93.2884,
+      "index": 103.644
     },
     {
       "date": "2026-04-27",
-      "price": 98.4474,
-      "index": 103.6712
+      "price": 93.1217,
+      "index": 103.4588
     },
     {
       "date": "2026-04-28",
-      "price": 98.4078,
-      "index": 103.6295
+      "price": 92.9942,
+      "index": 103.3171
     },
     {
       "date": "2026-04-29",
-      "price": 97.9722,
-      "index": 103.1708
+      "price": 92.9109,
+      "index": 103.2245
     },
     {
       "date": "2026-04-30",
-      "price": 98.1108,
-      "index": 103.3168
+      "price": 92.9942,
+      "index": 103.3171
     },
     {
       "date": "2026-05-01",
-      "price": 98.2399,
-      "index": 103.4527
+      "price": 93.0187,
+      "index": 103.3444
     },
     {
       "date": "2026-05-02",
-      "price": 98.2399,
-      "index": 103.4527
+      "price": 93.0187,
+      "index": 103.3444
     },
     {
       "date": "2026-05-03",
-      "price": 98.2399,
-      "index": 103.4527
+      "price": 93.0187,
+      "index": 103.3444
     },
     {
       "date": "2026-05-04",
-      "price": 97.932,
-      "index": 103.1285
+      "price": 93.0187,
+      "index": 103.3444
     },
     {
       "date": "2026-05-05",
-      "price": 98.1108,
-      "index": 103.3168
+      "price": 92.8765,
+      "index": 103.1864
     },
     {
       "date": "2026-05-06",
-      "price": 98.528,
-      "index": 103.7561
+      "price": 93.2394,
+      "index": 103.5895
     },
     {
       "date": "2026-05-07",
-      "price": 98.2896,
-      "index": 103.505
+      "price": 93.1904,
+      "index": 103.535
     },
     {
       "date": "2026-05-08",
-      "price": 98.518,
-      "index": 103.7456
+      "price": 93.2002,
+      "index": 103.5459
     },
     {
       "date": "2026-05-09",
-      "price": 98.518,
-      "index": 103.7456
+      "price": 93.2002,
+      "index": 103.5459
     },
     {
       "date": "2026-05-10",
-      "price": 98.518,
-      "index": 103.7456
+      "price": 93.2002,
+      "index": 103.5459
     },
     {
       "date": "2026-05-11",
-      "price": 98.2598,
-      "index": 103.4737
+      "price": 93.1805,
+      "index": 103.5241
     },
     {
       "date": "2026-05-12",
-      "price": 97.9717,
-      "index": 103.1703
+      "price": 92.7981,
+      "index": 103.0992
     },
     {
       "date": "2026-05-13",
-      "price": 98.0114,
-      "index": 103.2122
+      "price": 92.5922,
+      "index": 102.8704
     },
     {
       "date": "2026-05-14",
-      "price": 97.9816,
-      "index": 103.1808
+      "price": 92.9452,
+      "index": 103.2626
     },
     {
       "date": "2026-05-15",
-      "price": 97.3658,
-      "index": 102.5322
+      "price": 92.2882,
+      "index": 102.5327
     },
     {
       "date": "2026-05-16",
-      "price": 97.3658,
-      "index": 102.5322
+      "price": 92.2882,
+      "index": 102.5327
     },
     {
       "date": "2026-05-17",
-      "price": 97.3658,
-      "index": 102.5322
+      "price": 92.2882,
+      "index": 102.5327
     },
     {
       "date": "2026-05-18",
-      "price": 97.3559,
-      "index": 102.5218
+      "price": 92.1018,
+      "index": 102.3257
     },
     {
       "date": "2026-05-19",
-      "price": 96.9784,
-      "index": 102.1243
+      "price": 91.7096,
+      "index": 101.8899
     },
     {
       "date": "2026-05-20",
-      "price": 97.5644,
-      "index": 102.7414
+      "price": 92.1901,
+      "index": 102.4237
     },
     {
       "date": "2026-05-21",
-      "price": 97.6836,
-      "index": 102.867
+      "price": 92.115,
+      "index": 102.3403
     },
     {
       "date": "2026-05-22",
-      "price": 97.783,
-      "index": 102.9716
+      "price": 92.28,
+      "index": 102.5236
     },
     {
       "date": "2026-05-23",
-      "price": 97.783,
-      "index": 102.9716
+      "price": 92.28,
+      "index": 102.5236
     },
     {
       "date": "2026-05-24",
-      "price": 97.783,
-      "index": 102.9716
+      "price": 92.28,
+      "index": 102.5236
     },
     {
       "date": "2026-05-25",
-      "price": 97.783,
-      "index": 102.9716
+      "price": 92.28,
+      "index": 102.5236
     },
     {
       "date": "2026-05-26",
-      "price": 98.0611,
-      "index": 103.2645
+      "price": 92.67,
+      "index": 102.9569
     },
     {
       "date": "2026-05-27",
-      "price": 98.1406,
-      "index": 103.3482
+      "price": 92.83,
+      "index": 103.1347
     },
     {
       "date": "2026-05-28",
-      "price": 98.3392,
-      "index": 103.5573
+      "price": 92.99,
+      "index": 103.3124
     },
     {
       "date": "2026-05-29",
-      "price": 98.3988,
-      "index": 103.6201
+      "price": 93.31,
+      "index": 103.668
     },
     {
       "date": "2026-05-30",
-      "price": 98.3988,
-      "index": 103.6201
+      "price": 93.31,
+      "index": 103.668
     },
     {
       "date": "2026-05-31",
-      "price": 98.3988,
-      "index": 103.6201
+      "price": 93.31,
+      "index": 103.668
     },
     {
       "date": "2026-06-01",
-      "price": 98.35,
-      "index": 103.5687
+      "price": 93.02,
+      "index": 103.3458
     },
     {
       "date": "2026-06-02",
-      "price": 98.3799,
-      "index": 103.6002
+      "price": 93.17,
+      "index": 103.5124
     },
     {
       "date": "2026-06-03",
-      "price": 98.1706,
-      "index": 103.3798
+      "price": 92.9,
+      "index": 103.2124
     },
     {
       "date": "2026-06-04",
-      "price": 98.3301,
-      "index": 103.5477
+      "price": 93.1,
+      "index": 103.4346
     },
     {
       "date": "2026-06-05",
-      "price": 97.8417,
-      "index": 103.0334
+      "price": 92.69,
+      "index": 102.9791
     },
     {
       "date": "2026-06-06",
-      "price": 97.8417,
-      "index": 103.0334
+      "price": 92.69,
+      "index": 102.9791
     },
     {
       "date": "2026-06-07",
-      "price": 97.8417,
-      "index": 103.0334
+      "price": 92.69,
+      "index": 102.9791
     },
     {
       "date": "2026-06-08",
-      "price": 97.8417,
-      "index": 103.0334
+      "price": 92.6,
+      "index": 102.8791
     },
     {
       "date": "2026-06-09",
-      "price": 98.041,
-      "index": 103.2433
+      "price": 92.645,
+      "index": 102.9291
     },
     {
       "date": "2026-06-10",
-      "price": 97.9812,
-      "index": 103.1804
+      "price": 92.89,
+      "index": 103.2013
     },
     {
       "date": "2026-06-11",
-      "price": 98.5493,
-      "index": 103.7786
+      "price": 92.92,
+      "index": 103.2347
     },
     {
       "date": "2026-06-12",
-      "price": 98.4297,
-      "index": 103.6526
+      "price": 93.14,
+      "index": 103.4791
     },
     {
       "date": "2026-06-13",
-      "price": 98.4297,
-      "index": 103.6526
+      "price": 93.14,
+      "index": 103.4791
     },
     {
       "date": "2026-06-14",
-      "price": 98.4297,
-      "index": 103.6526
+      "price": 93.14,
+      "index": 103.4791
     },
     {
       "date": "2026-06-15",
-      "price": 98.5194,
-      "index": 103.7471
+      "price": 93.31,
+      "index": 103.668
     },
     {
       "date": "2026-06-16",
-      "price": 98.639,
-      "index": 103.8731
+      "price": 93.41,
+      "index": 103.7791
     },
     {
       "date": "2026-06-17",
-      "price": 98.2802,
-      "index": 103.4952
+      "price": 93.45,
+      "index": 103.8235
     },
     {
       "date": "2026-06-18",
-      "price": 98.5693,
-      "index": 103.7996
+      "price": 93.34,
+      "index": 103.7013
     },
     {
       "date": "2026-06-19",
-      "price": 98.5693,
-      "index": 103.7996
+      "price": 93.12,
+      "index": 103.4569
     },
     {
       "date": "2026-06-20",
-      "price": 98.5693,
-      "index": 103.7996
+      "price": 93.12,
+      "index": 103.4569
     },
     {
       "date": "2026-06-21",
-      "price": 98.5693,
-      "index": 103.7996
+      "price": 93.12,
+      "index": 103.4569
     },
     {
       "date": "2026-06-22",
-      "price": 98.3002,
-      "index": 103.5162
+      "price": 93.025,
+      "index": 103.3513
     },
     {
       "date": "2026-06-23",
-      "price": 98.3799,
-      "index": 103.6002
+      "price": 93.14,
+      "index": 103.4791
     },
     {
       "date": "2026-06-24",
-      "price": 98.8583,
-      "index": 104.104
+      "price": 93.7,
+      "index": 104.1012
     },
     {
       "date": "2026-06-25",
-      "price": 98.9181,
-      "index": 104.1669
+      "price": 93.83,
+      "index": 104.2457
     },
     {
       "date": "2026-06-26",
-      "price": 99.0078,
-      "index": 104.2614
+      "price": 93.75,
+      "index": 104.1568
     },
     {
       "date": "2026-06-27",
-      "price": 99.0078,
-      "index": 104.2614
+      "price": 93.75,
+      "index": 104.1568
     },
     {
       "date": "2026-06-28",
-      "price": 99.0078,
-      "index": 104.2614
+      "price": 93.75,
+      "index": 104.1568
     },
     {
       "date": "2026-06-29",
-      "price": 99.0377,
-      "index": 104.2929
+      "price": 93.65,
+      "index": 104.0457
     },
     {
       "date": "2026-06-30",
-      "price": 98.649,
-      "index": 103.8836
+      "price": 93.51,
+      "index": 103.8902
     },
     {
       "date": "2026-07-01",
-      "price": 98.5,
-      "index": 103.7266
+      "price": 93.26,
+      "index": 103.6124
     },
     {
       "date": "2026-07-02",
-      "price": 98.61,
-      "index": 103.8425
+      "price": 93.35,
+      "index": 103.7124
     },
     {
       "date": "2026-07-03",
-      "price": 98.61,
-      "index": 103.8425
+      "price": 93.4,
+      "index": 103.7679
     },
     {
       "date": "2026-07-04",
-      "price": 98.61,
-      "index": 103.8425
+      "price": 93.4,
+      "index": 103.7679
     },
     {
       "date": "2026-07-05",
-      "price": 98.61,
-      "index": 103.8425
+      "price": 93.4,
+      "index": 103.7679
     },
     {
       "date": "2026-07-06",
-      "price": 98.66,
-      "index": 103.8951
+      "price": 93.24,
+      "index": 103.5902
     },
     {
       "date": "2026-07-07",
-      "price": 98.21,
-      "index": 103.4213
+      "price": 93.06,
+      "index": 103.3902
     },
     {
       "date": "2026-07-08",
-      "price": 98.04,
-      "index": 103.2422
+      "price": 92.63,
+      "index": 102.9125
     },
     {
       "date": "2026-07-09",
-      "price": 98.18,
-      "index": 103.3897
+      "price": 92.89,
+      "index": 103.2013
     },
     {
       "date": "2026-07-10",
-      "price": 98.08,
-      "index": 103.2844
+      "price": 92.945,
+      "index": 103.2624
     },
     {
       "date": "2026-07-11",
-      "price": 98.08,
-      "index": 103.2844
+      "price": 92.945,
+      "index": 103.2624
     },
     {
       "date": "2026-07-12",
-      "price": 98.08,
-      "index": 103.2844
+      "price": 92.945,
+      "index": 103.2624
     },
     {
       "date": "2026-07-13",
-      "price": 97.71,
-      "index": 102.8947
+      "price": 92.55,
+      "index": 102.8236
     },
     {
       "date": "2026-07-14",
-      "price": 98.0,
-      "index": 103.2001
+      "price": 92.86,
+      "index": 103.168
     },
     {
       "date": "2026-07-15",
-      "price": 98.14,
-      "index": 103.3475
+      "price": 92.85,
+      "index": 103.1569
     },
     {
       "date": "2026-07-16",
-      "price": 98.13,
-      "index": 103.337
+      "price": 92.69,
+      "index": 102.9791
     },
     {
       "date": "2026-07-17",
-      "price": 98.2,
-      "index": 103.4107
+      "price": 92.985,
+      "index": 103.3069
     },
     {
       "date": "2026-07-18",
-      "price": 98.2,
-      "index": 103.4107
+      "price": 92.985,
+      "index": 103.3069
     },
     {
       "date": "2026-07-19",
-      "price": 98.2,
-      "index": 103.4107
+      "price": 92.985,
+      "index": 103.3069
     },
     {
       "date": "2026-07-20",
-      "price": 97.95,
-      "index": 103.1475
+      "price": 92.64,
+      "index": 102.9236
     },
     {
       "date": "2026-07-21",
-      "price": 97.95,
-      "index": 103.1475
+      "price": 92.49,
+      "index": 102.7569
     },
     {
       "date": "2026-07-22",
-      "price": 97.95,
-      "index": 103.1475
+      "price": 92.42,
+      "index": 102.6792
     },
     {
       "date": "2026-07-23",
-      "price": 97.34,
-      "index": 102.5051
+      "price": 91.96,
+      "index": 102.1681
     },
     {
       "date": "2026-07-24",
-      "price": 97.46,
-      "index": 102.6315
+      "price": 92.47,
+      "index": 102.7347
     },
     {
       "date": "2026-07-25",
-      "price": 97.46,
-      "index": 102.6315
+      "price": 92.47,
+      "index": 102.7347
     },
     {
       "date": "2026-07-26",
-      "price": 97.46,
-      "index": 102.6315
+      "price": 92.47,
+      "index": 102.7347
     },
     {
       "date": "2026-07-27",
-      "price": 97.69,
-      "index": 102.8737
+      "price": 92.43,
+      "index": 102.6903
     },
     {
       "date": "2026-07-28",
-      "price": 97.92,
-      "index": 103.1159
+      "price": 92.63,
+      "index": 102.9125
     },
     {
       "date": "2026-07-29",
-      "price": 97.55,
-      "index": 102.7262
+      "price": 92.34,
+      "index": 102.5903
     },
     {
       "date": "2026-07-30",
-      "price": 97.62,
-      "index": 102.8
+      "price": 92.32,
+      "index": 102.5681
     },
     {
       "date": "2026-07-31",
-      "price": 97.62,
-      "index": 102.8
+      "price": 92.09,
+      "index": 102.3125
     },
     {
       "date": "2026-08-01",
-      "price": 97.62,
-      "index": 102.8
+      "price": 92.09,
+      "index": 102.3125
     },
     {
       "date": "2026-08-02",
-      "price": 97.62,
-      "index": 102.8
+      "price": 92.09,
+      "index": 102.3125
     },
     {
       "date": "2026-08-03",
-      "price": 97.26,
-      "index": 102.4208
+      "price": 92.2,
+      "index": 102.4347
     },
     {
       "date": "2026-08-04",
-      "price": 97.66,
-      "index": 102.8421
+      "price": 92.68,
+      "index": 102.968
     },
     {
       "date": "2026-08-05",
-      "price": 97.71,
-      "index": 102.8947
+      "price": 92.65,
+      "index": 102.9347
     },
     {
       "date": "2026-08-06",
-      "price": 97.43,
-      "index": 102.5999
+      "price": 92.44,
+      "index": 102.7014
     },
     {
       "date": "2026-08-07",
-      "price": 97.6,
-      "index": 102.7789
+      "price": 92.77,
+      "index": 103.068
     },
     {
       "date": "2026-08-08",
-      "price": 97.6,
-      "index": 102.7789
+      "price": 92.77,
+      "index": 103.068
     },
     {
       "date": "2026-08-09",
-      "price": 97.6,
-      "index": 102.7789
+      "price": 92.77,
+      "index": 103.068
     },
     {
       "date": "2026-08-10",
-      "price": 97.24,
-      "index": 102.3998
+      "price": 92.56,
+      "index": 102.8347
     },
     {
       "date": "2026-08-11",
-      "price": 97.32,
-      "index": 102.484
+      "price": 92.31,
+      "index": 102.5569
     },
     {
       "date": "2026-08-12",
-      "price": 97.43,
-      "index": 102.5999
+      "price": 92.45,
+      "index": 102.7125
     },
     {
       "date": "2026-08-13",
-      "price": 97.69,
-      "index": 102.8737
+      "price": 92.74,
+      "index": 103.0347
     },
     {
       "date": "2026-08-14",
-      "price": 97.48,
-      "index": 102.6525
+      "price": 92.68,
+      "index": 102.968
     },
     {
       "date": "2026-08-15",
-      "price": 97.48,
-      "index": 102.6525
+      "price": 92.68,
+      "index": 102.968
     },
     {
       "date": "2026-08-16",
-      "price": 97.48,
-      "index": 102.6525
+      "price": 92.68,
+      "index": 102.968
     },
     {
       "date": "2026-08-17",
-      "price": 97.25,
-      "index": 102.4103
+      "price": 92.44,
+      "index": 102.7014
     },
     {
-      "date": "2026-08-19",
-      "price": 92.63,
-      "index": 97.5452
+      "date": "2026-08-18",
+      "price": 92.44,
+      "index": 102.7014
+    },
+    {
+      "date": "2026-08-20",
+      "price": 92.5,
+      "index": 102.7681
     }
   ],
   "_july_ramp_note": "FIX 2026-08-14: se prepende el mes de rampa de capital (1-jul a 31-jul-2025). Ver equity_sleeve_real.json para el detalle completo -- mismo fix, misma logica. FI Modified Dietz 1-jul->31-jul: mv_start=0, mv_end=$6,818,058.18 (statement oficial verificado), flows=MANIG/PIMCO-INC/WELLCRED (7-jul) + TGF (16-jul): twr=+0.3344%. Serie reescalada por (1+0.3344%)."
