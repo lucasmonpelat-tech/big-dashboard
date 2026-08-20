@@ -70,7 +70,7 @@ Para CADA holding del sleeve actual, responder:
 - Pregunta crítica: ¿qué fondos están "above water" después de fees, y cuáles no?
 
 ### 7. Decisiones históricas (track record de las trades)
-Mirá las trades de Pershing (`portfolio_reconstructor` outputs, o el statement excel):
+Mirá las trades de Pershing (`data/equity_sleeve_real.json` — reconstruido y verificado contra los statements oficiales, o el statement excel directo):
 - Compras/ventas hechas desde inception: ¿qué salió bien, qué salió mal?
 - Ej: vender VIRTUS Small-Cap fue buena/mala? Entrar a 4BRZ en X precio fue buena/mala?
 - **No suavices**: si vendimos en el piso, decilo. Si compramos arriba, decilo.
