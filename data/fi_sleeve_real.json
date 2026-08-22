@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-08-21T13:29:24.463540",
+  "refreshedAt": "2026-08-22T13:12:41.135125",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -1385,6 +1385,61 @@
           "qty": 224080.422,
           "price": 14.1,
           "mv": 3159533.9502,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "SGCB",
+          "qty": 269.44,
+          "price": 2175.9,
+          "mv": 586274.496,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "TGF",
+          "qty": 532000.0,
+          "price": 1.5470813721804513,
+          "mv": 823047.29,
+          "source": "pershing_frozen"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-22",
+      "mv_usd": 11047347.97321,
+      "holdings": [
+        {
+          "ticker": "PIMCO-EM",
+          "qty": 61949.011,
+          "price": 18.7,
+          "mv": 1158446.5056999999,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MANIG",
+          "qty": 16621.485,
+          "price": 125.45,
+          "mv": 2085165.29325,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "PIMCO-INC",
+          "qty": 159434.55,
+          "price": 20.19,
+          "mv": 3218983.5645,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MANEM",
+          "qty": 176.056,
+          "price": 115.75,
+          "mv": 20378.482,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "PIMCO-LD",
+          "qty": 224080.422,
+          "price": 14.08,
+          "mv": 3155052.3417599997,
           "source": "daily_close"
         },
         {
@@ -4716,6 +4771,13 @@
       "flow_in": 0.0,
       "twr": 0.008406802977933558,
       "index": 106.5225
+    },
+    {
+      "date": "2026-08-22",
+      "mv_usd": 11047347.97321,
+      "flow_in": 0.0,
+      "twr": 0.0077124566385898645,
+      "index": 106.4492
     }
   ],
   "agg_index_series": [
@@ -6803,8 +6865,14 @@
     },
     {
       "date": "2026-08-21",
-      "price": 92.67,
-      "index": 102.9569
+      "index": NaN,
+      "interpolated": true,
+      "price": NaN
+    },
+    {
+      "date": "2026-08-22",
+      "price": NaN,
+      "index": NaN
     }
   ],
   "fi_flows_by_month": {
@@ -6994,7 +7062,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-08-21 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-08-20.",
+  "_daily_refresh_note": "Punto 2026-08-22 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-08-21.",
   "_bench_fix_note": "2026-06-23: agg_index_series reconstruida con IUAG.L (UCITS Acc, total return). Antes era AGG NYSE price-only sin reinvertir dividendos, daba YTD -5.78% falso.",
   "_rebuild_note": "Reconstruccion completa 2026-07-31: reemplaza integramente el pipeline legacy (portfolio_reconstructor.py / sleeve_series desincronizado). Los 12 checkpoints mensuales estan verificados al centavo contra los statements oficiales de Pershing. Flujos calculados como -sum(Net Amount) de las transacciones reales del sleeve en cada periodo (auto-neutraliza fund exchanges internos). Excepcion: 3 transacciones de ene-2026 (venta WELLCRED + compras PIMCO-INC/PIMCO-EM) reclasificadas a feb-2026 tras verificar contra el statement oficial de febrero que asi procesaron realmente (Pershing las emitio como Cancel/Correct). Periodo oct-dic-2025 combinado en un solo calculo por el retiro grande de capital que distorsionaba el corte de fin de mes. | FIX 2026-08-07: se truncaron los puntos 01-ago a 07-ago (calculados con un anchor que iba driftando dia a dia por un bug en refresh_equity_daily.py/refresh_fi_daily.py, ya corregido -- ver _find_last_real_month_end). El proximo refresh diario recalcula bien desde el anchor real de 31-jul.",
   "twr_series_original": [
@@ -10309,6 +10377,13 @@
       "flow_in": 0.0,
       "twr": 0.008406802977933558,
       "index": 106.5225
+    },
+    {
+      "date": "2026-08-22",
+      "mv_usd": 11047347.97321,
+      "flow_in": 0.0,
+      "twr": 0.0077124566385898645,
+      "index": 106.4492
     }
   ],
   "agg_index_series_original": [
@@ -12389,9 +12464,15 @@
       "price": 92.47
     },
     {
-      "date": "2026-08-21",
-      "price": 92.67,
-      "index": 102.9569
+      "date": "2026-08-20",
+      "index": 102.8459,
+      "interpolated": true,
+      "price": 92.57
+    },
+    {
+      "date": "2026-08-22",
+      "price": NaN,
+      "index": NaN
     }
   ],
   "_july_ramp_note": "FIX 2026-08-14: se prepende el mes de rampa de capital (1-jul a 31-jul-2025). Ver equity_sleeve_real.json para el detalle completo -- mismo fix, misma logica. FI Modified Dietz 1-jul->31-jul: mv_start=0, mv_end=$6,818,058.18 (statement oficial verificado), flows=MANIG/PIMCO-INC/WELLCRED (7-jul) + TGF (16-jul): twr=+0.3344%. Serie reescalada por (1+0.3344%)."
