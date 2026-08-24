@@ -38,10 +38,13 @@ Full architecture:
 
 ```
 big-dashboard/
-├── index.html               Main dashboard UI
-├── dashboard.js             Rendering logic (tabs, KPIs, charts)
+├── index.html               Redirect al dashboard v2 (el v1 se borro 2026-08-24)
+├── dashboard_v2/
+│   └── presentation/
+│       └── index.html       Dashboard actual (v2)
 ├── data/
-│   ├── funds_metadata.js    Source of truth (positions, currency, yield, RF)
+│   ├── positions_latest.json  Posiciones (refresh diario, Pershing/NetX360)
+│   ├── funds_metadata.js    Metadata estatica por ISIN (currency, yield, factsheets)
 │   ├── live_prices.js       Stooq fetch module (client-side JS)
 │   ├── live_prices.json     Output from price_refresher.py (cached prices)
 │   └── lynk_data.json       Output from lynk_refresher.py (cached NAV)
@@ -131,11 +134,15 @@ git push
 
 ### When a trade executes
 
-1. Update `data/funds_metadata.js`:
-   - `BIG_POSITIONS` array (add/remove/resize position)
-2. Open `index.html` `#tab-trades` section:
-   - Add row to trade log
-3. Commit + push
+Ya no hay que tocar posiciones a mano. El cron diario (`daily-refresh.yml`)
+baja el export de Pershing/NetX360 y regenera `data/positions_latest.json`
+y el snapshot canonical.
+
+Lo unico manual: si el trade **incorpora un fondo nuevo**, agregarle la
+metadata estatica en `data/funds_metadata.js` (`FACTSHEET_LINKS`,
+`CURRENCY_EXPOSURE`, `CURRENT_YIELD`, `COUNTRY_EXPOSURE`). Si falta,
+`scripts/validate_data.py` lo marca como "falta ISIN" y el fondo
+desaparece callado de los widgets de Geography/Yield del v2.
 
 ## Data Sources
 

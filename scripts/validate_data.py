@@ -8,10 +8,13 @@ los numeros (ej: un ISIN mal escrito hace que un fondo desaparezca de un tab
 sin tirar error).
 
 Chequea:
-  1. ORPHAN ISINs   — ISINs en los dicts que NO existen en BIG_POSITIONS
-  2. MISSING ISINs  — fondos de BIG_POSITIONS que faltan en un dict donde deberian estar
-  3. DUAL SOURCE    — BIG_POSITIONS (funds_metadata.js) vs positions_latest.json: mismos ISINs y valores
-  4. EXPOSURE SUMS  — CURRENCY/COUNTRY/SECTOR deben sumar ~100% por fondo
+  1. ORPHAN ISINs   — ISINs en los dicts que ya no estan en cartera
+  2. MISSING ISINs  — fondos en cartera que faltan en un dict donde deberian estar
+  3. EXPOSURE SUMS  — CURRENCY/COUNTRY deben sumar ~100% por fondo
+
+El universo de "que hay en cartera" sale de data/positions_latest.json, que se
+refresca solo todos los dias. Hasta el 2026-08-24 salia del array manual
+BIG_POSITIONS (funds_metadata.js), que quedaba viejo y generaba errores falsos.
 
 Exit code 0 = todo OK. Exit code 1 = hay errores (gatea el deploy).
 
@@ -27,6 +30,14 @@ from pathlib import Path
 ROOT = Path(__file__).parent.parent
 META_JS = ROOT / "data" / "funds_metadata.js"
 POSITIONS_JSON = ROOT / "data" / "positions_latest.json"
+
+SLEEVE_LABEL = {"equity": "Equity", "fixed_income": "Fixed Income",
+                "alternatives": "Alternatives"}
+
+# Claves que existen en los dicts pero no son fondos en cartera: no tiene
+# sentido pedirles factsheet ni exposicion, y tampoco marcarlas como
+# huerfanas cuando no aparecen en las posiciones.
+NON_FUND_KEYS = {"CASH-USD"}
 
 # Tolerancia para sumas de exposicion (%)
 SUM_TOLERANCE = 1.5
@@ -70,27 +81,60 @@ def extract_isin_keys(block):
     return re.findall(r'"([A-Za-z0-9\-]+)"\s*:', block)
 
 
-def extract_big_positions(text):
-    """Extrae lista de dicts de BIG_POSITIONS con isin/ticker/sleeve/value."""
-    block = extract_block(text, "BIG_POSITIONS")
-    if not block:
+def read_positions():
+    """Universo de fondos en cartera, desde positions_latest.json.
+
+    CAMBIO 2026-08-24: antes esto salia de BIG_POSITIONS, un array a mano
+    dentro de funds_metadata.js con un snapshot congelado (ultimo update real
+    2026-06-10). Como positions_latest.json se refresca solo todos los dias
+    desde Pershing/NetX360, el array manual quedaba viejo y el validador
+    escupia 30+ errores falsos por puro drift. BIG_POSITIONS se borro junto
+    con el dashboard v1; la unica fuente de verdad de que hay en cartera es
+    este JSON.
+    """
+    if not POSITIONS_JSON.exists():
         return []
-    positions = []
-    # Cada entry: { isin: "...", ticker: "...", name: "...", sleeve: "...", value: NNN, ... }
-    for entry in re.finditer(r"\{[^}]*\}", block):
-        e = entry.group(0)
-        isin = re.search(r'isin:\s*"([^"]+)"', e)
-        ticker = re.search(r'ticker:\s*"([^"]+)"', e)
-        sleeve = re.search(r'sleeve:\s*"([^"]+)"', e)
-        value = re.search(r"value:\s*([\d.]+)", e)
-        if isin:
-            positions.append({
-                "isin": isin.group(1),
-                "ticker": ticker.group(1) if ticker else "?",
-                "sleeve": sleeve.group(1) if sleeve else "?",
-                "value": float(value.group(1)) if value else None,
+    pj = json.loads(POSITIONS_JSON.read_text(encoding="utf-8"))
+    out = [
+        {
+            "isin": pos["isin"],
+            "ticker": pos.get("ticker", "?"),
+            "sleeve": pos.get("sleeve", "?"),
+            "value": pos.get("value"),
+        }
+        for pos in pj.get("positions", [])
+        if pos.get("isin")
+    ]
+
+    # positions_latest.json es el espejo del export de Pershing, y hay
+    # holdings que NO estan en Pershing (CALP se custodia afuera). Sin esto,
+    # CALP -- 32% del sleeve alts -- daria "ISIN huerfano" en cada dict.
+    seen = {o["isin"] for o in out}
+    for h in _canonical_holdings():
+        if h["isin"] and h["isin"] not in seen:
+            out.append(h)
+            seen.add(h["isin"])
+    return out
+
+
+def _canonical_holdings():
+    """Holdings abiertos del ultimo snapshot canonical (incluye externos)."""
+    snaps = sorted((ROOT / "data" / "canonical").glob("*/holdings_returns.json"))
+    if not snaps:
+        return []
+    d = json.loads(snaps[-1].read_text(encoding="utf-8"))
+    out = []
+    for sleeve_key, sleeve in d.get("sleeves", {}).items():
+        for h in sleeve.get("holdings", []):
+            if (h.get("status") or "OPEN") != "OPEN":
+                continue
+            out.append({
+                "isin": h.get("isin"),
+                "ticker": h.get("ticker", "?"),
+                "sleeve": SLEEVE_LABEL.get(sleeve_key, sleeve_key),
+                "value": h.get("mv_usd"),
             })
-    return positions
+    return out
 
 
 def extract_exposure_sums(block):
@@ -122,15 +166,15 @@ def main():
     errors = []
     warnings = []
 
-    # ---- BIG_POSITIONS ----
-    positions = extract_big_positions(text)
+    # ---- Universo de fondos en cartera (positions_latest.json) ----
+    positions = read_positions()
     if not positions:
-        print("\n[FATAL] No pude parsear BIG_POSITIONS")
+        print("[FATAL] No pude leer positions_latest.json (o vino vacio)")
         sys.exit(1)
-    big_isins = {p["isin"] for p in positions}
-    equity_isins = {p["isin"] for p in positions if p["sleeve"] == "Equity"}
-    fi_isins = {p["isin"] for p in positions if p["sleeve"] == "Fixed Income"}
-    print(f"\nBIG_POSITIONS: {len(positions)} fondos "
+    big_isins = {pp["isin"] for pp in positions}
+    equity_isins = {pp["isin"] for pp in positions if pp["sleeve"] == "Equity"}
+    fi_isins = {pp["isin"] for pp in positions if pp["sleeve"] == "Fixed Income"}
+    print(f"\npositions_latest.json: {len(positions)} fondos "
           f"({len(equity_isins)} equity, {len(fi_isins)} FI, "
           f"{len(big_isins) - len(equity_isins) - len(fi_isins)} alts/cash)")
 
@@ -157,7 +201,7 @@ def main():
             continue
         keys = set(extract_isin_keys(block))
 
-        orphans = keys - big_isins
+        orphans = keys - big_isins - NON_FUND_KEYS
         missing = should_cover - keys
         bucket = errors if severity == "error" else warnings
 
@@ -165,7 +209,7 @@ def main():
         if orphans:
             status = severity.upper()
             for o in sorted(orphans):
-                bucket.append(f"{dict_name}: ISIN huerfano '{o}' (no existe en BIG_POSITIONS)")
+                bucket.append(f"{dict_name}: ISIN huerfano '{o}' (no esta en positions_latest.json)")
         if missing:
             status = severity.upper() if status == "OK" else status
             for m in sorted(missing):
@@ -227,45 +271,9 @@ def main():
     else:
         print(f"  [OK]    {len(fi_funds)} FI funds — todos tienen JSON con fi_metrics completas (ytw/duration/maturity)")
 
-    # ---- 3: DUAL SOURCE — BIG_POSITIONS vs positions_latest.json ----
+    # ---- 3: EXPOSURE SUMS ----
     print("\n" + "-" * 70)
-    print("  3 — Dual source: funds_metadata.js vs positions_latest.json")
-    print("-" * 70)
-    if not POSITIONS_JSON.exists():
-        warnings.append("positions_latest.json no existe — skip dual-source check")
-        print("  [WARN] positions_latest.json no existe")
-    else:
-        pj = json.loads(POSITIONS_JSON.read_text(encoding="utf-8"))
-        json_positions = {p["isin"]: p for p in pj.get("positions", [])}
-        meta_positions = {p["isin"]: p for p in positions}
-
-        only_meta = set(meta_positions) - set(json_positions)
-        only_json = set(json_positions) - set(meta_positions)
-        for o in sorted(only_meta):
-            errors.append(f"dual-source: '{o}' ({meta_positions[o]['ticker']}) "
-                          f"en funds_metadata.js pero NO en positions_latest.json")
-        for o in sorted(only_json):
-            errors.append(f"dual-source: '{o}' en positions_latest.json pero NO en funds_metadata.js")
-
-        # Valores
-        value_mismatches = 0
-        for isin in set(meta_positions) & set(json_positions):
-            mv = meta_positions[isin]["value"]
-            jv = json_positions[isin].get("value")
-            if mv is not None and jv is not None and abs(mv - jv) > VALUE_TOLERANCE_USD:
-                value_mismatches += 1
-                errors.append(f"dual-source: '{isin}' ({meta_positions[isin]['ticker']}) "
-                              f"value distinto — meta=${mv:,.2f} vs json=${jv:,.2f}")
-
-        if not only_meta and not only_json and value_mismatches == 0:
-            print(f"  [OK]    Las 2 fuentes coinciden ({len(meta_positions)} fondos, mismos ISINs y valores)")
-        else:
-            print(f"  [ERROR] {len(only_meta)} solo-meta, {len(only_json)} solo-json, "
-                  f"{value_mismatches} valores distintos")
-
-    # ---- 4: EXPOSURE SUMS ----
-    print("\n" + "-" * 70)
-    print("  4 — Sumas de exposicion (~100% por fondo)")
+    print("  3 — Sumas de exposicion (~100% por fondo)")
     print("-" * 70)
     for dict_name in ["CURRENCY_EXPOSURE", "COUNTRY_EXPOSURE"]:
         block = extract_block(text, dict_name)
