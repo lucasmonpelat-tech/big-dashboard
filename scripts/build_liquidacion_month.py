@@ -26,6 +26,60 @@ FOLDER = Path("C:/Users/lmonp/Dropbox/Maximus BIG/2026/Luiquidacion Comisiones B
 DEFAULT_PROCAPITAL = FOLDER / "ProCapital_XS3037627794 (1).xlsx"
 DEFAULT_LIQUIDACION = FOLDER / "Liuidación Global BIG 2026.xlsx"
 
+# Formula de cada fila de comision para una columna de dia.
+#   col  = la columna del dia que se esta escribiendo
+#   prev = la columna anterior (para el primer dia, C = anchor del cierre del
+#          mes anterior)
+ROW_FORMULA = {
+    42: lambda col, prev: f"={prev}38*$B$42/365",
+    44: lambda col, prev: f"={col}41*$B$44/365",
+    45: lambda col, prev: f"=({prev}38-{prev}41)*$B$45/365",
+    46: lambda col, prev: f"={prev}38*$B$46/365",
+    47: lambda col, prev: f"=({prev}38-{prev}41)*$B$47/365+1.3%*{prev}41/365",
+    48: lambda col, prev: f"={prev}38*$B$48/365",
+    49: lambda col, prev: f"={col}47-{col}48",
+}
+
+# Etiqueta esperada en la col A de cada fila que ROW_FORMULA escribe o
+# referencia. ROW_FORMULA hardcodea numeros de fila: si alguien inserta o
+# borra una fila en la plantilla, las formulas se escribirian en las filas
+# equivocadas SIN fallar, y el Excel saldria silenciosamente mal. Este guard
+# corta antes de tocar nada.
+EXPECTED_LABELS = {
+    38: "CAV",           # referenciada por 42/45/46/47/48
+    42: "PRO + PAMPA",
+    44: "PRO",
+    45: "PRO",
+    46: "Premium",
+    47: "PAMPA",
+    48: "FA",
+    49: "FER",
+}
+
+
+def assert_layout(ws):
+    """Verifica que el bloque de comisiones este donde ROW_FORMULA cree.
+
+    Devuelve lista de problemas (vacia = todo OK).
+    """
+    problemas = []
+    for row, esperado in EXPECTED_LABELS.items():
+        actual = ws.cell(row=row, column=1).value
+        actual = actual.strip() if isinstance(actual, str) else actual
+        if actual != esperado:
+            problemas.append(f"fila {row}: esperaba col A = '{esperado}', encontre {actual!r}")
+
+    # Fila 41 (nominal de la nota) no tiene etiqueta pero SI la referencian las
+    # formulas de 44/45/47: chequeamos que siga siendo la fila numerica.
+    a41 = ws.cell(row=41, column=1).value
+    b41 = ws.cell(row=41, column=2).value
+    if a41 not in (None, ""):
+        problemas.append(f"fila 41: esperaba col A vacia, encontre {a41!r}")
+    if not isinstance(b41, (int, float)):
+        problemas.append(f"fila 41: esperaba col B numerica (nominal nota), encontre {b41!r}")
+
+    return problemas
+
 MONTH_NAMES = {
     1: "ENE", 2: "FEB", 3: "MAR", 4: "Abril", 5: "Mayo",
     6: "Junio", 7: "Julio", 8: "Agosto", 9: "Septiembre",
@@ -157,6 +211,17 @@ def main():
     template_name = existing_sheets[-1]
     print(f"  Template Liq: '{template_name}'")
 
+    problemas = assert_layout(wb_liq[template_name])
+    if problemas:
+        print("  ERROR: la plantilla no tiene el layout que este script espera.")
+        print("         ROW_FORMULA hardcodea las filas 42/44-49 (y referencia 38/41).")
+        print("         Si se movio alguna fila, hay que actualizar ROW_FORMULA +")
+        print("         EXPECTED_LABELS antes de correr esto, si no el Excel sale mal.")
+        for prob in problemas:
+            print(f"         - {prob}")
+        return
+    print(f"  Layout OK: filas de comision 42/44-49 verificadas contra col A")
+
     if month_name in wb_liq.sheetnames:
         if args.force:
             del wb_liq[month_name]
@@ -239,15 +304,6 @@ def main():
     # workflow_cierre_mensual_big.md). Fix: regenerar en codigo, para TODAS
     # las columnas de dia (D..last_data_col), la formula de cada fila, en vez
     # de confiar en lo que trajo copy_worksheet.
-    ROW_FORMULA = {
-        42: lambda col, prev: f"={prev}38*$B$42/365",
-        44: lambda col, prev: f"={col}41*$B$44/365",
-        45: lambda col, prev: f"=({prev}38-{prev}41)*$B$45/365",
-        46: lambda col, prev: f"={prev}38*$B$46/365",
-        47: lambda col, prev: f"=({prev}38-{prev}41)*$B$47/365+1.3%*{prev}41/365",
-        48: lambda col, prev: f"={prev}38*$B$48/365",
-        49: lambda col, prev: f"={col}47-{col}48",
-    }
     for c in range(4, last_data_col + 1):
         col = get_column_letter(c)
         prev = get_column_letter(c - 1)
@@ -255,7 +311,7 @@ def main():
             ws_new.cell(row=r, column=c).value = fn(col, prev)
 
     last_col_letter = get_column_letter(last_data_col)
-    for r in [42, 44, 45, 46, 47, 48, 49]:
+    for r in ROW_FORMULA:
         ws_new.cell(row=r, column=total_col).value = f"=SUM(D{r}:{last_col_letter}{r})"
 
     print(f"  Formulas SUM reescritas en col {get_column_letter(total_col)}, rows 42/44/45/46/47/48/49")

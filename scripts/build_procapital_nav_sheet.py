@@ -2,9 +2,14 @@
 Genera hoja para Maximus con Fila 11 (Date) + Fila 36 (Gross NAV) desde el
 cierre del mes anterior al cierre del mes actual.
 
-Uso mensual: al cierre de cada mes, correr este script cambiando MONTH_YEAR.
+Uso mensual: al cierre de cada mes, correr este script con el mes de cierre.
 Output: nuevo archivo Excel en Desktop con la hoja lista para copiar/pegar.
+
+Usage:
+    python scripts/build_procapital_nav_sheet.py --month 7 --year 2026
+    python scripts/build_procapital_nav_sheet.py --month 7 --year 2026 --src "C:/ruta/ProCapital.xlsx"
 """
+import argparse
 import json
 from datetime import date, timedelta
 from pathlib import Path
@@ -12,10 +17,67 @@ import openpyxl
 from openpyxl.styles import Font, PatternFill, Alignment
 from copy import copy
 
-# ============ CONFIG (cambiar mensualmente) ============
-YEAR = 2026
-MONTH = 7  # mes de cierre
-# =======================================================
+LIQ_FOLDER = Path("C:/Users/lmonp/Dropbox/Maximus BIG/2026/Luiquidacion Comisiones BIG")
+
+# Nombre del mes tal como aparece en el ProCapital guardado en la carpeta de
+# liquidacion (ej "ProCapital_XS3037627794_LS104 - Julio 2026.xlsx").
+MONTH_NAMES = {
+    1: "Enero", 2: "Febrero", 3: "Marzo", 4: "Abril", 5: "Mayo", 6: "Junio",
+    7: "Julio", 8: "Agosto", 9: "Septiembre", 10: "Octubre",
+    11: "Noviembre", 12: "Diciembre",
+}
+
+
+def resolve_src(month, year, override):
+    """Ubica el ProCapital de origen.
+
+    BUGFIX 2026-08-24: antes estaba hardcodeado a un xlsx suelto de Downloads.
+    Ahora: 1) --src si lo pasan, 2) el nombre por convencion en la carpeta de
+    liquidacion, 3) fallback al ProCapital LS104 mas reciente de esa carpeta,
+    avisando cual eligio. Si no hay ninguno, error explicito con el listado de
+    lo que si hay, en vez de un FileNotFoundError pelado.
+    """
+    if override:
+        pth = Path(override)
+        if not pth.exists():
+            raise SystemExit(f"ERROR: --src no existe: {pth}")
+        return pth
+
+    expected = LIQ_FOLDER / f"ProCapital_XS3037627794_LS104 - {MONTH_NAMES[month]} {year}.xlsx"
+    if expected.exists():
+        return expected
+
+    candidates = sorted(
+        LIQ_FOLDER.glob("ProCapital*LS104*.xlsx"),
+        key=lambda f: f.stat().st_mtime,
+        reverse=True,
+    )
+    if not candidates:
+        print("ERROR: no encontre el ProCapital de origen.")
+        print(f"  Esperaba: {expected.name}")
+        print(f"  En:       {LIQ_FOLDER}")
+        print("  xlsx disponibles en esa carpeta:")
+        for f in sorted(LIQ_FOLDER.glob("*.xlsx")):
+            print(f"     - {f.name}")
+        raise SystemExit("  Pasa la ruta a mano con --src si el archivo se llama distinto.")
+
+    print(f"WARN: no existe '{expected.name}'.")
+    print(f"      Uso el LS104 mas reciente de la carpeta: '{candidates[0].name}'")
+    print("      Si no es el que corresponde, cortalo y pasa --src explicito.")
+    return candidates[0]
+
+
+ap = argparse.ArgumentParser()
+ap.add_argument("--month", type=int, required=True, help="Mes de cierre (1-12)")
+ap.add_argument("--year", type=int, required=True)
+ap.add_argument("--src", type=str, default="", help="ProCapital de origen (default: el de la carpeta de liquidacion)")
+args = ap.parse_args()
+
+if not 1 <= args.month <= 12:
+    raise SystemExit(f"ERROR: --month fuera de rango: {args.month}")
+
+YEAR = args.year
+MONTH = args.month
 
 # Rango: último día del mes anterior → último día del mes actual
 if MONTH == 1:
@@ -67,7 +129,8 @@ while curr <= END:
 print(f"Total dias: {len(all_dates)} | NAVs mapeados: {sum(1 for n in navs if n is not None)}")
 
 # ============ CARGAR EL EXCEL ORIGINAL Y AGREGAR HOJA ============
-src = Path("C:/Users/lmonp/Dropbox/Maximus BIG/2026/Luiquidacion Comisiones BIG/ProCapital_XS3037627794_LS104 - Julio 2026.xlsx")
+src = resolve_src(MONTH, YEAR, args.src)
+print(f"Template origen: {src.name}")
 out = Path(f"C:/Users/lmonp/OneDrive/Desktop/ProCapital_LS104_NAV_{YEAR}-{MONTH:02d}.xlsx")
 
 wb = openpyxl.load_workbook(str(src))
