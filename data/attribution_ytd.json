@@ -1,6 +1,6 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-08-24T13:33:35.431484",
+  "refreshedAt": "2026-08-24T10:59:45.337093",
   "as_of_date": "2026-08-24",
   "ytd_anchor": "2025-12-31",
   "days_ytd": 236,
@@ -23,8 +23,8 @@
       "name": "Alternatives",
       "value_usd": 8287216.81,
       "weight_pct": 28.89,
-      "ytd_pct": 3.8,
-      "contribution_pp": 1.099
+      "ytd_pct": 0.04,
+      "contribution_pp": 0.011
     },
     {
       "name": "Cash",
@@ -34,13 +34,13 @@
       "contribution_pp": 0.053
     }
   ],
-  "gross_reconstructed_pct": 4.435,
+  "gross_reconstructed_pct": 3.347,
   "mgmt_fee_pp": -1.164,
   "mgmt_fee_rate_annual_pct": 1.8,
-  "net_reconstructed_pct": 3.271,
+  "net_reconstructed_pct": 2.183,
   "lynk_ytd_pct": 3.85,
   "lynk_refreshed_at": "2026-08-24T13:32:40.181706",
-  "residual_pp": -0.579,
+  "residual_pp": -1.667,
   "alts_detail": [
     {
       "ticker": "CALP",
@@ -151,10 +151,10 @@
       },
       {
         "name": "Alternatives",
-        "big_contrib_pp": 1.099,
+        "big_contrib_pp": 0.011,
         "bench_contrib_pp": 0,
-        "alpha_pp": 1.099,
-        "comment": "BIG 28.9% @ +3.80% (bench no tiene Alts)"
+        "alpha_pp": 0.011,
+        "comment": "BIG 28.9% @ +0.04% (bench no tiene Alts)"
       },
       {
         "name": "Cash",
@@ -172,7 +172,7 @@
       },
       {
         "name": "Nuestro Cálculo (NET)",
-        "big_contrib_pp": 3.271,
+        "big_contrib_pp": 2.183,
         "bench_contrib_pp": null,
         "alpha_pp": null,
         "is_subtotal": true,
@@ -180,10 +180,10 @@
       },
       {
         "name": "Residual",
-        "big_contrib_pp": -0.579,
+        "big_contrib_pp": -1.667,
         "bench_contrib_pp": null,
-        "alpha_pp": 0.197,
-        "comment": "Nuestro calculo (+3.27%) - Lynk oficial (+3.85%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
+        "alpha_pp": 1.285,
+        "comment": "Nuestro calculo (+2.18%) - Lynk oficial (+3.85%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
       }
     ]
   }

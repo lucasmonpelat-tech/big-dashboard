@@ -1102,16 +1102,23 @@ def try_click_first_visible(page, selectors, label: str) -> bool:
     return False
 
 # URLs capturadas del test manual (2026-07-16)
+# Fix 2026-08-24: Positions/Transactions fallaron 2 veces el mismo dia (icono
+# download no encontrado) mientras UGL/RGL salieron bien con el mismo wait_load
+# -- el screenshot de debug mostro el spinner de carga TODAVIA girando cuando
+# el script busco el icono, no un cambio de layout. Positions/Transactions
+# tienen mas filas de datos que UGL/RGL y tardan mas en renderizar server-side.
+# Se sube el wait_load inicial de estas 2 tabs (ver tambien el retry en
+# download_from_tab, subido de 2 a 3 intentos).
 DOWNLOAD_TABS = [
     {
         "name": "Positions",
         "url": f"{BASE_URL}/my-practice/details/positions-account",
-        "wait_load": 4,
+        "wait_load": 8,
     },
     {
         "name": "Transactions",
         "url": f"{BASE_URL}/my-practice/details/activity-transactions-account",
-        "wait_load": 5,
+        "wait_load": 9,
     },
     {
         "name": "UGL",
@@ -1177,11 +1184,14 @@ def download_from_tab(page, tab_config, out_dir: Path) -> bool:
     # flaky contra el sitio en vivo, no de un cambio de layout permanente
     # (a diferencia del bug de login de 2026-08-04, que era 100% reproducible).
     # Se agrega un reintento con espera extra antes de rendirse y alertar.
+    # Fix 2026-08-24: Positions/Transactions fallaron los 2 el mismo dia con
+    # el spinner de carga todavia visible en el screenshot de debug -- subido
+    # de 2 a 3 intentos con mas espera entre cada uno.
     icon_clicked = False
-    for attempt in range(2):
+    for attempt in range(3):
         if attempt > 0:
             print(f"  [{name}] Icono no encontrado, reintentando tras espera extra...")
-            time.sleep(3)
+            time.sleep(5)
         for sel in EXPORT_ICON_SELECTORS:
             try:
                 el = page.locator(sel).first

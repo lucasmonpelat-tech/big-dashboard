@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-08-24T13:33:33.686035",
+  "refreshedAt": "2026-08-24T10:59:02.764164",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -4835,6 +4835,14 @@
       "index": 106.4492
     },
     {
+      "date": "2026-08-23",
+      "index": 106.4428,
+      "interpolated": true,
+      "mv_usd": 11046680.5134,
+      "flow_in": 0.0,
+      "twr": 0.0077
+    },
+    {
       "date": "2026-08-24",
       "mv_usd": 11046013.05359,
       "flow_in": 0.0,
@@ -6927,6 +6935,18 @@
     },
     {
       "date": "2026-08-21",
+      "index": NaN,
+      "interpolated": true,
+      "price": NaN
+    },
+    {
+      "date": "2026-08-22",
+      "index": NaN,
+      "interpolated": true,
+      "price": NaN
+    },
+    {
+      "date": "2026-08-23",
       "index": NaN,
       "interpolated": true,
       "price": NaN
@@ -10446,6 +10466,13 @@
       "flow_in": 0.0,
       "twr": 0.0077124566385898645,
       "index": 106.4492
+    },
+    {
+      "date": "2026-08-24",
+      "mv_usd": 11046013.05359,
+      "flow_in": 0.0,
+      "twr": 0.007590688488175191,
+      "index": 106.4363
     }
   ],
   "agg_index_series_original": [
@@ -12532,9 +12559,15 @@
       "price": 92.57
     },
     {
-      "date": "2026-08-22",
-      "price": NaN,
-      "index": NaN
+      "date": "2026-08-21",
+      "index": NaN,
+      "interpolated": true,
+      "price": NaN
+    },
+    {
+      "date": "2026-08-24",
+      "price": 92.51,
+      "index": 102.7792
     }
   ],
   "_july_ramp_note": "FIX 2026-08-14: se prepende el mes de rampa de capital (1-jul a 31-jul-2025). Ver equity_sleeve_real.json para el detalle completo -- mismo fix, misma logica. FI Modified Dietz 1-jul->31-jul: mv_start=0, mv_end=$6,818,058.18 (statement oficial verificado), flows=MANIG/PIMCO-INC/WELLCRED (7-jul) + TGF (16-jul): twr=+0.3344%. Serie reescalada por (1+0.3344%)."
