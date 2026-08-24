@@ -1594,15 +1594,16 @@
       BPCC:  "Private Credit",
       GCRED: "Private Credit",
       HLGPI: "Infraestructura",
-      IBIT:  "Bitcoin + Oro",
-      GLD:   "Bitcoin + Oro",
+      IBIT:  "Bitcoin",
+      GLD:   "Oro",
     };
 
     const ALTS_CATEGORY_COLORS = {
-      "Private Equity":  "#c9a961",
-      "Bitcoin + Oro":   "#e67e22",
+      "Private Equity":  "#7c6f9c",
       "Private Credit":  "#4a7ab8",
       "Infraestructura": "#7fa88f",
+      "Bitcoin":         "#e67e22",
+      "Oro":             "#c9a961",
       "Sin clasificar":  "#9aa5b1",
     };
 
@@ -1610,7 +1611,8 @@
       const t = (h.ticker || "").toUpperCase();
       if (ALTS_CATEGORY_BY_TICKER[t]) return ALTS_CATEGORY_BY_TICKER[t];
       const n = (h.name || "").toUpperCase();
-      if (/BITCOIN|ETHEREUM|GOLD SHS|SPDR GOLD|CRYPTO/.test(n)) return "Bitcoin + Oro";
+      if (/BITCOIN|ETHEREUM|CRYPTO/.test(n)) return "Bitcoin";
+      if (/GOLD SHS|SPDR GOLD|GOLD TR|ORO/.test(n)) return "Oro";
       if (/INFRASTRUCTURE|INFRAESTRUCTURA/.test(n)) return "Infraestructura";
       if (/PRIVATE CREDIT|CORPORATE LENDING|DIRECT LENDING|BDC/.test(n)) return "Private Credit";
       if (/PRIVATE EQUITY|SECONDARIES|PRIVATE MARKETS|BUYOUT/.test(n)) return "Private Equity";
