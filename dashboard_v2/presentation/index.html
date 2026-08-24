@@ -427,10 +427,20 @@
         </div>
       </div>
 
-      <!-- ALTS-ONLY: Pie composición -->
+      <!-- ALTS-ONLY: Pie composición (por holding + por categoría) -->
       <div class="section" id="alts-pie-block" style="display:none">
         <h2>Composición del Sleeve</h2>
-        <div id="alts-pie-chart" style="min-height: 480px"></div>
+        <div id="alts-pies-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:20px">
+          <div>
+            <h3 style="font-size:14px;color:var(--navy);margin-bottom:4px;text-align:center">Por Holding</h3>
+            <div id="alts-pie-chart" style="min-height: 480px"></div>
+          </div>
+          <div>
+            <h3 style="font-size:14px;color:var(--navy);margin-bottom:4px;text-align:center">Por Categoría</h3>
+            <div id="alts-category-chart" style="min-height: 480px"></div>
+          </div>
+        </div>
+        <div id="alts-category-note" style="font-size:11px;color:var(--text-mute);margin-top:10px;line-height:1.6"></div>
       </div>
 
       <!-- ALTS-ONLY: Concentration + Liquidity -->
@@ -1572,6 +1582,92 @@
       }, { responsive: true, displaylogo: false });
     }
 
+    // ---- Categorias del sleeve Alts -------------------------------------
+    // Mapa explicito por ticker. El fallback por nombre existe para que un
+    // holding nuevo caiga en la categoria correcta aunque nadie toque este
+    // mapa; si ni el ticker ni el nombre matchean, va a "Sin clasificar" y
+    // se avisa por consola + en la nota al pie (ruidoso, no silencioso).
+    const ALTS_CATEGORY_BY_TICKER = {
+      CALP:  "Private Equity",
+      FLEX:  "Private Equity",
+      HLEND: "Private Credit",
+      BPCC:  "Private Credit",
+      GCRED: "Private Credit",
+      HLGPI: "Infraestructura",
+      IBIT:  "Bitcoin + Oro",
+      GLD:   "Bitcoin + Oro",
+    };
+
+    const ALTS_CATEGORY_COLORS = {
+      "Private Equity":  "#c9a961",
+      "Bitcoin + Oro":   "#e67e22",
+      "Private Credit":  "#4a7ab8",
+      "Infraestructura": "#7fa88f",
+      "Sin clasificar":  "#9aa5b1",
+    };
+
+    function altsCategoryOf(h) {
+      const t = (h.ticker || "").toUpperCase();
+      if (ALTS_CATEGORY_BY_TICKER[t]) return ALTS_CATEGORY_BY_TICKER[t];
+      const n = (h.name || "").toUpperCase();
+      if (/BITCOIN|ETHEREUM|GOLD SHS|SPDR GOLD|CRYPTO/.test(n)) return "Bitcoin + Oro";
+      if (/INFRASTRUCTURE|INFRAESTRUCTURA/.test(n)) return "Infraestructura";
+      if (/PRIVATE CREDIT|CORPORATE LENDING|DIRECT LENDING|BDC/.test(n)) return "Private Credit";
+      if (/PRIVATE EQUITY|SECONDARIES|PRIVATE MARKETS|BUYOUT/.test(n)) return "Private Equity";
+      console.warn(`[alts] holding sin categoria: ${h.ticker} - ${h.name}`);
+      return "Sin clasificar";
+    }
+
+    // Pie chart de composicion Alts agrupado por categoria de activo
+    function renderAltsCategoryPie(holdings) {
+      const totalMv = holdings.reduce((s, h) => s + (h.mv_usd || 0), 0);
+
+      const buckets = {};
+      holdings.forEach(h => {
+        const cat = altsCategoryOf(h);
+        if (!buckets[cat]) buckets[cat] = { mv: 0, tickers: [] };
+        buckets[cat].mv += (h.mv_usd || 0);
+        buckets[cat].tickers.push(h.ticker);
+      });
+
+      const rows = Object.entries(buckets)
+        .map(([cat, b]) => ({ cat, mv: b.mv, tickers: b.tickers, pct: (b.mv / (totalMv || 1)) * 100 }))
+        .sort((a, b) => b.mv - a.mv);
+
+      Plotly.newPlot("alts-category-chart", [{
+        type: "pie", hole: 0.55,
+        labels: rows.map(r => r.cat),
+        values: rows.map(r => r.mv),
+        customdata: rows.map(r => r.tickers.join(" + ")),
+        marker: { colors: rows.map(r => ALTS_CATEGORY_COLORS[r.cat] || "#9aa5b1") },
+        textinfo: "label+percent",
+        textposition: "outside",
+        automargin: true,
+        sort: false,
+        textfont: { size: 13, color: "#0a2540" },
+        hovertemplate: "<b>%{label}</b><br>%{customdata}<br>$%{value:,.0f}<br>%{percent}<extra></extra>",
+      }], {
+        // Mismo criterio que el pie por holding: automargin + height explicito
+        // para que las etiquetas "outside" no queden cortadas.
+        height: 480,
+        margin: { t: 40, r: 40, b: 40, l: 40 },
+        showlegend: false,
+        annotations: [{
+          text: `<b>Por Categoría</b><br><span style='font-size:16px'>$${(totalMv / 1e6).toFixed(2)}M</span><br><span style='font-size:12px;color:#888'>${rows.length} categorías</span>`,
+          x: 0.5, y: 0.5, font: { size: 14, color: "#0a2540" }, showarrow: false,
+        }],
+      }, { responsive: true, displaylogo: false });
+
+      const detalle = rows.map(r =>
+        `<strong style="color:${ALTS_CATEGORY_COLORS[r.cat] || "#9aa5b1"}">${r.cat}</strong> ${r.pct.toFixed(1)}% (${r.tickers.join(" + ")})`
+      ).join(" &nbsp;·&nbsp; ");
+      const huerfanos = rows.filter(r => r.cat === "Sin clasificar");
+      const warn = huerfanos.length
+        ? `<div style="color:#dc2626;margin-top:6px">⚠️ Sin clasificar: ${huerfanos[0].tickers.join(", ")} — agregar al mapa ALTS_CATEGORY_BY_TICKER.</div>`
+        : "";
+      document.getElementById("alts-category-note").innerHTML = detalle + warn;
+    }
+
     // Concentration Ranking bars
     function renderAltsConcentration(holdings) {
       const totalMv = holdings.reduce((s, h) => s + (h.mv_usd || 0), 0);
@@ -1695,6 +1791,7 @@
         const holdings = (window.__hRets?.alts?.holdings || []).filter(h => (h.status || "OPEN") === "OPEN");
         renderAltsKpis(holdings);
         renderAltsPie(holdings);
+        renderAltsCategoryPie(holdings);
         renderAltsConcentration(holdings);
         renderAltsLiquidity(holdings);
         renderSleeveHoldings(sleeveKey);
