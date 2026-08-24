@@ -22,7 +22,7 @@ from pathlib import Path
 import openpyxl
 from openpyxl.utils import get_column_letter
 
-FOLDER = Path("C:/Users/lmonp/Dropbox/BIG/2026/Luiquidacion Comisiones BIG")
+FOLDER = Path("C:/Users/lmonp/Dropbox/Maximus BIG/2026/Luiquidacion Comisiones BIG")
 DEFAULT_PROCAPITAL = FOLDER / "ProCapital_XS3037627794 (1).xlsx"
 DEFAULT_LIQUIDACION = FOLDER / "Liuidación Global BIG 2026.xlsx"
 
@@ -228,6 +228,31 @@ def main():
             for c in range(last_data_col + 1, template_last_data_col + 2):
                 ws_new.cell(row=r, column=c).value = None
         print(f"  Cols extras limpiadas: {get_column_letter(last_data_col+1)}->{get_column_letter(template_last_data_col+1)}")
+
+    # BUGFIX 2026-08-24: cuando el mes nuevo tiene IGUAL O MAS dias que la
+    # plantilla (ej Junio 30 dias -> Julio 31 dias), la columna que en la
+    # plantilla tenia la formula "=SUM(...)" (su columna de total) pasa a ser
+    # un dia real del mes nuevo. copy_worksheet() no la convierte -- queda con
+    # la vieja formula SUM, y el total nuevo terminaba sumando esa columna
+    # (que ya era una suma parcial) DOS VECES, mientras el ultimo dia real
+    # nunca se calculaba. Detectado por Lucas en Julio 2026 (revisar
+    # workflow_cierre_mensual_big.md). Fix: regenerar en codigo, para TODAS
+    # las columnas de dia (D..last_data_col), la formula de cada fila, en vez
+    # de confiar en lo que trajo copy_worksheet.
+    ROW_FORMULA = {
+        42: lambda col, prev: f"={prev}38*$B$42/365",
+        44: lambda col, prev: f"={col}41*$B$44/365",
+        45: lambda col, prev: f"=({prev}38-{prev}41)*$B$45/365",
+        46: lambda col, prev: f"={prev}38*$B$46/365",
+        47: lambda col, prev: f"=({prev}38-{prev}41)*$B$47/365+1.3%*{prev}41/365",
+        48: lambda col, prev: f"={prev}38*$B$48/365",
+        49: lambda col, prev: f"={col}47-{col}48",
+    }
+    for c in range(4, last_data_col + 1):
+        col = get_column_letter(c)
+        prev = get_column_letter(c - 1)
+        for r, fn in ROW_FORMULA.items():
+            ws_new.cell(row=r, column=c).value = fn(col, prev)
 
     last_col_letter = get_column_letter(last_data_col)
     for r in [42, 44, 45, 46, 47, 48, 49]:

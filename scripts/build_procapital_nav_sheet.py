@@ -14,7 +14,7 @@ from copy import copy
 
 # ============ CONFIG (cambiar mensualmente) ============
 YEAR = 2026
-MONTH = 6  # mes de cierre
+MONTH = 7  # mes de cierre
 # =======================================================
 
 # Rango: último día del mes anterior → último día del mes actual
@@ -67,7 +67,7 @@ while curr <= END:
 print(f"Total dias: {len(all_dates)} | NAVs mapeados: {sum(1 for n in navs if n is not None)}")
 
 # ============ CARGAR EL EXCEL ORIGINAL Y AGREGAR HOJA ============
-src = Path("C:/Users/lmonp/Downloads/ProCapital_XS3037627794_LS104 (5).xlsx")
+src = Path("C:/Users/lmonp/Dropbox/Maximus BIG/2026/Luiquidacion Comisiones BIG/ProCapital_XS3037627794_LS104 - Julio 2026.xlsx")
 out = Path(f"C:/Users/lmonp/OneDrive/Desktop/ProCapital_LS104_NAV_{YEAR}-{MONTH:02d}.xlsx")
 
 wb = openpyxl.load_workbook(str(src))

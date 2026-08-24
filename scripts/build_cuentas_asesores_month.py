@@ -18,7 +18,7 @@ from pathlib import Path
 import openpyxl
 from openpyxl.utils import get_column_letter
 
-FOLDER = Path("C:/Users/lmonp/Dropbox/BIG/2026/Luiquidacion Comisiones BIG")
+FOLDER = Path("C:/Users/lmonp/Dropbox/Maximus BIG/2026/Luiquidacion Comisiones BIG")
 DEFAULT_CUENTAS = FOLDER / "BIG Cuentas - Asesores (1).xlsx"
 
 MONTH_TO_ABBR = {
@@ -194,6 +194,7 @@ def main():
     ap.add_argument("--check-only", action="store_true", help="Solo pre-scan de huerfanos, no modifica nada")
     ap.add_argument("--assign", type=str, default="", help="Asignar cuentas huerfanas: 'JXD1=Fernando,JXD2=Lucas'")
     ap.add_argument("--allow-orphans", action="store_true", help="Continuar aunque haya huerfanos (aparecen FALTA EN MAPPING)")
+    ap.add_argument("--exclude", type=str, default="", help="Cuentas a excluir del mes (plata entro despues del cierre pero aparece en el export de hoy): 'JXD1,JXD2'")
     args = ap.parse_args()
 
     month_abbr = args.month.upper()
@@ -216,6 +217,17 @@ def main():
     print(f"  Positions: {positions_path.name}")
 
     positions = read_positions(positions_path)
+
+    exclude_set = {a.strip() for a in args.exclude.split(",") if a.strip()}
+    if exclude_set:
+        excluded = [p for p in positions if p["account"] in exclude_set]
+        positions = [p for p in positions if p["account"] not in exclude_set]
+        for p in excluded:
+            print(f"  EXCLUIDA (plata post-cierre): {p['account']} {p['name']} MV=${p['mv']:,.2f}")
+        not_found = exclude_set - {p["account"] for p in excluded}
+        if not_found:
+            print(f"  WARN --exclude: no encontrada en positions: {not_found}")
+
     total_mv = sum(p["mv"] for p in positions)
     print(f"  Comitentes: {len(positions)} | Total MV: ${total_mv:,.2f}")
 
