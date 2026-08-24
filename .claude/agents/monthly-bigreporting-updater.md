@@ -288,7 +288,7 @@ Pedir a Lucas que valide:
 
 ## 🐛 Gotchas (errores ya cometidos — no repetir)
 
-1. **Bug histórico HTML analyzer:** `pampa-big-analyzer.html` NO aplica USD-hedge para PIMCO Income / PIMCO LD / Man GLG IG / Man EM Corp. **Source of truth = dashboard live, NO el HTML local.** (Ya se fixeó el HTML el 3-Jun-2026, pero igual confirmar con dashboard).
+1. **Currency exposure — source of truth = dashboard live.** El viejo `pampa-big-analyzer.html` se borró el 2026-08-24 (estaba roto por un error de sintaxis desde junio y nadie lo notó). Arrastraba un bug de USD-hedge no aplicado para PIMCO Income / PIMCO LD / Man GLG IG / Man EM Corp. Si aparece una copia suelta en algún lado, **no usarla**: el dato bueno está en el tab Geography · Yield del dashboard v2.
 
 2. **Maximus vs Dashboard para Stats RF:** Dan números distintos (Maximus YTW 6.86% vs Dashboard 7.14%). **Usar dashboard.**
 
