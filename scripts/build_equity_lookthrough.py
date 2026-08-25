@@ -87,6 +87,49 @@ ALIASES = {
 
 TICKER_SUFFIX = re.compile("_([A-Z][A-Z0-9.]{0,5})$")
 
+# --- Resolucion a TICKER (nivel clase de accion) ------------------------------
+# OJO: esto NO es lo mismo que ALIASES. ALIASES junta clases de la misma company
+# (GOOGL + GOOG -> "Alphabet") porque para el top consolidado interesa la
+# COMPANY. Aca interesa la CLASE, porque el ACWI lista GOOGL y GOOG como dos
+# filas con pesos distintos. Usar el mapa equivocado mezcla las dos y da mal.
+TICKER_BY_NAME = {
+    "NVDA": "NVDA", "NVIDIA CORP": "NVDA",
+    "AAPL": "AAPL", "APPLE INC": "AAPL",
+    "MSFT": "MSFT", "MICROSOFT CORP": "MSFT",
+    "AMZN": "AMZN", "AMAZON.COM INC": "AMZN",
+    "META": "META", "META PLATFORMS INC CLASS A": "META",
+    "TSLA": "TSLA", "TESLA INC": "TSLA",
+    "GOOGL": "GOOGL", "ALPHABET INC CLASS A": "GOOGL",
+    "GOOG": "GOOG",
+    "AVGO": "AVGO", "Broadcom_AVGO": "AVGO",
+    "BRK.B": "BRK.B",
+}
+
+# El ACWI lista algunas companies por su ticker local y los factsheets por el
+# ADR. Son el mismo papel a efectos de exposicion.
+TICKER_EQUIV = {
+    "TSM": "2330",     # Taiwan Semiconductor: ADR en NYSE vs listing en Taiwan
+}
+
+
+def resolve_ticker(raw):
+    """Nombre de factsheet -> ticker, o None si no se puede determinar.
+
+    Devolver None es correcto y esperado para la mayoria (Michelin, Snam, etc):
+    solo importa resolver lo que puede cruzarse contra el ACWI top 10.
+    """
+    if raw in TICKER_BY_NAME:
+        tk = TICKER_BY_NAME[raw]
+    else:
+        m = TICKER_SUFFIX.search(raw)
+        if m:
+            tk = m.group(1)
+        elif raw.isupper() and len(raw) <= 6 and " " not in raw:
+            tk = raw
+        else:
+            return None
+    return TICKER_EQUIV.get(tk, tk)
+
 
 def prettify(raw):
     """Nombre de factsheet -> nombre legible. 'MercadoLibre_MELI' -> 'MercadoLibre (MELI)'."""

@@ -15,9 +15,16 @@ Usage:
 
 import csv
 import json
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
+
+# resolve_ticker vive en build_equity_lookthrough.py junto al resto del
+# conocimiento de nombres de holdings, para no tener dos mapas que se
+# desincronicen.
+sys.path.insert(0, str(Path(__file__).parent))
+from build_equity_lookthrough import resolve_ticker  # noqa: E402
 
 TOP_N = 10
 
@@ -75,8 +82,43 @@ def read_positions():
 
 def read_fund_holdings():
     """Read top 10 holdings per equity fund."""
-    with open(ROOT / "data" / "fund_holdings_top10.json") as f:
+    with open(ROOT / "data" / "fund_holdings_top10.json", encoding="utf-8") as f:
         return json.load(f)
+
+
+def fund_holdings_by_ticker(fund_data):
+    """Holdings del fondo indexados por TICKER.
+
+    BUGFIX 2026-08-25: antes esto leia `top_holdings`, que esta indexado por
+    ticker pero SOLO tiene data para CSPX y THOR -- los otros 9 fondos quedaron
+    con el dict vacio. Resultado: correr este script tiraba a MAGS (y HEWJ) del
+    calculo, y MAGS tiene justo las 7 mega-caps del ACWI top 10 a ~14% cada una.
+    El total de exposicion BIG caia de 14.13% a 11.64% y el dashboard reportaba
+    13.1pp de underweight cuando el real era ~10.6pp.
+
+    Ahora se usa `_factsheet_top10` (indexado por NOMBRE, con los 11 fondos) y
+    cada nombre se resuelve a ticker con resolve_ticker(). Los nombres que no
+    resuelven se devuelven aparte para poder reportarlos, en vez de perderse.
+    """
+    block = fund_data.get("_factsheet_top10")
+    if not isinstance(block, dict) or not block:
+        block = fund_data.get("top_holdings")
+    if not isinstance(block, dict):
+        return {}, []
+
+    by_ticker = {}
+    sin_resolver = []
+    for raw, weight in block.items():
+        if raw.startswith("_") or not isinstance(weight, (int, float)):
+            continue
+        tk = resolve_ticker(raw)
+        if tk is None:
+            sin_resolver.append(raw)
+            continue
+        # Un fondo puede listar el mismo ticker dos veces (distintas lineas);
+        # se acumulan en vez de pisarse.
+        by_ticker[tk] = by_ticker.get(tk, 0) + weight
+    return by_ticker, sin_resolver
 
 
 def compute_overlap():
@@ -93,6 +135,21 @@ def compute_overlap():
     total_acwi_top10 = sum(h["weight_acwi"] for h in acwi_top10)
     total_big_exposure = 0
 
+    # Holdings por ticker de cada fondo, una sola vez
+    por_fondo = {}
+    sin_resolver = {}
+    for pos in equity_positions:
+        fd = fund_holdings.get(pos["ticker"])
+        if not isinstance(fd, dict):
+            print(f"  WARN: {pos['ticker']} esta en el sleeve pero no en "
+                  f"fund_holdings_top10.json -> aporta 0")
+            por_fondo[pos["ticker"]] = {}
+            continue
+        by_ticker, no_res = fund_holdings_by_ticker(fd)
+        por_fondo[pos["ticker"]] = by_ticker
+        if no_res:
+            sin_resolver[pos["ticker"]] = no_res
+
     for acwi_holding in acwi_top10:
         ticker = acwi_holding["ticker"]
         big_exposure = 0
@@ -103,15 +160,7 @@ def compute_overlap():
             # % del fondo DENTRO DEL EQUITY SLEEVE (100%), no sobre BIG total
             fund_weight_in_equity = pos["value"] / total_equity_value * 100
 
-            # Get this fund's holdings
-            fund_data = fund_holdings.get(fund_ticker, {})
-            top_holdings = fund_data.get("top_holdings", {})
-
-            # Skip non-data entries like "_note"
-            if not isinstance(top_holdings, dict):
-                continue
-
-            stock_weight_in_fund = top_holdings.get(ticker, 0)
+            stock_weight_in_fund = por_fondo.get(fund_ticker, {}).get(ticker, 0)
             if not isinstance(stock_weight_in_fund, (int, float)):
                 continue
 
@@ -137,6 +186,17 @@ def compute_overlap():
             "contributors": contributors,
         })
         total_big_exposure += big_exposure
+
+    # Chequeos ruidosos: si una fila del ACWI top 10 no matcheo con NINGUN fondo,
+    # puede ser real (no la tenemos) o un nombre que no resolvio. Hay que poder
+    # distinguirlo de un vistazo en vez de asumir que el 0 es correcto.
+    huerfanas = [h["ticker"] for h in overlap if not h["contributors"]]
+    if huerfanas:
+        print(f"  NOTA: sin exposicion via ningun fondo: {huerfanas}")
+    if sin_resolver:
+        total_no_res = sum(len(v) for v in sin_resolver.values())
+        print(f"  {total_no_res} holdings sin ticker resoluble (normal: solo importan "
+              f"los que cruzan con el ACWI top 10)")
 
     summary = {
         "total_acwi_top10": round(total_acwi_top10, 2),
