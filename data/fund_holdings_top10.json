@@ -1,7 +1,7 @@
 {
   "_description": "Top 10 holdings per BIG equity fund. Used for lookthrough analysis vs ACWI top 10.",
   "_lastUpdate": "2026-08-25",
-  "_status": "VERIFICADO: 9/9 fondos diversificados. Refrescados 25-Ago-2026: CSPX (31-Jul), MFSCV (31-Jul, pesos reales), JHGSC (31-Jul), THOR (30-Jun). Pendientes: LGLI (30-Abr), NBGMT/ARGT/ILF/4BRZ (Jun-2026), MAGS/HEWJ (Jul-2026).",
+  "_status": "VERIFICADO: 11 fondos del sleeve equity. Refrescados 25-Ago-2026: CSPX/MFSCV/JHGSC/NBGMT (31-Jul), THOR (30-Jun), ARGT (14-Ago), ILF (20-Ago), 4BRZ (31-Jul). MAGS/HEWJ en Jul-2026. Unico pendiente: LGLI (30-Abr-2026).",
   "CSPX": {
     "name": "iShares Core S&P 500 UCITS",
     "source": "VERIFICADO: factsheet oficial iShares Core S&P 500 UCITS ETF (BlackRock americas-offshore), seccion Top 10 Holdings al 31-Jul-2026. Total top 10 = 37.56% del portfolio. Reemplaza los pesos del indice S&P 500 publicos (~May-2026) que habia antes.",
@@ -34,86 +34,86 @@
   },
   "ILF": {
     "name": "iShares Latin America 40 ETF",
-    "source": "VERIFICADO: iShares Latin America 40 ETF holdings via stockanalysis.com al 17-Jun-2026. Top 10 = 55.3%.",
+    "source": "VERIFICADO: holdings de iShares Latin America 40 ETF via stockanalysis.com al 20-Ago-2026. Top 10 = 55.99%. El factsheet oficial de iShares esta al 30-Jun-2026 (mas viejo), por eso se usa stockanalysis, misma fuente que la carga anterior.",
     "isin": "US4642873909",
     "top_holdings": {
-      "_note": "Pure-play LatAm (Brazil + Mexico). NO overlap con ACWI top 10."
+      "_note": "LatAm 40. Nu Holdings pasa a #1 (8.73%), Vale cae a #2. Las dos lineas de Petrobras (ADR pref y ADR ordinaria) son la MISMA compania: juntas pesan 11.68%. Top 10 = 55.99%. NO overlap con ACWI top 10."
     },
-    "_as_of": "2026-06-17",
+    "_as_of": "2026-08-20",
     "_factsheet_top10": {
-      "Vale": 8.8,
-      "Nu_Holdings": 7.79,
-      "Itau_Unibanco": 6.81,
-      "Grupo_Mexico": 6.15,
-      "Petrobras_ADR": 5.24,
-      "Petrobras_PETR3": 4.94,
-      "Banorte": 4.25,
-      "Credicorp": 4.16,
-      "America_Movil": 3.81,
-      "Femsa": 3.4
+      "Nu_Holdings": 8.73,
+      "Vale": 7.99,
+      "Grupo_Mexico": 6.55,
+      "Itau_Unibanco": 6.21,
+      "Petrobras_ADR": 6.02,
+      "Petrobras_PETR3": 5.66,
+      "Banorte": 4.24,
+      "Credicorp": 4.03,
+      "America_Movil": 3.38,
+      "Femsa": 3.18
     }
   },
   "4BRZ": {
     "name": "iShares MSCI Brazil UCITS (DE)",
-    "source": "VERIFICADO: iShares MSCI Brazil UCITS ETF (DE) replica MSCI Brazil. Top 10 mismo orden que EWZ (US) via stockanalysis.com al 18-Jun-2026. Top 10 = 57.8%.",
+    "source": "VERIFICADO: factsheet oficial iShares MSCI Brazil UCITS ETF (DE) de BlackRock americas-offshore, al 31-Jul-2026. Total top 10 = 60.06%. MEJORA: antes se usaba EWZ (US) como proxy; ahora son los holdings reales del UCITS que tenemos.",
     "isin": "DE000A0Q4R85",
     "top_holdings": {
-      "_note": "Pure-play Brazil. NO overlap con ACWI top 10."
+      "_note": "Brasil puro. Las dos lineas de Petrobras (PETR4 pref + PETR3 ord) son la MISMA compania: juntas 14.52%. Top 10 = 60.06%. NO overlap con ACWI top 10. Jun->Jul: sale AXIA Energia, entra Itausa."
     },
-    "_as_of": "2026-06-18",
+    "_as_of": "2026-07-31",
     "_factsheet_top10": {
-      "Vale": 11.18,
-      "Nu_Holdings": 8.84,
-      "Itau_Unibanco": 8.37,
-      "Petrobras_PETR4": 6.51,
-      "Petrobras_PETR3": 6.15,
-      "Banco_Bradesco": 3.71,
-      "AXIA_Energia": 3.34,
-      "Ambev": 3.26,
-      "WEG": 3.25,
-      "B3": 3.18
+      "Vale": 10.59,
+      "Nu_Holdings": 10.37,
+      "Itau_Unibanco": 9.07,
+      "Petrobras_PETR4": 7.39,
+      "Petrobras_PETR3": 7.13,
+      "Banco_Bradesco": 3.81,
+      "Itausa": 3.18,
+      "B3": 3.1,
+      "WEG": 2.71,
+      "Ambev": 2.71
     }
   },
   "ARGT": {
     "name": "Global X MSCI Argentina ETF",
-    "source": "VERIFICADO: Global X MSCI Argentina ETF holdings via stockanalysis.com al 18-Jun-2026. AUM $826M. Top 10 = 67.7%.",
+    "source": "VERIFICADO: holdings de Global X MSCI Argentina ETF via stockanalysis.com al 14-Ago-2026. Top 10 = 69.60%. Global X no publica factsheet PDF accesible; stockanalysis da holdings diarios y es mas fresco que cualquier factsheet mensual.",
     "isin": "US37950E2596",
     "top_holdings": {
-      "_note": "Pure-play Argentina. MELI 21% (mega concentrado). NO overlap con ACWI top 10."
+      "_note": "Pure-play Argentina. MELI 25.09% (subio de 21.01% en Jun — MEGA concentrado, ojo si el cliente ademas tiene MELI directo). Top 10 = 69.60%. NO overlap con ACWI top 10. Jun->Ago: salen BBVA Argentina y Central Puerto; entran Fortuna Mining y Embotelladora Andina."
     },
-    "_as_of": "2026-06-18",
+    "_as_of": "2026-08-14",
     "_factsheet_top10": {
-      "MercadoLibre_MELI": 21.01,
-      "YPF": 9.12,
-      "Galicia_GGAL": 7.09,
-      "Vista_Energy_VIST": 5.87,
-      "Banco_Macro_BMA": 5.47,
-      "Pampa_Energia_PAM": 4.3,
-      "BBVA_Argentina_BBAR": 4.15,
-      "TGS": 3.92,
-      "Central_Puerto_CEPU": 3.59,
-      "SSR_Mining": 3.17
+      "MercadoLibre_MELI": 25.09,
+      "YPF": 9.58,
+      "Vista_Energy_VIST": 6.2,
+      "Galicia_GGAL": 5.78,
+      "Banco_Macro_BMA": 4.42,
+      "Pampa_Energia_PAM": 4.15,
+      "Fortuna_Mining_FVI": 3.73,
+      "TGS": 3.69,
+      "SSR_Mining": 3.49,
+      "Embotelladora_Andina": 3.47
     }
   },
   "NBGMT": {
     "name": "NB Global Equity Megatrends I",
-    "source": "VERIFICADO: NB Global Equity Megatrends via Endowus (datos al 18-19 Jun 2026). Active Share ~97% vs ACWI. Regional/sector breakdown mantiene Mar-2026 (no disponible Jun publico).",
+    "source": "VERIFICADO: factsheet oficial NB Global Equity Megatrends (swissfunddata, fsm-8350_84_01) al 31-Jul-2026, tabla \"Top 10 Fund Holdings vs Benchmark\". Assets in Top 10 = 47.26%. Reemplaza los datos de Endowus (18-Jun-2026).",
     "isin": "IE00BFMHRK20",
-    "_as_of": "2026-06-18",
+    "_as_of": "2026-07-31",
     "top_holdings": {
-      "_note": "Top 10 rebalanceado fuertemente Mar->Jun. NO tiene ningun ACWI top 10. Top 10 nuevo: Delta, Gen Digital, Chewy, Zeta, ON Semi, Cisco, Shift4, Element, Alibaba, Perrigo."
+      "_note": "Top 10 = 47.26% (muy concentrado). NO tiene ningun ACWI top 10 — el propio factsheet muestra que el peso de estos nombres en el benchmark suma 0.07%. Rotacion Jun->Jul: salen ON Semiconductor, Cisco, Element Solutions y Perrigo; entran Expedia, Tetra Tech, Charles River y Pets At Home."
     },
     "_factsheet_top10": {
-      "Delta_Air_Lines": 4.93,
-      "Gen_Digital": 4.74,
-      "Chewy": 4.66,
-      "Zeta_Global": 4.65,
-      "ON_Semiconductor": 4.64,
-      "Cisco_Systems": 4.48,
-      "Shift4_Payments": 4.25,
-      "Element_Solutions": 4.24,
-      "Alibaba": 4.23,
-      "Perrigo": 4.22
+      "Expedia_Group_EXPE": 5.09,
+      "Shift4_Payments": 5.08,
+      "Tetra_Tech_TTEK": 5.04,
+      "Alibaba": 5.03,
+      "Charles_River_Labs_CRL": 4.95,
+      "Chewy": 4.7,
+      "Delta_Air_Lines": 4.58,
+      "Gen_Digital": 4.37,
+      "Pets_At_Home": 4.3,
+      "Zeta_Global": 4.12
     }
   },
   "MFSCV": {

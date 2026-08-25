@@ -9,14 +9,13 @@
       "ILF",
       "CSPX",
       "4BRZ",
-      "JHGSC"
+      "JHGSC",
+      "ARGT"
     ],
     "equity_pending_url": [
       "LGLI"
     ],
-    "equity_manual_or_skip": [
-      "ARGT"
-    ],
+    "equity_manual_or_skip": [],
     "fi_chrome_mcp": [
       "PIMCO-LD",
       "PIMCO-INC",
@@ -108,8 +107,10 @@
       "sleeve": "Equity",
       "factsheet_url": "https://www.ishares.com/us/literature/fact-sheet/ilf-ishares-latin-america-40-etf-fund-fact-sheet-en-us.pdf",
       "source_type": "ishares_us",
-      "verified": "2026-03-31",
-      "refresh_frequency_days": 30
+      "verified": "2026-08-25",
+      "refresh_frequency_days": 30,
+      "alt_holdings_url": "https://stockanalysis.com/etf/ilf/holdings/",
+      "note": "El factsheet PDF de iShares US va con retraso (al 25-Ago-2026 seguia al 30-Jun). Para holdings usar alt_holdings_url (stockanalysis, diario)."
     },
     "4BRZ": {
       "name": "iShares MSCI Brazil UCITS (DE)",
@@ -124,10 +125,11 @@
       "name": "Global X MSCI Argentina ETF",
       "isin": "US37950E2596",
       "sleeve": "Equity",
-      "factsheet_url": "MANUAL_DROP — small position (1.35%), drop manually or skip",
-      "source_type": "manual_drop",
-      "note": "Global X factsheet URL not found via search. ARGT is small position with limited overlap with ACWI top 10 (mostly Mercado Libre etc).",
-      "refresh_frequency_days": 30
+      "factsheet_url": "https://stockanalysis.com/etf/argt/holdings/",
+      "source_type": "stockanalysis_holdings",
+      "note": "Global X no publica factsheet PDF accesible, pero stockanalysis.com da holdings DIARIOS (mas fresco que cualquier factsheet mensual). Verificado 25-Ago-2026. Ya no es MANUAL_DROP.",
+      "refresh_frequency_days": 30,
+      "verified": "2026-08-25"
     },
     "PIMCO-LD": {
       "name": "PIMCO GIS Low Duration Income I",

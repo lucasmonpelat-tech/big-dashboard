@@ -18,14 +18,14 @@
   },
   "fund_asof": {
     "CSPX": "2026-07-31",
-    "NBGMT": "2026-06-18",
+    "NBGMT": "2026-07-31",
     "MFSCV": "2026-07-31",
     "THOR": "2026-06-30",
     "JHGSC": "2026-07-31",
     "LGLI": "2026-04-30",
-    "ARGT": "2026-06-18",
-    "ILF": "2026-06-17",
-    "4BRZ": "2026-06-18",
+    "ARGT": "2026-08-14",
+    "ILF": "2026-08-20",
+    "4BRZ": "2026-07-31",
     "MAGS": "2026-07-15",
     "HEWJ": "2026-07-17"
   },
@@ -151,102 +151,102 @@
     },
     {
       "name": "MercadoLibre (MELI)",
-      "weight_in_sleeve_pct": 0.881,
+      "weight_in_sleeve_pct": 1.052,
       "rank": 8,
       "funds": [
         {
           "fund": "ARGT",
-          "weight_in_fund": 21.01,
-          "contribution": 0.881
-        }
-      ]
-    },
-    {
-      "name": "Delta Air Lines",
-      "weight_in_sleeve_pct": 0.846,
-      "rank": 9,
-      "funds": [
-        {
-          "fund": "NBGMT",
-          "weight_in_fund": 4.93,
-          "contribution": 0.846
+          "weight_in_fund": 25.09,
+          "contribution": 1.052
         }
       ]
     },
     {
       "name": "Petrobras (PBR)",
-      "weight_in_sleeve_pct": 0.82,
-      "rank": 10,
+      "weight_in_sleeve_pct": 0.941,
+      "rank": 9,
       "funds": [
         {
           "fund": "4BRZ",
-          "weight_in_fund": 12.66,
-          "contribution": 0.425
+          "weight_in_fund": 14.52,
+          "contribution": 0.487
         },
         {
           "fund": "ILF",
-          "weight_in_fund": 10.18,
-          "contribution": 0.395
+          "weight_in_fund": 11.68,
+          "contribution": 0.453
         }
       ]
     },
     {
-      "name": "Gen Digital",
-      "weight_in_sleeve_pct": 0.813,
+      "name": "Expedia Group (EXPE)",
+      "weight_in_sleeve_pct": 0.874,
+      "rank": 10,
+      "funds": [
+        {
+          "fund": "NBGMT",
+          "weight_in_fund": 5.09,
+          "contribution": 0.874
+        }
+      ]
+    },
+    {
+      "name": "Shift4 Payments",
+      "weight_in_sleeve_pct": 0.872,
       "rank": 11,
       "funds": [
         {
           "fund": "NBGMT",
-          "weight_in_fund": 4.74,
-          "contribution": 0.813
+          "weight_in_fund": 5.08,
+          "contribution": 0.872
+        }
+      ]
+    },
+    {
+      "name": "Tetra Tech (TTEK)",
+      "weight_in_sleeve_pct": 0.865,
+      "rank": 12,
+      "funds": [
+        {
+          "fund": "NBGMT",
+          "weight_in_fund": 5.04,
+          "contribution": 0.865
+        }
+      ]
+    },
+    {
+      "name": "Alibaba",
+      "weight_in_sleeve_pct": 0.863,
+      "rank": 13,
+      "funds": [
+        {
+          "fund": "NBGMT",
+          "weight_in_fund": 5.03,
+          "contribution": 0.863
+        }
+      ]
+    },
+    {
+      "name": "Charles River Labs (CRL)",
+      "weight_in_sleeve_pct": 0.85,
+      "rank": 14,
+      "funds": [
+        {
+          "fund": "NBGMT",
+          "weight_in_fund": 4.95,
+          "contribution": 0.85
         }
       ]
     },
     {
       "name": "Chewy",
-      "weight_in_sleeve_pct": 0.8,
-      "rank": 12,
-      "funds": [
-        {
-          "fund": "NBGMT",
-          "weight_in_fund": 4.66,
-          "contribution": 0.8
-        }
-      ]
-    },
-    {
-      "name": "Zeta Global",
-      "weight_in_sleeve_pct": 0.798,
-      "rank": 13,
-      "funds": [
-        {
-          "fund": "NBGMT",
-          "weight_in_fund": 4.65,
-          "contribution": 0.798
-        }
-      ]
-    },
-    {
-      "name": "ON Semiconductor",
-      "weight_in_sleeve_pct": 0.796,
-      "rank": 14,
-      "funds": [
-        {
-          "fund": "NBGMT",
-          "weight_in_fund": 4.64,
-          "contribution": 0.796
-        }
-      ]
-    },
-    {
-      "name": "Cisco Systems",
-      "weight_in_sleeve_pct": 0.769,
+      "weight_in_sleeve_pct": 0.807,
       "rank": 15,
       "funds": [
         {
           "fund": "NBGMT",
-          "weight_in_fund": 4.48,
-          "contribution": 0.769
+          "weight_in_fund": 4.7,
+          "contribution": 0.807
         }
       ]
     }
