@@ -16,6 +16,7 @@ Usage:
 import csv
 import json
 import sys
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
@@ -229,8 +230,20 @@ def main():
 
     # Save JSON
     out_path = ROOT / "data" / "acwi_overlap.json"
+    # BUGFIX 2026-08-25: refreshedAt estaba hardcodeado a "2026-05-12", asi que
+    # cada corrida re-estampaba mayo y el archivo mentia sobre su propia edad.
+    # as_of del factsheet de cada fondo del sleeve, para poder auditar de un
+    # vistazo con que data se calculo (THOR y LGLI suelen ir atrasados).
+    fund_holdings = read_fund_holdings()
+    equity_positions, _ = read_positions()
+    fund_asof = {}
+    for pos in sorted(equity_positions, key=lambda p: p["ticker"]):
+        fd = fund_holdings.get(pos["ticker"])
+        if isinstance(fd, dict):
+            fund_asof[pos["ticker"]] = fd.get("_as_of")
     out = {
-        "refreshedAt": "2026-05-12",
+        "refreshedAt": date.today().isoformat(),
+        "fund_asof": fund_asof,
         "source": "ACWI holdings (iShares ACWI factsheet 24-Apr) + fund_holdings_top10.json (CSPX exact, UCITS estimates)",
         "method": "BIG_exposure[stock] = Σ (fund_weight_in_BIG × stock_weight_in_fund / 100)",
         "summary": summary,

@@ -1,11 +1,24 @@
 {
-  "refreshedAt": "2026-05-12",
+  "refreshedAt": "2026-08-25",
+  "fund_asof": {
+    "4BRZ": "2026-06-18",
+    "ARGT": "2026-06-18",
+    "CSPX": "2026-05-31",
+    "HEWJ": "2026-07-17",
+    "ILF": "2026-06-17",
+    "JHGSC": "2026-05-31",
+    "LGLI": "2026-04-30",
+    "MAGS": "2026-07-15",
+    "MFSCV": "2026-07-31",
+    "NBGMT": "2026-06-18",
+    "THOR": "2026-06-30"
+  },
   "source": "ACWI holdings (iShares ACWI factsheet 24-Apr) + fund_holdings_top10.json (CSPX exact, UCITS estimates)",
   "method": "BIG_exposure[stock] = \u03a3 (fund_weight_in_BIG \u00d7 stock_weight_in_fund / 100)",
   "summary": {
     "total_acwi_top10": 24.75,
-    "total_big_top10_exposure": 14.68,
-    "diff_pp": -10.07
+    "total_big_top10_exposure": 14.72,
+    "diff_pp": -10.03
   },
   "overlap": [
     {
@@ -129,14 +142,14 @@
       "sector": "Information Technology",
       "location": "United States",
       "weight_acwi": 1.93,
-      "weight_big": 1.009,
-      "diff_pp": -0.921,
+      "weight_big": 1.016,
+      "diff_pp": -0.914,
       "contributors": [
         {
           "fund": "THOR",
           "fund_weight_in_equity_sleeve": 7.23,
-          "stock_weight_in_fund": 3.0,
-          "contribution": 0.217
+          "stock_weight_in_fund": 3.1,
+          "contribution": 0.224
         },
         {
           "fund": "CSPX",
@@ -152,14 +165,14 @@
       "sector": "Information Technology",
       "location": "Taiwan",
       "weight_acwi": 1.74,
-      "weight_big": 0.202,
-      "diff_pp": -1.538,
+      "weight_big": 0.238,
+      "diff_pp": -1.502,
       "contributors": [
         {
           "fund": "THOR",
           "fund_weight_in_equity_sleeve": 7.23,
-          "stock_weight_in_fund": 2.8,
-          "contribution": 0.202
+          "stock_weight_in_fund": 3.3,
+          "contribution": 0.238
         }
       ]
     },
