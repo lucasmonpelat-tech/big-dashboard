@@ -487,6 +487,14 @@
       <!-- EQUITY-ONLY: lookthrough al ACWI + composición del sleeve -->
       <div id="equity-lookthrough-block" style="display:none">
         <div class="section">
+          <h2>🥧 Composición del Equity Sleeve</h2>
+          <div style="font-size:12px;color:var(--text-mute);margin-bottom:12px">
+            Peso de cada fondo dentro del sleeve Equity (total = 100%).
+          </div>
+          <div id="equity-pie-chart" style="min-height:480px"></div>
+        </div>
+
+        <div class="section">
           <h2>🎯 BIG vs ACWI — Top 10 Lookthrough</h2>
           <div style="font-size:13px;color:var(--text-mute);margin-bottom:12px;line-height:1.5">
             ¿Cuánto de cada top 10 ACWI tenemos en BIG via los fondos equity que invertimos?
@@ -2024,6 +2032,46 @@
 
       const NAVY = "var(--navy)", GOLD = "var(--gold)", MUTE = "var(--text-mute)";
       const POS = "#7fa88f", NEG = "#c96060", WARN = "#e6a532";
+
+      // === Widget: Composición del sleeve (peso de cada fondo) ===
+      // El v1 tenia esta torta y se perdio al borrarlo (2026-08-24). FI y Alts
+      // ya la tenian en el v2; Equity no. Mismo criterio de render que la de
+      // Alts: hole 0.55 + labels outside + automargin + height explicito, si no
+      // Plotly mide el alto ANTES de saber cuanto ocupan las etiquetas de afuera
+      // y las corta.
+      try {
+        const eqHoldings = (window.__hRets?.equity?.holdings || [])
+          .filter(h => (h.status || "OPEN") === "OPEN" && h.mv_usd);
+        if (eqHoldings.length && typeof Plotly !== "undefined") {
+          const sorted = [...eqHoldings].sort((a, b) => b.mv_usd - a.mv_usd);
+          const totalMv = sorted.reduce((s, h) => s + h.mv_usd, 0);
+          const colors = ["#c9a961", "#4a7ab8", "#7fa88f", "#e67e22", "#7c6f9c",
+                          "#e8b57a", "#3a6a99", "#6a5aa5", "#5abfbf", "#c95a91", "#8fa87f"];
+          Plotly.newPlot("equity-pie-chart", [{
+            type: "pie", hole: 0.55,
+            labels: sorted.map(h => h.ticker),
+            values: sorted.map(h => h.mv_usd),
+            customdata: sorted.map(h => h.name || ""),
+            marker: { colors: colors.slice(0, sorted.length) },
+            textinfo: "label+percent",
+            textposition: "outside",
+            automargin: true,
+            textfont: { size: 13, color: "#0a2540" },
+            hovertemplate: "<b>%{label}</b><br>%{customdata}<br>$%{value:,.0f}<br>%{percent}<extra></extra>",
+          }], {
+            height: 480,
+            margin: { t: 40, r: 40, b: 40, l: 40 },
+            showlegend: false,
+            annotations: [{
+              text: `<b>Equity</b><br><span style='font-size:16px'>$${(totalMv / 1e6).toFixed(2)}M</span>`
+                    + `<br><span style='font-size:12px;color:#888'>${sorted.length} fondos</span>`,
+              x: 0.5, y: 0.5, font: { size: 14, color: "#0a2540" }, showarrow: false,
+            }],
+          }, { responsive: true, displaylogo: false });
+        }
+      } catch (e) {
+        console.warn("equity pie no se pudo renderizar", e);
+      }
 
       // === Widget: ACWI Top 10 Lookthrough Overlap ===
       try {

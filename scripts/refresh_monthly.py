@@ -5,10 +5,9 @@ Master script — orquesta el refresh mensual completo del HTML dashboard.
 
 Pasos:
   1. Descargar factsheets (download_factsheets.py)
-  2. Parsear cada PDF (parse_factsheet.py)
-  3. Agregar a BIG-level breakdowns (aggregate_breakdowns.py)
-  4. (Optional) PIMCO Chrome MCP refresh
-  5. Reportar estado final con status badges
+  2. Parsear cada PDF -> data/funds/<TICKER>.json (parse_factsheet.py)
+  3. (Optional) PIMCO Chrome MCP refresh
+  4. Reportar estado final con status badges
 
 Usage:
     python scripts/refresh_monthly.py [--month YYYY-MM]
@@ -98,13 +97,17 @@ def main():
         cmd = [sys.executable, str(SCRIPTS / "download_factsheets.py")]
         if args.month:
             cmd.extend(["--month", args.month])
-        run(cmd, "STEP 1/3 — Download factsheets")
+        run(cmd, "STEP 1/2 — Download factsheets")
 
-    # Step 2: Parse all PDFs
-    run([sys.executable, str(SCRIPTS / "parse_factsheet.py")], "STEP 2/3 — Parse factsheets")
+    # Step 2: Parse all PDFs -> data/funds/<TICKER>.json
+    run([sys.executable, str(SCRIPTS / "parse_factsheet.py")], "STEP 2/2 — Parse factsheets")
 
-    # Step 3: Aggregate to BIG-level
-    run([sys.executable, str(SCRIPTS / "aggregate_breakdowns.py")], "STEP 3/3 — Aggregate breakdowns")
+    # El viejo "STEP 3 — Aggregate breakdowns" se elimino el 2026-08-25 junto
+    # con aggregate_breakdowns.py: sus 4 outputs (equity_sectorial,
+    # equity_regional, fi_metrics, acwi_overlap_recomputed) no los leia nadie
+    # y estaban congelados desde el 12-May. Los breakdowns que SI se usan los
+    # generan otros scripts: fetch_acwi_breakdowns.py, fetch_agg_breakdowns.py
+    # y compute_fi_subasset.py, todos en el cron monthly-breakdowns.yml.
 
     # Status
     status_report()
