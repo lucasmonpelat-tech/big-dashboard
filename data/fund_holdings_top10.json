@@ -1,7 +1,7 @@
 {
   "_description": "Top 10 holdings per BIG equity fund. Used for lookthrough analysis vs ACWI top 10.",
-  "_lastUpdate": "2026-07-22",
-  "_status": "VERIFICADO: 9/9 fondos diversificados. CSPX, NBGMT, MFSCV, THOR, JHGSC, LGLI, ILF, ARGT, 4BRZ con factsheet/holdings data 2026.",
+  "_lastUpdate": "2026-08-25",
+  "_status": "VERIFICADO: 9/9 fondos diversificados. THOR refrescado 25-Ago-2026 (holdings 30-Jun-2026). CSPX, NBGMT, MFSCV, JHGSC, LGLI, ILF, ARGT, 4BRZ con factsheet/holdings data 2026.",
   "CSPX": {
     "name": "iShares Core S&P 500 UCITS",
     "source": "S&P 500 index weights (public, ~May 2026)",
@@ -139,24 +139,24 @@
   },
   "THOR": {
     "name": "Thornburg Equity Income Builder I",
-    "source": "VERIFICADO: Thornburg Equity Income Builder UCITS factsheet 30-Apr-2026 holdings / 31-May-2026 fund data via thornburg.com. Active Share ~91%. NAV $43.10. YTD +16.2%. AUM $564M.",
+    "source": "VERIFICADO: Thornburg Equity Income Builder UCITS Class I Acc factsheet 31-Jul-2026 (thornburg.wmcubehk.com); seccion \"Ten Largest Holdings\" al 30-Jun-2026. Active Share 91.8%. 65 holdings. P/E 16.3x, P/B 2.2x. Div yield 3.7%. YTD I Acc +19.90%. Composicion: 65.3% non-US equity / 23.2% US equity / 11.6% cash.",
     "isin": "IE00B6YCBF59",
-    "_as_of": "2026-04-30",
+    "_as_of": "2026-06-30",
     "top_holdings": {
-      "AVGO": 3.0,
-      "2330": 2.8
+      "AVGO": 3.1,
+      "2330": 3.3
     },
     "_factsheet_top10": {
-      "Orange": 3.9,
-      "BNP_Paribas": 3.6,
-      "ATT": 3.2,
-      "NN_Group": 3.0,
-      "Broadcom_AVGO": 3.0,
-      "Taiwan_Semiconductor_TSM": 2.8,
-      "Deutsche_Telekom": 2.5,
-      "Samsung_Electronics": 2.4,
-      "Equitable_Holdings": 2.3,
-      "TotalEnergies_TTE": 2.2
+      "Kimberly_Clark_KMB": 3.8,
+      "Orange": 3.7,
+      "BNP_Paribas": 3.5,
+      "Taiwan_Semiconductor_TSM": 3.3,
+      "NN_Group": 3.3,
+      "Broadcom_AVGO": 3.1,
+      "ATT": 3.0,
+      "TotalEnergies_TTE": 2.7,
+      "Samsung_Electronics": 2.5,
+      "Merck_&_Co_MRK": 2.3
     }
   },
   "JHGSC": {
