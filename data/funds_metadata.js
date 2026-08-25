@@ -34,6 +34,8 @@ const FACTSHEET_LINKS = {
     "IE00B5BMR087": "https://www.blackrock.com/americas-offshore/en/literature/fact-sheet/cspx-ishares-core-s-p-500-ucits-etf-fund-fact-sheet-en-lm.pdf",
     "US4642873909": "https://www.ishares.com/us/literature/fact-sheet/ilf-ishares-latin-america-40-etf-fund-fact-sheet-en-us.pdf",
     "US37950E2596": "https://www.globalxetfs.com/funds/argt",
+    "US46434V8862": "https://www.ishares.com/us/literature/fact-sheet/hewj-ishares-currency-hedged-msci-japan-etf-fund-fact-sheet-en-us.pdf",
+    "US53656G4982": "https://www.roundhillinvestments.com/assets/pdfs/mags_factsheet.pdf",
     "DE000A0Q4R85": "https://www.blackrock.com/es/profesionales/productos/304304/ishares-msci-brazil-ucits-etf-de-acc-fund",
     "IE00BF4KN675": "https://www.lazardassetmanagement.com/us/en_us/investment-solutions/how-to-invest/17/400?shareClass=5344",
     "LU1985812756": "https://www.mfs.com/content/dam/mfs-enterprise/mfscom/products/factsheet/meridian/gg/mer_cvf_fs_gg_en.pdf",
@@ -67,6 +69,12 @@ const CURRENCY_EXPOSURE = {
     "US4642873909": { exposures: [{c:"BRL",p:24},{c:"MXN",p:22},{c:"CLP",p:12},{c:"COP",p:10},{c:"ARS",p:9},{c:"PEN",p:7},{c:"USD",p:16}], note: "ILF — LatAm currency mix", src: "iShares factsheet" },
     "US37950E2596": { exposures: [{c:"ARS",p:55},{c:"USD",p:45}], note: "ARGT — Argentine ADRs & locals", src: "Global X docs" },
     "DE000A0Q4R85": { exposures: [{c:"BRL",p:97},{c:"USD",p:3}], note: "4BRZ — near full BRL exposure", src: "BlackRock factsheet" },
+    // HEWJ: acciones japonesas con el YEN HEDGEADO a USD. El pais del subyacente
+    // es JP (ver COUNTRY_EXPOSURE), pero la exposicion de MONEDA del inversor es
+    // USD. No confundir las dos cosas: es el mismo error que arrastraba el viejo
+    // pampa-big-analyzer con los PIMCO/Man hedgeados.
+    "US46434V8862": { exposures: [{c:"USD",p:100}], note: "HEWJ — MSCI Japan con el yen hedgeado a USD: pais JP, moneda USD", src: "iShares HEWJ factsheet (30-Jun-2026)" },
+    "US53656G4982": { exposures: [{c:"USD",p:100}], note: "MAGS — Mag7 equal weight (AAPL/MSFT/NVDA/AMZN/META/GOOGL/TSLA), todas US large caps en USD", src: "Roundhill MAGS factsheet" },
     "IE00BF4KN675": { exposures: [{c:"USD",p:55},{c:"EUR",p:18},{c:"GBP",p:12},{c:"AUD",p:8},{c:"CAD",p:7}], note: "Lazard Infra — global listed", src: "Lazard factsheet" },
     "LU1985812756": { exposures: [{c:"USD",p:62},{c:"EUR",p:20},{c:"GBP",p:10},{c:"JPY",p:5},{c:"OTHER",p:3}], note: "MFS Contrarian — global value equities", src: "MFS factsheet" },
     "IE00BFMHRK20": { exposures: [{c:"USD",p:58},{c:"EUR",p:16},{c:"GBP",p:8},{c:"JPY",p:7},{c:"OTHER",p:11}], note: "NB Megatrends — global thematic", src: "NB docs" },
