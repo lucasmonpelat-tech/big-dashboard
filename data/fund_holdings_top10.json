@@ -4,7 +4,7 @@
   "_status": "VERIFICADO: 11 fondos del sleeve equity. Refrescados 25-Ago-2026: CSPX/MFSCV/JHGSC/NBGMT (31-Jul), THOR (30-Jun), ARGT (14-Ago), ILF (20-Ago), 4BRZ (31-Jul). MAGS/HEWJ en Jul-2026. Unico pendiente: LGLI (30-Abr-2026).",
   "CSPX": {
     "name": "iShares Core S&P 500 UCITS",
-    "source": "VERIFICADO: factsheet oficial iShares Core S&P 500 UCITS ETF (BlackRock americas-offshore), seccion Top 10 Holdings al 31-Jul-2026. Total top 10 = 37.56% del portfolio. Reemplaza los pesos del indice S&P 500 publicos (~May-2026) que habia antes.",
+    "source": "VERIFICADO: factsheet oficial iShares Core S&P 500 UCITS ETF (BlackRock americas-offshore), seccion Top 10 Holdings al 31-Jul-2026. Total top 10 = 37.56% del portfolio. Reemplaza los pesos del indice S&P 500 publicos (~May-2026) que habia antes. + TSLA 1.42% desde iShares IVV al 13-Ago-2026 (ver _note).",
     "isin": "IE00B5BMR087",
     "top_holdings": {
       "NVDA": 7.54,
@@ -16,7 +16,8 @@
       "GOOG": 2.61,
       "META": 1.9,
       "JPM": 1.46,
-      "BRK.B": 1.45
+      "BRK.B": 1.45,
+      "TSLA": 1.42
     },
     "_as_of": "2026-07-31",
     "_factsheet_top10": {
@@ -29,8 +30,10 @@
       "GOOG": 2.61,
       "META": 1.9,
       "JPM": 1.46,
-      "BRK.B": 1.45
-    }
+      "BRK.B": 1.45,
+      "TSLA": 1.42
+    },
+    "_note": "El factsheet publica top-10 y TSLA quedo #11 (detras de JPM 1.46 y BRK.B 1.45). Se la agrega igual con peso 1.42% (iShares IVV / S&P 500 al 13-Ago-2026) porque CSPX replica el indice completo: omitirla hace que el widget BIG vs ACWI muestre un underweight falso en Tesla. Los 10 del factsheet son al 31-Jul-2026. De los ACWI top-10, el unico que CSPX legitimamente NO tiene es 2330 (TSM, Taiwan, fuera del S&P 500)."
   },
   "ILF": {
     "name": "iShares Latin America 40 ETF",

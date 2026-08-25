@@ -227,26 +227,31 @@
       ]
     },
     {
+      "name": "Tesla (TSLA)",
+      "weight_in_sleeve_pct": 0.851,
+      "rank": 14,
+      "funds": [
+        {
+          "fund": "CSPX",
+          "weight_in_fund": 1.42,
+          "contribution": 0.45
+        },
+        {
+          "fund": "MAGS",
+          "weight_in_fund": 13.2,
+          "contribution": 0.401
+        }
+      ]
+    },
+    {
       "name": "Charles River Labs (CRL)",
       "weight_in_sleeve_pct": 0.85,
-      "rank": 14,
+      "rank": 15,
       "funds": [
         {
           "fund": "NBGMT",
           "weight_in_fund": 4.95,
           "contribution": 0.85
-        }
-      ]
-    },
-    {
-      "name": "Chewy",
-      "weight_in_sleeve_pct": 0.807,
-      "rank": 15,
-      "funds": [
-        {
-          "fund": "NBGMT",
-          "weight_in_fund": 4.7,
-          "contribution": 0.807
         }
       ]
     }
