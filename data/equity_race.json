@@ -2,41 +2,6 @@
   "refreshedAt": "2026-08-25T13:33:01.915135",
   "inception": "2025-06-30",
   "benchmark": "MSCI ACWI (via ACWI ETF - Yahoo)",
-  "stats": {
-    "latest_month": "2026-05",
-    "returns": {
-      "1M": {
-        "sleeve": 1.76,
-        "acwi": 4.62,
-        "alpha": -2.86
-      },
-      "3M": {
-        "sleeve": 3.13,
-        "acwi": 7.57,
-        "alpha": -4.44
-      },
-      "6M": {
-        "sleeve": 10.52,
-        "acwi": 13.05,
-        "alpha": -2.53
-      },
-      "YTD": {
-        "sleeve": 9.48,
-        "acwi": 12.05,
-        "alpha": -2.57
-      },
-      "SI": {
-        "sleeve": 21.35,
-        "acwi": 24.36,
-        "alpha": -3.01
-      }
-    },
-    "annualized": {
-      "sleeve": 23.5,
-      "acwi": 26.85,
-      "alpha": -3.35
-    }
-  },
   "sleeve_index": {
     "2025-06": 100.0,
     "2025-07": 100.9605,
@@ -224,5 +189,6 @@
       "ytd_months_counted": 6
     }
   ],
-  "_ytd_spot_updated": "2026-08-25: 9 holdings YTD spot via Pershing NAV/anchor 31-Dic"
+  "_ytd_spot_updated": "2026-08-25: 9 holdings YTD spot via Pershing NAV/anchor 31-Dic",
+  "_stats_removed": "2026-08-25: se elimino el bloque 'stats' (latest_month 2026-05 + returns 1M/3M/6M/YTD/SI + annualized). Lo generaba equity_race.py, borrado el 2026-08-20 (commit 8a064d9) por estar dormido desde mayo. No lo leia NADIE: los returns del sleeve que muestra el dashboard salen de benchmark_comparison.json (canonical v2, regenerado a diario). El bloque quedaba con refreshedAt de hoy y numeros de mayo, invitando a concluir que el dashboard mostraba data vieja. Este JSON hoy se usa solo para holdings[] (clasificacion de sleeve + YTD override) y las series mensuales."
 }

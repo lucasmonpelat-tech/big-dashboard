@@ -1358,31 +1358,11 @@
       }, {responsive: true, displaylogo: false});
     }
 
-    function renderSleeveMonthly(raceData, sleeveKey) {
-      // raceData.sleeve_monthly_returns : {"YYYY-MM": 0.02, ...}
-      // raceData.acwi_monthly_returns o agg_monthly_returns
-      const smr = raceData?.sleeve_monthly_returns || {};
-      const bmkKey = sleeveKey === "equity" ? "acwi_monthly_returns" : "agg_monthly_returns";
-      const bmr = raceData?.[bmkKey] || {};
-      const months = Object.keys(smr).sort();
-      const rows = months.map(m => {
-        const sv = smr[m];
-        const bv = bmr[m];
-        if (sv === null || sv === undefined) return "";
-        const svPct = sv * 100;
-        const bvPct = bv !== null && bv !== undefined ? bv * 100 : null;
-        const alpha = bvPct !== null ? (svPct - bvPct) * 100 : null; // in bp
-        const alphaCls = alpha !== null ? (alpha > 0 ? "pos-val" : alpha < 0 ? "neg-val" : "") : "";
-        const svCls = sv > 0 ? "pos-val" : sv < 0 ? "neg-val" : "";
-        return `<tr class="attr-row">
-          <td class="left">${m}</td>
-          <td class="${svCls}">${_fmtPct(svPct)}</td>
-          <td>${bvPct !== null ? _fmtPct(bvPct) : "—"}</td>
-          <td class="${alphaCls}">${alpha !== null ? _fmtBp(alpha) : "—"}</td>
-        </tr>`;
-      }).join("");
-      document.querySelector("#sleeve-monthly-table tbody").innerHTML = rows;
-    }
+    // renderSleeveMonthly() se elimino el 2026-08-25: funcion muerta.
+    // Nunca se llamaba, y apuntaba a #sleeve-monthly-table, que no existe en
+    // el HTML -- de haberse invocado tiraba null.innerHTML. Leia el bloque
+    // mensual de equity_race/fi_race, que quedo sin generador cuando se
+    // borraron equity_race.py y fi_race.py (commit 8a064d9, 2026-08-20).
 
     function renderSleeveHoldings(sleeveKey) {
       // Canonical v2 holdings_returns.json: MV correcto de Pershing UGL + bench DW ya calculados

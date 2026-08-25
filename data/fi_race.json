@@ -13,38 +13,7 @@
   },
   "stats": {
     "latest_month": "2026-04",
-    "returns": {
-      "1M": {
-        "sleeve": 1.58,
-        "agg": 0.17,
-        "alpha": 1.41
-      },
-      "3M": {
-        "sleeve": 0.53,
-        "agg": -0.06,
-        "alpha": 0.59
-      },
-      "6M": {
-        "sleeve": 2.62,
-        "agg": 0.52,
-        "alpha": 2.1
-      },
-      "YTD": {
-        "sleeve": 1.29,
-        "agg": 0.19,
-        "alpha": 1.1
-      },
-      "SI": {
-        "sleeve": 6.35,
-        "agg": 3.22,
-        "alpha": 3.13
-      }
-    },
-    "annualized": {
-      "sleeve": 7.67,
-      "agg": 3.88,
-      "alpha": 3.79
-    }
+    "_note": "OJO: 'latest_month' NO es decorativo -- refresh_fi_race_daily.py lo lee como basis_month para detectar anchors stale y calibrar YTD/SI desde el mensual. No borrar. 2026-08-25: se quitaron 'returns' y 'annualized', que si eran fosiles (los generaba fi_race.py, borrado el 2026-08-20, y no los leia nadie; los returns del sleeve salen de benchmark_comparison.json)."
   },
   "sleeve_index": {
     "2025-06": 100.0,
