@@ -1,7 +1,7 @@
 {
   "_description": "Top 10 holdings per BIG equity fund. Used for lookthrough analysis vs ACWI top 10.",
   "_lastUpdate": "2026-08-25",
-  "_status": "VERIFICADO: 9/9 fondos diversificados. THOR refrescado 25-Ago-2026 (holdings 30-Jun-2026). CSPX, NBGMT, MFSCV, JHGSC, LGLI, ILF, ARGT, 4BRZ con factsheet/holdings data 2026.",
+  "_status": "VERIFICADO: 9/9 fondos diversificados. Refrescados 25-Ago-2026: THOR (holdings 30-Jun-2026) y MFSCV (full holdings 31-Jul-2026, pesos reales). CSPX, NBGMT, JHGSC, LGLI, ILF, ARGT, 4BRZ con factsheet/holdings data 2026.",
   "CSPX": {
     "name": "iShares Core S&P 500 UCITS",
     "source": "S&P 500 index weights (public, ~May 2026)",
@@ -118,23 +118,23 @@
   },
   "MFSCV": {
     "name": "MFS Meridian Contrarian Value I1",
-    "source": "VERIFICADO: nombres del PDF MFS 31-May-2026 + pesos de Citywire 30-Apr-2026 (los 8 holdings que siguen en May). Merck KGaA y Croda son nuevos en May, pesos ESTIMADOS ~3.2-3.5 basado en mediana top10. Total ~36% NAV.",
+    "source": "VERIFICADO: MFS full holdings oficial al 31-Jul-2026 (mfs.com, pagina Full and Historical Holdings del LU1985812756) — pesos REALES, ya no estimados. Nombres cruzados contra el factsheet MFS 31-Jul-2026. Top 10 equity = 33.12% (el factsheet declara 33.14%). Se excluye el forward EUR/USD 20260828 (3.74%), que no es equity. Net Assets $3.7B, 41 issues, cash 6.09%.",
     "isin": "LU1985812756",
-    "_as_of": "2026-05-31",
+    "_as_of": "2026-07-31",
     "top_holdings": {
-      "_note": "NO tiene NINGUNO de ACWI top 10. Cambios Mar->May: salieron Becton/Cenovus/Veolia/Medtronic. Entraron Merck KGaA, Howden Joinery, AB InBev, Symrise, Croda."
+      "_note": "NO tiene NINGUNO de ACWI top 10. Rotacion May->Jul: salen del top-10 Merck KGaA, Deutsche Post, Symrise y Croda (los tres ultimos siguen en cartera, mas abajo: Croda 2.70, Deutsche Post 2.40, Symrise 2.39). Entran Boston Scientific, Allegion, Medtronic y Becton Dickinson — vuelven Medtronic y Becton, que habian salido Mar->May."
     },
     "_factsheet_top10": {
-      "Michelin": 4.4,
-      "Davide_Campari": 4.3,
-      "IMCD": 4.3,
-      "Merck_KGaA": 3.5,
-      "Zalando": 3.4,
-      "Deutsche_Post": 3.7,
-      "Howden_Joinery": 3.3,
-      "AB_InBev": 3.1,
-      "Symrise": 3.1,
-      "Croda_International": 3.2
+      "Michelin": 3.97,
+      "Boston_Scientific_BSX": 3.94,
+      "Davide_Campari": 3.74,
+      "IMCD": 3.29,
+      "Howden_Joinery": 3.26,
+      "Allegion_ALLE": 3.08,
+      "AB_InBev": 3.07,
+      "Medtronic_MDT": 3.06,
+      "Becton_Dickinson_BDX": 2.92,
+      "Zalando": 2.79
     }
   },
   "THOR": {
