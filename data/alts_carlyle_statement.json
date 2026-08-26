@@ -1,6 +1,6 @@
 {
   "_description": "Source of truth para CALP (Carlyle AlpInvest) — unico holding Alts cuya valuation llega por fuera de Pershing. Cada entry es un statement; el ultimo por 'as_of' manda. Alimenta alts_race.json en refresh_alts_daily.py.",
-  "refreshedAt": "2026-07-31T17:30:00",
+  "refreshedAt": "2026-08-26T00:00:00",
   "source": "Statements oficiales Carlyle AlpInvest (PDF)",
   "statements": {
     "CALP": [
@@ -13,7 +13,7 @@
         "mv_usd": 2578416.72,
         "ytd_return_pct": null,
         "si_return_pct": 3.14,
-        "si_return_pct_carlyle_inception": 38.10,
+        "si_return_pct_carlyle_inception": 38.1,
         "big_cost_basis_nav": 13.39,
         "big_purchase_date": "2025-08-29",
         "since_inception_date": "2025-08-29",
@@ -41,11 +41,11 @@
         "isin": "LU2827810776",
         "fund_name": "Carlyle AlpInvest PM Sub-Fund - I - Class B1",
         "shares": 186706.497,
-        "nav_per_share": 14.30,
+        "nav_per_share": 14.3,
         "mv_usd": 2669902.91,
         "ytd_return_pct": 1.35,
-        "si_return_pct": 6.80,
-        "si_return_pct_carlyle_inception": 43.00,
+        "si_return_pct": 6.8,
+        "si_return_pct_carlyle_inception": 43.0,
         "big_cost_basis_nav": 13.39,
         "big_purchase_date": "2025-08-29",
         "since_inception_date": "2025-08-29",
@@ -77,7 +77,7 @@
         "mv_usd": 2684839.43,
         "ytd_return_pct": 1.91,
         "si_return_pct": 7.39,
-        "si_return_pct_carlyle_inception": 43.80,
+        "si_return_pct_carlyle_inception": 43.8,
         "big_cost_basis_nav": 13.39,
         "big_purchase_date": "2025-08-29",
         "since_inception_date": "2025-08-29",
@@ -131,6 +131,22 @@
         "since_inception_date": "2025-08-29",
         "source_doc": "TVS_P122202_2026-06-30.pdf",
         "notes": "Period End 30-Jun-2026. YTD vs 31-Dec-2025 NAV 14.11 (+5.03%, confirmado con el statement oficial, coincide con lo que ya estaba en alts_external.json). SI desde compra BIG 29-Aug-2025 @ 13.39 -> 14.82 = +10.68% (Carlyle inception 28-Jun-2024 @ 10.00 = +48.20%)."
+      },
+      {
+        "as_of": "2026-07-31",
+        "isin": "LU2827810776",
+        "fund_name": "Carlyle AlpInvest PM Sub-Fund - I - Class B1",
+        "shares": 186706.497,
+        "nav_per_share": 14.98,
+        "mv_usd": 2796863.33,
+        "ytd_return_pct": 6.17,
+        "si_return_pct": 11.87,
+        "si_return_pct_carlyle_inception": 49.8,
+        "big_cost_basis_nav": 13.39,
+        "big_purchase_date": "2025-08-29",
+        "since_inception_date": "2025-08-29",
+        "source_doc": "TVS_P122202_2026-07-31.pdf",
+        "notes": "Period End 31-Jul-2026. YTD vs NAV 14.11 del 31-Dic-2025 = +6.17%, valor declarado textual en el statement. SI desde compra BIG 29-Ago-2025 @ 13.39 -> 14.98 = +11.87% (Carlyle inception 28-Jun-2024 @ 10.00 = +49.80%, tambien declarado en el statement). Sin suscripciones nuevas: shares sin cambios."
       }
     ]
   }
