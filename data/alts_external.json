@@ -1,6 +1,6 @@
 {
   "_description": "Holdings alternativos EXTERNOS a Pershing UGL. Data manual desde statements de los managers directamente. Actualizar cuando Lucas envía nuevo statement.",
-  "_updated": "2026-07-27",
+  "_updated": "2026-08-26",
   "holdings": [
     {
       "ticker": "CALP",
@@ -9,19 +9,22 @@
       "cusip": null,
       "qty": 186706.497,
       "unit_cost_usd": 13.39,
-      "cost_basis_usd": 2500000.00,
-      "last_price_usd": 14.82,
-      "mv_usd": 2766990.29,
-      "unrealized_gl_usd": 266990.29,
-      "return_pct": 10.68,
-      "ytd_pct": 5.03,
+      "cost_basis_usd": 2500000.0,
+      "last_price_usd": 14.98,
+      "mv_usd": 2796863.33,
+      "unrealized_gl_usd": 296863.33,
+      "return_pct": 11.87,
+      "ytd_pct": 6.17,
       "first_buy_date": "2025-08-29",
-      "as_of": "2026-06-30",
-      "source": "Carlyle AlpInvest Statement Junio 2026 (Pro Capital, TVS_P122202_2026-06-30)",
-      "source_file": "C:/Users/lmonp/Dropbox/2026/Research Fondos/Alternativos/Private Equity/Carlyle AlpInvest/Statements/TVS_P122202_2026-06-30.pdf",
+      "as_of": "2026-07-31",
+      "source": "Carlyle AlpInvest Statement Julio 2026 (Pro Capital, TVS_P122202_2026-07-31)",
+      "source_file": "C:/Users/lmonp/Dropbox/2026/Research Fondos/Alternativos/Private Equity/Carlyle AlpInvest/Statements/TVS_P122202_2026-07-31.pdf",
       "sleeve": "alternatives",
       "buys_history": [
-        {"date": "2025-08-29", "cost": 2500000.00}
+        {
+          "date": "2025-08-29",
+          "cost": 2500000.0
+        }
       ]
     }
   ]
