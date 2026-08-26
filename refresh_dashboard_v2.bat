@@ -6,7 +6,8 @@ echo ============================================
 echo.
 echo 1) Descarga 4 XLSX desde NetX360+ (auto-login OTP)
 echo 2) Corre los 4 parsers (positions/transactions/pnl/costs)
-echo 3) Escribe canonical JSONs en data/canonical/
+echo 3) Deriva alts_external.json desde el statement de Carlyle
+echo 4) Escribe canonical JSONs en data/canonical/
 echo.
 pause
 
@@ -16,6 +17,16 @@ python dashboard_v2\ingest\netx360_auto.py --headed
 if errorlevel 1 (
     echo.
     echo [FAIL] Ingest fallo. Ver alertas en data/_alerts/.
+    pause
+    exit /b 1
+)
+
+echo.
+echo === STEP 1b: Derivar holdings externos (CALP) desde el statement ===
+python scriptsuild_alts_external.py
+if errorlevel 1 (
+    echo.
+    echo [FAIL] build_alts_external fallo.
     pause
     exit /b 1
 )

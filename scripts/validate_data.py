@@ -39,6 +39,23 @@ SLEEVE_LABEL = {"equity": "Equity", "fixed_income": "Fixed Income",
 # huerfanas cuando no aparecen en las posiciones.
 NON_FUND_KEYS = {"CASH-USD"}
 
+# ---- Holdings externos a Pershing (statements manuales) ---------------------
+# Un holding "external_statement" (hoy solo CALP, custodiado fuera de Pershing)
+# se carga A MANO y su dato termina replicado en 4 archivos, cada uno leido por
+# un widget distinto. Si se actualiza uno solo, el dashboard muestra data
+# mezclada (Overview con el mes nuevo, Alts Race con el viejo) y NADA lo
+# reconcilia: ningun cron los sincroniza y el deploy pasa igual.
+# Paso el 2026-08-26 al cargar el statement de Julio de CALP.
+ALTS_EXTERNAL_JSON = ROOT / "data" / "alts_external.json"
+ALTS_STATEMENT_JSON = ROOT / "data" / "alts_carlyle_statement.json"
+ALTS_FACTSHEET_YTD_JSON = ROOT / "data" / "alts_factsheet_ytd.json"
+
+# Los MV se copian textual del mismo statement, asi que tienen que ser
+# identicos. Tolerancia sub-centavo: absorbe ruido de float (~1e-9) pero un
+# centavo real de diferencia FALLA. Con 0.01 no fallaba: |0.01| no es > 0.01.
+MV_TOLERANCE_USD = 0.005
+PCT_TOLERANCE = 0.005
+
 # Tolerancia para sumas de exposicion (%)
 SUM_TOLERANCE = 1.5
 # Tolerancia para comparar valores USD entre las dos fuentes de posiciones
@@ -155,6 +172,111 @@ def extract_exposure_sums(block):
         if ps:
             sums[isin] = round(sum(ps), 2)
     return sums
+
+
+def latest_canonical():
+    """(path, dict) del snapshot canonical mas reciente, o (None, None)."""
+    snaps = sorted((ROOT / "data" / "canonical").glob("*/holdings_returns.json"))
+    if not snaps:
+        return None, None
+    return snaps[-1], json.loads(snaps[-1].read_text(encoding="utf-8"))
+
+
+def _load(path):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+
+
+def check_external_statements(errors, warnings):
+    """Los 4 archivos de un holding externo tienen que contar la misma historia.
+
+    Compara, para cada holding del canonical con _mv_source == "external_statement":
+      canonical  <-> alts_external.json        (as_of + mv_usd)
+      canonical  <-> alts_carlyle_statement    (as_of + mv_usd del ultimo statement)
+      canonical  <-> alts_factsheet_ytd        (as_of + ytd_pct)
+
+    NO se hardcodea ningun ticker: el universo sale del propio canonical.
+    """
+    print("\n" + "-" * 70)
+    print("  4 — Holdings externos: los 4 archivos en sincronia")
+    print("-" * 70)
+
+    canon_path, canon = latest_canonical()
+    if not canon:
+        warnings.append("no hay snapshot canonical — skip check de externos")
+        print("  [WARN] sin snapshot canonical")
+        return
+
+    externos = [
+        h for sl in canon.get("sleeves", {}).values()
+        for h in sl.get("holdings", [])
+        if h.get("_mv_source") == "external_statement"
+    ]
+    if not externos:
+        print("  [OK]    no hay holdings con _mv_source='external_statement'")
+        return
+
+    ext_data = _load(ALTS_EXTERNAL_JSON) or {}
+    ext_by_isin = {h.get("isin"): h for h in ext_data.get("holdings", []) if h.get("isin")}
+    stmts = (_load(ALTS_STATEMENT_JSON) or {}).get("statements", {})
+    ytd_ovr = (_load(ALTS_FACTSHEET_YTD_JSON) or {}).get("overrides", {})
+
+    def diff(a, b, tol):
+        if a is None or b is None:
+            return a != b
+        return abs(a - b) > tol
+
+    for h in externos:
+        tk, isin = h.get("ticker"), h.get("isin")
+        c_asof, c_mv, c_ytd = h.get("_as_of"), h.get("mv_usd"), h.get("ytd_pct")
+        problemas = []
+
+        # --- alts_external.json: es de donde el transform DERIVA el canonical ---
+        e = ext_by_isin.get(isin)
+        if e is None:
+            errors.append(f"externos[{tk}]: no esta en alts_external.json (el canonical lo tiene)")
+        else:
+            if e.get("as_of") != c_asof:
+                problemas.append(f"alts_external.as_of={e.get('as_of')} vs canonical._as_of={c_asof}")
+            if diff(e.get("mv_usd"), c_mv, MV_TOLERANCE_USD):
+                problemas.append(f"alts_external.mv_usd={e.get('mv_usd')} vs canonical={c_mv}")
+
+        # --- alts_carlyle_statement.json: historial de statements ---
+        arr = stmts.get(tk)
+        if not arr:
+            warnings.append(f"externos[{tk}]: sin entrada en {ALTS_STATEMENT_JSON.name} "
+                            f"(no se puede cruzar el statement)")
+        else:
+            last = max(arr, key=lambda s: str(s.get("as_of") or ""))
+            if last.get("as_of") != c_asof:
+                problemas.append(f"statement.as_of={last.get('as_of')} vs canonical._as_of={c_asof}")
+            if diff(last.get("mv_usd"), c_mv, MV_TOLERANCE_USD):
+                problemas.append(f"statement.mv_usd={last.get('mv_usd')} vs canonical={c_mv}")
+
+        # --- alts_factsheet_ytd.json: override de YTD que consume el front ---
+        o = ytd_ovr.get(isin)
+        if o is None:
+            warnings.append(f"externos[{tk}]: sin override en {ALTS_FACTSHEET_YTD_JSON.name}")
+        else:
+            if o.get("as_of") != c_asof:
+                problemas.append(f"factsheet_ytd.as_of={o.get('as_of')} vs canonical._as_of={c_asof}")
+            if diff(o.get("ytd_pct"), c_ytd, PCT_TOLERANCE):
+                problemas.append(f"factsheet_ytd.ytd_pct={o.get('ytd_pct')} vs canonical={c_ytd}")
+
+        if problemas:
+            print(f"  [ERROR] {tk:6} DIVERGENTE ({len(problemas)})")
+            for p in problemas:
+                errors.append(f"externos[{tk}]: {p}")
+        else:
+            print(f"  [OK]    {tk:6} as_of={c_asof}  MV=${c_mv:,.2f}  (4 archivos coinciden)")
+
+    if any(e.startswith("externos[") for e in errors):
+        print()
+        print("         Si el canonical quedo atras: corre refresh_dashboard_v2.bat")
+        print("         (o `python -m dashboard_v2.transform.run_all`) para regenerarlo.")
+        print(f"         Canonical usado: {canon_path.parent.name}")
 
 
 def main():
@@ -286,6 +408,9 @@ def main():
             print(f"  [ERROR] {dict_name:20s} {len(bad)} fondos no suman 100%")
         else:
             print(f"  [OK]    {dict_name:20s} {len(sums)} fondos suman ~100%")
+
+    # ---- 4: HOLDINGS EXTERNOS (statements manuales, 4 archivos) ----
+    check_external_statements(errors, warnings)
 
     # ---- REPORTE FINAL ----
     print("\n" + "=" * 70)

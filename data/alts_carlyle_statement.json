@@ -1,5 +1,5 @@
 {
-  "_description": "Source of truth para CALP (Carlyle AlpInvest) — unico holding Alts cuya valuation llega por fuera de Pershing. Cada entry es un statement; el ultimo por 'as_of' manda. Alimenta alts_race.json en refresh_alts_daily.py.",
+  "_description": "UNICO input manual de los holdings alternativos externos a Pershing (hoy solo CALP). Historial completo de statements por ticker. Para cargar un statement nuevo: agregar la entrada aca y correr `python scripts/build_alts_external.py`, que deriva alts_external.json y el override de alts_factsheet_ytd.json. Despues `python -m dashboard_v2.transform.run_all` para regenerar el canonical (o directamente refresh_dashboard_v2.bat, que hace los dos pasos). scripts/validate_data.py bloquea el deploy si los 4 archivos quedan divergidos.",
   "refreshedAt": "2026-08-26T00:00:00",
   "source": "Statements oficiales Carlyle AlpInvest (PDF)",
   "statements": {
