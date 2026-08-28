@@ -4,20 +4,20 @@
   "account_id": "JXD101380",
   "duration": "1 Month",
   "source_file": "data/raw/2026-08-24/netx360/Transactions_JXD101380.xlsx",
-  "generated_at": "2026-08-24T13:59:54Z",
+  "generated_at": "2026-08-28T18:31:42Z",
   "transactions": [
     {
       "process_date": "2026-08-24",
       "trade_date": "2026-08-03",
       "settlement_date": "2026-08-26",
-      "buy_sell": null,
-      "description": "",
-      "security_id": null,
+      "buy_sell": "BUY",
+      "description": "HAMILTON LANE GLOBAL PRIVATE INFRASTRUCTURE FUND CLASS I (ACC)(USD) ISIN LU2847068389",
+      "security_id": "L4680C117",
       "cusip": null,
       "isin": null,
       "symbol": null,
-      "quantity": null,
-      "price_ccy": null,
+      "quantity": 2134.279,
+      "price_ccy": 140.5627,
       "principal": -300000.02,
       "commission": 0.0,
       "fees": 0.0,
@@ -27,20 +27,23 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": "AJQ0ID26082409143608"
+      "reference": "AJQ0ID26082409143608",
+      "transaction_type": "Buy 2134.27900 of L4680C117 at 140.5627",
+      "is_cancel": false,
+      "is_trade": true
     },
     {
       "process_date": "2026-08-24",
       "trade_date": null,
       "settlement_date": null,
-      "buy_sell": null,
-      "description": "",
-      "security_id": null,
+      "buy_sell": "BUY",
+      "description": "HAMILTON LANE GLOBAL PRIVATE INFRASTRUCTURE FUND CLASS I (ACC)(USD) ISIN LU2847068389",
+      "security_id": "L4680C117",
       "cusip": null,
       "isin": null,
       "symbol": null,
-      "quantity": null,
-      "price_ccy": null,
+      "quantity": -2134.279,
+      "price_ccy": 0.0,
       "principal": 0.0,
       "commission": 0.0,
       "fees": 0.0,
@@ -50,20 +53,23 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": "0000000"
+      "reference": "0000000",
+      "transaction_type": "Cancel Buy -2134.27900 of L4680C117 at 0.0000",
+      "is_cancel": true,
+      "is_trade": true
     },
     {
       "process_date": "2026-08-24",
       "trade_date": null,
       "settlement_date": null,
-      "buy_sell": null,
-      "description": "",
-      "security_id": null,
+      "buy_sell": "BUY",
+      "description": "HAMILTON LANE GLOBAL PRIVATE INFRASTRUCTURE FUND CLASS I (ACC)(USD) ISIN LU2847068389",
+      "security_id": "L4680C117",
       "cusip": null,
       "isin": null,
       "symbol": null,
-      "quantity": null,
-      "price_ccy": null,
+      "quantity": 2150.624,
+      "price_ccy": 139.4944,
       "principal": -300000.0,
       "commission": 0.0,
       "fees": 0.0,
@@ -73,20 +79,23 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": null
+      "reference": null,
+      "transaction_type": "Buy 2150.62400 share(s) of L4680C117 at 139.4944",
+      "is_cancel": false,
+      "is_trade": true
     },
     {
       "process_date": "2026-08-24",
       "trade_date": null,
       "settlement_date": null,
-      "buy_sell": null,
-      "description": "",
-      "security_id": null,
+      "buy_sell": "BUY",
+      "description": "FRANKLIN LEXINGTON PE SECONDARIES FUND CLASS I (ACC)(USD) ISIN LU2966298809",
+      "security_id": "L4R58Q111",
       "cusip": null,
       "isin": null,
       "symbol": null,
-      "quantity": null,
-      "price_ccy": null,
+      "quantity": 4136.1756,
+      "price_ccy": 31.43,
       "principal": -130000.0,
       "commission": 0.0,
       "fees": 0.0,
@@ -96,14 +105,17 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": null
+      "reference": null,
+      "transaction_type": "Buy 4136.17560 share(s) of L4R58Q111 at 31.4300",
+      "is_cancel": false,
+      "is_trade": true
     },
     {
       "process_date": "2026-08-20",
       "trade_date": "2026-08-19",
       "settlement_date": "2026-08-20",
       "buy_sell": null,
-      "description": "",
+      "description": "U.S.DOLLARS CURRENCY",
       "security_id": null,
       "cusip": null,
       "isin": null,
@@ -119,14 +131,17 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": "4AU42Q"
+      "reference": "4AU42Q",
+      "transaction_type": "INTEREST ON FREE CREDIT   BALANCES",
+      "is_cancel": false,
+      "is_trade": false
     },
     {
       "process_date": "2026-08-18",
       "trade_date": null,
       "settlement_date": "2026-08-18",
       "buy_sell": null,
-      "description": "",
+      "description": "ICAPITAL HPS        CORPORATE LENDING   OFFSHORE ACCESS FUNDSP1",
       "security_id": null,
       "cusip": null,
       "isin": null,
@@ -142,19 +157,22 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": "019820"
+      "reference": "019820",
+      "transaction_type": "POSITION ADJUSTMENT       INCREASE",
+      "is_cancel": false,
+      "is_trade": false
     },
     {
       "process_date": "2026-08-07",
       "trade_date": "2026-08-07",
       "settlement_date": "2026-08-11",
-      "buy_sell": null,
-      "description": "",
-      "security_id": null,
+      "buy_sell": "SELL",
+      "description": "ISHARES MSCI BRAZIL UCITS ETF (DE)      ACCUMULATING UNITS  ISIN#DE000A0Q4R85",
+      "security_id": "4BRZ",
       "cusip": null,
       "isin": null,
       "symbol": "4BRZ:DE",
-      "quantity": null,
+      "quantity": -979.0,
       "price_ccy": null,
       "principal": 49647.05,
       "commission": 25.0,
@@ -165,14 +183,17 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": "P7YS1E"
+      "reference": "P7YS1E",
+      "transaction_type": "Sell -979.00000 of 4BRZ:DE at 50.7120",
+      "is_cancel": false,
+      "is_trade": true
     },
     {
       "process_date": "2026-08-06",
       "trade_date": null,
       "settlement_date": "2026-08-06",
       "buy_sell": null,
-      "description": "",
+      "description": "U.S.DOLLARS CURRENCY",
       "security_id": null,
       "cusip": null,
       "isin": null,
@@ -188,14 +209,17 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": "00713"
+      "reference": "00713",
+      "transaction_type": "FEDERAL FUNDS SENT",
+      "is_cancel": false,
+      "is_trade": false
     },
     {
       "process_date": "2026-08-06",
       "trade_date": null,
       "settlement_date": "2026-08-06",
       "buy_sell": null,
-      "description": "",
+      "description": "U.S.DOLLARS CURRENCY",
       "security_id": null,
       "cusip": null,
       "isin": null,
@@ -211,20 +235,23 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": "4AUE7X"
+      "reference": "4AUE7X",
+      "transaction_type": "WIRED FUNDS FEE",
+      "is_cancel": false,
+      "is_trade": false
     },
     {
       "process_date": "2026-08-05",
       "trade_date": "2026-08-05",
       "settlement_date": "2026-08-06",
-      "buy_sell": null,
-      "description": "",
-      "security_id": null,
+      "buy_sell": "BUY",
+      "description": "SPDR GOLD TR GOLD   SHS",
+      "security_id": "GLD",
       "cusip": null,
       "isin": null,
       "symbol": "GLD",
-      "quantity": null,
-      "price_ccy": null,
+      "quantity": 169.0,
+      "price_ccy": 388.9446,
       "principal": -65731.64,
       "commission": 25.0,
       "fees": 16.0,
@@ -234,20 +261,23 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": "I94NHG"
+      "reference": "I94NHG",
+      "transaction_type": "Buy 169.00000 share(s) of GLD at 388.9446",
+      "is_cancel": false,
+      "is_trade": true
     },
     {
       "process_date": "2026-08-04",
       "trade_date": "2026-08-04",
       "settlement_date": "2026-08-05",
-      "buy_sell": null,
-      "description": "",
-      "security_id": null,
+      "buy_sell": "BUY",
+      "description": "LISTED FDS TR       ROUNDHILL           MAGNIFICENT SEVEN   ETF",
+      "security_id": "MAGS",
       "cusip": null,
       "isin": null,
       "symbol": "MAGS",
-      "quantity": null,
-      "price_ccy": null,
+      "quantity": 950.0,
+      "price_ccy": 69.085,
       "principal": -65630.75,
       "commission": 25.0,
       "fees": 16.0,
@@ -257,14 +287,17 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": "I9XJQ7"
+      "reference": "I9XJQ7",
+      "transaction_type": "Buy 950.00000 share(s) of MAGS at 69.0850",
+      "is_cancel": false,
+      "is_trade": true
     },
     {
       "process_date": "2026-08-04",
       "trade_date": null,
       "settlement_date": "2026-08-04",
       "buy_sell": null,
-      "description": "",
+      "description": "U.S.DOLLARS CURRENCY",
       "security_id": null,
       "cusip": null,
       "isin": null,
@@ -280,14 +313,17 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": "001445"
+      "reference": "001445",
+      "transaction_type": "FEDERAL FUNDS RECEIVED",
+      "is_cancel": false,
+      "is_trade": false
     },
     {
       "process_date": "2026-08-03",
       "trade_date": null,
       "settlement_date": "2026-08-03",
       "buy_sell": null,
-      "description": "",
+      "description": "U.S.DOLLARS CURRENCY",
       "security_id": null,
       "cusip": null,
       "isin": null,
@@ -303,14 +339,17 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": "4A6HP1"
+      "reference": "4A6HP1",
+      "transaction_type": "FOREIGN CUSTODY FEE",
+      "is_cancel": false,
+      "is_trade": false
     },
     {
       "process_date": "2026-08-03",
       "trade_date": null,
       "settlement_date": "2026-08-03",
       "buy_sell": null,
-      "description": "",
+      "description": "U.S.DOLLARS CURRENCY",
       "security_id": null,
       "cusip": null,
       "isin": null,
@@ -326,14 +365,17 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": "4A6HP0"
+      "reference": "4A6HP0",
+      "transaction_type": "FOREIGN CUSTODY FEE",
+      "is_cancel": false,
+      "is_trade": false
     },
     {
       "process_date": "2026-08-03",
       "trade_date": null,
       "settlement_date": "2026-08-03",
       "buy_sell": null,
-      "description": "",
+      "description": "U.S.DOLLARS CURRENCY",
       "security_id": null,
       "cusip": null,
       "isin": null,
@@ -349,14 +391,17 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": "4A6HNE"
+      "reference": "4A6HNE",
+      "transaction_type": "FOREIGN CUSTODY FEE",
+      "is_cancel": false,
+      "is_trade": false
     },
     {
       "process_date": "2026-08-03",
       "trade_date": null,
       "settlement_date": "2026-08-03",
       "buy_sell": null,
-      "description": "",
+      "description": "U.S.DOLLARS CURRENCY",
       "security_id": null,
       "cusip": null,
       "isin": null,
@@ -372,14 +417,17 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": "4A6HNA"
+      "reference": "4A6HNA",
+      "transaction_type": "FOREIGN CUSTODY FEE",
+      "is_cancel": false,
+      "is_trade": false
     },
     {
       "process_date": "2026-07-30",
       "trade_date": "2026-07-30",
       "settlement_date": "2026-07-30",
       "buy_sell": null,
-      "description": "",
+      "description": "GOLUB CAPITAL       PRIVATE CREDIT      ICAPITAL OFFSHORE   ACCESS FUND SP 1",
       "security_id": null,
       "cusip": null,
       "isin": null,
@@ -395,7 +443,10 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": "022859"
+      "reference": "022859",
+      "transaction_type": "POSITION ADJUSTMENT       INCREASE",
+      "is_cancel": false,
+      "is_trade": false
     },
     {
       "process_date": null,
@@ -418,7 +469,10 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": null
+      "reference": null,
+      "transaction_type": "",
+      "is_cancel": false,
+      "is_trade": false
     },
     {
       "process_date": null,
@@ -441,7 +495,10 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": null
+      "reference": null,
+      "transaction_type": "",
+      "is_cancel": false,
+      "is_trade": false
     },
     {
       "process_date": null,
@@ -464,7 +521,10 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": null
+      "reference": null,
+      "transaction_type": "",
+      "is_cancel": false,
+      "is_trade": false
     },
     {
       "process_date": null,
@@ -487,7 +547,10 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": null
+      "reference": null,
+      "transaction_type": "",
+      "is_cancel": false,
+      "is_trade": false
     },
     {
       "process_date": null,
@@ -510,7 +573,10 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": null
+      "reference": null,
+      "transaction_type": "",
+      "is_cancel": false,
+      "is_trade": false
     },
     {
       "process_date": null,
@@ -533,7 +599,10 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": null
+      "reference": null,
+      "transaction_type": "",
+      "is_cancel": false,
+      "is_trade": false
     },
     {
       "process_date": null,
@@ -556,7 +625,10 @@
       "fx_rate_to_base": null,
       "security_type": null,
       "market": null,
-      "reference": null
+      "reference": null,
+      "transaction_type": "",
+      "is_cancel": false,
+      "is_trade": false
     }
   ]
 }

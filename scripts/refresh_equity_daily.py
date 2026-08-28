@@ -126,6 +126,88 @@ def fetch_acwi_close():
         return None, str(e)[:60]
 
 
+def _sleeve_lookup():
+    """(mapa pershing->(<ticker>,<sleeve>), mapa ticker->sleeve)."""
+    import sys as _s
+    _s.path.insert(0, str(ROOT / "scripts"))
+    from compute_holdings_returns import PERSHING_TO_MY as M
+    by_ticker = {}
+    for _k, (tk, sl) in M.items():
+        by_ticker.setdefault(tk, sl)
+    return M, by_ticker
+
+
+def _load_net_flows_since(anchor_date, sleeve="Equity"):
+    """Flujo NETO del sleeve desde anchor_date, leido de las transacciones.
+
+    BUGFIX 2026-08-28: antes esto era _load_buys_since(), que leia SOLO
+    buys_history y no descontaba las ventas. En un rebalanceo (vender un fondo
+    para comprar otro) el flujo quedaba inflado por el monto entero de la
+    compra: el sistema veia plata nueva que nunca entro, el MV no crecia, y el
+    TWR se desplomaba. El 2026-08-27 (venta LGLI -> compra MAGS/THOR) el indice
+    de Equity mostro -10.19% en un dia y el YTD paso de +8.12% a -2.89%.
+
+    Ahora se suma el net_amount_base_ccy de las transacciones del sleeve, con
+    el signo invertido: una compra sale con net<0 (sale cash) y es flujo que
+    ENTRA al sleeve; una venta sale con net>0 y es flujo que SALE. Sumar con
+    signo netea todo solo, incluidos los pares "Cancel Buy".
+
+    Se cuenta por SETTLEMENT DATE, no por trade date. Verificado con el caso
+    GLD (compra 169 shares, -$65,772.64): en el trade date (05-ago) no se movio
+    nada -- ni el cash ni la posicion; en el settlement (06-ago) se descontaron
+    los $65,772.64 exactos Y entraron las 169 shares. Cash y posicion se mueven
+    JUNTOS en el settlement, asi que no hace falta llevar registro de plata en
+    transito. Los trades sin liquidar (fechas en "-") se saltean hasta que
+    liquiden.
+
+    Returns: list de {ticker, date, cost} -- cost NEGATIVO en las ventas.
+    """
+    snaps = sorted((ROOT / "data" / "canonical").glob("*/transactions.json"))
+    if not snaps:
+        print("  WARN: no hay transactions.json canonical -- flujo = 0")
+        return []
+    try:
+        doc = json.load(open(snaps[-1], encoding="utf-8"))
+        M, by_ticker = _sleeve_lookup()
+    except Exception as e:
+        print(f"  WARN: no pude leer transacciones ({e}) -- flujo = 0")
+        return []
+
+    txns = doc.get("transactions", [])
+    trades = [t for t in txns if t.get("is_trade")]
+    if txns and not trades:
+        # Pasa mientras el canonical siga generado por el parser viejo (que
+        # leia columnas inexistentes y devolvia todo None). Devolver flujo 0
+        # seria peor que el comportamiento anterior, asi que se cae al metodo
+        # viejo -- solo compras, sin netear ventas -- avisando fuerte. En
+        # cuanto el cron regenere transactions.json con el parser nuevo, entra
+        # solo por el camino bueno.
+        print(f"  WARN: {len(txns)} transacciones y NINGUNA reconocida como "
+              f"operacion ({snaps[-1].parent.name}). Fallback al metodo viejo "
+              f"(solo compras): el flujo va a quedar inflado si hubo ventas.")
+        return _load_buys_since(ROOT / "data" / "holdings_returns_equity.json",
+                                anchor_date)
+
+    flows, sin_mapear = [], []
+    for t in trades:
+        sd = t.get("settlement_date")
+        if not sd or sd <= anchor_date:
+            continue          # no liquidado, o anterior al anchor
+        sec = t.get("security_id")
+        tk, sl = (M.get(sec) if sec in M else (sec, by_ticker.get(sec)) if sec in by_ticker else (None, None))
+        if sl != sleeve:
+            if sl is None and sec:
+                sin_mapear.append(f"{sec} ({str(t.get('description'))[:24]})")
+            continue
+        net = t.get("net_amount_base_ccy") or 0.0
+        flows.append({"ticker": tk, "date": sd, "cost": -net})
+
+    if sin_mapear:
+        print(f"  WARN: {len(sin_mapear)} operacion(es) sin sleeve asignado, "
+              f"NO cuentan en el flujo: {sin_mapear[:4]}")
+    return flows
+
+
 def _load_buys_since(holdings_file, anchor_date):
     """Lee buys_history de holdings_returns_equity.json (ya confiable, merge
     incremental + filtro PENDING CONFIRM, ver compute_holdings_returns.py),
@@ -255,12 +337,15 @@ def main():
     days_gap = (date.fromisoformat(today_iso) - date.fromisoformat(anchor["date"])).days
     if days_gap > 5:
         print(f"  WARNING: anchor tiene {days_gap} dias de antiguedad -- revisar por que el refresh diario no corrio antes")
-    holdings_file = ROOT / "data" / "holdings_returns_equity.json"
-    buys_since_anchor = _load_buys_since(holdings_file, anchor["date"])
+    flows_since_anchor = _load_net_flows_since(anchor["date"], sleeve="Equity")
+    n_compras = sum(1 for f in flows_since_anchor if f["cost"] > 0)
+    n_ventas = len(flows_since_anchor) - n_compras
     mv_anchor = anchor["mv_usd"]
-    twr_today, flow_in = _modified_dietz_return(mv_anchor, mv_today, buys_since_anchor, anchor["date"], today_iso)
+    twr_today, flow_in = _modified_dietz_return(mv_anchor, mv_today, flows_since_anchor, anchor["date"], today_iso)
     if abs(flow_in) > 1:
-        print(f"  flow_in detectado desde {anchor['date']}: ${flow_in:+,.0f} ({len(buys_since_anchor)} buys, Modified Dietz ponderado por fecha)")
+        print(f"  flow_in NETO desde {anchor['date']}: ${flow_in:+,.0f} "
+              f"({n_compras} compras / {n_ventas} ventas, por settlement date, "
+              f"Modified Dietz ponderado por fecha)")
     index_today = anchor["index"] * (1 + twr_today)
 
     new_twr_point = {"date": today_iso, "mv_usd": mv_today, "flow_in": round(flow_in, 2),
