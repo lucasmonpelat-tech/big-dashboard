@@ -1,0 +1,102 @@
+name: 🐕 Watchdog — ¿corrió el refresh de hoy?
+
+# Por que existe (2026-08-28)
+# --------------------------
+# record_run_status.py escribe la alerta DENTRO de la corrida. Si un paso falla,
+# queda el aviso. Pero si GitHub nunca dispara el workflow, no hay nada que
+# escriba nada: silencio total. Es una alarma de incendio que solo suena si
+# alguien la enciende.
+#
+# Paso dos veces la misma semana:
+#   27-ago  agendado 12:30 UTC, arranco 22:30 UTC (10 horas tarde)
+#   28-ago  no arranco nunca -- Lucas lo tuvo que disparar a mano
+#
+# En los dos casos Lucas se entero abriendo el dashboard y viendo data vieja.
+#
+# Este watchdog corre mas tarde y hace UNA pregunta: ¿corrio el refresh de hoy?
+# Si no, dispara el workflow principal y avisa por mail. No reemplaza al cron
+# original -- son dos oportunidades independientes en vez de una.
+#
+# Limite honesto: esto tambien es un schedule de GitHub y tambien se puede
+# retrasar. No es garantia absoluta, es una segunda red.
+
+on:
+  schedule:
+    # 16:07 UTC = 13:07 ART. Cuatro horas despues del refresh principal, con
+    # margen de sobra para el retraso tipico (~1h) de GitHub. Minuto 07 a
+    # proposito: GitHub congestiona mas los horarios redondos (:00 y :30).
+    - cron: '7 16 * * 1-6'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  watchdog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: ¿Corrió el refresh de hoy?
+        id: check
+        run: |
+          HOY=$(date -u +%Y-%m-%d)
+          ULTIMO=$(python -c "import json;print(json.load(open('data/_alerts/last_run.json'))['date'])" 2>/dev/null || echo "sin-dato")
+          echo "hoy=$HOY  ultimo_run=$ULTIMO"
+          if [ "$ULTIMO" = "$HOY" ]; then
+            echo "corrio=si" >> $GITHUB_OUTPUT
+            echo "El refresh de hoy ya corrio. Nada que hacer."
+          else
+            echo "corrio=no" >> $GITHUB_OUTPUT
+            echo "ultimo=$ULTIMO" >> $GITHUB_OUTPUT
+            echo "FALTA la corrida de hoy (ultimo run: $ULTIMO)."
+          fi
+
+      - name: Disparar el refresh que falto
+        if: steps.check.outputs.corrio == 'no'
+        run: |
+          gh workflow run daily-refresh.yml --ref main
+          echo "daily-refresh.yml disparado por el watchdog."
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Dejar alerta + avisar por mail
+        if: steps.check.outputs.corrio == 'no'
+        run: |
+          mkdir -p data/_alerts
+          HOY=$(date -u +%Y-%m-%d)
+          python - <<'PY'
+          import json, os, datetime
+          hoy = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+          alerta = {
+              "detected_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              "date": hoy,
+              "tipo": "cron_no_corrio",
+              "issues": [
+                  f"El daily-refresh de {hoy} no habia corrido a las 16:07 UTC "
+                  f"(agendado 12:30 UTC). El watchdog lo disparo. Si esto se "
+                  f"repite seguido, GitHub esta postergando los schedules y "
+                  f"conviene revisar el horario."
+              ],
+          }
+          with open(f"data/_alerts/cron_no_corrio_{hoy}.json", "w", encoding="utf-8") as f:
+              json.dump(alerta, f, indent=2, ensure_ascii=False)
+          print("alerta escrita")
+          PY
+          python scripts/send_failure_alert.py || echo "mail fallo, la alerta igual quedo en data/_alerts/"
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MAIL_LUCAS: ${{ secrets.MAIL_LUCAS }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+
+      - name: Commitear la alerta
+        if: steps.check.outputs.corrio == 'no'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/_alerts/ || true
+          git diff --staged --quiet || git commit -m "chore(alerts): el watchdog disparo el refresh que falto"
+          git pull --rebase origin main || true
+          git push origin main || true

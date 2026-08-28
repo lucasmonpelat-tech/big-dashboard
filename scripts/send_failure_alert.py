@@ -1,7 +1,7 @@
 """
 send_failure_alert.py
 ======================
-Manda un mail INMEDIATO (el mismo dia) a Lucas + Fer si el cron diario
+Manda un mail INMEDIATO (el mismo dia) a Lucas si el cron diario
 escribio alguna alerta hoy en data/_alerts/ -- sin esperar al weekly digest
 de los sabados (que ademas esta desactivado, ver weekly_digest.py).
 
@@ -93,21 +93,26 @@ def send_mail(html_body: str, text_body: str, today_iso: str, n_alerts: int):
     user = os.environ["GMAIL_USER"]
     pwd = os.environ["GMAIL_APP_PASSWORD"]
     to_lucas = os.environ["MAIL_LUCAS"]
-    to_fer = os.environ["MAIL_FER"]
+
+    # 2026-08-28, pedido de Lucas: las alertas de FALLA van SOLO a el.
+    # Antes se mandaban tambien a Fer, que no las necesita -- son ruido
+    # tecnico (cron que no corrio, scrape que fallo), no informacion del
+    # fondo. El digest semanal de weekly_digest.py SI le sigue llegando:
+    # eso es un reporte, no una alerta.
 
     msg = MIMEMultipart("alternative")
     msg["Subject"] = f"🚨 BIG · Alerta cron ({n_alerts}) · {today_iso}"
     msg["From"] = f"Pampa BIG Bot <{user}>"
-    msg["To"] = f"{to_lucas}, {to_fer}"
+    msg["To"] = to_lucas
 
     msg.attach(MIMEText(text_body, "plain", "utf-8"))
     msg.attach(MIMEText(html_body, "html", "utf-8"))
 
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=20) as smtp:
         smtp.login(user, pwd)
-        smtp.sendmail(user, [to_lucas, to_fer], msg.as_string())
+        smtp.sendmail(user, [to_lucas], msg.as_string())
 
-    print(f"OK: alerta mandada a {to_lucas} y {to_fer}")
+    print(f"OK: alerta mandada a {to_lucas}")
 
 
 def main():
