@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-08-28T16:08:03.994586",
+  "refreshedAt": "2026-08-28T22:36:28.305964",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -1680,7 +1680,7 @@
     },
     {
       "date": "2026-08-28",
-      "mv_usd": 11083449.163989998,
+      "mv_usd": 11069787.917739999,
       "holdings": [
         {
           "ticker": "MANEM",
@@ -1692,29 +1692,29 @@
         {
           "ticker": "PIMCO-EM",
           "qty": 48651.139,
-          "price": 18.77,
-          "mv": 913181.8790300001,
+          "price": 18.71,
+          "mv": 910262.8106900001,
           "source": "daily_close"
         },
         {
           "ticker": "MANIG",
           "qty": 16621.485,
-          "price": 125.71,
-          "mv": 2089486.87935,
+          "price": 125.66,
+          "mv": 2088655.8051,
           "source": "daily_close"
         },
         {
           "ticker": "PIMCO-INC",
           "qty": 159434.55,
-          "price": 20.26,
-          "mv": 3230143.983,
+          "price": 20.24,
+          "mv": 3226955.2919999994,
           "source": "daily_close"
         },
         {
           "ticker": "PIMCO-LD",
           "qty": 224080.422,
-          "price": 14.14,
-          "mv": 3168497.16708,
+          "price": 14.11,
+          "mv": 3161774.7544199997,
           "source": "daily_close"
         },
         {
@@ -5094,10 +5094,10 @@
     },
     {
       "date": "2026-08-28",
-      "mv_usd": 11083449.163989998,
+      "mv_usd": 11069787.917739999,
       "flow_in": 60.0,
-      "twr": 0.011009012332323157,
-      "index": 106.7974
+      "twr": 0.009761850754857835,
+      "index": 106.6657
     }
   ],
   "agg_index_series": [
@@ -10775,14 +10775,16 @@
       "mv_usd": 10831315.9175,
       "flow_in": 0.0,
       "twr": -0.011993466819250837,
-      "index": 104.3676
+      "index": 106.649,
+      "interpolated": true,
+      "_note": "Punto INTERPOLADO 2026-08-28, mismo caso que Equity: el valor original (104.3676) lo calculo el codigo previo al fix de flujo neto, que contaba las compras sin descontar las ventas. El 27-ago liquido la venta G7097Y503 (+$249,970) contra la compra de MANEM (-$250,030) -- un swap de $60 netos que el metodo viejo leyo como un cuarto de millon de plata nueva. Se interpola entre 26-ago 106.5006 y 28-ago 106.7974."
     },
     {
       "date": "2026-08-28",
-      "mv_usd": 11083449.163989998,
-      "flow_in": 250030.0,
-      "twr": -0.011792008674877246,
-      "index": 104.3889
+      "mv_usd": 11069787.917739999,
+      "flow_in": 60.0,
+      "twr": 0.009761850754857835,
+      "index": 106.6657
     }
   ],
   "agg_index_series_original": [
@@ -12900,6 +12902,12 @@
     },
     {
       "date": "2026-08-26",
+      "index": NaN,
+      "interpolated": true,
+      "price": NaN
+    },
+    {
+      "date": "2026-08-27",
       "index": NaN,
       "interpolated": true,
       "price": NaN

@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-08-28T19:02:10.892323",
+  "refreshedAt": "2026-08-28T22:36:27.426921",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -2494,15 +2494,8 @@
     },
     {
       "date": "2026-08-28",
-      "mv_usd": 8828539.045737064,
+      "mv_usd": 8811282.148257064,
       "holdings": [
-        {
-          "ticker": "THOR",
-          "qty": 18861.953,
-          "price": 44.95,
-          "mv": 847844.7873500001,
-          "source": "daily_close"
-        },
         {
           "ticker": "MAGS",
           "qty": 6905.0,
@@ -2511,17 +2504,24 @@
           "source": "daily_close"
         },
         {
+          "ticker": "THOR",
+          "qty": 18861.953,
+          "price": 44.93,
+          "mv": 847467.5482900001,
+          "source": "daily_close"
+        },
+        {
           "ticker": "4BRZ",
           "qty": 6000.0,
-          "price": 50.74,
-          "mv": 304440.0,
+          "price": 50.33,
+          "mv": 301980.0,
           "source": "daily_close"
         },
         {
           "ticker": "ILF",
           "qty": 10000.0,
-          "price": 34.95,
-          "mv": 349500.0,
+          "price": 34.525,
+          "mv": 345250.0,
           "source": "daily_close"
         },
         {
@@ -2534,36 +2534,36 @@
         {
           "ticker": "CSPX",
           "qty": 3408.0,
-          "price": 826.89,
-          "mv": 2818041.12,
+          "price": 832.38,
+          "mv": 2836751.04,
           "source": "daily_close"
         },
         {
           "ticker": "NBGMT",
           "qty": 58050.998,
-          "price": 26.71,
-          "mv": 1550542.15658,
+          "price": 26.51,
+          "mv": 1538931.95698,
           "source": "daily_close"
         },
         {
           "ticker": "JHGSC",
           "qty": 10410.46,
-          "price": 56.37,
-          "mv": 586837.6301999999,
+          "price": 56.15,
+          "mv": 584547.3289999999,
           "source": "daily_close"
         },
         {
           "ticker": "ARGT",
           "qty": 4000.0,
-          "price": 94.15,
-          "mv": 376600.0,
+          "price": 93.4428,
+          "mv": 373771.2,
           "source": "daily_close"
         },
         {
           "ticker": "MFSCV",
           "qty": 4063.638,
-          "price": 324.36,
-          "mv": 1318081.62168,
+          "price": 321.37,
+          "mv": 1305931.34406,
           "source": "daily_close"
         }
       ]
@@ -5929,10 +5929,10 @@
     },
     {
       "date": "2026-08-28",
-      "mv_usd": 8828539.045737064,
+      "mv_usd": 8811282.148257064,
       "flow_in": -113097.03,
-      "twr": 0.03774051329429515,
-      "index": 121.1164
+      "twr": 0.035738853356658315,
+      "index": 120.8827
     }
   ],
   "acwi_index_series": [
@@ -8063,8 +8063,8 @@
     },
     {
       "date": "2026-08-28",
-      "price": 160.98,
-      "index": 127.1682
+      "price": 161.09,
+      "index": 127.2551
     }
   ],
   "equity_flows_by_month": {
@@ -11611,14 +11611,16 @@
       "mv_usd": 8404640.956668599,
       "flow_in": 462580.15,
       "twr": -0.07774298528332024,
-      "index": 107.6381
+      "index": 120.4811,
+      "interpolated": true,
+      "_note": "Punto INTERPOLADO 2026-08-28. El valor original (107.6381) lo calculo el codigo previo al fix de flujo neto: conto los $462,580 de compras sin descontar la venta de LGLI, y el indice se desplomo -10.19% en un dia. No se pudo recalcular con un numero confiable porque las dos fuentes se contradicen para ESE dia: las transacciones dicen que MAGS y THOR liquidan el 28-ago, pero las posiciones del 27-ago ya traen las qty post-trade. Recalcular con el MV nuevo y el flujo del dia da 126.4680 (pico hacia arriba, tampoco creible). Se interpola entre los dos puntos confiables: 26-ago 119.8459 y 28-ago 121.1164."
     },
     {
       "date": "2026-08-28",
-      "mv_usd": 8828539.045737064,
+      "mv_usd": 8811282.148257064,
       "flow_in": -113097.03,
-      "twr": 0.03774051329429515,
-      "index": 121.1164
+      "twr": 0.035738853356658315,
+      "index": 120.8827
     }
   ],
   "acwi_index_series_original": [
@@ -13742,9 +13744,15 @@
       "price": 161.1687
     },
     {
+      "date": "2026-08-27",
+      "index": 127.2428,
+      "interpolated": true,
+      "price": 161.0743
+    },
+    {
       "date": "2026-08-28",
-      "price": 160.98,
-      "index": 127.1682
+      "price": 161.09,
+      "index": 127.2551
     }
   ],
   "_july_ramp_note": "FIX 2026-08-14: se prepende el mes de rampa de capital (1-jul a 31-jul-2025). Antes la serie arrancaba el 31-jul (primer statement oficial) tratandolo como inception (index=100) -- pero la inception real de BIG es 30-jun-2025 (Lynk) y la primera plata entro el 2-jul-2025 (ver transacciones: BRK B, GLD, IBIT 2-jul; CSPX, JHGSC 3-jul; MANIG, NBGMT, PIMCO-INC, MFSCV, WELLCRED 7-jul; NBRE 9-jul; MFSCV 15-jul; TGF 16-jul; BPCC 25-jul; BRK B, IBIT, GLD 30-jul). Modified Dietz 1-jul->31-jul con mv_start=0, mv_end=$6,016,105.03 (statement oficial verificado), flows=transacciones reales: twr=+1.2374%. Toda la serie posterior a esta fecha se reescalo multiplicando el indice por (1+1.2374%) para que el nuevo 1-jul sea la base 100 real. Verificado contra el SI oficial de Lynk (409 dias): residual bajo de +0.72pp a +0.12pp con este fix."

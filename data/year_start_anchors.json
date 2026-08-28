@@ -4,6 +4,15 @@
   "_source": "Pershing UGL + year_start_anchors legacy + baha monthlyReturns",
   "_generation_rule": "Cada 1-Ene guardar el precio 31-Dec del anio anterior en este archivo (script snapshot_year_start_prices.py).",
   "anchors_2026": {
+    "US53656G4982": {
+      "ticker": "MAGS",
+      "name": "LISTED FDS TR ROUNDHILL MAGNIFICENT SEVE",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
     "IE00B6YCBF59": {
       "ticker": "THOR",
       "name": "Thornburg Income Builder",
@@ -13,15 +22,6 @@
       "anchor_locked": true,
       "ytd_source": "manual_verified",
       "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, 31-Dic-2025"
-    },
-    "US53656G4982": {
-      "ticker": "MAGS",
-      "name": "LISTED FDS TR ROUNDHILL MAGNIFICENT SEVE",
-      "ytd_source_pct": null,
-      "price_2025_dec_31": null,
-      "qty_2025_dec_31": null,
-      "mv_2025_dec_31": null,
-      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
     },
     "IE00089T5MA6": {
       "ticker": "MANEM",
