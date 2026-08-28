@@ -4,16 +4,6 @@
   "_source": "Pershing UGL + year_start_anchors legacy + baha monthlyReturns",
   "_generation_rule": "Cada 1-Ene guardar el precio 31-Dec del anio anterior en este archivo (script snapshot_year_start_prices.py).",
   "anchors_2026": {
-    "IE00B29K0P99": {
-      "ticker": "PIMCO-EM",
-      "name": "PIMCO GIS EM Local Bond",
-      "price_2025_dec_31": 17.94,
-      "qty_2025_dec_31": 0.0,
-      "mv_2025_dec_31": 0.0,
-      "anchor_locked": true,
-      "ytd_source": "manual_verified",
-      "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, 31-Dic-2025"
-    },
     "IE00B6YCBF59": {
       "ticker": "THOR",
       "name": "Thornburg Income Builder",
@@ -33,6 +23,16 @@
       "mv_2025_dec_31": null,
       "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
     },
+    "IE00089T5MA6": {
+      "ticker": "MANEM",
+      "name": "Man EM Corp Credit Alt",
+      "price_2025_dec_31": 108.54,
+      "qty_2025_dec_31": 0.0,
+      "mv_2025_dec_31": 0.0,
+      "anchor_locked": true,
+      "ytd_source": "manual_verified",
+      "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, 31-Dic-2025"
+    },
     "US46438F1012": {
       "ticker": "IBIT",
       "name": "iShares Bitcoin Trust",
@@ -42,6 +42,16 @@
       "anchor_locked": true,
       "ytd_source": "manual_verified",
       "note": "Anchor real verificado el 2026-07-28. Fuente: Pershing statement oficial 31-Dic-2025 (LSERIES DAC, JXD-101380), pag 5 (iShares Bitcoin Trust)"
+    },
+    "IE00B29K0P99": {
+      "ticker": "PIMCO-EM",
+      "name": "PIMCO GIS EM Local Bond",
+      "price_2025_dec_31": 17.94,
+      "qty_2025_dec_31": 0.0,
+      "mv_2025_dec_31": 0.0,
+      "anchor_locked": true,
+      "ytd_source": "manual_verified",
+      "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, 31-Dic-2025"
     },
     "DE000A0Q4R85": {
       "ticker": "4BRZ",
@@ -53,16 +63,6 @@
       "ytd_source": "manual_verified",
       "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, cierre 30-Dic-2025 (feriado Xetra 31-Dic/1-Ene), confirmado OK"
     },
-    "IE000OE87WX6": {
-      "ticker": "MANIG",
-      "name": "Man GLG Global IG Opportunities",
-      "price_2025_dec_31": 122.61,
-      "qty_2025_dec_31": 12640.339,
-      "mv_2025_dec_31": 1549831.96,
-      "anchor_locked": true,
-      "ytd_source": "manual_verified",
-      "note": "Anchor real verificado el 2026-07-28. Fuente: Pershing statement oficial 31-Dic-2025 (LSERIES DAC, JXD-101380), pag 4 (MAN GLG Global IG Opps)"
-    },
     "XS2658535526": {
       "ticker": "BPCC",
       "name": "Barings Private Credit BPCC",
@@ -73,15 +73,24 @@
       "ytd_source": "manual_verified",
       "note": "Anchor real verificado el 2026-07-28. Fuente: Pershing statement oficial 31-Dic-2025 (LSERIES DAC, JXD-101380), pag 2 (PM Alpha DAC Barings BPCC ETN) [FIX: bono: precio cotiza per-100-face, mv = qty*price/100]"
     },
-    "IE00089T5MA6": {
-      "ticker": "MANEM",
-      "name": "Man EM Corp Credit Alt",
-      "price_2025_dec_31": 108.54,
-      "qty_2025_dec_31": 0.0,
-      "mv_2025_dec_31": 0.0,
+    "IE000OE87WX6": {
+      "ticker": "MANIG",
+      "name": "Man GLG Global IG Opportunities",
+      "price_2025_dec_31": 122.61,
+      "qty_2025_dec_31": 12640.339,
+      "mv_2025_dec_31": 1549831.96,
       "anchor_locked": true,
       "ytd_source": "manual_verified",
-      "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, 31-Dic-2025"
+      "note": "Anchor real verificado el 2026-07-28. Fuente: Pershing statement oficial 31-Dic-2025 (LSERIES DAC, JXD-101380), pag 4 (MAN GLG Global IG Opps)"
+    },
+    "LU2847068389": {
+      "ticker": "LU2847068389",
+      "name": "HAMILTON LANE GLOBAL PRIVATE INFRASTRUCT",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
     },
     "US4642873909": {
       "ticker": "ILF",
@@ -111,15 +120,6 @@
       "anchor_locked": true,
       "ytd_source": "manual_verified",
       "note": "Anchor real verificado el 2026-07-28. Fuente: Pershing statement oficial 31-Dic-2025 (LSERIES DAC, JXD-101380), pag 4 (PIMCO Income Fund Institutional)"
-    },
-    "LU2847068389": {
-      "ticker": "LU2847068389",
-      "name": "HAMILTON LANE GLOBAL PRIVATE INFRASTRUCT",
-      "ytd_source_pct": null,
-      "price_2025_dec_31": null,
-      "qty_2025_dec_31": null,
-      "mv_2025_dec_31": null,
-      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
     },
     "IE00B5BMR087": {
       "ticker": "CSPX",
