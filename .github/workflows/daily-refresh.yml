@@ -129,6 +129,21 @@ jobs:
         run: python dashboard_v2/ingest/netx360_auto.py
         continue-on-error: true
 
+      # Fix 2026-08-28: el canonical del dia se generaba recien al final del
+      # workflow, pero sync_positions_latest_from_canonical corre mucho antes y
+      # toma "el snapshot mas reciente" -- o sea el de AYER. En un dia normal no
+      # se nota; en un dia con TRADES, positions_latest queda con las qty
+      # PRE-trade mientras los flujos ya cuentan la compra, y refresh_equity_daily
+      # calcula un MV corto -> salto falso del indice.
+      # Paso el 2026-08-27 (venta LGLI + compra MAGS/THOR): el sleeve Equity
+      # mostro -10.19% en un dia y el YTD paso de +8.12% a -2.89%.
+      # Se parsea el snapshot de HOY aca. El transform del final se mantiene:
+      # reconstruye benchmark_comparison y holdings_returns con las series de
+      # sleeve ya recalculadas.
+      - name: v2 — Transform temprano (canonical del dia, ANTES del sync)
+        run: python -m dashboard_v2.transform.run_all
+        continue-on-error: true
+
       # Reconstruye qty/cost_basis/buys_history desde el UGL+RGL+Transactions
       # de HOY (merge incremental -- ver docstring de merge_buys_history en el
       # script, seguro para correr todos los dias sin perder historial viejo).
