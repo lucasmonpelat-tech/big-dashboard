@@ -5923,7 +5923,9 @@
       "mv_usd": 8404640.956668599,
       "flow_in": 462580.15,
       "twr": -0.07774298528332024,
-      "index": 107.6381
+      "index": 120.4811,
+      "interpolated": true,
+      "_note": "Punto INTERPOLADO 2026-08-28. El valor original (107.6381) lo calculo el codigo previo al fix de flujo neto: conto los $462,580 de compras sin descontar la venta de LGLI, y el indice se desplomo -10.19% en un dia. No se pudo recalcular con un numero confiable porque las dos fuentes se contradicen para ESE dia: las transacciones dicen que MAGS y THOR liquidan el 28-ago, pero las posiciones del 27-ago ya traen las qty post-trade. Recalcular con el MV nuevo y el flujo del dia da 126.4680 (pico hacia arriba, tampoco creible). Se interpola entre los dos puntos confiables: 26-ago 119.8459 y 28-ago 121.1164."
     },
     {
       "date": "2026-08-28",

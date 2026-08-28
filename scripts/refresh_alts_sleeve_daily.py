@@ -120,11 +120,22 @@ def main():
     if days_gap > 5:
         print(f"  WARNING: anchor tiene {days_gap} dias de antiguedad -- revisar por que el refresh diario no corrio antes")
 
-    buys_since_anchor = _load_buys_since(anchor["date"])
+    # BUGFIX 2026-08-28: se reemplaza _load_buys_since() por el flujo NETO.
+    # El metodo viejo leia SOLO buys_history y no descontaba las ventas, asi que
+    # un rebalanceo (vender un fondo para comprar otro) inflaba el flujo por el
+    # monto entero de la compra y hundia el TWR. Verificado en Equity: el YTD
+    # paso de -2.89% a +9.27%. La funcion se importa de refresh_equity_daily en
+    # vez de copiarse, para no tener tres versiones que se desincronicen.
+    import sys as _sys
+    _sys.path.insert(0, str(ROOT / "scripts"))
+    from refresh_equity_daily import _load_net_flows_since
+    flows_since_anchor = _load_net_flows_since(anchor["date"], sleeve="Alternatives")
+    n_c = sum(1 for f in flows_since_anchor if f["cost"] > 0)
     mv_anchor = anchor["mv_usd"]
-    twr_today, flow_in = _modified_dietz_return(mv_anchor, mv_today, buys_since_anchor, anchor["date"], today_iso)
+    twr_today, flow_in = _modified_dietz_return(mv_anchor, mv_today, flows_since_anchor, anchor["date"], today_iso)
     if abs(flow_in) > 1:
-        print(f"  flow_in detectado desde {anchor['date']}: ${flow_in:+,.0f} ({len(buys_since_anchor)} buys, Modified Dietz ponderado por fecha)")
+        print(f"  flow_in NETO desde {anchor['date']}: ${flow_in:+,.0f} "
+              f"({n_c} compras / {len(flows_since_anchor) - n_c} ventas, por settlement date)")
     index_today = anchor["index"] * (1 + twr_today)
 
     new_point = {"date": today_iso, "mv_usd": round(mv_today, 2), "flow_in": round(flow_in, 2),

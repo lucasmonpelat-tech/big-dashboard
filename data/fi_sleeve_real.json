@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-08-28T19:02:11.699988",
+  "refreshedAt": "2026-08-28T16:08:03.994586",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -5088,14 +5088,16 @@
       "mv_usd": 10831315.9175,
       "flow_in": 0.0,
       "twr": -0.011993466819250837,
-      "index": 104.3676
+      "index": 106.649,
+      "interpolated": true,
+      "_note": "Punto INTERPOLADO 2026-08-28, mismo caso que Equity: el valor original (104.3676) lo calculo el codigo previo al fix de flujo neto, que contaba las compras sin descontar las ventas. El 27-ago liquido la venta G7097Y503 (+$249,970) contra la compra de MANEM (-$250,030) -- un swap de $60 netos que el metodo viejo leyo como un cuarto de millon de plata nueva. Se interpola entre 26-ago 106.5006 y 28-ago 106.7974."
     },
     {
       "date": "2026-08-28",
       "mv_usd": 11083449.163989998,
-      "flow_in": 250030.0,
-      "twr": -0.011792008674877246,
-      "index": 104.3889
+      "flow_in": 60.0,
+      "twr": 0.011009012332323157,
+      "index": 106.7974
     }
   ],
   "agg_index_series": [
