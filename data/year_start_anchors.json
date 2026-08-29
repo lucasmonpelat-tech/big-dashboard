@@ -4,29 +4,10 @@
   "_source": "Pershing UGL + year_start_anchors legacy + baha monthlyReturns",
   "_generation_rule": "Cada 1-Ene guardar el precio 31-Dec del anio anterior en este archivo (script snapshot_year_start_prices.py).",
   "anchors_2026": {
-    "US53656G4982": {
-      "ticker": "MAGS",
-      "name": "LISTED FDS TR ROUNDHILL MAGNIFICENT SEVE",
-      "ytd_source_pct": null,
-      "price_2025_dec_31": null,
-      "qty_2025_dec_31": null,
-      "mv_2025_dec_31": null,
-      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
-    },
     "IE00B6YCBF59": {
       "ticker": "THOR",
       "name": "Thornburg Income Builder",
       "price_2025_dec_31": 37.09,
-      "qty_2025_dec_31": 0.0,
-      "mv_2025_dec_31": 0.0,
-      "anchor_locked": true,
-      "ytd_source": "manual_verified",
-      "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, 31-Dic-2025"
-    },
-    "IE00089T5MA6": {
-      "ticker": "MANEM",
-      "name": "Man EM Corp Credit Alt",
-      "price_2025_dec_31": 108.54,
       "qty_2025_dec_31": 0.0,
       "mv_2025_dec_31": 0.0,
       "anchor_locked": true,
@@ -83,15 +64,6 @@
       "ytd_source": "manual_verified",
       "note": "Anchor real verificado el 2026-07-28. Fuente: Pershing statement oficial 31-Dic-2025 (LSERIES DAC, JXD-101380), pag 4 (MAN GLG Global IG Opps)"
     },
-    "LU2847068389": {
-      "ticker": "LU2847068389",
-      "name": "HAMILTON LANE GLOBAL PRIVATE INFRASTRUCT",
-      "ytd_source_pct": null,
-      "price_2025_dec_31": null,
-      "qty_2025_dec_31": null,
-      "mv_2025_dec_31": null,
-      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
-    },
     "US4642873909": {
       "ticker": "ILF",
       "name": "iShares Latin America 40",
@@ -120,6 +92,25 @@
       "anchor_locked": true,
       "ytd_source": "manual_verified",
       "note": "Anchor real verificado el 2026-07-28. Fuente: Pershing statement oficial 31-Dic-2025 (LSERIES DAC, JXD-101380), pag 4 (PIMCO Income Fund Institutional)"
+    },
+    "LU2847068389": {
+      "ticker": "LU2847068389",
+      "name": "HAMILTON LANE GLOBAL PRIVATE INFRASTRUCT",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
+    "IE00089T5MA6": {
+      "ticker": "MANEM",
+      "name": "Man EM Corp Credit Alt",
+      "price_2025_dec_31": 108.54,
+      "qty_2025_dec_31": 0.0,
+      "mv_2025_dec_31": 0.0,
+      "anchor_locked": true,
+      "ytd_source": "manual_verified",
+      "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, 31-Dic-2025"
     },
     "IE00B5BMR087": {
       "ticker": "CSPX",
@@ -150,6 +141,15 @@
       "anchor_locked": true,
       "ytd_source": "manual_verified",
       "note": "Anchor real verificado el 2026-07-28. Fuente: Pershing statement oficial 31-Dic-2025 (LSERIES DAC, JXD-101380), pag 4"
+    },
+    "US53656G4982": {
+      "ticker": "MAGS",
+      "name": "LISTED FDS TR ROUNDHILL MAGNIFICENT SEVE",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
     },
     "LU2049315265": {
       "ticker": "SGCB",

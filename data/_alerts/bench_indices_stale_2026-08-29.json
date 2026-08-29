@@ -1,0 +1,12 @@
+{
+  "date": "2026-08-29",
+  "source": "bench_indices_refresher.py",
+  "error": "Yahoo no devolvio data fresca para: ACWI, NASDAQ100, SP500. Se preservo la ultima serie buena; el Bench SI/YTD equity del dashboard V2 queda stale.",
+  "accion": "Correr scripts/bench_indices_refresher.py manualmente y revisar yfinance / rate limit.",
+  "indices_last_date": {
+    "ACWI": "2026-08-27",
+    "NASDAQ100": "2026-08-27",
+    "SP500": "2026-08-27"
+  },
+  "expected_last_date": "2026-08-28"
+}
