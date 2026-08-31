@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-08-29T16:53:50.173962",
+  "refreshedAt": "2026-08-31T19:15:22.778077",
   "inception": "2025-06-30",
   "benchmark": "MSCI ACWI (via ACWI ETF - Yahoo)",
   "sleeve_index": {
@@ -69,7 +69,7 @@
       "value_usd": 2657592.48,
       "weight_pct": 33.86,
       "si_return_pct": 22.22,
-      "ytd_return_pct": 12.71,
+      "ytd_return_pct": 13.32,
       "contribution_pct": 7.52,
       "ytd_contribution_pct": 3.12,
       "source": "Yahoo:CSPX.L (proxy)",
@@ -83,7 +83,7 @@
       "value_usd": 1227372.6,
       "weight_pct": 15.64,
       "si_return_pct": 9.67,
-      "ytd_return_pct": 14.61,
+      "ytd_return_pct": 14.27,
       "contribution_pct": 1.51,
       "ytd_contribution_pct": 0.45,
       "source": "baha:IE00BFMHRK20",
@@ -111,7 +111,7 @@
       "value_usd": 610432.34,
       "weight_pct": 7.78,
       "si_return_pct": 30.43,
-      "ytd_return_pct": 21.14,
+      "ytd_return_pct": 20.33,
       "contribution_pct": 2.37,
       "ytd_contribution_pct": 1.1,
       "source": "baha:IE00B6YCBF59",
@@ -125,7 +125,7 @@
       "value_usd": 570389.1,
       "weight_pct": 7.27,
       "si_return_pct": 24.89,
-      "ytd_return_pct": 12.66,
+      "ytd_return_pct": 12.92,
       "contribution_pct": 1.81,
       "ytd_contribution_pct": 0.81,
       "source": "baha:LU2940405447",
@@ -153,7 +153,7 @@
       "value_usd": 383356.47,
       "weight_pct": 4.88,
       "si_return_pct": 24.63,
-      "ytd_return_pct": 13.04,
+      "ytd_return_pct": 12.06,
       "contribution_pct": 1.2,
       "ytd_contribution_pct": 0.37,
       "source": "Yahoo:4BRZ.DE (proxy)",
@@ -189,6 +189,6 @@
       "ytd_months_counted": 6
     }
   ],
-  "_ytd_spot_updated": "2026-08-29: 8 holdings YTD spot via Pershing NAV/anchor 31-Dic",
+  "_ytd_spot_updated": "2026-08-31: 8 holdings YTD spot via Pershing NAV/anchor 31-Dic",
   "_stats_removed": "2026-08-25: se elimino el bloque 'stats' (latest_month 2026-05 + returns 1M/3M/6M/YTD/SI + annualized). Lo generaba equity_race.py, borrado el 2026-08-20 (commit 8a064d9) por estar dormido desde mayo. No lo leia NADIE: los returns del sleeve que muestra el dashboard salen de benchmark_comparison.json (canonical v2, regenerado a diario). El bloque quedaba con refreshedAt de hoy y numeros de mayo, invitando a concluir que el dashboard mostraba data vieja. Este JSON hoy se usa solo para holdings[] (clasificacion de sleeve + YTD override) y las series mensuales."
 }
