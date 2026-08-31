@@ -41,12 +41,44 @@ on:
     # 12:30 UTC = 09:30 ART, Lunes a Sabado (1-6 en cron weekday).
     - cron: '30 12 * * 1-6'
   workflow_dispatch:
+    inputs:
+      force:
+        description: "Correr aunque ya haya corrido hoy"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
 jobs:
+  # Idempotencia (2026-08-31): desde que hay disparadores externos (tarea
+  # local + cron-job.org) mas el schedule de GitHub, el workflow puede
+  # recibir varios gatillos el mismo dia. Correrlo de nuevo no solo gasta
+  # minutos: vuelve a entrar a NetX360 con Playwright y a pedir el OTP por
+  # Gmail, que es la parte mas fragil de todo el pipeline. Este job decide
+  # una vez si hace falta correr.
+  guard:
+    runs-on: ubuntu-latest
+    outputs:
+      correr: ${{ steps.check.outputs.correr }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: check
+        run: |
+          HOY=$(date -u +%Y-%m-%d)
+          ULTIMO=$(python -c "import json;print(json.load(open('data/_alerts/last_run.json'))['date'])" 2>/dev/null || echo none)
+          FORCE="${{ inputs.force }}"
+          if [ "$ULTIMO" = "$HOY" ] && [ "$FORCE" != "true" ]; then
+            echo "correr=no" >> $GITHUB_OUTPUT
+            echo "Ya corrio hoy ($ULTIMO). Se saltea. Usar force=true para forzar."
+          else
+            echo "correr=si" >> $GITHUB_OUTPUT
+            echo "Corresponde correr (ultimo=$ULTIMO, hoy=$HOY, force=$FORCE)."
+          fi
+
   refresh:
+    needs: guard
+    if: needs.guard.outputs.correr == 'si'
     runs-on: ubuntu-latest
     timeout-minutes: 25
 
