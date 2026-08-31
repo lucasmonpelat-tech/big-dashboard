@@ -1,6 +1,6 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-08-31T19:15:25.419606",
+  "refreshedAt": "2026-08-31T17:07:06.945346",
   "as_of_date": "2026-08-31",
   "ytd_anchor": "2025-12-31",
   "days_ytd": 243,
@@ -128,9 +128,9 @@
     "_description": "Decomposicion del alpha YTD por asset class. Bench teorico = 60% ACWI + 40% AGG.",
     "bench_label": "60/40 (60% ACWI + 40% AGG)",
     "bench_ytd_aor_etf": 9.26,
-    "acwi_ytd": 14.905,
+    "acwi_ytd": 14.301,
     "agg_ytd": -0.611,
-    "bench_eq_contrib_pp": 8.943,
+    "bench_eq_contrib_pp": 8.58,
     "bench_fi_contrib_pp": -0.245,
     "big_ytd": 4.06,
     "alpha_ytd_total_pp": -5.2,
@@ -138,9 +138,9 @@
       {
         "name": "Equity",
         "big_contrib_pp": 2.78,
-        "bench_contrib_pp": 8.943,
-        "alpha_pp": -6.163,
-        "comment": "BIG 30.7% @ +9.06% vs 60% ACWI @ +14.91%"
+        "bench_contrib_pp": 8.58,
+        "alpha_pp": -5.8,
+        "comment": "BIG 30.7% @ +9.06% vs 60% ACWI @ +14.30%"
       },
       {
         "name": "Fixed Income",
@@ -182,7 +182,7 @@
         "name": "Residual",
         "big_contrib_pp": -0.376,
         "bench_contrib_pp": null,
-        "alpha_pp": -0.185,
+        "alpha_pp": -0.548,
         "comment": "Nuestro calculo (+3.68%) - Lynk oficial (+4.06%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
       }
     ]
