@@ -13,9 +13,17 @@ name: 🐕 Watchdog — ¿corrió el refresh de hoy?
 #
 # En los dos casos Lucas se entero abriendo el dashboard y viendo data vieja.
 #
-# Este watchdog corre mas tarde y hace UNA pregunta: ¿corrio el refresh de hoy?
-# Si no, dispara el workflow principal y avisa por mail. No reemplaza al cron
-# original -- son dos oportunidades independientes en vez de una.
+# Este watchdog corre mas tarde y pregunta, via scripts/should_run_refresh.py:
+# ¿corrio el refresh de hoy Y con data fresca? Si no, dispara el workflow
+# principal y avisa por mail. No reemplaza al cron original -- son dos
+# oportunidades independientes en vez de una.
+#
+# ACTUALIZADO 2026-09-01: antes solo miraba si last_run.json tenia la fecha de
+# hoy. No alcanzaba: con varios disparadores, el primero puede caer ANTES de que
+# Lynk publique el NAV, marcar el dia como hecho y bloquear los reintentos --
+# dejando data vieja todo el dia. Ahora el dia cuenta como hecho solo si ademas
+# el NAV llego fresco. La logica esta en el script, compartida con el guard del
+# propio daily-refresh para no tener dos copias.
 #
 # Limite honesto: esto tambien es un schedule de GitHub y tambien se puede
 # retrasar. No es garantia absoluta, es una segunda red.
@@ -38,19 +46,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: ¿Corrió el refresh de hoy?
+      - name: ¿Corrió el refresh de hoy Y con data fresca?
         id: check
         run: |
-          HOY=$(date -u +%Y-%m-%d)
-          ULTIMO=$(python -c "import json;print(json.load(open('data/_alerts/last_run.json'))['date'])" 2>/dev/null || echo "sin-dato")
-          echo "hoy=$HOY  ultimo_run=$ULTIMO"
-          if [ "$ULTIMO" = "$HOY" ]; then
-            echo "corrio=si" >> $GITHUB_OUTPUT
-            echo "El refresh de hoy ya corrio. Nada que hacer."
-          else
+          R=$(python scripts/should_run_refresh.py)
+          if [ "$R" = "si" ]; then
             echo "corrio=no" >> $GITHUB_OUTPUT
-            echo "ultimo=$ULTIMO" >> $GITHUB_OUTPUT
-            echo "FALTA la corrida de hoy (ultimo run: $ULTIMO)."
+          else
+            echo "corrio=si" >> $GITHUB_OUTPUT
           fi
 
       - name: Disparar el refresh que falto

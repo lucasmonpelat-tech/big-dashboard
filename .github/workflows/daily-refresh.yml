@@ -63,17 +63,18 @@ jobs:
       correr: ${{ steps.check.outputs.correr }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - id: check
         run: |
-          HOY=$(date -u +%Y-%m-%d)
-          ULTIMO=$(python -c "import json;print(json.load(open('data/_alerts/last_run.json'))['date'])" 2>/dev/null || echo none)
           FORCE="${{ inputs.force }}"
-          if [ "$ULTIMO" = "$HOY" ] && [ "$FORCE" != "true" ]; then
-            echo "correr=no" >> $GITHUB_OUTPUT
-            echo "Ya corrio hoy ($ULTIMO). Se saltea. Usar force=true para forzar."
-          else
+          if [ "$FORCE" = "true" ]; then
             echo "correr=si" >> $GITHUB_OUTPUT
-            echo "Corresponde correr (ultimo=$ULTIMO, hoy=$HOY, force=$FORCE)."
+            echo "force=true -- se corre igual."
+          else
+            R=$(python scripts/should_run_refresh.py)
+            echo "correr=$R" >> $GITHUB_OUTPUT
           fi
 
   refresh:
