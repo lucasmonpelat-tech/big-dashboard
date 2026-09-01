@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-08-31T19:15:22.618921",
+  "refreshedAt": "2026-09-01T13:25:00.775243",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -2709,6 +2709,82 @@
           "qty": 4000.0,
           "price": 93.8,
           "mv": 375200.0,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MFSCV",
+          "qty": 4063.638,
+          "price": 321.37,
+          "mv": 1305931.34406,
+          "source": "daily_close"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-01",
+      "mv_usd": 8824941.52050035,
+      "holdings": [
+        {
+          "ticker": "THOR",
+          "qty": 18861.953,
+          "price": 44.63,
+          "mv": 841808.9623900001,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "4BRZ",
+          "qty": 6000.0,
+          "price": 49.89,
+          "mv": 299340.0,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "ILF",
+          "qty": 10000.0,
+          "price": 34.82,
+          "mv": 348200.0,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "HEWJ",
+          "qty": 3125.0,
+          "price": 65.04000091552734,
+          "mv": 203250.00286102295,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "CSPX",
+          "qty": 3408.0,
+          "price": 836.87,
+          "mv": 2852052.96,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "NBGMT",
+          "qty": 58050.998,
+          "price": 26.43,
+          "mv": 1534287.87714,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MAGS",
+          "qty": 6905.0,
+          "price": 68.73999786376953,
+          "mv": 474649.6852493286,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "JHGSC",
+          "qty": 10410.46,
+          "price": 56.28,
+          "mv": 585900.6888,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "ARGT",
+          "qty": 4000.0,
+          "price": 94.88,
+          "mv": 379520.0,
           "source": "daily_close"
         },
         {
@@ -6107,6 +6183,13 @@
       "flow_in": -113097.03,
       "twr": 0.036528641370663674,
       "index": 120.9749
+    },
+    {
+      "date": "2026-09-01",
+      "mv_usd": 8824941.52050035,
+      "flow_in": 0.0,
+      "twr": 0.0008242489509192874,
+      "index": 121.0746
     }
   ],
   "acwi_index_series": [
@@ -8257,6 +8340,11 @@
       "date": "2026-08-31",
       "price": 160.425,
       "index": 126.7298
+    },
+    {
+      "date": "2026-09-01",
+      "price": 160.68,
+      "index": 126.9313
     }
   ],
   "equity_flows_by_month": {
@@ -8447,7 +8535,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-08-31 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing 2026-08-31.",
+  "_daily_refresh_note": "Punto 2026-09-01 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing 2026-09-01.",
   "_rebuild_note": "Reconstruccion completa 2026-07-31: reemplaza integramente el pipeline legacy (portfolio_reconstructor.py / sleeve_series desincronizado). Los 12 checkpoints mensuales estan verificados al centavo contra los statements oficiales de Pershing. Flujos calculados como -sum(Net Amount) de las transacciones reales del sleeve en cada periodo (auto-neutraliza fund exchanges internos). Excepcion: 3 transacciones de ene-2026 (venta WELLCRED + compras PIMCO-INC/PIMCO-EM) reclasificadas a feb-2026 tras verificar contra el statement oficial de febrero que asi procesaron realmente (Pershing las emitio como Cancel/Correct). Periodo oct-dic-2025 combinado en un solo calculo por el retiro grande de capital que distorsionaba el corte de fin de mes. | FIX 2026-08-07: se truncaron los puntos 01-ago a 07-ago (calculados con un anchor que iba driftando dia a dia por un bug en refresh_equity_daily.py/refresh_fi_daily.py, ya corregido -- ver _find_last_real_month_end). El proximo refresh diario recalcula bien desde el anchor real de 31-jul.",
   "twr_series_original": [
     {
@@ -11822,11 +11910,26 @@
       "index": 120.921
     },
     {
+      "date": "2026-08-30",
+      "index": 120.948,
+      "interpolated": true,
+      "mv_usd": 8815817.2553,
+      "flow_in": -113097.03,
+      "twr": 0.0363
+    },
+    {
       "date": "2026-08-31",
       "mv_usd": 8817673.562317062,
       "flow_in": -113097.03,
       "twr": 0.036528641370663674,
       "index": 120.9749
+    },
+    {
+      "date": "2026-09-01",
+      "mv_usd": 8824941.52050035,
+      "flow_in": 0.0,
+      "twr": 0.0008242489509192874,
+      "index": 121.0746
     }
   ],
   "acwi_index_series_original": [
@@ -13962,9 +14065,26 @@
       "price": 161.3021
     },
     {
+      "date": "2026-08-29",
+      "index": 127.1918,
+      "interpolated": true,
+      "price": 161.0097
+    },
+    {
+      "date": "2026-08-30",
+      "index": 126.9608,
+      "interpolated": true,
+      "price": 160.7174
+    },
+    {
       "date": "2026-08-31",
       "price": 160.425,
       "index": 126.7298
+    },
+    {
+      "date": "2026-09-01",
+      "price": 160.68,
+      "index": 126.9313
     }
   ],
   "_july_ramp_note": "FIX 2026-08-14: se prepende el mes de rampa de capital (1-jul a 31-jul-2025). Antes la serie arrancaba el 31-jul (primer statement oficial) tratandolo como inception (index=100) -- pero la inception real de BIG es 30-jun-2025 (Lynk) y la primera plata entro el 2-jul-2025 (ver transacciones: BRK B, GLD, IBIT 2-jul; CSPX, JHGSC 3-jul; MANIG, NBGMT, PIMCO-INC, MFSCV, WELLCRED 7-jul; NBRE 9-jul; MFSCV 15-jul; TGF 16-jul; BPCC 25-jul; BRK B, IBIT, GLD 30-jul). Modified Dietz 1-jul->31-jul con mv_start=0, mv_end=$6,016,105.03 (statement oficial verificado), flows=transacciones reales: twr=+1.2374%. Toda la serie posterior a esta fecha se reescalo multiplicando el indice por (1+1.2374%) para que el nuevo 1-jul sea la base 100 real. Verificado contra el SI oficial de Lynk (409 dias): residual bajo de +0.72pp a +0.12pp con este fix."

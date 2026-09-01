@@ -1,25 +1,25 @@
 {
-  "refreshedAt": "2026-08-31T19:13:31.063101",
+  "refreshedAt": "2026-09-01T13:22:33.246389",
   "source": "Yahoo Finance AOR (iShares Core Growth Allocation 60/40)",
   "note": "Single ETF que replica 60% stocks / 40% bonds. Composicion: ITOT + IDEV + IEMG + IAGG + AGG. Reemplaza el calculo viejo 0.6*ACWI + 0.4*AGG.",
   "ticker": "AOR",
   "inception": "2025-06-27",
   "periods": {
-    "latest_date": "2026-08-27",
-    "latest_value": 118.4023,
+    "latest_date": "2026-08-31",
+    "latest_value": 117.6935,
     "returns": {
-      "1W": 0.76,
-      "1M": 2.83,
-      "3M": 1.69,
-      "6M": 5.28,
-      "YTD": 9.26,
-      "SI": 18.4,
-      "Annualized": 15.58
+      "1W": 0.01,
+      "1M": 1.77,
+      "3M": 0.82,
+      "6M": 5.35,
+      "YTD": 8.61,
+      "SI": 17.69,
+      "Annualized": 14.84
     },
     "volatility": 8.81,
-    "sharpe_approx": 1.28
+    "sharpe_approx": 1.2
   },
-  "series_length": 294,
+  "series_length": 295,
   "series": [
     {
       "date": "2025-06-27",
@@ -59,7 +59,7 @@
     },
     {
       "date": "2025-07-11",
-      "value": 100.4245
+      "value": 100.4246
     },
     {
       "date": "2025-07-14",
@@ -535,7 +535,7 @@
     },
     {
       "date": "2025-12-30",
-      "value": 108.8809
+      "value": 108.881
     },
     {
       "date": "2025-12-31",
@@ -599,7 +599,7 @@
     },
     {
       "date": "2026-01-23",
-      "value": 110.3312
+      "value": 110.3311
     },
     {
       "date": "2026-01-26",
@@ -655,7 +655,7 @@
     },
     {
       "date": "2026-02-12",
-      "value": 111.1813
+      "value": 111.1812
     },
     {
       "date": "2026-02-13",
@@ -671,7 +671,7 @@
     },
     {
       "date": "2026-02-19",
-      "value": 111.6147
+      "value": 111.6146
     },
     {
       "date": "2026-02-20",
@@ -727,7 +727,7 @@
     },
     {
       "date": "2026-03-11",
-      "value": 109.4143
+      "value": 109.4144
     },
     {
       "date": "2026-03-12",
@@ -1196,6 +1196,10 @@
     {
       "date": "2026-08-27",
       "value": 118.4023
+    },
+    {
+      "date": "2026-08-31",
+      "value": 117.6935
     }
   ]
 }
