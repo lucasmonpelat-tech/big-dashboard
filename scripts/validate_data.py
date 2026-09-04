@@ -279,6 +279,96 @@ def check_external_statements(errors, warnings):
         print(f"         Canonical usado: {canon_path.parent.name}")
 
 
+def check_derivados_sincronizados(errors, warnings):
+    """benchmark_comparison tiene que reflejar la ultima data cruda.
+
+    POR QUE EXISTE (2026-09-04)
+    ---------------------------
+    Lucas vio el dashboard con Return YTD +3.79% cuando el valor real era
+    +4.45%. La data cruda estaba perfecta -- lynk_nav_series tenia el NAV del
+    03-sep -- pero benchmark_comparison.json, que es de donde el KPI toma el
+    numero, habia quedado de una corrida anterior con el NAV del 02-sep.
+
+    Lo peligroso: el validador daba "TODO OK". Cada archivo por separado se veia
+    bien; lo que estaba roto era la relacion entre ellos. Justo el tipo de error
+    que este validador existe para cazar.
+
+    Causa de ese dia: dos corridas en paralelo (ver concurrency en
+    daily-refresh.yml) dejaron el estado partido -- crudo nuevo, derivado viejo.
+    El concurrency lo previene, pero cualquier otra falla a mitad de camino
+    puede dejar el mismo desfasaje, asi que se chequea el resultado.
+
+    No se hardcodea nada: cada comparison declara su propio `portfolio_source`.
+    """
+    print("\n" + "-" * 70)
+    print("  5 — Derivados sincronizados con la data cruda")
+    print("-" * 70)
+
+    canon_path, _ = latest_canonical()
+    if not canon_path:
+        warnings.append("sin snapshot canonical — skip check de derivados")
+        print("  [WARN] sin snapshot canonical")
+        return
+    bc_path = canon_path.parent / "benchmark_comparison.json"
+    bc = _load(bc_path)
+    if not bc:
+        warnings.append(f"no pude leer {bc_path.name}")
+        print(f"  [WARN] no pude leer {bc_path.name}")
+        return
+
+    def ultimo_de(source: str):
+        """Resuelve 'data/x.json -> campo' al ultimo punto de esa serie."""
+        partes = [p.strip() for p in source.split("->")]
+        doc = _load(ROOT / partes[0])
+        if not doc:
+            return None, None
+        campo = partes[1] if len(partes) > 1 else None
+        serie = doc.get(campo) if campo else (doc.get("navSeries") or doc.get("series"))
+        if not serie:
+            return None, None
+        ult = serie[-1]
+        valor = ult.get("value") if ult.get("value") is not None else ult.get("index")
+        return ult.get("date"), valor
+
+    for nombre, comp in (bc.get("comparisons") or {}).items():
+        source = comp.get("portfolio_source")
+        serie = comp.get("series") or []
+        if not source or not serie:
+            warnings.append(f"derivados[{nombre}]: sin portfolio_source o sin serie")
+            continue
+
+        d_crudo, v_crudo = ultimo_de(source)
+        if d_crudo is None:
+            warnings.append(f"derivados[{nombre}]: no pude leer la fuente '{source}'")
+            print(f"  [WARN] {nombre:22} fuente ilegible")
+            continue
+
+        d_deriv = serie[-1].get("date")
+        v_deriv = serie[-1].get("portfolio")
+
+        problemas = []
+        if d_deriv != d_crudo:
+            problemas.append(f"ultima fecha {d_deriv} vs {d_crudo} en la fuente")
+        if (v_crudo is not None and v_deriv is not None
+                and abs(v_crudo - v_deriv) > PCT_TOLERANCE):
+            problemas.append(f"ultimo valor {v_deriv} vs {v_crudo} en la fuente")
+
+        if problemas:
+            print(f"  [ERROR] {nombre:22} DESFASADO")
+            for p in problemas:
+                errors.append(f"derivados[{nombre}]: {p} — "
+                              f"benchmark_comparison quedo atras de {source}")
+        else:
+            print(f"  [OK]    {nombre:22} {d_deriv} (coincide con la fuente)")
+
+    if any(e.startswith("derivados[") for e in errors):
+        print()
+        print("         El dashboard muestra lo DERIVADO, no lo crudo: si esto")
+        print("         esta desfasado, en pantalla se ve un numero viejo aunque")
+        print("         el scrape haya andado bien.")
+        print("         Regenerar: python -m dashboard_v2.transform.run_all")
+
+
 def main():
     print("=" * 70)
     print("  BIG Dashboard — Data Consistency Validator")
@@ -411,6 +501,9 @@ def main():
 
     # ---- 4: HOLDINGS EXTERNOS (statements manuales, 4 archivos) ----
     check_external_statements(errors, warnings)
+
+    # ---- 5: DERIVADOS SINCRONIZADOS CON LA DATA CRUDA ----
+    check_derivados_sincronizados(errors, warnings)
 
     # ---- REPORTE FINAL ----
     print("\n" + "=" * 70)
