@@ -47,6 +47,17 @@ on:
         type: boolean
         default: false
 
+# Una sola corrida a la vez (2026-09-04). El guard compara contra
+# last_run.json, que recien se escribe al FINAL: dos disparos simultaneos lo
+# esquivan porque los dos leen el estado viejo. Paso hoy -- las corridas #92 y
+# #93 arrancaron con 9 segundos de diferencia, corrieron en paralelo y al
+# pushear una piso a la otra: #92 fallo en 'Commit and push data/'.
+# Con esto la segunda espera a que termine la primera, y cuando le toca el
+# guard ya ve last_run actualizado y la saltea sola.
+concurrency:
+  group: daily-refresh
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
