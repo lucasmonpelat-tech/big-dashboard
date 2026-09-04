@@ -52,11 +52,30 @@ $ErrorActionPreference = "Stop"
 
 $repo     = "lucasmonpelat-tech/big-dashboard"
 $workflow = "daily-refresh.yml"
-$token    = $env:BIG_GH_TOKEN
+# El token se busca en DOS lugares, en orden:
+#   1) la variable de entorno BIG_GH_TOKEN (comodo cuando lo corres a mano)
+#   2) el archivo .gh_token junto a este script
+#
+# El archivo hace falta porque la tarea programada de Windows corre en un
+# contexto distinto al de tu sesion y NO ve las variables de usuario. Paso el
+# 2026-09-04: la tarea se ejecutaba, el script salia con error por falta de
+# token, y como corre con la ventana oculta el fallo era invisible. El segundo
+# intento del dia -- justo el que cubria el caso de Lynk publicando tarde --
+# nunca funciono.
+#
+# .gh_token esta en .gitignore: no se sube al repo.
+$token = $env:BIG_GH_TOKEN
+if (-not $token) {
+    $archivo = Join-Path $PSScriptRoot ".gh_token"
+    if (Test-Path $archivo) {
+        $token = (Get-Content $archivo -Raw).Trim()
+    }
+}
 
 if (-not $token) {
-    Write-Host "ERROR: falta la variable de entorno BIG_GH_TOKEN." -ForegroundColor Red
-    Write-Host "Ver las instrucciones en la cabecera de este archivo." -ForegroundColor Yellow
+    Write-Host "ERROR: no encontre el token." -ForegroundColor Red
+    Write-Host "  Ni en la variable BIG_GH_TOKEN, ni en $PSScriptRoot\.gh_token" -ForegroundColor Yellow
+    Write-Host "  Ver las instrucciones en la cabecera de este archivo." -ForegroundColor Yellow
     exit 1
 }
 
