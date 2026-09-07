@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "as_of": "2026-09-07",
-  "generated_at": "2026-09-07T17:55:39Z",
+  "generated_at": "2026-09-07T19:55:20Z",
   "note": "Holdings con MV/return DIRECTO de Pershing UGL (canonical v2 pnl.json). Bench DW calculado desde buys_history + bench indices. Fixes bug de precio staleado del compute_holdings_returns.py viejo.",
   "sources": {
     "positions": "data/canonical/2026-09-07/positions.json",
