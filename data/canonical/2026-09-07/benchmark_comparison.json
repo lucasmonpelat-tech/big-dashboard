@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "as_of": "2026-09-07",
-  "generated_at": "2026-09-07T13:14:12Z",
+  "generated_at": "2026-09-07T17:55:39Z",
   "note": "Comparaciones portfolio vs benchmark con fechas alineadas y rebased 100 en fecha comun. Fixes bug del dashboard viejo (arrays x separados sin intersect ni rebase).",
   "comparisons": {
     "total_vs_6040": {
@@ -538,8 +538,8 @@
         {
           "date": "2025-11-03",
           "portfolio": 103.386,
-          "benchmark": 107.0073,
-          "alpha_bp": -362.13
+          "benchmark": 107.0072,
+          "alpha_bp": -362.12
         },
         {
           "date": "2025-11-04",
@@ -7120,54 +7120,54 @@
         {
           "date": "2026-09-07",
           "portfolio": 106.5182,
-          "benchmark": 102.6014,
-          "alpha_bp": 391.68
+          "benchmark": 102.5903,
+          "alpha_bp": 392.79
         }
       ],
       "returns": {
         "1M": {
           "portfolio_pct": 0.28,
-          "benchmark_pct": -0.45,
-          "alpha_bp": 73.2,
+          "benchmark_pct": -0.46,
+          "alpha_bp": 74.2,
           "ref_date": "2026-08-08"
         },
         "3M": {
           "portfolio_pct": 0.97,
-          "benchmark_pct": -0.27,
-          "alpha_bp": 123.8,
+          "benchmark_pct": -0.28,
+          "alpha_bp": 124.9,
           "ref_date": "2026-06-08"
         },
         "6M": {
           "portfolio_pct": 1.08,
-          "benchmark_pct": -1.28,
-          "alpha_bp": 235.8,
+          "benchmark_pct": -1.29,
+          "alpha_bp": 236.9,
           "ref_date": "2026-03-09"
         },
         "YTD": {
           "portfolio_pct": 2.22,
-          "benchmark_pct": -0.77,
-          "alpha_bp": 298.1,
+          "benchmark_pct": -0.78,
+          "alpha_bp": 299.2,
           "ref_date": "2026-01-01"
         },
         "LTM": {
           "portfolio_pct": 4.47,
-          "benchmark_pct": 0.57,
-          "alpha_bp": 390.2,
+          "benchmark_pct": 0.56,
+          "alpha_bp": 391.2,
           "ref_date": "2025-09-07"
         },
         "SI": {
           "portfolio_pct": 6.52,
-          "benchmark_pct": 2.6,
-          "alpha_bp": 391.7,
+          "benchmark_pct": 2.59,
+          "alpha_bp": 392.8,
           "ref_date": "2025-07-01"
         }
       },
       "stats": {
         "n_days": 433,
         "tracking_error_pct_ann": 3.31,
-        "info_ratio": 0.642,
+        "info_ratio": 0.644,
         "sharpe_portfolio": 5.591,
-        "sharpe_benchmark": 0.468,
+        "sharpe_benchmark": 0.466,
         "beta": 0.019,
         "correlation": 0.097,
         "volatility_portfolio_pct_ann": 0.66,

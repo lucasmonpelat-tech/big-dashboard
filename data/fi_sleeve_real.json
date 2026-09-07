@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-09-07T13:14:10.244520",
+  "refreshedAt": "2026-09-07T17:55:37.790031",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -7798,8 +7798,8 @@
     },
     {
       "date": "2026-09-07",
-      "price": 92.35,
-      "index": 102.6014
+      "price": 92.34,
+      "index": 102.5903
     }
   ],
   "fi_flows_by_month": {
@@ -11415,6 +11415,14 @@
       "index": 106.4636
     },
     {
+      "date": "2026-09-06",
+      "index": 106.4909,
+      "interpolated": true,
+      "mv_usd": 11051672.7941,
+      "flow_in": 0.0,
+      "twr": 0.0006
+    },
+    {
       "date": "2026-09-07",
       "mv_usd": 11054503.59076,
       "flow_in": 0.0,
@@ -13595,9 +13603,21 @@
       "price": NaN
     },
     {
+      "date": "2026-09-05",
+      "index": NaN,
+      "interpolated": true,
+      "price": NaN
+    },
+    {
+      "date": "2026-09-06",
+      "index": NaN,
+      "interpolated": true,
+      "price": NaN
+    },
+    {
       "date": "2026-09-07",
-      "price": 92.35,
-      "index": 102.6014
+      "price": 92.34,
+      "index": 102.5903
     }
   ],
   "_july_ramp_note": "FIX 2026-08-14: se prepende el mes de rampa de capital (1-jul a 31-jul-2025). Ver equity_sleeve_real.json para el detalle completo -- mismo fix, misma logica. FI Modified Dietz 1-jul->31-jul: mv_start=0, mv_end=$6,818,058.18 (statement oficial verificado), flows=MANIG/PIMCO-INC/WELLCRED (7-jul) + TGF (16-jul): twr=+0.3344%. Serie reescalada por (1+0.3344%)."
