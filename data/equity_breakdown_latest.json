@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-07-22",
-  "source": "PRIMARY: factsheets oficiales (PDF MFS, thornburg.com, Endowus NB) + FT.com per fondo donde no actualizado x weights sleeve T-1 | UPDATED 2026-07-22: agregados MAGS + HEWJ via rescale + contribuciones ponderadas. | UPDATED 2026-07-22: agregados MAGS + HEWJ via rescale + contribuciones ponderadas.",
+  "asOf": "2026-08-31",
+  "source": "PRIMARY: FT.com fund/ETF tearsheets (Morningstar) por fondo x pesos del sleeve al 31-Ago-2026. ETFs de un solo pais/region (CSPX, MAGS, ILF, ARGT, 4BRZ, HEWJ) con region por construccion del indice — FT devuelve asset-type, no geografia, para ETFs. MAGS sectorial computado de nuestro fund_holdings_top10.json (7 posiciones equal-weight). 4BRZ via EWZ (mismo indice MSCI Brazil). ACWI/bmk SIN refresh — se preserva la carga previa.",
   "method": "Para cada equity holding: regional/sectorial extraído de FT.com fund tearsheet (que toma datos directo del fund manager), ponderado por peso BIG. NO usa Maximus.",
   "verification": {
     "updated_2026_06_22": true,
@@ -20,7 +20,25 @@
       "MAGS": 0.0239,
       "HEWJ": 0.0233
     },
-    "refresh_2026-07-22": "Rescale 9 fondos originales × 0.9528 + MAGS (100% US, Growth) + HEWJ (100% Japan, Blend/Value)"
+    "refresh_2026-07-22": "Rescale 9 fondos originales × 0.9528 + MAGS (100% US, Growth) + HEWJ (100% Japan, Blend/Value)",
+    "refresh_2026-08-31": {
+      "fecha": "2026-09-07",
+      "fondos": 10,
+      "cambio_clave": "Sale LGLI (Lazard Global Listed Infrastructure), vendido 24-Ago-2026. Era 6.06% del sleeve y concentraba Utilities e Infra: explica la caida de Utilities 5.5% -> 3.1% y de Real estate 1.9% -> 0.1%.",
+      "sleeve_weights_used": {
+        "CSPX": 0.3232,
+        "NBGMT": 0.1739,
+        "MFSCV": 0.148,
+        "THOR": 0.0954,
+        "JHGSC": 0.0664,
+        "MAGS": 0.0537,
+        "ARGT": 0.043,
+        "ILF": 0.0395,
+        "4BRZ": 0.0339,
+        "HEWJ": 0.023
+      },
+      "style_no_refrescado": "El bloque 'style' (Value/Growth/Blend) queda con la carga previa: FT no publica style box y la fuente nunca se definio. Sigue pendiente."
+    }
   },
   "style": {
     "title": "Distribución por Estilo",
@@ -55,67 +73,67 @@
     "rows": [
       {
         "category": "Technology",
-        "big": 22.3,
+        "big": 23.9,
         "acwi": 26
       },
       {
+        "category": "Industrials",
+        "big": 13.0,
+        "acwi": 11
+      },
+      {
         "category": "Financial",
-        "big": 12.6,
+        "big": 12.9,
         "acwi": 17
       },
       {
-        "category": "Comm. Serv.",
-        "big": 8.1,
-        "acwi": 9
-      },
-      {
         "category": "Cons. Cyc.",
-        "big": 10.8,
+        "big": 12.7,
         "acwi": 9
       },
       {
         "category": "Health",
+        "big": 9.1,
+        "acwi": 9
+      },
+      {
+        "category": "Comm. Serv.",
         "big": 8.4,
         "acwi": 9
       },
       {
-        "category": "Industrials",
-        "big": 13.8,
-        "acwi": 11
-      },
-      {
         "category": "Cons. Def.",
-        "big": 5.6,
+        "big": 5.5,
         "acwi": 5
       },
       {
+        "category": "Basic Mat.",
+        "big": 5.3,
+        "acwi": 4
+      },
+      {
         "category": "Energy",
-        "big": 4.6,
+        "big": 4.2,
         "acwi": 5
       },
       {
         "category": "Utilities",
-        "big": 5.5,
+        "big": 3.1,
         "acwi": 3
-      },
-      {
-        "category": "Basic Mat.",
-        "big": 4.6,
-        "acwi": 4
-      },
-      {
-        "category": "Real estate",
-        "big": 1.9,
-        "acwi": 2
       },
       {
         "category": "Other",
         "big": 1.8,
         "acwi": 0
+      },
+      {
+        "category": "Real estate",
+        "big": 0.1,
+        "acwi": 2
       }
     ],
     "totals": {
-      "big": 100,
+      "big": 100.0,
       "acwi": 100
     },
     "footnote": "Sumatoria FT.com 9 fondos × Pershing weights (2026-05-27). Sector \"Other\" agrupa REITs+otros según mapping FT.com.",
@@ -138,37 +156,37 @@
     "rows": [
       {
         "category": "N. America",
-        "big": 57.5,
+        "big": 63.7,
         "acwi": 66
       },
       {
-        "category": "LatAm",
-        "big": 11.8,
-        "acwi": 1
-      },
-      {
         "category": "Europe dev.",
-        "big": 11.8,
+        "big": 11.7,
         "acwi": 11
       },
       {
+        "category": "LatAm",
+        "big": 11.6,
+        "acwi": 1
+      },
+      {
         "category": "UK",
-        "big": 5.4,
+        "big": 5.9,
         "acwi": 4
       },
       {
         "category": "Japan",
-        "big": 6.3,
+        "big": 3.6,
         "acwi": 5
       },
       {
         "category": "Otros",
-        "big": 7.2,
+        "big": 3.5,
         "acwi": 13
       }
     ],
     "totals": {
-      "big": 100,
+      "big": 100.0,
       "acwi": 100
     },
     "footnote": "Otros incluye Asia EM (NBGMT 7%), Australasia (JHGSC 5%), Asia Dev (THOR/LGLI), Africa/ME, China, otros. Sanity check vs marzo: NA -5pp (BRK.B salió), Europe +2pp (THOR entró), Japan +0.5pp consistente.",
