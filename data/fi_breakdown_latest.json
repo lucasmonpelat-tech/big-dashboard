@@ -4,24 +4,39 @@
   "note": "Ver 'source' por seccion para saber que esta fresco y que sigue siendo la aprobacion de Abril-2026 (Lucas, 28-Abr-2026, fi_breakdown_mar26.json).",
   "fi_stats": {
     "title": "Estadísticas Renta Fija",
-    "source": "big: ponderado 28-Jul-2026 (fi_race.json x fi_subasset_big.json pesos, ex-MANEM por falta de dato). bmk: AGG, sin refresh (Abril-2026).",
+    "source": "big: ponderado al 31-Ago-2026 con los pesos REALES del canonical (no fi_race, que tenia los pesos congelados). Incluye solo fondos en USD o hedgeados a USD: PIMCO-LD, PIMCO-INC, MANIG, SGCB y MANEM. EXCLUYE Tenac (TGF) y PIMCO EM Local — este ultimo es moneda local sin hedge por diseno del mandato, y su duracion no es homogenea con la del resto. Regla fijada por Lucas el 2026-09-07. Cobertura 84.33% del sleeve. MANEM desde factsheet Man 30-Jun-2026 (YTW 8.55% hedged a USD, modified duration 2.35); su vencimiento 4.62 es ESTIMADO ponderando los buckets netos por punto medio, porque Man no publica vencimiento promedio. bmk: AGG, sin refresh (Abril-2026).",
     "rows": [
       {
         "metric": "YTW (%)",
-        "big": 7.22,
+        "big": 6.98,
         "bmk": 3.71
       },
       {
         "metric": "Duración",
-        "big": 4.66,
+        "big": 4.46,
         "bmk": 6.21
       },
       {
         "metric": "Vencimiento",
-        "big": 6.63,
+        "big": 6.01,
         "bmk": 8.36
       }
-    ]
+    ],
+    "_regla_inclusion": {
+      "incluidos": [
+        "PIMCO-LD",
+        "PIMCO-INC",
+        "MANIG",
+        "SGCB",
+        "MANEM"
+      ],
+      "excluidos": {
+        "TGF": "Lucas: no cuenta",
+        "PIMCO-EM": "moneda local emergente, sin hedge"
+      },
+      "cobertura_pct_sleeve": 84.33,
+      "nota": "La calidad crediticia NO sigue esta regla: Maximus la publica agregada, con TGF y PIMCO-EM adentro, y no se puede desarmar."
+    }
   },
   "sub_asset_class": {
     "title": "Distribución por Sub-asset Class (Sectorial FI)",
