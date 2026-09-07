@@ -1,80 +1,216 @@
 {
-  "asOf": "2026-07-28",
+  "asOf": "2026-08-31",
   "source": "Sub-asset class y credit_quality.bmk: recalculados 2026-07-28 desde fi_subasset_lookup.json x pesos frescos Pershing (canonical/2026-07-28) + factsheet oficial iShares AGG (30-Jun-2026). fi_stats.big: ponderado desde fi_race.json (ytw/duration/maturity por fondo) x mismos pesos. credit_quality.big, fi_stats.bmk y regional: todavia sin refresh (ver notes por seccion).",
   "note": "Ver 'source' por seccion para saber que esta fresco y que sigue siendo la aprobacion de Abril-2026 (Lucas, 28-Abr-2026, fi_breakdown_mar26.json).",
-
   "fi_stats": {
     "title": "Estadísticas Renta Fija",
     "source": "big: ponderado 28-Jul-2026 (fi_race.json x fi_subasset_big.json pesos, ex-MANEM por falta de dato). bmk: AGG, sin refresh (Abril-2026).",
     "rows": [
-      { "metric": "YTW (%)",     "big": 7.22, "bmk": 3.71 },
-      { "metric": "Duración",    "big": 4.66, "bmk": 6.21 },
-      { "metric": "Vencimiento", "big": 6.63, "bmk": 8.36 }
+      {
+        "metric": "YTW (%)",
+        "big": 7.22,
+        "bmk": 3.71
+      },
+      {
+        "metric": "Duración",
+        "big": 4.66,
+        "bmk": 6.21
+      },
+      {
+        "metric": "Vencimiento",
+        "big": 6.63,
+        "bmk": 8.36
+      }
     ]
   },
-
   "sub_asset_class": {
     "title": "Distribución por Sub-asset Class (Sectorial FI)",
     "subtitle": "BIG vs AGG (Bloomberg US Aggregate)",
     "source": "big: fi_subasset_lookup.json (breakdown por fondo, factsheets individuales) x pesos Pershing 28-Jul-2026. agg: factsheet oficial iShares AGG fund fact sheet, 30-Jun-2026 (TOP SECTORS x %), mapeado a las mismas 10 categorias.",
     "note": "MANEM (0.18% del FI) sin factsheet propio todavia -- ver fi_subasset_lookup.json, estimado 'EM Local + Hard' ~90% por convencion del pitch book. Pendiente reemplazar cuando llegue el factsheet real.",
     "rows": [
-      { "category": "US Treasury",             "big": 1.84,  "agg": 46.26 },
-      { "category": "Govt-related",            "big": 8.04,  "agg": 2.59 },
-      { "category": "Govt Agency MBS",          "big": 16.62, "agg": 23.43 },
-      { "category": "Securitized Non-Agency",   "big": 11.21, "agg": 1.39 },
-      { "category": "Corporate IG",             "big": 22.03, "agg": 24.71 },
-      { "category": "Corporate HY",             "big": 2.95,  "agg": 0.0 },
-      { "category": "EM Local + Hard",          "big": 18.14, "agg": 0.0 },
-      { "category": "Cat Bonds",                "big": 4.65,  "agg": 0.0 },
-      { "category": "Bank Loans",               "big": 0.26,  "agg": 0.0 },
-      { "category": "Other",                    "big": 14.23, "agg": 1.62 }
+      {
+        "category": "US Treasury",
+        "big": 1.84,
+        "agg": 46.26
+      },
+      {
+        "category": "Govt-related",
+        "big": 8.04,
+        "agg": 2.59
+      },
+      {
+        "category": "Govt Agency MBS",
+        "big": 16.62,
+        "agg": 23.43
+      },
+      {
+        "category": "Securitized Non-Agency",
+        "big": 11.21,
+        "agg": 1.39
+      },
+      {
+        "category": "Corporate IG",
+        "big": 22.03,
+        "agg": 24.71
+      },
+      {
+        "category": "Corporate HY",
+        "big": 2.95,
+        "agg": 0.0
+      },
+      {
+        "category": "EM Local + Hard",
+        "big": 18.14,
+        "agg": 0.0
+      },
+      {
+        "category": "Cat Bonds",
+        "big": 4.65,
+        "agg": 0.0
+      },
+      {
+        "category": "Bank Loans",
+        "big": 0.26,
+        "agg": 0.0
+      },
+      {
+        "category": "Other",
+        "big": 14.23,
+        "agg": 1.62
+      }
     ],
-    "totals": { "big": 99.97, "agg": 100.0 }
+    "totals": {
+      "big": 99.97,
+      "agg": 100.0
+    }
   },
-
   "credit_quality": {
     "title": "Calidad Crediticia",
     "subtitle": "BIG vs BMK (AGG)",
-    "source": "big: aprobado por Lucas 28-Abr-2026 (fi_breakdown_mar26.json) -- sin refresh, ver TODO. bmk: factsheet oficial iShares AGG, 30-Jun-2026 (CREDIT RATINGS x %).",
-    "todo_big": "BIG credit_quality sigue con los numeros de Abril. Para refrescar hace falta la distribucion de rating POR FONDO (no solo el rating unico que hoy tenemos en data/funds/*.json) -- pedirle factsheet detallado a cada gestora o a Lucas.",
+    "source": "big: Maximus, factsheet deck 8.factsheet-strategy-13503.pptx, slide 2, grafico 'Calidad Crediticia' al 31-Ago-2026 (leido de las etiquetas del chart). bmk: factsheet oficial iShares AGG, 30-Jun-2026 — sin cambios.",
     "rows": [
-      { "rating": "AAA", "big": 15.8, "bmk": 2.21 },
-      { "rating": "AA",  "big": 37.2, "bmk": 73.60 },
-      { "rating": "A",   "big": 6.9,  "bmk": 11.85 },
-      { "rating": "BBB", "big": 20.7, "bmk": 11.63 },
-      { "rating": "BB",  "big": 8.7,  "bmk": 0.0  },
-      { "rating": "B",   "big": 3.6,  "bmk": 0.0  },
-      { "rating": "CCC", "big": 6.6,  "bmk": 0.0  },
-      { "rating": "NR",  "big": 0.5,  "bmk": 0.71  }
+      {
+        "rating": "AAA",
+        "big": 12.89,
+        "bmk": 2.21
+      },
+      {
+        "rating": "AA",
+        "big": 36.44,
+        "bmk": 73.6
+      },
+      {
+        "rating": "A",
+        "big": 5.79,
+        "bmk": 11.85
+      },
+      {
+        "rating": "BBB",
+        "big": 20.75,
+        "bmk": 11.63
+      },
+      {
+        "rating": "BB",
+        "big": 8.26,
+        "bmk": 0.0
+      },
+      {
+        "rating": "B",
+        "big": 3.92,
+        "bmk": 0.0
+      },
+      {
+        "rating": "CCC",
+        "big": 6.14,
+        "bmk": 0.0
+      },
+      {
+        "rating": "NR",
+        "big": 5.81,
+        "bmk": 0.71
+      }
     ],
-    "totals": { "big": 100, "bmk": 100.0 },
+    "totals": {
+      "big": 100.0,
+      "bmk": 100.0
+    },
     "summary": {
-      "big_ig": 81.1,
-      "big_hy": 18.9,
+      "big_ig": 81.68,
+      "big_hy": 18.32,
+      "big_ig_ex_nr": 75.87,
+      "big_nr": 5.81,
       "bmk_ig": 99.29,
-      "bmk_hy": 0.0
-    }
+      "bmk_hy": 0.0,
+      "_convencion": "big_ig incluye NR, como venia desde Abril-2026 (80.6 + 0.5 = 81.1). En Agosto el NR pesa 5.81% (era 0.5%), asi que la eleccion ya no es cosmetica: sin NR el IG es 75.87%. Decision de presentacion pendiente."
+    },
+    "_refresh_2026-08-31": "Reemplaza los numeros de Abril-2026. El TODO decia que no se podia refrescar sin la distribucion de rating por fondo; Maximus la publica agregada, asi que se toma de ahi."
   },
-
   "regional": {
     "title": "Distribución Regional FI",
     "subtitle": "BIG vs ACWI 60%/40% AGG",
     "source": "Sin refresh -- aprobado 28-Abr-2026 (fi_breakdown_mar26.json / Maximus).",
     "rows": [
-      { "category": "North Am.",    "big": 35.9, "bmk": 44.9 },
-      { "category": "Europe dev.",  "big": 22.4, "bmk": 4.5  },
-      { "category": "Latin Am.",    "big": 17.5, "bmk": 1.1  },
-      { "category": "UK",           "big": 11.1, "bmk": 0.0  },
-      { "category": "Asia emerg.",  "big": 12.7, "bmk": 3.5  },
-      { "category": "Africa/ME",    "big": 5.7,  "bmk": 0.0  },
-      { "category": "Australasia",  "big": 5.6,  "bmk": 0.0  },
-      { "category": "Europe emrg.", "big": 4.3,  "bmk": 0.0  },
-      { "category": "Japan",        "big": -1.3, "bmk": 8.4  },
-      { "category": "China",        "big": 0.0,  "bmk": 0.5  },
-      { "category": "Others",       "big": -0.4, "bmk": 0.0  }
+      {
+        "category": "North Am.",
+        "big": 35.9,
+        "bmk": 44.9
+      },
+      {
+        "category": "Europe dev.",
+        "big": 22.4,
+        "bmk": 4.5
+      },
+      {
+        "category": "Latin Am.",
+        "big": 17.5,
+        "bmk": 1.1
+      },
+      {
+        "category": "UK",
+        "big": 11.1,
+        "bmk": 0.0
+      },
+      {
+        "category": "Asia emerg.",
+        "big": 12.7,
+        "bmk": 3.5
+      },
+      {
+        "category": "Africa/ME",
+        "big": 5.7,
+        "bmk": 0.0
+      },
+      {
+        "category": "Australasia",
+        "big": 5.6,
+        "bmk": 0.0
+      },
+      {
+        "category": "Europe emrg.",
+        "big": 4.3,
+        "bmk": 0.0
+      },
+      {
+        "category": "Japan",
+        "big": -1.3,
+        "bmk": 8.4
+      },
+      {
+        "category": "China",
+        "big": 0.0,
+        "bmk": 0.5
+      },
+      {
+        "category": "Others",
+        "big": -0.4,
+        "bmk": 0.0
+      }
     ],
-    "totals": { "big": 100, "bmk": 100 },
+    "totals": {
+      "big": 100,
+      "bmk": 100
+    },
     "footnote": "Valores negativos = posiciones cortas via derivativos (PIMCO sleeve)."
   }
 }
