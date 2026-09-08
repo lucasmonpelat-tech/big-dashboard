@@ -14,8 +14,8 @@
     "rating": "—"
   },
   "note": "Duracion: se usa RATES DURATION (-1.62), que es la sensibilidad a la tasa libre de riesgo y es lo comparable contra PIMCO/Man, que reportan duracion de tasa. El fondo esta SHORT tasa. La credit duration (+2.91) mide otro riesgo (spreads) y no se suma: la suma de ambas da +1.29 pero mezcla dos factores distintos. Decision de Lucas 2026-09-08. El factsheet reporta YTM (8.11), no YTW. No publica vencimiento promedio: el 11.92 queda del reporte anterior del manager (30-Abr-2026) y NO es del factsheet nuevo. No afecta a nada porque TGF esta excluido de los stats del sleeve. Class share sigue pendiente de confirmar con Nico (XS2324777171).",
-  "fi_stats_include": false,
-  "fi_stats_exclude_reason": "Fuera de los stats del sleeve por decision de Lucas, y el factsheet lo respalda: EM FX Net Exposure 52% — el fondo NO esta hedgeado a USD, asi que sus metricas no son homogeneas con el resto (ver methodology_fi_stats_duration).",
+  "fi_stats_include": true,
+  "fi_stats_exclude_reason": null,
   "fi_metrics_detalle": {
     "credit_duration": 2.91,
     "rates_duration": -1.62,
@@ -29,5 +29,6 @@
     "em_fx_net_exposure_pct": 52,
     "number_of_issuers": 52,
     "maturity_no_publicado_en_factsheet": true
-  }
+  },
+  "fi_stats_include_note": "Lucas 2026-09-08: Tenac SI entra al calculo. Se usa rates duration -1.62 (sensibilidad a tasa, comparable con PIMCO/Man). OJO: el fondo tiene EM FX Net Exposure 52%, o sea que NO esta hedgeado a USD — entra por decision de Lucas, no por cumplir el criterio de moneda. Ademas su YTW es en realidad un YTM (8.11) y su vencimiento 11.92 es del reporte de Abril, no del factsheet nuevo."
 }
