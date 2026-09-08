@@ -41,64 +41,66 @@
   "sub_asset_class": {
     "title": "Distribución por Sub-asset Class (Sectorial FI)",
     "subtitle": "BIG vs AGG (Bloomberg US Aggregate)",
-    "source": "big: fi_subasset_lookup.json (breakdown por fondo, factsheets individuales) x pesos Pershing 28-Jul-2026. agg: factsheet oficial iShares AGG fund fact sheet, 30-Jun-2026 (TOP SECTORS x %), mapeado a las mismas 10 categorias.",
+    "source": "big: fi_subasset_lookup.json x pesos REALES del canonical al 31-Ago-2026. Los 7 fondos del sleeve salen de factsheet publicado (refresh 2026-09-08): PIMCO-INC del factsheet UCITS de NUESTRA clase (IE00B87KCF77, 31-Jul); MANIG y MANEM de los factsheets Man 30-Jun; PIMCO-EM y SGCB ya estaban; PIMCO-LD del fondo hermano US (PFIIX, 30-Jun) como proxy; TGF sigue estimado. agg: factsheet oficial iShares AGG, 30-Jun-2026.",
     "note": "MANEM (0.18% del FI) sin factsheet propio todavia -- ver fi_subasset_lookup.json, estimado 'EM Local + Hard' ~90% por convencion del pitch book. Pendiente reemplazar cuando llegue el factsheet real.",
     "rows": [
       {
         "category": "US Treasury",
-        "big": 1.84,
+        "big": 0.0,
         "agg": 46.26
       },
       {
         "category": "Govt-related",
-        "big": 8.04,
+        "big": 6.2,
         "agg": 2.59
       },
       {
         "category": "Govt Agency MBS",
-        "big": 16.62,
+        "big": 20.5,
         "agg": 23.43
       },
       {
         "category": "Securitized Non-Agency",
-        "big": 11.21,
+        "big": 12.86,
         "agg": 1.39
       },
       {
         "category": "Corporate IG",
-        "big": 22.03,
+        "big": 19.27,
         "agg": 24.71
       },
       {
         "category": "Corporate HY",
-        "big": 2.95,
+        "big": 5.14,
         "agg": 0.0
       },
       {
         "category": "EM Local + Hard",
-        "big": 18.14,
+        "big": 20.97,
         "agg": 0.0
       },
       {
         "category": "Cat Bonds",
-        "big": 4.65,
+        "big": 4.68,
         "agg": 0.0
       },
       {
         "category": "Bank Loans",
-        "big": 0.26,
+        "big": 0.49,
         "agg": 0.0
       },
       {
         "category": "Other",
-        "big": 14.23,
+        "big": 9.89,
         "agg": 1.62
       }
     ],
     "totals": {
-      "big": 99.97,
+      "big": 100.0,
       "agg": 100.0
-    }
+    },
+    "_confianza": "high 64.0% | medium 28.6% (PIMCO-LD, proxy US) | low 7.5% (TGF, sin factsheet publico)",
+    "_nota_us_treasury": "US Treasury queda en 0.00%. PIMCO no lo reporta por separado: su categoria \"Government Related\" engloba Treasuries, agencias y papel garantizado de varios paises. El 1.8% que se mostraba antes venia del proxy PIMIX americano, que usa otra taxonomia. El BIG no tiene ningun fondo de Treasuries."
   },
   "credit_quality": {
     "title": "Calidad Crediticia",

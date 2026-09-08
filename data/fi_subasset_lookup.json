@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-06-03",
+    "last_updated": "2026-09-08",
     "source": "Individual fund factsheets, latest available June 2026",
     "categories": [
       "US Treasury",
@@ -19,41 +19,41 @@
   "funds": {
     "IE00BDT57R20": {
       "name": "PIMCO GIS Low Duration Income I-Acc",
-      "factsheet_date": null,
+      "factsheet_date": "2026-06-30",
       "factsheet_url": null,
-      "confidence": "low",
+      "confidence": "medium",
       "subasset": {
-        "US Treasury": 0,
-        "Govt-related": 3,
-        "Govt Agency MBS": 40,
-        "Securitized Non-Agency": 25,
-        "Corporate IG": 15,
-        "Corporate HY": 7,
-        "EM Local + Hard": 5,
-        "Cat Bonds": 0,
-        "Bank Loans": 0,
-        "Other": 5
+        "US Treasury": 0.0,
+        "Govt-related": 7.07,
+        "Govt Agency MBS": 35.35,
+        "Securitized Non-Agency": 21.21,
+        "Corporate IG": 8.08,
+        "Corporate HY": 1.01,
+        "EM Local + Hard": 7.07,
+        "Cat Bonds": 0.0,
+        "Bank Loans": 1.01,
+        "Other": 19.19
       },
-      "notes": "PIMCO official factsheet PDF was not accessible (PIMCO.com returned 403). Estimation based on: (1) Investing.com holdings page showing Securitized ~86%, Corporate ~21%, Government -2.8% (UST shorts/hedges), Cash -11.5%, Derivatives ~6% — a leveraged multi-sector short-duration strategy; (2) Top holdings dominated by FNMA/FHLMC agency MBS (~38-40%) plus 5Y/10Y Treasury futures used for duration management; (3) PIMCO's published fund mandate (up to 30% HY, multi-sector incl. EM and non-agency securitized). Split Securitized between Agency MBS (~40%) and Non-Agency/ABS/CLO (~25%). Split Corporate ~70/30 between IG/HY. Added ~5% EM consistent with PIMCO Low Duration Income historical allocation. Govt-related ~3% (small sovereign/agency non-MBS). UST left at 0% since net government exposure is slightly negative due to hedging. Total = 100%. Confidence LOW because exact percentages not extractable from a verified factsheet."
+      "notes": "Factsheet del fondo hermano US (PIMCO Low Duration Income Fund, INST/PFIIX) al 30-Jun-2026, usado como PROXY: el UCITS IE00BDT57R20 solo publica Quarterly Investment Report, que no sirve para un grafico de composicion (gobierno NETO NEGATIVO -4.64% por cobertura de duracion, y 'Securitizado' en un solo bucket de 59.52% sin separar agency de non-agency). CRUCE con el QIR del UCITS: securitizado total 56 vs 59.5 y EM 7 vs 7.5 (coinciden); IG credit 8 vs 14.9 y HY 1 vs 4.6 (difieren). REEMPLAZA la estimacion desde Investing.com."
     },
     "IE00B87KCF77": {
       "name": "PIMCO GIS Income I-Acc",
-      "factsheet_date": "2026-03-31",
+      "factsheet_date": "2026-07-31",
       "factsheet_url": "https://workplace.vanguard.com/assets/corp/fund_communications/pdf_publish/us-products/fact-sheet/F3926.pdf",
-      "confidence": "medium",
+      "confidence": "high",
       "subasset": {
-        "US Treasury": 6.3,
-        "Govt-related": 24.6,
-        "Govt Agency MBS": 17.7,
-        "Securitized Non-Agency": 13.9,
-        "Corporate IG": 2.5,
-        "Corporate HY": 0,
-        "EM Local + Hard": 0,
-        "Cat Bonds": 0,
-        "Bank Loans": 0.9,
-        "Other": 34
+        "US Treasury": 0.0,
+        "Govt-related": 14.39,
+        "Govt Agency MBS": 35.76,
+        "Securitized Non-Agency": 15.38,
+        "Corporate IG": 15.28,
+        "Corporate HY": 4.6,
+        "EM Local + Hard": 7.29,
+        "Cat Bonds": 0.0,
+        "Bank Loans": 0.7,
+        "Other": 6.59
       },
-      "notes": "Source: Vanguard PIMCO Income Fund (PIMIX) factsheet 03/31/2026, same strategy as the UCITS GIS Income Fund (IE00B87KCF77). PIMCO GIS Income official factsheet on pimco.com returns 403 (geo-blocked). Vanguard's 'Distribution by issuer-bonds' categories: Govt Related 24.6, Cash & Equiv 23.4, Agency MBS 17.7, Asset Backed 9.5, Future/Forward 8.0, Government 6.3, NonAgency Residential MBS 4.4, Swap 2.6, Corporate Bond 2.5, Bank Loan 0.9 = 99.9%. Mapping: Govt=US Treasury, Govt Related=Govt-related, Agency MBS=Govt Agency MBS, Asset Backed+NonAgency RMBS=Securitized Non-Agency, Corporate Bond=Corporate IG (no IG/HY split shown — net is small due to heavy CDS hedging), Bank Loan=Bank Loans. Cash+Futures+Swaps=Other (34%). HY and EM not broken out in Vanguard summary — PIMCO Income historically has 15-25% HY and 15-20% EM gross, but Vanguard aggregates derivative-hedged net exposure differently, so these show as 0 in this issuer-bonds view. Confidence: medium (would be high if PIMCO sector PDF accessible)."
+      "notes": "Factsheet OFICIAL PIMCO GIS Income Fund, ISIN IE00B87KCF77 — nuestra clase exacta — al 31-Jul-2026. Sector Allocation (GMV%), 12 categorias que suman 100.1. REEMPLAZA el proxy del PIMIX americano con datos de Marzo. OJO: PIMCO NO separa US Treasury; su 'Government Related' (14.4%) engloba Treasuries nominales e indexados, agencias y papel garantizado de EE.UU., Japon, UK, Australia, Canada y UE (ver nota metodologica del PDF). Por eso US Treasury queda en 0 y el 6.3% que mostraba el proxy era un artefacto de otra taxonomia."
     },
     "IE00B29K0P99": {
       "name": "PIMCO GIS Emerging Local Bond Fund I-Acc",
@@ -114,28 +114,28 @@
     },
     "IE000OE87WX6": {
       "name": "Man GLG Global Investment Grade Opportunities IVY USD",
-      "factsheet_date": null,
+      "factsheet_date": "2026-06-30",
       "factsheet_url": "https://www.man.com/man-glg-global-investment-grade-opportunities",
-      "confidence": "medium",
+      "confidence": "high",
       "subasset": {
         "US Treasury": 0,
         "Govt-related": 0,
         "Govt Agency MBS": 0,
-        "Securitized Non-Agency": 0,
-        "Corporate IG": 90,
-        "Corporate HY": 5,
-        "EM Local + Hard": 0,
+        "Securitized Non-Agency": 12.32,
+        "Corporate IG": 66.22,
+        "Corporate HY": 18.56,
+        "EM Local + Hard": 1.14,
         "Cat Bonds": 0,
         "Bank Loans": 0,
-        "Other": 5
+        "Other": 1.76
       },
-      "notes": "PLACEHOLDER entry added 2026-06-03 to complete the 7-fund FI sleeve. Man GLG Global Investment Grade Opportunities (IVY share class, IE000OE87WX6) is a global IG corporate credit fund per the strategy description. Estimation: ~90% Corporate IG (core mandate), ~5% Corporate HY (off-benchmark / fallen angels typical in flexible IG strategies), ~5% Other (cash + IR/CDS hedges). Official Man Group factsheet is gated behind professional login — recomendado validar con factsheet oficial cuando este disponible. Confidence: medium (mandate is unambiguous, exact split is estimated)."
+      "notes": "Factsheet oficial Man GLG Global Investment Grade Opportunities IYV USD, 30-Jun-2026. Base neta 92.50 (Exposure by Asset Class ex 'Duration Risk Management' 37.22, que es overlay de tasa). Verificado: 92.50 coincide con el total del Sector Breakdown y del Credit Rating Breakdown del mismo PDF. Split IG/HY desde el rating (BB 5.85 + B 11.23 + CCC 0.09 = 17.17 sub-IG; NR 0.93 va a Other). REEMPLAZA el placeholder 90/5/5 del 2026-06-03."
     },
     "IE00089T5MA6": {
       "name": "Man EM Corporate Credit Acc USD",
-      "factsheet_date": null,
+      "factsheet_date": "2026-06-30",
       "factsheet_url": "https://www.man.com/man-emerging-markets-corporate-credit-strategy",
-      "confidence": "low",
+      "confidence": "high",
       "subasset": {
         "US Treasury": 0,
         "Govt-related": 0,
@@ -143,12 +143,12 @@
         "Securitized Non-Agency": 0,
         "Corporate IG": 0,
         "Corporate HY": 0,
-        "EM Local + Hard": 90,
+        "EM Local + Hard": 85.67,
         "Cat Bonds": 0,
         "Bank Loans": 0,
-        "Other": 10
+        "Other": 14.33
       },
-      "notes": "No se encontro factsheet publico para esta share class especifica (IE00089T5MA6) — Man Group gatea sus factsheets PDF detras de login profesional. Estimacion basada en descripcion publica de la estrategia 'Man Emerging Markets Corporate Credit Alternative': long/short credit fund focused on hard currency EM corporates (de IG a distressed) mas EM sovereigns para hedging macro. Por convencion del Pitch Book BIG, todo el sleeve EM (corporate + sovereign hard currency) se asigna a 'EM Local + Hard' (~90%). El 10% en 'Other' refleja cash, derivatives y short positions tipicos de un fondo long/short. Confidence LOW — recomendado validar con factsheet oficial cuando Lucas tenga acceso via plataforma BIG o pidiendolo directamente a Man Group sales."
+      "notes": "Factsheet oficial Man EM Corporate Credit Alternative IV USD, 30-Jun-2026. Exposiciones LARGAS (los cortos son coberturas): Single Name Corporates 77.31 + Emerging Government 4.69 = 82.00 deuda EM; Cash Mgmt 9.64 + Convertibles 0.73 + Private Bond 2.32 + Equity 0.98 + Private Equity 0.05 = 13.72. Base 95.72. REEMPLAZA la estimacion 90/10."
     }
   }
 }
