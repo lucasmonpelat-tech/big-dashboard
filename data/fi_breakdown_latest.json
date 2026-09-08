@@ -32,7 +32,7 @@
       ],
       "excluidos": {
         "PIMCO-EM": "moneda local emergente sin hedge por diseno del mandato: su duracion no es homogenea con la del resto",
-        "TGF": "Lucas: no cuenta para los stats del sleeve"
+        "TGF": "Fuera de los stats del sleeve por decision de Lucas, y el factsheet lo respalda: EM FX Net Exposure 52% — el fondo NO esta hedgeado a USD, asi que sus metricas no son homogeneas con el resto (ver methodology_fi_stats_duration)."
       },
       "cobertura_pct_sleeve": 84.33,
       "factsheets_usados": {
@@ -44,7 +44,7 @@
       },
       "nota": "La calidad crediticia NO sigue esta regla: Maximus la publica agregada, con TGF y PIMCO-EM adentro, y no se puede desarmar."
     },
-    "_generated_at": "2026-09-08T13:59:46.573695",
+    "_generated_at": "2026-09-08T14:55:45.446171",
     "_generated_from": "canonical/2026-08-31/holdings_returns.json"
   },
   "sub_asset_class": {
