@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-09-08T16:51:47.208457",
+  "refreshedAt": "2026-09-08T19:28:07.184865",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -2192,17 +2192,17 @@
           "source": "daily_close"
         },
         {
-          "ticker": "PIMCO-INC",
-          "qty": 159434.55,
-          "price": 20.17,
-          "mv": 3215794.8735,
-          "source": "daily_close"
-        },
-        {
           "ticker": "MANEM",
           "qty": 2334.391,
           "price": 115.86,
           "mv": 270462.54126,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "PIMCO-INC",
+          "qty": 159434.55,
+          "price": 20.17,
+          "mv": 3215794.8735,
           "source": "daily_close"
         },
         {
