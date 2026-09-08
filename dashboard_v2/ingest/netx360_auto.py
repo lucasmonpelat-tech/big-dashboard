@@ -311,6 +311,48 @@ def try_selectors(page, selectors, action, value=None, timeout=3000):
     return None
 
 
+def describir_inputs(page):
+    """Lista los inputs visibles de la pagina. Para alertas: sin esto, cuando un
+    selector deja de matchear la alerta dice "no lo encontre" y no hay forma de
+    saber si Pershing cambio el markup, si la pagina expiro, o si nunca cargo."""
+    try:
+        datos = page.evaluate("""() => [...document.querySelectorAll('input')]
+            .filter(e => e.offsetParent !== null)
+            .slice(0, 12)
+            .map(e => ({name: e.name, id: e.id, type: e.type, maxlength: e.maxLength,
+                        placeholder: e.placeholder, aria: e.getAttribute('aria-label')}))""")
+        return json.dumps(datos, ensure_ascii=False)
+    except Exception as e:
+        return f"(no pude leer los inputs: {e})"
+
+
+def esperar_campo_otp(page, timeout_ms=20000):
+    """Espera a que aparezca el campo de OTP y devuelve el selector que matcheo.
+
+    POR QUE (2026-09-08, por la falla del 04-Sep)
+    ---------------------------------------------
+    Antes se probaba la lista de selectores UNA vez, apenas volvia de leer el
+    mail. Pero entre que se pide el OTP y que llega el mail pueden pasar hasta
+    90 segundos, y en ese rato la pagina puede seguir renderizando (Angular) o
+    directamente expirar. Un solo intento sin espera convierte un problema de
+    timing en "no encontre campo OTP".
+
+    Ahora se reintenta durante 20s antes de darse por vencido. Si igual falla,
+    la alerta lleva la URL y los inputs visibles para saber QUE paso.
+    """
+    fin = time.time() + timeout_ms / 1000
+    while time.time() < fin:
+        for sel in OTP_SELECTORS:
+            try:
+                el = page.locator(sel).first
+                if el.is_visible(timeout=800):
+                    return sel
+            except Exception:
+                continue
+        time.sleep(1)
+    return None
+
+
 def dismiss_cookie_banner(page):
     """Cierra el banner de OneTrust cookies que bloquea clicks."""
     cookie_selectors = [
@@ -681,10 +723,25 @@ def login_flow(page, verbose=True):
         if not otp:
             return False
 
-        # Ingresar OTP
-        sel_otp = try_selectors(page, OTP_SELECTORS, "fill", otp)
+        # Ingresar OTP. Se espera a que el campo aparezca en vez de probar una
+        # sola vez: leer el mail puede tardar 90s y la pagina sigue viva.
+        sel_otp = esperar_campo_otp(page)
         if not sel_otp:
-            write_alert("otp_form_not_found", "No encontre campo OTP")
+            write_alert(
+                "otp_form_not_found",
+                f"No encontre campo OTP despues de 20s de espera. "
+                f"URL: {page.url} | inputs visibles: {describir_inputs(page)}",
+                action=("Si la URL ya no es la de OTP, la sesion expiro mientras "
+                        "se esperaba el mail: reintentar. Si hay inputs pero con "
+                        "otro name/id, Pershing cambio el markup: agregar el "
+                        "selector a OTP_SELECTORS en netx360_auto.py."),
+            )
+            return False
+        try:
+            page.locator(sel_otp).first.fill(otp)
+        except Exception as e:
+            write_alert("otp_fill_failed",
+                        f"Encontre el campo OTP ({sel_otp}) pero no pude escribir: {e}")
             return False
         print(f"  OTP ingresado en {sel_otp}")
 
