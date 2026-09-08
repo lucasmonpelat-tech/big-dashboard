@@ -590,6 +590,7 @@
             YTW = yield to worst · Duration = sensibilidad a tasas · Spread vs UST 10Y = carry sobre Treasury.
           </div>
           <div class="kpi-grid" id="fi-metrics-kpis" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))"></div>
+          <div id="fi-metrics-scope" style="font-size:11px;color:var(--text-mute);margin-top:10px;line-height:1.5"></div>
         </div>
 
         <div class="section">
@@ -1850,18 +1851,40 @@
           maturity: rh.maturity || 0,
           rating: rh.rating || "—",
           spread_vs_ust: rh.spread_vs_ust,
+          fi_stats_include: rh.fi_stats_include,
+          metrics_as_of: rh.metrics_as_of,
         };
       }).filter(h => h.weight_pct > 0);
 
       // ==== KPIs FI (weighted por peso real del holding) ====
       if (holdings.length) {
-        // Excluir holdings con data missing (YTW=0 y Duration=0) del cálculo
-        // weighted — sino contaminan el promedio con ceros espurios y arrastran
-        // el spread hacia negativo (típico de fondos nuevos no indexados en baha).
-        const withData = holdings.filter(h => (h.ytw && h.ytw > 0) || (h.duration && h.duration > 0));
+        // REGLA DE INCLUSION (Lucas, 2026-09-07): los KPI ponderados del sleeve
+        // toman SOLO los fondos cuyas metricas estan en USD o hedgeadas a USD.
+        // Entran PIMCO-LD, PIMCO-INC, MANIG, SGCB y MANEM; quedan afuera Tenac
+        // (TGF) y PIMCO EM Local — moneda local sin hedge por diseno del
+        // mandato, su duracion no es homogenea con la del resto.
+        //
+        // La regla NO vive aca. Vive en data/funds/<TICKER>.json -> fi_stats_include,
+        // refresh_fi_race_daily.py la transporta a fi_race.json, y es la MISMA que
+        // usa fi_breakdown_latest.json -> fi_stats, o sea la misma que el factsheet
+        // que se manda a clientes y el S10 del pitch book.
+        //
+        // ANTES (hasta 2026-09-08) esto filtraba por "que tenga algun dato": metia
+        // TGF y PIMCO-EM, y dejaba afuera MANEM porque venia con ceros. Daba
+        // YTW 7.20 / Dur 4.64 / Venc 6.61 contra 6.98 / 4.46 / 6.01 de los reportes.
+        // Nadie lo detectaba: los dos numeros se veian razonables por separado.
+        const marcados = holdings.filter(h => h.fi_stats_include === true);
+        // Fallback al criterio viejo si fi_race.json todavia no trae el flag
+        // (deploy con data vieja): mejor un promedio imperfecto que un NaN.
+        const withData = marcados.length
+          ? marcados
+          : holdings.filter(h => (h.ytw && h.ytw > 0) || (h.duration && h.duration > 0));
         const wsum = withData.reduce((s, h) => s + h.weight_pct, 0) || 1;
         const w = (key) => withData.reduce((s, h) => s + h.weight_pct * (h[key] || 0), 0) / wsum;
         const ytw = w("ytw"), dur = w("duration"), mat = w("maturity"), spr = w("spread_vs_ust");
+        const incluidos = withData.map(h => h.ticker);
+        const excluidos = holdings.filter(h => !incluidos.includes(h.ticker)).map(h => h.ticker);
+        const cobertura = withData.reduce((s, h) => s + h.weight_pct, 0);
         const aum = liveTotalMv;
         const ust10 = race?.ust_reference?.value ?? null;
 
@@ -1893,6 +1916,15 @@
             <div class="sub">${holdings.length} holdings</div>
           </div>
         `;
+
+        const scope = document.getElementById("fi-metrics-scope");
+        if (scope) scope.innerHTML =
+          `YTW, Duration y Maturity se ponderan solo con fondos en USD o hedgeados a USD: ` +
+          `<strong>${incluidos.join(", ")}</strong> — ${cobertura.toFixed(1)}% del sleeve.` +
+          (excluidos.length
+            ? ` Excluidos: <strong>${excluidos.join(", ")}</strong> (moneda local sin hedge).`
+            : "") +
+          ` Misma regla que el factsheet y el pitch book.`;
       }
 
       // ==== Pie composición ====

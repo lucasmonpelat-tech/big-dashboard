@@ -156,7 +156,7 @@
   },
   "holdings": [
     {
-      "isin": "LU2837777825",
+      "isin": "LU2827810776",
       "ticker": "CALP",
       "name": "Carlyle AlpInvest Private Markets",
       "sub_class": "private_equity",
@@ -169,7 +169,9 @@
       "assumed_annual_pct": 12.0,
       "source": "Pershing UGL via sync_alts_ugl.py",
       "valuation_date": "2026-09-08",
-      "days_since_valuation": 0
+      "days_since_valuation": 0,
+      "isin_maximus": "LU2837777825",
+      "_isin_note": "CALP tiene dos ISIN dando vueltas: LU2827810776 es el del statement oficial de Carlyle y el que usan el canonical y funds_metadata.js; LU2837777825 es con el que lo dio de alta Maximus. Se unifica en el oficial. Se guarda el de Maximus para poder cruzar contra sus reportes."
     },
     {
       "isin": "US46438F1012",
@@ -236,7 +238,7 @@
       "days_since_valuation": 0
     },
     {
-      "isin": "FLEX-LEX",
+      "isin": "LU2966298809",
       "ticker": "FLEX",
       "name": "Flex-Lexington Partners Secondaries",
       "sub_class": "private_equity",
@@ -249,7 +251,8 @@
       "assumed_annual_pct": 12.0,
       "source": "Pershing UGL via sync_alts_ugl.py",
       "valuation_date": "2026-09-08",
-      "days_since_valuation": 0
+      "days_since_valuation": 0,
+      "_isin_note": "FLEX-LEX era un ISIN placeholder de cuando entro el fondo sin ISIN cargado. El real es LU2966298809 y ya es el que usan el canonical, positions_latest y funds_metadata.js. Unificado el 2026-09-08."
     },
     {
       "isin": "LU2847068389",

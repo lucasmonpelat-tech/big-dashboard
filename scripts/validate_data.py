@@ -27,6 +27,9 @@ import re
 import sys
 from pathlib import Path
 
+import build_fi_stats
+import race_weights
+
 ROOT = Path(__file__).parent.parent
 META_JS = ROOT / "data" / "funds_metadata.js"
 POSITIONS_JSON = ROOT / "data" / "positions_latest.json"
@@ -58,6 +61,12 @@ PCT_TOLERANCE = 0.005
 
 # Tolerancia para sumas de exposicion (%)
 SUM_TOLERANCE = 1.5
+
+# Cuanto puede diferir el weight_pct de un race JSON contra el canonical, en
+# puntos porcentuales. 0.5 absorbe el redondeo a 2 decimales y el desfasaje de
+# horas entre el transform temprano y el final del cron; un peso realmente
+# congelado siempre driftea varios puntos.
+WEIGHT_TOLERANCE_PP = 0.5
 # Tolerancia para comparar valores USD entre las dos fuentes de posiciones
 VALUE_TOLERANCE_USD = 1.0
 
@@ -369,6 +378,158 @@ def check_derivados_sincronizados(errors, warnings):
         print("         Regenerar: python -m dashboard_v2.transform.run_all")
 
 
+def check_pesos_race(errors, warnings):
+    """Los race JSON no pueden tener los pesos congelados.
+
+    POR QUE EXISTE (2026-09-08)
+    ---------------------------
+    Es el bug que mas veces volvio. Los tres *_race.json guardan weight_pct y
+    value_usd, pero el unico script que los escribia era el rebuild completo de
+    cada sleeve, borrado el 2026-08-20. Los refresh diarios solo tocan retornos,
+    asi que los pesos se congelan mientras refreshedAt se sigue actualizando: el
+    archivo parece fresco y no lo esta.
+
+        Ago-2026  PIMCO-LD/INC invertidos en el pie de FI. Se parcheo el HTML.
+        Sep-2026  volvio igual (38.66% vs 28.56% real) + el sleeve $700K corto.
+                  Y ademas equity_race drifteaba hasta 1.8pp sin que nadie mirara.
+
+    Las dos veces se detecto a ojo, comparando dos widgets. Este check lo hace
+    solo: compara cada peso contra el canonical, que es la misma fuente que ya
+    muestra la tabla "Holdings del Sleeve".
+
+    Tolerancia 0.5pp: absorbe el redondeo a 2 decimales y el desfasaje de horas
+    entre el transform temprano y el final del cron, pero un peso viejo de
+    verdad (que siempre driftea varios puntos) falla.
+    """
+    print("\n" + "-" * 70)
+    print("  6 - Pesos de los race JSON vs el canonical")
+    print("-" * 70)
+
+    for archivo, sleeve_key in race_weights.SLEEVE_DE_RACE.items():
+        race = _load(ROOT / "data" / archivo)
+        if not race:
+            warnings.append(f"pesos[{archivo}]: no pude leerlo")
+            print(f"  [WARN] {archivo:20} ilegible")
+            continue
+
+        r = race_weights.comparar(race, sleeve_key)
+        if not r["total"]:
+            warnings.append(f"pesos[{archivo}]: sin canonical para comparar")
+            print(f"  [WARN] {archivo:20} sin canonical")
+            continue
+
+        desviados = [(tk, a, e, g) for tk, a, e, g in r["filas"]
+                     if g is None or abs(g) > WEIGHT_TOLERANCE_PP]
+        for tk, actual, esperado, gap in desviados:
+            errors.append(
+                f"pesos[{archivo}]: {tk} pesa {actual}% pero el canonical "
+                f"({r['as_of']}) dice {esperado}% - {gap:+}pp. El peso quedo "
+                f"congelado: nadie lo reescribe desde que se borro el rebuild "
+                f"del sleeve. Correr el refresh diario de ese sleeve."
+            )
+        # Lista incompleta: NO es error de este check. Completarla necesita
+        # reconstruir anchors y retornos por fondo (trabajo del rebuild del
+        # sleeve), no algo que un refresh diario pueda hacer. Pero tiene que
+        # verse en cada corrida, porque un fondo ausente del race se cae de la
+        # clasificacion por sleeve del dashboard.
+        for tk in r["faltan"]:
+            warnings.append(
+                f"pesos[{archivo}]: {tk} esta en el canonical pero NO en el race "
+                f"- le falta el rebuild del sleeve. Mientras tanto el dashboard "
+                f"lo clasifica por el fallback de keywords, no por ISIN."
+            )
+        for tk in r["sobran"]:
+            warnings.append(
+                f"pesos[{archivo}]: {tk} esta en el race pero NO en el canonical "
+                f"- posicion cerrada que quedo colgada. Su peso no se actualiza."
+            )
+        # Mismo fondo, dos ISIN. Hoy no rompe nada porque el pipeline cruza casi
+        # todo por ticker, pero es una bomba de tiempo: el dia que un consumidor
+        # cruce por ISIN, el holding desaparece callado -- justo el error
+        # silencioso que este validador existe para cazar.
+        for tk, isin_race, isin_canon in r["isines"]:
+            errors.append(
+                f"pesos[{archivo}]: {tk} tiene ISIN '{isin_race}' pero el canonical "
+                f"dice '{isin_canon}'. Un solo fondo no puede tener dos ISIN dando "
+                f"vueltas: cualquier cruce por ISIN lo pierde en silencio. "
+                f"Unificar en el del statement oficial."
+            )
+
+        if desviados or r["isines"]:
+            print(f"  [ERROR] {archivo:20} {len(desviados)} peso(s) desfasado(s) "
+                  f"> {WEIGHT_TOLERANCE_PP}pp, {len(r['isines'])} ISIN discrepante(s)")
+        else:
+            extra = ""
+            if r["faltan"] or r["sobran"]:
+                extra = f"  (faltan: {r['faltan'] or '-'}, sobran: {r['sobran'] or '-'})"
+            print(f"  [OK]    {archivo:20} {len(r['filas'])} pesos coinciden "
+                  f"con canonical {r['as_of']}{extra}")
+
+
+def check_fi_stats_derivado(errors, warnings):
+    """YTW/Duracion/Vencimiento del factsheet tienen que salir de las fuentes.
+
+    POR QUE EXISTE (2026-09-08)
+    ---------------------------
+    Estos tres numeros se escribian a mano en fi_breakdown_latest.json y de ahi
+    iban al factsheet de clientes y al S10 del pitch book. El dashboard, en
+    paralelo, los calculaba con OTRA regla de inclusion: metia TGF y PIMCO-EM
+    (moneda local sin hedge) y dejaba afuera MANEM porque venia con ceros.
+    Daba YTW 7.20 / Dur 4.64 / Venc 6.61 contra 6.98 / 4.46 / 6.01 del reporte.
+
+    Nadie lo detectaba porque los dos numeros se ven razonables por separado.
+    Solo aparece si comparas el dashboard contra el PDF que le mandaste a un
+    cliente - y a esa altura ya es tarde.
+
+    Ahora los dos leen la misma regla (fi_stats_include en data/funds/*.json) y
+    este check verifica que el JSON publicado siga coincidiendo con lo que sale
+    de las fuentes.
+    """
+    print("\n" + "-" * 70)
+    print("  7 - fi_stats derivado de data/funds + canonical")
+    print("-" * 70)
+
+    try:
+        r = build_fi_stats.calcular(None)
+    except SystemExit as e:
+        warnings.append(f"fi_stats: no se pudo calcular - {e}")
+        print(f"  [WARN] no se pudo calcular: {e}")
+        return
+
+    doc = _load(ROOT / "data" / "fi_breakdown_latest.json") or {}
+    filas = {f["metric"]: f.get("big") for f in (doc.get("fi_stats") or {}).get("rows", [])}
+
+    for etiqueta, _ in build_fi_stats.METRICAS:
+        publicado = filas.get(etiqueta)
+        calculado = r["valores"][etiqueta]
+        if publicado is None:
+            errors.append(f"fi_stats: falta la fila '{etiqueta}' en fi_breakdown_latest.json")
+            print(f"  [ERROR] {etiqueta:14} ausente")
+        elif abs(publicado - calculado) > build_fi_stats.TOLERANCIA:
+            errors.append(
+                f"fi_stats: '{etiqueta}' publicado {publicado} vs {calculado} "
+                f"calculado desde data/funds x canonical {r['as_of']} - "
+                f"el factsheet y el dashboard van a mostrar numeros distintos. "
+                f"Regenerar: python scripts/build_fi_stats.py"
+            )
+            print(f"  [ERROR] {etiqueta:14} {publicado} vs {calculado} calculado")
+        else:
+            print(f"  [OK]    {etiqueta:14} {publicado}")
+
+    for tk in r["sin_flag"]:
+        errors.append(
+            f"fi_stats: {tk} no declara fi_stats_include en data/funds/{tk}.json - "
+            f"no se sabe si entra en YTW/Duracion/Vencimiento. Definirlo "
+            f"(true si esta en USD o hedgeado a USD)."
+        )
+    for m in r["faltantes"]:
+        errors.append(f"fi_stats: falta {m} en data/funds - entra en el promedio como cero")
+    if r["sin_ficha"]:
+        warnings.append(f"fi_stats: sin data/funds/<TICKER>.json: {r['sin_ficha']}")
+
+    print(f"  Incluidos: {', '.join(r['incluidos'])} - {r['cobertura_pct']}% del sleeve")
+
+
 def main():
     print("=" * 70)
     print("  BIG Dashboard — Data Consistency Validator")
@@ -504,6 +665,12 @@ def main():
 
     # ---- 5: DERIVADOS SINCRONIZADOS CON LA DATA CRUDA ----
     check_derivados_sincronizados(errors, warnings)
+
+    # ---- 6: PESOS DE LOS RACE JSON (fosiles del rebuild borrado) ----
+    check_pesos_race(errors, warnings)
+
+    # ---- 7: fi_stats DERIVADO (misma regla que el dashboard) ----
+    check_fi_stats_derivado(errors, warnings)
 
     # ---- REPORTE FINAL ----
     print("\n" + "=" * 70)

@@ -26,6 +26,8 @@ import json
 from datetime import date, datetime
 from pathlib import Path
 
+import race_weights
+
 ROOT = Path(__file__).parent.parent
 RACE_FILE = ROOT / "data" / "equity_contributions_real.json"
 SLEEVE_FILE = ROOT / "data" / "equity_sleeve_real.json"
@@ -153,6 +155,13 @@ def main():
                 n_updated += 1
                 if old is not None and abs(old - ytd_new) > 0.5:
                     print(f"  [equity_race YTD spot Pershing] {tk}: {old:+.2f}% -> {ytd_new:+.2f}%")
+
+            # Pesos y MV: se re-derivan del canonical en cada corrida (2026-09-08).
+            # Antes se arrastraban del archivo desde que se borro equity_race.py
+            # (2026-08-20) y venian drifteando hasta ~1.8pp -- CSPX marcaba 33.86%
+            # contra 32.04% real. Es el mismo fosil que ya rompio dos veces en FI;
+            # aca se corta en el origen. Ver scripts/race_weights.py.
+            race_weights.aplicar(er, "equity")
 
             er['refreshedAt'] = datetime.now().isoformat()
             er['_ytd_spot_updated'] = f'{datetime.now().date()}: {n_updated} holdings YTD spot via Pershing NAV/anchor 31-Dic'

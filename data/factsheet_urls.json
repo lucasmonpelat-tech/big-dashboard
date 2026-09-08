@@ -182,11 +182,12 @@
     },
     "CALP": {
       "name": "Carlyle AlpInvest",
-      "isin": "LU2837777825",
+      "isin": "LU2827810776",
       "sleeve": "Alternatives",
       "factsheet_url": "MANUAL_EMAIL",
       "source_type": "manual_email",
-      "refresh_frequency_days": 90
+      "refresh_frequency_days": 90,
+      "isin_maximus": "LU2837777825"
     },
     "NBPEA": {
       "name": "NB Global Private Equity Access",
@@ -198,11 +199,12 @@
     },
     "FLEX": {
       "name": "Flex-Lexington Partners",
-      "isin": "FLEX-LEX",
+      "isin": "LU2966298809",
       "sleeve": "Alternatives",
       "factsheet_url": "MANUAL_EMAIL",
       "source_type": "manual_email",
-      "refresh_frequency_days": 90
+      "refresh_frequency_days": 90,
+      "_isin_note": "FLEX-LEX era un ISIN placeholder de cuando entro el fondo sin ISIN cargado. El real es LU2966298809 y ya es el que usan el canonical, positions_latest y funds_metadata.js. Unificado el 2026-09-08."
     },
     "HLEND": {
       "name": "HPS Corporate Lending",

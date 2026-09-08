@@ -272,6 +272,9 @@ jobs:
         run: python scripts/validate_sleeve_returns.py
         continue-on-error: true
 
+      - name: fi_stats (YTW/Duracion/Vencimiento del sleeve FI)
+        run: python scripts/build_fi_stats.py
+
       - name: Brinson Attribution YTD
         run: python scripts/compute_attribution.py
         continue-on-error: true

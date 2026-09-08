@@ -3,15 +3,17 @@
   "isin": "IE00089T5MA6",
   "name": "Man Emerging Markets Corporate Credit Alternative IV USD",
   "sleeve": "Fixed Income",
-  "source": "PLACEHOLDER — pendiente factsheet",
-  "parsed_at": "2026-05-19",
-  "as_of_factsheet": null,
+  "source": "Factsheet oficial Man EM Corporate Credit Alternative IV USD, 30-Jun-2026",
+  "parsed_at": "2026-09-08",
+  "as_of_factsheet": "2026-06-30",
   "fi_metrics": {
-    "ytw": null,
-    "duration": null,
-    "maturity": null,
+    "ytw": 8.55,
     "current_yield": null,
-    "rating": null
+    "duration": 2.35,
+    "maturity": 4.62,
+    "rating": null,
+    "effective_duration": 2.16
   },
-  "note": "Posicion piloto $20K abierta May-2026 para entrar mas adelante. Long/short EM credit fund de Man Group (PM Kaushik Rambhiya). TODO: cargar factsheet y completar fi_metrics + currency/country exposure en funds_metadata.js."
+  "note": "Dejo de ser posicion piloto: paso de $20K (May-2026) a $270K en Agosto-2026, del 0.19% al 2.45% del sleeve. Long/short EM credit de Man Group (PM Kaushik Rambhiya). YTW 8.55% HEDGEADO A USD y modified duration 2.35 salen del factsheet oficial al 30-Jun-2026; effective duration 2.16 se guarda aparte porque el resto del sleeve reporta modified y hay que ponderar peras con peras. OJO maturity 4.62: es ESTIMADO -- Man no publica vencimiento promedio, se pondero cada bucket de vencimiento NETO por su punto medio. Es la unica metrica del sleeve que no es un dato publicado.",
+  "fi_stats_include": true
 }
