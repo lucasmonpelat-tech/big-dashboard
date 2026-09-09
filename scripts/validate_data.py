@@ -28,6 +28,7 @@ import sys
 from pathlib import Path
 
 import build_fi_stats
+import check_reportes_vs_datos
 import race_weights
 
 ROOT = Path(__file__).parent.parent
@@ -530,6 +531,61 @@ def check_fi_stats_derivado(errors, warnings):
     print(f"  Incluidos: {', '.join(r['incluidos'])} - {r['cobertura_pct']}% del sleeve")
 
 
+def check_mapa_reportes(errors, warnings):
+    """Las rutas del mapa shape->fuente tienen que seguir resolviendo.
+
+    POR QUE ESTA ACA Y NO EN EL SCRIPT DEL DECK (2026-09-09)
+    --------------------------------------------------------
+    scripts/reportes_shape_map.json dice de que campo de que JSON sale cada
+    numero del factsheet y del pitch book. check_reportes_vs_datos.py lo usa el
+    dia del cierre.
+
+    El problema: si alguien renombra un campo o cambia una categoria (paso el
+    2026-09-08 al fundir "US Treasury" dentro de "Govt-related"), el mapa apunta
+    a un campo que ya no existe. Y no se entera nadie hasta el cierre, que es
+    justo cuando no hay tiempo.
+
+    Este check NO mira ningun deck -- los .pptx viven en Dropbox y aca no estan.
+    Solo verifica que cada ruta declarada siga resolviendo contra los JSON del
+    repo. Es barato y corre en cada deploy.
+    """
+    print("\n" + "-" * 70)
+    print("  8 - Rutas del mapa shape->fuente de los reportes")
+    print("-" * 70)
+
+    mapa_path = ROOT / "scripts" / "reportes_shape_map.json"
+    mapa = _load(mapa_path)
+    if not mapa:
+        warnings.append("no pude leer reportes_shape_map.json")
+        print("  [WARN] no pude leerlo")
+        return
+
+    total, rotas = 0, 0
+    for deck, entradas in mapa.items():
+        if deck.startswith("_") or not isinstance(entradas, dict):
+            continue
+        for etq, decl in entradas.items():
+            if etq.startswith("_"):
+                continue
+            specs = decl.get("fuentes") or ([decl["fuente"]] if decl.get("fuente") else [])
+            for spec in specs:
+                total += 1
+                try:
+                    check_reportes_vs_datos.resolver(spec)
+                except Exception as e:
+                    rotas += 1
+                    errors.append(
+                        "mapa reportes [%s] %s: la ruta '%s' ya no resuelve (%s). "
+                        "Alguien renombro un campo o cambio una categoria; el "
+                        "chequeo del deck se queda sin con que comparar."
+                        % (deck, etq, spec, e))
+
+    if rotas:
+        print("  [ERROR] %d de %d rutas no resuelven" % (rotas, total))
+    else:
+        print("  [OK]    %d rutas resuelven contra los JSON del repo" % total)
+
+
 def main():
     print("=" * 70)
     print("  BIG Dashboard — Data Consistency Validator")
@@ -671,6 +727,9 @@ def main():
 
     # ---- 7: fi_stats DERIVADO (misma regla que el dashboard) ----
     check_fi_stats_derivado(errors, warnings)
+
+    # ---- 8: EL MAPA DE LOS REPORTES SIGUE APUNTANDO A ALGO ----
+    check_mapa_reportes(errors, warnings)
 
     # ---- REPORTE FINAL ----
     print("\n" + "=" * 70)
