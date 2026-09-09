@@ -36,14 +36,25 @@ from compute_holdings_returns import PERSHING_TO_MY  # noqa: E402
 # refresh_alts_daily.py / portfolio_reconstructor.py para estos 2 tickers).
 PAR_VALUE_TICKERS = {"TGF", "BPCC"}
 
-# GCRED/HLEND son fondos privados sin ISIN real en el feed de Pershing (solo
-# identificador interno). funds_metadata.js les puso un placeholder -- se
-# reusa el mismo para que el dual-source check (validate_data.py) los pueda
-# matchear en vez de comparar contra None.
-ISIN_PLACEHOLDER_BY_TICKER = {
-    "HLEND": "KYG4737U1085",
-    "GCRED": "GCRED-I",
-}
+# GCRED/HLEND son feeders offshore de iCapital y Pershing NO les publica ISIN:
+# el feed crudo los trae en null. Sin un identificador, cualquier cruce por ISIN
+# los pierde en silencio.
+#
+# El mapa vivia hardcodeado aca. Desde el 2026-09-09 esta en data/isin_overrides.json,
+# que ademas declara CUAL es real y cual es un placeholder nuestro -- distincion
+# que importa: 'GCRED-I' no es un ISIN, es una etiqueta interna para poder cruzar.
+# Lo lee tambien dashboard_v2/transform/build_holdings_returns.py, para que el
+# canonical los traiga y el dashboard no tenga que adivinarlos por descripcion.
+def _cargar_isin_overrides():
+    try:
+        doc = json.load(open(ROOT / "data" / "isin_overrides.json", encoding="utf-8"))
+        return {tk: o["isin"] for tk, o in doc.get("overrides", {}).items()}
+    except Exception as e:
+        print(f"  WARN: no pude leer isin_overrides.json ({e}) — sigo sin overrides")
+        return {}
+
+
+ISIN_PLACEHOLDER_BY_TICKER = _cargar_isin_overrides()
 
 
 def latest_canonical_positions():

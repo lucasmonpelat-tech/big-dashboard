@@ -1,0 +1,23 @@
+{
+  "_description": "Identificador por ticker para los holdings que Pershing entrega SIN ISIN. El feed crudo (canonical/<fecha>/positions.json) los trae en null, asi que cualquier cruce por ISIN los pierde en silencio. Aca se declara con que identificador tratarlos, y si es real o un placeholder nuestro.",
+  "_por_que": "Los dos son feeders offshore de iCapital. Pershing los identifica solo con su numero interno (379LP0083 / 449LP0055) y no publica ISIN. Hasta el 2026-09-09 cada script que necesitaba un identificador se armaba el suyo: sync_positions_latest_from_canonical.py tenia su propio mapa y el canonical directamente los dejaba en null, asi que classifyHolding() del dashboard tenia que adivinarlos por la descripcion.",
+  "_como_usarlo": "Si aparece el ISIN real de alguno (statement de iCapital, ficha del fondo), reemplazar el valor aca y poner es_real en true. Es el unico lugar donde se toca: lo leen sync_positions_latest_from_canonical.py y dashboard_v2/transform/build_holdings_returns.py.",
+  "_ojo": "Un valor con es_real=false NO es un ISIN. Es una etiqueta interna para poder cruzar. No mandarlo a un cliente ni a un proveedor como si fuera el ISIN del fondo.",
+
+  "overrides": {
+    "HLEND": {
+      "isin": "KYG4737U1085",
+      "es_real": true,
+      "nombre": "iCapital HPS Corporate Lending Offshore Access Fund SP1",
+      "pershing_id": "449LP0055",
+      "fuente": "Alta manual en funds_metadata.js; ISIN de Cayman, consistente con un feeder offshore"
+    },
+    "GCRED": {
+      "isin": "GCRED-I",
+      "es_real": false,
+      "nombre": "Golub Capital Private Credit iCapital Offshore Access Fund SP1",
+      "pershing_id": "379LP0083",
+      "fuente": "PLACEHOLDER. No se le conoce ISIN publico. Se eligio 'GCRED-I' porque ya era el que usaban funds_metadata.js, alts_liquidity.json, alts_race.json, factsheet_urls.json y live_prices.js: cambiarlo ahora obligaria a tocar los cinco. Si aparece el real, reemplazar aca y poner es_real en true."
+    }
+  }
+}

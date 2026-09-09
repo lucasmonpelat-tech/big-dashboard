@@ -39,6 +39,34 @@ from dashboard_v2.canonical.schemas import SCHEMA_VERSION
 from dashboard_v2.transform._common import ROOT, utc_now_iso, relpath_from_root
 
 DATA_DIR = ROOT / "data"
+
+
+def _cargar_isin_overrides() -> dict:
+    """{ticker: isin} para los holdings que Pershing entrega sin ISIN.
+
+    Mismo archivo que lee scripts/sync_positions_latest_from_canonical.py, para
+    no tener dos mapas que puedan divergir. Ver data/isin_overrides.json.
+    """
+    try:
+        doc = json.loads((DATA_DIR / "isin_overrides.json").read_text(encoding="utf-8"))
+        return {tk: o["isin"] for tk, o in doc.get("overrides", {}).items()}
+    except Exception as e:
+        print(f"  WARN: no pude leer isin_overrides.json ({e}) — sigo sin overrides")
+        return {}
+
+
+def _cargar_pershing_ids() -> dict:
+    """{ticker: numero con el que Pershing nombra la posicion}."""
+    try:
+        doc = json.loads((DATA_DIR / "isin_overrides.json").read_text(encoding="utf-8"))
+        return {tk: o["pershing_id"] for tk, o in doc.get("overrides", {}).items()
+                if o.get("pershing_id")}
+    except Exception:
+        return {}
+
+
+_ISIN_OVERRIDES = _cargar_isin_overrides()
+_PERSHING_ID = _cargar_pershing_ids()
 CANONICAL_DIR = DATA_DIR / "canonical"
 
 YTD_ANCHOR = "2026-01-01"
@@ -259,6 +287,19 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
         if pos.get("isin"):
             isin = pos.get("isin")
 
+    # Ultimo recurso: los holdings que Pershing entrega SIN ISIN.
+    #
+    # GCRED y HLEND son feeders offshore de iCapital; el feed crudo los trae en
+    # null y hasta el 2026-09-09 llegaban asi al canonical. Consecuencia: el
+    # dashboard no podia cruzarlos por ISIN y caia a adivinar por el texto de la
+    # descripcion, y cualquier consumidor que cruzara por ISIN los perdia sin
+    # avisar.
+    #
+    # El identificador se declara en data/isin_overrides.json, que ademas dice
+    # cual es real (HLEND) y cual es una etiqueta interna nuestra (GCRED).
+    if not isin:
+        isin = _ISIN_OVERRIDES.get(ticker)
+
     # ===== Bench SI (Jul-2026: PRICE return desde primera compra) =====
     # Nueva metodología (Lucas Jul-2026): NO dollar-weighted. Simple buy-and-hold del bench
     # desde el first_buy_date del activo.
@@ -320,6 +361,13 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
         "ticker": ticker,
         "name": name,
         "isin": isin,
+        # El identificador con el que Pershing nombra la posicion. Se agrega el
+        # 2026-09-09 porque para GCRED y HLEND es lo UNICO que los dos lados
+        # comparten: el ISIN que les pusimos vive en nuestros archivos, pero el
+        # feed crudo de posiciones los trae en null, asi que cruzar por ISIN no
+        # los encuentra. Con esto el cruce es exacto contra el numero de
+        # Pershing, en vez de adivinar por el texto de la descripcion.
+        "pershing_id": (pos or {}).get("security_id") or _PERSHING_ID.get(ticker),
         "status": status,
         "qty": qty,
         "mv_usd": round(mv, 2) if mv is not None else None,

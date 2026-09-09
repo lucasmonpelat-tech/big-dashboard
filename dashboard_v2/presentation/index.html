@@ -1480,6 +1480,12 @@
         const raceTicker = (rh.ticker || "").toUpperCase();
         // ISIN exacto
         if (isin && raceIsin && isin === raceIsin) return sleeve;
+        // Numero de Pershing exacto. Para GCRED (379LP0083) y HLEND (449LP0055)
+        // es lo UNICO que los dos lados comparten: Pershing no les publica ISIN,
+        // asi que el feed de posiciones los trae en null y cruzar por ISIN no
+        // los encuentra. Solo lo traen los holdings del canonical.
+        const racePershing = (rh.pershing_id || "").toUpperCase();
+        if (secId && racePershing && secId === racePershing) return sleeve;
         // Ticker match (mínimo 3 chars, evitar false positives)
         if (raceTicker.length >= 3) {
           // Exact security_id match
