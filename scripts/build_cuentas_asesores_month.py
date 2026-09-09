@@ -44,15 +44,28 @@ def find_positions_file(folder: Path, month_int: int, year: int) -> Path:
         7: ["Julio", "Jul"], 8: ["Agosto", "Ago"], 9: ["Septiembre", "Sep"],
         10: ["Octubre", "Oct"], 11: ["Noviembre", "Nov"], 12: ["Diciembre", "Dic"],
     }
-    candidates = [p for p in folder.glob("Positions_JXD*.xlsx") if not p.name.startswith("~$")]
+    # rglob y no glob: los inputs pueden estar en una subcarpeta (desde Sep-2026
+    # los ProCapital y los Positions viven en 'Pro Capital Desgloze Fees/', y en
+    # la raiz quedaron solo los dos Excels de BIG). Buscar recursivo hace que
+    # reordenar la carpeta no rompa la autodeteccion.
+    candidates = [p for p in folder.rglob("Positions_JXD*.xlsx")
+                  if not p.name.startswith("~$") and ".backups" not in p.parts]
     for name in month_names_full[month_int]:
-        for path in candidates:
-            if name.lower() in path.name.lower():
-                return path
+        delmes = [p for p in candidates if name.lower() in p.name.lower()]
+        if not delmes:
+            continue
+        # Si hay una version "al cierre" (con el rollback de suscripciones
+        # posteriores) es la que vale: el export crudo trae la foto de hoy.
+        alcierre = [p for p in delmes if "cierre" in p.name.lower()]
+        elegida = (alcierre or delmes)[0]
+        if len(delmes) > 1:
+            print(f"  OJO: {len(delmes)} archivos de posiciones para ese mes, "
+                  f"uso '{elegida.name}'. Otros: {[p.name for p in delmes if p != elegida]}")
+        return elegida
     if len(candidates) == 1:
         return candidates[0]
     raise FileNotFoundError(
-        f"No encuentro Positions_JXD para el mes {month_int}. "
+        f"No encuentro Positions_JXD para el mes {month_int} en {folder} (ni subcarpetas). "
         f"Candidatos: {[p.name for p in candidates]}"
     )
 

@@ -25,8 +25,25 @@ import openpyxl
 from openpyxl.utils import get_column_letter
 
 FOLDER = Path("C:/Users/lmonp/Dropbox/Maximus BIG/2026/Luiquidacion Comisiones BIG")
-DEFAULT_PROCAPITAL = FOLDER / "ProCapital_XS3037627794 (1).xlsx"
 DEFAULT_LIQUIDACION = FOLDER / "Liuidación Global BIG 2026.xlsx"
+
+
+def find_procapital(folder: Path = FOLDER) -> Path:
+    """El ProCapital mas reciente, buscando tambien en subcarpetas.
+
+    Desde Sep-2026 los ProCapital de cada mes viven en
+    'Pro Capital Desgloze Fees/' y en la raiz quedaron solo los dos Excels de
+    BIG. Buscar recursivo y por fecha de modificacion hace que reordenar la
+    carpeta no rompa nada.
+    """
+    cands = [p for p in folder.rglob("ProCapital*.xlsx")
+             if not p.name.startswith("~$") and ".backups" not in p.parts]
+    if not cands:
+        raise FileNotFoundError(f"No encuentro ningun ProCapital*.xlsx en {folder} ni subcarpetas")
+    return max(cands, key=lambda p: p.stat().st_mtime)
+
+
+DEFAULT_PROCAPITAL = FOLDER / "ProCapital_XS3037627794 (1).xlsx"  # solo referencia historica
 
 # Formula de cada fila de comision para una columna de dia.
 #   col  = la columna del dia que se esta escribiendo
@@ -173,13 +190,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--month", type=int, required=True, help="Mes (1-12)")
     ap.add_argument("--year", type=int, required=True)
-    ap.add_argument("--procapital", type=str, default=str(DEFAULT_PROCAPITAL))
+    ap.add_argument("--procapital", type=str, default=None,
+                    help="Default: el ProCapital mas reciente de la carpeta (o subcarpetas)")
     ap.add_argument("--liquidacion", type=str, default=str(DEFAULT_LIQUIDACION))
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--force", action="store_true", help="Sobreescribe hoja si existe")
     args = ap.parse_args()
 
-    proc_path = Path(args.procapital)
+    proc_path = Path(args.procapital) if args.procapital else find_procapital()
     liq_path = Path(args.liquidacion)
     year = args.year
     month = args.month
