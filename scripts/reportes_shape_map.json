@@ -1,0 +1,365 @@
+{
+  "_description": "Que celda del deck sale de que campo de que archivo. Lo usa scripts/check_reportes_vs_datos.py para verificar que el numero impreso coincida con su fuente, y para listar los numeros que NO tienen fuente declarada. Sintaxis de la ruta: 'archivo.json :: campo.lista[clave=valor].campo'.",
+  "_como_agregar": "Correr check_reportes_vs_datos.py con --sin-fuente, elegir una linea, y agregar una entrada con su etiqueta exacta como clave.",
+  "factsheet": {
+    "_nota": "Mapa shape -> fuente del factsheet. Las claves son las mismas etiquetas que imprime diff_reportes_mensual.py, asi que los dos scripts hablan el mismo idioma. Cubre por ahora la mitad de renta fija de la slide 2, que es donde se concentraron los errores del cierre de Agosto. Todo lo no mapeado sale en --sin-fuente.",
+    "s2 txt id=43": {
+      "fuentes": [
+        "data/fi_breakdown_latest.json :: fi_stats.rows[metric=YTW (%)].big",
+        "data/fi_breakdown_latest.json :: fi_stats.rows[metric=Duración].big"
+      ],
+      "formatos": [
+        {
+          "dec": 1,
+          "sufijo": "%"
+        },
+        {
+          "dec": 1
+        }
+      ],
+      "nota": "Un solo shape con DOS valores pegados: 'YTW% Duracion'."
+    },
+    "s2 txt id=44": {
+      "fuente": "data/fi_breakdown_latest.json :: fi_stats.rows[metric=Vencimiento].big",
+      "formato": {
+        "dec": 1
+      }
+    },
+    "s2 tabla id=24 f0 c1": {
+      "fuente": "data/fi_breakdown_latest.json :: fi_stats.rows[metric=YTW (%)].bmk",
+      "formato": {
+        "dec": 1,
+        "sufijo": "%"
+      },
+      "nota": "Fila Bloomberg US Agg."
+    },
+    "s2 tabla id=24 f0 c2": {
+      "fuente": "data/fi_breakdown_latest.json :: fi_stats.rows[metric=Duración].bmk",
+      "formato": {
+        "dec": 1
+      }
+    },
+    "s2 tabla id=24 f0 c3": {
+      "fuente": "data/fi_breakdown_latest.json :: fi_stats.rows[metric=Vencimiento].bmk",
+      "formato": {
+        "dec": 1
+      }
+    },
+    "s2 txt id=22": {
+      "fuentes": [
+        "data/fi_breakdown_latest.json :: credit_quality.summary.big_ig",
+        "data/fi_breakdown_latest.json :: credit_quality.summary.big_hy"
+      ],
+      "formatos": [
+        {
+          "dec": 0,
+          "sufijo": "%"
+        },
+        {
+          "dec": 0,
+          "sufijo": "%"
+        }
+      ],
+      "nota": "El IG incluye NR por convencion desde Abril-2026. En Agosto el NR pesa 5.81%, asi que la eleccion ya no es cosmetica."
+    },
+    "s2 tabla id=24 f2 c4": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=AAA].big",
+      "formato": {
+        "dec": 1,
+        "sufijo": "%"
+      }
+    },
+    "s2 tabla id=24 f3 c4": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=AA].big",
+      "formato": {
+        "dec": 1,
+        "sufijo": "%"
+      }
+    },
+    "s2 tabla id=24 f4 c4": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=A].big",
+      "formato": {
+        "dec": 1,
+        "sufijo": "%"
+      }
+    },
+    "s2 tabla id=24 f5 c4": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=BBB].big",
+      "formato": {
+        "dec": 1,
+        "sufijo": "%"
+      }
+    },
+    "s2 tabla id=21 f0 c1": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=BB].big",
+      "formato": {
+        "dec": 1,
+        "sufijo": "%"
+      }
+    },
+    "s2 tabla id=21 f1 c1": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=B].big",
+      "formato": {
+        "dec": 1,
+        "sufijo": "%"
+      }
+    },
+    "s2 tabla id=21 f2 c1": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=CCC].big",
+      "formato": {
+        "dec": 1,
+        "sufijo": "%"
+      }
+    }
+  },
+  "pitchbook": {
+    "_nota": "Mapa shape -> fuente del pitch book. Cubre la slide 10 (renta fija) completa, incluidos los dos graficos. La serie AGG del grafico de calidad estuvo hardcodeada desde Abril sin corresponder a ningun archivo; mapearla es lo que impide que vuelva a pasar.",
+    "s10 txt id=27": {
+      "fuente": "data/fi_breakdown_latest.json :: fi_stats.rows[metric=YTW (%)].big",
+      "formato": {
+        "dec": 1,
+        "sufijo": "%"
+      }
+    },
+    "s10 txt id=29": {
+      "fuente": "data/fi_breakdown_latest.json :: fi_stats.rows[metric=Duración].big",
+      "formato": {
+        "dec": 1
+      }
+    },
+    "s10 txt id=31": {
+      "fuente": "data/fi_breakdown_latest.json :: fi_stats.rows[metric=Vencimiento].big",
+      "formato": {
+        "dec": 1
+      }
+    },
+    "s10 txt id=38": {
+      "fuente": "data/fi_breakdown_latest.json :: fi_stats.rows[metric=YTW (%)].bmk",
+      "formato": {
+        "dec": 1,
+        "sufijo": "%"
+      }
+    },
+    "s10 txt id=40": {
+      "fuente": "data/fi_breakdown_latest.json :: fi_stats.rows[metric=Duración].bmk",
+      "formato": {
+        "dec": 1
+      }
+    },
+    "s10 txt id=42": {
+      "fuente": "data/fi_breakdown_latest.json :: fi_stats.rows[metric=Vencimiento].bmk",
+      "formato": {
+        "dec": 1
+      }
+    },
+    "s10 txt id=8": {
+      "fuentes": [
+        "data/fi_breakdown_latest.json :: credit_quality.summary.big_ig",
+        "data/fi_breakdown_latest.json :: credit_quality.summary.big_hy"
+      ],
+      "formatos": [
+        {
+          "dec": 0,
+          "sufijo": "%"
+        },
+        {
+          "dec": 0,
+          "sufijo": "%"
+        }
+      ],
+      "nota": "El 'Promedio: A-' no tiene fuente en el repo."
+    },
+    "s10 chart id=211 [BIG] AAA": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=AAA].big",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=211 [AGG] AAA": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=AAA].bmk",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=211 [BIG] AA": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=AA].big",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=211 [AGG] AA": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=AA].bmk",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=211 [BIG] A": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=A].big",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=211 [AGG] A": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=A].bmk",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=211 [BIG] BBB": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=BBB].big",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=211 [AGG] BBB": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=BBB].bmk",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=211 [BIG] BB": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=BB].big",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=211 [AGG] BB": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=BB].bmk",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=211 [BIG] B": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=B].big",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=211 [AGG] B": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=B].bmk",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=211 [BIG] CCC": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=CCC].big",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=211 [AGG] CCC": {
+      "fuente": "data/fi_breakdown_latest.json :: credit_quality.rows[rating=CCC].bmk",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=500 [BIG] Govt-related": {
+      "fuente": "data/fi_breakdown_latest.json :: sub_asset_class.rows[category=Govt-related].big",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=500 [AGG] Govt-related": {
+      "fuente": "data/fi_breakdown_latest.json :: sub_asset_class.rows[category=Govt-related].agg",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=500 [BIG] Govt Agency MBS": {
+      "fuente": "data/fi_breakdown_latest.json :: sub_asset_class.rows[category=Govt Agency MBS].big",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=500 [AGG] Govt Agency MBS": {
+      "fuente": "data/fi_breakdown_latest.json :: sub_asset_class.rows[category=Govt Agency MBS].agg",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=500 [BIG] Securitized Non-Agency": {
+      "fuente": "data/fi_breakdown_latest.json :: sub_asset_class.rows[category=Securitized Non-Agency].big",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=500 [AGG] Securitized Non-Agency": {
+      "fuente": "data/fi_breakdown_latest.json :: sub_asset_class.rows[category=Securitized Non-Agency].agg",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=500 [BIG] Corporate IG": {
+      "fuente": "data/fi_breakdown_latest.json :: sub_asset_class.rows[category=Corporate IG].big",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=500 [AGG] Corporate IG": {
+      "fuente": "data/fi_breakdown_latest.json :: sub_asset_class.rows[category=Corporate IG].agg",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=500 [BIG] Corporate HY": {
+      "fuente": "data/fi_breakdown_latest.json :: sub_asset_class.rows[category=Corporate HY].big",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=500 [AGG] Corporate HY": {
+      "fuente": "data/fi_breakdown_latest.json :: sub_asset_class.rows[category=Corporate HY].agg",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=500 [BIG] EM Local + Hard": {
+      "fuente": "data/fi_breakdown_latest.json :: sub_asset_class.rows[category=EM Local + Hard].big",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=500 [AGG] EM Local + Hard": {
+      "fuente": "data/fi_breakdown_latest.json :: sub_asset_class.rows[category=EM Local + Hard].agg",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=500 [BIG] Cat Bonds": {
+      "fuente": "data/fi_breakdown_latest.json :: sub_asset_class.rows[category=Cat Bonds].big",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=500 [AGG] Cat Bonds": {
+      "fuente": "data/fi_breakdown_latest.json :: sub_asset_class.rows[category=Cat Bonds].agg",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=500 [BIG] Bank Loans": {
+      "fuente": "data/fi_breakdown_latest.json :: sub_asset_class.rows[category=Bank Loans].big",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=500 [AGG] Bank Loans": {
+      "fuente": "data/fi_breakdown_latest.json :: sub_asset_class.rows[category=Bank Loans].agg",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=500 [BIG] Other": {
+      "fuente": "data/fi_breakdown_latest.json :: sub_asset_class.rows[category=Other].big",
+      "formato": {
+        "dec": 4
+      }
+    },
+    "s10 chart id=500 [AGG] Other": {
+      "fuente": "data/fi_breakdown_latest.json :: sub_asset_class.rows[category=Other].agg",
+      "formato": {
+        "dec": 4
+      }
+    }
+  }
+}

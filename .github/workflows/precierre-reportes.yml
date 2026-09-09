@@ -1,0 +1,89 @@
+name: 📋 Pre-cierre — ¿está todo listo para armar los reportes?
+
+# Por que existe (2026-09-09)
+# ---------------------------
+# En el cierre de Agosto se mandaron a clientes el factsheet y el pitch book con
+# la columna "Inicio" congelada desde Julio. El dato estaba disponible; nadie
+# toco la celda. Se detecto despues de enviarlos.
+#
+# Parte del problema es que TODO se hace el mismo dia: refrescar factsheets
+# externos, armar el deck, revisarlo y mandarlo. Cuando aparece que un factsheet
+# esta vencido ya no hay tiempo de conseguirlo.
+#
+# Casi nada de eso depende del cierre. Este job adelanta al dia 25 lo que se
+# puede resolver antes, y deja ~6 dias para conseguir lo que falte.
+#
+# QUE MITAD CORRE ACA
+# -------------------
+# Solo la antiguedad de las fuentes, que sale de archivos del repo.
+#
+# La otra mitad del chequeo -- que los shape_id sigan siendo un ancla valida
+# entre decks -- necesita los .pptx, que viven en el Dropbox de Lucas. El runner
+# de GitHub no los ve. Esa mitad se corre local, con:
+#     python scripts/precierre_reportes.py
+# sin --solo-fuentes.
+
+on:
+  schedule:
+    # Dia 25 a las 12:20 UTC (~09:20 ART). Minuto no redondo a proposito:
+    # GitHub congestiona mas los :00 y :30 (ver SETUP_DISPARADORES.md).
+    - cron: '20 12 25 * *'
+  workflow_dispatch:
+    inputs:
+      dias:
+        description: "A partir de cuantos dias considerar vencida una fuente"
+        required: false
+        default: "100"
+
+permissions:
+  contents: write
+
+jobs:
+  precierre:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Chequear antigüedad de las fuentes externas
+        id: chk
+        continue-on-error: true
+        run: |
+          python scripts/precierre_reportes.py \
+            --solo-fuentes \
+            --dias "${{ inputs.dias || '100' }}" \
+            --alerta "data/_alerts/precierre_$(date -u +%Y-%m-%d).json"
+
+      - name: Avisar por mail si hay algo vencido
+        if: steps.chk.outcome == 'failure'
+        run: python scripts/send_failure_alert.py || echo "el mail fallo, la alerta quedo en data/_alerts/"
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MAIL_LUCAS: ${{ secrets.MAIL_LUCAS }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+
+      - name: Commitear la alerta
+        if: steps.chk.outcome == 'failure'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # El add va ANTES del diff: `git diff` no ve archivos nuevos, y la
+          # alerta siempre es un archivo nuevo. Ese fue exactamente el bug que
+          # tiro tres meses de snapshots (ver monthly-snapshot.yml).
+          git add data/_alerts/
+
+          if git diff --cached --quiet; then
+            echo "sin cambios"
+            exit 0
+          fi
+          git commit -m "chore(alerts): pre-cierre $(date -u +%Y-%m-%d) — fuentes vencidas"
+          git pull --rebase origin main || true
+          git push origin main || true

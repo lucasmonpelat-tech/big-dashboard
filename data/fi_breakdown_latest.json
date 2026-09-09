@@ -46,7 +46,9 @@
       "nota": "La calidad crediticia NO sigue esta regla: Maximus la publica agregada, con TGF y PIMCO-EM adentro, y no se puede desarmar."
     },
     "_generated_at": "2026-09-09T13:14:23.580654",
-    "_generated_from": "canonical/2026-09-09/holdings_returns.json"
+    "_generated_from": "canonical/2026-09-09/holdings_returns.json",
+    "bmk_as_of": "2026-06-30",
+    "bmk_fuente": "Factsheet oficial iShares AGG"
   },
   "sub_asset_class": {
     "title": "Distribución por Sub-asset Class (Sectorial FI)",
@@ -106,7 +108,9 @@
     },
     "_confianza": "high 64.0% | medium 28.6% (PIMCO-LD, proxy US) | low 7.5% (TGF, sin factsheet publico)",
     "_nota_us_treasury": "US Treasury queda en 0.00%. PIMCO no lo reporta por separado: su categoria \"Government Related\" engloba Treasuries, agencias y papel garantizado de varios paises. El 1.8% que se mostraba antes venia del proxy PIMIX americano, que usa otra taxonomia. El BIG no tiene ningun fondo de Treasuries.",
-    "_merge_us_treasury": "2026-09-08: 'US Treasury' se fundio dentro de 'Govt-related'. PIMCO -que es el 57.6% del sleeve entre Income y Low Duration- NO reporta Treasuries por separado: su 'Government Related' ya los engloba junto con agencias y papel garantizado de EE.UU., Japon, UK, Australia, Canada y UE (nota metodologica de su factsheet). Mostrar una barra en 0 afirmaba que el BIG no tiene Treasuries, y si tiene (el top-10 de PIMCO Income lista un TIPS al 1.2%). El AGG si los separa, asi que se sumaron sus 46.26% a Govt-related para que el benchmark siga cerrando en 100. Valores redondeados por resto mayor para que la suma de exactamente 100.0."
+    "_merge_us_treasury": "2026-09-08: 'US Treasury' se fundio dentro de 'Govt-related'. PIMCO -que es el 57.6% del sleeve entre Income y Low Duration- NO reporta Treasuries por separado: su 'Government Related' ya los engloba junto con agencias y papel garantizado de EE.UU., Japon, UK, Australia, Canada y UE (nota metodologica de su factsheet). Mostrar una barra en 0 afirmaba que el BIG no tiene Treasuries, y si tiene (el top-10 de PIMCO Income lista un TIPS al 1.2%). El AGG si los separa, asi que se sumaron sus 46.26% a Govt-related para que el benchmark siga cerrando en 100. Valores redondeados por resto mayor para que la suma de exactamente 100.0.",
+    "agg_as_of": "2026-06-30",
+    "agg_fuente": "Factsheet oficial iShares AGG"
   },
   "credit_quality": {
     "title": "Calidad Crediticia",
@@ -167,7 +171,9 @@
       "bmk_hy": 0.0,
       "_convencion": "big_ig incluye NR, como venia desde Abril-2026 (80.6 + 0.5 = 81.1). En Agosto el NR pesa 5.81% (era 0.5%), asi que la eleccion ya no es cosmetica: sin NR el IG es 75.87%. Decision de presentacion pendiente."
     },
-    "_refresh_2026-08-31": "Reemplaza los numeros de Abril-2026. El TODO decia que no se podia refrescar sin la distribucion de rating por fondo; Maximus la publica agregada, asi que se toma de ahi."
+    "_refresh_2026-08-31": "Reemplaza los numeros de Abril-2026. El TODO decia que no se podia refrescar sin la distribucion de rating por fondo; Maximus la publica agregada, asi que se toma de ahi.",
+    "bmk_as_of": "2026-06-30",
+    "bmk_fuente": "Factsheet oficial iShares AGG"
   },
   "regional": {
     "title": "Distribución Regional FI",
@@ -234,6 +240,8 @@
       "big": 100,
       "bmk": 100
     },
-    "footnote": "Valores negativos = posiciones cortas via derivativos (PIMCO sleeve)."
+    "footnote": "Valores negativos = posiciones cortas via derivativos (PIMCO sleeve).",
+    "as_of": "2026-03-31",
+    "_pendiente": "Sin refresh desde la aprobacion del 28-Abr-2026 (datos al 31-Mar). Es la seccion mas vieja del archivo."
   }
 }

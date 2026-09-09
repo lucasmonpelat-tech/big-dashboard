@@ -9,8 +9,10 @@ del template ProCapital para el mes correspondiente, matcheando por fecha
 (row 11) y por label (col A). Las formulas rows 41-49 (desglose PRO/PAMPA/
 Premium/FA/FER) se copian con la hoja y se recalculan automaticamente.
 
-Output: valor total PAMPA del mes (row 47 col AI o equivalente) que alimenta
-el Paso 2.
+Output: PAMPA (row 47), FER (row 49) y sobre todo **FA (row 48)**, que es el
+trailer que se reparte entre los asesores y el unico numero que alimenta el
+Paso 2. PAMPA y FA son montos distintos con distinto significado de negocio:
+pasarle PAMPA al Paso 2 reparte de mas (paso en Julio-2026).
 
 Usage:
     python scripts/build_liquidacion_month.py --month 6 --year 2026
@@ -324,32 +326,54 @@ def main():
 
     wb_calc = openpyxl.load_workbook(str(liq_path), data_only=True)
     ws_calc = wb_calc[month_name]
-    pampa_total = ws_calc.cell(row=47, column=total_col).value
 
-    if pampa_total is None or not isinstance(pampa_total, (int, float)):
-        # openpyxl no evaluo la formula. Replicar formula manualmente sobre CAV raw.
-        # PAMPA daily = (CAV - 20M) * 0.0135 / 365 + 0.013 * 20M / 365
-        threshold = ws_calc.cell(row=41, column=3).value or 20_000_000
+    def _num(r, c):
+        v = ws_calc.cell(row=r, column=c).value
+        return v if isinstance(v, (int, float)) else None
+
+    # Row 47 = PAMPA (comision propia de la firma, tiered 1.35% / 1.3% bajo 20M)
+    # Row 48 = FA    (trailer del 1.00%, ES LO QUE SE REPARTE ENTRE LOS ASESORES)
+    # Row 49 = FER   = PAMPA - FA (lo que se queda la firma, no se reparte)
+    pampa_total, fa_total = _num(47, total_col), _num(48, total_col)
+
+    if pampa_total is None or fa_total is None:
+        # openpyxl no evalua formulas y el archivo lo acabamos de escribir con
+        # openpyxl, asi que casi siempre se cae aca. Replicamos las formulas del
+        # Excel tal cual estan en la hoja:
+        #   PAMPA(dia) = (CAV[dia-1] - 20M) * 1.35%/365 + 1.3% * 20M/365
+        #   FA(dia)    =  CAV[dia-1] * 1.00%/365
+        # OJO: las dos usan el CAV del DIA ANTERIOR (la formula de la col D
+        # referencia C38). La version vieja de este bloque usaba el CAV del mismo
+        # dia y por eso Julio dio 31.117,32 cuando el Excel decia 31.100,92.
         pampa_rate = ws_calc.cell(row=47, column=2).value or 0.0135
-        below_rate = 0.013  # Rate para los primeros 20M
-        pampa_total = 0
+        fa_rate = ws_calc.cell(row=48, column=2).value or 0.0100
+        below_rate = 0.013  # rate para los primeros 20M
+        pampa_total = fa_total = 0.0
         for c in range(4, last_data_col + 1):
-            cav = ws_calc.cell(row=38, column=c).value
-            if cav is None or not isinstance(cav, (int, float)):
+            cav = _num(38, c - 1)
+            if cav is None:
                 continue
+            threshold = _num(41, c - 1) or 20_000_000
             pampa_total += (cav - threshold) * pampa_rate / 365 + below_rate * threshold / 365
-        source = "calculado manualmente desde CAV row 38 (openpyxl no evalua formulas)"
+            fa_total += cav * fa_rate / 365
+        source = "recalculado desde CAV row 38 con el CAV del dia anterior (openpyxl no evalua formulas)"
     else:
-        source = f"row 47 col {get_column_letter(total_col)}"
+        source = f"rows 47/48 col {get_column_letter(total_col)}"
 
     print()
-    if pampa_total:
-        print(f"  === PAMPA TOTAL {month_name} {year} = ${pampa_total:,.2f} ===")
+    if pampa_total and fa_total:
+        print(f"  PAMPA (row 47, {ws_calc.cell(row=47, column=2).value:.4%})  = ${pampa_total:,.2f}")
+        print(f"  FER   (row 49)                = ${pampa_total - fa_total:,.2f}   se queda la firma")
+        print()
+        print(f"  === FA {month_name} {year} = ${fa_total:,.2f} ===")
+        print(f"  === ESTE es el monto a repartir entre asesores. Va al Paso 2: ===")
+        print(f"  ===   build_cuentas_asesores_month.py --pampa {fa_total:.2f}   ===")
+        print(f"  (el flag se llama --pampa por historia, pero recibe FA — row 48, no row 47)")
         print(f"  ({source})")
     else:
-        print(f"  WARN: PAMPA total no pudo calcularse")
+        print(f"  WARN: no se pudieron calcular los totales (PAMPA={pampa_total}, FA={fa_total})")
 
-    return pampa_total
+    return {"pampa": pampa_total, "fa": fa_total}
 
 
 if __name__ == "__main__":

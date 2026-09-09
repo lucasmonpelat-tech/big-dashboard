@@ -43,12 +43,27 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          if git diff --quiet --cached data/snapshots/ && git diff --quiet data/snapshots/; then
+          # OJO con el orden: el `git add` va ANTES de preguntar si hay cambios.
+          #
+          # Hasta el 2026-09-09 estaba al reves, y `git diff` NO VE archivos sin
+          # trackear. Cada snapshot crea un directorio nuevo (data/snapshots/
+          # 2026-07/, 2026-08/...), o sea que siempre era todo nuevo, o sea que
+          # el guard siempre decia "no hay cambios" y el job terminaba en verde
+          # sin commitear nada.
+          #
+          # Los snapshots de Junio, Julio y Agosto se generaron y se tiraron. El
+          # workflow figura "success" las tres veces. La corrida del 15-Jun si
+          # commiteo, pero de casualidad: ese mes re-escribio data/snapshots/
+          # 2026-05/, que YA estaba trackeado, y esa modificacion si la vio.
+          #
+          # Con el add primero, --cached ve tambien lo nuevo.
+          git add data/snapshots/
+
+          if git diff --cached --quiet; then
             echo "No hay cambios al snapshot — skipping commit."
             exit 0
           fi
 
-          git add data/snapshots/
           git commit -m "chore(snapshot): monthly snapshot $(date -u +%Y-%m-%d)"
 
           # Push robusto (fetch + rebase + reintento) — mismo patron que Lynk/Stooq
