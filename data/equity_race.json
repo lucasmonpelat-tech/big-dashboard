@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-09-09T15:04:21.598179",
+  "refreshedAt": "2026-09-09T15:20:57.494250",
   "inception": "2025-06-30",
   "benchmark": "MSCI ACWI (via ACWI ETF - Yahoo)",
   "sleeve_index": {
@@ -173,9 +173,37 @@
       "source": "Yahoo:ILF",
       "months_counted": 12,
       "ytd_months_counted": 6
+    },
+    {
+      "isin": "US53656G4982",
+      "ticker": "MAGS",
+      "name": "Roundhill Magnificent Seven ETF",
+      "source": "Yahoo:MAGS",
+      "value_usd": 476928.35,
+      "weight_pct": 5.4,
+      "ytd_return_pct": 4.71,
+      "ytd_contribution_pct": null,
+      "ytd_months_counted": null,
+      "si_return_pct": null,
+      "contribution_pct": null,
+      "_alta": "Agregado 2026-09-09. Comprados el 02-Jul-2026, nunca habian entrado a este archivo porque el rebuild del sleeve (equity_race.py) se borro el 2026-08-20."
+    },
+    {
+      "isin": "US46434V8862",
+      "ticker": "HEWJ",
+      "name": "iShares Currency Hedged MSCI Japan ETF",
+      "source": "Yahoo:HEWJ",
+      "value_usd": 200000.0,
+      "weight_pct": 2.26,
+      "ytd_return_pct": 22.1,
+      "ytd_contribution_pct": null,
+      "ytd_months_counted": null,
+      "si_return_pct": null,
+      "contribution_pct": null,
+      "_alta": "Agregado 2026-09-09. Comprados el 02-Jul-2026, nunca habian entrado a este archivo porque el rebuild del sleeve (equity_race.py) se borro el 2026-08-20."
     }
   ],
-  "_ytd_spot_updated": "2026-09-09: 8 holdings YTD spot via Pershing NAV/anchor 31-Dic",
+  "_ytd_spot_updated": "2026-09-09: 10 holdings YTD spot via Pershing NAV/anchor 31-Dic",
   "_stats_removed": "2026-08-25: se elimino el bloque 'stats' (latest_month 2026-05 + returns 1M/3M/6M/YTD/SI + annualized). Lo generaba equity_race.py, borrado el 2026-08-20 (commit 8a064d9) por estar dormido desde mayo. No lo leia NADIE: los returns del sleeve que muestra el dashboard salen de benchmark_comparison.json (canonical v2, regenerado a diario). El bloque quedaba con refreshedAt de hoy y numeros de mayo, invitando a concluir que el dashboard mostraba data vieja. Este JSON hoy se usa solo para holdings[] (clasificacion de sleeve + YTD override) y las series mensuales.",
   "_weights_source": "canonical/2026-09-09/holdings_returns.json",
   "_holdings_cerrados": [
@@ -193,5 +221,6 @@
       },
       "ojo": "Su historia NO se pierde: los 27 puntos de la serie TWR del sleeve (equity_sleeve_real.json, 28-Feb a 26-Ago-2026) siguen intactos, y el retorno del sleeve se calcula de ahi, no de este archivo."
     }
-  ]
+  ],
+  "_nota_si_return_pct": "MAGS y HEWJ entran con si_return_pct en null A PROPOSITO. El si_return_pct de los otros 8 esta CONGELADO desde el 2026-07-28: lo escribia el rebuild completo (equity_race.py, borrado el 2026-08-20) encadenando retornos mensuales de baha/yfinance, y el refresh diario solo toca ytd_return_pct. Poner un si calculado hoy al lado de ocho de hace seis semanas seria mezclar dos bases en la misma columna -- exactamente el error silencioso que estamos persiguiendo. Preferible un null visible. Nadie lo consume: build_holdings_returns.py lee de este archivo solo ytd_return_pct."
 }

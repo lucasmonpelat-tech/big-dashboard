@@ -135,10 +135,23 @@ def main():
             er = json.load(open(equity_race_file, encoding='utf-8'))
             navs = json.load(open(ROOT / 'data' / 'ucits_daily_nav.json', encoding='utf-8')).get('navs', {})
             anchors = json.load(open(ROOT / 'data' / 'year_start_anchors.json', encoding='utf-8')).get('anchors_2026', {})
+            # Fallback para los ETF listados en EE.UU.: ucits_daily_nav solo trae
+            # los UCITS que llegan por Pershing, y va indexado por ISIN. MAGS y
+            # HEWJ no estan ahi (no son UCITS), asi que sin esto se quedaban sin
+            # YTD y el dashboard les mostraba el retorno de NUESTRA posicion en la
+            # columna del retorno DEL FONDO -- dos cosas distintas en la misma
+            # columna. live_prices.json es la misma fuente que ya usa el resto del
+            # pipeline para ETFs y va indexado por ticker.
+            precios_etf = json.load(
+                open(ROOT / 'data' / 'live_prices.json', encoding='utf-8')).get('prices', {})
             for h in er.get('holdings', []):
                 tk = h.get('ticker')
                 isin = h.get('isin')
                 nav = (navs.get(isin) or {}).get('nav')
+                if nav is None:
+                    p = precios_etf.get(tk) or {}
+                    if not p.get('stale'):
+                        nav = p.get('price')
                 anchor_px = (anchors.get(isin) or {}).get('price_2025_dec_31')
                 if not (nav and anchor_px):
                     # Sin anchor real -> se deja el YTD tal cual esta (NO se
