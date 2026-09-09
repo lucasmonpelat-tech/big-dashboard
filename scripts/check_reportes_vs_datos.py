@@ -174,6 +174,22 @@ def main():
         else:
             difiere.append((etq, actual, faltan, sorted(archivos)))
 
+    # Etiquetas prohibidas: reglas que no son "este numero sale de aca" sino
+    # "esto no se dice mas". La primera nace de la regla de benchmark por sleeve
+    # (Lucas, 2026-09-08): un blend 60/40 con equity adentro no tiene duracion
+    # ni P/E, asi que nombrarlo en la tabla de estadisticas de un sleeve es
+    # etiquetar mal numeros que en realidad son del indice puro.
+    prohibidas = []
+    reglas = (mapa_todo.get("_etiquetas_prohibidas") or {}).get("reglas", [])
+    for regla in reglas:
+        patron = regla["patron"]
+        for etq, val in sorted(por_etiqueta.items()):
+            if patron.lower() not in val.lower():
+                continue
+            if any(etq.startswith(p) for p in regla.get("salvo_en", [])):
+                continue
+            prohibidas.append((etq, val, regla["motivo"]))
+
     print("=" * 78)
     print("DECK vs DATOS  [%s]" % deck)
     print("  deck      : %s" % os.path.basename(a.pptx))
@@ -203,6 +219,14 @@ def main():
             print("  %-34s %s cambio en %s (%s) %s"
                   % ("", rel, fecha[:10], sha, msg[:40]))
 
+    if prohibidas:
+        print("\n" + "-" * 78)
+        print("ETIQUETA QUE NO VA")
+        print("-" * 78)
+        for etq, val, motivo in prohibidas:
+            print("  %-34s %s" % (etq, val[:40]))
+            print("  %-34s %s" % ("", motivo))
+
     if rotos:
         print("\n" + "-" * 78)
         print("MAPEO ROTO — hay que arreglar reportes_shape_map.json")
@@ -229,9 +253,9 @@ def main():
             print("  %-34s %s" % (etq, val[:56]))
 
     print()
-    if difiere or rotos:
+    if difiere or rotos or prohibidas:
         print("RESULTADO: %d problema(s) — revisar antes de mandar"
-              % (len(difiere) + len(rotos)))
+              % (len(difiere) + len(rotos) + len(prohibidas)))
         sys.exit(1)
     print("RESULTADO: todo lo mapeado coincide con su fuente")
     sys.exit(0)

@@ -361,5 +361,18 @@
         "dec": 4
       }
     }
+  },
+  "_etiquetas_prohibidas": {
+    "_nota": "Textos que no pueden aparecer en un deck, con el motivo. Los chequea check_reportes_vs_datos.py. Sirven para reglas que no son 'este numero sale de aca' sino 'esto no se dice mas'.",
+    "reglas": [
+      {
+        "patron": "ACWI 60%/40% AGG",
+        "salvo_en": [
+          "s1 ",
+          "s8 "
+        ],
+        "motivo": "Regla de Lucas (2026-09-08): el benchmark se nombra POR SLEEVE. Renta fija vs Bloomberg US Agg, renta variable vs ACWI. El blend 60/40 es el benchmark del FONDO ENTERO (retornos), no de un sleeve: no tiene P/E ni duracion. En la slide de renta fija ya se unifico; la de renta variable todavia lo arrastra."
+      }
+    ]
   }
 }
