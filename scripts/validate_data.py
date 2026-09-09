@@ -436,8 +436,9 @@ def check_pesos_race(errors, warnings):
         for tk in r["faltan"]:
             warnings.append(
                 f"pesos[{archivo}]: {tk} esta en el canonical pero NO en el race "
-                f"- le falta el rebuild del sleeve. Mientras tanto el dashboard "
-                f"lo clasifica por el fallback de keywords, no por ISIN."
+                f"- le falta el rebuild del sleeve. Desde el 2026-09-09 el "
+                f"dashboard clasifica por sleeve leyendo el canonical, asi que "
+                f"esto ya no afecta lo que se ve: quedo como deuda del archivo."
             )
         for tk in r["sobran"]:
             warnings.append(
