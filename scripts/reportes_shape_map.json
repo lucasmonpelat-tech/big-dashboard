@@ -374,5 +374,6 @@
         "motivo": "Regla de Lucas (2026-09-08): el benchmark se nombra POR SLEEVE. Renta fija vs Bloomberg US Agg, renta variable vs ACWI. El blend 60/40 es el benchmark del FONDO ENTERO (retornos), no de un sleeve: no tiene P/E ni duracion. En la slide de renta fija ya se unifico; la de renta variable todavia lo arrastra."
       }
     ]
-  }
+  },
+  "_alcance": "Solo 5 de las 22 slides tienen un chart real con datos adentro: factsheet slide 2 (torta de Alternativos) y pitch book slides 10 y 12. Todo el resto de lo que parece grafico esta DIBUJADO a mano -- freeforms con cajas de texto encima -- asi que su geometria no tiene fuente y no se puede verificar mecanicamente, solo mirandola (ver dossier_slides.py). Por eso este mapa cubre los numeros impresos y no los dibujos."
 }
