@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-09-09T13:14:19.873060",
+  "refreshedAt": "2026-09-09T15:04:21.598179",
   "inception": "2025-06-30",
   "benchmark": "MSCI ACWI (via ACWI ETF - Yahoo)",
   "sleeve_index": {
@@ -133,20 +133,6 @@
       "ytd_months_counted": 5
     },
     {
-      "isin": "IE00BF4KN675",
-      "ticker": "LGLI",
-      "name": "Lazard Global Listed Infrastructure A",
-      "value_usd": 535776.76,
-      "weight_pct": 6.83,
-      "si_return_pct": 15.57,
-      "ytd_return_pct": 7.15,
-      "contribution_pct": 1.06,
-      "ytd_contribution_pct": 0.68,
-      "source": "baha:IE00BF4KN675",
-      "months_counted": 11,
-      "ytd_months_counted": 5
-    },
-    {
       "isin": "DE000A0Q4R85",
       "ticker": "4BRZ",
       "name": "iShares MSCI Brazil UCITS (DE)",
@@ -191,5 +177,21 @@
   ],
   "_ytd_spot_updated": "2026-09-09: 8 holdings YTD spot via Pershing NAV/anchor 31-Dic",
   "_stats_removed": "2026-08-25: se elimino el bloque 'stats' (latest_month 2026-05 + returns 1M/3M/6M/YTD/SI + annualized). Lo generaba equity_race.py, borrado el 2026-08-20 (commit 8a064d9) por estar dormido desde mayo. No lo leia NADIE: los returns del sleeve que muestra el dashboard salen de benchmark_comparison.json (canonical v2, regenerado a diario). El bloque quedaba con refreshedAt de hoy y numeros de mayo, invitando a concluir que el dashboard mostraba data vieja. Este JSON hoy se usa solo para holdings[] (clasificacion de sleeve + YTD override) y las series mensuales.",
-  "_weights_source": "canonical/2026-09-09/holdings_returns.json"
+  "_weights_source": "canonical/2026-09-09/holdings_returns.json",
+  "_holdings_cerrados": [
+    {
+      "ticker": "LGLI",
+      "isin": "IE00BF4KN675",
+      "name": "Lazard Global Listed Infrastructure A",
+      "sacado_el": "2026-09-09",
+      "motivo": "Vendido. No aparece en el canonical ni en positions_latest desde el 2026-08-26, ultimo punto de la serie TWR que lo incluye. Se quedo colgado porque el rebuild del sleeve (equity_race.py) se borro el 2026-08-20 y nadie mas saca holdings de esta lista.",
+      "ultimos_valores": {
+        "weight_pct": 6.83,
+        "value_usd": 535776.76,
+        "si_return_pct": 15.57,
+        "ytd_return_pct": 7.15
+      },
+      "ojo": "Su historia NO se pierde: los 27 puntos de la serie TWR del sleeve (equity_sleeve_real.json, 28-Feb a 26-Ago-2026) siguen intactos, y el retorno del sleeve se calcula de ahi, no de este archivo."
+    }
+  ]
 }

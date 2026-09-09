@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-09-09T13:14:19.867751",
+  "refreshedAt": "2026-09-09T15:04:21.591427",
   "source": "Buy-and-hold price race vs ACWI (transactions Pershing)",
   "method": "Asset Return = (end_price - first_buy_price) / first_buy_price. ACWI Return = same window. Alpha = Asset - ACWI. End = today if open / last sell if closed.",
   "period_start": "2025-07-02",
@@ -190,7 +190,7 @@
     },
     {
       "ticker": "LGLI",
-      "name": "Lazard Global Listed Infrastructure A",
+      "name": "Lazard Global Listed Infrastructure A (CLOSED Ago-2026)",
       "period_start": "2026-02-04",
       "period_end": "2026-08-26",
       "months_held": 6,
@@ -204,15 +204,16 @@
       "alpha_mwr_pp": -10.43,
       "avg_weight_pct": null,
       "contribution_pp": null,
-      "is_closed": false,
-      "status": "underperform",
-      "status_label": "[-] UNDERPERFORM",
+      "is_closed": true,
+      "status": "underperform_closed",
+      "status_label": "[-] UNDERPERFORM (cerrado)",
       "final_mv_usd": 523263.51,
       "first_buy_price": 19.3902,
       "first_buy_date": "2026-02-04",
       "acwi_start": 144.05,
       "qty_remaining": 26511.13,
-      "end_price": 19.6556
+      "end_price": 19.6556,
+      "_cerrado_nota": "Vendido. Se marca cerrado el 2026-09-09 con end=2026-08-26, su ultimo cierre real. Venia con is_closed=false y por eso el refresh diario lo listaba como 'skipped' todos los dias en vez de congelarlo, como ya hacia con VIRTUS, NBRE y BRK.B."
     },
     {
       "ticker": "ARGT",
