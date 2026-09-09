@@ -69,7 +69,8 @@ def read_positions(path: Path):
     if header_row is None:
         raise ValueError("No encuentro header 'Account #' en Positions_JXD")
 
-    col_acc = col_name = col_mv = None
+    col_acc = col_name = None
+    mv_cols = {}
     for c in range(1, ws.max_column + 1):
         h = ws.cell(row=header_row, column=c).value
         if h == "Account #":
@@ -77,9 +78,37 @@ def read_positions(path: Path):
         elif h == "Short Name":
             col_name = c
         elif h and "Market Value" in str(h):
-            col_mv = c
+            mv_cols[str(h)] = c
+
+    # El export de Pershing trae DOS columnas de Market Value: "(Position CCY)" y
+    # "(USDE)". Hasta Sep-2026 esto era un elif que reasignaba en cada match, asi
+    # que ganaba la ultima por orden de columna — silenciosamente. Hoy las dos dan
+    # identico porque todo el libro esta en USD, pero si algun dia aparece una
+    # posicion en otra moneda dejan de coincidir y el split cambiaria sin aviso.
+    # Fijamos Position CCY, que es la moneda de la nota.
+    col_mv = None
+    for pref in ("Market Value (Position CCY)", "Market Value (USDE)"):
+        if pref in mv_cols:
+            col_mv = mv_cols[pref]
+            break
+    if col_mv is None and mv_cols:
+        col_mv = sorted(mv_cols.values())[0]
     if not all([col_acc, col_name, col_mv]):
-        raise ValueError(f"Cols no detectadas: acc={col_acc} name={col_name} mv={col_mv}")
+        raise ValueError(f"Cols no detectadas: acc={col_acc} name={col_name} mv={col_mv} "
+                         f"(candidatas MV: {list(mv_cols)})")
+    if len(mv_cols) > 1:
+        otras = [c for c in mv_cols.values() if c != col_mv]
+        for r in range(header_row + 1, ws.max_row + 1):
+            base = ws.cell(row=r, column=col_mv).value
+            if not isinstance(base, (int, float)):
+                continue
+            for c in otras:
+                v = ws.cell(row=r, column=c).value
+                if isinstance(v, (int, float)) and abs(v - base) > 0.01:
+                    raise ValueError(
+                        f"Las columnas de Market Value no coinciden en la fila {r} "
+                        f"({base:,.2f} vs {v:,.2f}). Hay posiciones en otra moneda: "
+                        f"decidi a mano cual usar antes de repartir plata.")
 
     positions = []
     for r in range(header_row + 1, ws.max_row + 1):
