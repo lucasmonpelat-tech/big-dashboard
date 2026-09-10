@@ -528,6 +528,12 @@ def send_mail(html_body: str, text_body: str, as_of: str):
     user = os.environ["GMAIL_USER"]
     pwd = os.environ["GMAIL_APP_PASSWORD"]
     to_lucas = os.environ["MAIL_LUCAS"]
+    # OJO AL REACTIVAR ESTE DIGEST (nota 2026-09-10): Lucas pidio DOS veces
+    # que los mails automaticos le lleguen solo a el. Eso ya esta aplicado en
+    # send_failure_alert.py (alertas). Este digest es otra cosa -- un reporte
+    # de performance, no una alerta -- y por eso todavia incluye a Fer.
+    # Pero hoy el script esta cortocircuitado arriba y no manda nada: si se
+    # reactiva, CONFIRMAR con Lucas antes de que le vuelva a llegar a Fer.
     to_fer = os.environ["MAIL_FER"]
 
     msg = MIMEMultipart("alternative")

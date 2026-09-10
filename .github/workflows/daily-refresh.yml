@@ -30,7 +30,7 @@ name: 🔄 Daily Refresh BIG (Lynk + Sleeves + Alertas + Digest)
 #   - Si algo falla, queda marker en data/_alerts/cron_failure_YYYY-MM-DD.json
 #     (y otros scripts dejan sus propios markers: sleeve_return_anomaly_*,
 #     health_check_warning_*, bench_indices_stale_*, netx360_download_*, etc.)
-#   - send_failure_alert.py manda mail a Lucas + Fer EL MISMO DIA si aparece
+#   - send_failure_alert.py manda mail SOLO A LUCAS el mismo dia si aparece
 #     cualquiera de esos markers (2026-07-31, agregado porque Lucas se va de
 #     vacaciones y varios steps tienen continue-on-error: true -- el job puede
 #     terminar "success" aunque algo se haya roto en silencio).
