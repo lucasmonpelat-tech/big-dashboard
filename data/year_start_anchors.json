@@ -4,6 +4,16 @@
   "_source": "Pershing UGL + year_start_anchors legacy + baha monthlyReturns",
   "_generation_rule": "Cada 1-Ene guardar el precio 31-Dec del anio anterior en este archivo (script snapshot_year_start_prices.py).",
   "anchors_2026": {
+    "IE00089T5MA6": {
+      "ticker": "MANEM",
+      "name": "Man EM Corp Credit Alt",
+      "price_2025_dec_31": 108.54,
+      "qty_2025_dec_31": 0.0,
+      "mv_2025_dec_31": 0.0,
+      "anchor_locked": true,
+      "ytd_source": "manual_verified",
+      "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, 31-Dic-2025"
+    },
     "IE00B6YCBF59": {
       "ticker": "THOR",
       "name": "Thornburg Income Builder",
@@ -64,15 +74,14 @@
       "ytd_source": "manual_verified",
       "note": "Anchor real verificado el 2026-07-28. Fuente: Pershing statement oficial 31-Dic-2025 (LSERIES DAC, JXD-101380), pag 4 (MAN GLG Global IG Opps)"
     },
-    "IE00089T5MA6": {
-      "ticker": "MANEM",
-      "name": "Man EM Corp Credit Alt",
-      "price_2025_dec_31": 108.54,
-      "qty_2025_dec_31": 0.0,
-      "mv_2025_dec_31": 0.0,
-      "anchor_locked": true,
-      "ytd_source": "manual_verified",
-      "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, 31-Dic-2025"
+    "LU2847068389": {
+      "ticker": "LU2847068389",
+      "name": "HAMILTON LANE GLOBAL PRIVATE INFRASTRUCT",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
     },
     "US4642873909": {
       "ticker": "ILF",
@@ -87,11 +96,11 @@
     "US46434V8862": {
       "ticker": "HEWJ",
       "name": "iShares Currency Hedged MSCI Japan ETF",
-      "price_2025_dec_31": 52.4146,
-      "qty_2025_dec_31": 0.0,
-      "mv_2025_dec_31": 0.0,
       "ytd_source_pct": null,
-      "note": "Cargado 2026-09-09, misma base que MAGS. qty=0: comprado el 02-Jul-2026. OJO: Pershing lo marca en 64.00 exacto (3125 x 64 = $200.000 redondo) mientras Yahoo cerro en 63.38 el 09-Sep. Se usa el precio de Pershing por convencion -- es el libro -- pero ese 1% de diferencia se traslada al YTD."
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
     },
     "IE00B87KCF77": {
       "ticker": "PIMCO-INC",
@@ -102,15 +111,6 @@
       "anchor_locked": true,
       "ytd_source": "manual_verified",
       "note": "Anchor real verificado el 2026-07-28. Fuente: Pershing statement oficial 31-Dic-2025 (LSERIES DAC, JXD-101380), pag 4 (PIMCO Income Fund Institutional)"
-    },
-    "LU2847068389": {
-      "ticker": "LU2847068389",
-      "name": "HAMILTON LANE GLOBAL PRIVATE INFRASTRUCT",
-      "ytd_source_pct": null,
-      "price_2025_dec_31": null,
-      "qty_2025_dec_31": null,
-      "mv_2025_dec_31": null,
-      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
     },
     "IE00B5BMR087": {
       "ticker": "CSPX",
@@ -145,11 +145,11 @@
     "US53656G4982": {
       "ticker": "MAGS",
       "name": "Roundhill Magnificent Seven ETF",
-      "price_2025_dec_31": 65.96,
-      "qty_2025_dec_31": 0.0,
-      "mv_2025_dec_31": 0.0,
       "ytd_source_pct": null,
-      "note": "Cargado 2026-09-09. Cierre AJUSTADO POR DIVIDENDOS de Yahoo al 31-Dic-2025, que es la misma base que usan los otros anchors: se verifico reproduciendo los de ILF (30.0664) y ARGT (91.0806) al centavo. qty=0 porque el BIG compro MAGS recien el 02-Jul-2026: el anchor es del FONDO, no de nuestra posicion."
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
     },
     "LU2049315265": {
       "ticker": "SGCB",
