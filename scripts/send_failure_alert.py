@@ -126,10 +126,22 @@ def main():
     print(f"[send_failure_alert] {len(alert_files)} alerta(s) encontradas: {[p.name for p in alert_files]}")
     html, text = build_body(alert_files, today_iso)
 
-    if all(os.environ.get(k) for k in ("GMAIL_USER", "GMAIL_APP_PASSWORD", "MAIL_LUCAS", "MAIL_FER")):
+    # MAIL_FER NO va en esta lista, aunque el secret siga existiendo.
+    #
+    # El mail va solo a Lucas desde que el lo pidio (2026-09-04, sobre las alertas
+    # de cron: "eso que no se lo manden a Fer, solo a mi"). Pero la guarda seguia
+    # EXIGIENDO que MAIL_FER estuviera seteado para mandar. O sea: el dia que
+    # alguien borrara ese secret -- que es lo natural despues de decidir no
+    # mandarle nada a Fer -- el mail dejaba de salir EN SILENCIO. La unica senal
+    # habria sido un WARN en el log de una corrida que igual termina en verde.
+    #
+    # Se pide solo lo que realmente se usa para enviar.
+    faltan = [k for k in ("GMAIL_USER", "GMAIL_APP_PASSWORD", "MAIL_LUCAS")
+              if not os.environ.get(k)]
+    if not faltan:
         send_mail(html, text, today_iso, len(alert_files))
     else:
-        print("WARN: faltan secrets de SMTP (GMAIL_USER/GMAIL_APP_PASSWORD/MAIL_LUCAS/MAIL_FER), mail no enviado.")
+        print("WARN: faltan secrets de SMTP (%s), mail no enviado." % ", ".join(faltan))
 
 
 if __name__ == "__main__":
