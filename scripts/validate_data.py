@@ -661,6 +661,99 @@ def check_anchors_trabados(errors, warnings):
               % (trabados, sin_precio))
 
 
+def check_pending_confirms(errors, warnings):
+    """Un ajuste por trade pendiente que YA liquido, duplica plata.
+
+    POR QUE EXISTE (2026-09-10)
+    ---------------------------
+    pending_confirms.json existe para un caso real: Pershing tarda semanas en
+    asentar la compra de algunos fondos privados. La plata ya salio del cash pero
+    el MV del holding todavia no la refleja, asi que el AUM del dashboard no
+    cuadra contra el NAV de Lynk. El ajuste tapa ese hueco.
+
+    El problema es el otro lado: cuando el trade FINALMENTE liquida, Pershing
+    empieza a reportar el taxlot -- y si el ajuste sigue en el array, el
+    dashboard suma la misma plata DOS VECES.
+
+    Paso con FLEX. Orden el 06-Jul, Pershing asento el buy el 08-Sep (64 dias).
+    Desde ese dia el dashboard mostraba el holding en $781,503.58 contra
+    $651,503.58 reales, con el AUM total inflado en $130.000. Lo detecto Lucas
+    mirando el detalle de transacciones, no el sistema.
+
+    El archivo se mantiene a mano y dice cuando fue la ultima revision. Nadie
+    avisaba cuando un item quedaba de mas: este check lo hace.
+
+    COMO LO DETECTA
+    ---------------
+    Busca en los taxlots de Pershing (pnl.json) uno del mismo CUSIP con
+    entry_date posterior o igual a la fecha de compra declarada. Si existe, el
+    trade liquido y el ajuste sobra.
+    """
+    print("\n" + "-" * 70)
+    print("  10 - Ajustes por trades pendientes que ya liquidaron")
+    print("-" * 70)
+
+    pend = _load(ROOT / "data" / "pending_confirms.json")
+    if not pend:
+        warnings.append("no pude leer pending_confirms.json")
+        print("  [WARN] no pude leerlo")
+        return
+
+    activos = pend.get("pending") or []
+    if not activos:
+        print("  [OK]    sin ajustes activos — nada que pueda duplicarse")
+        return
+
+    canon_path, _ = latest_canonical()
+    pnl = _load(canon_path.parent / "pnl.json") if canon_path else None
+    if not pnl:
+        warnings.append("pending_confirms: sin pnl.json para verificar si liquidaron")
+        print("  [WARN] sin pnl.json para verificar")
+        return
+
+    lotes = pnl.get("unrealized") or []
+    for item in activos:
+        cusip = item.get("cusip")
+        buy_date = item.get("buy_date") or ""
+        tk = item.get("ticker", "?")
+        monto = item.get("amount_usd")
+
+        liquidado = [t for t in lotes
+                     if t.get("cusip") == cusip
+                     and (t.get("entry_date") or "") >= buy_date]
+        if liquidado:
+            lote = liquidado[0]
+            errors.append(
+                "pending_confirms: %s sigue con un ajuste de $%s pero Pershing YA "
+                "asento el taxlot (entry_date %s, costo $%s). El dashboard esta "
+                "sumando esa plata DOS VECES y el AUM total queda inflado. Sacar "
+                "el item del array en data/pending_confirms.json."
+                % (tk, f"{monto:,.0f}" if monto else monto,
+                   lote.get("entry_date"), f"{lote.get('current_total_cost'):,.2f}"
+                   if lote.get("current_total_cost") else "?")
+            )
+            print("  [ERROR] %-6s ya liquido el %s — el ajuste duplica"
+                  % (tk, lote.get("entry_date")))
+        else:
+            eta = item.get("eta_settle")
+            print("  [OK]    %-6s todavia sin asentar (orden %s, eta %s)"
+                  % (tk, buy_date, eta))
+            # La demora real de estos fondos es de meses; si el eta quedo muy
+            # atras probablemente sea el eta el que esta mal, no el trade.
+            if eta and eta < date_hoy_iso():
+                warnings.append(
+                    "pending_confirms: %s tiene eta_settle %s, ya pasado, y sigue "
+                    "sin asentar. FLEX tardo 48 y 64 dias en sus dos tramos: "
+                    "revisar si el eta era optimista o si el trade tuvo un problema."
+                    % (tk, eta)
+                )
+
+
+def date_hoy_iso():
+    from datetime import date
+    return date.today().isoformat()
+
+
 def main():
     print("=" * 70)
     print("  BIG Dashboard — Data Consistency Validator")
@@ -808,6 +901,9 @@ def main():
 
     # ---- 9: ANCHORS TRABADOS (el cron reconstruye ese archivo) ----
     check_anchors_trabados(errors, warnings)
+
+    # ---- 10: AJUSTES POR TRADES PENDIENTES QUE YA LIQUIDARON ----
+    check_pending_confirms(errors, warnings)
 
     # ---- REPORTE FINAL ----
     print("\n" + "=" * 70)
