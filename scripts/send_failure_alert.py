@@ -20,7 +20,7 @@ Uso (desde el yml, al final, con `if: always()`):
     python scripts/send_failure_alert.py
 
 Env vars requeridos (ya configurados como secrets para weekly_digest.py):
-    GMAIL_USER, GMAIL_APP_PASSWORD, MAIL_LUCAS, MAIL_FER
+    GMAIL_USER, GMAIL_APP_PASSWORD, MAIL_LUCAS
 Si faltan, imprime warning y no manda nada (no rompe el job).
 """
 import json
@@ -94,11 +94,13 @@ def send_mail(html_body: str, text_body: str, today_iso: str, n_alerts: int):
     pwd = os.environ["GMAIL_APP_PASSWORD"]
     to_lucas = os.environ["MAIL_LUCAS"]
 
-    # 2026-08-28, pedido de Lucas: las alertas de FALLA van SOLO a el.
-    # Antes se mandaban tambien a Fer, que no las necesita -- son ruido
-    # tecnico (cron que no corrio, scrape que fallo), no informacion del
-    # fondo. El digest semanal de weekly_digest.py SI le sigue llegando:
-    # eso es un reporte, no una alerta.
+    # SOLO LUCAS. Pedido suyo el 2026-08-28 para las alertas, y confirmado el
+    # 2026-09-10 para TODO lo que sale automatico de este repo.
+    #
+    # Antes iban tambien a Fer. La distincion que se usaba era "alerta vs
+    # reporte": las alertas son ruido tecnico (cron que no corrio, scrape que
+    # fallo) y no le sirven, pero el digest semanal si le llegaba. Lucas cerro
+    # esa distincion: le llega todo solo a el. weekly_digest.py tambien.
 
     msg = MIMEMultipart("alternative")
     msg["Subject"] = f"🚨 BIG · Alerta cron ({n_alerts}) · {today_iso}"

@@ -16,14 +16,14 @@ Fuentes:
   - data/fi_race.json        -> per-fondo FI
 
 Output:
-  - Mail a MAIL_LUCAS + MAIL_FER (SMTP via Gmail con App Password)
+  - Mail SOLO a MAIL_LUCAS (SMTP via Gmail con App Password)
   - Estructura: NAV + headline macro + cada asset class + flags
   - Si hay ANTHROPIC_API_KEY -> narrativa "por que se movio X" con Claude API
   - Si no hay -> datos crudos (sigue siendo util)
 
 Env vars requeridos (GitHub Secrets):
   - GMAIL_USER, GMAIL_APP_PASSWORD
-  - MAIL_LUCAS, MAIL_FER
+  - MAIL_LUCAS
   - ANTHROPIC_API_KEY (opcional)
 
 Uso:
@@ -528,27 +528,30 @@ def send_mail(html_body: str, text_body: str, as_of: str):
     user = os.environ["GMAIL_USER"]
     pwd = os.environ["GMAIL_APP_PASSWORD"]
     to_lucas = os.environ["MAIL_LUCAS"]
-    # OJO AL REACTIVAR ESTE DIGEST (nota 2026-09-10): Lucas pidio DOS veces
-    # que los mails automaticos le lleguen solo a el. Eso ya esta aplicado en
-    # send_failure_alert.py (alertas). Este digest es otra cosa -- un reporte
-    # de performance, no una alerta -- y por eso todavia incluye a Fer.
-    # Pero hoy el script esta cortocircuitado arriba y no manda nada: si se
-    # reactiva, CONFIRMAR con Lucas antes de que le vuelva a llegar a Fer.
-    to_fer = os.environ["MAIL_FER"]
+
+    # SOLO LUCAS. Decision suya, 2026-09-10: "solo a mi".
+    #
+    # Antes iba tambien a Fer, con el argumento de que un digest de performance
+    # es un reporte y no una alerta. Lucas cerro la distincion: TODO lo que sale
+    # automatico de este repo le llega solo a el. Si en algun momento Fer tiene
+    # que recibirlo, que sea una decision explicita y no un default heredado.
+    #
+    # MAIL_FER ya no se usa en ningun script. El secret puede seguir existiendo
+    # sin efecto: nada lo lee.
 
     msg = MIMEMultipart("alternative")
     msg["Subject"] = f"📊 BIG · Resumen semanal · {as_of}"
     msg["From"] = f"Pampa BIG Bot <{user}>"
-    msg["To"] = f"{to_lucas}, {to_fer}"
+    msg["To"] = to_lucas
 
     msg.attach(MIMEText(text_body, "plain", "utf-8"))
     msg.attach(MIMEText(html_body, "html", "utf-8"))
 
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=20) as smtp:
         smtp.login(user, pwd)
-        smtp.sendmail(user, [to_lucas, to_fer], msg.as_string())
+        smtp.sendmail(user, [to_lucas], msg.as_string())
 
-    print(f"OK: mail enviado a {to_lucas} y {to_fer}")
+    print(f"OK: mail enviado a {to_lucas}")
 
 
 # ============================================================================
@@ -572,7 +575,10 @@ def main():
     print(f"Copia guardada en {out_dir}/")
 
     # Mandar mail (solo si tenemos secrets)
-    if all(os.environ.get(k) for k in ("GMAIL_USER", "GMAIL_APP_PASSWORD", "MAIL_LUCAS", "MAIL_FER")):
+    # Sin MAIL_FER en la lista: exigir un secret que ya no se usa hacia que el
+    # mail dejara de salir en silencio el dia que alguien lo borrara. Mismo
+    # problema que tenia send_failure_alert.py, arreglado el 2026-09-10.
+    if all(os.environ.get(k) for k in ("GMAIL_USER", "GMAIL_APP_PASSWORD", "MAIL_LUCAS")):
         send_mail(html, text, data["as_of"])
     else:
         print("WARN: faltan secrets de SMTP, mail no enviado (pero digest generado).")

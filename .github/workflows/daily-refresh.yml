@@ -101,7 +101,8 @@ jobs:
       GMAIL_USER: ${{ secrets.GMAIL_USER }}
       GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
       MAIL_LUCAS: ${{ secrets.MAIL_LUCAS }}
-      MAIL_FER: ${{ secrets.MAIL_FER }}
+      # MAIL_FER se saco el 2026-09-10: TODO lo automatico va solo a Lucas.
+      # El secret puede seguir existiendo en GitHub, ya no lo lee nadie.
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       # === Pipeline v2 (NetX360+ Pershing → canonical JSONs) ===
       NETX360_USER: ${{ secrets.NETX360_USER }}
