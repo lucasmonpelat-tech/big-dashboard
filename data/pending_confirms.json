@@ -2,8 +2,9 @@
   "_description": "Ajustes manuales para trades en 'PENDING CONFIRM' de Pershing — la plata ya salió del cash (journal transferido al manager) pero el trade aún no settle formalmente, entonces el MV del holding no refleja el buy nuevo. Se suma al holding correspondiente para que el AUM total del dashboard coincida con el NAV oficial (Lynk).",
   "_workflow": "Cuando el trade settle en Pershing, remover el item del array. El widget de Holdings va a mostrar el MV total sin necesidad de ajuste.",
   "_maintained_manually": true,
-  "_lastReviewed": "2026-07-23",
-  "pending": [
+  "_lastReviewed": "2026-09-10",
+  "pending": [],
+  "_liquidados": [
     {
       "ticker": "FLEX",
       "isin": "LU2966298809",
@@ -13,7 +14,12 @@
       "buy_date": "2026-07-06",
       "eta_settle": "2026-08-01",
       "source_txn_reference": "MFDJXD1013AJQZF1",
-      "note": "Journal debit 2026-07-06 (-$130k) + BUY pending confirm 2026-07-23 (qty 4160 @ $31.25). Cash ya descontado; MV del holding aún no incluye el nuevo taxlot."
+      "note": "Journal debit 2026-07-06 (-$130k) + BUY pending confirm 2026-07-23 (qty 4160 @ $31.25). Cash ya descontado; MV del holding aún no incluye el nuevo taxlot.",
+      "removido_el": "2026-09-10",
+      "settle_real": "2026-09-08",
+      "detalle_settle": "Pershing asento 'Buy 4091.91000 of L4R58Q111 at 31.7700' = -129,999.98 el 08-Sep. El taxlot esta en pnl.json y la posicion paso de 16,414.97 a 20,506.88 unidades.",
+      "por_que_importaba": "Con el ajuste todavia en el array, el dashboard sumaba $130.000 a un MV que Pershing YA incluia: mostraba $781,503.58 contra $651,503.58 reales, y el AUM total quedaba inflado en la misma plata.",
+      "demora_real": "64 dias entre la orden (06-Jul) y el asiento del buy (08-Sep). El primer tramo tardo 48 (orden 20-Mar, buy 07-May). El eta_settle decia 3 semanas: contar ~2 meses."
     }
   ]
 }
