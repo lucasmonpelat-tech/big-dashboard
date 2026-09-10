@@ -282,6 +282,18 @@ jobs:
         continue-on-error: true
 
       # === COMMIT + PUSH ===
+      # Pershing re-marca los privados sin avisar y sin periodicidad fija. Esto
+      # compara el snapshot de hoy contra el anterior y deja alerta si alguno se
+      # movio. Va ANTES del commit para que la alerta viaje en el mismo push.
+      #
+      # No mira IBIT ni GLD (ETF liquidos: avisarian todos los dias) ni CALP (no
+      # viene de Pershing). Y no se guia por price_date: BPCC lo avanza casi a
+      # diario con el precio quieto. Ver el script.
+      - name: ¿Pershing re-marcó algún alternativo ilíquido?
+        continue-on-error: true
+        run: |
+          python scripts/check_alts_nav_updates.py             --alerta "data/_alerts/alts_nav_remarcado_$(date -u +%Y-%m-%d).json"
+
       - name: Commit and push data/ if changed
         id: commit
         run: |
