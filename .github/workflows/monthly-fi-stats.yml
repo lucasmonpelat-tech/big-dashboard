@@ -1,0 +1,79 @@
+name: 📐 fi_stats mensual (YTW / Duración / Vencimiento)
+
+# Por que es MENSUAL y no diario (2026-09-10)
+# -------------------------------------------
+# Estos tres numeros salen de dos cosas: los pesos del sleeve (que se mueven
+# todos los dias) y las metricas de cada fondo (que salen de factsheets
+# MENSUALES o TRIMESTRALES, y por lo tanto no se mueven).
+#
+# Recalcularlos a diario movia el numero sin agregar informacion: medido el
+# 2026-09-08, con pesos del 31-Ago y del 08-Sep el resultado daba identico
+# (6.98 / 4.46 / 6.01 en los dos casos). El drift de pesos intra-mes no alcanza
+# a mover un promedio ponderado de metricas que no cambiaron.
+#
+# Y hay algo peor que la falta de utilidad: el numero es de CIERRE DE MES. De
+# aca sale la tabla del factsheet y la slide 10 del pitch book, que Lucas arma
+# una vez por mes y manda. Un numero que se mueve todos los dias hace imposible
+# reconstruir despues de donde salio el que se envio.
+#
+# Decision de Lucas, 2026-09-10: "YTW una vez por mes esta bien".
+#
+# DIA 1, NO DIA 15
+# ----------------
+# Lucas cierra los reportes en los primeros dias del mes siguiente (el cierre de
+# Agosto se mando el 09-Sep). Corriendo el dia 1 con los pesos del ultimo
+# canonical de Agosto, el dato ya esta listo y correcto cuando se sienta a armar
+# el deck. Los otros dos jobs mensuales corren el 15, que para esto seria tarde.
+
+on:
+  schedule:
+    # Dia 1, 12:40 UTC (~09:40 ART). Minuto no redondo: GitHub congestiona mas
+    # los :00 y :30 (ver SETUP_DISPARADORES.md).
+    - cron: '40 12 1 * *'
+  workflow_dispatch:
+    inputs:
+      as_of:
+        description: "Fecha del canonical (YYYY-MM-DD). Vacio = último cierre del mes pasado."
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  fi-stats:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generar fi_stats con los pesos del cierre
+        run: |
+          if [ -n "${{ inputs.as_of }}" ]; then
+            python scripts/build_fi_stats.py --as-of "${{ inputs.as_of }}"
+          else
+            python scripts/build_fi_stats.py --cierre-anterior
+          fi
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # add ANTES del diff: git diff no ve archivos nuevos. Aca el archivo ya
+          # existe, pero se mantiene el orden por consistencia con el resto --
+          # el orden invertido tiro tres meses de snapshots (ver monthly-snapshot.yml).
+          git add data/fi_breakdown_latest.json
+
+          if git diff --cached --quiet; then
+            echo "fi_stats sin cambios respecto del mes pasado."
+            exit 0
+          fi
+          git commit -m "chore(fi_stats): cierre mensual $(date -u +%Y-%m)"
+          git pull --rebase origin main || true
+          git push origin main || true

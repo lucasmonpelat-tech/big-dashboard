@@ -40,6 +40,7 @@ USO
 ---
     python scripts/build_fi_stats.py                    # ultimo canonical
     python scripts/build_fi_stats.py --as-of 2026-08-31 # cierre de mes (factsheet)
+    python scripts/build_fi_stats.py --cierre-anterior  # idem, resolviendo la fecha solo
     python scripts/build_fi_stats.py --check            # no escribe, solo compara
 
 `--check` sale con codigo 1 si lo que hay en el JSON no coincide con lo
@@ -50,7 +51,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from datetime import datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
@@ -63,6 +64,25 @@ BREAKDOWN = ROOT / "data" / "fi_breakdown_latest.json"
 METRICAS = [("YTW (%)", "ytw"), ("Duración", "duration"), ("Vencimiento", "maturity")]
 
 TOLERANCIA = 0.005   # los valores van redondeados a 2 decimales
+
+
+def cierre_mes_anterior(hoy=None):
+    """El ultimo canonical disponible del mes pasado.
+
+    Es la fecha que corresponde para estos stats: las metricas salen de
+    factsheets mensuales o trimestrales, asi que el numero es de cierre de mes,
+    no del dia. Se busca el ultimo snapshot que exista dentro del mes anterior
+    -- el 31 puede caer fin de semana y no tener corrida.
+    """
+    hoy = hoy or date.today()
+    primero = hoy.replace(day=1)
+    fin_anterior = primero - timedelta(days=1)
+    prefijo = fin_anterior.strftime("%Y-%m")
+    delmes = sorted(p.parent.name for p in CANONICAL_DIR.glob("*/holdings_returns.json")
+                    if p.parent.name.startswith(prefijo))
+    if not delmes:
+        sys.exit(f"ERROR: no hay ningun canonical de {prefijo}")
+    return delmes[-1]
 
 
 def snapshot(as_of):
@@ -186,10 +206,18 @@ def aplicar(r):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--as-of", default=None, help="Fecha del canonical (YYYY-MM-DD). Default: el ultimo.")
+    ap.add_argument("--cierre-anterior", action="store_true",
+                    help=("Usar el ultimo canonical del mes pasado. Es lo que corre "
+                          "el cron mensual: estos stats son de cierre de mes."))
     ap.add_argument("--check", action="store_true", help="No escribe; compara y sale 1 si difiere.")
     args = ap.parse_args()
 
-    r = calcular(args.as_of)
+    as_of = args.as_of
+    if args.cierre_anterior:
+        if as_of:
+            sys.exit("ERROR: --as-of y --cierre-anterior son excluyentes")
+        as_of = cierre_mes_anterior()
+    r = calcular(as_of)
 
     print(f"fi_stats desde canonical {r['as_of']}  (sleeve ${r['sleeve_mv']:,.2f})")
     print(f"  incluidos : {', '.join(r['incluidos'])}  -> {r['cobertura_pct']}% del sleeve")

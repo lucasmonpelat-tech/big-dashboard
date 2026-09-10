@@ -491,8 +491,23 @@ def check_fi_stats_derivado(errors, warnings):
     print("  7 - fi_stats derivado de data/funds + canonical")
     print("-" * 70)
 
+    # Se recalcula contra la MISMA fecha que declara el archivo, no contra el
+    # canonical mas reciente.
+    #
+    # POR QUE (2026-09-10): estos stats pasaron a generarse UNA VEZ POR MES, con
+    # pesos de cierre (decision de Lucas: las metricas salen de factsheets
+    # mensuales o trimestrales, recalcularlas a diario mueve el numero sin
+    # agregar informacion). Si el check siguiera comparando contra el canonical
+    # de hoy, empezaria a fallar el dia 2 de cada mes por puro drift de pesos, y
+    # un validador que grita en falso todos los dias se termina ignorando.
+    doc_actual = _load(ROOT / "data" / "fi_breakdown_latest.json") or {}
+    generado_de = (doc_actual.get("fi_stats") or {}).get("_generated_from") or ""
+    # "canonical/2026-08-31/holdings_returns.json" -> "2026-08-31"
+    partes = generado_de.split("/")
+    as_of_declarado = partes[1] if len(partes) > 2 else None
+
     try:
-        r = build_fi_stats.calcular(None)
+        r = build_fi_stats.calcular(as_of_declarado)
     except SystemExit as e:
         warnings.append(f"fi_stats: no se pudo calcular - {e}")
         print(f"  [WARN] no se pudo calcular: {e}")

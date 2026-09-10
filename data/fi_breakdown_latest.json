@@ -4,21 +4,21 @@
   "note": "Ver 'source' por seccion para saber que esta fresco y que sigue siendo la aprobacion de Abril-2026 (Lucas, 28-Abr-2026, fi_breakdown_mar26.json).",
   "fi_stats": {
     "title": "Estadísticas Renta Fija",
-    "source": "big: DERIVADO por scripts/build_fi_stats.py — pesos del canonical 2026-09-10 x metricas de data/funds/<TICKER>.json. Incluye solo fondos en USD o hedgeados a USD (PIMCO-INC, PIMCO-LD, MANIG, TGF, SGCB, MANEM), cobertura 91.87% del sleeve. Regla fijada por Lucas el 2026-09-07, guardada en fi_stats_include de cada archivo de fondo. bmk (AGG): manual, no lo toca este script.",
+    "source": "big: DERIVADO por scripts/build_fi_stats.py — pesos del canonical 2026-08-31 x metricas de data/funds/<TICKER>.json. Incluye solo fondos en USD o hedgeados a USD (PIMCO-INC, PIMCO-LD, MANIG, TGF, SGCB, MANEM), cobertura 91.79% del sleeve. Regla fijada por Lucas el 2026-09-07, guardada en fi_stats_include de cada archivo de fondo. bmk (AGG): manual, no lo toca este script.",
     "rows": [
       {
         "metric": "YTW (%)",
-        "big": 7.1,
+        "big": 7.07,
         "bmk": 3.71
       },
       {
         "metric": "Duración",
-        "big": 3.93,
+        "big": 3.97,
         "bmk": 6.21
       },
       {
         "metric": "Vencimiento",
-        "big": 6.46,
+        "big": 6.49,
         "bmk": 8.36
       }
     ],
@@ -34,7 +34,7 @@
       "excluidos": {
         "PIMCO-EM": "moneda local emergente sin hedge por diseno del mandato: su duracion no es homogenea con la del resto"
       },
-      "cobertura_pct_sleeve": 91.87,
+      "cobertura_pct_sleeve": 91.79,
       "factsheets_usados": {
         "PIMCO-INC": "2026-04-30",
         "PIMCO-LD": "2026-04-30",
@@ -45,8 +45,8 @@
       },
       "nota": "La calidad crediticia NO sigue esta regla: Maximus la publica agregada, con TGF y PIMCO-EM adentro, y no se puede desarmar."
     },
-    "_generated_at": "2026-09-10T13:14:36.140034",
-    "_generated_from": "canonical/2026-09-10/holdings_returns.json",
+    "_generated_at": "2026-09-10T10:32:22.704349",
+    "_generated_from": "canonical/2026-08-31/holdings_returns.json",
     "bmk_as_of": "2026-06-30",
     "bmk_fuente": "Factsheet oficial iShares AGG"
   },
