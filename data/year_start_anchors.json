@@ -96,11 +96,12 @@
     "US46434V8862": {
       "ticker": "HEWJ",
       "name": "iShares Currency Hedged MSCI Japan ETF",
-      "ytd_source_pct": null,
-      "price_2025_dec_31": null,
-      "qty_2025_dec_31": null,
-      "mv_2025_dec_31": null,
-      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+      "price_2025_dec_31": 52.4146,
+      "qty_2025_dec_31": 0.0,
+      "mv_2025_dec_31": 0.0,
+      "anchor_locked": true,
+      "ytd_source": "manual_verified",
+      "note": "Anchor real verificado el 2026-09-10. Fuente: Yahoo cierre AJUSTADO POR DIVIDENDOS 31-Dic-2025, misma base que MAGS."
     },
     "IE00B87KCF77": {
       "ticker": "PIMCO-INC",
@@ -145,11 +146,12 @@
     "US53656G4982": {
       "ticker": "MAGS",
       "name": "Roundhill Magnificent Seven ETF",
-      "ytd_source_pct": null,
-      "price_2025_dec_31": null,
-      "qty_2025_dec_31": null,
-      "mv_2025_dec_31": null,
-      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+      "price_2025_dec_31": 65.96,
+      "qty_2025_dec_31": 0.0,
+      "mv_2025_dec_31": 0.0,
+      "anchor_locked": true,
+      "ytd_source": "manual_verified",
+      "note": "Anchor real verificado el 2026-09-10. Fuente: Yahoo cierre AJUSTADO POR DIVIDENDOS 31-Dic-2025. Base verificada contra los anchors de ILF y ARGT."
     },
     "LU2049315265": {
       "ticker": "SGCB",

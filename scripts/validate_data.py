@@ -587,6 +587,65 @@ def check_mapa_reportes(errors, warnings):
         print("  [OK]    %d rutas resuelven contra los JSON del repo" % total)
 
 
+def check_anchors_trabados(errors, warnings):
+    """Un anchor con precio pero sin anchor_locked se pierde en la proxima corrida.
+
+    POR QUE EXISTE (2026-09-10)
+    ---------------------------
+    year_start_anchors.json guarda el precio de cada fondo al 31-Dic, que es la
+    base del YTD. NO es un archivo que se edite y quede: el pipeline lo
+    RECONSTRUYE entero todos los dias (dashboard_v2/transform/snapshot_year_start.py,
+    llamado desde run_all). Lo que no puede derivar de sus fuentes lo deja en null.
+
+    Por eso existe `anchor_locked`: un anchor trabado se copia tal cual y no se
+    recalcula nunca. Sin esa marca, un precio cargado a mano dura hasta la
+    proxima corrida del cron.
+
+    Paso el 2026-09-09: se cargaron a mano los anchors de MAGS (65.96) y HEWJ
+    (52.4146) sin trabarlos. A la manana siguiente el cron los habia puesto en
+    null y el YTD de los dos habia quedado congelado en el valor de la vispera.
+    Doce horas, y el sintoma era identico al bug que se estaba arreglando.
+
+    La forma correcta de cargar uno es scripts/lock_year_start_anchor.py, que
+    ademas deja registrada la fuente.
+    """
+    print("\n" + "-" * 70)
+    print("  9 - Anchors 31-Dic trabados (si no, el cron los borra)")
+    print("-" * 70)
+
+    doc = _load(ROOT / "data" / "year_start_anchors.json")
+    if not doc:
+        warnings.append("no pude leer year_start_anchors.json")
+        print("  [WARN] no pude leerlo")
+        return
+
+    anchors = doc.get("anchors_2026") or {}
+    sueltos, trabados, sin_precio = [], 0, 0
+    for isin, a in anchors.items():
+        precio = a.get("price_2025_dec_31")
+        if precio is None:
+            sin_precio += 1
+        elif a.get("anchor_locked"):
+            trabados += 1
+        else:
+            sueltos.append((a.get("ticker", isin), isin, precio))
+
+    for tk, isin, precio in sueltos:
+        errors.append(
+            "anchors: %s (%s) tiene price_2025_dec_31=%s pero NO anchor_locked. "
+            "snapshot_year_start.py reconstruye este archivo todos los dias y lo "
+            "va a pisar con null en la proxima corrida del cron; el YTD del fondo "
+            "queda congelado. Trabarlo: python scripts/lock_year_start_anchor.py "
+            "--isin %s --price %s --source \"...\"" % (tk, isin, precio, isin, precio)
+        )
+
+    if sueltos:
+        print("  [ERROR] %d anchor(s) con precio pero sin trabar" % len(sueltos))
+    else:
+        print("  [OK]    %d trabados, %d sin precio (nada en riesgo de perderse)"
+              % (trabados, sin_precio))
+
+
 def main():
     print("=" * 70)
     print("  BIG Dashboard — Data Consistency Validator")
@@ -731,6 +790,9 @@ def main():
 
     # ---- 8: EL MAPA DE LOS REPORTES SIGUE APUNTANDO A ALGO ----
     check_mapa_reportes(errors, warnings)
+
+    # ---- 9: ANCHORS TRABADOS (el cron reconstruye ese archivo) ----
+    check_anchors_trabados(errors, warnings)
 
     # ---- REPORTE FINAL ----
     print("\n" + "=" * 70)
