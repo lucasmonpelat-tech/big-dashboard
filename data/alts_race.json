@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-09-10T13:14:34.170128",
+  "refreshedAt": "2026-09-11T13:12:39.812650",
   "inception": "2025-06-30",
   "benchmark_primary": "60/40 blend (60% ACWI + 40% AGG)",
   "benchmark_secondary": "HFRX Global HF proxy (QAI ETF)",
@@ -168,7 +168,7 @@
       "ytd_contribution_pct": 1.98,
       "assumed_annual_pct": 12.0,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-09-10",
+      "valuation_date": "2026-09-11",
       "days_since_valuation": 0,
       "isin_maximus": "LU2837777825",
       "_isin_note": "CALP tiene dos ISIN dando vueltas: LU2827810776 es el del statement oficial de Carlyle y el que usan el canonical y funds_metadata.js; LU2837777825 es con el que lo dio de alta Maximus. Se unifica en el oficial. Se guarda el de Maximus para poder cruzar contra sus reportes."
@@ -187,7 +187,7 @@
       "assumed_annual_pct": null,
       "source": "Pershing T-1 (2026-09-09)",
       "valuation_date": "2026-09-09",
-      "days_since_valuation": 1
+      "days_since_valuation": 2
     },
     {
       "isin": "US78463V1070",
@@ -203,7 +203,7 @@
       "assumed_annual_pct": null,
       "source": "Pershing T-1 (2026-09-09)",
       "valuation_date": "2026-09-09",
-      "days_since_valuation": 1
+      "days_since_valuation": 2
     },
     {
       "isin": "KYG4737U1085",
@@ -218,7 +218,7 @@
       "ytd_contribution_pct": 0.22,
       "assumed_annual_pct": 9.5,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-09-10",
+      "valuation_date": "2026-09-11",
       "days_since_valuation": 0
     },
     {
@@ -234,7 +234,7 @@
       "ytd_contribution_pct": 0.21,
       "assumed_annual_pct": 9.5,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-09-10",
+      "valuation_date": "2026-09-11",
       "days_since_valuation": 0
     },
     {
@@ -250,7 +250,7 @@
       "ytd_contribution_pct": 0.25,
       "assumed_annual_pct": 12.0,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-09-10",
+      "valuation_date": "2026-09-11",
       "days_since_valuation": 0,
       "_isin_note": "FLEX-LEX era un ISIN placeholder de cuando entro el fondo sin ISIN cargado. El real es LU2966298809 y ya es el que usan el canonical, positions_latest y funds_metadata.js. Unificado el 2026-09-08."
     },
@@ -267,7 +267,7 @@
       "ytd_contribution_pct": 0.38,
       "assumed_annual_pct": 11.0,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-09-10",
+      "valuation_date": "2026-09-11",
       "days_since_valuation": 0
     },
     {
@@ -283,11 +283,11 @@
       "ytd_contribution_pct": 0.06,
       "assumed_annual_pct": 9.5,
       "source": "Pershing UGL via sync_alts_ugl.py",
-      "valuation_date": "2026-09-10",
+      "valuation_date": "2026-09-11",
       "days_since_valuation": 0
     }
   ],
-  "_daily_refresh_note": "Refresh diario 2026-09-10: 2 liquidos via Pershing T-1, 2 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $8,720,509.",
-  "_sync_alts_ugl_at": "2026-09-10T13:14:36.038749",
+  "_daily_refresh_note": "Refresh diario 2026-09-11: 2 liquidos via Pershing T-1, 2 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $8,720,509.",
+  "_sync_alts_ugl_at": "2026-09-11T13:12:41.404126",
   "_sync_alts_ugl_note": "Returns y sleeve YTD/SI sobreescritos con Pershing UGL (cost-basis weighted). sleeve_index mensual sigue siendo time-weighted con proxies (para charts históricos)."
 }
