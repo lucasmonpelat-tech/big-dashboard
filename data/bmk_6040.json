@@ -1,25 +1,25 @@
 {
-  "refreshedAt": "2026-09-11T13:28:37.272247",
+  "refreshedAt": "2026-09-12T13:11:36.171277",
   "source": "Yahoo Finance AOR (iShares Core Growth Allocation 60/40)",
   "note": "Single ETF que replica 60% stocks / 40% bonds. Composicion: ITOT + IDEV + IEMG + IAGG + AGG. Reemplaza el calculo viejo 0.6*ACWI + 0.4*AGG.",
   "ticker": "AOR",
   "inception": "2025-06-27",
   "periods": {
-    "latest_date": "2026-09-10",
-    "latest_value": 116.4447,
+    "latest_date": "2026-09-11",
+    "latest_value": 117.0522,
     "returns": {
-      "1W": -1.57,
-      "1M": -1.29,
-      "3M": 0.85,
-      "6M": 7.71,
-      "YTD": 7.46,
-      "SI": 16.44,
-      "Annualized": 13.47
+      "1W": -1.04,
+      "1M": -1.07,
+      "3M": 1.11,
+      "6M": 8.75,
+      "YTD": 8.02,
+      "SI": 17.05,
+      "Annualized": 13.93
     },
     "volatility": 8.78,
-    "sharpe_approx": 1.04
+    "sharpe_approx": 1.1
   },
-  "series_length": 303,
+  "series_length": 304,
   "series": [
     {
       "date": "2025-06-27",
@@ -59,7 +59,7 @@
     },
     {
       "date": "2025-07-11",
-      "value": 100.4246
+      "value": 100.4245
     },
     {
       "date": "2025-07-14",
@@ -139,7 +139,7 @@
     },
     {
       "date": "2025-08-08",
-      "value": 102.1334
+      "value": 102.1333
     },
     {
       "date": "2025-08-11",
@@ -175,7 +175,7 @@
     },
     {
       "date": "2025-08-21",
-      "value": 102.2976
+      "value": 102.2977
     },
     {
       "date": "2025-08-22",
@@ -355,7 +355,7 @@
     },
     {
       "date": "2025-10-24",
-      "value": 107.393
+      "value": 107.3929
     },
     {
       "date": "2025-10-27",
@@ -375,11 +375,11 @@
     },
     {
       "date": "2025-10-31",
-      "value": 107.393
+      "value": 107.3929
     },
     {
       "date": "2025-11-03",
-      "value": 107.4259
+      "value": 107.426
     },
     {
       "date": "2025-11-04",
@@ -1232,6 +1232,10 @@
     {
       "date": "2026-09-10",
       "value": 116.4447
+    },
+    {
+      "date": "2026-09-11",
+      "value": 117.0522
     }
   ]
 }
