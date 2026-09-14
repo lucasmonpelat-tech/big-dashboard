@@ -51,6 +51,24 @@ def main():
             status = (data.get("jobStatus") or "").lower()
             ran_date = data.get("date")
 
+            # Si la ultima corrida registrada es de HOY, este chequeo no puede
+            # decir nada del sabado: el marker ya fue pisado por la corrida de
+            # hoy. No es evidencia de que el sabado fallara.
+            #
+            # POR QUE PASA (2026-09-14): el step corre PRIMERO en el job, asi que
+            # en la PRIMERA corrida del lunes last_run.json todavia trae el sabado
+            # y el chequeo funciona. Pero con cuatro disparadores (cron-job.org,
+            # tarea de Windows, schedule de GitHub, watchdog) es normal que un dia
+            # tenga mas de una corrida -- y en la segunda saltaba un
+            # "wrong_previous_day" falso. Ya habia pasado los lunes 15-Jun y
+            # 07-Sep, y de nuevo el 14-Sep. Una alerta que grita en falso se
+            # termina ignorando, que es peor que no tenerla.
+            if ran_date == today_iso:
+                print(f"[check_previous_run] Ya hubo una corrida hoy ({today_iso}): "
+                      f"el marker del {args.expected_day} ya fue sobrescrito. "
+                      f"Sin chequeo -- no hay nada que afirmar.")
+                return
+
             if day != args.expected_day.lower():
                 warning = {
                     "warningType": "wrong_previous_day",
