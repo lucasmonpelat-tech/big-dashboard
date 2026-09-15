@@ -150,11 +150,26 @@ jobs:
       # Ahora el script deja la alerta en data/_alerts/ y el step "Alerta
       # inmediata por mail" (linea ~343) la manda el mismo dia. Mismo aviso,
       # sin arrastrar al resto.
+      #
+      # El `if` del final NO es paranoia: es el agujero que abre el
+      # continue-on-error. El script deja alerta cuando el DATO es invalido,
+      # pero si se muere por otra cosa (timeout de Playwright, cambio de layout
+      # que tira excepcion, red) no alcanza a escribir nada -- y sin el job rojo
+      # eso quedaria verde y mudo hasta que alguien mire a mano. El freshness
+      # check que vigila lynk_data.json no corre en ningun cron.
       - name: Lynk NAV scrape (KPIs)
         continue-on-error: true
         run: |
-          python scripts/lynk_refresher.py --email "$LYNK_EMAIL" \
-            --alerta "data/_alerts/lynk_scrape_invalido_$(date -u +%Y-%m-%d).json"
+          A="data/_alerts/lynk_scrape_invalido_$(date -u +%Y-%m-%d).json"
+          rc=0
+          python scripts/lynk_refresher.py --email "$LYNK_EMAIL" --alerta "$A" || rc=$?
+          if [ "$rc" -ne 0 ] && [ ! -f "$A" ]; then
+            mkdir -p data/_alerts
+            python scripts/write_crash_alert.py --path "$A" \
+              --tipo lynk_scrape_crash --rc "$rc" \
+              --que "el scrape de KPIs de Lynk (lynk_refresher.py)" \
+              --archivo data/lynk_data.json
+          fi
 
       # Este escribe la serie historica completa del NAV (retornos, vol, grafico).
       # Hasta el 2026-09-15 no validaba NADA: pisaba el archivo con lo que viniera.
@@ -163,8 +178,16 @@ jobs:
       - name: Lynk NAV series (full history)
         continue-on-error: true
         run: |
-          python scripts/lynk_nav_extractor.py --email "$LYNK_EMAIL" \
-            --alerta "data/_alerts/lynk_serie_nav_invalida_$(date -u +%Y-%m-%d).json"
+          A="data/_alerts/lynk_serie_nav_invalida_$(date -u +%Y-%m-%d).json"
+          rc=0
+          python scripts/lynk_nav_extractor.py --email "$LYNK_EMAIL" --alerta "$A" || rc=$?
+          if [ "$rc" -ne 0 ] && [ ! -f "$A" ]; then
+            mkdir -p data/_alerts
+            python scripts/write_crash_alert.py --path "$A" \
+              --tipo lynk_serie_crash --rc "$rc" \
+              --que "el extractor de la serie de NAV (lynk_nav_extractor.py)" \
+              --archivo data/lynk_nav_series.json
+          fi
 
       - name: Sync UCITS NAV desde Pershing/NetX360 (reemplaza baha, ver 2026-07-28)
         run: python scripts/sync_ucits_nav_from_pershing.py
