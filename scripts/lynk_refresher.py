@@ -156,10 +156,58 @@ def validate_scrape(data: dict) -> list:
     return errors
 
 
+def escribir_alerta(path, data, errors):
+    """Deja la alerta en data/_alerts/ para que send_failure_alert.py la mande.
+
+    POR QUE (2026-09-15)
+    --------------------
+    Hasta hoy este script avisaba de una sola forma: exit(1). Y como el step del
+    cron no tenia `continue-on-error`, ese exit se llevaba puestos los 23 pasos
+    siguientes -- Pershing, canonical, sleeves y el commit del dia.
+
+    El 15-Sep paso de verdad. Lynk publico el NAV del lunes 14 en 0.000 (su
+    propia API lo servia asi). La guarda de validate_scrape() hizo lo suyo y no
+    piso lynk_data.json, que era el punto. Pero ademas mato el cron entero: no
+    bajo el Pershing, no se armo canonical/2026-09-15 y no hubo commit. Un dato
+    malo de un proveedor nos costo el dia completo de pipeline.
+
+    La proteccion del dato ya estaba arriba, en la guarda. Matar el job ERA
+    redundante. Lo que hacia falta era que la falla se NOTE, y para eso ya
+    existe el canal: cualquier archivo de hoy en data/_alerts/ dispara el mail
+    inmediato de send_failure_alert.py. Con la alerta escrita aca, el step puede
+    llevar continue-on-error y el resto del cron sigue.
+
+    Ojo: esto NO baja el nivel de alarma. Antes el aviso era un job rojo; ahora
+    es un mail el mismo dia con el detalle de que campo fallo.
+    """
+    if not path:
+        return
+    import os
+    from datetime import date
+    carpeta = os.path.dirname(path)
+    if carpeta:
+        os.makedirs(carpeta, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump({
+            "date": date.today().isoformat(),
+            "tipo": "lynk_scrape_invalido",
+            "issues": errors,
+            "accion": ("El scrape de Lynk devolvio datos invalidos. lynk_data.json "
+                       "NO se piso: el dashboard sigue mostrando el ultimo valor "
+                       "bueno, con su fecha vieja. Revisar si el problema es de "
+                       "Lynk (mirar api.lynkmarkets.com/financial/<id>) o si "
+                       "cambio el layout de la pagina."),
+            "scrapeado": data,
+        }, f, indent=2, ensure_ascii=False)
+    print(f"  Alerta escrita en {path}")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--email", default="lucas.monpelat@pampa-capital.com",
                         help="Email for Lynk gate")
+    parser.add_argument("--alerta", default=None,
+                        help="Si el scrape es invalido, escribir el JSON de alerta aca.")
     args = parser.parse_args()
 
     data = scrape_with_playwright(args.email)
@@ -181,6 +229,7 @@ def main():
         print("\nPosibles causas: el email gate cambio, el layout de Lynk cambio, "
               "o los regex de parse_lynk_body() ya no matchean. Revisar el HTML "
               "renderizado. El JSON viejo se preserva (mejor stale que null).")
+        escribir_alerta(args.alerta, data, errors)
         sys.exit(1)
 
     OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)

@@ -139,12 +139,32 @@ jobs:
         continue-on-error: true
 
       # === SCRAPING ===
+      # continue-on-error desde el 2026-09-15. ANTES este step no lo tenia, y el
+      # dia que Lynk publico el NAV del lunes 14 en 0.000 su exit(1) se llevo
+      # puestos los 23 pasos siguientes: no bajo el Pershing, no se armo
+      # canonical/2026-09-15 y no hubo commit. Un dato malo del proveedor nos
+      # costo el pipeline entero del dia.
+      #
+      # El dato nunca estuvo en riesgo: la guarda de validate_scrape() ya se
+      # negaba a pisar lynk_data.json. Matar el job era proteccion redundante.
+      # Ahora el script deja la alerta en data/_alerts/ y el step "Alerta
+      # inmediata por mail" (linea ~343) la manda el mismo dia. Mismo aviso,
+      # sin arrastrar al resto.
       - name: Lynk NAV scrape (KPIs)
-        run: python scripts/lynk_refresher.py --email "$LYNK_EMAIL"
-
-      - name: Lynk NAV series (full history)
-        run: python scripts/lynk_nav_extractor.py --email "$LYNK_EMAIL"
         continue-on-error: true
+        run: |
+          python scripts/lynk_refresher.py --email "$LYNK_EMAIL" \
+            --alerta "data/_alerts/lynk_scrape_invalido_$(date -u +%Y-%m-%d).json"
+
+      # Este escribe la serie historica completa del NAV (retornos, vol, grafico).
+      # Hasta el 2026-09-15 no validaba NADA: pisaba el archivo con lo que viniera.
+      # El 0 del 14-Sep no entro solo porque el step de arriba mato el job antes
+      # de que este corriera. Ahora tiene guarda propia (ver validar_serie()).
+      - name: Lynk NAV series (full history)
+        continue-on-error: true
+        run: |
+          python scripts/lynk_nav_extractor.py --email "$LYNK_EMAIL" \
+            --alerta "data/_alerts/lynk_serie_nav_invalida_$(date -u +%Y-%m-%d).json"
 
       - name: Sync UCITS NAV desde Pershing/NetX360 (reemplaza baha, ver 2026-07-28)
         run: python scripts/sync_ucits_nav_from_pershing.py
