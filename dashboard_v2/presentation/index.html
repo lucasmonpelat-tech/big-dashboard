@@ -375,6 +375,8 @@
           IR = alpha_ann / TE_ann. Sharpe con Rf=0 (cash yield marginal).
         </div>
         <div class="kpi-grid" id="perf-risk-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))"></div>
+        <div id="perf-risk-nota" style="display:none;margin-top:10px;font-size:11px;
+             color:var(--text-mute);line-height:1.5"></div>
       </div>
 
       <div class="section">
@@ -1203,6 +1205,25 @@
           <div class="sub">${k.sub}</div>
         </div>
       `).join("");
+
+      // Si se salteo algun dia por dato erroneo del proveedor, decirlo.
+      // Estas metricas salen de retornos DIARIOS, asi que excluir un dia las
+      // cambia de verdad (el 12-Ago-2026 movia la Vol de 4.95% a 6.72%).
+      // Un numero que no usa la serie completa y no lo aclara es un numero que
+      // nadie puede auditar despues.
+      const ex = comp.fechas_excluidas || [];
+      const nota = document.getElementById("perf-risk-nota");
+      if (nota) {
+        if (ex.length) {
+          const dias = ex.length === 1 ? "1 día" : `${ex.length} días`;
+          nota.innerHTML = `⚠️ Excluye ${dias} con NAV erróneo publicado por Lynk `
+            + `(${ex.join(", ")}). Los retornos por período no se ven afectados: `
+            + `usan valores de inicio y fin.`;
+          nota.style.display = "";
+        } else {
+          nota.style.display = "none";
+        }
+      }
     }
 
     function renderNavChart(comp) {
