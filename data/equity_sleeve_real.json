@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-09-15T13:30:20.996689",
+  "refreshedAt": "2026-09-15T14:07:04.527490",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -3634,27 +3634,27 @@
     },
     {
       "date": "2026-09-15",
-      "mv_usd": 8703363.751920644,
+      "mv_usd": 8699505.489380643,
       "holdings": [
         {
           "ticker": "THOR",
           "qty": 18861.953,
-          "price": 44.32,
-          "mv": 835961.75696,
+          "price": 44.44,
+          "mv": 838225.19132,
           "source": "daily_close"
         },
         {
           "ticker": "4BRZ",
           "qty": 6000.0,
-          "price": 54.39,
-          "mv": 326340.0,
+          "price": 53.3,
+          "mv": 319800.0,
           "source": "daily_close"
         },
         {
           "ticker": "ILF",
           "qty": 10000.0,
-          "price": 35.47,
-          "mv": 354700.0,
+          "price": 35.55,
+          "mv": 355500.0,
           "source": "daily_close"
         },
         {
@@ -3667,15 +3667,15 @@
         {
           "ticker": "CSPX",
           "qty": 3408.0,
-          "price": 827.49,
-          "mv": 2820085.92,
+          "price": 821.89,
+          "mv": 2801001.12,
           "source": "daily_close"
         },
         {
           "ticker": "NBGMT",
           "qty": 58050.998,
-          "price": 25.32,
-          "mv": 1469851.26936,
+          "price": 25.61,
+          "mv": 1486686.0587799998,
           "source": "daily_close"
         },
         {
@@ -3688,22 +3688,22 @@
         {
           "ticker": "JHGSC",
           "qty": 10410.46,
-          "price": 54.64,
-          "mv": 568827.5344,
+          "price": 54.27,
+          "mv": 564975.6642,
           "source": "daily_close"
         },
         {
           "ticker": "ARGT",
           "qty": 4000.0,
-          "price": 95.3,
-          "mv": 381200.0,
+          "price": 95.45,
+          "mv": 381800.0,
           "source": "daily_close"
         },
         {
           "ticker": "MFSCV",
           "qty": 4063.638,
-          "price": 310.77,
-          "mv": 1262856.7812599998,
+          "price": 312.03,
+          "mv": 1267976.9651399998,
           "source": "daily_close"
         }
       ]
@@ -7198,10 +7198,10 @@
     },
     {
       "date": "2026-09-15",
-      "mv_usd": 8703363.751920644,
+      "mv_usd": 8699505.489380643,
       "flow_in": 0.0,
-      "twr": -0.01296371538235764,
-      "index": 119.4066
+      "twr": -0.013401275529343571,
+      "index": 119.3537
     }
   ],
   "acwi_index_series": [
@@ -9439,8 +9439,8 @@
     },
     {
       "date": "2026-09-15",
-      "price": 158.96,
-      "index": 125.5725
+      "price": 158.46,
+      "index": 125.1775
     }
   ],
   "equity_flows_by_month": {
@@ -13122,10 +13122,10 @@
     },
     {
       "date": "2026-09-15",
-      "mv_usd": 8703363.751920644,
+      "mv_usd": 8699505.489380643,
       "flow_in": 0.0,
-      "twr": -0.01296371538235764,
-      "index": 119.4066
+      "twr": -0.013401275529343571,
+      "index": 119.3537
     }
   ],
   "acwi_index_series_original": [
@@ -15356,9 +15356,15 @@
       "price": 160.1751
     },
     {
+      "date": "2026-09-14",
+      "index": 126.0524,
+      "interpolated": true,
+      "price": 159.5675
+    },
+    {
       "date": "2026-09-15",
-      "price": 158.96,
-      "index": 125.5725
+      "price": 158.46,
+      "index": 125.1775
     }
   ],
   "_july_ramp_note": "FIX 2026-08-14: se prepende el mes de rampa de capital (1-jul a 31-jul-2025). Antes la serie arrancaba el 31-jul (primer statement oficial) tratandolo como inception (index=100) -- pero la inception real de BIG es 30-jun-2025 (Lynk) y la primera plata entro el 2-jul-2025 (ver transacciones: BRK B, GLD, IBIT 2-jul; CSPX, JHGSC 3-jul; MANIG, NBGMT, PIMCO-INC, MFSCV, WELLCRED 7-jul; NBRE 9-jul; MFSCV 15-jul; TGF 16-jul; BPCC 25-jul; BRK B, IBIT, GLD 30-jul). Modified Dietz 1-jul->31-jul con mv_start=0, mv_end=$6,016,105.03 (statement oficial verificado), flows=transacciones reales: twr=+1.2374%. Toda la serie posterior a esta fecha se reescalo multiplicando el indice por (1+1.2374%) para que el nuevo 1-jul sea la base 100 real. Verificado contra el SI oficial de Lynk (409 dias): residual bajo de +0.72pp a +0.12pp con este fix."
