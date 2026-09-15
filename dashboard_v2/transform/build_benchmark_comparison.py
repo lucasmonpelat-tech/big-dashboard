@@ -38,6 +38,44 @@ CANONICAL_DIR = DATA_DIR / "canonical"
 # Trading days per year para annualización
 TRADING_DAYS = 252
 
+# Fechas en las que Lynk publicó un NAV que sabemos que está mal.
+#
+# POR QUÉ SE EXCLUYEN (2026-09-15)
+# --------------------------------
+# La serie de Lynk trae el 12-Ago-2026 en 103.215, entre 106.861 y 106.957: un
+# -3.41% seguido de +3.63%. No es mercado, es un print roto. Y como las stats de
+# acá salen de retornos DIARIOS, ese ida y vuelta se propagaba a todo lo que
+# muestra el tab Benchmark:
+#
+#     Vol Portfolio    6.72%  ->  4.95%
+#     Tracking Error   8.55%  ->  7.30%
+#     Sharpe           0.891  ->  1.193
+#     Correlation      0.421  ->  0.565
+#
+# El desempate no es una opinión nuestra: la PROPIA página de Lynk publica
+# VOLATILITY 4.97%, que es el número sin el punto. O sea que ellos lo calculan
+# limpio y nos sirven la serie sucia. Sin esta exclusión, el mismo fondo mostraba
+# dos vol distintas en dos pantallas, y la nuestra lo hacía ver 36% más volátil.
+#
+# NO se borra de lynk_nav_series.json: la serie cruda sigue siendo la de Lynk.
+# Acá se saltea el punto, con lo cual el retorno 11-Ago -> 13-Ago pasa a ser uno
+# de dos días. Es lo correcto cuando el print del medio es basura.
+#
+# La lista vive en data/lynk_puntos_malos.json, un solo lugar, compartida con
+# scripts/lynk_nav_extractor.py. Cuando Lynk corrija, se saca de ahí y el cron
+# siguiente recalcula todo solo.
+PUNTOS_MALOS_FILE = DATA_DIR / "lynk_puntos_malos.json"
+
+
+def _fechas_malas() -> set[str]:
+    """Fechas a saltear. Si el archivo no está, no se excluye nada."""
+    try:
+        doc = json.loads(PUNTOS_MALOS_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        return set()
+    return {p["fecha"] for p in doc.get("puntos_malos", [])
+            if p.get("fecha") and not p.get("corregido_por_lynk")}
+
 
 # ============================================================
 # ALIGNMENT HELPERS
@@ -244,9 +282,16 @@ def _build_comparison(
     bench_name: str,
     port_source: str,
     bench_source: str,
+    excluir_fechas: set[str] | None = None,
 ) -> dict:
     port_map = _series_to_date_map(port_series, port_value_key)
     bench_map = _series_to_date_map(bench_series, bench_value_key)
+
+    # Sólo aplica a la comparación que sale de Lynk. Los sleeves de Equity/FI
+    # los calculamos nosotros: un dato malo de Lynk no los toca.
+    excluidos = sorted(f for f in (excluir_fechas or set()) if f in port_map)
+    for f in excluidos:
+        del port_map[f]
 
     dates, port_rebased, bench_rebased = _intersect_and_rebase(port_map, bench_map)
 
@@ -275,6 +320,13 @@ def _build_comparison(
         "inception": dates[0] if dates else None,
         "as_of": dates[-1] if dates else None,
         "n_observations": len(dates),
+        # Que quede escrito en el dato, no sólo en el código: cualquiera que lea
+        # este JSON tiene que poder ver que se salteó un día y por qué.
+        "fechas_excluidas": excluidos,
+        "fechas_excluidas_motivo": (
+            "NAV publicado mal por Lynk, ver data/lynk_puntos_malos.json"
+            if excluidos else None
+        ),
         "series": series_out,
         "returns": returns,
         "stats": stats,
@@ -305,6 +357,7 @@ def build(as_of: str | None = None) -> dict:
             bench_name="60/40 Global (AOR ETF)",
             port_source="data/lynk_nav_series.json",
             bench_source="data/bmk_6040.json",
+            excluir_fechas=_fechas_malas(),
         ),
         "equity_vs_acwi": _build_comparison(
             port_series=eq["twr_series"],

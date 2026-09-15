@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "as_of": "2026-09-15",
-  "generated_at": "2026-09-15T14:07:08Z",
+  "generated_at": "2026-09-15T17:14:44Z",
   "note": "Comparaciones portfolio vs benchmark con fechas alineadas y rebased 100 en fecha comun. Fixes bug del dashboard viejo (arrays x separados sin intersect ni rebase).",
   "comparisons": {
     "total_vs_6040": {
@@ -11,7 +11,11 @@
       "benchmark_source": "data/bmk_6040.json",
       "inception": "2025-06-30",
       "as_of": "2026-09-14",
-      "n_observations": 303,
+      "n_observations": 302,
+      "fechas_excluidas": [
+        "2026-08-12"
+      ],
+      "fechas_excluidas_motivo": "NAV publicado mal por Lynk, ver data/lynk_puntos_malos.json",
       "series": [
         {
           "date": "2025-06-30",
@@ -1694,12 +1698,6 @@
           "alpha_bp": -1064.27
         },
         {
-          "date": "2026-08-12",
-          "portfolio": 103.215,
-          "benchmark": 117.8567,
-          "alpha_bp": -1464.17
-        },
-        {
           "date": "2026-08-13",
           "portfolio": 106.957,
           "benchmark": 118.3442,
@@ -1871,15 +1869,15 @@
         }
       },
       "stats": {
-        "n_days": 302,
-        "tracking_error_pct_ann": 8.55,
-        "info_ratio": -0.789,
-        "sharpe_portfolio": 0.891,
-        "sharpe_benchmark": 1.443,
-        "beta": 0.321,
-        "correlation": 0.421,
-        "volatility_portfolio_pct_ann": 6.72,
-        "volatility_benchmark_pct_ann": 8.82
+        "n_days": 301,
+        "tracking_error_pct_ann": 7.3,
+        "info_ratio": -0.941,
+        "sharpe_portfolio": 1.193,
+        "sharpe_benchmark": 1.444,
+        "beta": 0.316,
+        "correlation": 0.565,
+        "volatility_portfolio_pct_ann": 4.95,
+        "volatility_benchmark_pct_ann": 8.85
       }
     },
     "equity_vs_acwi": {
@@ -1890,6 +1888,8 @@
       "inception": "2025-07-01",
       "as_of": "2026-09-15",
       "n_observations": 442,
+      "fechas_excluidas": [],
+      "fechas_excluidas_motivo": null,
       "series": [
         {
           "date": "2025-07-01",
@@ -4602,6 +4602,8 @@
       "inception": "2025-07-01",
       "as_of": "2026-09-15",
       "n_observations": 442,
+      "fechas_excluidas": [],
+      "fechas_excluidas_motivo": null,
       "series": [
         {
           "date": "2025-07-01",

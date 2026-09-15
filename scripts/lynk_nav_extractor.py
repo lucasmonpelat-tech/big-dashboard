@@ -35,21 +35,36 @@ LYNK_URL = "https://app.lynkmarkets.com/public/products/4w9aANBbvM"
 # barato: no se pisa el archivo y llega un mail. Se revisa y se corre de nuevo.
 SALTO_MAX_PCT = 3.0
 
-# Saltos YA CONOCIDOS que no deben bloquear la escritura.
+# Puntos que YA sabemos que Lynk publico mal. Viven en data/lynk_puntos_malos.json,
+# un solo lugar, porque los lee tambien build_benchmark_comparison.py para
+# excluirlos de retornos y stats. Hardcodearlos en los dos archivos garantiza que
+# tarde o temprano digan cosas distintas.
 #
-# Sin esta lista la guarda se auto-sabotea: el 12-Ago malo YA esta en la serie
-# que publica Lynk y en el archivo que tenemos guardado. Si bloqueara por el,
-# bloquearia TODOS los dias, el archivo quedaria congelado para siempre y lo
-# unico que llegaria seria un mail diario identico que se vuelve ignorable.
-# Seria fabricar el mismo fosil que la guarda viene a evitar: un archivo que
-# parece vivo y no se actualiza.
+# Aca sirven para que la guarda no se auto-sabotee: el 12-Ago malo YA esta en la
+# serie que publica Lynk y en el archivo que tenemos guardado. Si bloqueara por
+# el, bloquearia TODOS los dias, el archivo quedaria congelado para siempre y lo
+# unico que llegaria seria un mail diario identico que se vuelve ignorable. Seria
+# fabricar el mismo fosil que la guarda viene a evitar.
 #
-# Entonces: estos no frenan la escritura, pero se IMPRIMEN en cada corrida para
-# que no se olviden. Sacar la fecha de aca en cuanto Lynk corrija el dato.
-SALTOS_ACEPTADOS = {
-    "2026-08-12": "print roto de Lynk (-3.41%), reclamado 2026-09-15, sin corregir",
-    "2026-08-13": "rebote del mismo print roto (+3.63%)",
-}
+# Entonces no frenan la escritura, pero se IMPRIMEN en cada corrida.
+PUNTOS_MALOS_FILE = Path(__file__).parent.parent / "data" / "lynk_puntos_malos.json"
+
+
+def cargar_puntos_malos():
+    """{fecha: motivo} de los NAV que Lynk publico mal y siguen sin corregir.
+
+    Si el archivo no esta o no se puede leer, devuelve vacio: la guarda pasa a
+    ser mas estricta, no menos. Fallar hacia el lado seguro.
+    """
+    try:
+        doc = json.loads(PUNTOS_MALOS_FILE.read_text(encoding="utf-8"))
+    except Exception as e:
+        print(f"  WARN: no pude leer {PUNTOS_MALOS_FILE.name} ({e}). "
+              f"Sigo sin excepciones conocidas.")
+        return {}
+    return {p["fecha"]: p.get("motivo", "")
+            for p in doc.get("puntos_malos", [])
+            if not p.get("corregido_por_lynk")}
 
 EXTRACT_JS = r"""
 () => {
@@ -170,8 +185,14 @@ def validar_serie(series, previa=None):
     if errors:
         return errors, avisos
 
-    # 2. Saltos diarios. Los ya conocidos avisan pero no bloquean (ver
-    #    SALTOS_ACEPTADOS: si bloquearan, el archivo no se actualizaria nunca mas).
+    # 2. Saltos diarios. Los ya conocidos avisan pero no bloquean (si
+    #    bloquearan, el archivo no se actualizaria nunca mas).
+    #
+    #    OJO: un punto malo genera DOS saltos, el de entrada y el de salida. El
+    #    12-Ago roto ensucia tanto 11->12 como 12->13, y el NAV del 13 esta
+    #    perfecto. Por eso alcanza con que CUALQUIERA de los dos extremos sea
+    #    conocido: listar el 13 como "malo" seria mentir sobre un dato sano.
+    malos = cargar_puntos_malos()
     for i in range(1, len(series)):
         a, b = series[i - 1]["value"], series[i]["value"]
         if not a:
@@ -179,11 +200,12 @@ def validar_serie(series, previa=None):
         pct = (b / a - 1) * 100
         if abs(pct) <= SALTO_MAX_PCT:
             continue
-        fecha = series[i]["date"]
+        desde, hasta = series[i - 1]["date"], series[i]["date"]
         linea = ("salto diario irreal %s -> %s: %.3f -> %.3f (%+.2f%%)"
-                 % (series[i - 1]["date"], fecha, a, b, pct))
-        if fecha in SALTOS_ACEPTADOS:
-            avisos.append(f"{linea}  [conocido: {SALTOS_ACEPTADOS[fecha]}]")
+                 % (desde, hasta, a, b, pct))
+        conocido = malos.get(hasta) or malos.get(desde)
+        if conocido:
+            avisos.append(f"{linea}  [conocido: {conocido}]")
         else:
             errors.append(linea)
 

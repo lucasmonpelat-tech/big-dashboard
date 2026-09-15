@@ -1,0 +1,17 @@
+{
+  "_doc": "Fechas en las que Lynk publico un NAV que sabemos que esta mal. UN SOLO lugar: lo leen scripts/lynk_nav_extractor.py (para no bloquear la guarda) y dashboard_v2/transform/build_benchmark_comparison.py (para excluirlas de retornos y stats). Si esta lista viviera hardcodeada en los dos, se desincronizarian.",
+  "_como_agregar": "Sumar la fecha con motivo, como se detecto y la fecha del reclamo. SACARLA en cuanto Lynk corrija el dato: la serie vuelve sola a usarla y las stats se recalculan en el cron siguiente.",
+  "_efecto_de_excluir": "El punto NO se borra de lynk_nav_series.json: la serie cruda sigue siendo la que publica Lynk. Lo que se hace es saltearlo al calcular retornos y stats, con lo cual el retorno del dia anterior al dia siguiente pasa a ser uno de dos dias. Es lo correcto cuando el print del medio es basura.",
+  "_ultima_revision": "2026-09-15",
+  "puntos_malos": [
+    {
+      "fecha": "2026-08-12",
+      "nav_publicado": 103.215,
+      "motivo": "Print roto: -3.41% contra el 11-Ago (106.861) y +3.63% al dia siguiente (106.957). Una cartera 40/30/30 con alternativos no cae 3.4% en un dia y lo recupera entero al siguiente.",
+      "como_se_detecto": "2026-09-15, barriendo la serie por saltos diarios mientras se investigaba el NAV en 0 del 14-Sep.",
+      "evidencia_externa": "La propia pagina de Lynk publica VOLATILITY 4.97%, que es lo que da la serie SIN este punto (4.95%). Con el punto adentro da 6.72%: Lynk calcula su vol sin que lo ensucie, pero nos sirve la serie con el punto.",
+      "reclamado": "2026-09-15",
+      "corregido_por_lynk": null
+    }
+  ]
+}
