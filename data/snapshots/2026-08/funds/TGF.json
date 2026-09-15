@@ -1,0 +1,34 @@
+{
+  "ticker": "TGF",
+  "isin": "XS2324777171",
+  "name": "Tenac Global Fund (TGF)",
+  "sleeve": "Fixed Income",
+  "source": "Tenac (Nico Dujovne) — factsheet del manager",
+  "parsed_at": "2026-05-15",
+  "as_of_factsheet": "2026-08-31",
+  "fi_metrics": {
+    "ytw": 8.11,
+    "duration": -1.62,
+    "maturity": 11.92,
+    "current_yield": 7.32,
+    "rating": "—"
+  },
+  "note": "Duracion: se usa RATES DURATION (-1.62), que es la sensibilidad a la tasa libre de riesgo y es lo comparable contra PIMCO/Man, que reportan duracion de tasa. El fondo esta SHORT tasa. La credit duration (+2.91) mide otro riesgo (spreads) y no se suma: la suma de ambas da +1.29 pero mezcla dos factores distintos. Decision de Lucas 2026-09-08. El factsheet reporta YTM (8.11), no YTW. No publica vencimiento promedio: el 11.92 queda del reporte anterior del manager (30-Abr-2026) y NO es del factsheet nuevo. No afecta a nada porque TGF esta excluido de los stats del sleeve. Class share sigue pendiente de confirmar con Nico (XS2324777171).",
+  "fi_stats_include": true,
+  "fi_stats_exclude_reason": null,
+  "fi_metrics_detalle": {
+    "credit_duration": 2.91,
+    "rates_duration": -1.62,
+    "suma_credit_mas_rates": 1.29,
+    "ytm": 8.11,
+    "cy": 7.32,
+    "net_credit_exposure_pct": 45,
+    "gross_credit_exposure_pct": 197,
+    "long_credit_pct": 120,
+    "short_credit_pct": -76,
+    "em_fx_net_exposure_pct": 52,
+    "number_of_issuers": 52,
+    "maturity_no_publicado_en_factsheet": true
+  },
+  "fi_stats_include_note": "Lucas 2026-09-08: Tenac SI entra al calculo. Se usa rates duration -1.62 (sensibilidad a tasa, comparable con PIMCO/Man). OJO: el fondo tiene EM FX Net Exposure 52%, o sea que NO esta hedgeado a USD — entra por decision de Lucas, no por cumplir el criterio de moneda. Ademas su YTW es en realidad un YTM (8.11) y su vencimiento 11.92 es del reporte de Abril, no del factsheet nuevo."
+}

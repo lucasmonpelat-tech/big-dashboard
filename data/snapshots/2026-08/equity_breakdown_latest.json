@@ -1,0 +1,205 @@
+{
+  "asOf": "2026-08-31",
+  "source": "PRIMARY: FT.com fund/ETF tearsheets (Morningstar) por fondo x pesos del sleeve al 31-Ago-2026. ETFs de un solo pais/region (CSPX, MAGS, ILF, ARGT, 4BRZ, HEWJ) con region por construccion del indice — FT devuelve asset-type, no geografia, para ETFs. MAGS sectorial computado de nuestro fund_holdings_top10.json (7 posiciones equal-weight). 4BRZ via EWZ (mismo indice MSCI Brazil). ACWI/bmk SIN refresh — se preserva la carga previa.",
+  "method": "Para cada equity holding: regional/sectorial extraído de FT.com fund tearsheet (que toma datos directo del fund manager), ponderado por peso BIG. NO usa Maximus.",
+  "verification": {
+    "updated_2026_06_22": true,
+    "mfscv_change_may_vs_mar": "Top 10 rotation: salieron Becton/Cenovus/Veolia/Medtronic, entraron Merck/Howden/ABInBev/Symrise/Croda. Industrials +5.7pp, Materials -6.4pp, Utilities +4.3pp (nuevo).",
+    "thor_change_may_vs_jan": "Income Builder data 4 meses fresca. Sector Financial 22.8 (era 21.6 +1.2pp). Top 10: Orange sigue top, BNP sube a #2.",
+    "nbgmt_change_jun_vs_mar": "NBGMT fuerte rotation Q2: salio Amdocs (era #1), Expedia, NICE, Uber, Charles_River. Entraron Gen Digital, Chewy, Zeta, ON Semi, Cisco, Shift4, Element, Alibaba. Tema +Tech/Cons.Cyc continua. Regional/sector mantengo Mar-2026 (no disponible publico Jun).",
+    "sleeve_weights_used": {
+      "CSPX": 0.32,
+      "NBGMT": 0.1656,
+      "MFSCV": 0.1435,
+      "THOR": 0.0724,
+      "JHGSC": 0.0658,
+      "LGLI": 0.060599999999999994,
+      "ARGT": 0.043899999999999995,
+      "4BRZ": 0.0408,
+      "ILF": 0.0403,
+      "MAGS": 0.0239,
+      "HEWJ": 0.0233
+    },
+    "refresh_2026-07-22": "Rescale 9 fondos originales × 0.9528 + MAGS (100% US, Growth) + HEWJ (100% Japan, Blend/Value)",
+    "refresh_2026-08-31": {
+      "fecha": "2026-09-07",
+      "fondos": 10,
+      "cambio_clave": "Sale LGLI (Lazard Global Listed Infrastructure), vendido 24-Ago-2026. Era 6.06% del sleeve y concentraba Utilities e Infra: explica la caida de Utilities 5.5% -> 3.1% y de Real estate 1.9% -> 0.1%.",
+      "sleeve_weights_used": {
+        "CSPX": 0.3232,
+        "NBGMT": 0.1739,
+        "MFSCV": 0.148,
+        "THOR": 0.0954,
+        "JHGSC": 0.0664,
+        "MAGS": 0.0537,
+        "ARGT": 0.043,
+        "ILF": 0.0395,
+        "4BRZ": 0.0339,
+        "HEWJ": 0.023
+      },
+      "style_no_refrescado": "El bloque 'style' (Value/Growth/Blend) queda con la carga previa: FT no publica style box y la fuente nunca se definio. Sigue pendiente."
+    }
+  },
+  "style": {
+    "title": "Distribución por Estilo",
+    "subtitle": "BIG vs BMK (ACWI) — TODO: validar desde Morningstar style box per fund",
+    "_pending_primary": true,
+    "rows": [
+      {
+        "category": "Value",
+        "big": 30.2,
+        "bmk": 28
+      },
+      {
+        "category": "Growth",
+        "big": 39.4,
+        "bmk": 32
+      },
+      {
+        "category": "Blend",
+        "big": 30.4,
+        "bmk": 40
+      }
+    ],
+    "totals": {
+      "big": 100,
+      "bmk": 100
+    }
+  },
+  "sectorial": {
+    "title": "Distribución Sectorial",
+    "subtitle": "BIG vs ACWI — Computado PRIMARY (FT.com per fund × weights)",
+    "method": "Sumatoria por fondo: peso_sleeve × sector_pct_FT.com. Datos sectoriales extraídos directo del FT.com fund/ETF tearsheet 2026-05-27.",
+    "rows": [
+      {
+        "category": "Technology",
+        "big": 23.9,
+        "acwi": 26
+      },
+      {
+        "category": "Industrials",
+        "big": 13.0,
+        "acwi": 11
+      },
+      {
+        "category": "Financial",
+        "big": 12.9,
+        "acwi": 17
+      },
+      {
+        "category": "Cons. Cyc.",
+        "big": 12.7,
+        "acwi": 9
+      },
+      {
+        "category": "Health",
+        "big": 9.1,
+        "acwi": 9
+      },
+      {
+        "category": "Comm. Serv.",
+        "big": 8.4,
+        "acwi": 9
+      },
+      {
+        "category": "Cons. Def.",
+        "big": 5.5,
+        "acwi": 5
+      },
+      {
+        "category": "Basic Mat.",
+        "big": 5.3,
+        "acwi": 4
+      },
+      {
+        "category": "Energy",
+        "big": 4.2,
+        "acwi": 5
+      },
+      {
+        "category": "Utilities",
+        "big": 3.1,
+        "acwi": 3
+      },
+      {
+        "category": "Other",
+        "big": 1.8,
+        "acwi": 0
+      },
+      {
+        "category": "Real estate",
+        "big": 0.1,
+        "acwi": 2
+      }
+    ],
+    "totals": {
+      "big": 100.0,
+      "acwi": 100
+    },
+    "footnote": "Sumatoria FT.com 9 fondos × Pershing weights (2026-05-27). Sector \"Other\" agrupa REITs+otros según mapping FT.com.",
+    "primary_sources": {
+      "CSPX": "FT.com tearsheet — Technology 37.61% / Financial 11.14% / Comm. Serv. 11.08% / Cons. Cyc. 9.94% / Health 8.29%",
+      "NBGMT": "FT.com tearsheet — Technology 38.59% / Cons. Cyc. 14.91% / Industrials 14.85% / Health 12.27% / Comm. Serv. 7.49%",
+      "MFSCV": "MFS Meridian Contrarian Value factsheet 31-May-2026 (PDF) - Industrials 24.4 / Health 16.0 / Financial 13.4 / Cons.Cyc 13.4 / Cons.Def 12.6 / Materials 8.7 / Utilities 4.3 / Energy 2.3 / Cash 4.9 (sin Tech/Comm.Serv/RE)",
+      "THOR": "Thornburg Equity Income Builder 31-May-2026 (thornburg.com) - Financial 22.8 / Comm.Serv 16.0 / Tech 10.5 / Health 9.6 / Cash 9.7 (resto Indust/Cons/Energy/Utilities est)",
+      "JHGSC": "FT.com tearsheet — Industrials 27.75% / Financial 12.78% / Technology 12.02% / Cons. Cyc. 10.97% / Health 8.86%",
+      "LGLI": "FT.com tearsheet — Utilities 51.29% / Industrials 28.46% / Real estate 13.18% / Comm. Serv. 1.29%",
+      "ARGT": "FT.com tearsheet — Cons. Cyc. 26.19% / Energy 22.11% / Financial 13.66% / Basic Mat. 13.21% / Industrials 8.31%",
+      "4BRZ": "FT.com tearsheet — Financial 31.48% / Energy 18.51% / Basic Mat. 14.58% / Utilities 11.87% / Industrials 10.6%",
+      "ILF": "FT.com tearsheet — Financial 33.75% / Basic Mat. 21.74% / Energy 13.3% / Industrials 9.08% / Cons. Def. 8.76%"
+    }
+  },
+  "regional": {
+    "title": "Distribución Regional",
+    "subtitle": "BIG vs ACWI — Computado PRIMARY (FT.com per fund × weights)",
+    "method": "Sumatoria por fondo: peso_sleeve × region_pct_factsheet. Asia Developed asignado a Others (conservador). Japan = MFSCV 3.62% + JHGSC 13.16% × pesos.",
+    "rows": [
+      {
+        "category": "N. America",
+        "big": 63.7,
+        "acwi": 66
+      },
+      {
+        "category": "Europe dev.",
+        "big": 11.7,
+        "acwi": 11
+      },
+      {
+        "category": "LatAm",
+        "big": 11.6,
+        "acwi": 1
+      },
+      {
+        "category": "UK",
+        "big": 5.9,
+        "acwi": 4
+      },
+      {
+        "category": "Japan",
+        "big": 3.6,
+        "acwi": 5
+      },
+      {
+        "category": "Otros",
+        "big": 3.5,
+        "acwi": 13
+      }
+    ],
+    "totals": {
+      "big": 100.0,
+      "acwi": 100
+    },
+    "footnote": "Otros incluye Asia EM (NBGMT 7%), Australasia (JHGSC 5%), Asia Dev (THOR/LGLI), Africa/ME, China, otros. Sanity check vs marzo: NA -5pp (BRK.B salió), Europe +2pp (THOR entró), Japan +0.5pp consistente.",
+    "primary_sources": {
+      "CSPX": "iShares Core S&P 500 - 100% US (definicion)",
+      "NBGMT": "NB factsheet 31-Mar-2026 (Jun-2026 regional no publicado) - US 78.4 / UK 4.8 / Asia EM 7.4 / ME 4.4 / Other 5.0",
+      "MFSCV": "MFS factsheet 31-May-2026 (PDF MFS) - Eurozone 46.8 (EUR cur) / UK 22.2 / US 16.5 / Canada 3.9 / Japan 3.4 / Cash 7.2",
+      "THOR": "Thornburg Equity Income Builder 31-May-2026 (thornburg.com) - US 24.9 / France 14.4 / Germany 8.7 / Netherlands 7.1 / UK 7.8 / Japan~5 / Asia Dev/Other ~25",
+      "JHGSC": "Janus Henderson 31-Mar-2026 (sin cambio) - US 60.9 / Japan 13.2 / Eurozone 7.4 / Australasia 4.6 / UK 4.4 / Other 9.5",
+      "LGLI": "L&G 31-Mar-2026 (sin cambio) - Eurozone 39.4 / US 23.7 / UK 20.2 / Canada 4.3 / Asia Dev 3.6 / Other 8.8",
+      "4BRZ": "iShares MSCI Brazil - 100% Brazil",
+      "ARGT": "Global X MSCI Argentina - 100% Argentina",
+      "ILF": "iShares LatAm 40 - Brazil ~58 / Mexico ~22 / Chile ~7 / others 13"
+    }
+  }
+}

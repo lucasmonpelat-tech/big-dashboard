@@ -1,0 +1,247 @@
+{
+  "asOf": "2026-08-31",
+  "source": "Sub-asset class y credit_quality.bmk: recalculados 2026-07-28 desde fi_subasset_lookup.json x pesos frescos Pershing (canonical/2026-07-28) + factsheet oficial iShares AGG (30-Jun-2026). fi_stats.big: ponderado desde fi_race.json (ytw/duration/maturity por fondo) x mismos pesos. credit_quality.big, fi_stats.bmk y regional: todavia sin refresh (ver notes por seccion).",
+  "note": "Ver 'source' por seccion para saber que esta fresco y que sigue siendo la aprobacion de Abril-2026 (Lucas, 28-Abr-2026, fi_breakdown_mar26.json).",
+  "fi_stats": {
+    "title": "Estadísticas Renta Fija",
+    "source": "big: DERIVADO por scripts/build_fi_stats.py — pesos del canonical 2026-08-31 x metricas de data/funds/<TICKER>.json. Incluye solo fondos en USD o hedgeados a USD (PIMCO-INC, PIMCO-LD, MANIG, TGF, SGCB, MANEM), cobertura 91.79% del sleeve. Regla fijada por Lucas el 2026-09-07, guardada en fi_stats_include de cada archivo de fondo. bmk (AGG): manual, no lo toca este script.",
+    "rows": [
+      {
+        "metric": "YTW (%)",
+        "big": 7.07,
+        "bmk": 3.71
+      },
+      {
+        "metric": "Duración",
+        "big": 3.97,
+        "bmk": 6.21
+      },
+      {
+        "metric": "Vencimiento",
+        "big": 6.49,
+        "bmk": 8.36
+      }
+    ],
+    "_regla_inclusion": {
+      "incluidos": [
+        "PIMCO-INC",
+        "PIMCO-LD",
+        "MANIG",
+        "TGF",
+        "SGCB",
+        "MANEM"
+      ],
+      "excluidos": {
+        "PIMCO-EM": "moneda local emergente sin hedge por diseno del mandato: su duracion no es homogenea con la del resto"
+      },
+      "cobertura_pct_sleeve": 91.79,
+      "factsheets_usados": {
+        "PIMCO-INC": "2026-04-30",
+        "PIMCO-LD": "2026-04-30",
+        "MANIG": "2026-03-31",
+        "TGF": "2026-08-31",
+        "SGCB": "2026-04-30",
+        "MANEM": "2026-06-30"
+      },
+      "nota": "La calidad crediticia NO sigue esta regla: Maximus la publica agregada, con TGF y PIMCO-EM adentro, y no se puede desarmar."
+    },
+    "_generated_at": "2026-09-10T10:32:22.704349",
+    "_generated_from": "canonical/2026-08-31/holdings_returns.json",
+    "bmk_as_of": "2026-06-30",
+    "bmk_fuente": "Factsheet oficial iShares AGG"
+  },
+  "sub_asset_class": {
+    "title": "Distribución por Sub-asset Class (Sectorial FI)",
+    "subtitle": "BIG vs AGG (Bloomberg US Aggregate)",
+    "source": "big: fi_subasset_lookup.json x pesos REALES del canonical al 31-Ago-2026. Los 7 fondos del sleeve salen de factsheet publicado (refresh 2026-09-08): PIMCO-INC del factsheet UCITS de NUESTRA clase (IE00B87KCF77, 31-Jul); MANIG y MANEM de los factsheets Man 30-Jun; PIMCO-EM y SGCB ya estaban; PIMCO-LD del fondo hermano US (PFIIX, 30-Jun) como proxy; TGF sigue estimado. agg: factsheet oficial iShares AGG, 30-Jun-2026.",
+    "note": "MANEM (0.18% del FI) sin factsheet propio todavia -- ver fi_subasset_lookup.json, estimado 'EM Local + Hard' ~90% por convencion del pitch book. Pendiente reemplazar cuando llegue el factsheet real.",
+    "rows": [
+      {
+        "category": "Govt-related",
+        "big": 6.2,
+        "agg": 48.9
+      },
+      {
+        "category": "Govt Agency MBS",
+        "big": 20.5,
+        "agg": 23.4
+      },
+      {
+        "category": "Securitized Non-Agency",
+        "big": 12.8,
+        "agg": 1.4
+      },
+      {
+        "category": "Corporate IG",
+        "big": 19.3,
+        "agg": 24.7
+      },
+      {
+        "category": "Corporate HY",
+        "big": 5.1,
+        "agg": 0.0
+      },
+      {
+        "category": "EM Local + Hard",
+        "big": 21.0,
+        "agg": 0.0
+      },
+      {
+        "category": "Cat Bonds",
+        "big": 4.7,
+        "agg": 0.0
+      },
+      {
+        "category": "Bank Loans",
+        "big": 0.5,
+        "agg": 0.0
+      },
+      {
+        "category": "Other",
+        "big": 9.9,
+        "agg": 1.6
+      }
+    ],
+    "totals": {
+      "big": 100.0,
+      "agg": 100.0
+    },
+    "_confianza": "high 64.0% | medium 28.6% (PIMCO-LD, proxy US) | low 7.5% (TGF, sin factsheet publico)",
+    "_nota_us_treasury": "US Treasury queda en 0.00%. PIMCO no lo reporta por separado: su categoria \"Government Related\" engloba Treasuries, agencias y papel garantizado de varios paises. El 1.8% que se mostraba antes venia del proxy PIMIX americano, que usa otra taxonomia. El BIG no tiene ningun fondo de Treasuries.",
+    "_merge_us_treasury": "2026-09-08: 'US Treasury' se fundio dentro de 'Govt-related'. PIMCO -que es el 57.6% del sleeve entre Income y Low Duration- NO reporta Treasuries por separado: su 'Government Related' ya los engloba junto con agencias y papel garantizado de EE.UU., Japon, UK, Australia, Canada y UE (nota metodologica de su factsheet). Mostrar una barra en 0 afirmaba que el BIG no tiene Treasuries, y si tiene (el top-10 de PIMCO Income lista un TIPS al 1.2%). El AGG si los separa, asi que se sumaron sus 46.26% a Govt-related para que el benchmark siga cerrando en 100. Valores redondeados por resto mayor para que la suma de exactamente 100.0.",
+    "agg_as_of": "2026-06-30",
+    "agg_fuente": "Factsheet oficial iShares AGG"
+  },
+  "credit_quality": {
+    "title": "Calidad Crediticia",
+    "subtitle": "BIG vs BMK (AGG)",
+    "source": "big: Maximus, factsheet deck 8.factsheet-strategy-13503.pptx, slide 2, grafico 'Calidad Crediticia' al 31-Ago-2026 (leido de las etiquetas del chart). bmk: factsheet oficial iShares AGG, 30-Jun-2026 — sin cambios.",
+    "rows": [
+      {
+        "rating": "AAA",
+        "big": 12.89,
+        "bmk": 2.21
+      },
+      {
+        "rating": "AA",
+        "big": 36.44,
+        "bmk": 73.6
+      },
+      {
+        "rating": "A",
+        "big": 5.79,
+        "bmk": 11.85
+      },
+      {
+        "rating": "BBB",
+        "big": 20.75,
+        "bmk": 11.63
+      },
+      {
+        "rating": "BB",
+        "big": 8.26,
+        "bmk": 0.0
+      },
+      {
+        "rating": "B",
+        "big": 3.92,
+        "bmk": 0.0
+      },
+      {
+        "rating": "CCC",
+        "big": 6.14,
+        "bmk": 0.0
+      },
+      {
+        "rating": "NR",
+        "big": 5.81,
+        "bmk": 0.71
+      }
+    ],
+    "totals": {
+      "big": 100.0,
+      "bmk": 100.0
+    },
+    "summary": {
+      "big_ig": 81.68,
+      "big_hy": 18.32,
+      "big_ig_ex_nr": 75.87,
+      "big_nr": 5.81,
+      "bmk_ig": 99.29,
+      "bmk_hy": 0.0,
+      "_convencion": "big_ig incluye NR, como venia desde Abril-2026 (80.6 + 0.5 = 81.1). En Agosto el NR pesa 5.81% (era 0.5%), asi que la eleccion ya no es cosmetica: sin NR el IG es 75.87%. Decision de presentacion pendiente."
+    },
+    "_refresh_2026-08-31": "Reemplaza los numeros de Abril-2026. El TODO decia que no se podia refrescar sin la distribucion de rating por fondo; Maximus la publica agregada, asi que se toma de ahi.",
+    "bmk_as_of": "2026-06-30",
+    "bmk_fuente": "Factsheet oficial iShares AGG"
+  },
+  "regional": {
+    "title": "Distribución Regional FI",
+    "subtitle": "BIG vs ACWI 60%/40% AGG",
+    "source": "Sin refresh -- aprobado 28-Abr-2026 (fi_breakdown_mar26.json / Maximus).",
+    "rows": [
+      {
+        "category": "North Am.",
+        "big": 35.9,
+        "bmk": 44.9
+      },
+      {
+        "category": "Europe dev.",
+        "big": 22.4,
+        "bmk": 4.5
+      },
+      {
+        "category": "Latin Am.",
+        "big": 17.5,
+        "bmk": 1.1
+      },
+      {
+        "category": "UK",
+        "big": 11.1,
+        "bmk": 0.0
+      },
+      {
+        "category": "Asia emerg.",
+        "big": 12.7,
+        "bmk": 3.5
+      },
+      {
+        "category": "Africa/ME",
+        "big": 5.7,
+        "bmk": 0.0
+      },
+      {
+        "category": "Australasia",
+        "big": 5.6,
+        "bmk": 0.0
+      },
+      {
+        "category": "Europe emrg.",
+        "big": 4.3,
+        "bmk": 0.0
+      },
+      {
+        "category": "Japan",
+        "big": -1.3,
+        "bmk": 8.4
+      },
+      {
+        "category": "China",
+        "big": 0.0,
+        "bmk": 0.5
+      },
+      {
+        "category": "Others",
+        "big": -0.4,
+        "bmk": 0.0
+      }
+    ],
+    "totals": {
+      "big": 100,
+      "bmk": 100
+    },
+    "footnote": "Valores negativos = posiciones cortas via derivativos (PIMCO sleeve).",
+    "as_of": "2026-03-31",
+    "_pendiente": "Sin refresh desde la aprobacion del 28-Abr-2026 (datos al 31-Mar). Es la seccion mas vieja del archivo."
+  }
+}
