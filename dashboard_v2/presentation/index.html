@@ -1206,19 +1206,23 @@
         </div>
       `).join("");
 
-      // Si se salteo algun dia por dato erroneo del proveedor, decirlo.
-      // Estas metricas salen de retornos DIARIOS, asi que excluir un dia las
-      // cambia de verdad (el 12-Ago-2026 movia la Vol de 4.95% a 6.72%).
-      // Un numero que no usa la serie completa y no lo aclara es un numero que
-      // nadie puede auditar despues.
-      const ex = comp.fechas_excluidas || [];
+      // Si algun NAV no es el dato crudo de Lynk, decirlo.
+      // Estas metricas salen de retornos DIARIOS, asi que un solo dia mal mueve
+      // el numero de verdad: con el 12-Ago-2026 sin corregir la Vol daba 6.72%
+      // en vez de 4.95%. Un numero que no usa la serie tal cual la publica el
+      // proveedor y no lo aclara es un numero que nadie puede auditar despues.
+      const cor = comp.correcciones_nav || [];
       const nota = document.getElementById("perf-risk-nota");
       if (nota) {
-        if (ex.length) {
-          const dias = ex.length === 1 ? "1 día" : `${ex.length} días`;
-          nota.innerHTML = `⚠️ Excluye ${dias} con NAV erróneo publicado por Lynk `
-            + `(${ex.join(", ")}). Los retornos por período no se ven afectados: `
-            + `usan valores de inicio y fin.`;
+        if (cor.length) {
+          const dias = cor.length === 1 ? "1 día" : `${cor.length} días`;
+          const detalle = cor.map(c => c.a !== null
+            ? `${c.fecha}: ${c.de} → ${c.a}`
+            : `${c.fecha}: excluido`).join(" · ");
+          nota.innerHTML = `⚠️ ${dias} con el NAV corregido: Lynk reescribió el dato `
+            + `después de publicarlo. Valor restaurado según el CAV oficial de `
+            + `ProCapital (${detalle}). Los retornos por período no cambian: usan `
+            + `valores de inicio y fin.`;
           nota.style.display = "";
         } else {
           nota.style.display = "none";

@@ -1,15 +1,19 @@
 {
-  "_doc": "Fechas en las que Lynk publico un NAV que sabemos que esta mal. UN SOLO lugar: lo leen scripts/lynk_nav_extractor.py (para no bloquear la guarda) y dashboard_v2/transform/build_benchmark_comparison.py (para excluirlas de retornos y stats). Si esta lista viviera hardcodeada en los dos, se desincronizarian.",
-  "_como_agregar": "Sumar la fecha con motivo, como se detecto y la fecha del reclamo. SACARLA en cuanto Lynk corrija el dato: la serie vuelve sola a usarla y las stats se recalculan en el cron siguiente.",
-  "_efecto_de_excluir": "El punto NO se borra de lynk_nav_series.json: la serie cruda sigue siendo la que publica Lynk. Lo que se hace es saltearlo al calcular retornos y stats, con lo cual el retorno del dia anterior al dia siguiente pasa a ser uno de dos dias. Es lo correcto cuando el print del medio es basura.",
-  "_ultima_revision": "2026-09-15",
+  "_doc": "NAV que Lynk publica mal, con el valor correcto y de donde sale. UN SOLO lugar: lo lee scripts/lynk_series.py, que es por donde pasan todos los consumidores. No lo leas directo desde otro script -- usá el helper.",
+  "_como_agregar": "Sumar la fecha con el valor correcto, su fuente y como se detecto. SACAR la entrada en cuanto Lynk corrija: el cron siguiente vuelve a usar el dato de ellos y todo se recalcula solo.",
+  "_por_que_corregir_y_no_excluir": "Excluir el dia deja un agujero en una serie de NAV y no se puede hacer en el Excel que va al administrador. Cuando sabemos el valor real -- y aca lo sabemos por dos fuentes independientes -- corregirlo deja la serie completa y correcta. Excluir queda como ultimo recurso si algun dia hay un dato malo sin valor conocido.",
+  "_la_serie_cruda_no_se_toca": "lynk_nav_series.json sigue siendo exactamente lo que publica Lynk. La correccion se aplica al leer, no al guardar, para que siempre se pueda ver que mandaron ellos y que mostramos nosotros.",
+  "_ultima_revision": "2026-09-17",
   "puntos_malos": [
     {
       "fecha": "2026-08-12",
       "nav_publicado": 103.215,
-      "motivo": "Print roto: -3.41% contra el 11-Ago (106.861) y +3.63% al dia siguiente (106.957). Una cartera 40/30/30 con alternativos no cae 3.4% en un dia y lo recupera entero al siguiente.",
-      "como_se_detecto": "2026-09-15, barriendo la serie por saltos diarios mientras se investigaba el NAV en 0 del 14-Sep.",
-      "evidencia_externa": "La propia pagina de Lynk publica VOLATILITY 4.97%, que es lo que da la serie SIN este punto (4.95%). Con el punto adentro da 6.72%: Lynk calcula su vol sin que lo ensucie, pero nos sirve la serie con el punto.",
+      "valor_correcto": 106.861,
+      "fuente_del_valor_correcto": "CAV file oficial de ProCapital (serie LS104, fila 57 NAV, columna 08/12/2026): 106.861, con % Change 0,00% -- ese dia el NAV no se movio respecto del 11-Ago. Coincide con lo que el PROPIO Lynk publicaba hasta el 12-Sep.",
+      "motivo": "Lynk REESCRIBIO un dato del pasado. El 12-Ago valia 106.861 y el 14-Sep lo sobrescribieron con 103.215, un mes despues. No es un dato mal publicado en su momento: es historia reescrita.",
+      "cuando_lo_reescribieron": "2026-09-14, la misma corrida en la que publicaron el NAV del 14-Sep en 0.000. Un solo evento suyo rompio las dos cosas; el 0 lo corrigieron ese mismo dia, esto no.",
+      "evidencia_en_git": "data/lynk_nav_series.json: commit del 2026-09-12 13:14 tiene 106.861; el del 2026-09-14 13:14 ya tiene 103.215.",
+      "impacto_si_no_se_corrige": "Mete un -3.41% y un +3.63% que nunca pasaron. Sobre retornos diarios eso lleva la Vol del sleeve total de 4.95% a 6.72% y el Sharpe de 1.193 a 0.891.",
       "reclamado": "2026-09-15",
       "corregido_por_lynk": null
     }

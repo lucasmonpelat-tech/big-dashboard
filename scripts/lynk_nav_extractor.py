@@ -47,24 +47,21 @@ SALTO_MAX_PCT = 3.0
 # fabricar el mismo fosil que la guarda viene a evitar.
 #
 # Entonces no frenan la escritura, pero se IMPRIMEN en cada corrida.
-PUNTOS_MALOS_FILE = Path(__file__).parent.parent / "data" / "lynk_puntos_malos.json"
-
-
 def cargar_puntos_malos():
     """{fecha: motivo} de los NAV que Lynk publico mal y siguen sin corregir.
 
-    Si el archivo no esta o no se puede leer, devuelve vacio: la guarda pasa a
-    ser mas estricta, no menos. Fallar hacia el lado seguro.
+    Se pide al mismo helper que usan los consumidores (scripts/lynk_series.py)
+    para que la guarda y el calculo no puedan discrepar sobre que dia es malo.
+    Si no se puede leer, devuelve vacio: la guarda pasa a ser mas estricta, no
+    menos. Fallar hacia el lado seguro.
     """
     try:
-        doc = json.loads(PUNTOS_MALOS_FILE.read_text(encoding="utf-8"))
+        from lynk_series import cargar_puntos_malos as _cpm
+        return {f: e.get("motivo", "") for f, e in _cpm().items()}
     except Exception as e:
-        print(f"  WARN: no pude leer {PUNTOS_MALOS_FILE.name} ({e}). "
+        print(f"  WARN: no pude leer los puntos malos ({e}). "
               f"Sigo sin excepciones conocidas.")
         return {}
-    return {p["fecha"]: p.get("motivo", "")
-            for p in doc.get("puntos_malos", [])
-            if not p.get("corregido_por_lynk")}
 
 EXTRACT_JS = r"""
 () => {

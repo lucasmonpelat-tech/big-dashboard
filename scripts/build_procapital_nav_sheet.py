@@ -11,6 +11,7 @@ Usage:
 """
 import argparse
 import json
+import sys
 from datetime import date, timedelta
 from pathlib import Path
 import openpyxl
@@ -96,9 +97,22 @@ else:
 print(f"Rango: {START} -> {END}")
 
 # ============ LEER LYNK NAV SERIES ============
-lynk_file = Path("C:/Users/lmonp/OneDrive/Desktop/Code/big-dashboard/data/lynk_nav_series.json")
-d = json.load(open(lynk_file, encoding="utf-8"))
-series = d.get("navSeries") or d.get("series") or []
+# La serie va por el helper, que corrige los NAV que Lynk publica mal.
+#
+# IMPORTANTE (2026-09-17): este Excel va al ADMINISTRADOR del fondo, asi que un
+# dato malo de Lynk sale del edificio. Paso cerca: el 14-Sep Lynk reescribio el
+# NAV del 12-Ago (106.861 -> 103.215). El cierre de Agosto ya se habia mandado
+# el 7-Sep, cuando el dato todavia estaba bien, asi que salio correcto de pura
+# suerte de timing. Si se regenera hoy sin corregir, saldria mal.
+#
+# El valor correcto no es criterio nuestro: sale del CAV oficial de ProCapital.
+sys.path.insert(0, str(Path(__file__).parent))
+from lynk_series import cargar_serie, describir
+
+series, _correcciones = cargar_serie()
+if _correcciones:
+    print("NAV de Lynk corregido antes de armar la planilla:")
+    print(describir(_correcciones))
 nav_by_date = {}
 for p in series:
     dt = p.get("date")

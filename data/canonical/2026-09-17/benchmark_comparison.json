@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "as_of": "2026-09-17",
-  "generated_at": "2026-09-17T13:14:06Z",
+  "generated_at": "2026-09-17T20:36:32Z",
   "note": "Comparaciones portfolio vs benchmark con fechas alineadas y rebased 100 en fecha comun. Fixes bug del dashboard viejo (arrays x separados sin intersect ni rebase).",
   "comparisons": {
     "total_vs_6040": {
@@ -11,11 +11,15 @@
       "benchmark_source": "data/bmk_6040.json",
       "inception": "2025-06-30",
       "as_of": "2026-09-16",
-      "n_observations": 304,
-      "fechas_excluidas": [
-        "2026-08-12"
+      "n_observations": 305,
+      "correcciones_nav": [
+        {
+          "fecha": "2026-08-12",
+          "de": 103.215,
+          "a": 106.861,
+          "fuente": "CAV file oficial de ProCapital (serie LS104, fila 57 NAV, columna 08/12/2026): 106.861, con % Change 0,00% -- ese dia el NAV no se movio respecto del 11-Ago. Coincide con lo que el PROPIO Lynk publicaba hasta el 12-Sep."
+        }
       ],
-      "fechas_excluidas_motivo": "NAV publicado mal por Lynk, ver data/lynk_puntos_malos.json",
       "series": [
         {
           "date": "2025-06-30",
@@ -1698,6 +1702,12 @@
           "alpha_bp": -1064.25
         },
         {
+          "date": "2026-08-12",
+          "portfolio": 106.861,
+          "benchmark": 117.8567,
+          "alpha_bp": -1099.57
+        },
+        {
           "date": "2026-08-13",
           "portfolio": 106.957,
           "benchmark": 118.3442,
@@ -1881,15 +1891,15 @@
         }
       },
       "stats": {
-        "n_days": 303,
-        "tracking_error_pct_ann": 7.28,
+        "n_days": 304,
+        "tracking_error_pct_ann": 7.26,
         "info_ratio": -0.919,
-        "sharpe_portfolio": 1.131,
+        "sharpe_portfolio": 1.129,
         "sharpe_benchmark": 1.391,
-        "beta": 0.316,
-        "correlation": 0.565,
-        "volatility_portfolio_pct_ann": 4.94,
-        "volatility_benchmark_pct_ann": 8.83
+        "beta": 0.317,
+        "correlation": 0.566,
+        "volatility_portfolio_pct_ann": 4.93,
+        "volatility_benchmark_pct_ann": 8.8
       }
     },
     "equity_vs_acwi": {
@@ -1900,8 +1910,7 @@
       "inception": "2025-07-01",
       "as_of": "2026-09-17",
       "n_observations": 444,
-      "fechas_excluidas": [],
-      "fechas_excluidas_motivo": null,
+      "correcciones_nav": [],
       "series": [
         {
           "date": "2025-07-01",
@@ -4626,8 +4635,7 @@
       "inception": "2025-07-01",
       "as_of": "2026-09-17",
       "n_observations": 444,
-      "fechas_excluidas": [],
-      "fechas_excluidas_motivo": null,
+      "correcciones_nav": [],
       "series": [
         {
           "date": "2025-07-01",
