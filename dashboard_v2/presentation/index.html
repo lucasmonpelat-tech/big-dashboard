@@ -727,9 +727,12 @@
       <div class="section">
         <h2>💰 Portfolio Yield vs Benchmark 60/40</h2>
         <div style="font-size:12px;color:var(--text-mute);margin-bottom:12px">
-          Yield pagado o estimado por cada fondo. Para PE ilíquido → N/A (retorno vía cap gain). Bench: 60% ACWI (2.0%) + 40% AGG (4.5%).
+          Yield pagado o estimado por cada fondo. Para PE ilíquido → N/A (retorno vía cap gain).
+          Pesos sobre el portfolio total, CALP incluido.
         </div>
         <div class="kpi-grid" id="gy-yield-summary" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))"></div>
+        <div id="gy-cobertura" style="display:none;margin-top:12px;font-size:11px;
+             color:var(--text-mute);line-height:1.7"></div>
       </div>
 
       <div class="section">
@@ -2508,27 +2511,57 @@
         console.warn("funds_metadata.js no disponible");
         return;
       }
+      // ---- FUENTE: holdings_returns (canonical), NO positions.json ----
+      //
+      // Antes este widget leia positions.json crudo, y eso rompia tres cosas
+      // a la vez (auditado 2026-09-17):
+      //
+      //  1. CALP no esta en positions.json: viene de un statement externo de
+      //     Carlyle, no de Pershing. Son $2.8M, casi el 10% del fondo, que no
+      //     aparecian en el grafico de paises. Y peor: TODOS los pesos se
+      //     calculaban sobre $25.9M en vez de $28.7M, o sea inflados ~11%.
+      //
+      //  2. HLEND y GCRED no matcheaban contra COUNTRY_EXPOSURE/CURRENT_YIELD
+      //     porque Pershing no publica su ISIN. Ya existe data/isin_overrides.json
+      //     justo para eso, y holdings_returns los trae resueltos -- pero este
+      //     widget se los perdia por leer el archivo equivocado.
+      //
+      //  3. El sleeve salia de classifyHolding(), una segunda forma de decidir
+      //     lo mismo. holdings_returns ya viene agrupado por sleeve.
+      //
+      // Leer la misma fuente que el resto del dashboard no es solo mas correcto:
+      // saca dos formas distintas de contestar la misma pregunta.
       const positions = window.__positions;
-      if (!positions) return;
+      if (!window.__hRets) return;
 
-      const totalMv = positions.holdings.reduce((s, h) => s + (h.market_value_usd || 0), 0);
-      const rows = positions.holdings
-        .filter(h => (h.market_value_usd || 0) > 0)
-        .map(h => {
-          const isinFromDesc = ((h.description || "").match(/ISIN#?\s*([A-Z]{2}[A-Z0-9]{10})/i) || [])[1];
-          const isin = h.isin || isinFromDesc;
-          const desc = (h.description || "").trim();
-          const isCash = h.security_type === "Cash" || h.security_id === "USD999997";
-          const isinKey = isCash ? "CASH-USD" : isin;
-          return {
-            isin: isinKey,
-            ticker: (h.security_id || "").split(":")[0],
-            name: isCash ? "Cash USD" : desc,
-            pct: (h.market_value_usd / totalMv) * 100,
-            mv: h.market_value_usd,
-          };
-        })
-        .sort((a, b) => b.pct - a.pct);
+      const SLEEVE_LABEL = { equity: "Equity", fi: "Fixed Income", alts: "Alternatives" };
+      const rows = [];
+      ["equity", "fi", "alts"].forEach(k => {
+        (window.__hRets?.[k]?.holdings || [])
+          .filter(h => (h.status || "OPEN") === "OPEN" && (h.mv_usd || 0) > 0)
+          .forEach(h => rows.push({
+            sleeve: SLEEVE_LABEL[k],
+            isin: h.isin,
+            ticker: h.ticker,
+            name: h.name || h.ticker || "",
+            mv: h.mv_usd,
+            externo: h._mv_source === "external_statement",
+          }));
+      });
+
+      // Cash: holdings_returns no lo trae (no tiene retorno), sale de positions.
+      (positions?.holdings || [])
+        .filter(h => (h.security_type === "Cash" || h.security_id === "USD999997")
+                     && (h.market_value_usd || 0) > 0)
+        .forEach(h => rows.push({
+          sleeve: "Cash", isin: "CASH-USD", ticker: "CASH",
+          name: "Cash USD", mv: h.market_value_usd, externo: false,
+        }));
+
+      const totalMv = rows.reduce((s, r) => s + r.mv, 0);
+      if (!totalMv) return;
+      rows.forEach(r => { r.pct = (r.mv / totalMv) * 100; });
+      rows.sort((a, b) => b.pct - a.pct);
 
       // ==== COUNTRY BARS ====
       const totals = {};
@@ -2570,12 +2603,9 @@
       }).join("");
 
       // ==== COMBINED TBODY (country + yield) ====
-      const sleeveOf = h => classifyHolding(h);
+      // El sleeve ya viene de holdings_returns: no se vuelve a clasificar.
       const sleeves = { "Equity": [], "Fixed Income": [], "Alternatives": [], "Cash": [] };
-      positions.holdings.forEach(h => {
-        if ((h.market_value_usd || 0) <= 0) return;
-        sleeves[sleeveOf(h)].push(h);
-      });
+      rows.forEach(r => { (sleeves[r.sleeve] || sleeves["Cash"]).push(r); });
       const sleeveTint = {
         "Equity":       "rgba(201,169,97,0.06)",
         "Fixed Income": "rgba(74,122,184,0.06)",
@@ -2584,18 +2614,25 @@
       };
       let combined = "";
       let weightedYield = 0, pctWithYield = 0, manualCount = 0, noYieldCount = 0;
+      // Cobertura: cuanto del portfolio queda fuera de cada dict. Sin esto, un
+      // holding sin metadata se ve como una celda vacia y nadie nota que el
+      // total de abajo no lo incluye.
+      let pctSinPais = 0, pctSinYield = 0;
+      const faltanPais = [], faltanYield = [];
 
       ["Equity", "Fixed Income", "Alternatives", "Cash"].forEach(sleeve => {
         const hs = sleeves[sleeve] || [];
         if (!hs.length) return;
         combined += `<tr style="background:${sleeveTint[sleeve]}"><td colspan="5" style="text-align:left;font-weight:700;color:var(--gold);padding:8px 10px;font-size:12px;letter-spacing:0.4px;text-transform:uppercase">${sleeve}</td></tr>`;
         hs.forEach(h => {
-          const isinFromDesc = ((h.description || "").match(/ISIN#?\s*([A-Z]{2}[A-Z0-9]{10})/i) || [])[1];
-          const isin = h.security_type === "Cash" ? "CASH-USD" : (h.isin || isinFromDesc);
+          const isin = h.isin;
           const ce = COUNTRY_EXPOSURE[isin];
           const yd = CURRENT_YIELD[isin];
-          const pct = (h.market_value_usd / totalMv) * 100;
-          const name = h.security_type === "Cash" ? "Cash USD" : (h.description || "").trim();
+          const pct = h.pct;
+          const name = h.name;
+
+          if (!ce) { pctSinPais += pct; faltanPais.push(h.ticker || isin || name); }
+          if (!yd || yd.y === null) { pctSinYield += pct; faltanYield.push(h.ticker || isin || name); }
 
           // Country pills
           const pills = ce
@@ -2637,31 +2674,72 @@
       if (cbody) cbody.innerHTML = combined;
 
       // ==== YIELD SUMMARY ====
-      const bmkYield = 0.60 * 2.0 + 0.40 * 4.5;
+      // Los yields del benchmark salen de funds_metadata.js (BENCH_YIELD), con
+      // su fecha. Antes estaban escritos a mano acá adentro: un supuesto sin
+      // fecha ni dueño, imposible de auditar y que nadie iba a ir a actualizar.
+      const BY = (typeof BENCH_YIELD !== "undefined") ? BENCH_YIELD
+                 : { acwi: 2.0, agg: 4.5, as_of: null };
+      const bmkYield = 0.60 * BY.acwi + 0.40 * BY.agg;
       const alpha = weightedYield - bmkYield;
+
+      // El weighted yield es sobre el portfolio ENTERO, así que lo que no tiene
+      // dato lo tira para abajo. La segunda lectura lo reparte sólo entre lo que
+      // SÍ tiene dato.
+      //
+      // Ojo con la diferencia, que es la parte fácil de equivocar: GLD e IBIT
+      // tienen yield CERO CONOCIDO, no yield faltante. Tienen que estar en el
+      // denominador (un activo que no paga nada baja el yield de verdad), pero
+      // NO contar como dato que falta. Sólo MANEM, CALP, FLEX y el cat bond
+      // quedan afuera, que son los que no tienen el dato cargado.
+      const pctConDato = 100 - pctSinYield;
+      const yieldSobreCubierto = pctConDato > 0 ? (weightedYield / pctConDato) * 100 : 0;
+
       const summary = document.getElementById("gy-yield-summary");
       if (summary) summary.innerHTML = `
         <div class="kpi-card pos">
           <div class="label">Portfolio Weighted Yield</div>
           <div class="value">${weightedYield.toFixed(2)}%</div>
-          <div class="sub">ponderado por peso portfolio</div>
+          <div class="sub">sobre el portfolio total</div>
         </div>
         <div class="kpi-card info">
-          <div class="label">% Portfolio con Yield</div>
-          <div class="value">${pctWithYield.toFixed(1)}%</div>
-          <div class="sub">assets con yield &gt; 0</div>
+          <div class="label">Yield sobre lo medido</div>
+          <div class="value">${yieldSobreCubierto.toFixed(2)}%</div>
+          <div class="sub">excluye el ${pctSinYield.toFixed(1)}% sin dato cargado</div>
         </div>
         <div class="kpi-card">
           <div class="label">Benchmark 60/40 Yield</div>
           <div class="value">${bmkYield.toFixed(2)}%</div>
-          <div class="sub">60% ACWI (2.0%) + 40% AGG (4.5%)</div>
+          <div class="sub">60% ACWI (${BY.acwi}%) + 40% AGG (${BY.agg}%)${BY.as_of ? " · " + BY.as_of : ""}</div>
         </div>
         <div class="kpi-card ${alpha >= 0 ? "pos" : "neg"}">
           <div class="label">Yield Alpha</div>
           <div class="value">${(alpha >= 0 ? "+" : "") + alpha.toFixed(2)}%</div>
-          <div class="sub">vs 60/40 · ${manualCount} manual</div>
+          <div class="sub">vs 60/40 · ${manualCount} estimados</div>
         </div>
       `;
+
+      // ==== COBERTURA ====
+      // Que se vea cuanto del portfolio NO esta representado, y quienes son.
+      const cob = document.getElementById("gy-cobertura");
+      if (cob) {
+        const partes = [];
+        if (pctSinPais > 0.005) {
+          partes.push(`<b>${pctSinPais.toFixed(1)}%</b> del portfolio sin desglose de país `
+            + `(${faltanPais.join(", ")}) — no está en las barras de arriba`);
+        }
+        if (pctSinYield > 0.005) {
+          partes.push(`<b>${pctSinYield.toFixed(1)}%</b> sin yield cargado `
+            + `(${faltanYield.join(", ")}) — cuenta como 0% en el Weighted Yield`);
+        }
+        if (typeof METADATA_LAST_REVIEW !== "undefined") {
+          partes.push(`Metadata de país y yield revisada por última vez el `
+            + `<b>${METADATA_LAST_REVIEW}</b>; se carga a mano desde los factsheets`);
+        }
+        cob.innerHTML = partes.length
+          ? "⚠️ " + partes.join("<br>⚠️ ")
+          : "✅ Todos los holdings tienen país y yield cargados.";
+        cob.style.display = "";
+      }
 
       _geoyieldLoaded = true;
     }

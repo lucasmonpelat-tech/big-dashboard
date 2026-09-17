@@ -28,6 +28,24 @@
 const METADATA_LAST_REVIEW = "2026-05-14";  // CURRENCY/COUNTRY/CURRENT_YIELD/FI_METRICS — ultima revision dicts
 
 // ============================================================
+// YIELD DEL BENCHMARK 60/40 (tab Geography · Yield)
+// ============================================================
+// Estaba escrito a mano adentro del index.html como `0.60 * 2.0 + 0.40 * 4.5`.
+// Un supuesto sin fecha y sin dueño, enterrado en el medio del render: no habia
+// forma de saber de cuando era ni quien lo iba a actualizar.
+//
+// Aca al menos tiene fecha y se ve al lado del resto de la metadata que se
+// revisa junto. El dashboard lo muestra con su as_of.
+//
+// Para refrescar: dividend yield de ACWI (MSCI/iShares) y yield to maturity del
+// Bloomberg Global Aggregate (proxy AGG de iShares).
+const BENCH_YIELD = {
+    acwi:  2.0,           // MSCI ACWI dividend yield
+    agg:   4.5,           // Bloomberg Global Agg YTM (proxy AGG)
+    as_of: "2026-05-14"   // misma revision que el resto de los dicts
+};
+
+// ============================================================
 // FACTSHEET LINKS (for refresh automation / manual review)
 // ============================================================
 const FACTSHEET_LINKS = {
