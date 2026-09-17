@@ -29,6 +29,18 @@ FILES_TO_CHECK = [
     ("lynk_data.json", 3, "Lynk NAV oficial"),
     ("lynk_nav_series.json", 3, "Lynk serie NAV"),
 
+    # NAV oficial del agente de calculo. Se actualiza a mano, una vez por mes,
+    # corriendo verificar_nav_oficial.bat despues de subir el CAV a la carpeta
+    # de fees. Es lo unico que detecta que Lynk publique un NAV distinto al
+    # registro oficial -- paso el 14-Sep-2026, cuando reescribieron el 12-Ago.
+    #
+    # 40 business days (~8 semanas) a proposito: los CAV llegan entre el 9 y el
+    # 24 del mes siguiente, asi que un umbral mas corto daria falsa alarma los
+    # meses que tardan. Con 40 solo avisa si se saltearon dos meses, que es
+    # cuando de verdad conviene avisar. Una alarma que llora sin motivo se
+    # vuelve ignorable, y entonces no sirve para nada.
+    ("cav_nav_oficial.json", 40, "NAV oficial ProCapital (CAV mensual, manual)"),
+
     # Sleeves (chart Base 100)
     ("equity_sleeve_real.json", 3, "Chart Equity Base 100"),
     ("fi_sleeve_real.json", 3, "Chart FI Base 100"),
