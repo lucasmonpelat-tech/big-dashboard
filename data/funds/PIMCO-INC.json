@@ -3,15 +3,13 @@
   "isin": "IE00B87KCF77",
   "name": "PIMCO GIS Income I",
   "sleeve": "Fixed Income",
-  "source": "PIMCO website via Chrome MCP",
-  "parsed_at": "2026-05-12",
-  "as_of_factsheet": "2026-04-30",
+  "source": "Factsheet PIMCO GIS Income Fund, 31-Jul-2026",
+  "parsed_at": "2026-09-18",
+  "as_of_factsheet": "2026-07-31",
   "fi_metrics": {
-    "ytw": 7.0,
-    "current_yield": 4.57,
-    "duration": 6.29,
-    "maturity": 9.33,
-    "underlying_portfolio_yield": 4.02,
+    "ytw": 7.32,
+    "duration": 6.73,
+    "maturity": 10.02,
     "rating": "AA-"
   },
   "countries": {
@@ -38,7 +36,11 @@
     "Bank Loan": 0.0
   },
   "fi_stats_include": true,
-  "countries_de_factsheet": true,
+  "countries_de_factsheet": false,
   "countries_as_of": "2026-04-30",
-  "factsheet_url": "https://www.pimco.com/sg/en/investments/gis/income-fund/inst-usd-accumulation"
+  "factsheet_url": "https://www.pimco.com/sg/en/investments/gis/income-fund/inst-usd-accumulation",
+  "source_file": "Dropbox/2026/Research Fondos/Renta Fija/PIMCO Income/PIMCO GIS Income Fund INST USD ACC INC SG FS.pdf",
+  "fi_metrics_de_factsheet": true,
+  "fi_metrics_nota": "ytw = Estimated Yield to Maturity (gross of fees, moneda base del fondo). duration = Effective Duration. maturity = Effective Maturity. El factsheet no publica current yield: el 6.12% 'Annualised Distribution Yield' es de la clase Income y la nuestra (IE00B87KCF77) es Acumulacion.",
+  "countries_nota": "Estos paises vienen de la web de PIMCO (Abr-2026), por valor de mercado, y NO de un factsheet de la carpeta. El factsheet de PIMCO solo publica 'Top 10 Countries by Contribution to Total Duration' (% duration weighted), que es una medida de RIESGO, no de asignacion: mezclarla en el grafico con fondos medidos por valor de mercado seria sumar peras con manzanas. Ademas PIMCO clasifica paises por moneda de liquidacion, no por emisor."
 }

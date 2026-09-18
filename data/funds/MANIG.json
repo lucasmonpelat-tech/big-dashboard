@@ -3,27 +3,30 @@
   "isin": "IE000OE87WX6",
   "name": "Man GLG Global Investment Grade Opportunities IYV USD",
   "sleeve": "Fixed Income",
-  "source": "Man GLG factsheet (manual)",
-  "parsed_at": "2026-05-15",
-  "as_of_factsheet": "2026-03-31",
+  "source": "Man Global Investment Grade Opportunities, Monthly summary report 30-Jun-2026 (IYV USD)",
+  "parsed_at": "2026-09-18",
+  "as_of_factsheet": "2026-06-30",
   "fi_metrics": {
-    "ytw": 7.1,
-    "duration": 5.76,
+    "ytw": 6.82,
+    "duration": 5.58,
     "maturity": 5.5,
-    "current_yield": 6.2,
     "rating": "BBB"
   },
   "note": "USD-hedged share class. Benchmark ICE BofA Global Large Cap Corporate USD Hedged.",
   "fi_stats_include": true,
   "countries": {
-    "US": 55,
-    "UK": 10,
-    "DE": 8,
-    "FR": 6,
-    "OTHER": 21
+    "US": 32.37,
+    "EU": 25.67,
+    "LatAm": 15.51,
+    "UK": 10.37,
+    "AU": 2.6,
+    "OTHER": 5.98
   },
-  "countries_de_factsheet": false,
-  "countries_as_of": "2026-05-14",
-  "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta.",
-  "factsheet_url": "https://www.man.com/ucits/glg-global-investment-grade-opportunities"
+  "countries_de_factsheet": true,
+  "countries_as_of": "2026-06-30",
+  "countries_nota": "'Geographical Breakdown' del factsheet, por REGION (no por pais). US = North America (incluye Canada). EU = Europe excl UK. OTHER = Middle East 2.97 + Asia excl Japan 2.17 + Supranational 0.84. Suma 92.5: el resto es cash/derivados y el indice lo completa como OTHER. Apareado por posicion en el grafico: la barra de arriba es el fondo; la de abajo (benchmark) da 59.44 North America, lo tipico del indice global.",
+  "factsheet_url": "https://www.man.com/ucits/glg-global-investment-grade-opportunities",
+  "source_file": "Dropbox/2026/Research Fondos/Renta Fija/Man IG Opportunities/Man Global Investment Grade Opportunities IYV USD - Jun26.pdf",
+  "fi_metrics_de_factsheet": true,
+  "fi_metrics_nota": "ytw = Yield to Worst hedged a USD (6.82, igual al YTM). duration = MODIFIED duration (5.58), que es la que usa el resto del sleeve -- NO la 'Spread Duration' 3.16 que aparece primero en el factsheet, ni la effective 5.51. maturity: el factsheet NO publica vencimiento promedio; queda el 5.5 de la carga de Mar-2026 hasta tener el dato. rating: se mantiene BBB (el factsheet trae breakdown por rating, no un promedio)."
 }

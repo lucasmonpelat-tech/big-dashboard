@@ -566,39 +566,43 @@
       "name": "Man GLG Global Investment Grade Opportunities IYV USD",
       "sleeve": "Fixed Income",
       "archivo": "MANIG.json",
-      "as_of_factsheet": "2026-03-31",
+      "as_of_factsheet": "2026-06-30",
       "yield": {
-        "valor": 7.1,
+        "valor": 6.82,
         "tipo": "YTM",
-        "as_of": "2026-03-31",
-        "fuente": "Man GLG factsheet (manual)",
+        "as_of": "2026-06-30",
+        "fuente": "Man Global Investment Grade Opportunities, Monthly summary report 30-Jun-2026 (IYV USD)",
         "de_factsheet": true
       },
       "countries": [
         {
           "c": "US",
-          "p": 55
+          "p": 32.37
+        },
+        {
+          "c": "EU",
+          "p": 25.67
+        },
+        {
+          "c": "LatAm",
+          "p": 15.51
         },
         {
           "c": "OTHER",
-          "p": 21
+          "p": 13.48
         },
         {
           "c": "UK",
-          "p": 10
+          "p": 10.37
         },
         {
-          "c": "DE",
-          "p": 8
-        },
-        {
-          "c": "FR",
-          "p": 6
+          "c": "AU",
+          "p": 2.6
         }
       ],
-      "countries_de_factsheet": false,
-      "countries_as_of": "2026-05-14",
-      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+      "countries_de_factsheet": true,
+      "countries_as_of": "2026-06-30",
+      "countries_nota": "'Geographical Breakdown' del factsheet, por REGION (no por pais). US = North America (incluye Canada). EU = Europe excl UK. OTHER = Middle East 2.97 + Asia excl Japan 2.17 + Supranational 0.84. Suma 92.5: el resto es cash/derivados y el indice lo completa como OTHER. Apareado por posicion en el grafico: la barra de arriba es el fondo; la de abajo (benchmark) da 59.44 North America, lo tipico del indice global."
     },
     "LU1985812756": {
       "ticker": "MFSCV",
@@ -715,7 +719,7 @@
         "tipo": "YTM",
         "as_of": "2026-04-30",
         "fuente": "PIMCO website via Chrome MCP",
-        "de_factsheet": true
+        "de_factsheet": false
       },
       "countries": [
         {
@@ -772,12 +776,12 @@
       "name": "PIMCO GIS Income I",
       "sleeve": "Fixed Income",
       "archivo": "PIMCO-INC.json",
-      "as_of_factsheet": "2026-04-30",
+      "as_of_factsheet": "2026-07-31",
       "yield": {
-        "valor": 7.0,
+        "valor": 7.32,
         "tipo": "YTM",
-        "as_of": "2026-04-30",
-        "fuente": "PIMCO website via Chrome MCP",
+        "as_of": "2026-07-31",
+        "fuente": "Factsheet PIMCO GIS Income Fund, 31-Jul-2026",
         "de_factsheet": true
       },
       "countries": [
@@ -822,21 +826,21 @@
           "p": -1.22
         }
       ],
-      "countries_de_factsheet": true,
+      "countries_de_factsheet": false,
       "countries_as_of": "2026-04-30",
-      "countries_nota": null
+      "countries_nota": "Estos paises vienen de la web de PIMCO (Abr-2026), por valor de mercado, y NO de un factsheet de la carpeta. El factsheet de PIMCO solo publica 'Top 10 Countries by Contribution to Total Duration' (% duration weighted), que es una medida de RIESGO, no de asignacion: mezclarla en el grafico con fondos medidos por valor de mercado seria sumar peras con manzanas. Ademas PIMCO clasifica paises por moneda de liquidacion, no por emisor."
     },
     "IE00BDT57R20": {
       "ticker": "PIMCO-LD",
       "name": "PIMCO GIS Low Duration Income I",
       "sleeve": "Fixed Income",
       "archivo": "PIMCO-LD.json",
-      "as_of_factsheet": "2026-04-30",
+      "as_of_factsheet": "2026-06-30",
       "yield": {
-        "valor": 6.23,
+        "valor": 5.84,
         "tipo": "YTM",
-        "as_of": "2026-04-30",
-        "fuente": "PIMCO website via Chrome MCP",
+        "as_of": "2026-06-30",
+        "fuente": "PIMCO GIS Low Duration Income Fund, Quarterly Investment Report 30-Jun-2026 (INST Acc)",
         "de_factsheet": true
       },
       "countries": [
@@ -881,9 +885,9 @@
           "p": -0.61
         }
       ],
-      "countries_de_factsheet": true,
+      "countries_de_factsheet": false,
       "countries_as_of": "2026-04-30",
-      "countries_nota": null
+      "countries_nota": "Estos paises vienen de la web de PIMCO (Abr-2026), por valor de mercado, y NO de un factsheet de la carpeta. El factsheet de PIMCO solo publica 'Top 10 Countries by Contribution to Total Duration' (% duration weighted), que es una medida de RIESGO, no de asignacion: mezclarla en el grafico con fondos medidos por valor de mercado seria sumar peras con manzanas. Ademas PIMCO clasifica paises por moneda de liquidacion, no por emisor."
     },
     "LU2049315265": {
       "ticker": "SGCB",
@@ -896,7 +900,7 @@
         "tipo": "YTM",
         "as_of": "2026-04-30",
         "fuente": "Schroder GAIA Cat Bond Ficha Mensual (Chrome MCP, schroders.es)",
-        "de_factsheet": true
+        "de_factsheet": false
       },
       "countries": [
         {

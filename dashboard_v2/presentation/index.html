@@ -2756,12 +2756,12 @@
         }
         // Lo que tiene numero pero sin factsheet detras: se muestra, pero se avisa.
         if (pctYieldEstimado > 0.005) {
-          partes.push(`<b>${pctYieldEstimado.toFixed(1)}%</b> con yield estimado, sin factsheet `
-            + `en la carpeta que lo respalde (marcado ⚠ en la tabla)`);
+          partes.push(`<b>${pctYieldEstimado.toFixed(1)}%</b> con yield que no sale de un factsheet `
+            + `de la carpeta (web del gestor o carga previa; marcado ⚠ en la tabla)`);
         }
         if (pctPaisEstimado > 0.005) {
-          partes.push(`<b>${pctPaisEstimado.toFixed(1)}%</b> con países estimados, sin factsheet `
-            + `en la carpeta que los respalde`);
+          partes.push(`<b>${pctPaisEstimado.toFixed(1)}%</b> con países que no salen de un factsheet `
+            + `de la carpeta (web del gestor o estimación previa)`);
         }
         cob.innerHTML = partes.length
           ? "⚠️ " + partes.join("<br>⚠️ ")

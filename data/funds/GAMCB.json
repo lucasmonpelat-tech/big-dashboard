@@ -26,7 +26,7 @@
   "cat_bond_metrics": {
     "spread_sobre_referencia_pct": 4.88,
     "expected_loss_pct": 2.16,
-    "swiss_re_modelled_expected_loss_pct": 2.10,
+    "swiss_re_modelled_expected_loss_pct": 2.1,
     "var_95_pct": 5.03,
     "weighted_avg_maturity_yrs": 1.96,
     "cash_pct": 11.85,
@@ -53,5 +53,6 @@
   "countries_as_of": "2026-08-31",
   "countries_nota": "OJO: no es exposicion por valor de mercado. Es la contribucion a la PERDIDA ESPERADA por peril ('Top 10 contributors to portfolio expected loss by peril'), que es lo unico geografico que publica el factsheet. US = Wind Florida 26.76 + Wind Gulf 22.25 + Wind Northeast 13.44 + Earthquake California 11.18 + Wind Mid Atlantic 7.66 + Wildfire 2.68 + Convective Storm 1.97 + Earthquake Pacific NW 1.56. EU = European Wind 2.47. JP = Japan Earthquake 0.98. OTHER = Other Cat Perils 9.05.",
   "fi_stats_include": false,
-  "fi_stats_exclude_reason": "El factsheet no publica YTW absoluto (solo 'Reference Rate + 4.88%') ni duracion. Si entrara al promedio del sleeve, aportaria como cero y bajaria el YTW y la duracion de la slide 10. Es el 0.7% del fondo."
+  "fi_stats_exclude_reason": "El factsheet no publica YTW absoluto (solo 'Reference Rate + 4.88%') ni duracion. Si entrara al promedio del sleeve, aportaria como cero y bajaria el YTW y la duracion de la slide 10. Es el 0.7% del fondo.",
+  "fi_metrics_de_factsheet": true
 }

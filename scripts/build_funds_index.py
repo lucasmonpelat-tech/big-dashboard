@@ -107,7 +107,10 @@ def resolver_yield(d: dict) -> dict:
             "tipo": "YTM",
             "as_of": d.get("as_of_factsheet"),
             "fuente": d.get("source") or d["_archivo"],
-            "de_factsheet": True,
+            # "de factsheet" = de un PDF de la carpeta de Research Fondos. Varias
+            # fichas de renta fija se cargaron de la web del gestor (PIMCO-EM,
+            # SGCB): tienen numero, pero no el respaldo que pide la regla.
+            "de_factsheet": bool(d.get("fi_metrics_de_factsheet")),
         }
     y = d.get("yield")
     if y:
