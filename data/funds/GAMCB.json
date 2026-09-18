@@ -1,0 +1,57 @@
+{
+  "ticker": "GAMCB",
+  "isin": "IE00B6WYL972",
+  "name": "GAM Swiss Re Cat Bond Institutional USD Acc",
+  "sleeve": "Fixed Income",
+  "is_cat_bond": true,
+  "source": "Factsheet GAM Swiss Re Cat Bond, clase Ordinary USD Acc (IE00B4VZPG27)",
+  "source_file": "Dropbox/2026/Research Fondos/Renta Fija/GAM Cat Bonds/2026 08 GAM Swiss Re Cat Bond - Ord USD Acc.pdf",
+  "parsed_at": "2026-09-18",
+  "as_of_factsheet": "2026-08-31",
+  "nota_clase": "El factsheet es de la clase Ordinary (IE00B4VZPG27) y nosotros tenemos la Institutional (IE00B6WYL972): lo confirma el NAV (23.1890 en el factsheet vs 24.7125 en Pershing). Sirve igual para las metricas de PORTFOLIO, porque el propio factsheet aclara que son 'gross of fees and expenses charged at the class level' y que esa seccion 'refers to GAM Swiss Re Cat Bond (The Fund) into which all share classes invest'. NO sirve para fees ni performance, que dependen de la clase.",
+  "fi_metrics": {
+    "ytw": null,
+    "duration": null,
+    "maturity": 1.96,
+    "rating": "NR"
+  },
+  "yield": {
+    "valor": null,
+    "tipo": "Ref. Rate + 4.88%",
+    "as_of": "2026-08-31",
+    "fuente": "Factsheet GAM Ago-2026: 'Portfolio yield to maturity (%): Reference Rate + 4.88%'",
+    "de_factsheet": true,
+    "nota": "El factsheet no publica un yield absoluto, solo el spread sobre la tasa de referencia (el yield del colateral money market), y esa tasa no esta en el factsheet. No se inventa: para tener un numero habria que sacar la tasa de otra fuente, y el criterio es que todo salga del factsheet. Por eso no suma al Weighted Yield del tab."
+  },
+  "cat_bond_metrics": {
+    "spread_sobre_referencia_pct": 4.88,
+    "expected_loss_pct": 2.16,
+    "swiss_re_modelled_expected_loss_pct": 2.10,
+    "var_95_pct": 5.03,
+    "weighted_avg_maturity_yrs": 1.96,
+    "cash_pct": 11.85,
+    "n_posiciones": 317,
+    "max_evento_1_en_100": "U.S. Wind Florida, 10.0%",
+    "public_cat_bond_pct": 100,
+    "maturity_buckets": {
+      "0-6m": 11,
+      "6-12m": 16,
+      "12-24m": 29,
+      "24-36m": 28,
+      "36-48m": 15,
+      "48-60m": 1,
+      "60m+": 0
+    }
+  },
+  "countries": {
+    "US": 87.5,
+    "EU": 2.47,
+    "JP": 0.98,
+    "OTHER": 9.05
+  },
+  "countries_de_factsheet": true,
+  "countries_as_of": "2026-08-31",
+  "countries_nota": "OJO: no es exposicion por valor de mercado. Es la contribucion a la PERDIDA ESPERADA por peril ('Top 10 contributors to portfolio expected loss by peril'), que es lo unico geografico que publica el factsheet. US = Wind Florida 26.76 + Wind Gulf 22.25 + Wind Northeast 13.44 + Earthquake California 11.18 + Wind Mid Atlantic 7.66 + Wildfire 2.68 + Convective Storm 1.97 + Earthquake Pacific NW 1.56. EU = European Wind 2.47. JP = Japan Earthquake 0.98. OTHER = Other Cat Perils 9.05.",
+  "fi_stats_include": false,
+  "fi_stats_exclude_reason": "El factsheet no publica YTW absoluto (solo 'Reference Rate + 4.88%') ni duracion. Si entrara al promedio del sleeve, aportaria como cero y bajaria el YTW y la duracion de la slide 10. Es el 0.7% del fondo."
+}

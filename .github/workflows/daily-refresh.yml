@@ -338,6 +338,25 @@ jobs:
         run: |
           python scripts/check_alts_nav_updates.py             --alerta "data/_alerts/alts_nav_remarcado_$(date -u +%Y-%m-%d).json"
 
+      # Las fichas de fondos (data/funds/*.json) son la unica fuente de yield,
+      # paises y metricas por fondo desde el 2026-09-18. El tab Geography lee el
+      # indice que sale de ellas. Las fichas no cambian a diario (se editan cuando
+      # llega un factsheet), asi que esto es una red: si alguien edita una ficha
+      # y se olvida de regenerar el indice, el tab no se queda con el dato viejo.
+      # El validador ademas lo marca como error antes del deploy.
+      - name: Fichas de fondos -> indice del tab Geography
+        continue-on-error: true
+        run: |
+          A="data/_alerts/funds_index_$(date -u +%Y-%m-%d).json"
+          rc=0
+          python scripts/build_funds_index.py || rc=$?
+          if [ "$rc" -ne 0 ]; then
+            python scripts/write_crash_alert.py --path "$A" \
+              --tipo funds_index_crash --rc "$rc" \
+              --que "el armado del indice de fichas (build_funds_index.py)" \
+              --archivo data/funds_index.json
+          fi
+
       - name: Commit and push data/ if changed
         id: commit
         run: |

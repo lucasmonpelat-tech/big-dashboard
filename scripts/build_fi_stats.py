@@ -106,7 +106,7 @@ def leer_fondos():
         if d.get("sleeve") != "Fixed Income":
             continue
         fm = d.get("fi_metrics") or {}
-        out[d["ticker"]] = {
+        ficha = {
             "ytw": fm.get("ytw"),
             "duration": fm.get("duration"),
             "maturity": fm.get("maturity"),
@@ -114,6 +114,13 @@ def leer_fondos():
             "as_of_factsheet": d.get("as_of_factsheet"),
             "motivo": d.get("fi_stats_exclude_reason"),
         }
+        out[d["ticker"]] = ficha
+        # Tambien por ISIN. Un fondo recien comprado entra al canonical con el
+        # ISIN como ticker hasta que alguien lo mapea en PERSHING_TO_MY (paso con
+        # el GAM cat bond en Sep-2026). Buscarlo solo por ticker lo dejaba "sin
+        # ficha" aunque la ficha existiera.
+        if d.get("isin"):
+            out[d["isin"]] = ficha
     return out
 
 
@@ -127,7 +134,7 @@ def calcular(as_of):
     total = sum(h["mv_usd"] for h in holdings)
     sin_ficha, sin_flag, incluidos = [], [], []
     for h in holdings:
-        f = fondos.get(h["ticker"])
+        f = fondos.get(h["ticker"]) or fondos.get(h.get("isin"))
         if f is None:
             sin_ficha.append(h["ticker"])
         elif f["include"] is None:

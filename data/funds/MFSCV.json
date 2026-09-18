@@ -34,5 +34,26 @@
   },
   "active_share": null,
   "ter": null,
-  "_as_of_factsheet_original": "31 March 2026"
+  "_as_of_factsheet_original": "31 March 2026",
+  "yield": {
+    "valor": 1.1,
+    "tipo": "Distribution Yield",
+    "as_of": "2026-05-14",
+    "fuente": "MFS Contrarian — accumulating",
+    "de_factsheet": false
+  },
+  "countries": {
+    "US": 40,
+    "UK": 12,
+    "FR": 10,
+    "DE": 9,
+    "JP": 7,
+    "CH": 6,
+    "NL": 5,
+    "OTHER": 11
+  },
+  "countries_de_factsheet": false,
+  "countries_as_of": "2026-05-14",
+  "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta.",
+  "factsheet_url": "https://www.mfs.com/content/dam/mfs-enterprise/mfscom/products/factsheet/meridian/gg/mer_cvf_fs_gg_en.pdf"
 }

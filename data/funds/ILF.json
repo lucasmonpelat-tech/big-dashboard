@@ -32,5 +32,25 @@
   },
   "regions": null,
   "active_share": null,
-  "ter": null
+  "ter": null,
+  "yield": {
+    "valor": 3.6,
+    "tipo": "Distribution Yield",
+    "as_of": "2026-05-14",
+    "fuente": "ILF factsheet",
+    "de_factsheet": false
+  },
+  "countries": {
+    "BR": 56,
+    "MX": 22,
+    "CL": 8,
+    "CO": 4,
+    "PE": 4,
+    "AR": 4,
+    "OTHER": 2
+  },
+  "countries_de_factsheet": false,
+  "countries_as_of": "2026-05-14",
+  "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta.",
+  "factsheet_url": "https://www.ishares.com/us/literature/fact-sheet/ilf-ishares-latin-america-40-etf-fund-fact-sheet-en-us.pdf"
 }

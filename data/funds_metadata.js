@@ -1,11 +1,11 @@
 /* ==========================================================================
-   BIG FUND METADATA
-   Source of truth for ISIN-level fund data
-   - Currency exposure (underlying, not share class)
-   - Current yield / distribution yield
-   - YTM, Duration, Maturity (fixed income)
-   - Factsheet links for refresh
-   Last factsheet review: Mar-2026 (will be updated as factsheets are re-parsed)
+   BIG FUND METADATA — constantes globales del dashboard v2
+   Quedan solo: BENCH_YIELD, ALTS_LIQUIDITY, MAXIMUS_AS_OF / PORT_PERF_DETAIL
+   y LYNK_DATA (valores estaticos; los numeros vivos salen de lynk_data.json).
+
+   Los datos POR FONDO (yield, paises, moneda, metricas de renta fija, link al
+   factsheet) NO viven aca desde el 2026-09-18: estan en data/funds/<TICKER>.json,
+   una ficha por fondo cargada desde el factsheet de Research Fondos.
    ========================================================================== */
 
 // ============================================================
@@ -16,16 +16,22 @@
 // commit). La fuente de verdad de que hay en cartera es
 // data/positions_latest.json (refresh diario) + el snapshot canonical
 // data/canonical/<fecha>/holdings_returns.json (incluye CALP, que se
-// custodia fuera de Pershing). Este archivo queda SOLO con metadata
-// estatica por ISIN (factsheets, currency, country, yield), que si usa
-// el dashboard v2.
+// custodia fuera de Pershing).
 // ============================================================
 
 // ============================================================
-// DATA FRESHNESS MARKERS — para el banner de frescura de cada tab.
-// Bumpear cuando se refresca la data subyacente.
+// YIELD, PAISES, MONEDA Y LINKS DE FACTSHEET POR FONDO — MOVIDOS 2026-09-18
+// Vivian aca como CURRENT_YIELD / COUNTRY_EXPOSURE / CURRENCY_EXPOSURE /
+// FACTSHEET_LINKS: una segunda copia a mano de datos que ya estaban en
+// data/funds/<TICKER>.json, y no coincidian (PIMCO Income: 4.38% aca, 4.57%
+// alla; paises "US 60%" aca contra 91.57% del factsheet).
+//
+// Ahora hay UNA ficha por fondo: data/funds/<TICKER>.json, cargada desde el
+// factsheet que Lucas sube a Research Fondos. El tab Geography la lee via
+// data/funds_index.json (scripts/build_funds_index.py).
+//
+// NO volver a agregar datos por fondo en este archivo.
 // ============================================================
-const METADATA_LAST_REVIEW = "2026-05-14";  // CURRENCY/COUNTRY/CURRENT_YIELD/FI_METRICS — ultima revision dicts
 
 // ============================================================
 // YIELD DEL BENCHMARK 60/40 (tab Geography · Yield)
@@ -42,116 +48,7 @@ const METADATA_LAST_REVIEW = "2026-05-14";  // CURRENCY/COUNTRY/CURRENT_YIELD/FI
 const BENCH_YIELD = {
     acwi:  2.0,           // MSCI ACWI dividend yield
     agg:   4.5,           // Bloomberg Global Agg YTM (proxy AGG)
-    as_of: "2026-05-14"   // misma revision que el resto de los dicts
-};
-
-// ============================================================
-// FACTSHEET LINKS (for refresh automation / manual review)
-// ============================================================
-const FACTSHEET_LINKS = {
-    "IE00B5BMR087": "https://www.blackrock.com/americas-offshore/en/literature/fact-sheet/cspx-ishares-core-s-p-500-ucits-etf-fund-fact-sheet-en-lm.pdf",
-    "US4642873909": "https://www.ishares.com/us/literature/fact-sheet/ilf-ishares-latin-america-40-etf-fund-fact-sheet-en-us.pdf",
-    "US37950E2596": "https://www.globalxetfs.com/funds/argt",
-    "US46434V8862": "https://www.ishares.com/us/literature/fact-sheet/hewj-ishares-currency-hedged-msci-japan-etf-fund-fact-sheet-en-us.pdf",
-    "US53656G4982": "https://www.roundhillinvestments.com/assets/pdfs/mags_factsheet.pdf",
-    "DE000A0Q4R85": "https://www.blackrock.com/es/profesionales/productos/304304/ishares-msci-brazil-ucits-etf-de-acc-fund",
-    "LU1985812756": "https://www.mfs.com/content/dam/mfs-enterprise/mfscom/products/factsheet/meridian/gg/mer_cvf_fs_gg_en.pdf",
-    "IE00BFMHRK20": "https://www.nb.com/en/latam/products/ucits-funds/global-equity-megatrends-fund?section=documents",
-    "LU2940405447": "https://www.janushenderson.com/en-lu/advisor/product/jhhf-global-smaller-companies-fund/?identifier=LU2940405447",
-    "US78463V1070": "https://www.spdrgoldshares.com/usa/gld/",
-    "US46438F1012": "https://www.blackrock.com/cl/productos/333011/ishares-bitcoin-trust-etf",
-    "GCRED-I":      "https://gcredbdc.com/resources/",
-    "LU2827810776": "https://www.carlyle.com/caps-sicav",
-    "LU2847068389": "https://www.hamiltonlane.com/en-us/strategies/private-markets-funds",
-    "IE00B87KCF77": "https://www.pimco.com/sg/en/investments/gis/income-fund/inst-usd-accumulation",
-    "IE00BDT57R20": "https://www.pimco.com/sg/en/investments/gis/low-duration-income-fund/inst-usd-accumulation",
-    "IE000OE87WX6": "https://www.man.com/ucits/glg-global-investment-grade-opportunities",
-    "IE00089T5MA6": "https://www.man.com/products/man-emerging-markets-corporate-credit-alternative-inf-usd",
-    "IE00B29K0P99": "https://www.pimco.com/gb/en/investments/gis/emerging-local-bond-fund/inst-usd-accumulation",
-    "XS2658535526": "Email from Barings (private credit)",
-    "XS2324777171": "Tenac Global Fund - direct with Nico Dujovne",
-    "LU2966298809":     "Flex-Lexington Partners Secondaries - direct with manager (private)",
-    "KYG4737U1085": "https://www.hpspartners.com/lending",
-    "LU2049315265": "https://www.schroders.com/es-es/es/inversores-particulares/centro-de-fondos/?language=es&location=es&channel=inversores-particulares&clientId=schdr&clientVersion=v1&externalId=SCHDR_F0000147B0&r=%2Ffund%2FSCHDR_F0000147B0%2F&fundName=Schroder-GAIA-Cat-Bond-C-Accumulation-USD",
-    "IE00B6YCBF59": "https://www.thornburg.com/funds/equity-income-builder-fund/"
-};
-
-// ============================================================
-// CURRENCY EXPOSURE (underlying, not share class)
-// Each fund: list of {c: currency, p: percent}, must sum to 100
-// ============================================================
-const CURRENCY_EXPOSURE = {
-    "IE00B5BMR087": { exposures: [{c:"USD",p:100}], note: "S&P 500 — 100% USD equities", src: "BlackRock factsheet" },
-    "IE00B6YCBF59": { exposures: [{c:"USD",p:58},{c:"EUR",p:18},{c:"GBP",p:9},{c:"JPY",p:6},{c:"OTHER",p:9}], note: "Thornburg EIB — global dividend equities", src: "Thornburg factsheet" },
-    "US4642873909": { exposures: [{c:"BRL",p:24},{c:"MXN",p:22},{c:"CLP",p:12},{c:"COP",p:10},{c:"ARS",p:9},{c:"PEN",p:7},{c:"USD",p:16}], note: "ILF — LatAm currency mix", src: "iShares factsheet" },
-    "US37950E2596": { exposures: [{c:"ARS",p:55},{c:"USD",p:45}], note: "ARGT — Argentine ADRs & locals", src: "Global X docs" },
-    "DE000A0Q4R85": { exposures: [{c:"BRL",p:97},{c:"USD",p:3}], note: "4BRZ — near full BRL exposure", src: "BlackRock factsheet" },
-    // HEWJ: acciones japonesas con el YEN HEDGEADO a USD. El pais del subyacente
-    // es JP (ver COUNTRY_EXPOSURE), pero la exposicion de MONEDA del inversor es
-    // USD. No confundir las dos cosas: es el mismo error que arrastraba el viejo
-    // pampa-big-analyzer con los PIMCO/Man hedgeados.
-    "US46434V8862": { exposures: [{c:"USD",p:100}], note: "HEWJ — MSCI Japan con el yen hedgeado a USD: pais JP, moneda USD", src: "iShares HEWJ factsheet (30-Jun-2026)" },
-    "US53656G4982": { exposures: [{c:"USD",p:100}], note: "MAGS — Mag7 equal weight (AAPL/MSFT/NVDA/AMZN/META/GOOGL/TSLA), todas US large caps en USD", src: "Roundhill MAGS factsheet" },
-    "LU1985812756": { exposures: [{c:"USD",p:62},{c:"EUR",p:20},{c:"GBP",p:10},{c:"JPY",p:5},{c:"OTHER",p:3}], note: "MFS Contrarian — global value equities", src: "MFS factsheet" },
-    "IE00BFMHRK20": { exposures: [{c:"USD",p:58},{c:"EUR",p:16},{c:"GBP",p:8},{c:"JPY",p:7},{c:"OTHER",p:11}], note: "NB Megatrends — global thematic", src: "NB docs" },
-    "LU2940405447": { exposures: [{c:"USD",p:55},{c:"GBP",p:18},{c:"EUR",p:14},{c:"JPY",p:6},{c:"OTHER",p:7}], note: "JH Small Cos — global", src: "JH docs" },
-    "US78463V1070": { exposures: [{c:"GOLD",p:100}], note: "GLD — physical gold, safe-haven", src: "SPDR GLD" },
-    "US46438F1012": { exposures: [{c:"BTC",p:100}], note: "IBIT — Bitcoin, digital asset", src: "BlackRock IBIT" },
-    "GCRED-I":      { exposures: [{c:"USD",p:100}], note: "GCRED — mid-market USD loans, floating rate", src: "GCRED docs" },
-    "KYG4737U1085": { exposures: [{c:"USD",p:100}], note: "HLEND — USD corporate lending", src: "Investment policy" },
-    "LU2827810776": { exposures: [{c:"USD",p:65},{c:"EUR",p:25},{c:"GBP",p:10}], note: "Carlyle — global PE multi-currency", src: "Carlyle CAPS SICAV" },
-    "LU2847068389": { exposures: [{c:"USD",p:60},{c:"EUR",p:20},{c:"GBP",p:10},{c:"OTHER",p:10}], note: "Hamilton Lane Global Private Infra — global infrastructure (PLACEHOLDER, refinar con factsheet)", src: "estimación" },
-    "XS2658535526": { exposures: [{c:"USD",p:100}], note: "Barings — USD corporate lending", src: "Manager email" },
-    "LU2966298809":     { exposures: [{c:"USD",p:80},{c:"EUR",p:15},{c:"GBP",p:5}], note: "Flex-Lexington — secondaries PE global", src: "Flex-Lex docs" },
-    // PIMCO Income I (Acc USD): fondo USD-base con hedging FX a nivel mandate
-    // de TODA exposición no-USD. Investor net exposure = 100% USD.
-    "IE00B87KCF77": { exposures: [{c:"USD",p:100}], note: "PIMCO Income I — 100% USD (hedge FX mandate-level, todo no-USD vuelve a USD)", src: "PIMCO Income KIID + factsheet (USD-hedged share class)" },
-    // PIMCO Low Duration Income I: idem — USD-base + mandate-level FX hedge
-    "IE00BDT57R20": { exposures: [{c:"USD",p:100}], note: "PIMCO Low Duration Income I — 100% USD (hedge FX mandate-level)", src: "PIMCO LD KIID + factsheet" },
-    // Man GLG Global IG Opps IYV USD: clase USD-hedged. Lucas confirma.
-    // Bench oficial: ICE BofA Global Large Cap Corporate Index (USD Hedged).
-    "IE000OE87WX6": { exposures: [{c:"USD",p:100}], note: "Man GLG IG Opps IYV USD — 100% USD (clase USD-hedged, bench USD-hedged)", src: "Man docs + Lucas confirma" },
-    "IE00089T5MA6": { exposures: [{c:"USD",p:100}], note: "Man EM Corp Credit Alt IV USD — placeholder (verify with factsheet)", src: "TODO: factsheet" },
-    // Tenac Global Fund: pendiente confirmar share class con Nico Dujovne
-    "XS2324777171": { exposures: [{c:"USD",p:100}], note: "Tenac TGF — asumido USD class, ⚠ confirmar share class con Nico", src: "⚠ Pendiente confirmar Nico" },
-    // PIMCO EM Local Bond: NO HEDGEADO por diseño — el mandate es retorno EM local FX
-    "IE00B29K0P99": { exposures: [{c:"BRL",p:18},{c:"MXN",p:16},{c:"IDR",p:10},{c:"INR",p:9},{c:"ZAR",p:8},{c:"CLP",p:7},{c:"COP",p:6},{c:"USD",p:12},{c:"OTHER",p:14}], note: "PIMCO EM Local Bond I — EM local currencies (NO hedge por diseño del mandate)", src: "PIMCO EM Local factsheet 30-Apr-26" },
-    // Schroder GAIA Cat Bond Class C: cat bonds emitidos en USD nativamente. ISIN correcto LU2049315265
-    "LU2049315265": { exposures: [{c:"USD",p:100}], note: "Schroder GAIA Cat Bond C — 100% USD (cat bonds emitidos en USD nativamente)", src: "Schroder GAIA prospectus" },
-    "CASH-USD":     { exposures: [{c:"USD",p:100}], note: "Cash USD", src: "Pershing" }
-};
-
-// ============================================================
-// CURRENT YIELD (dividend / distribution / current yield)
-// m = manual/requires confirmation, y = null means illiquid
-// ============================================================
-const CURRENT_YIELD = {
-    "IE00B5BMR087": { y: 1.3,  t: "Dividend Yield",       n: "S&P 500 dividend yield",        m: false },
-    "IE00B6YCBF59": { y: 4.2,  t: "Distribution Yield",   n: "Thornburg EIB — dividend-focused", m: false },
-    "US4642873909": { y: 3.6,  t: "Distribution Yield",   n: "ILF factsheet",                 m: false },
-    "US37950E2596": { y: 1.5,  t: "Distribution Yield",   n: "Global X ARGT docs",            m: false },
-    "DE000A0Q4R85": { y: 2.8,  t: "Distribution Yield",   n: "BlackRock 4BRZ factsheet",      m: false },
-    "LU1985812756": { y: 1.1,  t: "Distribution Yield",   n: "MFS Contrarian — accumulating", m: false },
-    "IE00BFMHRK20": { y: 0.8,  t: "Distribution Yield",   n: "NB Megatrends — growth",        m: false },
-    "LU2940405447": { y: 1.0,  t: "Distribution Yield",   n: "JH Small Cos — accumulating",   m: false },
-    "US78463V1070": { y: 0,    t: "N/A",                  n: "GLD — no yield (gold)",         m: false },
-    "US46438F1012": { y: 0,    t: "N/A",                  n: "IBIT — no yield (BTC)",         m: false },
-    "GCRED-I":      { y: 10.5, t: "Distribution Rate",    n: "GCRED — ~SOFR+5.5% floating",   m: false },
-    "KYG4737U1085": { y: 9.1,  t: "Distribution Rate",    n: "HLEND — estimated",             m: true  },
-    "LU2827810776": { y: null, t: "N/A — illiquid PE",    n: "Carlyle — return via cap gain", m: false },
-    "LU2847068389": { y: 4.0,  t: "Distribution Yield",   n: "HLGPI — Hamilton Lane Global Private Infra", m: false },
-    "XS2658535526": { y: 9.4,  t: "Distribution Rate",    n: "Barings BPCC — email datum",    m: true  },
-    "LU2966298809":     { y: null, t: "N/A — illiquid PE",    n: "Flex-Lex — secondaries",        m: false },
-    "IE00B87KCF77": { y: 4.38, t: "Current Yield",        n: "PIMCO website 31-Mar",          m: false },
-    "IE00BDT57R20": { y: 4.05, t: "Current Yield",        n: "PIMCO website 31-Mar",          m: false },
-    "IE000OE87WX6": { y: 6.20, t: "Current Yield",        n: "Man GLG factsheet (verify)",    m: false },
-    "IE00089T5MA6": { y: null, t: "Yield TBD",             n: "Man EM Corp Credit Alt IV — pendiente factsheet", m: false },
-    "XS2324777171": { y: 8.00, t: "Current Yield",        n: "Tenac/Nico Dujovne (verify)",   m: true  },
-    "IE00B29K0P99": { y: 6.21, t: "Current Yield",        n: "PIMCO website 31-Mar",          m: false },
-    "LU2049315265": { y: 7.80, t: "Current Yield",        n: "Schroder factsheet (verify)",   m: false },
-    "US53656G4982": { y: 0.4,  t: "Dividend Yield",       n: "Roundhill MAGS — Mag7 weighted div yield (AAPL/MSFT pay small; NVDA/META/TSLA/AMZN/GOOGL ~0)", m: true  },
-    "US46434V8862": { y: 2.0,  t: "Distribution Yield",   n: "HEWJ = EWJ hedged; MSCI Japan div yield ~2%",  m: false },
-    "CASH-USD":     { y: 4.3,  t: "Money Market",         n: "Fed Funds estimate",            m: false }
+    as_of: "2026-05-14"   // ultima revision de estos dos numeros
 };
 
 // ============================================================
@@ -242,51 +139,6 @@ window.LYNK_DATA = {
     url: "https://app.lynkmarkets.com/public/products/4w9aANBbvM"
 };
 const LYNK_DATA = window.LYNK_DATA;
-
-// ============================================================
-// CURRENCY DISPLAY CONFIG
-// ============================================================
-const CUR_COLORS = {
-    USD:"#2a7a4a", EUR:"#1a4a9a", GBP:"#6a2a8a",
-    BRL:"#9a5a1a", ARS:"#9a2a1a", MXN:"#1a6a6a",
-    JPY:"#8a1a1a", IDR:"#4a6a1a", INR:"#7a4a1a",
-    ZAR:"#1a7a5a", CLP:"#5a1a7a", COP:"#7a5a0a",
-    AUD:"#3a6a9a", CAD:"#9a6a3a", PEN:"#3a5a2a",
-    GOLD:"#D4AF37", BTC:"#f7931a", OTHER:"#666"
-};
-
-// ============================================================
-// COUNTRY / GEOGRAPHY EXPOSURE (underlying)
-// Estimated from factsheets. Keys = country code.
-// ============================================================
-const COUNTRY_EXPOSURE = {
-    "IE00B5BMR087": [{c:"US",p:100}],
-    "IE00B6YCBF59": [{c:"US",p:55},{c:"DE",p:8},{c:"UK",p:7},{c:"TW",p:6},{c:"CH",p:5},{c:"NL",p:4},{c:"FR",p:3},{c:"JP",p:4},{c:"OTHER",p:8}],
-    "US4642873909": [{c:"BR",p:56},{c:"MX",p:22},{c:"CL",p:8},{c:"CO",p:4},{c:"PE",p:4},{c:"AR",p:4},{c:"OTHER",p:2}],
-    "US37950E2596": [{c:"AR",p:100}],
-    "DE000A0Q4R85": [{c:"BR",p:100}],
-    "LU1985812756": [{c:"US",p:40},{c:"UK",p:12},{c:"FR",p:10},{c:"DE",p:9},{c:"JP",p:7},{c:"CH",p:6},{c:"NL",p:5},{c:"OTHER",p:11}],
-    "IE00BFMHRK20": [{c:"US",p:58},{c:"DE",p:8},{c:"TW",p:6},{c:"UK",p:5},{c:"JP",p:5},{c:"KR",p:4},{c:"FR",p:4},{c:"OTHER",p:10}],
-    "LU2940405447": [{c:"US",p:55},{c:"UK",p:16},{c:"JP",p:8},{c:"DE",p:5},{c:"FR",p:3},{c:"CA",p:3},{c:"OTHER",p:10}],
-    "US78463V1070": [{c:"GLOBAL",p:100}],
-    "US46438F1012": [{c:"GLOBAL",p:100}],
-    "GCRED-I":      [{c:"US",p:100}],
-    "KYG4737U1085": [{c:"US",p:90},{c:"UK",p:7},{c:"OTHER",p:3}],
-    "LU2827810776": [{c:"US",p:55},{c:"UK",p:15},{c:"FR",p:10},{c:"DE",p:8},{c:"OTHER",p:12}],
-    "LU2847068389": [{c:"US",p:55},{c:"UK",p:12},{c:"DE",p:8},{c:"FR",p:7},{c:"AU",p:5},{c:"OTHER",p:13}],
-    "XS2658535526": [{c:"US",p:90},{c:"UK",p:5},{c:"OTHER",p:5}],
-    "LU2966298809":     [{c:"US",p:60},{c:"UK",p:15},{c:"FR",p:10},{c:"DE",p:8},{c:"OTHER",p:7}],
-    "IE00B87KCF77": [{c:"US",p:60},{c:"DE",p:6},{c:"UK",p:5},{c:"FR",p:4},{c:"JP",p:4},{c:"OTHER",p:21}],
-    "IE00BDT57R20": [{c:"US",p:85},{c:"UK",p:4},{c:"OTHER",p:11}],
-    "IE000OE87WX6": [{c:"US",p:55},{c:"UK",p:10},{c:"DE",p:8},{c:"FR",p:6},{c:"OTHER",p:21}],
-    "IE00089T5MA6": [{c:"EM",p:100}],
-    "XS2324777171": [{c:"US",p:40},{c:"UK",p:15},{c:"LatAm",p:15},{c:"EU",p:20},{c:"OTHER",p:10}],
-    "IE00B29K0P99": [{c:"BR",p:16},{c:"MX",p:14},{c:"ID",p:9},{c:"IN",p:9},{c:"ZA",p:8},{c:"CL",p:7},{c:"PL",p:6},{c:"OTHER",p:31}],
-    "LU2049315265": [{c:"US",p:80},{c:"JP",p:5},{c:"EU",p:10},{c:"OTHER",p:5}],
-    "US53656G4982": [{c:"US",p:100}],
-    "US46434V8862": [{c:"JP",p:100}],
-    "CASH-USD":     [{c:"US",p:100}]
-};
 
 // ============================================================
 // SECTOR EXPOSURE — REMOVIDO el 2026-05-15

@@ -30,5 +30,16 @@
     "number_of_issuers": 52,
     "maturity_no_publicado_en_factsheet": true
   },
-  "fi_stats_include_note": "Lucas 2026-09-08: Tenac SI entra al calculo. Se usa rates duration -1.62 (sensibilidad a tasa, comparable con PIMCO/Man). OJO: el fondo tiene EM FX Net Exposure 52%, o sea que NO esta hedgeado a USD — entra por decision de Lucas, no por cumplir el criterio de moneda. Ademas su YTW es en realidad un YTM (8.11) y su vencimiento 11.92 es del reporte de Abril, no del factsheet nuevo."
+  "fi_stats_include_note": "Lucas 2026-09-08: Tenac SI entra al calculo. Se usa rates duration -1.62 (sensibilidad a tasa, comparable con PIMCO/Man). OJO: el fondo tiene EM FX Net Exposure 52%, o sea que NO esta hedgeado a USD — entra por decision de Lucas, no por cumplir el criterio de moneda. Ademas su YTW es en realidad un YTM (8.11) y su vencimiento 11.92 es del reporte de Abril, no del factsheet nuevo.",
+  "countries": {
+    "US": 40,
+    "UK": 15,
+    "LatAm": 15,
+    "EU": 20,
+    "OTHER": 10
+  },
+  "countries_de_factsheet": false,
+  "countries_as_of": "2026-05-14",
+  "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta.",
+  "factsheet_url": "Tenac Global Fund - direct with Nico Dujovne"
 }

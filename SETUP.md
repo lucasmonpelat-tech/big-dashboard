@@ -15,8 +15,8 @@ Full architecture:
                                 │ (published as CSV)
                                 ▼
                      ┌──────────────────────────────────┐
-                     │ data/funds_metadata.js (fallback)│  ← Mirrors Sheet, source of
-                     │                                  │    truth for factsheet data
+                     │ data/funds_metadata.js (fallback)│  ← HISTORICO: los datos por fondo
+                     │                                  │    viven en data/funds/ (2026-09-18)
                      └────────────────┬─────────────────┘
                                       │
     ┌─────────────────┬───────────────┼──────────────────┐
@@ -44,7 +44,9 @@ big-dashboard/
 │       └── index.html       Dashboard actual (v2)
 ├── data/
 │   ├── positions_latest.json  Posiciones (refresh diario, Pershing/NetX360)
-│   ├── funds_metadata.js    Metadata estatica por ISIN (currency, yield, factsheets)
+│   ├── funds/<TICKER>.json   Ficha por fondo: yield, paises, metricas FI (del factsheet)
+│   ├── funds_index.json     Indice de las fichas que lee el tab Geography (generado)
+│   ├── funds_metadata.js    Constantes globales (BENCH_YIELD, LYNK_DATA...). NO datos por fondo
 │   ├── live_prices.js       Stooq fetch module (client-side JS)
 │   ├── live_prices.json     Output from price_refresher.py (cached prices)
 │   └── lynk_data.json       Output from lynk_refresher.py (cached NAV)
@@ -138,11 +140,20 @@ Ya no hay que tocar posiciones a mano. El cron diario (`daily-refresh.yml`)
 baja el export de Pershing/NetX360 y regenera `data/positions_latest.json`
 y el snapshot canonical.
 
-Lo unico manual: si el trade **incorpora un fondo nuevo**, agregarle la
-metadata estatica en `data/funds_metadata.js` (`FACTSHEET_LINKS`,
-`CURRENCY_EXPOSURE`, `CURRENT_YIELD`, `COUNTRY_EXPOSURE`). Si falta,
-`scripts/validate_data.py` lo marca como "falta ISIN" y el fondo
-desaparece callado de los widgets de Geography/Yield del v2.
+Lo unico manual: si el trade **incorpora un fondo nuevo**:
+
+1. Si Pershing lo nombra con un id nuevo, mapearlo en `PERSHING_TO_MY`
+   (`scripts/compute_holdings_returns.py`). Sin eso entra con el ISIN como ticker.
+2. Crear su ficha `data/funds/<TICKER>.json` **desde el factsheet que Lucas sube a
+   Research Fondos** (regla de Lucas, 2026-09-18): yield, `countries`, y si es renta
+   fija `fi_metrics` + `fi_stats_include`. Verificar que el PDF sea de la clase que
+   tenemos (ISIN) — el GAM llego con el factsheet de otra clase.
+3. `python scripts/build_funds_index.py` para que el tab lo vea.
+
+`scripts/validate_data.py` falla si un holding no tiene ficha, si falta el yield o
+los paises, o si el indice quedo viejo respecto de las fichas. Hasta el 2026-09-18
+esto se cargaba en cuatro diccionarios de `funds_metadata.js`: era una segunda copia
+a mano de lo mismo y no coincidia con la primera.
 
 ## Data Sources
 

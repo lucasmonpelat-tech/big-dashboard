@@ -7,10 +7,12 @@ Caza errores SILENCIOSOS — los que no rompen nada visiblemente pero corrompen
 los numeros (ej: un ISIN mal escrito hace que un fondo desaparezca de un tab
 sin tirar error).
 
-Chequea:
-  1. ORPHAN ISINs   — ISINs en los dicts que ya no estan en cartera
-  2. MISSING ISINs  — fondos en cartera que faltan en un dict donde deberian estar
-  3. EXPOSURE SUMS  — CURRENCY/COUNTRY deben sumar ~100% por fondo
+Chequea (numeracion historica; el 3 se absorbio en el 1 & 2):
+  1 & 2  FICHAS       — cada holding tiene data/funds/<TICKER>.json con yield y
+                        paises, los paises no suman de mas, y data/funds_index.json
+                        (lo que lee el tab) esta al dia con las fichas
+  2b     FI METRICS   — YTW / duracion / vencimiento de los fondos de la slide 10
+  4-10                — ver cada check_* abajo
 
 El universo de "que hay en cartera" sale de data/positions_latest.json, que se
 refresca solo todos los dias. Hasta el 2026-08-24 salia del array manual
@@ -23,7 +25,6 @@ Usage:
 """
 
 import json
-import re
 import sys
 from pathlib import Path
 
@@ -32,16 +33,11 @@ import check_reportes_vs_datos
 import race_weights
 
 ROOT = Path(__file__).parent.parent
-META_JS = ROOT / "data" / "funds_metadata.js"
 POSITIONS_JSON = ROOT / "data" / "positions_latest.json"
 
 SLEEVE_LABEL = {"equity": "Equity", "fixed_income": "Fixed Income",
                 "alternatives": "Alternatives"}
 
-# Claves que existen en los dicts pero no son fondos en cartera: no tiene
-# sentido pedirles factsheet ni exposicion, y tampoco marcarlas como
-# huerfanas cuando no aparecen en las posiciones.
-NON_FUND_KEYS = {"CASH-USD"}
 
 # ---- Holdings externos a Pershing (statements manuales) ---------------------
 # Un holding "external_statement" (hoy solo CALP, custodiado fuera de Pershing)
@@ -71,41 +67,6 @@ WEIGHT_TOLERANCE_PP = 0.5
 # Tolerancia para comparar valores USD entre las dos fuentes de posiciones
 VALUE_TOLERANCE_USD = 1.0
 
-
-def read_meta_js():
-    """Lee funds_metadata.js como texto."""
-    return META_JS.read_text(encoding="utf-8")
-
-
-def extract_block(text, const_name):
-    """Extrae el cuerpo de un `const NAME = {...}` o `const NAME = [...]`."""
-    # Encuentra el inicio
-    m = re.search(rf"const\s+{re.escape(const_name)}\s*=\s*", text)
-    if not m:
-        return None
-    start = m.end()
-    open_char = text[start]
-    close_char = "}" if open_char == "{" else "]"
-    depth = 0
-    i = start
-    while i < len(text):
-        c = text[i]
-        if c == open_char:
-            depth += 1
-        elif c == close_char:
-            depth -= 1
-            if depth == 0:
-                return text[start:i + 1]
-        i += 1
-    return None
-
-
-def extract_isin_keys(block):
-    """Extrae las keys (ISINs) de un bloque tipo objeto JS: '"KEY": ...'."""
-    if not block:
-        return []
-    # Match keys: "XXXX": al inicio de cada entry
-    return re.findall(r'"([A-Za-z0-9\-]+)"\s*:', block)
 
 
 def read_positions():
@@ -163,25 +124,6 @@ def _canonical_holdings():
             })
     return out
 
-
-def extract_exposure_sums(block):
-    """Para CURRENCY/COUNTRY/SECTOR: devuelve {isin: suma_de_p}."""
-    if not block:
-        return {}
-    sums = {}
-    # Cada entry: "ISIN": [ ... {..p:NN..} ... ]  o  "ISIN": { exposures: [...] }
-    # Partimos por las keys de ISIN
-    entries = re.split(r'(?="[A-Za-z0-9\-]+"\s*:)', block)
-    for entry in entries:
-        key_m = re.match(r'\s*"([A-Za-z0-9\-]+)"\s*:', entry)
-        if not key_m:
-            continue
-        isin = key_m.group(1)
-        # sumar todos los p:NN del entry
-        ps = [float(x) for x in re.findall(r"p:\s*([\d.]+)", entry)]
-        if ps:
-            sums[isin] = round(sum(ps), 2)
-    return sums
 
 
 def latest_canonical():
@@ -754,12 +696,111 @@ def date_hoy_iso():
     return date.today().isoformat()
 
 
+def check_fichas(errors, warnings):
+    """Cada holding tiene su ficha en data/funds/ y el indice esta al dia.
+
+    Una sola fuente por fondo (2026-09-18): yield + paises + metricas salen de
+    data/funds/<TICKER>.json, cargado desde el factsheet que Lucas sube a
+    Research Fondos. El tab Geography lee data/funds_index.json, que se genera
+    de esas fichas con scripts/build_funds_index.py.
+
+    El universo es holdings_returns del canonical -- lo mismo que muestra el
+    tab --, no positions_latest.json: positions no trae a CALP (viene de un
+    statement externo) y es el 9.75% del fondo.
+    """
+    print("\n" + "-" * 70)
+    print("  1 & 2 — Fichas por fondo (data/funds/) + indice del tab")
+    print("-" * 70)
+
+    sys.path.insert(0, str(ROOT / "scripts"))
+    try:
+        import build_funds_index as bfi
+    except Exception as e:
+        errors.append(f"fichas: no pude importar build_funds_index.py ({e})")
+        print("  [ERROR] no pude cargar las fichas")
+        return
+
+    index, avisos = bfi.construir()
+    for av in avisos:
+        warnings.append(f"fichas: {av}")
+
+    canon_path, _ = latest_canonical()
+    hr = _load(canon_path.parent / "holdings_returns.json") if canon_path else None
+    if not hr:
+        errors.append("fichas: sin holdings_returns.json para saber que fondos hay en cartera")
+        print("  [ERROR] sin holdings_returns")
+        return
+
+    vivos = {}
+    for s in (hr.get("sleeves") or {}).values():
+        for h in s.get("holdings", []):
+            if (h.get("status") or "OPEN") == "OPEN" and h.get("isin") and h.get("mv_usd"):
+                vivos[h["isin"]] = h.get("ticker") or h["isin"]
+    vivos["CASH-USD"] = "CASH"
+
+    sin_ficha, sin_yield, sin_paises, sumas_mal = [], [], [], []
+    estimado_y, estimado_p = [], []
+    for isin, tk in sorted(vivos.items(), key=lambda x: x[1]):
+        f = index.get(isin)
+        if f is None:
+            sin_ficha.append(f"{tk} ({isin})")
+            continue
+        y = f["yield"]
+        if y.get("tipo") in (None, "sin dato"):
+            sin_yield.append(tk)
+        elif not y.get("de_factsheet"):
+            estimado_y.append(tk)
+        if not f["countries"]:
+            sin_paises.append(tk)
+        else:
+            total = sum(c["p"] for c in f["countries"])
+            if total > 100 + SUM_TOLERANCE:
+                sumas_mal.append(f"{tk} suma {total:.1f}%")
+            if not f["countries_de_factsheet"]:
+                estimado_p.append(tk)
+
+    for x in sin_ficha:
+        errors.append(f"fichas: {x} esta en cartera y no tiene data/funds/<TICKER>.json")
+    for x in sin_yield:
+        errors.append(f"fichas: {x} no tiene yield (ni fi_metrics.ytw ni bloque 'yield'). "
+                      f"Si no aplica, cargar el bloque con valor null y el tipo que lo explique.")
+    for x in sin_paises:
+        errors.append(f"fichas: {x} no tiene 'countries'")
+    for x in sumas_mal:
+        errors.append(f"fichas: {x} de paises (mas de 100: hay exposicion contada dos veces)")
+
+    # Lo estimado no bloquea: el dato existe, solo que no hay factsheet detras.
+    # Pero se nombra, para que se vea que falta subir a la carpeta.
+    if estimado_y:
+        warnings.append(f"fichas: yield sin factsheet en la carpeta ({len(estimado_y)}): "
+                        f"{', '.join(estimado_y)}")
+    if estimado_p:
+        warnings.append(f"fichas: paises sin factsheet en la carpeta ({len(estimado_p)}): "
+                        f"{', '.join(estimado_p)}")
+
+    # El tab lee el INDICE, no las fichas. Si alguien edita una ficha y no
+    # regenera el indice, el tab muestra el dato viejo con cara de nuevo: el
+    # mismo fosil que esta unificacion vino a sacar. Por eso se compara.
+    idx = _load(ROOT / "data" / "funds_index.json")
+    if not idx:
+        errors.append("fichas: data/funds_index.json no existe -- correr "
+                      "python scripts/build_funds_index.py")
+    elif idx.get("fondos") != json.loads(json.dumps(index)):
+        errors.append("fichas: data/funds_index.json esta desactualizado respecto de "
+                      "data/funds/*.json -- correr python scripts/build_funds_index.py")
+
+    ok = not (sin_ficha or sin_yield or sin_paises or sumas_mal)
+    print(f"  [{'OK' if ok else 'ERROR':5s}] {len(vivos)} holdings — "
+          f"{len(sin_ficha)} sin ficha, {len(sin_yield)} sin yield, "
+          f"{len(sin_paises)} sin paises")
+    print(f"  [INFO ] sin factsheet detras: yield {len(estimado_y)}, paises {len(estimado_p)}")
+
+
 def main():
     print("=" * 70)
     print("  BIG Dashboard — Data Consistency Validator")
     print("=" * 70)
 
-    text = read_meta_js()
     errors = []
     warnings = []
 
@@ -775,73 +816,61 @@ def main():
           f"({len(equity_isins)} equity, {len(fi_isins)} FI, "
           f"{len(big_isins) - len(equity_isins) - len(fi_isins)} alts/cash)")
 
-    # ---- 1 & 2: ORPHAN / MISSING ISINs en cada dict ----
-    # (dict_name, debe_cubrir_isins, label, severity)
-    #   severity "error"   -> gatea el deploy
-    #   severity "warning" -> solo avisa (dicts opcionales / data muerta)
-    checks = [
-        ("FACTSHEET_LINKS", big_isins - {"CASH-USD"}, "todos (menos cash)", "error"),
-        ("CURRENCY_EXPOSURE", big_isins, "todos los fondos", "error"),
-        ("CURRENT_YIELD", big_isins, "todos los fondos", "error"),
-        ("COUNTRY_EXPOSURE", big_isins, "todos los fondos", "error"),
-        # FI_METRICS migrado a data/funds/<TICKER>.json — chequeado abajo en check separado.
-        # SECTOR_EXPOSURE: borrado el 2026-05-15 (era data muerta).
-    ]
-
-    print("\n" + "-" * 70)
-    print("  1 & 2 — Cobertura de ISINs por diccionario")
-    print("-" * 70)
-    for dict_name, should_cover, label, severity in checks:
-        block = extract_block(text, dict_name)
-        if block is None:
-            errors.append(f"{dict_name}: no se encontro el bloque")
-            continue
-        keys = set(extract_isin_keys(block))
-
-        orphans = keys - big_isins - NON_FUND_KEYS
-        missing = should_cover - keys
-        bucket = errors if severity == "error" else warnings
-
-        status = "OK"
-        if orphans:
-            status = severity.upper()
-            for o in sorted(orphans):
-                bucket.append(f"{dict_name}: ISIN huerfano '{o}' (no esta en positions_latest.json)")
-        if missing:
-            status = severity.upper() if status == "OK" else status
-            for m in sorted(missing):
-                tk = next((p["ticker"] for p in positions if p["isin"] == m), "?")
-                bucket.append(f"{dict_name}: falta ISIN '{m}' ({tk}) — esperado [{label}]")
-
-        flag = {"OK": "[OK]   ", "ERROR": "[ERROR]", "WARNING": "[WARN] "}[status]
-        print(f"  {flag} {dict_name:20s} {len(keys):2d} keys  "
-              f"(orphans: {len(orphans)}, missing: {len(missing)})")
+    # ---- 1 & 2: CADA HOLDING TIENE SU FICHA (data/funds/*.json) ----
+    #
+    # Hasta el 2026-09-18 esto chequeaba cuatro diccionarios de funds_metadata.js
+    # (FACTSHEET_LINKS, CURRENCY_EXPOSURE, CURRENT_YIELD, COUNTRY_EXPOSURE). Eran
+    # una segunda copia a mano de datos que ya vivian en data/funds/*.json, y no
+    # coincidian. Peor: exigia CURRENCY_EXPOSURE para todos los fondos cuando
+    # ninguna pantalla lo mostraba -- bloqueaba el deploy por un dato muerto.
+    # Ahora hay una sola ficha por fondo y se chequea eso.
+    check_fichas(errors, warnings)
 
     # ---- 2b: FI_METRICS migrado a data/funds/<TICKER>.json ----
     print("\n" + "-" * 70)
     print("  2b — FI metrics en data/funds/*.json (single source de YTW/Dur/Maturity)")
     print("-" * 70)
     funds_dir = ROOT / "data" / "funds"
+    # Ficha por ISIN, no por ticker: un fondo recien comprado entra al pipeline
+    # con el ISIN como ticker hasta que se lo mapea (paso con el GAM cat bond).
+    fichas_por_isin = {}
+    for fpath in funds_dir.glob("*.json"):
+        try:
+            dd = json.loads(fpath.read_text(encoding="utf-8"))
+            if dd.get("isin"):
+                fichas_por_isin[dd["isin"]] = (fpath, dd)
+        except Exception:
+            pass
     fi_funds = [p for p in positions if p["sleeve"] == "Fixed Income"]
     fi_missing_json = []
     fi_missing_metrics = []
     for fp in fi_funds:
-        fpath = funds_dir / f"{fp['ticker']}.json"
-        if not fpath.exists():
+        hallada = fichas_por_isin.get(fp["isin"])
+        if not hallada:
             fi_missing_json.append(fp["ticker"])
             errors.append(f"data/funds/{fp['ticker']}.json no existe (FI fund {fp['isin']})")
             continue
+        fpath, d = hallada
         try:
-            d = json.loads(fpath.read_text(encoding="utf-8"))
             # Skip fi_metrics validation para fondos pendientes de factsheet
             # (posiciones piloto recien abiertas). Marcador: as_of_factsheet == null.
             if d.get("as_of_factsheet") is None:
                 continue
             fm = d.get("fi_metrics", {})
-            for required in ["ytw", "duration", "maturity"]:
+            # YTW / duracion / vencimiento se exigen solo a los fondos que ENTRAN
+            # en la slide 10: ahi un faltante cuenta como cero y baja el promedio.
+            # Un fondo excluido (fi_stats_include=false, con su motivo) puede no
+            # tenerlos -- el GAM cat bond no publica YTW absoluto ni duracion, y
+            # exigirselos obligaria a inventarlos. Su yield del tab se chequea en
+            # check_fichas().
+            requeridos = ["ytw", "duration", "maturity"] if d.get("fi_stats_include") else []
+            if not d.get("fi_stats_include") and not d.get("fi_stats_exclude_reason"):
+                errors.append(f"{fpath.name}: fi_stats_include=false sin fi_stats_exclude_reason "
+                              f"-- toda exclusion de la slide 10 tiene que decir por que")
+            for required in requeridos:
                 if fm.get(required) is None:
-                    fi_missing_metrics.append(f"{fp['ticker']}.json falta fi_metrics.{required}")
-                    errors.append(f"data/funds/{fp['ticker']}.json: falta fi_metrics.{required}")
+                    fi_missing_metrics.append(f"{fpath.name} falta fi_metrics.{required}")
+                    errors.append(f"data/funds/{fpath.name}: falta fi_metrics.{required}")
 
             # ---- Check de plausibilidad para CAT BONDS / ILS ----
             # Los cat bonds son floating-rate (SOFR+spread) -> duration de tasa ~0,
@@ -868,21 +897,8 @@ def main():
     else:
         print(f"  [OK]    {len(fi_funds)} FI funds — todos tienen JSON con fi_metrics completas (ytw/duration/maturity)")
 
-    # ---- 3: EXPOSURE SUMS ----
-    print("\n" + "-" * 70)
-    print("  3 — Sumas de exposicion (~100% por fondo)")
-    print("-" * 70)
-    for dict_name in ["CURRENCY_EXPOSURE", "COUNTRY_EXPOSURE"]:
-        block = extract_block(text, dict_name)
-        sums = extract_exposure_sums(block)
-        bad = {k: v for k, v in sums.items() if abs(v - 100) > SUM_TOLERANCE}
-        if bad:
-            for isin, total in sorted(bad.items()):
-                tk = next((p["ticker"] for p in positions if p["isin"] == isin), "?")
-                errors.append(f"{dict_name}: '{isin}' ({tk}) suma {total}% (deberia ser ~100%)")
-            print(f"  [ERROR] {dict_name:20s} {len(bad)} fondos no suman 100%")
-        else:
-            print(f"  [OK]    {dict_name:20s} {len(sums)} fondos suman ~100%")
+    # ---- 3: SUMAS DE PAISES ----
+    # Se chequean dentro de check_fichas(), sobre las fichas ya normalizadas.
 
     # ---- 4: HOLDINGS EXTERNOS (statements manuales, 4 archivos) ----
     check_external_statements(errors, warnings)

@@ -1,0 +1,1019 @@
+{
+  "_doc": "Generado por scripts/build_funds_index.py desde data/funds/*.json. NO editar a mano: se pisa en cada corrida. Para cambiar un dato, editar la ficha del fondo.",
+  "generado": "2026-09-18",
+  "fondos": {
+    "DE000A0Q4R85": {
+      "ticker": "4BRZ",
+      "name": "iShares MSCI Brazil UCITS (DE)",
+      "sleeve": "Equity",
+      "archivo": "4BRZ.json",
+      "as_of_factsheet": "16 2017 2018",
+      "yield": {
+        "valor": 2.8,
+        "tipo": "Distribution Yield",
+        "as_of": "2026-05-14",
+        "fuente": "BlackRock 4BRZ factsheet",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "BR",
+          "p": 100
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "US37950E2596": {
+      "ticker": "ARGT",
+      "name": "GLOBAL X FDS MSCI ARGENTINA ETF",
+      "sleeve": "Equity",
+      "archivo": "ARGT.json",
+      "as_of_factsheet": null,
+      "yield": {
+        "valor": 1.5,
+        "tipo": "Distribution Yield",
+        "as_of": "2026-05-14",
+        "fuente": "Global X ARGT docs",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "AR",
+          "p": 100
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "XS2658535526": {
+      "ticker": "BPCC",
+      "name": "PM ALPHA DAC BARINGS BPCC ETN I ACC MEDIUM TERM NOTES VARIAB",
+      "sleeve": "Alternatives",
+      "archivo": "BPCC.json",
+      "as_of_factsheet": null,
+      "yield": {
+        "valor": 9.4,
+        "tipo": "Distribution Rate",
+        "as_of": "2026-05-14",
+        "fuente": "Barings BPCC — email datum",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 90
+        },
+        {
+          "c": "UK",
+          "p": 5
+        },
+        {
+          "c": "OTHER",
+          "p": 5
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "LU2827810776": {
+      "ticker": "CALP",
+      "name": "Carlyle AlpInvest PM Sub-Fund - I - Class B1",
+      "sleeve": "Alternatives",
+      "archivo": "CALP.json",
+      "as_of_factsheet": null,
+      "yield": {
+        "valor": null,
+        "tipo": "N/A — illiquid PE",
+        "as_of": "2026-05-14",
+        "fuente": "Carlyle — return via cap gain",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 55
+        },
+        {
+          "c": "UK",
+          "p": 15
+        },
+        {
+          "c": "OTHER",
+          "p": 12
+        },
+        {
+          "c": "FR",
+          "p": 10
+        },
+        {
+          "c": "DE",
+          "p": 8
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "CASH-USD": {
+      "ticker": "CASH",
+      "name": "Cash USD",
+      "sleeve": "Cash",
+      "archivo": "CASH.json",
+      "as_of_factsheet": null,
+      "yield": {
+        "valor": 4.3,
+        "tipo": "Money Market",
+        "as_of": "2026-05-14",
+        "fuente": "Fed Funds estimate",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 100
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "IE00B5BMR087": {
+      "ticker": "CSPX",
+      "name": "iShares Core S&P 500 UCITS",
+      "sleeve": "Equity",
+      "archivo": "CSPX.json",
+      "as_of_factsheet": "16 2017 2018",
+      "yield": {
+        "valor": 1.3,
+        "tipo": "Dividend Yield",
+        "as_of": "2026-05-14",
+        "fuente": "S&P 500 dividend yield",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 100
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "LU2966298809": {
+      "ticker": "FLEX",
+      "name": "FRANKLIN LEXINGTON PE SECONDARIES FUND CLASS I (ACC)(USD) IS",
+      "sleeve": "Alternatives",
+      "archivo": "FLEX.json",
+      "as_of_factsheet": null,
+      "yield": {
+        "valor": null,
+        "tipo": "N/A — illiquid PE",
+        "as_of": "2026-05-14",
+        "fuente": "Flex-Lex — secondaries",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 60
+        },
+        {
+          "c": "UK",
+          "p": 15
+        },
+        {
+          "c": "FR",
+          "p": 10
+        },
+        {
+          "c": "DE",
+          "p": 8
+        },
+        {
+          "c": "OTHER",
+          "p": 7
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "IE00B6WYL972": {
+      "ticker": "GAMCB",
+      "name": "GAM Swiss Re Cat Bond Institutional USD Acc",
+      "sleeve": "Fixed Income",
+      "archivo": "GAMCB.json",
+      "as_of_factsheet": "2026-08-31",
+      "yield": {
+        "valor": null,
+        "tipo": "Ref. Rate + 4.88%",
+        "as_of": "2026-08-31",
+        "fuente": "Factsheet GAM Ago-2026: 'Portfolio yield to maturity (%): Reference Rate + 4.88%'",
+        "de_factsheet": true,
+        "nota": "El factsheet no publica un yield absoluto, solo el spread sobre la tasa de referencia (el yield del colateral money market), y esa tasa no esta en el factsheet. No se inventa: para tener un numero habria que sacar la tasa de otra fuente, y el criterio es que todo salga del factsheet. Por eso no suma al Weighted Yield del tab."
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 87.5
+        },
+        {
+          "c": "OTHER",
+          "p": 9.05
+        },
+        {
+          "c": "EU",
+          "p": 2.47
+        },
+        {
+          "c": "JP",
+          "p": 0.98
+        }
+      ],
+      "countries_de_factsheet": true,
+      "countries_as_of": "2026-08-31",
+      "countries_nota": "OJO: no es exposicion por valor de mercado. Es la contribucion a la PERDIDA ESPERADA por peril ('Top 10 contributors to portfolio expected loss by peril'), que es lo unico geografico que publica el factsheet. US = Wind Florida 26.76 + Wind Gulf 22.25 + Wind Northeast 13.44 + Earthquake California 11.18 + Wind Mid Atlantic 7.66 + Wildfire 2.68 + Convective Storm 1.97 + Earthquake Pacific NW 1.56. EU = European Wind 2.47. JP = Japan Earthquake 0.98. OTHER = Other Cat Perils 9.05."
+    },
+    "GCRED-I": {
+      "ticker": "GCRED",
+      "name": "GOLUB CAPITAL PRIVATE CREDIT ICAPITAL OFFSHORE ACCESS FUND S",
+      "sleeve": "Alternatives",
+      "archivo": "GCRED.json",
+      "as_of_factsheet": null,
+      "yield": {
+        "valor": 10.5,
+        "tipo": "Distribution Rate",
+        "as_of": "2026-05-14",
+        "fuente": "GCRED — ~SOFR+5.5% floating",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 100
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "US78463V1070": {
+      "ticker": "GLD",
+      "name": "SPDR GOLD TR GOLD SHS",
+      "sleeve": "Alternatives",
+      "archivo": "GLD.json",
+      "as_of_factsheet": null,
+      "yield": {
+        "valor": 0,
+        "tipo": "N/A",
+        "as_of": "2026-05-14",
+        "fuente": "GLD — no yield (gold)",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "GLOBAL",
+          "p": 100
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "US46434V8862": {
+      "ticker": "HEWJ",
+      "name": "ISHARES TR ISHARES CURRENCY HEDGED MSCI JAPAN ETF",
+      "sleeve": "Equity",
+      "archivo": "HEWJ.json",
+      "as_of_factsheet": null,
+      "yield": {
+        "valor": 2.0,
+        "tipo": "Distribution Yield",
+        "as_of": "2026-05-14",
+        "fuente": "HEWJ = EWJ hedged; MSCI Japan div yield ~2%",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "JP",
+          "p": 100
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "KYG4737U1085": {
+      "ticker": "HLEND",
+      "name": "ICAPITAL HPS CORPORATE LENDING OFFSHORE ACCESS FUND SP1",
+      "sleeve": "Alternatives",
+      "archivo": "HLEND.json",
+      "as_of_factsheet": null,
+      "yield": {
+        "valor": 9.1,
+        "tipo": "Distribution Rate",
+        "as_of": "2026-05-14",
+        "fuente": "HLEND — estimated",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 90
+        },
+        {
+          "c": "UK",
+          "p": 7
+        },
+        {
+          "c": "OTHER",
+          "p": 3
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "LU2847068389": {
+      "ticker": "HLGPI",
+      "name": "HAMILTON LANE GLOBAL PRIVATE INFRASTRUCTURE FUND CLASS I (AC",
+      "sleeve": "Alternatives",
+      "archivo": "HLGPI.json",
+      "as_of_factsheet": null,
+      "yield": {
+        "valor": 4.0,
+        "tipo": "Distribution Yield",
+        "as_of": "2026-05-14",
+        "fuente": "HLGPI — Hamilton Lane Global Private Infra",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 55
+        },
+        {
+          "c": "OTHER",
+          "p": 13
+        },
+        {
+          "c": "UK",
+          "p": 12
+        },
+        {
+          "c": "DE",
+          "p": 8
+        },
+        {
+          "c": "FR",
+          "p": 7
+        },
+        {
+          "c": "AU",
+          "p": 5
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "US46438F1012": {
+      "ticker": "IBIT",
+      "name": "ISHARES BITCOIN TR ETF SHS BEN INT",
+      "sleeve": "Alternatives",
+      "archivo": "IBIT.json",
+      "as_of_factsheet": null,
+      "yield": {
+        "valor": 0,
+        "tipo": "N/A",
+        "as_of": "2026-05-14",
+        "fuente": "IBIT — no yield (BTC)",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "GLOBAL",
+          "p": 100
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "US4642873909": {
+      "ticker": "ILF",
+      "name": "iShares Latin America 40 ETF",
+      "sleeve": "Equity",
+      "archivo": "ILF.json",
+      "as_of_factsheet": "21 2022 2023",
+      "yield": {
+        "valor": 3.6,
+        "tipo": "Distribution Yield",
+        "as_of": "2026-05-14",
+        "fuente": "ILF factsheet",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "BR",
+          "p": 56
+        },
+        {
+          "c": "MX",
+          "p": 22
+        },
+        {
+          "c": "CL",
+          "p": 8
+        },
+        {
+          "c": "CO",
+          "p": 4
+        },
+        {
+          "c": "PE",
+          "p": 4
+        },
+        {
+          "c": "AR",
+          "p": 4
+        },
+        {
+          "c": "OTHER",
+          "p": 2
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "LU2940405447": {
+      "ticker": "JHGSC",
+      "name": "Janus Henderson Global Smaller Cos F2",
+      "sleeve": "Equity",
+      "archivo": "JHGSC.json",
+      "as_of_factsheet": "2026-03-31",
+      "yield": {
+        "valor": 1.0,
+        "tipo": "Distribution Yield",
+        "as_of": "2026-05-14",
+        "fuente": "JH Small Cos — accumulating",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 55
+        },
+        {
+          "c": "UK",
+          "p": 16
+        },
+        {
+          "c": "OTHER",
+          "p": 10
+        },
+        {
+          "c": "JP",
+          "p": 8
+        },
+        {
+          "c": "DE",
+          "p": 5
+        },
+        {
+          "c": "FR",
+          "p": 3
+        },
+        {
+          "c": "CA",
+          "p": 3
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "US53656G4982": {
+      "ticker": "MAGS",
+      "name": "LISTED FDS TR ROUNDHILL MAGNIFICENT SEVEN ETF",
+      "sleeve": "Equity",
+      "archivo": "MAGS.json",
+      "as_of_factsheet": null,
+      "yield": {
+        "valor": 0.4,
+        "tipo": "Dividend Yield",
+        "as_of": "2026-05-14",
+        "fuente": "Roundhill MAGS — Mag7 weighted div yield (AAPL/MSFT pay small; NVDA/META/TSLA/AMZN/GOOGL ~0)",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 100
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "IE00089T5MA6": {
+      "ticker": "MANEM",
+      "name": "Man Emerging Markets Corporate Credit Alternative IV USD",
+      "sleeve": "Fixed Income",
+      "archivo": "MANEM.json",
+      "as_of_factsheet": "2026-06-30",
+      "yield": {
+        "valor": 8.55,
+        "tipo": "YTM",
+        "as_of": "2026-06-30",
+        "fuente": "Factsheet oficial Man EM Corporate Credit Alternative IV USD, 30-Jun-2026",
+        "de_factsheet": true
+      },
+      "countries": [
+        {
+          "c": "EM",
+          "p": 100
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "IE000OE87WX6": {
+      "ticker": "MANIG",
+      "name": "Man GLG Global Investment Grade Opportunities IYV USD",
+      "sleeve": "Fixed Income",
+      "archivo": "MANIG.json",
+      "as_of_factsheet": "2026-03-31",
+      "yield": {
+        "valor": 7.1,
+        "tipo": "YTM",
+        "as_of": "2026-03-31",
+        "fuente": "Man GLG factsheet (manual)",
+        "de_factsheet": true
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 55
+        },
+        {
+          "c": "OTHER",
+          "p": 21
+        },
+        {
+          "c": "UK",
+          "p": 10
+        },
+        {
+          "c": "DE",
+          "p": 8
+        },
+        {
+          "c": "FR",
+          "p": 6
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "LU1985812756": {
+      "ticker": "MFSCV",
+      "name": "MFS Meridian Contrarian Value I1",
+      "sleeve": "Equity",
+      "archivo": "MFSCV.json",
+      "as_of_factsheet": "2026-03-31",
+      "yield": {
+        "valor": 1.1,
+        "tipo": "Distribution Yield",
+        "as_of": "2026-05-14",
+        "fuente": "MFS Contrarian — accumulating",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 40
+        },
+        {
+          "c": "UK",
+          "p": 12
+        },
+        {
+          "c": "OTHER",
+          "p": 11
+        },
+        {
+          "c": "FR",
+          "p": 10
+        },
+        {
+          "c": "DE",
+          "p": 9
+        },
+        {
+          "c": "JP",
+          "p": 7
+        },
+        {
+          "c": "CH",
+          "p": 6
+        },
+        {
+          "c": "NL",
+          "p": 5
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "IE00BFMHRK20": {
+      "ticker": "NBGMT",
+      "name": "NB Global Equity Megatrends I",
+      "sleeve": "Equity",
+      "archivo": "NBGMT.json",
+      "as_of_factsheet": "2018-04-27",
+      "yield": {
+        "valor": 0.8,
+        "tipo": "Distribution Yield",
+        "as_of": "2026-05-14",
+        "fuente": "NB Megatrends — growth",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 58
+        },
+        {
+          "c": "OTHER",
+          "p": 10
+        },
+        {
+          "c": "DE",
+          "p": 8
+        },
+        {
+          "c": "TW",
+          "p": 6
+        },
+        {
+          "c": "UK",
+          "p": 5
+        },
+        {
+          "c": "JP",
+          "p": 5
+        },
+        {
+          "c": "KR",
+          "p": 4
+        },
+        {
+          "c": "FR",
+          "p": 4
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "IE00B29K0P99": {
+      "ticker": "PIMCO-EM",
+      "name": "PIMCO GIS EM Local Bond I",
+      "sleeve": "Fixed Income",
+      "archivo": "PIMCO-EM.json",
+      "as_of_factsheet": "2026-04-30",
+      "yield": {
+        "valor": 8.51,
+        "tipo": "YTM",
+        "as_of": "2026-04-30",
+        "fuente": "PIMCO website via Chrome MCP",
+        "de_factsheet": true
+      },
+      "countries": [
+        {
+          "c": "OTHER",
+          "p": 14.57
+        },
+        {
+          "c": "MX",
+          "p": 10.44
+        },
+        {
+          "c": "MY",
+          "p": 10.08
+        },
+        {
+          "c": "IN",
+          "p": 9.96
+        },
+        {
+          "c": "CN",
+          "p": 9.87
+        },
+        {
+          "c": "ID",
+          "p": 9.31
+        },
+        {
+          "c": "BR",
+          "p": 8.54
+        },
+        {
+          "c": "PL",
+          "p": 8.29
+        },
+        {
+          "c": "ZA",
+          "p": 7.69
+        },
+        {
+          "c": "TH",
+          "p": 6.56
+        },
+        {
+          "c": "CZ",
+          "p": 4.69
+        }
+      ],
+      "countries_de_factsheet": true,
+      "countries_as_of": "2026-04-30",
+      "countries_nota": null
+    },
+    "IE00B87KCF77": {
+      "ticker": "PIMCO-INC",
+      "name": "PIMCO GIS Income I",
+      "sleeve": "Fixed Income",
+      "archivo": "PIMCO-INC.json",
+      "as_of_factsheet": "2026-04-30",
+      "yield": {
+        "valor": 7.0,
+        "tipo": "YTM",
+        "as_of": "2026-04-30",
+        "fuente": "PIMCO website via Chrome MCP",
+        "de_factsheet": true
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 91.57
+        },
+        {
+          "c": "JP",
+          "p": 2.79
+        },
+        {
+          "c": "BR",
+          "p": 2.1
+        },
+        {
+          "c": "MX",
+          "p": 1.78
+        },
+        {
+          "c": "ZA",
+          "p": 1.51
+        },
+        {
+          "c": "IN",
+          "p": 1.06
+        },
+        {
+          "c": "TR",
+          "p": 0.99
+        },
+        {
+          "c": "CA",
+          "p": -0.8
+        },
+        {
+          "c": "IL",
+          "p": -0.84
+        },
+        {
+          "c": "SG",
+          "p": -1.22
+        }
+      ],
+      "countries_de_factsheet": true,
+      "countries_as_of": "2026-04-30",
+      "countries_nota": null
+    },
+    "IE00BDT57R20": {
+      "ticker": "PIMCO-LD",
+      "name": "PIMCO GIS Low Duration Income I",
+      "sleeve": "Fixed Income",
+      "archivo": "PIMCO-LD.json",
+      "as_of_factsheet": "2026-04-30",
+      "yield": {
+        "valor": 6.23,
+        "tipo": "YTM",
+        "as_of": "2026-04-30",
+        "fuente": "PIMCO website via Chrome MCP",
+        "de_factsheet": true
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 94.09
+        },
+        {
+          "c": "JP",
+          "p": 1.92
+        },
+        {
+          "c": "BR",
+          "p": 1.27
+        },
+        {
+          "c": "MX",
+          "p": 1.08
+        },
+        {
+          "c": "ZA",
+          "p": 0.98
+        },
+        {
+          "c": "TR",
+          "p": 0.93
+        },
+        {
+          "c": "IN",
+          "p": 0.54
+        },
+        {
+          "c": "IL",
+          "p": -0.4
+        },
+        {
+          "c": "CA",
+          "p": -0.41
+        },
+        {
+          "c": "SG",
+          "p": -0.61
+        }
+      ],
+      "countries_de_factsheet": true,
+      "countries_as_of": "2026-04-30",
+      "countries_nota": null
+    },
+    "LU2049315265": {
+      "ticker": "SGCB",
+      "name": "Schroder GAIA Cat Bond Class C",
+      "sleeve": "Fixed Income",
+      "archivo": "SGCB.json",
+      "as_of_factsheet": "2026-04-30",
+      "yield": {
+        "valor": 9.7,
+        "tipo": "YTM",
+        "as_of": "2026-04-30",
+        "fuente": "Schroder GAIA Cat Bond Ficha Mensual (Chrome MCP, schroders.es)",
+        "de_factsheet": true
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 80
+        },
+        {
+          "c": "EU",
+          "p": 10
+        },
+        {
+          "c": "JP",
+          "p": 5
+        },
+        {
+          "c": "OTHER",
+          "p": 5
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "XS2324777171": {
+      "ticker": "TGF",
+      "name": "Tenac Global Fund (TGF)",
+      "sleeve": "Fixed Income",
+      "archivo": "TGF.json",
+      "as_of_factsheet": "2026-08-31",
+      "yield": {
+        "valor": 8.11,
+        "tipo": "YTM",
+        "as_of": "2026-08-31",
+        "fuente": "Tenac (Nico Dujovne) — factsheet del manager",
+        "de_factsheet": true
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 40
+        },
+        {
+          "c": "EU",
+          "p": 20
+        },
+        {
+          "c": "UK",
+          "p": 15
+        },
+        {
+          "c": "LatAm",
+          "p": 15
+        },
+        {
+          "c": "OTHER",
+          "p": 10
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "IE00B6YCBF59": {
+      "ticker": "THOR",
+      "name": "Thornburg Equity Income Builder I",
+      "sleeve": "Equity",
+      "archivo": "THOR.json",
+      "as_of_factsheet": "2026-02-28",
+      "yield": {
+        "valor": 4.2,
+        "tipo": "Distribution Yield",
+        "as_of": "2026-05-14",
+        "fuente": "Thornburg EIB — dividend-focused",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 55
+        },
+        {
+          "c": "DE",
+          "p": 8
+        },
+        {
+          "c": "OTHER",
+          "p": 8
+        },
+        {
+          "c": "UK",
+          "p": 7
+        },
+        {
+          "c": "TW",
+          "p": 6
+        },
+        {
+          "c": "CH",
+          "p": 5
+        },
+        {
+          "c": "NL",
+          "p": 4
+        },
+        {
+          "c": "JP",
+          "p": 4
+        },
+        {
+          "c": "FR",
+          "p": 3
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-05-14",
+      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    }
+  }
+}

@@ -14,5 +14,16 @@
     "rating": "BBB"
   },
   "note": "USD-hedged share class. Benchmark ICE BofA Global Large Cap Corporate USD Hedged.",
-  "fi_stats_include": true
+  "fi_stats_include": true,
+  "countries": {
+    "US": 55,
+    "UK": 10,
+    "DE": 8,
+    "FR": 6,
+    "OTHER": 21
+  },
+  "countries_de_factsheet": false,
+  "countries_as_of": "2026-05-14",
+  "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta.",
+  "factsheet_url": "https://www.man.com/ucits/glg-global-investment-grade-opportunities"
 }

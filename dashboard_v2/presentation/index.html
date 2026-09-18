@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BIG Fund Dashboard v2</title>
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
-  <!-- funds_metadata.js: constantes globales COUNTRY_EXPOSURE, CURRENT_YIELD, COUNTRY_COLORS.
+  <!-- funds_metadata.js: constantes globales (BENCH_YIELD, LYNK_DATA, etc). Yield y paises
+       por fondo YA NO viven aca: salen de data/funds_index.json (ver build_funds_index.py).
        Cache buster inline via document.write para forzar refresh en cada load. -->
   <script>
     document.write('<script src="../../data/funds_metadata.js?_=' + Date.now() + '"><\/script>');
@@ -739,7 +740,7 @@
         <h2>📊 Holdings — Country Breakdown + Yield</h2>
         <div style="font-size:12px;color:var(--text-mute);margin-bottom:12px">
           Vista unificada por holding: peso, exposure geográfica (pills) y yield (con tipo + nota).
-          <span style="color:#e6a532">⚠</span> = yield con confirmación manual pendiente.
+          <span style="color:#e6a532">⚠</span> = dato sin factsheet en la carpeta que lo respalde.
         </div>
         <table>
           <thead><tr>
@@ -2392,6 +2393,11 @@
 
         // alts_liquidity.json — liquidity profile por holding del sleeve Alts
         try { window.__altsLiq = await loadLegacyJson("alts_liquidity"); } catch (e) { window.__altsLiq = null; }
+        // Fichas de fondos (yield + paises), una por holding, generadas desde
+        // data/funds/*.json. Reemplaza a CURRENT_YIELD / COUNTRY_EXPOSURE de
+        // funds_metadata.js, que eran una segunda copia a mano. Ver
+        // scripts/build_funds_index.py.
+        try { window.__fondos = (await loadLegacyJson("funds_index")).fondos; } catch (e) { window.__fondos = null; }
 
         // alts_external.json — holdings alternatives externos (CALP desde statement)
         try { window.__altsExt = await loadLegacyJson("alts_external"); } catch (e) { window.__altsExt = null; }
@@ -2501,14 +2507,20 @@
     }
     // ============================================================
     // GEOGRAPHY + YIELD (widget del tab "Geography · Yield")
-    // Consume funds_metadata.js (globals: COUNTRY_EXPOSURE + CURRENT_YIELD + COUNTRY_COLORS)
+    // Consume data/funds_index.json (window.__fondos: yield + paises por ISIN)
     // y positions.json live (window.__positions) para weights.
     // ============================================================
     let _geoyieldLoaded = false;
     function renderGeoyield() {
       if (_geoyieldLoaded) return;
-      if (typeof COUNTRY_EXPOSURE === "undefined" || typeof CURRENT_YIELD === "undefined") {
-        console.warn("funds_metadata.js no disponible");
+      // Las fichas salen de data/funds_index.json (una por holding). Antes eran
+      // CURRENT_YIELD / COUNTRY_EXPOSURE de funds_metadata.js: una segunda copia
+      // a mano que no coincidia con la de la slide 10 (PIMCO Income 4.38% vs
+      // 4.57%) y cuyos paises eran estimaciones redondas ("US 60%" contra 91.57%
+      // del factsheet). Ver scripts/build_funds_index.py.
+      const F = window.__fondos;
+      if (!F) {
+        console.warn("funds_index.json no disponible");
         return;
       }
       // ---- FUENTE: holdings_returns (canonical), NO positions.json ----
@@ -2566,8 +2578,8 @@
       // ==== COUNTRY BARS ====
       const totals = {};
       rows.forEach(r => {
-        const ce = COUNTRY_EXPOSURE[r.isin];
-        if (!ce) return;
+        const ce = (F[r.isin] || {}).countries;
+        if (!ce || !ce.length) return;
         ce.forEach(e => { totals[e.c] = (totals[e.c] || 0) + (r.pct * e.p) / 100; });
       });
       const tsum = Object.values(totals).reduce((a, b) => a + b, 0);
@@ -2587,7 +2599,7 @@
         GLOBAL: "#c9a961", EM: "#7ab89e", EU: "#4a7ab8", LatAm: "#7fa88f",
         OTHER: "#6b88a8"
       };
-      const colorFor = c => CC[c] || (typeof COUNTRY_COLORS !== "undefined" && COUNTRY_COLORS[c]) || "#6b88a8";
+      const colorFor = c => CC[c] || "#6b88a8";
 
       if (bars) bars.innerHTML = sorted.slice(0, 15).map(([c, v]) => {
         const color = colorFor(c);
@@ -2618,6 +2630,8 @@
       // holding sin metadata se ve como una celda vacia y nadie nota que el
       // total de abajo no lo incluye.
       let pctSinPais = 0, pctSinYield = 0;
+      // Lo que SI tiene dato, pero no sale de un factsheet de la carpeta.
+      let pctPaisEstimado = 0, pctYieldEstimado = 0;
       const faltanPais = [], faltanYield = [];
 
       ["Equity", "Fixed Income", "Alternatives", "Cash"].forEach(sleeve => {
@@ -2626,13 +2640,18 @@
         combined += `<tr style="background:${sleeveTint[sleeve]}"><td colspan="5" style="text-align:left;font-weight:700;color:var(--gold);padding:8px 10px;font-size:12px;letter-spacing:0.4px;text-transform:uppercase">${sleeve}</td></tr>`;
         hs.forEach(h => {
           const isin = h.isin;
-          const ce = COUNTRY_EXPOSURE[isin];
-          const yd = CURRENT_YIELD[isin];
+          const ficha = F[isin] || null;
+          const ce = ficha && ficha.countries && ficha.countries.length ? ficha.countries : null;
+          const yd = ficha ? ficha.yield : null;
           const pct = h.pct;
           const name = h.name;
+          const etiqueta = h.ticker || isin || name;
 
-          if (!ce) { pctSinPais += pct; faltanPais.push(h.ticker || isin || name); }
-          if (!yd || yd.y === null) { pctSinYield += pct; faltanYield.push(h.ticker || isin || name); }
+          if (!ce) { pctSinPais += pct; faltanPais.push(etiqueta); }
+          else if (!ficha.countries_de_factsheet) { pctPaisEstimado += pct; }
+          // Yield CERO no es un dato faltante: GLD e IBIT rinden 0 de verdad.
+          if (!yd || yd.valor === null || yd.valor === undefined) { pctSinYield += pct; faltanYield.push(etiqueta); }
+          else if (!yd.de_factsheet) { pctYieldEstimado += pct; }
 
           // Country pills
           const pills = ce
@@ -2643,18 +2662,22 @@
             : `<span style="color:var(--text-mute);font-size:11px;font-style:italic">sin data</span>`;
 
           // Yield cell
+          // ⚠ = el dato NO sale de un factsheet de la carpeta (estimacion previa).
+          const sinRespaldo = yd && !yd.de_factsheet
+            ? ' <span title="sin factsheet que lo respalde" style="color:#e6a532;font-size:10px">⚠</span>' : "";
           let ytxt, ttxt;
           if (yd) {
-            if (yd.y === null || yd.y === 0) {
-              ytxt = `<span style="color:var(--text-mute);font-weight:600">N/A</span>`;
+            if (yd.valor === null || yd.valor === undefined || yd.valor === 0) {
+              ytxt = `<span style="color:var(--text-mute);font-weight:600">N/A</span>${sinRespaldo}`;
             } else {
-              ytxt = `<strong style="color:var(--gold);font-size:13px">${yd.y.toFixed(2)}%</strong>${yd.m ? ' <span title="requiere confirmación manual" style="color:#e6a532;font-size:10px">⚠</span>' : ""}`;
-              weightedYield += (pct * yd.y) / 100;
+              ytxt = `<strong style="color:var(--gold);font-size:13px">${yd.valor.toFixed(2)}%</strong>${sinRespaldo}`;
+              weightedYield += (pct * yd.valor) / 100;
               pctWithYield += pct;
             }
-            if (yd.m) manualCount++;
-            if (yd.y === null || yd.y === 0) noYieldCount++;
-            ttxt = `<div style="font-size:11px;color:var(--text-mute);font-weight:600">${yd.t}</div><div style="font-size:10px;color:var(--text-mute);opacity:0.7;margin-top:1px">${yd.n}</div>`;
+            if (!yd.de_factsheet) manualCount++;
+            if (yd.valor === null || yd.valor === undefined || yd.valor === 0) noYieldCount++;
+            const fecha = yd.as_of ? ` · ${yd.as_of}` : "";
+            ttxt = `<div style="font-size:11px;color:var(--text-mute);font-weight:600">${yd.tipo || "—"}${fecha}</div><div style="font-size:10px;color:var(--text-mute);opacity:0.7;margin-top:1px">${yd.fuente || ""}</div>`;
           } else {
             ytxt = `<span style="color:var(--text-mute);font-style:italic">no data</span>`;
             ttxt = `<span style="color:var(--text-mute);font-size:11px;font-style:italic">—</span>`;
@@ -2731,13 +2754,18 @@
           partes.push(`<b>${pctSinYield.toFixed(1)}%</b> sin yield cargado `
             + `(${faltanYield.join(", ")}) — cuenta como 0% en el Weighted Yield`);
         }
-        if (typeof METADATA_LAST_REVIEW !== "undefined") {
-          partes.push(`Metadata de país y yield revisada por última vez el `
-            + `<b>${METADATA_LAST_REVIEW}</b>; se carga a mano desde los factsheets`);
+        // Lo que tiene numero pero sin factsheet detras: se muestra, pero se avisa.
+        if (pctYieldEstimado > 0.005) {
+          partes.push(`<b>${pctYieldEstimado.toFixed(1)}%</b> con yield estimado, sin factsheet `
+            + `en la carpeta que lo respalde (marcado ⚠ en la tabla)`);
+        }
+        if (pctPaisEstimado > 0.005) {
+          partes.push(`<b>${pctPaisEstimado.toFixed(1)}%</b> con países estimados, sin factsheet `
+            + `en la carpeta que los respalde`);
         }
         cob.innerHTML = partes.length
           ? "⚠️ " + partes.join("<br>⚠️ ")
-          : "✅ Todos los holdings tienen país y yield cargados.";
+          : "✅ Todos los holdings tienen país y yield respaldados por factsheet.";
         cob.style.display = "";
       }
 

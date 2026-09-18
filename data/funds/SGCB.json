@@ -31,5 +31,15 @@
     }
   },
   "note": "Cat bond / ILS (insurance-linked). NO tiene metricas de bono tradicional: duration de tasa ~0 (floating SOFR+spread), sin rating crediticio (NR), riesgo medido via Expected Loss (-3.2%) no spread vs UST. ytw/current_yield = Fund Yield del factsheet (9.7%). maturity = weighted avg life (~2.2y). Datos reales del factsheet Schroders Abr-2026 (reemplazo el placeholder generico BBB+/dur4/mat8 que estaba mal).",
-  "fi_stats_include": true
+  "fi_stats_include": true,
+  "countries": {
+    "US": 80,
+    "JP": 5,
+    "EU": 10,
+    "OTHER": 5
+  },
+  "countries_de_factsheet": false,
+  "countries_as_of": "2026-05-14",
+  "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta.",
+  "factsheet_url": "https://www.schroders.com/es-es/es/inversores-particulares/centro-de-fondos/?language=es&location=es&channel=inversores-particulares&clientId=schdr&clientVersion=v1&externalId=SCHDR_F0000147B0&r=%2Ffund%2FSCHDR_F0000147B0%2F&fundName=Schroder-GAIA-Cat-Bond-C-Accumulation-USD"
 }

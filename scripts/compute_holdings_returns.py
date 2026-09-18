@@ -61,6 +61,10 @@ PERSHING_TO_MY = {
     'G594CD616':   ('MANEM',     'Fixed Income'),
     'G5478EAA2':   ('TGF',       'Fixed Income'),
     'L8147L735':   ('SGCB',      'Fixed Income'),
+    # GAM Swiss Re Cat Bond, clase Institutional. Pershing lo identifica por el
+    # ISIN, no por CUSIP como al resto. Entro en Sep-2026 sin mapeo y quedo con
+    # el ISIN como ticker, que es lo que hacia fallar al validador.
+    'IE00B6WYL972': ('GAMCB',    'Fixed Income'),
     'HEWJ':        ('HEWJ',     'Equity'),
     'MAGS':        ('MAGS',     'Equity'),
     # Alternatives
