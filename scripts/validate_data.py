@@ -458,7 +458,45 @@ def check_fi_stats_derivado(errors, warnings):
     doc = _load(ROOT / "data" / "fi_breakdown_latest.json") or {}
     filas = {f["metric"]: f.get("big") for f in (doc.get("fi_stats") or {}).get("rows", [])}
 
+    # ---- ¿Llego un factsheet nuevo DESPUES del cierre? ----
+    #
+    # La ficha de cada fondo es una sola fuente con dos cadencias (2026-09-18):
+    # el tab Geography la lee en vivo, la slide 10 la toma una vez por mes, al
+    # cierre. Entonces, cuando Lucas sube un factsheet nuevo a mitad de mes, el
+    # numero guardado de la slide (el del cierre anterior, el que YA SE MANDO)
+    # deja de coincidir con las fichas -- y eso es correcto, no un error.
+    #
+    # Sin esta distincion, cada factsheet cargado bloquearia el deploy hasta el
+    # dia 1. El archivo guarda con que factsheet se armo cada fondo
+    # (factsheets_usados); si siguen siendo los mismos, el numero TIENE que
+    # coincidir exacto (asi se sigue atrapando una edicion a mano). Si cambiaron,
+    # se avisa que la slide los toma en el proximo cierre.
+    usados = ((doc.get("fi_stats") or {}).get("_regla_inclusion") or {}).get("factsheets_usados")
+    fichas_nuevas = usados is not None and usados != r["fichas"]
+    if fichas_nuevas:
+        cambios = sorted(
+            f"{tk} {usados.get(tk, '—')} -> {r['fichas'].get(tk, '—')}"
+            for tk in set(usados) | set(r["fichas"])
+            if usados.get(tk) != r["fichas"].get(tk)
+        )
+        warnings.append(
+            "fi_stats: la slide 10 se armo con factsheets anteriores a los que hay "
+            "hoy en data/funds (" + "; ".join(cambios) + "). No es un error: la "
+            "slide los toma en el proximo cierre (monthly-fi-stats.yml, dia 1). "
+            "El tab Geography ya muestra los nuevos."
+        )
+        print("  [INFO]  factsheets nuevos desde el cierre - la slide los toma el dia 1:")
+        for c in cambios:
+            print(f"          {c}")
+
     for etiqueta, _ in build_fi_stats.METRICAS:
+        if fichas_nuevas:
+            # Solo se saltea la COMPARACION de numeros. Los chequeos de abajo
+            # (fondo incluido sin YTW, sin flag) siguen corriendo: esos son
+            # errores reales con o sin factsheet nuevo.
+            print(f"  [--]    {etiqueta:14} {filas.get(etiqueta)} (cierre)  vs  "
+                  f"{r['valores'][etiqueta]} (con las fichas de hoy)")
+            continue
         publicado = filas.get(etiqueta)
         calculado = r["valores"][etiqueta]
         if publicado is None:
