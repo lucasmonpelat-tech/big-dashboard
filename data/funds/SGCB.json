@@ -11,7 +11,6 @@
     "ytw": 9.7,
     "duration": 0.3,
     "maturity": 2.2,
-    "current_yield": 9.7,
     "rating": "NR"
   },
   "cat_bond_metrics": {
@@ -42,5 +41,12 @@
   "countries_as_of": "2026-05-14",
   "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta.",
   "factsheet_url": "https://www.schroders.com/es-es/es/inversores-particulares/centro-de-fondos/?language=es&location=es&channel=inversores-particulares&clientId=schdr&clientVersion=v1&externalId=SCHDR_F0000147B0&r=%2Ffund%2FSCHDR_F0000147B0%2F&fundName=Schroder-GAIA-Cat-Bond-C-Accumulation-USD",
-  "fi_metrics_de_factsheet": false
+  "fi_metrics_de_factsheet": false,
+  "current_yield_ref": {
+    "valor": 9.7,
+    "as_of": "2026-04-30",
+    "fuente": "web de Schroders (Abr-2026): es el mismo 'Fund Yield' que ytw, no un current yield aparte",
+    "de_factsheet": false,
+    "nota": "Solo referencia, no se muestra (Lucas 2026-09-18: YTM solo)."
+  }
 }

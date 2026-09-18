@@ -8,7 +8,6 @@
   "as_of_factsheet": "2026-04-30",
   "fi_metrics": {
     "ytw": 8.51,
-    "current_yield": 5.96,
     "duration": 5.31,
     "maturity": 7.32,
     "rating": "BBB"
@@ -30,5 +29,12 @@
   "countries_de_factsheet": true,
   "countries_as_of": "2026-04-30",
   "factsheet_url": "https://www.pimco.com/gb/en/investments/gis/emerging-local-bond-fund/inst-usd-accumulation",
-  "fi_metrics_de_factsheet": false
+  "fi_metrics_de_factsheet": false,
+  "current_yield_ref": {
+    "valor": 5.96,
+    "as_of": "2026-04-30",
+    "fuente": "web de PIMCO (Abr-2026), no un factsheet de la carpeta",
+    "de_factsheet": false,
+    "nota": "Solo referencia, no se muestra (Lucas 2026-09-18: YTM solo)."
+  }
 }

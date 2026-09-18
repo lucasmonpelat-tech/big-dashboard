@@ -28,5 +28,12 @@
   "factsheet_url": "https://www.man.com/ucits/glg-global-investment-grade-opportunities",
   "source_file": "Dropbox/2026/Research Fondos/Renta Fija/Man IG Opportunities/Man Global Investment Grade Opportunities IYV USD - Jun26.pdf",
   "fi_metrics_de_factsheet": true,
-  "fi_metrics_nota": "ytw = Yield to Worst hedged a USD (6.82, igual al YTM). duration = MODIFIED duration (5.58), que es la que usa el resto del sleeve -- NO la 'Spread Duration' 3.16 que aparece primero en el factsheet, ni la effective 5.51. maturity: el factsheet NO publica vencimiento promedio; queda el 5.5 de la carga de Mar-2026 hasta tener el dato. rating: se mantiene BBB (el factsheet trae breakdown por rating, no un promedio)."
+  "fi_metrics_nota": "ytw = Yield to Worst hedged a USD (6.82, igual al YTM). duration = MODIFIED duration (5.58), que es la que usa el resto del sleeve -- NO la 'Spread Duration' 3.16 que aparece primero en el factsheet, ni la effective 5.51. maturity: el factsheet NO publica vencimiento promedio; queda el 5.5 de la carga de Mar-2026 hasta tener el dato. rating: se mantiene BBB (el factsheet trae breakdown por rating, no un promedio).",
+  "current_yield_ref": {
+    "valor": 5.84,
+    "as_of": "2026-06-30",
+    "fuente": "Running Yield, factsheet Man GLG Global IG Opportunities 30-Jun-2026",
+    "nota": "Solo referencia, no se muestra (Lucas 2026-09-18: YTM solo). Man lo llama running yield = cupon / precio.",
+    "de_factsheet": true
+  }
 }

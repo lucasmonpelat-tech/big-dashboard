@@ -10,7 +10,6 @@
     "ytw": 8.11,
     "duration": -1.62,
     "maturity": 11.92,
-    "current_yield": 7.32,
     "rating": "—"
   },
   "note": "Duracion: se usa RATES DURATION (-1.62), que es la sensibilidad a la tasa libre de riesgo y es lo comparable contra PIMCO/Man, que reportan duracion de tasa. El fondo esta SHORT tasa. La credit duration (+2.91) mide otro riesgo (spreads) y no se suma: la suma de ambas da +1.29 pero mezcla dos factores distintos. Decision de Lucas 2026-09-08. El factsheet reporta YTM (8.11), no YTW. No publica vencimiento promedio: el 11.92 queda del reporte anterior del manager (30-Abr-2026) y NO es del factsheet nuevo. No afecta a nada porque TGF esta excluido de los stats del sleeve. Class share sigue pendiente de confirmar con Nico (XS2324777171).",
@@ -42,5 +41,12 @@
   "countries_as_of": "2026-05-14",
   "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta.",
   "factsheet_url": "Tenac Global Fund - direct with Nico Dujovne",
-  "fi_metrics_de_factsheet": true
+  "fi_metrics_de_factsheet": true,
+  "current_yield_ref": {
+    "valor": 7.32,
+    "as_of": "2026-08-31",
+    "fuente": "carga previa; NO aparece en el factsheet de Ago-2026 de la carpeta",
+    "de_factsheet": false,
+    "nota": "Solo referencia, no se muestra (Lucas 2026-09-18: YTM solo)."
+  }
 }
