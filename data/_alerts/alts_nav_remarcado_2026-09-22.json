@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-22",
+  "tipo": "alts_nav_remarcado",
+  "issues": [
+    "HLGPI: precio 140.5627 -> 142.5173 (+1.39%). MV $1,432,710.76 -> $1,452,633.38. Detectado el 2026-09-22."
+  ],
+  "accion": "Pershing re-marco el NAV de un alternativo iliquido. Revisar que el movimiento sea razonable y, si corresponde, avisarle al equipo.",
+  "detalle": [
+    {
+      "ticker": "HLGPI",
+      "senal": "precio",
+      "antes": 140.5627,
+      "ahora": 142.5173,
+      "var_pct": 1.39,
+      "price_date_antes": "2026-07-31",
+      "price_date_ahora": "2026-08-31",
+      "mv_antes": 1432710.76,
+      "mv_ahora": 1452633.38,
+      "detectado_en": "2026-09-22",
+      "contra": "2026-09-21"
+    }
+  ]
+}

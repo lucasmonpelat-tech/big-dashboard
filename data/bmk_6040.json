@@ -1,25 +1,25 @@
 {
-  "refreshedAt": "2026-09-21T13:11:40.832147",
+  "refreshedAt": "2026-09-22T13:11:30.968741",
   "source": "Yahoo Finance AOR (iShares Core Growth Allocation 60/40)",
   "note": "Single ETF que replica 60% stocks / 40% bonds. Composicion: ITOT + IDEV + IEMG + IAGG + AGG. Reemplaza el calculo viejo 0.6*ACWI + 0.4*AGG.",
   "ticker": "AOR",
   "inception": "2025-06-27",
   "periods": {
-    "latest_date": "2026-09-18",
-    "latest_value": 116.5797,
+    "latest_date": "2026-09-21",
+    "latest_value": 117.7273,
     "returns": {
-      "1W": -0.4,
-      "1M": -1.17,
-      "3M": -0.22,
-      "6M": 10.02,
-      "YTD": 7.58,
-      "SI": 16.58,
-      "Annualized": 13.32
+      "1W": 1.15,
+      "1M": -0.13,
+      "3M": 0.99,
+      "6M": 9.75,
+      "YTD": 8.64,
+      "SI": 17.73,
+      "Annualized": 14.13
     },
-    "volatility": 8.76,
-    "sharpe_approx": 1.03
+    "volatility": 8.79,
+    "sharpe_approx": 1.12
   },
-  "series_length": 309,
+  "series_length": 310,
   "series": [
     {
       "date": "2025-06-27",
@@ -55,11 +55,11 @@
     },
     {
       "date": "2025-07-10",
-      "value": 100.901
+      "value": 100.9011
     },
     {
       "date": "2025-07-11",
-      "value": 100.4246
+      "value": 100.4245
     },
     {
       "date": "2025-07-14",
@@ -355,7 +355,7 @@
     },
     {
       "date": "2025-10-24",
-      "value": 107.3929
+      "value": 107.393
     },
     {
       "date": "2025-10-27",
@@ -375,11 +375,11 @@
     },
     {
       "date": "2025-10-31",
-      "value": 107.3929
+      "value": 107.393
     },
     {
       "date": "2025-11-03",
-      "value": 107.426
+      "value": 107.4259
     },
     {
       "date": "2025-11-04",
@@ -455,7 +455,7 @@
     },
     {
       "date": "2025-12-01",
-      "value": 107.36
+      "value": 107.3599
     },
     {
       "date": "2025-12-02",
@@ -1256,6 +1256,10 @@
     {
       "date": "2026-09-18",
       "value": 116.5797
+    },
+    {
+      "date": "2026-09-21",
+      "value": 117.7273
     }
   ]
 }
