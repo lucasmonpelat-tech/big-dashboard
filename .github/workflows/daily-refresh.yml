@@ -378,6 +378,28 @@ jobs:
               --archivo data/equity_top10_consolidated.json
           fi
 
+      # Overlap del sleeve Equity contra el top 10 de ACWI. Mismo caso que el
+      # look-through: era manual y quedo del 25-Ago, contando a LGLI (vendido el
+      # 24-Ago) con 5.86% del sleeve. Eso diluia a todos los demas y hacia ver la
+      # exposicion al top 10 de ACWI en 14.93% cuando es 18.05%.
+      #
+      # OJO: el lado ACWI sale de data/acwi_holdings/acwi_holdings.csv, que se
+      # baja A MANO y hoy es de Abril-2026. El archivo declara esa fecha en su
+      # campo `source`, asi que la vejez queda a la vista; refrescar el CSV es
+      # aparte.
+      - name: Overlap Equity vs top 10 de ACWI
+        continue-on-error: true
+        run: |
+          A="data/_alerts/acwi_overlap_$(date -u +%Y-%m-%d).json"
+          rc=0
+          python scripts/acwi_overlap.py || rc=$?
+          if [ "$rc" -ne 0 ]; then
+            python scripts/write_crash_alert.py --path "$A" \
+              --tipo acwi_overlap_crash --rc "$rc" \
+              --que "el overlap contra ACWI (acwi_overlap.py)" \
+              --archivo data/acwi_overlap.json
+          fi
+
       - name: Commit and push data/ if changed
         id: commit
         run: |
