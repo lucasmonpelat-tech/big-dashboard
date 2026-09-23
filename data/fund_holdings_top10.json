@@ -19,19 +19,19 @@
       "BRK.B": 1.45,
       "TSLA": 1.42
     },
-    "_as_of": "2026-07-31",
+    "_as_of": "2026-09-22",
     "_factsheet_top10": {
-      "NVDA": 7.54,
-      "AAPL": 7.03,
-      "MSFT": 5.35,
-      "AMZN": 4.12,
-      "GOOGL": 3.24,
-      "AVGO": 2.86,
-      "GOOG": 2.61,
-      "META": 1.9,
-      "JPM": 1.46,
-      "BRK.B": 1.45,
-      "TSLA": 1.42
+      "NVDA": 8.26,
+      "AAPL": 7.39,
+      "MSFT": 5.51,
+      "AMZN": 3.73,
+      "GOOGL": 3.07,
+      "AVGO": 2.59,
+      "GOOG": 2.46,
+      "META": 2.42,
+      "MU": 1.85,
+      "TSLA": 1.59,
+      "_note": "Derivado de data/fund_holdings_full/CSPX.json por scripts/fetch_cspx_holdings.py. No editar a mano."
     },
     "_note": "El factsheet publica top-10 y TSLA quedo #11 (detras de JPM 1.46 y BRK.B 1.45). Se la agrega igual con peso 1.42% (iShares IVV / S&P 500 al 13-Ago-2026) porque CSPX replica el indice completo: omitirla hace que el widget BIG vs ACWI muestre un underweight falso en Tesla. Los 10 del factsheet son al 31-Jul-2026. De los ACWI top-10, el unico que CSPX legitimamente NO tiene es 2330 (TSM, Taiwan, fuera del S&P 500)."
   },

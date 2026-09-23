@@ -87,6 +87,26 @@ def read_fund_holdings():
         return json.load(f)
 
 
+def read_full_holdings(ticker):
+    """Cartera completa del fondo, si la tenemos. {holdings, as_of, n_holdings}.
+
+    Hoy solo existe para CSPX (scripts/fetch_cspx_holdings.py). Los demas fondos
+    son activos y no publican la cartera entera: siguen con su top 10.
+    """
+    p = ROOT / "data" / "fund_holdings_full" / f"{ticker}.json"
+    if not p.exists():
+        return None
+    try:
+        d = json.loads(p.read_text(encoding="utf-8"))
+    except Exception as e:
+        print(f"  WARN: no pude leer {p.name} ({e}) -> uso el top 10")
+        return None
+    h = d.get("holdings")
+    if not isinstance(h, dict) or not h:
+        return None
+    return {"holdings": h, "as_of": d.get("as_of"), "n_holdings": len(h)}
+
+
 def fund_holdings_by_ticker(fund_data):
     """Holdings del fondo indexados por TICKER.
 
@@ -139,17 +159,34 @@ def compute_overlap():
     # Holdings por ticker de cada fondo, una sola vez
     por_fondo = {}
     sin_resolver = {}
+    completos = {}
     for pos in equity_positions:
-        fd = fund_holdings.get(pos["ticker"])
+        tk = pos["ticker"]
+
+        # Cartera COMPLETA si la tenemos (hoy solo CSPX). Con el top 10 a secas,
+        # cualquier nombre del indice que no entre en ese top cuenta como CERO y
+        # el underweight sale sobreestimado: paso con Micron, que tenemos via
+        # CSPX pero figuraba en 0.00%.
+        full = read_full_holdings(tk)
+        if full:
+            por_fondo[tk] = full["holdings"]
+            completos[tk] = full
+            continue
+
+        fd = fund_holdings.get(tk)
         if not isinstance(fd, dict):
-            print(f"  WARN: {pos['ticker']} esta en el sleeve pero no en "
+            print(f"  WARN: {tk} esta en el sleeve pero no en "
                   f"fund_holdings_top10.json -> aporta 0")
-            por_fondo[pos["ticker"]] = {}
+            por_fondo[tk] = {}
             continue
         by_ticker, no_res = fund_holdings_by_ticker(fd)
-        por_fondo[pos["ticker"]] = by_ticker
+        por_fondo[tk] = by_ticker
         if no_res:
-            sin_resolver[pos["ticker"]] = no_res
+            sin_resolver[tk] = no_res
+
+    for tk, full in completos.items():
+        print(f"  {tk}: cartera COMPLETA ({full['n_holdings']} holdings, "
+              f"as of {full['as_of']})")
 
     for acwi_holding in acwi_top10:
         ticker = acwi_holding["ticker"]

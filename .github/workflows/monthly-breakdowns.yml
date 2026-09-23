@@ -63,6 +63,14 @@ jobs:
         continue-on-error: true
         run: python scripts/fetch_acwi_holdings.py
 
+      # Cartera COMPLETA de CSPX (32.6% del sleeve Equity). Con solo su top 10,
+      # cualquier nombre del indice fuera de ese top contaba CERO en el overlap:
+      # Micron figuraba en 0.00% teniendolo via CSPX. Ademas deja sincronizado el
+      # top 10 de la tarjeta, que antes mostraba otra fecha que el calculo.
+      - name: Fetch CSPX holdings completos
+        continue-on-error: true
+        run: python scripts/fetch_cspx_holdings.py
+
       # === RECOMPUTE FI sub-asset (BIG-level) ===
       - name: Compute FI sub-asset BIG (if script exists)
         run: |
@@ -79,7 +87,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/breakdowns/ data/acwi_holdings/
+          git add data/breakdowns/ data/acwi_holdings/ data/fund_holdings_full/ data/fund_holdings_top10.json
           if git diff --cached --quiet; then
             echo "no changes en data/breakdowns/" && echo "committed=false" >> $GITHUB_OUTPUT && exit 0
           fi
