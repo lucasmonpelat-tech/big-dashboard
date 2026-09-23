@@ -228,7 +228,7 @@ def _compute_bench_price_return(bench_prices: dict, anchor_date: str) -> float |
 
 def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
                   bench_prices: dict, v0_by_isin: dict, bench_label: str,
-                  race_by_isin: dict) -> dict:
+                  race_by_isin: dict, px0_by_isin: dict | None = None) -> dict:
     """Calcula UN holding.
     - MV/cost/return_pct (SI): Pershing UGL (MWR gl/cost).
     - ytd_pct: price return desde 31-Dic-25 (source: race_by_isin[isin].ytd_return_pct).
@@ -322,9 +322,25 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
     bench_ytd_dw_pct = None
     alpha_ytd_pp = None
 
+    ytd_metodo = None
+    ytd_as_of = None
+
     race_h = race_by_isin.get(isin) if isin else None
+    px_anchor = px0_by_isin.get(isin) if isin else None
+    px_hoy = (pos or {}).get("market_price_ccy")
+
     if race_h is not None and race_h.get("ytd_return_pct") is not None:
         ytd_pct = round(float(race_h["ytd_return_pct"]), 2)
+        ytd_metodo = "precio (race)"
+    elif px_anchor and px_hoy:
+        # YTD de PRECIO contra el anchor del 31-Dic. Es el retorno DEL FONDO en el
+        # año, no el nuestro desde que lo compramos. Para los ilíquidos el precio
+        # de Pershing es el NAV del gestor, y su price_date dice a qué cierre
+        # corresponde: se guarda, porque un YTD "al 31-Ago" no es al día de hoy y
+        # mostrarlo sin la fecha sería mentir.
+        ytd_pct = round((float(px_hoy) / px_anchor - 1) * 100, 2)
+        ytd_metodo = "precio vs anchor 31-Dic"
+        ytd_as_of = (pos or {}).get("price_date")
     elif h_legacy.get("ytd_pct") is not None:
         # FIX 2026-07-28: alts (CALP, HLEND, GCRED, IBIT, GLD, FLEX, HLGPI...)
         # no tienen race_by_isin (siempre {} para el sleeve alternativo, ver
@@ -336,6 +352,7 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
         # holdings_returns_daily.py), simplemente nunca se leia aca. Usarlo
         # como fuente antes de recalcular con MWR.
         ytd_pct = round(float(h_legacy["ytd_pct"]), 2)
+        ytd_metodo = "Pershing UGL (MV vs costo, NO es YTD de calendario)"
     elif pos and agg:
         cost_pre_ytd = agg.get("cost_pre_ytd", 0) or 0
         buys_ytd_list = agg.get("buys_ytd", [])
@@ -350,6 +367,7 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
             capital_ytd = v0_real + buys_ytd_total
         if capital_ytd > 0 and mv is not None:
             ytd_pct = round((mv - v0_real - buys_ytd_total) / capital_ytd * 100, 2)
+            ytd_metodo = "MWR Simple Dietz (anchor de MV)"
 
     # ===== Bench YTD (Jul-2026: PRICE return desde 31-Dic-25) =====
     bench_ytd_dw_pct = _compute_bench_price_return(bench_prices, "2025-12-31")
@@ -378,6 +396,11 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
         "bench_dw_pct": bench_dw_pct,
         "alpha_real_pp": alpha_real_pp,
         "ytd_pct": ytd_pct,
+        # De donde salio el YTD y a que cierre corresponde. Sin esto, un YTD de
+        # un iliquido parece "de hoy" cuando en realidad es del ultimo NAV que
+        # publico el gestor.
+        "ytd_metodo": ytd_metodo,
+        "ytd_as_of": ytd_as_of,
         "bench_ytd_pct": bench_ytd_dw_pct,
         "alpha_ytd_pp": alpha_ytd_pp,
         "first_buy_date": h_legacy.get("first_buy_date"),
@@ -385,6 +408,41 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
         "buys_history": buys,
         "_mv_source": source_note,
     }
+
+
+def _load_year_start_prices() -> dict:
+    """{isin: price_2025_dec_31} — para YTD de PRECIO (TWR del fondo).
+
+    POR QUE (2026-09-23)
+    --------------------
+    Los alternativos ilíquidos no tenían YTD de calendario. Caían al `ytd_pct`
+    del legacy, que sale de Pershing UGL y es MV contra COSTO: para HLGPI daba
+    3.76%, que es lo que rindió DESDE QUE LO COMPRAMOS (Jun-2026), no en el año.
+    El dashboard lo tapaba con un override manual de `alts_factsheet_ytd.json`
+    que había que cargar a mano de cada factsheet — el de HLGPI tenía 5 meses y
+    decía 5.33% cuando el real al cierre de Agosto era 11.65%.
+
+    Ahora: si el fondo tiene `price_2025_dec_31` en year_start_anchors.json, el
+    YTD se calcula precio de Pershing / ese anchor. Pershing marca al NAV oficial
+    del gestor — verificado con FLEX: Franklin reporta 31.25 al 31-May y Pershing
+    tiene 31.25 exacto — y publica el re-marcado apenas sale, así que el número
+    se actualiza solo.
+
+    Para fondos comprados a mitad de año Pershing NO tiene precio al 31-Dic (no
+    había posición), así que el anchor se carga a mano: se despeja del factsheet
+    (NAV a una fecha / (1 + YTD a esa fecha)). Va con `anchor_locked` para que el
+    cron no lo pise, como el resto.
+    """
+    p = DATA_DIR / "year_start_anchors.json"
+    if not p.exists():
+        return {}
+    ya = json.load(open(p, encoding='utf-8'))
+    out = {}
+    for isin, v in (ya.get('anchors_2026') or {}).items():
+        px = v.get('price_2025_dec_31')
+        if px:
+            out[isin] = float(px)
+    return out
 
 
 def _load_year_start_anchors() -> dict:
@@ -495,6 +553,7 @@ def build(as_of: str) -> dict:
         pnl = json.load(f)
     pnl_agg = _agg_by_security(pnl)
     v0_by_isin = _load_year_start_anchors()
+    px0_by_isin = _load_year_start_prices()
 
     # Race JSONs (SI/YTD price-based por ISIN) — Jul-2026 nueva metodología
     equity_race = _load_race_by_isin(DATA_DIR / "equity_race.json")
@@ -547,7 +606,7 @@ def build(as_of: str) -> dict:
                 legacy_tickers_seen.add(tk)
             hr_out = build_holding(h_legacy, positions, pnl_agg,
                                    bench_prices, v0_by_isin, bench_label,
-                                   race_by_isin)
+                                   race_by_isin, px0_by_isin)
             # Solo incluimos OPEN (los CLOSED reales quedan fuera del widget)
             if hr_out.get("status") == "OPEN":
                 holdings_out.append(hr_out)
@@ -574,7 +633,7 @@ def build(as_of: str) -> dict:
             h_synth = _make_synthetic_legacy(pos, pnl_agg)
             hr_out = build_holding(h_synth, positions, pnl_agg,
                                    bench_prices, v0_by_isin, bench_label,
-                                   race_by_isin)
+                                   race_by_isin, px0_by_isin)
             if hr_out.get("status") == "OPEN":
                 hr_out["_mv_source"] = hr_out.get("_mv_source") or "positions_sweep"
                 holdings_out.append(hr_out)

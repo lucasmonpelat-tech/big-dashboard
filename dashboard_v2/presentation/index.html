@@ -1448,14 +1448,30 @@
       const rows = sorted.map(h => {
         const weight = totalMv > 0 ? (h.mv_usd / totalMv) * 100 : 0;
         if (isAlts) {
-          // Override YTD desde factsheet cuando existe (para PE, infra, private credit).
-          // Los holdings líquidos (GLD, IBIT) se quedan con el YTD calculado (spot T-1).
-          const override = fsYtd[h.isin];
+          // PRIORIDAD DEL YTD (cambiada 2026-09-23):
+          //   1. Calculado contra el anchor del 31-Dic (precio de Pershing).
+          //   2. Override manual del factsheet, si el fondo no tiene anchor.
+          //   3. Lo que venga calculado.
+          //
+          // Antes el override manual ganaba SIEMPRE, y por eso HLGPI mostraba
+          // 5.33% (factsheet de Abril) cuando al cierre de Agosto era 11.65%:
+          // el override hay que cargarlo a mano de cada PDF y quedaba meses
+          // atrás. Pershing marca al NAV del gestor y publica el re-marcado
+          // apenas sale, así que el calculado se actualiza solo.
+          const porAnchor = (h.ytd_metodo || "").startsWith("precio vs anchor");
+          const override = porAnchor ? null : fsYtd[h.isin];
           const ytdVal = override ? override.ytd_pct : h.ytd_pct;
-          const asOf = override ? fmtAsOf(override.as_of) : (h.ytd_pct != null ? "T-1" : "");
-          const asOfCell = override
-            ? `<span title="${override.source || ''}" style="font-size:11px;color:var(--gold)">${asOf}</span>`
-            : `<span style="font-size:11px;color:var(--text-mute)">${asOf}</span>`;
+          // La fecha importa: un YTD de un ilíquido es al último NAV publicado,
+          // no al día de hoy. Mostrarlo sin fecha lo haría parecer de hoy.
+          const asOf = override ? fmtAsOf(override.as_of)
+                     : porAnchor ? fmtAsOf(h.ytd_as_of)
+                     : (h.ytd_pct != null ? "T-1" : "");
+          const titulo = override ? (override.source || "")
+                       : porAnchor ? `Precio de Pershing / NAV al 31-Dic-25 · ${h.ytd_metodo}`
+                       : (h.ytd_metodo || "");
+          const asOfCell = (override || porAnchor)
+            ? `<span title="${titulo}" style="font-size:11px;color:var(--gold)">${asOf}</span>`
+            : `<span title="${titulo}" style="font-size:11px;color:var(--text-mute)">${asOf}</span>`;
           return `<tr>
             <td style="text-align:left"><strong>${h.ticker || ""}</strong>
               <div style="font-size:11px;color:var(--text-mute)">${(h.name || "").trim()}</div></td>

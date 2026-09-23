@@ -1,6 +1,6 @@
 {
   "_description": "Precios al 31-Dec del anio anterior, usados como anchor para calcular YTD correcto (TWR real del fondo, no MWR).",
-  "_updated": "2026-07-17",
+  "_updated": "2026-09-23",
   "_source": "Pershing UGL + year_start_anchors legacy + baha monthlyReturns",
   "_generation_rule": "Cada 1-Ene guardar el precio 31-Dec del anio anterior en este archivo (script snapshot_year_start_prices.py).",
   "anchors_2026": {
@@ -105,13 +105,14 @@
       "note": "Anchor real verificado el 2026-07-28. Fuente: Pershing statement oficial 31-Dic-2025 (LSERIES DAC, JXD-101380), pag 4 (PIMCO Income Fund Institutional)"
     },
     "LU2847068389": {
-      "ticker": "LU2847068389",
-      "name": "HAMILTON LANE GLOBAL PRIVATE INFRASTRUCT",
-      "ytd_source_pct": null,
-      "price_2025_dec_31": null,
-      "qty_2025_dec_31": null,
-      "mv_2025_dec_31": null,
-      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+      "ticker": "HLGPI",
+      "name": "Hamilton Lane Global Private Infrastructure Fund Class I (Acc)",
+      "price_2025_dec_31": 127.6441,
+      "qty_2025_dec_31": 0.0,
+      "mv_2025_dec_31": 0.0,
+      "anchor_locked": true,
+      "ytd_source": "derivado_de_factsheet",
+      "note": "DERIVADO del factsheet de Hamilton Lane de Abril-2026 (el mas nuevo en la carpeta): NAV/Share 134.4475 al 30-Abr con YTD 5.33%, entonces el NAV al 31-Dic-2025 fue 134.4475 / 1.0533 = 127.6441. NO se compro el fondo hasta Jun-2026, asi que Pershing no tiene precio al 31-Dic: este anchor es la unica forma de tener un YTD de calendario. El YTD pasa a calcularse precio de Pershing / este anchor, y se actualiza solo cada vez que Pershing re-marca (la alarma de alts lo detecta). Precision: el YTD del factsheet viene redondeado a 2 decimales, lo que da un margen de +-0.005% en el YTD resultante. Cargado 2026-09-23."
     },
     "IE00B5BMR087": {
       "ticker": "CSPX",
