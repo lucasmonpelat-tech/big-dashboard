@@ -1,0 +1,84 @@
+name: 📈 Bench indices (segundo intento, tarde)
+
+# POR QUE EXISTE (2026-09-23)
+# ---------------------------
+# Las series base-100 de ACWI / S&P 500 / Nasdaq 100 alimentan el Bench SI/YTD
+# del tab de equity. Las baja el cron diario a las 12:30 UTC (09:30 ART), y a esa
+# hora Yahoo devuelve seguido una respuesta SIN el ultimo cierre.
+#
+# Paso el 18-Ago, 29-Ago, 31-Ago y 23-Sep-2026. Las cuatro veces los TRES indices
+# fallaron juntos, devolviendo datos viejos y no un error: cache del lado de
+# Yahoo. Y las cuatro veces se arreglo corriendo el script a mano un rato
+# despues. Nunca se arreglo solo, porque nada volvia a intentarlo.
+#
+# Entonces: el cron de la mañana corre con --sin-alerta (silencioso; el dato
+# queda protegido igual porque se preserva la ultima serie buena) y este job
+# vuelve a intentar a las 17 UTC. Si a esa hora sigue stale, ES un problema y
+# recien ahi se alarma.
+#
+# Resultado esperado: se dejan de mandar ~4 falsas alarmas por mes y la serie se
+# arregla sola el mismo dia, sin que nadie corra nada.
+
+on:
+  schedule:
+    # 17:00 UTC = 14:00 ART, ~4.5 h despues del cron diario. Lunes a sabado,
+    # los mismos dias que el diario (la grilla sale del equity sleeve, que solo
+    # se refresca esos dias). Minuto no redondo: GitHub congestiona los :00.
+    - cron: '10 17 * * 1-6'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reintento:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install yfinance pandas
+
+      # Sin --sin-alerta: este SI alarma. Si a las 14 ART Yahoo sigue sin el
+      # ultimo cierre, ya no es la flakiness de la mañana.
+      - name: Refrescar indices (y alarmar si sigue stale)
+        continue-on-error: true
+        run: python scripts/bench_indices_refresher.py
+
+      - name: Commit si cambio algo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/equity_bench_indices.json data/_alerts/ || true
+          if git diff --cached --quiet; then
+            echo "sin cambios: la serie de la mañana ya estaba bien"
+            exit 0
+          fi
+          git commit -m "chore(bench): segundo intento de indices ($(date -u +%Y-%m-%d))"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort; exit 1; }
+            if git push origin HEAD:main; then exit 0; fi
+            sleep 3
+          done
+          exit 1
+
+      # Mismo canal que el resto: cualquier archivo de hoy en data/_alerts/
+      # dispara el mail. Si el refresco salio bien, no hay alerta y no hay mail.
+      - name: Alerta por mail si quedo stale
+        if: always()
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MAIL_LUCAS: ${{ secrets.MAIL_LUCAS }}
+        run: python scripts/send_failure_alert.py

@@ -24,7 +24,23 @@ Output:
   data/equity_bench_indices.json
 
 Usage:
-    python bench_indices_refresher.py
+    python bench_indices_refresher.py                # refresca y alarma si quedo stale
+    python bench_indices_refresher.py --sin-alerta   # refresca en silencio
+
+POR QUE EXISTE --sin-alerta (2026-09-23)
+----------------------------------------
+Yahoo devuelve seguido una respuesta SIN el ultimo cierre a la hora en que corre
+el cron diario (09:30 ART). Paso el 18-Ago, 29-Ago, 31-Ago y 23-Sep: los tres
+indices fallaron JUNTOS y devolviendo datos viejos, no un error -- cache del lado
+de ellos. Las cuatro veces se arreglo corriendo esto a mano un rato despues.
+
+O sea: que falle a la mañana no significa nada; lo que importa es si SIGUE stale
+mas tarde. Entonces el cron de la mañana corre con --sin-alerta (el dato queda
+protegido igual, porque el merge preserva la ultima serie buena) y el job de la
+tarde -- .github/workflows/bench-indices-tarde.yml -- corre normal y es el que
+alarma.
+
+Asi se dejan de mandar cuatro falsas alarmas por mes sin perder la senal real.
 """
 
 import json
@@ -98,6 +114,12 @@ def build_series(closes, grid):
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser(description="Refresca las series base-100 de los indices de referencia.")
+    ap.add_argument("--sin-alerta", action="store_true",
+                    help="No escribir la alerta si quedo stale (la decide el job de la tarde).")
+    args = ap.parse_args()
+
     print(f"[{datetime.now().isoformat()}] Bench indices refresher...")
     grid = load_grid()
     base_date = grid[0]
@@ -151,7 +173,11 @@ def main():
         [k for k, v in merged.items()
          if v.get("series") and v["series"][-1]["date"] < last_date]
     ))
-    if stale:
+    if stale and args.sin_alerta:
+        # La corrida de la mañana no alarma: Yahoo suele estar atrasado a esa
+        # hora y se acomoda solo. Si a la tarde sigue asi, el otro job avisa.
+        print(f"  stale: {stale} — sin alerta (la decide el job de la tarde)")
+    elif stale:
         detail = {k: (merged[k]["series"][-1]["date"]
                       if k in merged and merged[k].get("series") else "sin serie")
                   for k in stale}

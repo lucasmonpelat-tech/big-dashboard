@@ -197,8 +197,14 @@ jobs:
         run: python scripts/price_refresher.py
         continue-on-error: true
 
+      # --sin-alerta a proposito: a esta hora (09:30 ART) Yahoo devuelve seguido
+      # una respuesta sin el ultimo cierre, y un rato despues se acomoda sola.
+      # Paso el 18-Ago, 29-Ago, 31-Ago y 23-Sep -- las cuatro veces hubo que
+      # correrlo a mano. El dato queda protegido igual (se preserva la ultima
+      # serie buena); quien alarma es bench-indices-tarde.yml, que vuelve a
+      # intentar a las 17 UTC y para entonces ya es un problema de verdad.
       - name: Bench indices Equity (ACWI / S&P / Nasdaq / MSCI World)
-        run: python scripts/bench_indices_refresher.py
+        run: python scripts/bench_indices_refresher.py --sin-alerta
         continue-on-error: true
 
       - name: Bench indices FI (AGG / SOFR / UST)
