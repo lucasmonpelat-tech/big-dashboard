@@ -357,6 +357,27 @@ jobs:
               --archivo data/funds_index.json
           fi
 
+      # Top 10 consolidado del sleeve Equity (look-through de los factsheets por
+      # el peso de cada fondo). Era MANUAL, y por eso se fosilizo: LGLI se vendio
+      # el 24-Ago-2026 y el archivo -- generado el 25-Ago, con Pershing todavia
+      # mostrandolo abierto -- lo siguio contando con 5.86% del sleeve durante un
+      # mes, diluyendo a todos los demas. El script ya filtraba las posiciones
+      # cerradas; lo que faltaba era que corriera.
+      #
+      # Los pesos del sleeve cambian todos los dias, asi que va en el cron diario.
+      - name: Top 10 consolidado del sleeve Equity
+        continue-on-error: true
+        run: |
+          A="data/_alerts/equity_lookthrough_$(date -u +%Y-%m-%d).json"
+          rc=0
+          python scripts/build_equity_lookthrough.py || rc=$?
+          if [ "$rc" -ne 0 ]; then
+            python scripts/write_crash_alert.py --path "$A" \
+              --tipo equity_lookthrough_crash --rc "$rc" \
+              --que "el look-through del sleeve Equity (build_equity_lookthrough.py)" \
+              --archivo data/equity_top10_consolidated.json
+          fi
+
       - name: Commit and push data/ if changed
         id: commit
         run: |

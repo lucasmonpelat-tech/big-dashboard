@@ -2207,7 +2207,19 @@
       // === Widget: Top 10 por Fondo cards ===
       try {
         const ft = await loadLegacyJson("fund_holdings_top10");
-        const FUND_ORDER = ["CSPX", "NBGMT", "MFSCV", "THOR", "JHGSC", "LGLI", "ARGT", "ILF", "4BRZ", "MAGS", "HEWJ"];
+        // Los fondos salen de lo que HAY en cartera, no de una lista escrita a mano.
+        //
+        // Antes esta lista tenia los tickers fijos en el codigo. LGLI se vendio el
+        // 24-Ago-2026 y su tarjeta siguio apareciendo un mes, con los holdings del
+        // factsheet de Abril, porque nadie la saco de aca. El archivo de holdings
+        // por fondo conserva a los vendidos a proposito (es historia del factsheet),
+        // asi que el filtro tiene que estar en quien muestra.
+        //
+        // Orden por peso dentro del sleeve, que ademas es mas util que el orden fijo.
+        const FUND_ORDER = (window.__hRets?.equity?.holdings || [])
+          .filter(h => (h.status || "OPEN") === "OPEN" && (h.mv_usd || 0) > 0)
+          .sort((a, b) => (b.mv_usd || 0) - (a.mv_usd || 0))
+          .map(h => h.ticker);
         const fmtName = k => k.replace(/_/g, " ");
         const cards = FUND_ORDER.map(tk => {
           const f = ft[tk]; if (!f) return "";
