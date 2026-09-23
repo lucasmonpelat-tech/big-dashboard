@@ -88,10 +88,11 @@ def read_fund_holdings():
 
 
 def read_full_holdings(ticker):
-    """Cartera completa del fondo, si la tenemos. {holdings, as_of, n_holdings}.
+    """Holdings profundos del fondo, si los tenemos.
 
-    Hoy solo existe para CSPX (scripts/fetch_cspx_holdings.py). Los demas fondos
-    son activos y no publican la cartera entera: siguen con su top 10.
+    Hoy solo existe para CSPX: su top 20, bajado de iShares por
+    scripts/fetch_cspx_holdings.py. Los demas fondos son activos y no publican
+    la cartera entera, asi que siguen con su top 10 del factsheet.
     """
     p = ROOT / "data" / "fund_holdings_full" / f"{ticker}.json"
     if not p.exists():
@@ -104,7 +105,8 @@ def read_full_holdings(ticker):
     h = d.get("holdings")
     if not isinstance(h, dict) or not h:
         return None
-    return {"holdings": h, "as_of": d.get("as_of"), "n_holdings": len(h)}
+    return {"holdings": h, "as_of": d.get("as_of"), "n_holdings": len(h),
+            "cobertura_pct": d.get("cobertura_pct")}
 
 
 def fund_holdings_by_ticker(fund_data):
@@ -163,10 +165,10 @@ def compute_overlap():
     for pos in equity_positions:
         tk = pos["ticker"]
 
-        # Cartera COMPLETA si la tenemos (hoy solo CSPX). Con el top 10 a secas,
-        # cualquier nombre del indice que no entre en ese top cuenta como CERO y
-        # el underweight sale sobreestimado: paso con Micron, que tenemos via
-        # CSPX pero figuraba en 0.00%.
+        # Holdings profundos si los tenemos (hoy solo CSPX: su top 20). Con el
+        # top 10 a secas, cualquier nombre del indice que no entre en ese top
+        # cuenta como CERO y el underweight sale sobreestimado: paso con Micron,
+        # que tenemos via CSPX pero figuraba en 0.00%.
         full = read_full_holdings(tk)
         if full:
             por_fondo[tk] = full["holdings"]
@@ -185,8 +187,8 @@ def compute_overlap():
             sin_resolver[tk] = no_res
 
     for tk, full in completos.items():
-        print(f"  {tk}: cartera COMPLETA ({full['n_holdings']} holdings, "
-              f"as of {full['as_of']})")
+        print(f"  {tk}: top {full['n_holdings']} del fondo "
+              f"({full['cobertura_pct']}% de su cartera, as of {full['as_of']})")
 
     for acwi_holding in acwi_top10:
         ticker = acwi_holding["ticker"]
