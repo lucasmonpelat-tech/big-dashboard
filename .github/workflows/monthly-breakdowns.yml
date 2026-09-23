@@ -51,6 +51,18 @@ jobs:
       - name: Fetch AGG breakdowns (credit + sectors + maturity)
         run: python scripts/fetch_agg_breakdowns.py
 
+      # Holdings completos de ACWI, contra los que se mide el overlap del sleeve
+      # Equity. Se bajaba A MANO y la copia era de Abril-2026: cinco meses de
+      # pesos del indice congelados. El script valida el archivo antes de pisar
+      # el anterior (que no venga el HTML de la pagina, ni cortado), asi que un
+      # fallo deja el que estaba en vez de romper el overlap.
+      #
+      # Mensual alcanza: los pesos de un indice de ~2.200 nombres no se mueven
+      # de un dia para otro, y el overlap declara la fecha del archivo que uso.
+      - name: Fetch ACWI holdings (CSV completo para el overlap)
+        continue-on-error: true
+        run: python scripts/fetch_acwi_holdings.py
+
       # === RECOMPUTE FI sub-asset (BIG-level) ===
       - name: Compute FI sub-asset BIG (if script exists)
         run: |
@@ -67,7 +79,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/breakdowns/
+          git add data/breakdowns/ data/acwi_holdings/
           if git diff --cached --quiet; then
             echo "no changes en data/breakdowns/" && echo "committed=false" >> $GITHUB_OUTPUT && exit 0
           fi

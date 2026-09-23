@@ -15,19 +15,19 @@
   "source": "ACWI holdings (iShares ACWI factsheet 24-Apr) + fund_holdings_top10.json (CSPX exact, UCITS estimates)",
   "method": "BIG_exposure[stock] = \u03a3 (fund_weight_in_BIG \u00d7 stock_weight_in_fund / 100)",
   "summary": {
-    "total_acwi_top10": 24.75,
-    "total_big_top10_exposure": 18.05,
-    "diff_pp": -6.7
+    "total_acwi_top10": 25.18,
+    "total_big_top10_exposure": 16.83,
+    "diff_pp": -8.35
   },
   "overlap": [
     {
       "ticker": "NVDA",
-      "name": "NVIDIA CORP",
+      "name": "NVIDIA",
       "sector": "Information Technology",
       "location": "United States",
-      "weight_acwi": 5.13,
+      "weight_acwi": 5.0,
       "weight_big": 3.252,
-      "diff_pp": -1.878,
+      "diff_pp": -1.748,
       "contributors": [
         {
           "fund": "CSPX",
@@ -45,12 +45,12 @@
     },
     {
       "ticker": "AAPL",
-      "name": "APPLE INC",
+      "name": "APPLE",
       "sector": "Information Technology",
       "location": "United States",
-      "weight_acwi": 4.04,
+      "weight_acwi": 4.76,
       "weight_big": 3.149,
-      "diff_pp": -0.891,
+      "diff_pp": -1.611,
       "contributors": [
         {
           "fund": "CSPX",
@@ -68,12 +68,12 @@
     },
     {
       "ticker": "MSFT",
-      "name": "MICROSOFT CORP",
+      "name": "MICROSOFT",
       "sector": "Information Technology",
       "location": "United States",
-      "weight_acwi": 3.04,
+      "weight_acwi": 3.38,
       "weight_big": 2.551,
-      "diff_pp": -0.489,
+      "diff_pp": -0.829,
       "contributors": [
         {
           "fund": "CSPX",
@@ -94,9 +94,9 @@
       "name": "AMAZON.COM INC",
       "sector": "Consumer Discretionary",
       "location": "United States",
-      "weight_acwi": 2.58,
+      "weight_acwi": 2.39,
       "weight_big": 2.151,
-      "diff_pp": -0.429,
+      "diff_pp": -0.239,
       "contributors": [
         {
           "fund": "CSPX",
@@ -114,12 +114,12 @@
     },
     {
       "ticker": "GOOGL",
-      "name": "ALPHABET INC CLASS A",
+      "name": "ALPHABET CLASS A",
       "sector": "Communication",
       "location": "United States",
-      "weight_acwi": 2.03,
+      "weight_acwi": 1.99,
       "weight_big": 1.842,
-      "diff_pp": -0.188,
+      "diff_pp": -0.148,
       "contributors": [
         {
           "fund": "CSPX",
@@ -136,13 +136,30 @@
       ]
     },
     {
+      "ticker": "2330",
+      "name": "TAIWAN SEMICONDUCTOR MANUFACTURING",
+      "sector": "Information Technology",
+      "location": "Taiwan",
+      "weight_acwi": 1.84,
+      "weight_big": 0.315,
+      "diff_pp": -1.525,
+      "contributors": [
+        {
+          "fund": "THOR",
+          "fund_weight_in_equity_sleeve": 9.53,
+          "stock_weight_in_fund": 3.3,
+          "contribution": 0.315
+        }
+      ]
+    },
+    {
       "ticker": "AVGO",
       "name": "BROADCOM INC",
       "sector": "Information Technology",
       "location": "United States",
-      "weight_acwi": 1.93,
+      "weight_acwi": 1.57,
       "weight_big": 1.226,
-      "diff_pp": -0.704,
+      "diff_pp": -0.344,
       "contributors": [
         {
           "fund": "THOR",
@@ -159,30 +176,13 @@
       ]
     },
     {
-      "ticker": "2330",
-      "name": "TAIWAN SEMICONDUCTOR MANUFACTURING",
-      "sector": "Information Technology",
-      "location": "Taiwan",
-      "weight_acwi": 1.74,
-      "weight_big": 0.315,
-      "diff_pp": -1.425,
-      "contributors": [
-        {
-          "fund": "THOR",
-          "fund_weight_in_equity_sleeve": 9.53,
-          "stock_weight_in_fund": 3.3,
-          "contribution": 0.315
-        }
-      ]
-    },
-    {
       "ticker": "GOOG",
-      "name": "ALPHABET INC CLASS C",
+      "name": "ALPHABET CLASS C",
       "sector": "Communication",
       "location": "United States",
-      "weight_acwi": 1.69,
+      "weight_acwi": 1.57,
       "weight_big": 0.849,
-      "diff_pp": -0.841,
+      "diff_pp": -0.721,
       "contributors": [
         {
           "fund": "CSPX",
@@ -194,12 +194,12 @@
     },
     {
       "ticker": "META",
-      "name": "META PLATFORMS INC CLASS A",
+      "name": "META PLATFORMS CLASS A",
       "sector": "Communication",
       "location": "United States",
-      "weight_acwi": 1.49,
+      "weight_acwi": 1.55,
       "weight_big": 1.498,
-      "diff_pp": 0.008,
+      "diff_pp": -0.052,
       "contributors": [
         {
           "fund": "CSPX",
@@ -216,27 +216,14 @@
       ]
     },
     {
-      "ticker": "TSLA",
-      "name": "TESLA INC",
-      "sector": "Consumer Discretionary",
+      "ticker": "MU",
+      "name": "MICRON TECHNOLOGY",
+      "sector": "Information Technology",
       "location": "United States",
-      "weight_acwi": 1.08,
-      "weight_big": 1.216,
-      "diff_pp": 0.136,
-      "contributors": [
-        {
-          "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 32.52,
-          "stock_weight_in_fund": 1.42,
-          "contribution": 0.462
-        },
-        {
-          "fund": "MAGS",
-          "fund_weight_in_equity_sleeve": 5.71,
-          "stock_weight_in_fund": 13.2,
-          "contribution": 0.754
-        }
-      ]
+      "weight_acwi": 1.13,
+      "weight_big": 0,
+      "diff_pp": -1.13,
+      "contributors": []
     }
   ]
 }

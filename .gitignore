@@ -27,7 +27,9 @@ credentials.json
 # Heavy data not needed for static dashboard
 factsheets/fi/*.pdf
 factsheets/fi/*.html
-data/acwi_holdings/acwi_holdings.csv
+# data/acwi_holdings/acwi_holdings.csv — se DEJO de ignorar el 2026-09-23.
+# Lo necesita scripts/acwi_overlap.py, que ahora corre en el cron: ignorado,
+# el archivo solo existia en la maquina de Lucas y el runner fallaba.
 
 # Handoffs (internal docs)
 handoffs/
