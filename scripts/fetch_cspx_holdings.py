@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Baja el top 20 de CSPX (iShares Core S&P 500 UCITS) desde iShares.
+"""Baja el top 10 de CSPX (iShares Core S&P 500 UCITS) desde iShares.
 
 POR QUE EXISTE (2026-09-23)
 ---------------------------
@@ -14,8 +14,8 @@ cargar mas profundidad de CSPX, que es el 32.6% del sleeve y el que mas mueve la
 aguja.
 
 CUANTO SE GUARDA: se bajan los ~500 holdings (hace falta para validar que el
-archivo venga entero) y se guardan los primeros TOP_N=20 -- pedido de Lucas:
-"solo necesito top 10 o 20". Guardar los 504 no aportaba: todos los nombres del
+archivo venga entero) y se guardan los primeros TOP_N=10 -- pedido de Lucas:
+"dejemos top 10". Guardar los 504 no aportaba: todos los nombres del
 top 10 de ACWI que existen en el S&P 500 caen dentro del top 9 de CSPX.
 
 Los otros fondos siguen con su top 10 del factsheet: son activos y no publican
@@ -72,12 +72,14 @@ SUMA_MINIMA = 95.0
 # Cuantos holdings se guardan (decision de Lucas, 2026-09-23: "solo necesito top
 # 10 o 20"). Guardar los 504 no aportaba nada: el overlap compara contra el top
 # 10 de ACWI, y TODOS esos nombres que existen en el S&P 500 caen dentro del top
-# 9 de CSPX. 20 deja margen por si el indice rota.
+# 9 de CSPX (NVDA 1, AAPL 2, MSFT 3, AMZN 4, GOOGL 5, AVGO 6, GOOG 7, META 8,
+# MU 9), asi que con 10 alcanza.
 #
-# El limite: un nombre del top 10 de ACWI que en CSPX estuviera mas abajo del
-# puesto 20 contaria CERO. Hoy no pasa con ninguno. El unico que no aparece es
-# Taiwan Semi, y no por profundidad sino porque no es del S&P 500.
-TOP_N = 20
+# El limite: un nombre del top 10 de ACWI que en CSPX estuviera debajo del puesto
+# 10 contaria CERO. Hoy el mas bajo es Micron, puesto 9 -- o sea que el margen es
+# de UN puesto. Si el indice rota y algo entra mas abajo, subir este numero.
+# El unico que no aparece es Taiwan Semi, y no por profundidad: no es del S&P 500.
+TOP_N = 10
 
 MESES = {"jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
          "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12}

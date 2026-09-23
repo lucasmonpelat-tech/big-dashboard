@@ -1,5 +1,5 @@
 {
-  "_doc": "Top 20 de CSPX, para el overlap contra ACWI. Se bajan los ~500 holdings del fondo (para validar que el archivo venga completo) y se guardan los primeros: todos los nombres del top 10 de ACWI que existen en el S&P 500 caen dentro del top 9 de CSPX. Un nombre de ACWI que en CSPX estuviera debajo del puesto 20 contaria cero. Generado por scripts/fetch_cspx_holdings.py, NO editar a mano.",
+  "_doc": "Top 10 de CSPX, para el overlap contra ACWI. Se bajan los ~500 holdings del fondo (para validar que el archivo venga completo) y se guardan los primeros: todos los nombres del top 10 de ACWI que existen en el S&P 500 caen dentro del top 9 de CSPX. Un nombre de ACWI que en CSPX estuviera debajo del puesto 20 contaria cero. Generado por scripts/fetch_cspx_holdings.py, NO editar a mano.",
   "ticker": "CSPX",
   "isin": "IE00B5BMR087",
   "name": "iShares Core S&P 500 UCITS ETF",
@@ -8,8 +8,8 @@
   "generado": "2026-09-23",
   "source": "iShares product-data API (holdings.all), portfolioId 253743",
   "source_url": "https://www.ishares.com/uk/individual/en/products/253743/ishares-sp-500-b-ucits-etf-acc-fund",
-  "n_holdings_guardados": 20,
-  "cobertura_pct": 49.74,
+  "n_holdings_guardados": 10,
+  "cobertura_pct": 38.87,
   "n_holdings_en_el_fondo": 504,
   "suma_pesos_fondo": 99.75,
   "holdings": {
@@ -22,17 +22,7 @@
     "GOOG": 2.46196,
     "META": 2.4212,
     "MU": 1.84535,
-    "TSLA": 1.59171,
-    "AMD": 1.51787,
-    "BRK B": 1.3979,
-    "LLY": 1.39571,
-    "JPM": 1.34706,
-    "XOM": 0.97268,
-    "JNJ": 0.96698,
-    "V": 0.91982,
-    "INTC": 0.9174,
-    "WMT": 0.73158,
-    "ABBV": 0.69857
+    "TSLA": 1.59171
   },
   "detalle": {
     "NVDA": {
@@ -74,46 +64,6 @@
     "TSLA": {
       "name": "TESLA INC",
       "sector": "Consumer Discretionary"
-    },
-    "AMD": {
-      "name": "ADVANCED MICRO DEVICES",
-      "sector": "Information Technology"
-    },
-    "BRK B": {
-      "name": "BERKSHIRE HATHAWAY INC CLASS B",
-      "sector": "Financials"
-    },
-    "LLY": {
-      "name": "ELI LILLY",
-      "sector": "Health Care"
-    },
-    "JPM": {
-      "name": "JPMORGAN CHASE & CO",
-      "sector": "Financials"
-    },
-    "XOM": {
-      "name": "EXXONMOBIL HOLDINGS CORP",
-      "sector": "Energy"
-    },
-    "JNJ": {
-      "name": "JOHNSON & JOHNSON",
-      "sector": "Health Care"
-    },
-    "V": {
-      "name": "VISA CLASS A",
-      "sector": "Financials"
-    },
-    "INTC": {
-      "name": "INTEL CORPORATION",
-      "sector": "Information Technology"
-    },
-    "WMT": {
-      "name": "WALMART",
-      "sector": "Consumer Staples"
-    },
-    "ABBV": {
-      "name": "ABBVIE",
-      "sector": "Health Care"
     }
   }
 }
