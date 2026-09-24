@@ -324,6 +324,7 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
 
     ytd_metodo = None
     ytd_as_of = None
+    ytd_fuente = None
 
     race_h = race_by_isin.get(isin) if isin else None
     px_anchor = px0_by_isin.get(isin) if isin else None
@@ -341,6 +342,17 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
         ytd_pct = round((float(px_hoy) / px_anchor - 1) * 100, 2)
         ytd_metodo = "precio vs anchor 31-Dic"
         ytd_as_of = (pos or {}).get("price_date")
+    elif _statement_ytd(isin, ticker):
+        # YTD declarado en el statement del gestor (GCRED, HLEND): Pershing no
+        # publica precio ni fecha de valuacion para ellos, asi que no hay anchor
+        # posible. Antes esto lo aplicaba el FRONT encima del canonical, y el
+        # canonical, alts_race y la atribucion seguian con el MV-vs-costo de
+        # abajo. Ahora vive aca: una sola fuente para todos (2026-09-24).
+        ov = _statement_ytd(isin, ticker)
+        ytd_pct = round(float(ov["ytd_pct"]), 2)
+        ytd_metodo = "statement del gestor"
+        ytd_as_of = ov.get("as_of")
+        ytd_fuente = ov.get("source")
     elif h_legacy.get("ytd_pct") is not None:
         # FIX 2026-07-28: alts (CALP, HLEND, GCRED, IBIT, GLD, FLEX, HLGPI...)
         # no tienen race_by_isin (siempre {} para el sleeve alternativo, ver
@@ -401,6 +413,7 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
         # publico el gestor.
         "ytd_metodo": ytd_metodo,
         "ytd_as_of": ytd_as_of,
+        "ytd_fuente": ytd_fuente,
         "bench_ytd_pct": bench_ytd_dw_pct,
         "alpha_ytd_pp": alpha_ytd_pp,
         "first_buy_date": h_legacy.get("first_buy_date"),
@@ -408,6 +421,30 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
         "buys_history": buys,
         "_mv_source": source_note,
     }
+
+
+_STATEMENT_YTD_CACHE = None
+
+
+def _statement_ytd(isin: str | None, ticker: str | None) -> dict | None:
+    """YTD declarado en el statement del gestor (data/alts_factsheet_ytd.json).
+
+    Se busca por ISIN y, si no, por ticker: GCRED viene del feed con isin null y
+    su clave en el archivo es "GCRED-I". Los que tienen anchor (HLGPI, FLEX) no
+    llegan aca: el anchor se calcula antes y le gana al override, que queda de
+    respaldo."""
+    global _STATEMENT_YTD_CACHE
+    if _STATEMENT_YTD_CACHE is None:
+        _STATEMENT_YTD_CACHE = {}
+        p = DATA_DIR / "alts_factsheet_ytd.json"
+        if p.exists():
+            for key, ov in (json.load(open(p, encoding="utf-8")).get("overrides") or {}).items():
+                if ov.get("ytd_pct") is None:
+                    continue
+                _STATEMENT_YTD_CACHE[key] = ov
+                if ov.get("ticker"):
+                    _STATEMENT_YTD_CACHE.setdefault(ov["ticker"], ov)
+    return _STATEMENT_YTD_CACHE.get(isin or "") or _STATEMENT_YTD_CACHE.get(ticker or "")
 
 
 def _load_year_start_prices() -> dict:
@@ -677,6 +714,9 @@ def build(as_of: str) -> dict:
                     "bench_dw_pct": bench_dw_pct,
                     "alpha_real_pp": alpha_real_pp,
                     "ytd_pct": eh.get("ytd_pct"),
+                    "ytd_metodo": "statement del gestor" if eh.get("ytd_pct") is not None else None,
+                    "ytd_as_of": eh.get("as_of"),
+                    "ytd_fuente": eh.get("source"),
                     "bench_ytd_pct": bench_ytd_pct,
                     "alpha_ytd_pp": alpha_ytd_pp,
                     "first_buy_date": first_buy_date,

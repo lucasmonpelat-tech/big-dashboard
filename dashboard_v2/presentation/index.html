@@ -1438,7 +1438,6 @@
         </tr>`;
       }
 
-      const fsYtd = (window.__altsFactsheetYtd?.overrides) || {};
       const fmtAsOf = iso => {
         if (!iso) return "";
         const [y, m, d] = iso.split("-");
@@ -1448,28 +1447,21 @@
       const rows = sorted.map(h => {
         const weight = totalMv > 0 ? (h.mv_usd / totalMv) * 100 : 0;
         if (isAlts) {
-          // PRIORIDAD DEL YTD (cambiada 2026-09-23):
-          //   1. Calculado contra el anchor del 31-Dic (precio de Pershing).
-          //   2. Override manual del factsheet, si el fondo no tiene anchor.
-          //   3. Lo que venga calculado.
-          //
-          // Antes el override manual ganaba SIEMPRE, y por eso HLGPI mostraba
-          // 5.33% (factsheet de Abril) cuando al cierre de Agosto era 11.65%:
-          // el override hay que cargarlo a mano de cada PDF y quedaba meses
-          // atrás. Pershing marca al NAV del gestor y publica el re-marcado
-          // apenas sale, así que el calculado se actualiza solo.
+          // El YTD viene resuelto del canonical (2026-09-24): anchor del 31-Dic
+          // (precio de Pershing) o, si no hay, el YTD declarado en el statement
+          // del gestor. Antes el front aplicaba el override por su cuenta y el
+          // canonical, alts_race y la atribucion quedaban con otro numero.
           const porAnchor = (h.ytd_metodo || "").startsWith("precio vs anchor");
-          const override = porAnchor ? null : fsYtd[h.isin];
-          const ytdVal = override ? override.ytd_pct : h.ytd_pct;
+          const porStatement = h.ytd_metodo === "statement del gestor";
+          const ytdVal = h.ytd_pct;
           // La fecha importa: un YTD de un ilíquido es al último NAV publicado,
           // no al día de hoy. Mostrarlo sin fecha lo haría parecer de hoy.
-          const asOf = override ? fmtAsOf(override.as_of)
-                     : porAnchor ? fmtAsOf(h.ytd_as_of)
+          const asOf = (porAnchor || porStatement) ? fmtAsOf(h.ytd_as_of)
                      : (h.ytd_pct != null ? "T-1" : "");
-          const titulo = override ? (override.source || "")
+          const titulo = porStatement ? (h.ytd_fuente || h.ytd_metodo)
                        : porAnchor ? `Precio de Pershing / NAV al 31-Dic-25 · ${h.ytd_metodo}`
                        : (h.ytd_metodo || "");
-          const asOfCell = (override || porAnchor)
+          const asOfCell = (porStatement || porAnchor)
             ? `<span title="${titulo}" style="font-size:11px;color:var(--gold)">${asOf}</span>`
             : `<span title="${titulo}" style="font-size:11px;color:var(--text-mute)">${asOf}</span>`;
           return `<tr>
@@ -1615,12 +1607,20 @@
     function renderAltsKpis(holdings) {
       const totalMv = holdings.reduce((s, h) => s + (h.mv_usd || 0), 0);
       const totalCost = holdings.reduce((s, h) => s + (h.cost_basis_usd || 0), 0);
-      const wSI = holdings.reduce((s, h) => s + (h.mv_usd || 0) * (h.return_pct || 0), 0) / (totalMv || 1);
-      const wYTD = holdings.reduce((s, h) => s + (h.mv_usd || 0) * (h.ytd_pct || 0), 0) / (totalMv || 1);
+      // SI y YTD del sleeve = TWR reconstruido con statements (alts_sleeve_real),
+      // el mismo numero que usa la atribucion. ANTES (hasta 2026-09-24) era el
+      // promedio de los retornos de cada fondo ponderado por el MV de HOY: HLGPI
+      // y FLEX, comprados en May/Jun, pesaban como si estuvieran desde Enero.
+      const serie = window.__altsTwr?.twr_series || [];
+      const ult = serie[serie.length - 1];
+      const dic = [...serie].reverse().find(p => p.date <= "2025-12-31");
+      const twrSI = ult ? ult.index - 100 : null;
+      const twrYTD = (ult && dic) ? (ult.index / dic.index - 1) * 100 : null;
+      const subTwr = ult ? `TWR con statements · al ${ult.date}` : "sin serie TWR";
       const kpis = [
         { label: "Sleeve AUM", value: fmtUsd(totalMv, 0), sub: `${holdings.length} holdings`, klass: "info" },
-        { label: "Sleeve Return SI", value: _fmtPct(wSI), sub: "weighted por MV", klass: wSI >= 0 ? "pos" : "neg" },
-        { label: "Sleeve Return YTD", value: _fmtPct(wYTD), sub: "weighted por MV", klass: wYTD >= 0 ? "pos" : "neg" },
+        { label: "Sleeve Return SI", value: _fmtPct(twrSI), sub: `${subTwr} · desde ${window.__altsTwr?.first_trade_date || ""}`, klass: (twrSI || 0) >= 0 ? "pos" : "neg" },
+        { label: "Sleeve Return YTD", value: _fmtPct(twrYTD), sub: subTwr, klass: (twrYTD || 0) >= 0 ? "pos" : "neg" },
         { label: "Cost Basis Total", value: fmtUsd(totalCost, 0), sub: `Unreal. G/L $${((totalMv - totalCost) / 1e6).toFixed(2)}M`, klass: "info" },
       ];
       document.getElementById("sleeveKpis").innerHTML = kpis.map(k => `
@@ -2430,10 +2430,11 @@
         // alts_external.json — holdings alternatives externos (CALP desde statement)
         try { window.__altsExt = await loadLegacyJson("alts_external"); } catch (e) { window.__altsExt = null; }
 
-        // alts_factsheet_ytd.json — YTD oficial reportado en factsheets (override
-        // manual para holdings ilíquidos tipo PE/Infra/Private Credit donde el YTD
-        // calculado desde precios no aplica).
-        try { window.__altsFactsheetYtd = await loadLegacyJson("alts_factsheet_ytd"); } catch (e) { window.__altsFactsheetYtd = null; }
+        // alts_sleeve_real.json — TWR del sleeve Alts reconstruido con statements
+        // (Pershing + Carlyle, Modified Dietz). Es de donde salen el SI y el YTD
+        // del sleeve, igual que equity_sleeve_real / fi_sleeve_real para los otros.
+        // (El YTD por fondo del statement ya no se lee aca: viene en el canonical.)
+        try { window.__altsTwr = await loadLegacyJson("alts_sleeve_real"); } catch (e) { window.__altsTwr = null; }
 
         // Mergear externals a positions para que aparezcan en Overview (positions/AUM/alloc)
         if (window.__altsExt?.holdings) {

@@ -320,22 +320,12 @@ def main():
         else:
             h["weight_pct"] = round(h["value_usd"] / total_active * 100, 2)
 
-    # Recalcular YTD del sleeve via weighted holding contribution real (de statements).
-    # Esto sobreescribe el sleeve_index proxy que tenia spikes irreales (-5%/+5%
-    # mensuales que no reflejan el comportamiento de illiquidos PE/PC).
-    # Source of truth: statements (Carlyle + iCapital) + live prices (IBIT/GLD/BPCC).
-    #
-    # NOTA: 1M/3M/6M y SI se mantienen del sleeve_index proxy (a pesar de ser
-    # imperfectos). Para fixearlos hay que reconstruir el sleeve_index mensual desde
-    # los monthly returns por holding -- en el roadmap pero requiere historial MV
-    # por holding (que no tenemos pre-Q1 2026 para todos).
-    ytd_weighted = sum(
-        (h["value_usd"] / total_active) * (h.get("ytd_return_pct") or 0)
-        for h in active
-    )
-    stats = ar.setdefault("stats_vs_6040", {})
-    returns = stats.setdefault("returns", {})
-    returns.setdefault("YTD", {})["sleeve"] = round(ytd_weighted, 2)
+    # El YTD del sleeve NO se calcula aca (sacado 2026-09-24). Antes se escribia
+    # el promedio de los YTD de cada fondo ponderado por el peso de HOY (1.97% el
+    # 24-Sep), que sync_alts_ugl.py pisaba unos pasos despues con el TWR real
+    # (6.49%). Era un numero intermedio y equivocado: HLGPI y FLEX, comprados en
+    # May/Jun, pesaban como si estuvieran desde Enero. Unica fuente del SI/YTD
+    # del sleeve: el TWR de alts_sleeve_real.json.
 
     ar["refreshedAt"] = datetime.now().isoformat()
     ar["_daily_refresh_note"] = (

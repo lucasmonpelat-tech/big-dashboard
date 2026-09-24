@@ -4,8 +4,8 @@ sync_alts_ugl.py — POST alts_race.py daily refresh hook.
 CONTEXT (actualizado 2026-07-31): alts_race.py ya carga sleeve_index real desde
 data/alts_sleeve_real.json (statements Pershing + Carlyle, Modified Dietz) --
 ya no hace falta ningun parche de sleeve_index aca. Este script se encarga de
-lo que SI sigue siendo su trabajo: sincronizar el SI/YTD por HOLDING (cost-basis
-via Pershing UGL) y recomputar los stats agregados desde el sleeve_index real.
+lo que SI sigue siendo su trabajo: sincronizar por HOLDING el MV y el SI (cost-basis
+via Pershing UGL) y el YTD de calendario (del canonical), y recomputar los stats agregados desde el sleeve_index real.
 
 Flow del cron diario:
   1. compute_holdings_returns.py (manual cuando hay UGL nuevo)
@@ -23,6 +23,31 @@ ROOT = Path(__file__).parent.parent
 ALTS_RACE = ROOT / "data" / "alts_race.json"
 HOLDINGS_ALTS = ROOT / "data" / "holdings_returns_alternatives.json"
 CARLYLE_STMT = ROOT / "data" / "alts_carlyle_statement.json"
+CANONICAL_DIR = ROOT / "data" / "canonical"
+# Metodos del canonical que dan un YTD de CALENDARIO (del fondo en el año). El
+# resto (ej "Pershing UGL (MV vs costo...)") es retorno desde la compra.
+YTD_CALENDARIO = ("precio vs anchor 31-Dic", "statement del gestor", "precio (race)")
+
+
+def _canonical_alts_by_ticker() -> dict:
+    """Holdings de Alts del canonical holdings_returns mas reciente. En el cron
+    corre despues del primer run_all, asi que es el del dia."""
+    if not CANONICAL_DIR.exists():
+        return {}
+    for d in sorted((p for p in CANONICAL_DIR.iterdir() if p.is_dir()), reverse=True):
+        f = d / "holdings_returns.json"
+        if f.exists():
+            c = json.load(open(f, encoding='utf-8'))
+            hs = (c.get('sleeves', {}).get('alternatives') or {}).get('holdings', [])
+            return {h['ticker']: h for h in hs if h.get('ticker')}
+    return {}
+
+
+def _dias(iso: str) -> int | None:
+    try:
+        return (datetime.now().date() - datetime.fromisoformat(iso).date()).days
+    except Exception:
+        return None
 
 
 def main():
@@ -33,6 +58,7 @@ def main():
     ar = json.load(open(ALTS_RACE, encoding='utf-8'))
     ha = json.load(open(HOLDINGS_ALTS, encoding='utf-8'))
     ha_by_tk = {h['ticker']: h for h in ha.get('holdings', [])}
+    canon_by_tk = _canonical_alts_by_ticker()
 
     # CALP comes from Carlyle statement (external, no Pershing). Build pseudo-entry.
     if CARLYLE_STMT.exists():
@@ -53,7 +79,27 @@ def main():
     updates = 0
     for h in ar.get('holdings', []):
         tk = h['ticker']
-        # IBIT/GLD: value_usd/ytd_return_pct ya vienen frescos de Pershing
+        # YTD de calendario del FONDO: sale del canonical (anchor del 31-Dic o
+        # statement del gestor), para todos incluidos IBIT/GLD. ANTES (hasta
+        # 2026-09-24) se copiaba el `ytd_pct` de holdings_returns_alternatives,
+        # que para FLEX/HLGPI/HLEND/GCRED es MV contra COSTO (retorno desde la
+        # compra, no del año). Si el canonical no tiene un YTD de calendario,
+        # queda None: mejor vacio que un numero que no es lo que dice.
+        c = canon_by_tk.get(tk)
+        if c is not None:
+            if c.get('ytd_metodo') in YTD_CALENDARIO:
+                h['ytd_return_pct'] = c.get('ytd_pct')
+                h['ytd_as_of'] = c.get('ytd_as_of')
+                h['ytd_metodo'] = c.get('ytd_metodo')
+                if c.get('ytd_as_of'):
+                    h['valuation_date'] = c['ytd_as_of']
+                    h['days_since_valuation'] = _dias(c['ytd_as_of'])
+            else:
+                h['ytd_return_pct'] = None
+                h['ytd_as_of'] = None
+                h['ytd_metodo'] = c.get('ytd_metodo')
+
+        # IBIT/GLD: value_usd ya vienen frescos de Pershing
         # (canonical positions.json) via refresh_alts_daily.py -- NO
         # pisar con holdings_returns_alternatives.json, que tiene mv/qty
         # desactualizados para estos dos (falta re-sync de transacciones,
@@ -65,16 +111,12 @@ def main():
             continue
         pers = ha_by_tk[tk]
         si = pers.get('return_pct')
-        ytd = pers.get('ytd_pct')
         if si is None:
             continue
+        # SI = retorno NUESTRO desde la primera compra (cost basis Pershing UGL).
         h['si_return_pct'] = round(si, 2)
         h['value_usd'] = round(pers.get('mv_usd') or h.get('value_usd', 0), 2)
-        if ytd is not None:
-            h['ytd_return_pct'] = round(ytd, 2)
-        h['source'] = 'Pershing UGL via sync_alts_ugl.py'
-        h['valuation_date'] = ha.get('period_end', datetime.now().date().isoformat())
-        h['days_since_valuation'] = 0
+        h['source'] = 'MV y SI: Pershing UGL · YTD: canonical holdings_returns'
         updates += 1
 
     # 2) Recompute weights (positions might have changed)
@@ -87,8 +129,9 @@ def main():
             ytd = h.get('ytd_return_pct')
             if si is not None:
                 h['contribution_pct'] = round(w * si / 100, 2)
-            if ytd is not None:
-                h['ytd_contribution_pct'] = round(w * ytd / 100, 2)
+            # Informativo (peso de HOY x YTD del fondo): NO suma al YTD del
+            # sleeve, que es el TWR de mas abajo.
+            h['ytd_contribution_pct'] = round(w * ytd / 100, 2) if ytd is not None else None
 
     # 3a) Recompute sub_class_breakdown_pct (los pesos cambian con MVs nuevos)
     pm_pre = ar.setdefault('portfolio_metrics', {})
@@ -100,9 +143,6 @@ def main():
             sub_pct[sc] = sub_pct.get(sc, 0) + v / total * 100
         pm_pre['sub_class_breakdown_pct'] = {k: round(v, 2) for k, v in sub_pct.items()}
 
-    # 3) Recompute sleeve YTD/SI/etc from weighted contributions (cost-basis)
-    sleeve_ytd_cb = sum(h.get('ytd_contribution_pct', 0) or 0 for h in ar['holdings'])
-    sleeve_si_cb = sum(h.get('contribution_pct', 0) or 0 for h in ar['holdings'])
 
     # 4) sleeve_index ya NO necesita parche (fix 2026-07-31): alts_race.py lo
     #    carga real desde data/alts_sleeve_real.json (statements Pershing +
@@ -135,20 +175,24 @@ def main():
     # 5) Same for portfolio_metrics
     pm = ar.setdefault('portfolio_metrics', {})
     pm['total_alts_usd'] = round(total)
-    pm['ytd_return_pct'] = round(sleeve_ytd_cb, 2)
-    pm['si_return_pct'] = round(sleeve_si_cb, 2)
     pm['n_holdings'] = len(ar['holdings'])
+    # Sacados 2026-09-24: ytd_return_pct / si_return_pct eran la suma de las
+    # contribuciones (peso de HOY x retorno de cada fondo) -- un tercer "YTD del
+    # sleeve" (2.84%) que nadie leia y no coincidia con el real. El SI/YTD del
+    # sleeve es UNO: stats_vs_6040.returns (TWR de alts_sleeve_real.json).
+    pm.pop('ytd_return_pct', None)
+    pm.pop('si_return_pct', None)
 
     # 6) Note
     ar['_sync_alts_ugl_at'] = datetime.now().isoformat()
     ar['_sync_alts_ugl_note'] = (
-        'Returns y sleeve YTD/SI sobreescritos con Pershing UGL (cost-basis weighted). '
-        'sleeve_index mensual sigue siendo time-weighted con proxies (para charts históricos).'
+        'Por holding: MV y SI (desde la compra) de Pershing UGL; YTD de calendario del canonical '
+        '(anchor 31-Dic o statement del gestor). Sleeve SI/YTD: TWR de alts_sleeve_real.json.'
     )
 
     with open(ALTS_RACE, 'w', encoding='utf-8') as f:
         json.dump(ar, f, indent=2, ensure_ascii=False)
-    print(f"  [sync_alts_ugl] {updates} holdings sync'd. Sleeve YTD: {sleeve_ytd_cb:+.2f}% / SI: {sleeve_si_cb:+.2f}%")
+    print(f"  [sync_alts_ugl] {updates} holdings sync'd (MV/SI Pershing UGL, YTD del canonical)")
 
 
 if __name__ == '__main__':
