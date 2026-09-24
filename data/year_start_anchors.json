@@ -4,16 +4,6 @@
   "_source": "Pershing UGL + year_start_anchors legacy + baha monthlyReturns",
   "_generation_rule": "Cada 1-Ene guardar el precio 31-Dec del anio anterior en este archivo (script snapshot_year_start_prices.py).",
   "anchors_2026": {
-    "US46438F1012": {
-      "ticker": "IBIT",
-      "name": "iShares Bitcoin Trust",
-      "price_2025_dec_31": 49.65,
-      "qty_2025_dec_31": 15695.0,
-      "mv_2025_dec_31": 779256.75,
-      "anchor_locked": true,
-      "ytd_source": "manual_verified",
-      "note": "Anchor real verificado el 2026-07-28. Fuente: Pershing statement oficial 31-Dic-2025 (LSERIES DAC, JXD-101380), pag 5 (iShares Bitcoin Trust)"
-    },
     "IE00B6YCBF59": {
       "ticker": "THOR",
       "name": "Thornburg Income Builder",
@@ -23,6 +13,16 @@
       "anchor_locked": true,
       "ytd_source": "manual_verified",
       "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, 31-Dic-2025"
+    },
+    "US46438F1012": {
+      "ticker": "IBIT",
+      "name": "iShares Bitcoin Trust",
+      "price_2025_dec_31": 49.65,
+      "qty_2025_dec_31": 15695.0,
+      "mv_2025_dec_31": 779256.75,
+      "anchor_locked": true,
+      "ytd_source": "manual_verified",
+      "note": "Anchor real verificado el 2026-07-28. Fuente: Pershing statement oficial 31-Dic-2025 (LSERIES DAC, JXD-101380), pag 5 (iShares Bitcoin Trust)"
     },
     "IE00B29K0P99": {
       "ticker": "PIMCO-EM",
@@ -64,16 +64,6 @@
       "ytd_source": "manual_verified",
       "note": "Anchor real verificado el 2026-07-28. Fuente: Pershing statement oficial 31-Dic-2025 (LSERIES DAC, JXD-101380), pag 4 (MAN GLG Global IG Opps)"
     },
-    "IE00089T5MA6": {
-      "ticker": "MANEM",
-      "name": "Man EM Corp Credit Alt",
-      "price_2025_dec_31": 108.54,
-      "qty_2025_dec_31": 0.0,
-      "mv_2025_dec_31": 0.0,
-      "anchor_locked": true,
-      "ytd_source": "manual_verified",
-      "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, 31-Dic-2025"
-    },
     "US4642873909": {
       "ticker": "ILF",
       "name": "iShares Latin America 40",
@@ -113,6 +103,16 @@
       "anchor_locked": true,
       "ytd_source": "derivado_de_factsheet",
       "note": "DERIVADO del factsheet de Hamilton Lane de Abril-2026 (el mas nuevo en la carpeta): NAV/Share 134.4475 al 30-Abr con YTD 5.33%, entonces el NAV al 31-Dic-2025 fue 134.4475 / 1.0533 = 127.6441. NO se compro el fondo hasta Jun-2026, asi que Pershing no tiene precio al 31-Dic: este anchor es la unica forma de tener un YTD de calendario. El YTD pasa a calcularse precio de Pershing / este anchor, y se actualiza solo cada vez que Pershing re-marca (la alarma de alts lo detecta). Precision: el YTD del factsheet viene redondeado a 2 decimales, lo que da un margen de +-0.005% en el YTD resultante. Cargado 2026-09-23."
+    },
+    "IE00089T5MA6": {
+      "ticker": "MANEM",
+      "name": "Man EM Corp Credit Alt",
+      "price_2025_dec_31": 108.54,
+      "qty_2025_dec_31": 0.0,
+      "mv_2025_dec_31": 0.0,
+      "anchor_locked": true,
+      "ytd_source": "manual_verified",
+      "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, 31-Dic-2025"
     },
     "IE00B5BMR087": {
       "ticker": "CSPX",
