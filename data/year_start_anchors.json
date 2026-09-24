@@ -206,11 +206,12 @@
     "LU2966298809": {
       "ticker": "FLEX",
       "name": "Franklin Lexington PE Secondaries",
-      "ytd_source_pct": null,
-      "price_2025_dec_31": null,
-      "qty_2025_dec_31": null,
-      "mv_2025_dec_31": null,
-      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+      "price_2025_dec_31": 29.46,
+      "qty_2025_dec_31": 0.0,
+      "mv_2025_dec_31": 0.0,
+      "anchor_locked": true,
+      "ytd_source": "manual_verified",
+      "note": "Anchor real verificado el 2026-09-24. Fuente: Mail de M (Franklin Templeton), 23-Sep-2026: NAV de la clase I al 31-Dic-2025 = 29.46 (el mail decia 31/12/26 por error, confirmado por Lucas que es 31/12/25). Nuestra clase es I (acc) USD LU2966298809. Chequeo: 31.25 (NAV Franklin 31-May, = precio Pershing) / 29.46 = +6.1% YTD a Mayo; ~+7.8% al ultimo NAV, en linea con la clase E (7.8% al 31-Jul). OJO: el dato anterior de 27.54 era de la clase A (acc) USD LU3009548630, NO usar."
     },
     "US78463V1070": {
       "ticker": "GLD",
