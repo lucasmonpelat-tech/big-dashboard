@@ -137,6 +137,61 @@ def _sleeve_lookup():
     return M, by_ticker
 
 
+_QTY_CACHE = {}
+
+
+def _qty_por_snapshot():
+    """{fecha_snapshot: {id: qty}} de todos los canonical positions.json, con
+    cada posicion indexada por security_id Y por cusip (las transacciones de
+    los fondos de Luxemburgo traen el CUSIP; las posiciones, el ISIN)."""
+    if _QTY_CACHE:
+        return _QTY_CACHE
+    for f in sorted((ROOT / "data" / "canonical").glob("*/positions.json")):
+        try:
+            hs = json.load(open(f, encoding="utf-8")).get("holdings", [])
+        except Exception:
+            continue
+        m = {}
+        for h in hs:
+            q = h.get("quantity") or 0.0
+            for k in (h.get("security_id"), h.get("cusip"), h.get("isin")):
+                if k:
+                    m[k] = q
+        _QTY_CACHE[f.parent.name] = m
+    return _QTY_CACHE
+
+
+def _fecha_movimiento(t, fecha_default):
+    """Primer snapshot canonical en que la cantidad de la posicion cambio por
+    la cantidad del trade (tolerancia 1%). None si no se encuentra."""
+    from datetime import timedelta
+    sec, q = t.get("security_id"), t.get("quantity")
+    if not sec or not q:
+        return None
+    fechas = [d for d in (t.get("trade_date"), t.get("settlement_date"), t.get("process_date")) if d]
+    if not fechas:
+        return None
+    try:
+        ini = (date.fromisoformat(min(fechas)) - timedelta(days=1)).isoformat()
+        fin = (date.fromisoformat(max(fechas)) + timedelta(days=12)).isoformat()
+    except ValueError:
+        return None
+    snaps = _qty_por_snapshot()
+    dias = sorted(d for d in snaps if ini <= d <= fin)
+    prev = None
+    # cantidad justo antes de la ventana
+    antes = [d for d in sorted(snaps) if d < ini]
+    if antes:
+        prev = snaps[antes[-1]].get(sec, 0.0)
+    tol = max(abs(q) * 0.01, 0.01)
+    for d in dias:
+        cur = snaps[d].get(sec, 0.0)
+        if prev is not None and abs((cur - prev) - q) <= tol:
+            return d
+        prev = cur
+    return None
+
+
 def _load_net_flows_since(anchor_date, sleeve="Equity"):
     """Flujo NETO del sleeve desde anchor_date, leido de las transacciones.
 
@@ -207,6 +262,17 @@ def _load_net_flows_since(anchor_date, sleeve="Equity"):
         # el YTD de Alts se inflo 1.6pp (6.44% vs 4.85%).
         pd_ = t.get("process_date") or ""
         sd = max(sd, pd_) if pd_ else sd
+        # FIX 2026-09-25 (2da vuelta): ni settlement ni process_date son la
+        # fecha en que la posicion cambia. Verificado contra los snapshots:
+        # GLD entro el dia de settlement, FLEX y GAM el de process_date, MANEM
+        # UN DIA DESPUES del process_date (compra 03-Sep, process 08, settle
+        # 10, la cantidad aparecio el 09). Con cualquier fecha fija queda un
+        # dia con el MV movido y el flujo no (o al reves): un pico falso del
+        # tamaño del trade. La verdad esta en las posiciones: se busca el
+        # primer snapshot en que la cantidad cambio por la del trade. Si no se
+        # encuentra (trades sin cantidad, dos lotes el mismo dia), queda la
+        # regla de arriba.
+        sd = _fecha_movimiento(t, sd) or sd
         if sd <= anchor_date:
             continue          # anterior al anchor
         sec = t.get("security_id")

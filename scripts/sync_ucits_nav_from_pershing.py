@@ -80,6 +80,15 @@ INSTRUMENTS = {
     "IE00B29K0P99": {"ticker": "PIMCO-EM",  "name": "PIMCO GIS Emerging Local Bond Inst Acc USD"},
     "LU2049315265": {"ticker": "SGCB",      "name": "Schroder GAIA Cat Bond C Acc USD"},
     "IE00089T5MA6": {"ticker": "MANEM",     "name": "Man EM Corporate Credit Alternative IV USD"},
+    # 2026-09-25: alta en el sleeve FI (comprado 11-Sep-2026, $200k).
+    "IE00B6WYL972": {"ticker": "GAMCB",     "name": "GAM Swiss Re Cat Bond Institutional USD Acc"},
+    # 2026-09-25: TGF SI entra. La nota de arriba ("bonos ya resueltos via
+    # sync_alts_ugl") era vieja: refresh_fi_daily no tenia precio para TGF y
+    # caia a "pershing_frozen" -- el MV quedo clavado en $823,047 desde el
+    # 28-May-2026 (7% del sleeve sin marcar). Pershing lo cotiza por 100 de
+    # nominal (153.61 = $817,206 / 532,000), asi que el "nav" por unidad es
+    # precio/100 para que qty x nav = MV de Pershing.
+    "XS2324777171": {"ticker": "TGF",       "name": "LFEEDER DAC EMTN (Tenac)", "per_100": True},
     # Alts liquidos (2026-07-28): antes via Stooq/Yahoo en live_prices.json.
     # Mismo pedido de Lucas -- Pershing como unica fuente tambien para esto.
     "US46438F1012": {"ticker": "IBIT", "name": "iShares Bitcoin Trust"},
@@ -134,9 +143,10 @@ def main():
             print(f"  {meta['ticker']:<8} sin posicion/precio en el snapshot -- se omite")
             continue
         price_date_iso = h.get("price_date")
+        nav = h["market_price_ccy"] / 100.0 if meta.get("per_100") else h["market_price_ccy"]
         navs[isin] = {
             "ticker": meta["ticker"],
-            "nav": h["market_price_ccy"],
+            "nav": nav,
             "currency": h.get("position_ccy", "USD"),
             "baha_fund_id": None,
             "name": meta["name"],

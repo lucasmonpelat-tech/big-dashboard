@@ -391,6 +391,14 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
         if has_pre_ytd_position and not has_anchor:
             v0_real = None
             capital_ytd = 0
+        elif not has_pre_ytd_position and not has_anchor:
+            # Comprado en 2026 y sin NAV al 31-Dic: lo unico calculable es el
+            # retorno desde la compra, que NO es el YTD del fondo. Antes se
+            # mostraba igual (GAM: 0.36% "YTD" a las 2 semanas de comprarlo).
+            # Mejor vacio hasta cargar el anchor (2026-09-25).
+            v0_real = None
+            capital_ytd = 0
+            ytd_metodo = "sin anchor 31-Dic (comprado en 2026): falta el NAV del fondo al 31-Dic-25"
         else:
             v0_real = v0_by_isin.get(isin, 0) if isin else 0
             capital_ytd = v0_real + buys_ytd_total

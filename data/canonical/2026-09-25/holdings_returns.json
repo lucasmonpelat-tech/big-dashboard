@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "as_of": "2026-09-25",
-  "generated_at": "2026-09-25T17:48:24Z",
+  "generated_at": "2026-09-25T18:21:04Z",
   "note": "Holdings con MV/return DIRECTO de Pershing UGL (canonical v2 pnl.json). Bench DW calculado desde buys_history + bench indices. Fixes bug de precio staleado del compute_holdings_returns.py viejo.",
   "sources": {
     "positions": "data/canonical/2026-09-25/positions.json",
@@ -733,7 +733,7 @@
           "_mv_source": "pershing_ugl"
         },
         {
-          "ticker": "IE00B6WYL972",
+          "ticker": "GAMCB",
           "name": "GAM SWISS RE CAT BOND FUND INSTITUTIONAL CLASS (ACC)(USD) ISIN IE00B6WYL972",
           "isin": "IE00B6WYL972",
           "pershing_id": "IE00B6WYL972",
@@ -744,19 +744,19 @@
           "unrealized_gl_usd": 751.73,
           "return_pct": 0.38,
           "bench_label": "AGG",
-          "bench_dw_pct": -0.98,
-          "alpha_real_pp": 1.36,
-          "ytd_pct": 0.38,
-          "ytd_metodo": "MWR Simple Dietz (anchor de MV)",
+          "bench_dw_pct": -1.07,
+          "alpha_real_pp": 1.45,
+          "ytd_pct": null,
+          "ytd_metodo": "sin anchor 31-Dic (comprado en 2026): falta el NAV del fondo al 31-Dic-25",
           "ytd_as_of": null,
           "ytd_fuente": null,
           "bench_ytd_pct": -2.36,
-          "alpha_ytd_pp": 2.74,
-          "first_buy_date": "2026-09-14",
+          "alpha_ytd_pp": null,
+          "first_buy_date": "2026-09-11",
           "n_trades": 1,
           "buys_history": [
             {
-              "date": "2026-09-14",
+              "date": "2026-09-11",
               "cost": 200000.04
             }
           ],

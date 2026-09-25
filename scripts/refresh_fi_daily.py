@@ -167,6 +167,28 @@ def _modified_dietz_return(mv_start, mv_end, flows, anchor_date, today_iso):
     return ret, total_flow
 
 
+def _reinterpolar(twr, desde, hasta):
+    """Los puntos marcados `interpolated` del mes (fines de semana/feriados sin
+    corrida real) se rehacen como interpolacion lineal del indice entre los
+    puntos reales vecinos, ya recalculados. Sin esto, un punto interpolado
+    conserva un mv_usd viejo y al aplicarle los flujos nuevos queda un pico
+    falso (paso el 20-Sep-2026, domingo, al dar de alta GAM en FI)."""
+    from datetime import date as _d
+    reales = [p for p in twr if desde <= p["date"] < hasta and not p.get("interpolated") and p.get("index")]
+    for p in twr:
+        if not (desde < p["date"] < hasta) or not p.get("interpolated"):
+            continue
+        antes = [r for r in reales if r["date"] < p["date"]]
+        despues = [r for r in reales if r["date"] > p["date"]]
+        if not antes or not despues:
+            continue
+        a, b = antes[-1], despues[0]
+        t = (_d.fromisoformat(p["date"]) - _d.fromisoformat(a["date"])).days / max(1, (_d.fromisoformat(b["date"]) - _d.fromisoformat(a["date"])).days)
+        p["index"] = round(a["index"] + (b["index"] - a["index"]) * t, 4)
+        p["flow_in"] = a.get("flow_in")
+        p["twr"] = None
+
+
 def main():
     print(f"[{datetime.now().isoformat()}] Refresh FI daily...")
     data = json.load(open(SLEEVE_FILE, encoding="utf-8"))
@@ -248,10 +270,33 @@ def main():
     flows_since_anchor = _load_net_flows_since(anchor["date"], sleeve="Fixed Income")
     n_c = sum(1 for f in flows_since_anchor if f["cost"] > 0)
     mv_anchor = anchor["mv_usd"]
+
+    if "--recompute-month" in _sys.argv:
+        # Rehacer los puntos ya guardados del mes (mismo anchor, mv_usd de cada
+        # dia tal como esta, flujos de HOY). Mismo mecanismo que
+        # refresh_alts_sleeve_daily.py (2026-09-25): sirve cuando un flujo
+        # aparece tarde o se corrige la lectura de flujos, porque cada punto
+        # del mes se calcula desde el mismo anchor.
+        n_re = 0
+        for p in twr:
+            if p["date"] <= anchor["date"] or p["date"] >= today_iso or not _is_valid_price(p.get("mv_usd")):
+                continue
+            if p.get("interpolated"):
+                continue  # se re-interpola abajo, entre los puntos reales ya corregidos
+            fl = [f for f in flows_since_anchor if f["date"] <= p["date"]]
+            r, fi = _modified_dietz_return(mv_anchor, p["mv_usd"], fl, anchor["date"], p["date"])
+            old_idx = p["index"]
+            p["flow_in"], p["twr"], p["index"] = round(fi, 2), r, round(anchor["index"] * (1 + r), 4)
+            n_re += 1
+            if abs(p["index"] - old_idx) > 0.005:
+                print(f"    {p['date']}: index {old_idx:.4f} -> {p['index']:.4f}  flow ${fi:+,.0f}")
+        print(f"  --recompute-month: {n_re} puntos desde {anchor['date']} recalculados")
+        _reinterpolar(twr, anchor["date"], today_iso)
+
     twr_today, flow_in = _modified_dietz_return(mv_anchor, mv_today, flows_since_anchor, anchor["date"], today_iso)
     if abs(flow_in) > 1:
         print(f"  flow_in NETO desde {anchor['date']}: ${flow_in:+,.0f} "
-              f"({n_c} compras / {len(flows_since_anchor) - n_c} ventas, por settlement date)")
+              f"({n_c} compras / {len(flows_since_anchor) - n_c} ventas, por fecha en que se movio la posicion)")
     index_today = anchor["index"] * (1 + twr_today)
 
     # Guard final: abort si calculos resultan NaN/0 (NO sobreescribir el JSON con basura)

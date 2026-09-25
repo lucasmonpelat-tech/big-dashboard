@@ -3,7 +3,7 @@
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Fixed Income",
   "period_end": "2026-09-25",
-  "n_open": 7,
+  "n_open": 8,
   "n_closed": 4,
   "holdings": [
     {
@@ -318,6 +318,34 @@
       "first_buy_date": "01/28/2026",
       "last_sell_date": "06/16/2026",
       "n_lots": 1
+    },
+    {
+      "ticker": "GAMCB",
+      "sleeve": "Fixed Income",
+      "status": "OPEN",
+      "name": "GAM SWISS RE CAT BOND FUND INSTITUTIONAL CLASS (ACC)(USD) ISIN IE00B6WYL972",
+      "qty": 8100.48,
+      "mv_usd": 200751.77,
+      "cost_basis_usd": 200000.04,
+      "unrealized_gl_usd": 751.73,
+      "return_pct": 0.38,
+      "last_price_pershing": 24.7827,
+      "bench_label": "AGG",
+      "bench_dw_pct": null,
+      "alpha_real_pp": null,
+      "ytd_pct": null,
+      "bench_ytd_pct": null,
+      "alpha_ytd_pp": null,
+      "first_buy_date": "2026-09-11",
+      "period_end": "2026-09-25",
+      "n_trades": 1,
+      "buys_history": [
+        {
+          "date": "2026-09-11",
+          "cost": 200000.04
+        }
+      ],
+      "_alta": "2026-09-25 a mano (compute_holdings_returns no corre local: los XLSX de NetX360 no estan en el repo). El cron lo reconcilia con el UGL."
     }
   ],
   "_daily_refresh_note": "Daily refresh 2026-09-25: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump."

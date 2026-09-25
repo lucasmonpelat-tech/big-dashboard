@@ -97,6 +97,28 @@ def _modified_dietz_return(mv_start, mv_end, flows, anchor_date, today_iso):
     return ret, total_flow
 
 
+def _reinterpolar(twr, desde, hasta):
+    """Los puntos marcados `interpolated` del mes (fines de semana/feriados sin
+    corrida real) se rehacen como interpolacion lineal del indice entre los
+    puntos reales vecinos, ya recalculados. Sin esto, un punto interpolado
+    conserva un mv_usd viejo y al aplicarle los flujos nuevos queda un pico
+    falso (paso el 20-Sep-2026, domingo, al dar de alta GAM en FI)."""
+    from datetime import date as _d
+    reales = [p for p in twr if desde <= p["date"] < hasta and not p.get("interpolated") and p.get("index")]
+    for p in twr:
+        if not (desde < p["date"] < hasta) or not p.get("interpolated"):
+            continue
+        antes = [r for r in reales if r["date"] < p["date"]]
+        despues = [r for r in reales if r["date"] > p["date"]]
+        if not antes or not despues:
+            continue
+        a, b = antes[-1], despues[0]
+        t = (_d.fromisoformat(p["date"]) - _d.fromisoformat(a["date"])).days / max(1, (_d.fromisoformat(b["date"]) - _d.fromisoformat(a["date"])).days)
+        p["index"] = round(a["index"] + (b["index"] - a["index"]) * t, 4)
+        p["flow_in"] = a.get("flow_in")
+        p["twr"] = None
+
+
 def main():
     print(f"[{datetime.now().isoformat()}] Refresh Alts sleeve daily...")
     data = json.load(open(SLEEVE_FILE, encoding="utf-8"))
@@ -146,15 +168,17 @@ def main():
         for p in twr:
             if p["date"] <= anchor["date"] or p["date"] >= today_iso or p.get("mv_usd") is None:
                 continue
+            if p.get("interpolated"):
+                continue  # se re-interpola abajo, entre los puntos reales ya corregidos
             fl = [f for f in flows_since_anchor if f["date"] <= p["date"]]
             r, fi = _modified_dietz_return(mv_anchor, p["mv_usd"], fl, anchor["date"], p["date"])
             old = p["index"]
             p["flow_in"], p["twr"], p["index"] = round(fi, 2), r, round(anchor["index"] * (1 + r), 4)
-            p.pop("interpolated", None)
             n_re += 1
             if abs(p["index"] - old) > 0.005:
                 print(f"    {p['date']}: index {old:.4f} -> {p['index']:.4f}  flow ${fi:+,.0f}")
         print(f"  --recompute-month: {n_re} puntos desde {anchor['date']} recalculados")
+        _reinterpolar(twr, anchor["date"], today_iso)
 
     twr_today, flow_in = _modified_dietz_return(mv_anchor, mv_today, flows_since_anchor, anchor["date"], today_iso)
     if abs(flow_in) > 1:

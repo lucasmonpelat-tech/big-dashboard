@@ -252,8 +252,14 @@ def _canonical_positions(pred):
     return None
 
 
-def _tracked_tickers(holdings_file):
-    """Tickers OPEN que el sleeve incluye en su MV (holdings_returns_<sleeve>)."""
+def _tracked_tickers(holdings_file, sleeve_doc=None):
+    """Tickers que el sleeve incluye en su MV: los del ultimo punto de la
+    sleeve_series (lo que el TWR sumo de verdad). Si el archivo no tiene esa
+    serie (Alts), los OPEN de holdings_returns_<sleeve>."""
+    if sleeve_doc:
+        for k, v in sleeve_doc.items():
+            if k.startswith("sleeve_series") and isinstance(v, list) and v and isinstance(v[-1], dict) and v[-1].get("holdings"):
+                return {h.get("ticker") for h in v[-1]["holdings"]}
     try:
         d = json.load(open(DATA_DIR / holdings_file, encoding="utf-8"))
         return {h.get("ticker") for h in d.get("holdings", []) if (h.get("status") or "OPEN") == "OPEN"}

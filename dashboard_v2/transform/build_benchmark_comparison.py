@@ -161,7 +161,13 @@ def _returns_by_period(port_map: dict, bench_map: dict, as_of: str) -> dict:
         "1M": (as_of_dt - timedelta(days=30)).isoformat(),
         "3M": (as_of_dt - timedelta(days=91)).isoformat(),
         "6M": (as_of_dt - timedelta(days=182)).isoformat(),
-        "YTD": date(as_of_dt.year, 1, 1).isoformat(),
+        # FIX 2026-09-25: la referencia del YTD es el ULTIMO punto del año
+        # anterior (31-Dic), no el 1-Ene. Con "01-01" _find_ref_date caia en el
+        # punto del 1-Ene, que en las series de sleeve es INTERPOLADO (feriado)
+        # -- un valor inventado entre el 31-Dic y el 2-Ene. Por eso el KPI del
+        # tab (Equity 7.77%) no coincidia con la atribucion (7.69%), que si
+        # usa el 31-Dic.
+        "YTD": date(as_of_dt.year - 1, 12, 31).isoformat(),
         "LTM": (as_of_dt - timedelta(days=365)).isoformat(),
         "SI": inception,
     }

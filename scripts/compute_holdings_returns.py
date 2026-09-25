@@ -65,6 +65,10 @@ PERSHING_TO_MY = {
     # ISIN, no por CUSIP como al resto. Entro en Sep-2026 sin mapeo y quedo con
     # el ISIN como ticker, que es lo que hacia fallar al validador.
     'IE00B6WYL972': ('GAMCB',    'Fixed Income'),
+    # 2026-09-25: las TRANSACCIONES de Pershing traen el CUSIP, no el ISIN. Sin
+    # esta clave la compra del 11-Sep ($200k) no contaba como flujo del sleeve
+    # FI y el fondo quedaba fuera del TWR (ni MV ni flujo).
+    'G37271460':    ('GAMCB',    'Fixed Income'),
     'HEWJ':        ('HEWJ',     'Equity'),
     'MAGS':        ('MAGS',     'Equity'),
     # Alternatives
