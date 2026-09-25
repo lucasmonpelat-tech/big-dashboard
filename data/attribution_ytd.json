@@ -1,6 +1,6 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-09-25T13:15:37.860347",
+  "refreshedAt": "2026-09-25T14:49:28.712643",
   "as_of_date": "2026-09-25",
   "ytd_anchor": "2025-12-31",
   "days_ytd": 268,
@@ -23,8 +23,8 @@
       "name": "Alternatives",
       "value_usd": 8709676.68,
       "weight_pct": 30.32,
-      "ytd_pct": 6.44,
-      "contribution_pp": 1.952
+      "ytd_pct": 4.85,
+      "contribution_pp": 1.472
     },
     {
       "name": "Cash",
@@ -34,13 +34,13 @@
       "contribution_pp": 0.016
     }
   ],
-  "gross_reconstructed_pct": 4.67,
+  "gross_reconstructed_pct": 4.19,
   "mgmt_fee_pp": -1.322,
   "mgmt_fee_rate_annual_pct": 1.8,
-  "net_reconstructed_pct": 3.348,
+  "net_reconstructed_pct": 2.868,
   "lynk_ytd_pct": 2.98,
   "lynk_refreshed_at": "2026-09-25T13:11:47.680224",
-  "residual_pp": 0.368,
+  "residual_pp": -0.112,
   "alts_detail": [
     {
       "ticker": "CALP",
@@ -87,10 +87,10 @@
       "name": "HPS Corporate Lending Fund",
       "value_usd": 761044.21,
       "weight_pct": 8.74,
-      "ytd_pct": 0.62,
-      "contribution_pp": 0.054,
+      "ytd_pct": 1.4,
+      "contribution_pp": 0.122,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
-      "valuation_date": "2026-03-31"
+      "valuation_date": "2026-08-19"
     },
     {
       "ticker": "FLEX",
@@ -117,10 +117,10 @@
       "name": "Golub Capital Private Credit",
       "value_usd": 500276.97,
       "weight_pct": 5.74,
-      "ytd_pct": -1.92,
-      "contribution_pp": -0.11,
+      "ytd_pct": 0.02,
+      "contribution_pp": 0.001,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
-      "valuation_date": "2026-03-31"
+      "valuation_date": "2026-07-31"
     }
   ],
   "total_aum": 28722478.35,
@@ -151,10 +151,10 @@
       },
       {
         "name": "Alternatives",
-        "big_contrib_pp": 1.952,
+        "big_contrib_pp": 1.472,
         "bench_contrib_pp": 0,
-        "alpha_pp": 1.952,
-        "comment": "BIG 30.3% @ +6.44% (bench no tiene Alts)"
+        "alpha_pp": 1.472,
+        "comment": "BIG 30.3% @ +4.85% (bench no tiene Alts)"
       },
       {
         "name": "Cash",
@@ -172,7 +172,7 @@
       },
       {
         "name": "Nuestro Cálculo (NET)",
-        "big_contrib_pp": 3.348,
+        "big_contrib_pp": 2.868,
         "bench_contrib_pp": null,
         "alpha_pp": null,
         "is_subtotal": true,
@@ -180,10 +180,10 @@
       },
       {
         "name": "Residual",
-        "big_contrib_pp": 0.368,
+        "big_contrib_pp": -0.112,
         "bench_contrib_pp": null,
-        "alpha_pp": -0.453,
-        "comment": "Nuestro calculo (+3.35%) - Lynk oficial (+2.98%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
+        "alpha_pp": 0.027,
+        "comment": "Nuestro calculo (+2.87%) - Lynk oficial (+2.98%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
       }
     ]
   }

@@ -158,7 +158,9 @@ def _load_net_flows_since(anchor_date, sleeve="Equity"):
     los $65,772.64 exactos Y entraron las 169 shares. Cash y posicion se mueven
     JUNTOS en el settlement, asi que no hace falta llevar registro de plata en
     transito. Los trades sin liquidar (fechas en "-") se saltean hasta que
-    liquiden.
+    liquiden. Excepcion (2026-09-25): si Pershing asienta un trade con el
+    settlement retro-fechado (fondos privados), manda el process_date -- ver
+    el comentario en el loop.
 
     Returns: list de {ticker, date, cost} -- cost NEGATIVO en las ventas.
     """
@@ -191,8 +193,22 @@ def _load_net_flows_since(anchor_date, sleeve="Equity"):
     flows, sin_mapear = [], []
     for t in trades:
         sd = t.get("settlement_date")
-        if not sd or sd <= anchor_date:
-            continue          # no liquidado, o anterior al anchor
+        if not sd:
+            continue          # no liquidado todavia
+        # FIX 2026-09-25: la fecha del flujo es la fecha en que la posicion se
+        # movio de verdad, que es la MAYOR entre settlement y process_date.
+        # Para ETFs/UCITS son el mismo dia (verificado con GLD arriba). Pero
+        # los fondos privados via Pershing (FLEX, HLGPI) se asientan semanas
+        # despues con el settlement RETRO-FECHADO al dia del pedido: el 2do
+        # tramo de FLEX ($130k) entro a la posicion el 08-Sep con settlement
+        # "04-Ago". Filtrando por settlement caia antes del anchor del 31-Ago
+        # y no se contaba en ningun mes -- y el 31-Ago tampoco, porque ese
+        # dia el asiento aun no existia. Los $130k quedaron como "retorno" y
+        # el YTD de Alts se inflo 1.6pp (6.44% vs 4.85%).
+        pd_ = t.get("process_date") or ""
+        sd = max(sd, pd_) if pd_ else sd
+        if sd <= anchor_date:
+            continue          # anterior al anchor
         sec = t.get("security_id")
         tk, sl = (M.get(sec) if sec in M else (sec, by_ticker.get(sec)) if sec in by_ticker else (None, None))
         if sl != sleeve:

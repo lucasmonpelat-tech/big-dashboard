@@ -25,8 +25,15 @@ Debe correr ANTES de sync_alts_ugl.py en el cron, para que sus stats de
 
 Usage:
     python scripts/refresh_alts_sleeve_daily.py
+    python scripts/refresh_alts_sleeve_daily.py --recompute-month
+        Recalcula TODOS los puntos posteriores al ultimo fin de mes real con
+        los flujos de hoy (mv_usd de cada punto se conserva). Para cuando un
+        flujo aparece tarde o se corrige la lectura de flujos: cada punto del
+        mes se calcula desde el mismo anchor, asi que basta rehacerlos.
+        (Usado 2026-09-25 para el 2do tramo de FLEX, ver refresh_equity_daily.)
 """
 import json
+import sys
 from datetime import date, datetime
 from pathlib import Path
 
@@ -126,16 +133,33 @@ def main():
     # monto entero de la compra y hundia el TWR. Verificado en Equity: el YTD
     # paso de -2.89% a +9.27%. La funcion se importa de refresh_equity_daily en
     # vez de copiarse, para no tener tres versiones que se desincronicen.
-    import sys as _sys
-    _sys.path.insert(0, str(ROOT / "scripts"))
+    sys.path.insert(0, str(ROOT / "scripts"))
     from refresh_equity_daily import _load_net_flows_since
     flows_since_anchor = _load_net_flows_since(anchor["date"], sleeve="Alternatives")
     n_c = sum(1 for f in flows_since_anchor if f["cost"] > 0)
     mv_anchor = anchor["mv_usd"]
+
+    if "--recompute-month" in sys.argv:
+        # Rehacer los puntos ya guardados del mes (mismo anchor, mismos mv_usd
+        # de cada dia, flujos de HOY) antes de calcular el de hoy.
+        n_re = 0
+        for p in twr:
+            if p["date"] <= anchor["date"] or p["date"] >= today_iso or p.get("mv_usd") is None:
+                continue
+            fl = [f for f in flows_since_anchor if f["date"] <= p["date"]]
+            r, fi = _modified_dietz_return(mv_anchor, p["mv_usd"], fl, anchor["date"], p["date"])
+            old = p["index"]
+            p["flow_in"], p["twr"], p["index"] = round(fi, 2), r, round(anchor["index"] * (1 + r), 4)
+            p.pop("interpolated", None)
+            n_re += 1
+            if abs(p["index"] - old) > 0.005:
+                print(f"    {p['date']}: index {old:.4f} -> {p['index']:.4f}  flow ${fi:+,.0f}")
+        print(f"  --recompute-month: {n_re} puntos desde {anchor['date']} recalculados")
+
     twr_today, flow_in = _modified_dietz_return(mv_anchor, mv_today, flows_since_anchor, anchor["date"], today_iso)
     if abs(flow_in) > 1:
         print(f"  flow_in NETO desde {anchor['date']}: ${flow_in:+,.0f} "
-              f"({n_c} compras / {len(flows_since_anchor) - n_c} ventas, por settlement date)")
+              f"({n_c} compras / {len(flows_since_anchor) - n_c} ventas, por fecha en que se movio la posicion)")
     index_today = anchor["index"] * (1 + twr_today)
 
     new_point = {"date": today_iso, "mv_usd": round(mv_today, 2), "flow_in": round(flow_in, 2),

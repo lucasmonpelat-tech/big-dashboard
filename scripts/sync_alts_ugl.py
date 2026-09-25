@@ -26,7 +26,8 @@ CARLYLE_STMT = ROOT / "data" / "alts_carlyle_statement.json"
 CANONICAL_DIR = ROOT / "data" / "canonical"
 # Metodos del canonical que dan un YTD de CALENDARIO (del fondo en el año). El
 # resto (ej "Pershing UGL (MV vs costo...)") es retorno desde la compra.
-YTD_CALENDARIO = ("precio vs anchor 31-Dic", "statement del gestor", "precio (race)")
+YTD_CALENDARIO = ("precio vs anchor 31-Dic", "valor Pershing vs valor 31-Dic (statement)",
+                  "statement del gestor", "precio (race)")
 
 
 def _canonical_alts_by_ticker() -> dict:

@@ -342,6 +342,23 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
         ytd_pct = round((float(px_hoy) / px_anchor - 1) * 100, 2)
         ytd_metodo = "precio vs anchor 31-Dic"
         ytd_as_of = (pos or {}).get("price_date")
+    elif px_hoy is None and mv is not None and _anchor_valor_31dic(isin):
+        # Fondos que Pershing valua SIN precio ni fecha (HLEND, GCRED: la
+        # "cantidad" es el valor en dolares) pero que SI re-marca cada tanto.
+        # YTD = valor en Pershing / valor REAL al 31-Dic (statement del gestor,
+        # en year_start_anchors.mv_2025_dec_31) - 1, descontando compras del
+        # año. La fecha es el dia en que Pershing cambio el valor por ultima
+        # vez (2026-09-25). Antes se mostraba el YTD del statement de Marzo
+        # aunque Pershing ya tuviera una marca mas nueva: HLEND +0.62% (Mar)
+        # cuando el valor de Pershing implicaba +1.40%, GCRED -1.92% vs ~0%.
+        ent = _anchor_valor_31dic(isin)
+        v0 = float(ent["mv_2025_dec_31"])
+        buys_ytd_total = sum(b["cost"] for b in (agg or {}).get("buys_ytd", [])) if agg else 0.0
+        if v0 + buys_ytd_total > 0:
+            ytd_pct = round((mv - v0 - buys_ytd_total) / (v0 + buys_ytd_total) * 100, 2)
+            ytd_metodo = "valor Pershing vs valor 31-Dic (statement)"
+            ytd_as_of = _ultimo_remarcado((pos or {}).get("security_id"), mv)
+            ytd_fuente = f"Pershing re-marco el valor el {ytd_as_of} · 31-Dic segun {ent.get('ytd_source')}"
     elif _statement_ytd(isin, ticker):
         # YTD declarado en el statement del gestor (GCRED, HLEND): Pershing no
         # publica precio ni fecha de valuacion para ellos, asi que no hay anchor
@@ -421,6 +438,48 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
         "buys_history": buys,
         "_mv_source": source_note,
     }
+
+
+_ANCHOR_VALOR_CACHE = None
+
+
+def _anchor_valor_31dic(isin: str | None) -> dict | None:
+    """Entrada de year_start_anchors con VALOR (no precio) real al 31-Dic, para
+    los fondos que Pershing valua sin precio. Solo si esta trabada."""
+    global _ANCHOR_VALOR_CACHE
+    if _ANCHOR_VALOR_CACHE is None:
+        _ANCHOR_VALOR_CACHE = {}
+        p = DATA_DIR / "year_start_anchors.json"
+        if p.exists():
+            for k, v in (json.load(open(p, encoding="utf-8")).get("anchors_2026") or {}).items():
+                if v.get("anchor_locked") and not v.get("price_2025_dec_31") and (v.get("mv_2025_dec_31") or 0) > 0:
+                    _ANCHOR_VALOR_CACHE[k] = v
+    return _ANCHOR_VALOR_CACHE.get(isin or "")
+
+
+def _ultimo_remarcado(security_id: str | None, mv_hoy: float) -> str | None:
+    """Fecha del snapshot canonical en que Pershing paso a mostrar el valor
+    actual de esta posicion (= ultimo re-marcado visible). Recorre los
+    snapshots hacia atras hasta encontrar un valor distinto."""
+    if not security_id or mv_hoy is None:
+        return None
+    dirs = sorted(p.name for p in CANONICAL_DIR.iterdir() if p.is_dir())
+    fecha = None
+    for d in reversed(dirs):
+        f = CANONICAL_DIR / d / "positions.json"
+        if not f.exists():
+            continue
+        try:
+            hs = json.load(open(f, encoding="utf-8")).get("holdings", [])
+        except Exception:
+            continue
+        h = next((x for x in hs if (x.get("security_id") or x.get("cusip")) == security_id), None)
+        if h is None:
+            continue
+        if abs((h.get("market_value_usd") or 0) - mv_hoy) > 0.01:
+            break
+        fecha = d
+    return fecha
 
 
 _STATEMENT_YTD_CACHE = None

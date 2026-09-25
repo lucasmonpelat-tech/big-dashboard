@@ -1452,16 +1452,19 @@
           // del gestor. Antes el front aplicaba el override por su cuenta y el
           // canonical, alts_race y la atribucion quedaban con otro numero.
           const porAnchor = (h.ytd_metodo || "").startsWith("precio vs anchor");
+          const porValor = (h.ytd_metodo || "").startsWith("valor Pershing");
           const porStatement = h.ytd_metodo === "statement del gestor";
+          const conFecha = porAnchor || porValor || porStatement;
           const ytdVal = h.ytd_pct;
           // La fecha importa: un YTD de un ilíquido es al último NAV publicado,
           // no al día de hoy. Mostrarlo sin fecha lo haría parecer de hoy.
-          const asOf = (porAnchor || porStatement) ? fmtAsOf(h.ytd_as_of)
+          const asOf = conFecha ? fmtAsOf(h.ytd_as_of)
                      : (h.ytd_pct != null ? "T-1" : "");
           const titulo = porStatement ? (h.ytd_fuente || h.ytd_metodo)
+                       : porValor ? `Valor en Pershing / valor real al 31-Dic-25 (statement) · ${h.ytd_fuente || ""}`
                        : porAnchor ? `Precio de Pershing / NAV al 31-Dic-25 · ${h.ytd_metodo}`
                        : (h.ytd_metodo || "");
-          const asOfCell = (porStatement || porAnchor)
+          const asOfCell = conFecha
             ? `<span title="${titulo}" style="font-size:11px;color:var(--gold)">${asOf}</span>`
             : `<span title="${titulo}" style="font-size:11px;color:var(--text-mute)">${asOf}</span>`;
           return `<tr>

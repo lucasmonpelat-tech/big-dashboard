@@ -1,7 +1,7 @@
 {
   "_description": "YTD oficial reportado en factsheets/statements de fondos alternativos (PE, infra, private credit). Override manual — el pipeline calcula un YTD desde precios spot, pero para holdings ilíquidos el número que reporta el manager es el que vale (no hay precio de mercado diario). Cuando salga un factsheet más nuevo, actualizar el as_of y el ytd_pct.",
   "_maintained_manually": true,
-  "_lastReviewed": "2026-09-23",
+  "_lastReviewed": "2026-09-25",
   "overrides": {
     "LU2847068389": {
       "ticker": "HLGPI",
@@ -33,7 +33,7 @@
       "nav_31dic_2025": 1157.3905,
       "nav_a_la_fecha": 1135.1782,
       "shares": 432.1639,
-      "nota": "Pershing NO publica precio ni price_date para este fondo (la 'cantidad' es el valor en dolares), asi que NO se puede usar el anchor del 31-Dic como en HLGPI: el YTD quedaria sin fecha de valuacion. Va por el statement, que trae el YTD declarado. Verificado: 1135.1782 / 1157.3905 - 1 = -1.92%, identico al declarado. ACTUALIZAR cuando llegue un statement mas nuevo."
+      "nota": "DESDE 2026-09-25 NO ES LA FUENTE: el YTD sale de valor en Pershing / valor real al 31-Dic (year_start_anchors.json, mv_2025_dec_31) porque Pershing re-marca este fondo aunque no publique fecha. Este override queda como verificacion contra el statement. Pershing NO publica precio ni price_date para este fondo (la 'cantidad' es el valor en dolares), asi que NO se puede usar el anchor del 31-Dic como en HLGPI: el YTD quedaria sin fecha de valuacion. Va por el statement, que trae el YTD declarado. Verificado: 1135.1782 / 1157.3905 - 1 = -1.92%, identico al declarado. ACTUALIZAR cuando llegue un statement mas nuevo."
     },
     "KYG4737U1085": {
       "ticker": "HLEND",
@@ -44,10 +44,10 @@
       "nav_31dic_2025": 1115.6077,
       "nav_a_la_fecha": 1122.5783,
       "shares": 672.7601,
-      "nota": "Mismo caso que GCRED: Pershing no publica precio ni fecha de valuacion. Verificado: 1122.5783 / 1115.6077 - 1 = +0.62%, identico al declarado. ACTUALIZAR cuando llegue un statement mas nuevo."
+      "nota": "DESDE 2026-09-25 NO ES LA FUENTE: el YTD sale de valor en Pershing / valor real al 31-Dic (year_start_anchors.json, mv_2025_dec_31) porque Pershing re-marca este fondo aunque no publique fecha. Este override queda como verificacion contra el statement. Mismo caso que GCRED: Pershing no publica precio ni fecha de valuacion. Verificado: 1122.5783 / 1115.6077 - 1 = +0.62%, identico al declarado. ACTUALIZAR cuando llegue un statement mas nuevo."
     }
   },
   "_pending": [
-    "FLEX (falta el NAV al 31-Dic-2025 para usar el anchor de Pershing)"
+    "Statements de HLEND/GCRED posteriores a Mar-2026, para verificar el valor de Pershing contra el declarado."
   ]
 }

@@ -212,6 +212,152 @@ def check_sleeve(sleeve_key, sleeve_file, holdings_file, today_iso):
     #    firma exacta del bug de HLGPI/FLEX)
     issues.extend(check_duplicate_pending_buys(holdings_file))
 
+    # 5) El flujo del mes explica los cambios de posicion (fix FLEX 2026-09-25)
+    try:
+        issues.extend(check_flows_vs_positions(sleeve_key, twr, holdings_file))
+    except Exception as e:
+        issues.append(f"{sleeve_key}: no se pudo correr el chequeo flujo vs posiciones ({e})")
+
+    return issues
+
+
+MAX_FLOW_GAP_PCT_OF_MV = 0.005   # 0.5% del MV: por encima, el flujo no explica el cambio de posiciones
+MIN_FLOW_GAP_USD = 5000
+
+_SLEEVE_NAME = {"equity": "Equity", "fixed_income": "Fixed Income", "alternatives": "Alternatives"}
+
+
+def _is_month_end(d):
+    import calendar
+    y, m, dd = map(int, d.split("-"))
+    return dd == calendar.monthrange(y, m)[1]
+
+
+def _canonical_positions(pred):
+    """(fecha, {security_id: (qty, price)}) del snapshot canonical mas reciente
+    cuya fecha cumple pred. None si no hay."""
+    dirs = sorted(p.name for p in (DATA_DIR / "canonical").iterdir() if p.is_dir())
+    for d in reversed(dirs):
+        if not pred(d):
+            continue
+        f = DATA_DIR / "canonical" / d / "positions.json"
+        if not f.exists():
+            continue
+        out = {}
+        for h in json.load(open(f, encoding="utf-8")).get("holdings", []):
+            sid = h.get("security_id") or h.get("cusip")
+            if sid:
+                out[sid] = (h.get("quantity") or 0.0, h.get("market_price_ccy"))
+        return d, out
+    return None
+
+
+def _tracked_tickers(holdings_file):
+    """Tickers OPEN que el sleeve incluye en su MV (holdings_returns_<sleeve>)."""
+    try:
+        d = json.load(open(DATA_DIR / holdings_file, encoding="utf-8"))
+        return {h.get("ticker") for h in d.get("holdings", []) if (h.get("status") or "OPEN") == "OPEN"}
+    except Exception:
+        return set()
+
+
+def check_flows_vs_positions(sleeve_key, twr, holdings_file=None):
+    """5) El flujo acumulado del mes tiene que explicar los cambios de cantidad
+    de las posiciones del sleeve desde el anchor (fin de mes).
+
+    POR QUE EXISTE (2026-09-25)
+    ---------------------------
+    El 08-Sep entro el 2do tramo de FLEX ($130k): la posicion paso de 16,415 a
+    20,507 cuotas y el MV del sleeve subio $130k. Pershing lo asento con el
+    settlement retro-fechado al 04-Ago, asi que el lector de flujos (que
+    filtraba por settlement > anchor) no lo conto en septiembre -- ni en
+    agosto, porque el 31-Ago el asiento no existia. Los $130k quedaron como
+    "retorno": el YTD de Alts mostro 6.44% cuando era 4.85%. Ningun chequeo lo
+    vio: el salto diario fue 1.1% (umbral 5pp) y el flow_in era 0.
+
+    QUE MIRA
+    --------
+    Σ (qty_hoy - qty_anchor) x precio_hoy por posicion del sleeve, contra el
+    flow_in del ultimo punto. Es el mismo numero medido por otro camino (las
+    posiciones en vez de las transacciones), no otra metodologia de retorno.
+    Se excluyen las posiciones sin precio (HLEND/GCRED: la "cantidad" es el
+    valor en dolares y cambia cuando Pershing re-marca, no por flujos). Para
+    el anchor se prueban el ultimo snapshot <= anchor y el primero > anchor, y
+    solo avisa si NINGUNO de los dos cuadra: un trade justo el dia del cierre
+    puede caer de un lado u otro y no es un error.
+    """
+    issues = []
+    anchor = None
+    for p in reversed(twr):
+        if _is_month_end(p["date"]) and p.get("mv_usd") is not None and not p.get("interpolated"):
+            anchor = p
+            break
+    if anchor is None or not twr:
+        return issues
+    last = twr[-1]
+    flow_in = last.get("flow_in") or 0.0
+    mv_today = last.get("mv_usd") or 0.0
+    if mv_today <= 0:
+        return issues
+
+    import sys as _s
+    _s.path.insert(0, str(ROOT / "scripts"))
+    from compute_holdings_returns import PERSHING_TO_MY as M
+    sleeve_name = _SLEEVE_NAME[sleeve_key]
+    en_sleeve = {sid for sid, (tk, sl) in M.items() if sl == sleeve_name}
+
+    hoy = _canonical_positions(lambda d: True)
+    if not hoy:
+        return issues
+    d_hoy, pos_hoy = hoy
+
+    # Solo se comparan las posiciones que el sleeve INCLUYE en su MV. Una
+    # posicion de Pershing mapeada al sleeve pero que el TWR no rastrea (no
+    # esta en holdings_returns_<sleeve>, sin NAV diario) queda fuera del MV y
+    # del flujo a la vez: no infla el retorno, pero su plata no se mide. Se
+    # avisa aparte, porque el arreglo es distinto (dar de alta el fondo, no
+    # tocar el flujo). Caso GAM cat bond, comprado 11-Sep-2026, $200k.
+    tracked = _tracked_tickers(holdings_file) if holdings_file else set()
+    if tracked:
+        fuera = sorted({M[sid][0] for sid in en_sleeve
+                        if sid in pos_hoy and (pos_hoy[sid][0] or 0) > 0 and M[sid][0] not in tracked})
+        if fuera:
+            issues.append(
+                f"{sleeve_key}: posicion(es) en Pershing mapeadas a este sleeve que el TWR NO incluye "
+                f"(ni en MV ni en flujo): {', '.join(fuera)}. Su retorno no se esta midiendo -- hay que "
+                f"darlas de alta en holdings_returns/ucits_daily_nav como al resto."
+            )
+        en_sleeve = {sid for sid in en_sleeve if M[sid][0] in tracked}
+    candidatos = [c for c in (_canonical_positions(lambda d: d <= anchor["date"]),
+                              _canonical_positions(lambda d: d > anchor["date"])) if c]
+    if not candidatos:
+        return issues
+
+    tol = max(MAX_FLOW_GAP_PCT_OF_MV * mv_today, MIN_FLOW_GAP_USD)
+    resultados = []
+    for d_anc, pos_anc in candidatos:
+        esperado, detalle = 0.0, []
+        for sid in en_sleeve:
+            q1, px1 = pos_hoy.get(sid, (0.0, None))
+            q0, px0 = pos_anc.get(sid, (0.0, None))
+            px = px1 if px1 is not None else px0
+            if px is None:
+                continue  # sin precio: la cantidad es un valor, no cuotas
+            dq = (q1 or 0.0) - (q0 or 0.0)
+            if abs(dq) > 1e-6:
+                esperado += dq * px
+                detalle.append(f"{M[sid][0]} {dq:+,.2f} x {px:,.2f}")
+        resultados.append((d_anc, esperado, detalle))
+        if abs(esperado - flow_in) <= tol:
+            return issues  # cuadra con este anchor: OK
+
+    d_anc, esperado, detalle = resultados[0]
+    issues.append(
+        f"{sleeve_key}: el flow_in del mes (${flow_in:+,.0f} desde {anchor['date']}) no explica "
+        f"los cambios de posicion (Σ Δqty x precio = ${esperado:+,.0f}, snapshot {d_anc} -> {d_hoy}; "
+        f"tolerancia ${tol:,.0f}). Movimientos: {'; '.join(detalle) or 'ninguno'}. Si hay un trade "
+        f"que el flujo no cuenta, el TWR lo esta tomando como retorno (caso FLEX 08-Sep-2026)."
+    )
     return issues
 
 
