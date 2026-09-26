@@ -232,26 +232,6 @@
       "anchor_locked": true,
       "ytd_source": "manual_verified",
       "note": "Anchor real verificado el 2026-07-28. Fuente: Pershing statement oficial 31-Dic-2025 (LSERIES DAC, JXD-101380), pag 2-3 (LFEEDER DAC / TGF) [FIX: bono: precio cotiza per-100-face, mv = qty*price/100]"
-    },
-    "KYG4737U1085": {
-      "ticker": "HLEND",
-      "name": "iCapital - HPS Corporate Lending Offshore Access Fund SP1",
-      "price_2025_dec_31": null,
-      "qty_2025_dec_31": 672.7601,
-      "mv_2025_dec_31": 750536.35,
-      "anchor_locked": true,
-      "ytd_source": "statement_icapital_valor_31dic",
-      "note": "VALOR real al 31-Dic-2025 segun el statement de iCapital (shares x NAV del statement de Marzo-2026, que trae el NAV al 31-Dic): 672.7601 x 1115.6077 = $750,536.35. Pershing NO publica precio ni fecha para este fondo (la 'cantidad' ES el valor en dolares) pero SI lo re-marca cada tanto, asi que el YTD se calcula valor en Pershing / este valor - 1, con fecha = ultimo re-marcado de Pershing. El statement (alts_factsheet_ytd.json) queda como verificacion. Ojo vintage: el statement de Pershing del 31-Dic mostraba $740,702.36 (marca vieja); para el YTD del FONDO vale el valor real de iCapital. Cargado 2026-09-25."
-    },
-    "GCRED-I": {
-      "ticker": "GCRED",
-      "name": "Golub Capital Private Credit iCapital Offshore Access Fund SP1",
-      "price_2025_dec_31": null,
-      "qty_2025_dec_31": 432.1639,
-      "mv_2025_dec_31": 500182.39,
-      "anchor_locked": true,
-      "ytd_source": "statement_icapital_valor_31dic",
-      "note": "VALOR real al 31-Dic-2025 segun el statement de iCapital (shares x NAV del statement de Marzo-2026, que trae el NAV al 31-Dic): 432.1639 x 1157.3905 = $500,182.39. Pershing NO publica precio ni fecha para este fondo (la 'cantidad' ES el valor en dolares) pero SI lo re-marca cada tanto, asi que el YTD se calcula valor en Pershing / este valor - 1, con fecha = ultimo re-marcado de Pershing. El statement (alts_factsheet_ytd.json) queda como verificacion. Ojo vintage: el statement de Pershing del 31-Dic mostraba $490,000.00 (a costo) (marca vieja); para el YTD del FONDO vale el valor real de iCapital. Cargado 2026-09-25."
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-09-25",
+  "refreshedAt": "2026-09-26",
   "fund_asof": {
     "4BRZ": "2026-07-31",
     "ARGT": "2026-08-14",
@@ -16,8 +16,8 @@
   "method": "BIG_exposure[stock] = \u03a3 (fund_weight_in_BIG \u00d7 stock_weight_in_fund / 100)",
   "summary": {
     "total_acwi_top10": 25.18,
-    "total_big_top10_exposure": 17.84,
-    "diff_pp": -7.34
+    "total_big_top10_exposure": 17.9,
+    "diff_pp": -7.28
   },
   "overlap": [
     {
@@ -26,14 +26,14 @@
       "sector": "Information Technology",
       "location": "United States",
       "weight_acwi": 5.0,
-      "weight_big": 3.514,
-      "diff_pp": -1.486,
+      "weight_big": 3.527,
+      "diff_pp": -1.473,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 32.71,
+          "fund_weight_in_equity_sleeve": 32.86,
           "stock_weight_in_fund": 8.25713,
-          "contribution": 2.701
+          "contribution": 2.714
         },
         {
           "fund": "MAGS",
@@ -49,14 +49,14 @@
       "sector": "Information Technology",
       "location": "United States",
       "weight_acwi": 4.76,
-      "weight_big": 3.295,
-      "diff_pp": -1.465,
+      "weight_big": 3.307,
+      "diff_pp": -1.453,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 32.71,
+          "fund_weight_in_equity_sleeve": 32.86,
           "stock_weight_in_fund": 7.39261,
-          "contribution": 2.418
+          "contribution": 2.43
         },
         {
           "fund": "MAGS",
@@ -72,14 +72,14 @@
       "sector": "Information Technology",
       "location": "United States",
       "weight_acwi": 3.38,
-      "weight_big": 2.628,
-      "diff_pp": -0.752,
+      "weight_big": 2.637,
+      "diff_pp": -0.743,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 32.71,
+          "fund_weight_in_equity_sleeve": 32.86,
           "stock_weight_in_fund": 5.51351,
-          "contribution": 1.803
+          "contribution": 1.812
         },
         {
           "fund": "MAGS",
@@ -95,14 +95,14 @@
       "sector": "Consumer Discretionary",
       "location": "United States",
       "weight_acwi": 2.39,
-      "weight_big": 2.045,
-      "diff_pp": -0.345,
+      "weight_big": 2.051,
+      "diff_pp": -0.339,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 32.71,
+          "fund_weight_in_equity_sleeve": 32.86,
           "stock_weight_in_fund": 3.73104,
-          "contribution": 1.22
+          "contribution": 1.226
         },
         {
           "fund": "MAGS",
@@ -118,20 +118,20 @@
       "sector": "Communication",
       "location": "United States",
       "weight_acwi": 1.99,
-      "weight_big": 1.806,
-      "diff_pp": -0.184,
+      "weight_big": 1.811,
+      "diff_pp": -0.179,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 32.71,
+          "fund_weight_in_equity_sleeve": 32.86,
           "stock_weight_in_fund": 3.07217,
-          "contribution": 1.005
+          "contribution": 1.01
         },
         {
           "fund": "MAGS",
           "fund_weight_in_equity_sleeve": 5.81,
           "stock_weight_in_fund": 13.8,
-          "contribution": 0.802
+          "contribution": 0.801
         }
       ]
     },
@@ -141,14 +141,14 @@
       "sector": "Information Technology",
       "location": "Taiwan",
       "weight_acwi": 1.84,
-      "weight_big": 0.316,
-      "diff_pp": -1.524,
+      "weight_big": 0.315,
+      "diff_pp": -1.525,
       "contributors": [
         {
           "fund": "THOR",
-          "fund_weight_in_equity_sleeve": 9.57,
+          "fund_weight_in_equity_sleeve": 9.54,
           "stock_weight_in_fund": 3.3,
-          "contribution": 0.316
+          "contribution": 0.315
         }
       ]
     },
@@ -158,20 +158,20 @@
       "sector": "Information Technology",
       "location": "United States",
       "weight_acwi": 1.57,
-      "weight_big": 1.142,
-      "diff_pp": -0.428,
+      "weight_big": 1.146,
+      "diff_pp": -0.424,
       "contributors": [
         {
           "fund": "THOR",
-          "fund_weight_in_equity_sleeve": 9.57,
+          "fund_weight_in_equity_sleeve": 9.54,
           "stock_weight_in_fund": 3.1,
-          "contribution": 0.297
+          "contribution": 0.296
         },
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 32.71,
+          "fund_weight_in_equity_sleeve": 32.86,
           "stock_weight_in_fund": 2.58572,
-          "contribution": 0.846
+          "contribution": 0.85
         }
       ]
     },
@@ -181,14 +181,14 @@
       "sector": "Communication",
       "location": "United States",
       "weight_acwi": 1.57,
-      "weight_big": 0.805,
-      "diff_pp": -0.765,
+      "weight_big": 0.809,
+      "diff_pp": -0.761,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 32.71,
+          "fund_weight_in_equity_sleeve": 32.86,
           "stock_weight_in_fund": 2.46196,
-          "contribution": 0.805
+          "contribution": 0.809
         }
       ]
     },
@@ -198,14 +198,14 @@
       "sector": "Communication",
       "location": "United States",
       "weight_acwi": 1.55,
-      "weight_big": 1.686,
-      "diff_pp": 0.136,
+      "weight_big": 1.69,
+      "diff_pp": 0.14,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 32.71,
+          "fund_weight_in_equity_sleeve": 32.86,
           "stock_weight_in_fund": 2.4212,
-          "contribution": 0.792
+          "contribution": 0.796
         },
         {
           "fund": "MAGS",
@@ -221,14 +221,14 @@
       "sector": "Information Technology",
       "location": "United States",
       "weight_acwi": 1.13,
-      "weight_big": 0.604,
-      "diff_pp": -0.526,
+      "weight_big": 0.606,
+      "diff_pp": -0.524,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 32.71,
+          "fund_weight_in_equity_sleeve": 32.86,
           "stock_weight_in_fund": 1.84535,
-          "contribution": 0.604
+          "contribution": 0.606
         }
       ]
     }

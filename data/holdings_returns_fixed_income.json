@@ -1,11 +1,38 @@
 {
-  "refreshedAt": "2026-09-25T13:15:37.270563",
+  "refreshedAt": "2026-09-26T13:13:15.355097",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Fixed Income",
-  "period_end": "2026-09-25",
+  "period_end": "2026-09-26",
   "n_open": 8,
   "n_closed": 4,
   "holdings": [
+    {
+      "ticker": "PIMCO-INC",
+      "sleeve": "Fixed Income",
+      "status": "OPEN",
+      "name": "PIMCO INCOME FUND INSTITUTIONAL CLASS (ACC)(USD)    ",
+      "qty": 159434.55,
+      "mv_usd": 3115351.11,
+      "cost_basis_usd": 3194047.88,
+      "unrealized_gl_usd": -78696.77,
+      "return_pct": -2.46,
+      "last_price_pershing": 19.54,
+      "bench_label": "AGG",
+      "bench_dw_pct": -2.71,
+      "alpha_real_pp": 0.25,
+      "ytd_pct": -2.35,
+      "bench_ytd_pct": null,
+      "alpha_ytd_pp": null,
+      "first_buy_date": "2026-07-07",
+      "period_end": "2026-09-26",
+      "n_trades": 1,
+      "buys_history": [
+        {
+          "date": "2026-07-07",
+          "cost": 150030.0
+        }
+      ]
+    },
     {
       "ticker": "PIMCO-LD",
       "sleeve": "Fixed Income",
@@ -18,13 +45,13 @@
       "return_pct": 0.44,
       "last_price_pershing": 13.94,
       "bench_label": "AGG",
-      "bench_dw_pct": -2.48,
-      "alpha_real_pp": 2.92,
+      "bench_dw_pct": -2.54,
+      "alpha_real_pp": 2.98,
       "ytd_pct": 1.01,
-      "bench_ytd_pct": -2.65,
-      "alpha_ytd_pp": 4.24,
+      "bench_ytd_pct": null,
+      "alpha_ytd_pp": null,
       "first_buy_date": "2026-01-30",
-      "period_end": "2026-09-25",
+      "period_end": "2026-09-26",
       "n_trades": 5,
       "buys_history": [
         {
@@ -50,51 +77,24 @@
       ]
     },
     {
-      "ticker": "PIMCO-INC",
-      "sleeve": "Fixed Income",
-      "status": "OPEN",
-      "name": "PIMCO INCOME FUND INSTITUTIONAL CLASS (ACC)(USD)    ",
-      "qty": 159434.55,
-      "mv_usd": 3140860.63,
-      "cost_basis_usd": 3194047.88,
-      "unrealized_gl_usd": -53187.25,
-      "return_pct": -1.67,
-      "last_price_pershing": 19.7,
-      "bench_label": "AGG",
-      "bench_dw_pct": -2.64,
-      "alpha_real_pp": 0.97,
-      "ytd_pct": -1.55,
-      "bench_ytd_pct": -2.65,
-      "alpha_ytd_pp": 2.15,
-      "first_buy_date": "2026-07-07",
-      "period_end": "2026-09-25",
-      "n_trades": 1,
-      "buys_history": [
-        {
-          "date": "2026-07-07",
-          "cost": 150030.0
-        }
-      ]
-    },
-    {
       "ticker": "MANIG",
       "sleeve": "Fixed Income",
       "status": "OPEN",
       "name": "MAN GLG GLOBAL INVESTMENT GRADE OPPORTUNITIES FUND CLASS IVY",
       "qty": 16621.485,
-      "mv_usd": 2068710.02,
+      "mv_usd": 2056576.34,
       "cost_basis_usd": 1993370.62,
-      "unrealized_gl_usd": 75339.4,
-      "return_pct": 3.78,
-      "last_price_pershing": 124.46,
+      "unrealized_gl_usd": 63205.72,
+      "return_pct": 3.17,
+      "last_price_pershing": 123.73,
       "bench_label": "AGG",
-      "bench_dw_pct": -0.18,
-      "alpha_real_pp": 3.96,
-      "ytd_pct": 1.51,
-      "bench_ytd_pct": -2.65,
-      "alpha_ytd_pp": 4.18,
+      "bench_dw_pct": -0.25,
+      "alpha_real_pp": 3.42,
+      "ytd_pct": 0.91,
+      "bench_ytd_pct": null,
+      "alpha_ytd_pp": null,
       "first_buy_date": "2025-07-07",
-      "period_end": "2026-09-25",
+      "period_end": "2026-09-26",
       "n_trades": 10,
       "buys_history": [
         {
@@ -151,13 +151,13 @@
       "return_pct": 0.32,
       "last_price_pershing": 18.4,
       "bench_label": "AGG",
-      "bench_dw_pct": -2.6,
-      "alpha_real_pp": 2.92,
+      "bench_dw_pct": -2.67,
+      "alpha_real_pp": 2.99,
       "ytd_pct": 2.56,
-      "bench_ytd_pct": -2.65,
-      "alpha_ytd_pp": 5.99,
+      "bench_ytd_pct": null,
+      "alpha_ytd_pp": null,
       "first_buy_date": "2026-01-30",
-      "period_end": "2026-09-25",
+      "period_end": "2026-09-26",
       "n_trades": 2,
       "buys_history": [
         {
@@ -176,19 +176,19 @@
       "status": "OPEN",
       "name": "LFEEDER DAC EURO MEDIUM TERM NOTE ISIN#XS2324777171 VARIABL ",
       "qty": 532000.0,
-      "mv_usd": 817206.48,
+      "mv_usd": 817206.26,
       "cost_basis_usd": 764206.53,
-      "unrealized_gl_usd": 52999.95,
+      "unrealized_gl_usd": 52999.73,
       "return_pct": 6.94,
-      "last_price_pershing": 153.6102,
+      "last_price_pershing": 1.5361,
       "bench_label": "AGG",
-      "bench_dw_pct": 1.1,
-      "alpha_real_pp": 5.84,
-      "ytd_pct": 3.53,
-      "bench_ytd_pct": -2.65,
-      "alpha_ytd_pp": 6.18,
+      "bench_dw_pct": 1.04,
+      "alpha_real_pp": 5.9,
+      "ytd_pct": -98.98,
+      "bench_ytd_pct": null,
+      "alpha_ytd_pp": null,
       "first_buy_date": "2025-07-16",
-      "period_end": "2026-09-25",
+      "period_end": "2026-09-26",
       "n_trades": 2,
       "buys_history": [
         {
@@ -213,13 +213,13 @@
       "return_pct": 4.91,
       "last_price_pershing": 2219.39,
       "bench_label": "AGG",
-      "bench_dw_pct": -2.51,
-      "alpha_real_pp": 7.42,
+      "bench_dw_pct": -2.57,
+      "alpha_real_pp": 7.48,
       "ytd_pct": 6.74,
-      "bench_ytd_pct": -2.65,
-      "alpha_ytd_pp": 9.39,
+      "bench_ytd_pct": null,
+      "alpha_ytd_pp": null,
       "first_buy_date": "2026-04-13",
-      "period_end": "2026-09-25",
+      "period_end": "2026-09-26",
       "n_trades": 2,
       "buys_history": [
         {
@@ -238,19 +238,19 @@
       "status": "OPEN",
       "name": "MAN EMERGING MARKETS CORPORATE CREDIT ALTERNATIVE FUND CLASS",
       "qty": 4060.017,
-      "mv_usd": 470271.77,
+      "mv_usd": 469784.57,
       "cost_basis_usd": 470090.0,
-      "unrealized_gl_usd": 181.77,
-      "return_pct": 0.04,
-      "last_price_pershing": 115.83,
+      "unrealized_gl_usd": -305.43,
+      "return_pct": -0.06,
+      "last_price_pershing": 115.71,
       "bench_label": "AGG",
-      "bench_dw_pct": -2.23,
-      "alpha_real_pp": 2.27,
-      "ytd_pct": 6.72,
-      "bench_ytd_pct": -2.65,
-      "alpha_ytd_pp": 9.36,
+      "bench_dw_pct": -2.3,
+      "alpha_real_pp": 2.24,
+      "ytd_pct": 6.61,
+      "bench_ytd_pct": null,
+      "alpha_ytd_pp": null,
       "first_buy_date": "2026-05-13",
-      "period_end": "2026-09-25",
+      "period_end": "2026-09-26",
       "n_trades": 3,
       "buys_history": [
         {
@@ -264,6 +264,37 @@
         {
           "date": "2026-09-08",
           "cost": 200030.0
+        }
+      ]
+    },
+    {
+      "ticker": "GAMCB",
+      "sleeve": "Fixed Income",
+      "status": "OPEN",
+      "name": "GAM SWISS RE CAT BOND FUND INSTITUTIONAL CLASS (ACC)(USD) IS",
+      "qty": 8100.48,
+      "mv_usd": 200751.77,
+      "cost_basis_usd": 200000.04,
+      "unrealized_gl_usd": 751.73,
+      "return_pct": 0.38,
+      "last_price_pershing": 24.7827,
+      "bench_label": "AGG",
+      "bench_dw_pct": -1.12,
+      "alpha_real_pp": 1.5,
+      "ytd_pct": 0.38,
+      "bench_ytd_pct": null,
+      "alpha_ytd_pp": null,
+      "first_buy_date": "2026-09-11",
+      "period_end": "2026-09-26",
+      "n_trades": 2,
+      "buys_history": [
+        {
+          "date": "2026-09-11",
+          "cost": 200000.04
+        },
+        {
+          "date": "2026-09-14",
+          "cost": 200000.04
         }
       ]
     },
@@ -318,35 +349,7 @@
       "first_buy_date": "01/28/2026",
       "last_sell_date": "06/16/2026",
       "n_lots": 1
-    },
-    {
-      "ticker": "GAMCB",
-      "sleeve": "Fixed Income",
-      "status": "OPEN",
-      "name": "GAM SWISS RE CAT BOND FUND INSTITUTIONAL CLASS (ACC)(USD) ISIN IE00B6WYL972",
-      "qty": 8100.48,
-      "mv_usd": 200751.77,
-      "cost_basis_usd": 200000.04,
-      "unrealized_gl_usd": 751.73,
-      "return_pct": 0.38,
-      "last_price_pershing": 24.7827,
-      "bench_label": "AGG",
-      "bench_dw_pct": null,
-      "alpha_real_pp": null,
-      "ytd_pct": null,
-      "bench_ytd_pct": null,
-      "alpha_ytd_pp": null,
-      "first_buy_date": "2026-09-11",
-      "period_end": "2026-09-25",
-      "n_trades": 1,
-      "buys_history": [
-        {
-          "date": "2026-09-11",
-          "cost": 200000.04
-        }
-      ],
-      "_alta": "2026-09-25 a mano (compute_holdings_returns no corre local: los XLSX de NetX360 no estan en el repo). El cron lo reconcilia con el UGL."
     }
   ],
-  "_daily_refresh_note": "Daily refresh 2026-09-25: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump."
+  "_daily_refresh_note": "Daily refresh 2026-09-26: MV con precios T-1, bench DW recalculado. Cost basis y qty fijos del ultimo Pershing dump."
 }
