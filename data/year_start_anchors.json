@@ -1,6 +1,6 @@
 {
   "_description": "Precios al 31-Dec del anio anterior, usados como anchor para calcular YTD correcto (TWR real del fondo, no MWR).",
-  "_updated": "2026-09-25",
+  "_updated": "2026-09-28",
   "_source": "Pershing UGL + year_start_anchors legacy + baha monthlyReturns",
   "_generation_rule": "Cada 1-Ene guardar el precio 31-Dec del anio anterior en este archivo (script snapshot_year_start_prices.py).",
   "anchors_2026": {
@@ -135,13 +135,14 @@
       "note": "Anchor real verificado el 2026-07-28. Fuente: Lucas via baha historico, 31-Dic-2025"
     },
     "IE00B6WYL972": {
-      "ticker": "IE00B6WYL972",
-      "name": "GAM SWISS RE CAT BOND FUND INSTITUTIONAL",
-      "ytd_source_pct": null,
-      "price_2025_dec_31": null,
-      "qty_2025_dec_31": null,
-      "mv_2025_dec_31": null,
-      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+      "ticker": "GAMCB",
+      "name": "GAM Swiss Re Cat Bond Institutional USD Acc",
+      "price_2025_dec_31": 23.1548,
+      "qty_2025_dec_31": 0.0,
+      "mv_2025_dec_31": 0.0,
+      "anchor_locked": true,
+      "ytd_source": "manual_verified",
+      "note": "Anchor real verificado el 2026-09-28. Fuente: NAV al 31-Dic-2025 = 23.1548 que paso Lucas (chat, 28-Sep-2026). CHEQUEO DE CLASE: corresponde a la Institutional (la nuestra, IE00B6WYL972) y no a la Ordinary (IE00B4VZPG27): con 23.1548 el YTD al 23-Sep da +7.0% (24.7827 / 23.1548), en linea con el otro cat bond del sleeve (SGCB +6.7%). Si fuera de la Ordinary, esa clase (23.1890 al 31-Ago) llevaria +0.15% en 8 meses, imposible para un cat bond este año."
     },
     "IE00BFMHRK20": {
       "ticker": "NBGMT",
