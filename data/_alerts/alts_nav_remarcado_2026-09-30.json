@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-30",
+  "tipo": "alts_nav_remarcado",
+  "issues": [
+    "FLEX: precio 31.77 -> 32.26 (+1.54%). MV $651,503.58 -> $661,551.95. Detectado el 2026-09-30."
+  ],
+  "accion": "Pershing re-marco el NAV de un alternativo iliquido. Revisar que el movimiento sea razonable y, si corresponde, avisarle al equipo.",
+  "detalle": [
+    {
+      "ticker": "FLEX",
+      "senal": "precio",
+      "antes": 31.77,
+      "ahora": 32.26,
+      "var_pct": 1.54,
+      "price_date_antes": "2026-07-31",
+      "price_date_ahora": "2026-08-31",
+      "mv_antes": 651503.58,
+      "mv_ahora": 661551.95,
+      "detectado_en": "2026-09-30",
+      "contra": "2026-09-29"
+    }
+  ]
+}
