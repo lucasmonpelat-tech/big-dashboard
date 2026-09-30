@@ -1138,18 +1138,27 @@
       return v.toFixed(dec);
     }
 
-    function renderPerfReturns(comp) {
-      // Multi-Period Returns table: 3 rows (BIG / Bench / Alpha)
+    function renderPerfReturns(comp, comp2) {
+      // Multi-Period Returns table: BIG / Bench 60-40 / Alpha (+ Bench 40-60 / Alpha, 2026-09-30)
       const r = comp.returns;
       const periods = ["YTD", "1M", "3M", "6M", "LTM", "SI"];
       const bigCells = periods.map(p => `<td>${_fmtPct(r[p]?.portfolio_pct)}</td>`).join("");
       const bmkCells = periods.map(p => `<td>${_fmtPct(r[p]?.benchmark_pct)}</td>`).join("");
       const alphaCells = periods.map(p => `<td>${_fmtBp(r[p]?.alpha_bp)}</td>`).join("");
+      let extra = "";
+      if (comp2?.returns) {
+        const r2 = comp2.returns;
+        const bmk2 = periods.map(p => `<td>${_fmtPct(r2[p]?.benchmark_pct)}</td>`).join("");
+        const alpha2 = periods.map(p => `<td>${_fmtBp(r2[p]?.alpha_bp)}</td>`).join("");
+        extra = `
+        <tr class="row-bmk">    <td class="left">Benchmark (${comp2.benchmark_name})</td>${bmk2}</tr>
+        <tr class="row-alpha">  <td class="left">Alpha vs ${comp2.benchmark_name.split(" ")[0]}</td>${alpha2}</tr>`;
+      }
 
       document.getElementById("perf-returns-body").innerHTML = `
         <tr class="row-big">    <td class="left">BIG (Lynk NAV)</td>${bigCells}</tr>
         <tr class="row-bmk">    <td class="left">Benchmark (${comp.benchmark_name})</td>${bmkCells}</tr>
-        <tr class="row-alpha">  <td class="left">Alpha</td>${alphaCells}</tr>
+        <tr class="row-alpha">  <td class="left">Alpha vs ${comp.benchmark_name.split(" ")[0]}</td>${alphaCells}</tr>${extra}
       `;
     }
 
@@ -1188,19 +1197,29 @@
       document.getElementById("perf-alpha-attribution-body").innerHTML = rows + total;
     }
 
-    function renderRiskGrid(comp) {
+    function renderRiskGrid(comp, comp2) {
       const s = comp.stats;
+      const s2 = comp2?.stats;
+      const b1 = comp.benchmark_name.split(" ")[0];                   // "60/40"
+      const b2 = comp2 ? comp2.benchmark_name.split(" ")[0] : null;   // "40/60"
       const kpis = [
         {label: "Vol Portfolio", value: `${_fmtNum(s.volatility_portfolio_pct_ann)}%`, sub: "annualized", klass: "info"},
-        {label: "Vol Benchmark", value: `${_fmtNum(s.volatility_benchmark_pct_ann)}%`, sub: "annualized", klass: "info"},
-        {label: "Tracking Error", value: `${_fmtNum(s.tracking_error_pct_ann)}%`, sub: "annualized", klass: "info"},
-        {label: "Info Ratio", value: _fmtNum(s.info_ratio, 3), sub: "alpha_ann / TE_ann",
+        {label: `Vol ${b1}`, value: `${_fmtNum(s.volatility_benchmark_pct_ann)}%`, sub: "annualized", klass: "info"},
+        ...(s2 ? [{label: `Vol ${b2}`, value: `${_fmtNum(s2.volatility_benchmark_pct_ann)}%`, sub: "annualized", klass: "info"}] : []),
+        {label: `Tracking Error vs ${b1}`, value: `${_fmtNum(s.tracking_error_pct_ann)}%`, sub: "annualized", klass: "info"},
+        {label: `Info Ratio vs ${b1}`, value: _fmtNum(s.info_ratio, 3), sub: "alpha_ann / TE_ann",
           klass: s.info_ratio >= 0 ? "pos" : "neg"},
+        ...(s2 ? [
+          {label: `Tracking Error vs ${b2}`, value: `${_fmtNum(s2.tracking_error_pct_ann)}%`, sub: "annualized", klass: "info"},
+          {label: `Info Ratio vs ${b2}`, value: _fmtNum(s2.info_ratio, 3), sub: "alpha_ann / TE_ann",
+            klass: s2.info_ratio >= 0 ? "pos" : "neg"},
+        ] : []),
         {label: "Sharpe Portfolio", value: _fmtNum(s.sharpe_portfolio, 3), sub: "Rf = 0",
           klass: s.sharpe_portfolio >= 0 ? "pos" : "neg"},
-        {label: "Sharpe Benchmark", value: _fmtNum(s.sharpe_benchmark, 3), sub: "Rf = 0", klass: "info"},
-        {label: "Beta", value: _fmtNum(s.beta, 3), sub: "cov / var(bench)", klass: "info"},
-        {label: "Correlation", value: _fmtNum(s.correlation, 3), sub: `n=${s.n_days} days`, klass: "info"},
+        {label: `Sharpe ${b1}`, value: _fmtNum(s.sharpe_benchmark, 3), sub: "Rf = 0", klass: "info"},
+        ...(s2 ? [{label: `Sharpe ${b2}`, value: _fmtNum(s2.sharpe_benchmark, 3), sub: "Rf = 0", klass: "info"}] : []),
+        {label: `Beta vs ${b1}`, value: _fmtNum(s.beta, 3), sub: `corr ${_fmtNum(s.correlation, 2)} · n=${s.n_days}`, klass: "info"},
+        ...(s2 ? [{label: `Beta vs ${b2}`, value: _fmtNum(s2.beta, 3), sub: `corr ${_fmtNum(s2.correlation, 2)} · n=${s2.n_days}`, klass: "info"}] : []),
       ];
       document.getElementById("perf-risk-grid").innerHTML = kpis.map(k => `
         <div class="kpi-card ${k.klass}">
@@ -1234,7 +1253,7 @@
       }
     }
 
-    function renderNavChart(comp) {
+    function renderNavChart(comp, comp2) {
       const dates = comp.series.map(p => p.date);
       const port = comp.series.map(p => p.portfolio);
       const bench = comp.series.map(p => p.benchmark);
@@ -1253,6 +1272,16 @@
           line: { color: "#4a7ab8", width: 2, dash: "dot" },
         },
       ];
+      if (comp2?.series?.length) {
+        // 40/60 (AOM), 2026-09-30. Cada comparacion trae su serie alineada
+        // con Lynk; se plotea con sus propias fechas por si difieren en 1 dia.
+        traces.push({
+          x: comp2.series.map(p => p.date), y: comp2.series.map(p => p.benchmark),
+          name: `Benchmark: ${comp2.benchmark_name}`,
+          type: "scatter", mode: "lines",
+          line: { color: "#7fa88f", width: 2, dash: "dash" },
+        });
+      }
       const layout = {
         margin: { t: 20, r: 20, b: 40, l: 50 },
         showlegend: true,
@@ -2516,10 +2545,11 @@
         // Rendimientos vs Benchmark
         window.__bmComp = bmComp;
         const comp = bmComp.comparisons.total_vs_6040;
-        renderPerfReturns(comp);
+        const comp2 = bmComp.comparisons.total_vs_4060 || null;  // 40/60 (AOM), 2026-09-30
+        renderPerfReturns(comp, comp2);
         renderAlphaAttribution(attribYtd);
-        renderRiskGrid(comp);
-        renderNavChart(comp);
+        renderRiskGrid(comp, comp2);
+        renderNavChart(comp, comp2);
 
         // Sleeves Race (equity + fi)
         renderSleeve(currentSleeve);

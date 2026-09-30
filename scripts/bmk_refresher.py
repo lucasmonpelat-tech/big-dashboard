@@ -33,6 +33,18 @@ from pathlib import Path
 INCEPTION = date(2025, 6, 27)
 BMK_TICKER = "AOR"  # iShares Core Growth Allocation 60/40
 
+# 2026-09-30 (pedido de Lucas): segundo benchmark, el hermano conservador del
+# AOR. Misma familia iShares Core Allocation y mismos bloques (ITOT/IDEV/IEMG/
+# IUSB/IAGG), solo cambia la proporcion: 40% acciones / 60% bonos.
+BENCHMARKS = [
+    {"ticker": "AOR", "out": "bmk_6040.json", "label": "60/40",
+     "name": "iShares Core Growth Allocation 60/40",
+     "note": "Single ETF que replica 60% stocks / 40% bonds. Composicion: ITOT + IDEV + IEMG + IAGG + AGG. Reemplaza el calculo viejo 0.6*ACWI + 0.4*AGG."},
+    {"ticker": "AOM", "out": "bmk_4060.json", "label": "40/60",
+     "name": "iShares Core Moderate Allocation 40/60",
+     "note": "Single ETF que replica 40% stocks / 60% bonds (60% bonos AGG-like / 40% acciones globales). Misma familia y bloques que AOR. Agregado 2026-09-30 como benchmark conservador."},
+]
+
 
 def _is_valid_price(value) -> bool:
     """True si value es un numero real positivo (rechaza None/NaN/Inf/<=0).
@@ -169,19 +181,25 @@ def main():
     inception = date.fromisoformat(args.inception)
     today = date.fromisoformat(args.today) if args.today else date.today()
 
-    print(f"[{datetime.now()}] Computing 60/40 benchmark...")
+    for bmk in BENCHMARKS:
+        _refresh_one(bmk, inception, today, args.inception)
+
+
+def _refresh_one(bmk, inception, today, inception_arg):
+    tk, nm, label = bmk["ticker"], bmk["name"], bmk["label"]
+    print(f"[{datetime.now()}] Computing {label} benchmark ({tk})...")
     print(f"  Period: {inception} to {today}")
 
     try:
-        print(f"  Fetching {BMK_TICKER} (iShares Core Growth Allocation 60/40) from Yahoo Finance...")
-        hist = fetch_yf_history(BMK_TICKER, inception, today)
+        print(f"  Fetching {tk} ({nm}) from Yahoo Finance...")
+        hist = fetch_yf_history(tk, inception, today)
         print(f"    {len(hist)} bars  ({hist[0]['date']} -> {hist[-1]['date']})")
     except Exception as e:
         print(f"ERROR: {e}")
         return
 
     if not hist:
-        print("ERROR: No history data for AOR")
+        print(f"ERROR: No history data for {tk}")
         return
 
     series = build_index_from_etf(hist)
@@ -190,14 +208,14 @@ def main():
     # Guard: si el latest_value o los returns vienen NaN, abort sin sobreescribir
     latest_val = periods.get("latest_value") if periods else None
     if not _is_valid_price(latest_val):
-        print(f"  ABORT: latest_value invalido ({latest_val}). NO se sobreescribe bmk_6040.json.")
+        print(f"  ABORT: latest_value invalido ({latest_val}). NO se sobreescribe {bmk['out']}.")
         return
     returns_vals = (periods.get("returns") or {}).values()
     if all(v is None or (isinstance(v, float) and math.isnan(v)) for v in returns_vals):
-        print(f"  ABORT: todos los returns son None/NaN. NO se sobreescribe bmk_6040.json.")
+        print(f"  ABORT: todos los returns son None/NaN. NO se sobreescribe {bmk['out']}.")
         return
 
-    print(f"\n=== 60/40 Benchmark (AOR — iShares Core Growth Allocation ETF) ===")
+    print(f"\n=== {label} Benchmark ({tk} — {nm}) ===")
     print(f"Latest: {periods['latest_date']} | Value: {periods['latest_value']} (base 100)")
     for k, v in periods["returns"].items():
         print(f"  {k:12s}: {v:+.2f}%" if v is not None else f"  {k:12s}: —")
@@ -206,18 +224,18 @@ def main():
 
     output = {
         "refreshedAt": datetime.now().isoformat(),
-        "source": f"Yahoo Finance {BMK_TICKER} (iShares Core Growth Allocation 60/40)",
-        "note": "Single ETF que replica 60% stocks / 40% bonds. Composicion: ITOT + IDEV + IEMG + IAGG + AGG. Reemplaza el calculo viejo 0.6*ACWI + 0.4*AGG.",
-        "ticker": BMK_TICKER,
-        "inception": args.inception,
+        "source": f"Yahoo Finance {tk} ({nm})",
+        "note": bmk["note"],
+        "ticker": tk,
+        "inception": inception_arg,
         "periods": periods,
         "series_length": len(series),
         "series": series,
     }
-    out = Path(__file__).parent.parent / "data" / "bmk_6040.json"
+    out = Path(__file__).parent.parent / "data" / bmk["out"]
     with open(out, "w", encoding="utf-8") as f:
         json.dump(output, f, indent=2)
-    print(f"\nWritten to: {out}")
+    print(f"\nWritten to: {out}\n")
 
 
 if __name__ == "__main__":

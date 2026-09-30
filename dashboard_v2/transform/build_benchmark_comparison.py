@@ -326,6 +326,12 @@ def build(as_of: str | None = None) -> dict:
         print(describir(correcciones_nav))
     with open(DATA_DIR / "bmk_6040.json", encoding="utf-8") as f:
         bmk = json.load(f)
+    # 2026-09-30: segundo benchmark del total, 40/60 (AOM). Opcional para que
+    # una falla de Yahoo en AOM no tire todo el transform.
+    bmk_4060 = None
+    if (DATA_DIR / "bmk_4060.json").exists():
+        with open(DATA_DIR / "bmk_4060.json", encoding="utf-8") as f:
+            bmk_4060 = json.load(f)
     with open(DATA_DIR / "equity_sleeve_real.json", encoding="utf-8") as f:
         eq = json.load(f)
     with open(DATA_DIR / "fi_sleeve_real.json", encoding="utf-8") as f:
@@ -343,6 +349,17 @@ def build(as_of: str | None = None) -> dict:
             bench_source="data/bmk_6040.json",
             correcciones=correcciones_nav,
         ),
+        "total_vs_4060": _build_comparison(
+            port_series=lynk_series,
+            port_value_key="value",
+            bench_series=bmk_4060["series"],
+            bench_value_key="value",
+            port_name="BIG Total (Lynk NAV)",
+            bench_name="40/60 Global (AOM ETF)",
+            port_source="data/lynk_nav_series.json",
+            bench_source="data/bmk_4060.json",
+            correcciones=correcciones_nav,
+        ) if bmk_4060 else None,
         "equity_vs_acwi": _build_comparison(
             port_series=eq["twr_series"],
             port_value_key="index",
@@ -364,6 +381,8 @@ def build(as_of: str | None = None) -> dict:
             bench_source="data/fi_sleeve_real.json -> agg_index_series",
         ),
     }
+
+    comparisons = {k: v for k, v in comparisons.items() if v is not None}
 
     return {
         "schema_version": SCHEMA_VERSION,

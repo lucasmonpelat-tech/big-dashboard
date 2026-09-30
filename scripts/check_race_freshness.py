@@ -63,6 +63,7 @@ FILES_TO_CHECK = [
 
     # Benchmark 60/40 (AOR ETF) — tab "Rendimientos vs Benchmark" + Overview
     ("bmk_6040.json", 3, "Benchmark 60/40 (AOR)"),
+    ("bmk_4060.json", 3, "Benchmark 40/60 (AOM)"),
 ]
 
 
