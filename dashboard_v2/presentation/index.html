@@ -2546,6 +2546,14 @@
         window.__bmComp = bmComp;
         const comp = bmComp.comparisons.total_vs_6040;
         const comp2 = bmComp.comparisons.total_vs_4060 || null;  // 40/60 (AOM), 2026-09-30
+        // Fecha del dato en los titulos del tab (pedido de Lucas 2026-09-30):
+        // los numeros son al ultimo dia con NAV de Lynk Y precio del ETF, que
+        // suele ser un dia antes del snapshot.
+        const asOfTxt = comp.as_of ? ` · al ${comp.as_of.split("-").reverse().join("/")}` : "";
+        for (const id of ["perf-returns-body", "perf-risk-grid", "nav-chart-perf"]) {
+          const h2 = document.getElementById(id)?.closest(".section")?.querySelector("h2");
+          if (h2 && !h2.dataset.asofDone) { h2.textContent += asOfTxt; h2.dataset.asofDone = "1"; }
+        }
         renderPerfReturns(comp, comp2);
         renderAlphaAttribution(attribYtd);
         renderRiskGrid(comp, comp2);
