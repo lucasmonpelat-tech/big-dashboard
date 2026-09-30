@@ -293,14 +293,20 @@ def check_flows_vs_positions(sleeve_key, twr, holdings_file=None):
     puede caer de un lado u otro y no es un error.
     """
     issues = []
-    anchor = None
-    for p in reversed(twr):
-        if _is_month_end(p["date"]) and p.get("mv_usd") is not None and not p.get("interpolated"):
-            anchor = p
-            break
-    if anchor is None or not twr:
+    if not twr:
         return issues
     last = twr[-1]
+    # El anchor es el fin de mes ANTERIOR al ultimo punto. Sin el "<", el dia
+    # de cierre de mes el anchor era el propio punto de hoy y el chequeo
+    # comparaba el flujo del mes contra cero dias de posiciones (falso
+    # positivo en FI el 30-Sep-2026).
+    anchor = None
+    for p in reversed(twr):
+        if p["date"] < last["date"] and _is_month_end(p["date"]) and p.get("mv_usd") is not None and not p.get("interpolated"):
+            anchor = p
+            break
+    if anchor is None:
+        return issues
     flow_in = last.get("flow_in") or 0.0
     mv_today = last.get("mv_usd") or 0.0
     if mv_today <= 0:
