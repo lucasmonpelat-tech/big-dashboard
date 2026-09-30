@@ -3,7 +3,7 @@
   "_como_agregar": "Sumar la fecha con el valor correcto, su fuente y como se detecto. SACAR la entrada en cuanto Lynk corrija: el cron siguiente vuelve a usar el dato de ellos y todo se recalcula solo.",
   "_por_que_corregir_y_no_excluir": "Excluir el dia deja un agujero en una serie de NAV y no se puede hacer en el Excel que va al administrador. Cuando sabemos el valor real -- y aca lo sabemos por dos fuentes independientes -- corregirlo deja la serie completa y correcta. Excluir queda como ultimo recurso si algun dia hay un dato malo sin valor conocido.",
   "_la_serie_cruda_no_se_toca": "lynk_nav_series.json sigue siendo exactamente lo que publica Lynk. La correccion se aplica al leer, no al guardar, para que siempre se pueda ver que mandaron ellos y que mostramos nosotros.",
-  "_ultima_revision": "2026-09-17",
+  "_ultima_revision": "2026-09-30",
   "puntos_malos": [
     {
       "fecha": "2026-08-12",
@@ -16,6 +16,17 @@
       "impacto_si_no_se_corrige": "Mete un -3.41% y un +3.63% que nunca pasaron. Sobre retornos diarios eso lleva la Vol del sleeve total de 4.95% a 6.72% y el Sharpe de 1.193 a 0.891.",
       "reclamado": "2026-09-15",
       "corregido_por_lynk": null
+    },
+    {
+      "fecha": "2026-05-07",
+      "nav_publicado": 107.98917,
+      "valor_correcto": 106.05267193039512,
+      "fuente_del_valor_correcto": "NAV del 06-May (106.0527): se toma 0% de cambio ese dia, por decision de Lucas (2026-09-30). El 08-May queda con su valor oficial (105.972), que ya tiene el asiento revertido.",
+      "motivo": "Error de Pershing: un asiento de cash por la suscripcion de FLEX ($130k) que Lynk contrarresto al dia siguiente. El NAV subio +1.83% el 07-May y bajo -1.87% el 08-May sin que pasara nada en la cartera (el 60/40 hizo -0.6%/+0.7% esos dias). Este error SI esta en el CAV oficial de ProCapital (107.9892 / 105.9720): no es que Lynk publico mal, es que el NAV oficial llevo el asiento y su reversa.",
+      "impacto_si_no_se_corrige": "Dos retornos diarios de +/-1.85% que nunca pasaron. Sobre retornos diarios llevan la Vol del total de 4.37% a 4.95%. Los retornos por periodo (YTD, SI) no cambian: usan inicio y fin.",
+      "reclamado": null,
+      "corregido_por_lynk": null,
+      "nota_cav": "OJO: a diferencia del 12-Ago, aca el CAV oficial tiene el mismo error. check_lynk_vs_cav no alarma porque la fecha esta en este archivo. El Excel mensual para Maximus (build_procapital_nav_sheet) usa la serie corregida: si algun dia se regenerara el de MAYO saldria con 106.0527 el 07-May, distinto del oficial (107.9892). El de mayo ya se entrego con el dato oficial; no regenerarlo."
     }
   ]
 }

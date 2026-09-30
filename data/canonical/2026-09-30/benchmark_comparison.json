@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "as_of": "2026-09-30",
-  "generated_at": "2026-09-30T15:59:45Z",
+  "generated_at": "2026-09-30T19:00:22Z",
   "note": "Comparaciones portfolio vs benchmark con fechas alineadas y rebased 100 en fecha comun. Fixes bug del dashboard viejo (arrays x separados sin intersect ni rebase).",
   "comparisons": {
     "total_vs_6040": {
@@ -13,6 +13,12 @@
       "as_of": "2026-09-29",
       "n_observations": 314,
       "correcciones_nav": [
+        {
+          "fecha": "2026-05-07",
+          "de": 107.98917,
+          "a": 106.05267193039512,
+          "fuente": "NAV del 06-May (106.0527): se toma 0% de cambio ese dia, por decision de Lucas (2026-09-30). El 08-May queda con su valor oficial (105.972), que ya tiene el asiento revertido."
+        },
         {
           "fecha": "2026-08-12",
           "de": 103.215,
@@ -1307,9 +1313,9 @@
         },
         {
           "date": "2026-05-07",
-          "portfolio": 107.9892,
+          "portfolio": 106.0527,
           "benchmark": 114.0985,
-          "alpha_bp": -610.94
+          "alpha_bp": -804.59
         },
         {
           "date": "2026-05-08",
@@ -1946,13 +1952,13 @@
       },
       "stats": {
         "n_days": 313,
-        "tracking_error_pct_ann": 7.21,
-        "info_ratio": -0.961,
-        "sharpe_portfolio": 1.028,
+        "tracking_error_pct_ann": 6.53,
+        "info_ratio": -1.064,
+        "sharpe_portfolio": 1.161,
         "sharpe_benchmark": 1.362,
-        "beta": 0.324,
-        "correlation": 0.577,
-        "volatility_portfolio_pct_ann": 4.95,
+        "beta": 0.348,
+        "correlation": 0.704,
+        "volatility_portfolio_pct_ann": 4.36,
         "volatility_benchmark_pct_ann": 8.83
       }
     },
@@ -1965,6 +1971,12 @@
       "as_of": "2026-09-29",
       "n_observations": 314,
       "correcciones_nav": [
+        {
+          "fecha": "2026-05-07",
+          "de": 107.98917,
+          "a": 106.05267193039512,
+          "fuente": "NAV del 06-May (106.0527): se toma 0% de cambio ese dia, por decision de Lucas (2026-09-30). El 08-May queda con su valor oficial (105.972), que ya tiene el asiento revertido."
+        },
         {
           "fecha": "2026-08-12",
           "de": 103.215,
@@ -3259,9 +3271,9 @@
         },
         {
           "date": "2026-05-07",
-          "portfolio": 107.9892,
+          "portfolio": 106.0527,
           "benchmark": 110.4121,
-          "alpha_bp": -242.29
+          "alpha_bp": -435.94
         },
         {
           "date": "2026-05-08",
@@ -3898,13 +3910,13 @@
       },
       "stats": {
         "n_days": 313,
-        "tracking_error_pct_ann": 5.89,
-        "info_ratio": -0.523,
-        "sharpe_portfolio": 1.028,
+        "tracking_error_pct_ann": 5.12,
+        "info_ratio": -0.607,
+        "sharpe_portfolio": 1.161,
         "sharpe_benchmark": 1.179,
-        "beta": 0.395,
-        "correlation": 0.552,
-        "volatility_portfolio_pct_ann": 4.95,
+        "beta": 0.425,
+        "correlation": 0.676,
+        "volatility_portfolio_pct_ann": 4.36,
         "volatility_benchmark_pct_ann": 6.93
       }
     },
