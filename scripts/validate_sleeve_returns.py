@@ -319,8 +319,8 @@ def check_flows_vs_positions(sleeve_key, twr, holdings_file=None):
     en_sleeve = {sid for sid, (tk, sl) in M.items() if sl == sleeve_name}
 
     hoy = _canonical_positions(lambda d: True)
-    if not hoy:
-        return issues
+    if not hoy or not hoy[1]:
+        return issues   # sin posiciones de hoy (export vacio) no hay con que comparar
     d_hoy, pos_hoy = hoy
 
     # Solo se comparan las posiciones que el sleeve INCLUYE en su MV. Una

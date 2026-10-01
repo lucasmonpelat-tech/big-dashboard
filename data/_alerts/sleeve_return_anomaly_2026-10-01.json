@@ -1,9 +1,0 @@
-{
-  "detected_at": "2026-10-01T13:15:05.083462",
-  "date": "2026-10-01",
-  "issues": [
-    "equity: el ultimo punto es de 2026-09-30, no de hoy (2026-10-01) -- el refresh diario no corrio.",
-    "fixed_income: el ultimo punto es de 2026-09-30, no de hoy (2026-10-01) -- el refresh diario no corrio.",
-    "fixed_income: el flow_in del mes ($+400,030 desde 2026-08-31) no explica los cambios de posicion (Σ Δqty x precio = $-92,069,663, snapshot 2026-08-31 -> 2026-10-01; tolerancia $56,135). Movimientos: MANIG -16,621.49 x 125.67; PIMCO-EM -48,651.14 x 18.63; TGF -532,000.00 x 154.96; PIMCO-INC -159,434.55 x 20.15; PIMCO-LD -224,080.42 x 14.08; MANEM -2,334.39 x 115.87. Si hay un trade que el flujo no cuenta, el TWR lo esta tomando como retorno (caso FLEX 08-Sep-2026)."
-  ]
-}

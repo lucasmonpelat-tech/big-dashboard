@@ -847,6 +847,15 @@ def main():
     if not positions:
         print("[FATAL] No pude leer positions_latest.json (o vino vacio)")
         sys.exit(1)
+    # GATE (2026-10-01): una cartera "vacia" no pasa. Ese dia el export de
+    # Positions de NetX360 vino sin filas, positions_latest quedo solo con CALP
+    # (externo) y este validador dio TODO OK: el dashboard salio con $0 en
+    # Equity y FI. Pershing siempre tiene 20+ posiciones; menos de 10 es un
+    # export roto, no una cartera.
+    n_pershing = sum(1 for pp in positions if pp.get("sleeve") in ("Equity", "Fixed Income"))
+    if n_pershing < 10:
+        errors.append(f"positions_latest: solo {n_pershing} posiciones de Equity/FI (Pershing) -- "
+                      f"el export de Positions vino vacio o roto. NO deployar una cartera vacia.")
     big_isins = {pp["isin"] for pp in positions}
     equity_isins = {pp["isin"] for pp in positions if pp["sleeve"] == "Equity"}
     fi_isins = {pp["isin"] for pp in positions if pp["sleeve"] == "Fixed Income"}

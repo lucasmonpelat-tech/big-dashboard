@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-10-01T13:15:03.139127",
+  "refreshedAt": "2026-10-01T11:05:25.966867",
   "inception": "2025-06-30",
   "benchmark_primary": "60/40 blend (60% ACWI + 40% AGG)",
   "benchmark_secondary": "HFRX Global HF proxy (QAI ETF)",
@@ -255,9 +255,9 @@
       "value_usd": 661551.95,
       "weight_pct": 7.6,
       "si_return_pct": 5.01,
-      "ytd_return_pct": null,
+      "ytd_return_pct": 0.0,
       "contribution_pct": 0.38,
-      "ytd_contribution_pct": null,
+      "ytd_contribution_pct": 0.0,
       "assumed_annual_pct": 12.0,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
       "valuation_date": "2026-08-31",
@@ -274,9 +274,9 @@
       "value_usd": 1452633.38,
       "weight_pct": 16.7,
       "si_return_pct": 3.76,
-      "ytd_return_pct": null,
+      "ytd_return_pct": 0.0,
       "contribution_pct": 0.63,
-      "ytd_contribution_pct": null,
+      "ytd_contribution_pct": 0.0,
       "assumed_annual_pct": 11.0,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
       "valuation_date": "2026-08-31",
@@ -303,7 +303,7 @@
       "ytd_metodo": "statement del gestor"
     }
   ],
-  "_daily_refresh_note": "Refresh diario 2026-10-01: 0 liquidos via Pershing T-1, 0 via Pershing T-1, 1 via Carlyle statement, 4 frozen statement. Total activo: $8,676,685.",
-  "_sync_alts_ugl_at": "2026-10-01T13:15:04.745019",
+  "_daily_refresh_note": "Refresh diario 2026-10-01: 2 liquidos via Pershing T-1, 2 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $8,676,685.",
+  "_sync_alts_ugl_at": "2026-10-01T11:05:30.444472",
   "_sync_alts_ugl_note": "Por holding: MV y SI (desde la compra) de Pershing UGL; YTD de calendario del canonical (anchor 31-Dic o statement del gestor). Sleeve SI/YTD: TWR de alts_sleeve_real.json."
 }

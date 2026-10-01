@@ -66,6 +66,54 @@ def write_json(data: dict, out_path: Path):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 
+def _fallback_si_vacio(positions: dict, target_date: str) -> dict:
+    """Si el export de Positions de NetX360 vino VACIO (o con menos de la
+    mitad del valor del dia anterior), se usa el canonical anterior y se
+    escribe una alerta. Sin esto, el 2026-10-01 el dashboard salio con $0 en
+    Equity y FI y 100% en Alternatives: Pershing devolvio el Positions sin
+    filas (los otros 3 exports vinieron bien), el job termino "success" y se
+    publico una cartera vacia. Un export vacio no es una cartera vacia."""
+    import json as _json
+    from datetime import datetime as _dt
+    n = len(positions.get("holdings", []))
+    mv = sum((h.get("market_value_usd") or 0) for h in positions.get("holdings", []))
+    prev = None
+    for d in sorted((p.name for p in CANONICAL_DIR.iterdir() if p.is_dir()), reverse=True):
+        if d >= target_date:
+            continue
+        f = CANONICAL_DIR / d / "positions.json"
+        if f.exists():
+            try:
+                prev = (d, _json.load(open(f, encoding="utf-8")))
+            except Exception:
+                prev = None
+            if prev and prev[1].get("holdings"):
+                break
+            prev = None
+    if prev is None:
+        return positions
+    d_prev, p_prev = prev
+    mv_prev = sum((h.get("market_value_usd") or 0) for h in p_prev.get("holdings", []))
+    if n > 0 and (mv_prev <= 0 or mv >= 0.5 * mv_prev):
+        return positions
+    motivo = ("sin filas" if n == 0 else f"{n} filas por ${mv:,.0f}, menos de la mitad del dia anterior (${mv_prev:,.0f})")
+    print(f"    !! Positions de NetX360 {motivo}. Se usa el canonical del {d_prev} ({len(p_prev['holdings'])} holdings).")
+    out = dict(p_prev)
+    out["as_of"] = target_date
+    out["_fallback_from"] = d_prev
+    out["_fallback_motivo"] = f"Export de Positions del {target_date} {motivo}. Cantidades y precios son los del {d_prev}."
+    alerts = ROOT / "data" / "_alerts"
+    alerts.mkdir(parents=True, exist_ok=True)
+    with open(alerts / f"positions_vacias_{target_date}.json", "w", encoding="utf-8") as f:
+        _json.dump({
+            "date": target_date, "tipo": "positions_vacias", "detected_at": _dt.now().isoformat(),
+            "detalle": out["_fallback_motivo"],
+            "accion": "Revisar el XLSX de Positions de NetX360 de ese dia (data/raw). Si Pershing lo volvio a publicar bien, "
+                      "basta con que corra el cron siguiente. Mientras tanto el dashboard muestra la cartera del dia anterior.",
+        }, f, indent=2, ensure_ascii=False)
+    return out
+
+
 def run(target_date: str) -> dict:
     print(f"\n{'=' * 70}")
     print(f"  Transform {target_date}")
@@ -83,6 +131,7 @@ def run(target_date: str) -> dict:
     # 1. Positions
     print(f"\n  [1/4] Positions...")
     positions = parse_positions.parse(files["positions"], as_of=target_date)
+    positions = _fallback_si_vacio(positions, target_date)
     errs = validators.validate_positions(positions)
     if errs:
         print(f"    VALIDATION ERRORS: {len(errs)}")
