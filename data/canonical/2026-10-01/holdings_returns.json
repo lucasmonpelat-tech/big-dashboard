@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-01",
+  "generated_at": "2026-10-01T13:15:05Z",
+  "note": "Holdings con MV/return DIRECTO de Pershing UGL (canonical v2 pnl.json). Bench DW calculado desde buys_history + bench indices. Fixes bug de precio staleado del compute_holdings_returns.py viejo.",
+  "sources": {
+    "positions": "data/canonical/2026-10-01/positions.json",
+    "pnl": "data/canonical/2026-10-01/pnl.json"
+  },
+  "sleeves": {
+    "equity": {
+      "bench_label": "ACWI",
+      "n_open": 0,
+      "holdings": []
+    },
+    "fixed_income": {
+      "bench_label": "AGG",
+      "n_open": 0,
+      "holdings": []
+    },
+    "alternatives": {
+      "bench_label": "ACWI",
+      "n_open": 1,
+      "holdings": [
+        {
+          "ticker": "CALP",
+          "name": "Carlyle AlpInvest PM Sub-Fund - I - Class B1",
+          "isin": "LU2827810776",
+          "status": "OPEN",
+          "qty": 186706.497,
+          "mv_usd": 2796863.33,
+          "cost_basis_usd": 2500000.0,
+          "unrealized_gl_usd": 296863.33,
+          "return_pct": 11.87,
+          "bench_label": "ACWI",
+          "bench_dw_pct": 20.81,
+          "alpha_real_pp": -8.94,
+          "ytd_pct": 6.17,
+          "ytd_metodo": "statement del gestor",
+          "ytd_as_of": "2026-07-31",
+          "ytd_fuente": "Carlyle AlpInvest Statement Julio 2026 (Pro Capital, TVS_P122202_2026-07-31)",
+          "bench_ytd_pct": 12.94,
+          "alpha_ytd_pp": -6.77,
+          "first_buy_date": "2025-08-29",
+          "buys_history": [
+            {
+              "date": "2025-08-29",
+              "cost": 2500000.0
+            }
+          ],
+          "_mv_source": "external_statement",
+          "_source_note": "Carlyle AlpInvest Statement Julio 2026 (Pro Capital, TVS_P122202_2026-07-31)",
+          "_as_of": "2026-07-31"
+        }
+      ]
+    }
+  }
+}

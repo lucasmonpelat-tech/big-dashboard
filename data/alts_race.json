@@ -1,16 +1,16 @@
 {
-  "refreshedAt": "2026-09-30T13:14:00.929314",
+  "refreshedAt": "2026-10-01T13:15:03.139127",
   "inception": "2025-06-30",
   "benchmark_primary": "60/40 blend (60% ACWI + 40% AGG)",
   "benchmark_secondary": "HFRX Global HF proxy (QAI ETF)",
   "portfolio_metrics": {
-    "total_alts_usd": 8695477,
+    "total_alts_usd": 8700444,
     "sub_class_breakdown_pct": {
-      "private_equity": 39.77,
+      "private_equity": 39.75,
       "crypto": 11.6,
       "commodity": 10.38,
-      "private_credit": 21.54,
-      "private_infra": 16.71
+      "private_credit": 21.58,
+      "private_infra": 16.7
     },
     "n_holdings": 8
   },
@@ -18,19 +18,19 @@
     "latest_month": "2026-08",
     "returns": {
       "1M": {
-        "sleeve": 0.44,
+        "sleeve": 0.0,
         "bmk6040": 1.59,
-        "alpha": -1.15
+        "alpha": -1.59
       },
       "3M": {
-        "sleeve": 5.58,
+        "sleeve": 4.09,
         "bmk6040": 0.55,
-        "alpha": 5.03
+        "alpha": 3.54
       },
       "6M": {
-        "sleeve": 4.21,
+        "sleeve": 2.59,
         "bmk6040": 4.64,
-        "alpha": -0.43
+        "alpha": -2.05
       },
       "YTD": {
         "sleeve": 4.6,
@@ -44,9 +44,9 @@
       }
     },
     "annualized": {
-      "sleeve": 9.8,
+      "sleeve": 9.12,
       "bmk6040": 15.05,
-      "alpha": -5.25
+      "alpha": -5.93
     }
   },
   "stats_vs_hfrx": {
@@ -99,7 +99,8 @@
     "2026-06": 105.6373,
     "2026-07": 107.141,
     "2026-08": 111.0424,
-    "2026-09": 111.5281
+    "2026-09": 111.5281,
+    "2026-10": 111.5281
   },
   "bmk6040_index": {
     "2025-06": 100.0,
@@ -150,7 +151,8 @@
     "2026-06": -0.027874,
     "2026-07": 0.014235,
     "2026-08": 0.036414,
-    "2026-09": 0.004374
+    "2026-09": 0.004374,
+    "2026-10": 0.0
   },
   "holdings": [
     {
@@ -159,7 +161,7 @@
       "name": "Carlyle AlpInvest Private Markets",
       "sub_class": "private_equity",
       "value_usd": 2796863.33,
-      "weight_pct": 32.16,
+      "weight_pct": 32.15,
       "si_return_pct": 11.87,
       "ytd_return_pct": 6.17,
       "contribution_pct": 3.82,
@@ -167,7 +169,7 @@
       "assumed_annual_pct": 12.0,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
       "valuation_date": "2026-07-31",
-      "days_since_valuation": 61,
+      "days_since_valuation": 62,
       "isin_maximus": "LU2837777825",
       "_isin_note": "CALP tiene dos ISIN dando vueltas: LU2827810776 es el del statement oficial de Carlyle y el que usan el canonical y funds_metadata.js; LU2837777825 es con el que lo dio de alta Maximus. Se unifica en el oficial. Se guarda el de Maximus para poder cruzar contra sus reportes.",
       "ytd_as_of": "2026-07-31",
@@ -181,13 +183,13 @@
       "value_usd": 1008886.28,
       "weight_pct": 11.6,
       "si_return_pct": null,
-      "ytd_return_pct": -4.67,
+      "ytd_return_pct": null,
       "contribution_pct": null,
-      "ytd_contribution_pct": -0.54,
+      "ytd_contribution_pct": null,
       "assumed_annual_pct": null,
       "source": "Pershing T-1 (2026-09-29)",
       "valuation_date": "2026-09-29",
-      "days_since_valuation": 1,
+      "days_since_valuation": 2,
       "ytd_as_of": "2026-09-29",
       "ytd_metodo": "precio vs anchor 31-Dic"
     },
@@ -199,13 +201,13 @@
       "value_usd": 902854.62,
       "weight_pct": 10.38,
       "si_return_pct": null,
-      "ytd_return_pct": -3.39,
+      "ytd_return_pct": null,
       "contribution_pct": null,
-      "ytd_contribution_pct": -0.35,
+      "ytd_contribution_pct": null,
       "assumed_annual_pct": null,
       "source": "Pershing T-1 (2026-09-29)",
       "valuation_date": "2026-09-29",
-      "days_since_valuation": 1,
+      "days_since_valuation": 2,
       "ytd_as_of": "2026-09-29",
       "ytd_metodo": "precio vs anchor 31-Dic"
     },
@@ -215,15 +217,15 @@
       "name": "HPS Corporate Lending Fund",
       "sub_class": "private_credit",
       "value_usd": 767778.35,
-      "weight_pct": 8.83,
+      "weight_pct": 8.82,
       "si_return_pct": 4.45,
-      "ytd_return_pct": 0.62,
+      "ytd_return_pct": 2.49,
       "contribution_pct": 0.39,
-      "ytd_contribution_pct": 0.05,
+      "ytd_contribution_pct": 0.22,
       "assumed_annual_pct": 9.5,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
-      "valuation_date": "2026-03-31",
-      "days_since_valuation": 183,
+      "valuation_date": "2026-04-30",
+      "days_since_valuation": 154,
       "ytd_as_of": "2026-03-31",
       "ytd_metodo": "statement del gestor"
     },
@@ -232,16 +234,16 @@
       "ticker": "BPCC",
       "name": "Barings Private Credit Corporation",
       "sub_class": "private_credit",
-      "value_usd": 604632.23,
-      "weight_pct": 6.95,
-      "si_return_pct": 9.04,
-      "ytd_return_pct": 3.99,
-      "contribution_pct": 0.63,
-      "ytd_contribution_pct": 0.28,
+      "value_usd": 609599.26,
+      "weight_pct": 7.01,
+      "si_return_pct": 9.94,
+      "ytd_return_pct": 3.07,
+      "contribution_pct": 0.7,
+      "ytd_contribution_pct": 0.22,
       "assumed_annual_pct": 9.5,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
-      "valuation_date": "2026-09-29",
-      "days_since_valuation": 1,
+      "valuation_date": "2026-06-30",
+      "days_since_valuation": 93,
       "ytd_as_of": "2026-09-29",
       "ytd_metodo": "precio vs anchor 31-Dic"
     },
@@ -251,15 +253,15 @@
       "name": "Flex-Lexington Partners Secondaries",
       "sub_class": "private_equity",
       "value_usd": 661551.95,
-      "weight_pct": 7.61,
+      "weight_pct": 7.6,
       "si_return_pct": 5.01,
-      "ytd_return_pct": 9.5,
+      "ytd_return_pct": null,
       "contribution_pct": 0.38,
-      "ytd_contribution_pct": 0.72,
+      "ytd_contribution_pct": null,
       "assumed_annual_pct": 12.0,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
       "valuation_date": "2026-08-31",
-      "days_since_valuation": 30,
+      "days_since_valuation": 31,
       "_isin_note": "FLEX-LEX era un ISIN placeholder de cuando entro el fondo sin ISIN cargado. El real es LU2966298809 y ya es el que usan el canonical, positions_latest y funds_metadata.js. Unificado el 2026-09-08.",
       "ytd_as_of": "2026-08-31",
       "ytd_metodo": "precio vs anchor 31-Dic"
@@ -270,15 +272,15 @@
       "name": "Hamilton Lane Global Private Infrastructure",
       "sub_class": "private_infra",
       "value_usd": 1452633.38,
-      "weight_pct": 16.71,
+      "weight_pct": 16.7,
       "si_return_pct": 3.76,
-      "ytd_return_pct": 11.65,
+      "ytd_return_pct": null,
       "contribution_pct": 0.63,
-      "ytd_contribution_pct": 1.95,
+      "ytd_contribution_pct": null,
       "assumed_annual_pct": 11.0,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
       "valuation_date": "2026-08-31",
-      "days_since_valuation": 30,
+      "days_since_valuation": 31,
       "ytd_as_of": "2026-08-31",
       "ytd_metodo": "precio vs anchor 31-Dic"
     },
@@ -290,18 +292,18 @@
       "value_usd": 500276.97,
       "weight_pct": 5.75,
       "si_return_pct": 2.09,
-      "ytd_return_pct": -1.92,
+      "ytd_return_pct": 1.12,
       "contribution_pct": 0.12,
-      "ytd_contribution_pct": -0.11,
+      "ytd_contribution_pct": 0.06,
       "assumed_annual_pct": 9.5,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
-      "valuation_date": "2026-03-31",
-      "days_since_valuation": 183,
+      "valuation_date": "2026-04-30",
+      "days_since_valuation": 154,
       "ytd_as_of": "2026-03-31",
       "ytd_metodo": "statement del gestor"
     }
   ],
-  "_daily_refresh_note": "Refresh diario 2026-09-30: 2 liquidos via Pershing T-1, 2 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $8,676,685.",
-  "_sync_alts_ugl_at": "2026-09-30T13:14:02.096839",
+  "_daily_refresh_note": "Refresh diario 2026-10-01: 0 liquidos via Pershing T-1, 0 via Pershing T-1, 1 via Carlyle statement, 4 frozen statement. Total activo: $8,676,685.",
+  "_sync_alts_ugl_at": "2026-10-01T13:15:04.745019",
   "_sync_alts_ugl_note": "Por holding: MV y SI (desde la compra) de Pershing UGL; YTD de calendario del canonical (anchor 31-Dic o statement del gestor). Sleeve SI/YTD: TWR de alts_sleeve_real.json."
 }
