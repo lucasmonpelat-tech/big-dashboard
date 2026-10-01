@@ -1,6 +1,6 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-10-01T16:28:23.428513",
+  "refreshedAt": "2026-10-01T16:31:53.614757",
   "as_of_date": "2026-10-01",
   "ytd_anchor": "2025-12-31",
   "days_ytd": 274,
@@ -125,7 +125,7 @@
   ],
   "total_aum": 28599979.67,
   "alpha_attribution": {
-    "_description": "Decomposicion del alpha YTD por asset class. Contribucion del bench con pesos fijos del mandato: 30% ACWI + 40% AGG + 30% 60/40 (AOR, referencia de Alts).",
+    "_description": "Decomposicion del alpha YTD por asset class. Contribucion del bench con pesos fijos del mandato: 30% ACWI (Equity) + 40% AGG (FI) + 30% ACWI (Alts).",
     "bench_label": "60/40 (AOR)",
     "bench_weights": {
       "Equity": 0.3,
@@ -138,7 +138,7 @@
     "agg_ytd": -3.259,
     "bench_eq_contrib_pp": 3.883,
     "bench_fi_contrib_pp": -1.304,
-    "bench_alts_contrib_pp": 2.013,
+    "bench_alts_contrib_pp": 3.883,
     "big_ytd": 2.59,
     "alpha_ytd_total_pp": -4.12,
     "components": [
@@ -159,9 +159,9 @@
       {
         "name": "Alternatives",
         "big_contrib_pp": 1.401,
-        "bench_contrib_pp": 2.013,
-        "alpha_pp": -0.612,
-        "comment": "BIG 30.4% @ +4.60% vs 30% 60/40 @ +6.71%"
+        "bench_contrib_pp": 3.883,
+        "alpha_pp": -2.482,
+        "comment": "BIG 30.4% @ +4.60% vs 30% ACWI @ +12.94%"
       },
       {
         "name": "Cash",
@@ -189,8 +189,8 @@
         "name": "Residual",
         "big_contrib_pp": -0.69,
         "bench_contrib_pp": null,
-        "alpha_pp": -1.428,
-        "comment": "Nuestro calculo (+1.90%) - Lynk oficial (+2.59%), mas la diferencia entre el bench por pesos del mandato (+4.59%) y el AOR (+6.71%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
+        "alpha_pp": 0.442,
+        "comment": "Nuestro calculo (+1.90%) - Lynk oficial (+2.59%), mas la diferencia entre el bench por pesos del mandato (+6.46%) y el AOR (+6.71%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
       }
     ]
   }

@@ -46,8 +46,8 @@ MGMT_FEE_ANNUAL = 1.8         # Lynk management fee (Lucas confirmed)
 # se leen de las posiciones de hoy.
 #   Equity       30% x ACWI YTD
 #   Fixed Income 40% x AGG YTD
-#   Alternatives 30% x 60/40 (AOR) YTD  -- la referencia que ya usa el tab Sleeves
-#                                          Race para Alts (no tiene bench propio)
+#   Alternatives 30% x ACWI YTD  -- mismo bench que Equity (decision de Lucas,
+#                                   2026-10-01: Alts se compara contra ACWI)
 #   Cash          0%
 BENCH_W_EQUITY = 0.30
 BENCH_W_FI = 0.40
@@ -196,7 +196,7 @@ def main():
     # Decomposicion del alpha YTD por asset class:
     # - Equity: BIG_eq_contrib - 30% * ACWI_YTD
     # - FI:     BIG_fi_contrib - 40% * AGG_YTD
-    # - Alts:   BIG_alts_contrib - 30% * AOR_YTD (60/40, referencia de Alts)
+    # - Alts:   BIG_alts_contrib - 30% * ACWI_YTD (mismo bench que Equity)
     # - Cash:   BIG_cash_contrib (el mandato no tiene cash)
     # - Fee:    -mgmt_fee
     # - Residual: tracking error AOR + adjustments
@@ -225,7 +225,7 @@ def main():
         # Contribucion del bench por componente, con los pesos FIJOS del mandato
         bench_eq_contrib = BENCH_W_EQUITY * acwi_ytd if acwi_ytd is not None else 0
         bench_fi_contrib = BENCH_W_FI * agg_ytd if agg_ytd is not None else 0
-        bench_alts_contrib = BENCH_W_ALTS * bmk_ytd if bmk_ytd is not None else 0
+        bench_alts_contrib = BENCH_W_ALTS * acwi_ytd if acwi_ytd is not None else 0
 
         # Alpha por sleeve = BIG contrib - Bench contrib equivalente
         equity_alpha = eq_dict["contribution_pp"] - bench_eq_contrib
@@ -239,7 +239,7 @@ def main():
         alpha_residual = (actual_alpha - sum_attribution) if actual_alpha is not None else None
 
         alpha_attribution = {
-            "_description": "Decomposicion del alpha YTD por asset class. Contribucion del bench con pesos fijos del mandato: 30% ACWI + 40% AGG + 30% 60/40 (AOR, referencia de Alts).",
+            "_description": "Decomposicion del alpha YTD por asset class. Contribucion del bench con pesos fijos del mandato: 30% ACWI (Equity) + 40% AGG (FI) + 30% ACWI (Alts).",
             "bench_label": "60/40 (AOR)",
             "bench_weights": {"Equity": BENCH_W_EQUITY, "Fixed Income": BENCH_W_FI, "Alternatives": BENCH_W_ALTS, "Cash": 0.0},
             "bench_ytd_aor_etf": bmk_ytd,
@@ -270,7 +270,7 @@ def main():
                     "big_contrib_pp": alts_dict["contribution_pp"],
                     "bench_contrib_pp": round(bench_alts_contrib, 3),
                     "alpha_pp": round(alts_alpha, 3),
-                    "comment": f"BIG {alts_dict['weight_pct']:.1f}% @ {alts_dict['ytd_pct']:+.2f}% vs {BENCH_W_ALTS*100:.0f}% 60/40 @ {bmk_ytd:+.2f}%"
+                    "comment": f"BIG {alts_dict['weight_pct']:.1f}% @ {alts_dict['ytd_pct']:+.2f}% vs {BENCH_W_ALTS*100:.0f}% ACWI @ {acwi_ytd:+.2f}%"
                 },
                 {
                     "name": "Cash",
