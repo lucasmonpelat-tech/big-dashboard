@@ -3,5 +3,221 @@
   "_updated": "2026-09-28",
   "_source": "Pershing UGL + year_start_anchors legacy + baha monthlyReturns",
   "_generation_rule": "Cada 1-Ene guardar el precio 31-Dec del anio anterior en este archivo (script snapshot_year_start_prices.py).",
-  "anchors_2026": {}
+  "anchors_2026": {
+    "IE00B6YCBF59": {
+      "ticker": "G8T49N214",
+      "name": "THORNBURG INVESTMENT INCOME BUILDER FUND",
+      "ytd_source_pct": 14.15,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=year_start_anchors, qty_pre=0"
+    },
+    "US46438F1012": {
+      "ticker": "IBIT",
+      "name": "ISHARES BITCOIN TR ETF SHS BEN INT",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": 13655.0,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=13655.0"
+    },
+    "IE00B29K0P99": {
+      "ticker": "G7097Y503",
+      "name": "PIMCO EMERGING LOCAL BOND FUND INSTITUTI",
+      "ytd_source_pct": 2.06,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=year_start_anchors, qty_pre=0"
+    },
+    "DE000A0Q4R85": {
+      "ticker": "4BRZ:DE",
+      "name": "ISHARES MSCI BRAZIL UCITS ETF (DE) ACCUM",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
+    "XS2658535526": {
+      "ticker": "G7151GAA7",
+      "name": "PM ALPHA DAC BARINGS BPCC ETN I ACC MEDI",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": 464209.0,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=464209.0"
+    },
+    "IE000OE87WX6": {
+      "ticker": "G5896H580",
+      "name": "MAN GLG GLOBAL INVESTMENT GRADE OPPORTUNITIES FUND CLASS IVY",
+      "ytd_source_pct": 1.28,
+      "price_2025_dec_31": 121.139415,
+      "qty_2025_dec_31": 12640.339,
+      "mv_2025_dec_31": 1531243.27,
+      "ytd_source": "year_start_anchors",
+      "anchor_locked": false,
+      "note": "PROVISIONAL: derivado de ytd_source_pct (posiblemente stale), NO verificado contra un NAV real del 31-Dic. Reemplazar con anchor_locked=true + precio real en cuanto se consiga (ver Lucas / baha historico)."
+    },
+    "IE00089T5MA6": {
+      "ticker": "G594CD616",
+      "name": "MAN EMERGING MARKETS CORPORATE CREDIT AL",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
+    "US4642873909": {
+      "ticker": "ILF",
+      "name": "ISHARES TR LATIN AMER 40 ETF",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
+    "US46434V8862": {
+      "ticker": "HEWJ",
+      "name": "ISHARES TR ISHARES CURRENCY HEDGED MSCI ",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
+    "IE00B87KCF77": {
+      "ticker": "G7113P361",
+      "name": "PIMCO INCOME FUND INSTITUTIONAL CLASS (ACC)(USD)",
+      "ytd_source_pct": 0.74,
+      "price_2025_dec_31": 19.317054,
+      "qty_2025_dec_31": 36564.949,
+      "mv_2025_dec_31": 706327.09,
+      "ytd_source": "year_start_anchors",
+      "anchor_locked": false,
+      "note": "PROVISIONAL: derivado de ytd_source_pct (posiblemente stale), NO verificado contra un NAV real del 31-Dic. Reemplazar con anchor_locked=true + precio real en cuanto se consiga (ver Lucas / baha historico)."
+    },
+    "LU2847068389": {
+      "ticker": "LU2847068389",
+      "name": "HAMILTON LANE GLOBAL PRIVATE INFRASTRUCT",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
+    "IE00B5BMR087": {
+      "ticker": "CSPX:GB",
+      "name": "ISHARES VII PLC CORE S&P 500 UCITS ETF I",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": 2271.0,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=2271.0"
+    },
+    "IE00BDT57R20": {
+      "ticker": "G7S11T150",
+      "name": "PIMCO LOW DURATION INCOME FUND INSTITUTI",
+      "ytd_source_pct": 0.94,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=year_start_anchors, qty_pre=0"
+    },
+    "IE00B6WYL972": {
+      "ticker": "IE00B6WYL972",
+      "name": "GAM SWISS RE CAT BOND FUND INSTITUTIONAL",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
+    "IE00BFMHRK20": {
+      "ticker": "G6430T809",
+      "name": "NEUBERGER GLOBAL EQUITY MEGATRENDS FUND CLASS I (ACC)(USD)",
+      "ytd_source_pct": 2.88,
+      "price_2025_dec_31": 23.998834,
+      "qty_2025_dec_31": 44731.728,
+      "mv_2025_dec_31": 1073509.31,
+      "ytd_source": "year_start_anchors",
+      "anchor_locked": false,
+      "note": "PROVISIONAL: derivado de ytd_source_pct (posiblemente stale), NO verificado contra un NAV real del 31-Dic. Reemplazar con anchor_locked=true + precio real en cuanto se consiga (ver Lucas / baha historico)."
+    },
+    "US53656G4982": {
+      "ticker": "MAGS",
+      "name": "LISTED FDS TR ROUNDHILL MAGNIFICENT SEVE",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
+    "LU2049315265": {
+      "ticker": "LU2049315265",
+      "name": "SCHRODER GAIA CAT BOND FUND CLASS C (USD",
+      "ytd_source_pct": 1.57,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=year_start_anchors, qty_pre=0"
+    },
+    "LU2940405447": {
+      "ticker": "L468AA656",
+      "name": "JANUS HENDERSON HORIZON GLOBAL SMALLER C",
+      "ytd_source_pct": 11.1,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=year_start_anchors, qty_pre=0"
+    },
+    "US37950E2596": {
+      "ticker": "ARGT",
+      "name": "GLOBAL X FDS MSCI ARGENTINA ETF",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
+    "LU1985812756": {
+      "ticker": "L6366L196",
+      "name": "MFS MERIDIAN CONTRARIAN VALUE FUND CLASS I1",
+      "ytd_source_pct": 6.55,
+      "price_2025_dec_31": 288.596904,
+      "qty_2025_dec_31": 3989.558,
+      "mv_2025_dec_31": 1151374.09,
+      "ytd_source": "year_start_anchors",
+      "anchor_locked": false,
+      "note": "PROVISIONAL: derivado de ytd_source_pct (posiblemente stale), NO verificado contra un NAV real del 31-Dic. Reemplazar con anchor_locked=true + precio real en cuanto se consiga (ver Lucas / baha historico)."
+    },
+    "LU2966298809": {
+      "ticker": "LU2966298809",
+      "name": "FRANKLIN LEXINGTON PE SECONDARIES FUND C",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
+    "US78463V1070": {
+      "ticker": "GLD",
+      "name": "SPDR GOLD TR GOLD SHS",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": 1924.0,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=1924.0"
+    },
+    "XS2324777171": {
+      "ticker": "G5478EAA2",
+      "name": "LFEEDER DAC EURO MEDIUM TERM NOTE ISIN#X",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": 532000.0,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=532000.0"
+    }
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-10-01T11:05:20.753338",
+  "refreshedAt": "2026-10-02T13:14:23.493367",
   "inception": "2025-06-30",
   "benchmark": "MSCI ACWI (via ACWI ETF - Yahoo)",
   "sleeve_index": {
@@ -83,7 +83,7 @@
       "value_usd": 1433279.14,
       "weight_pct": 16.73,
       "si_return_pct": 9.67,
-      "ytd_return_pct": 8.08,
+      "ytd_return_pct": 2.88,
       "contribution_pct": 1.51,
       "ytd_contribution_pct": 0.45,
       "source": "baha:IE00BFMHRK20",
@@ -97,7 +97,7 @@
       "value_usd": 1249568.69,
       "weight_pct": 14.58,
       "si_return_pct": 13.87,
-      "ytd_return_pct": 15.7,
+      "ytd_return_pct": 6.55,
       "contribution_pct": 2.03,
       "ytd_contribution_pct": 0.96,
       "source": "baha:LU1985812756",
@@ -203,9 +203,9 @@
       "_alta": "Agregado 2026-09-09. Comprados el 02-Jul-2026, nunca habian entrado a este archivo porque el rebuild del sleeve (equity_race.py) se borro el 2026-08-20."
     }
   ],
-  "_ytd_spot_updated": "2026-10-01: 0 holdings YTD spot via Pershing NAV/anchor 31-Dic",
+  "_ytd_spot_updated": "2026-10-02: 2 holdings YTD spot via Pershing NAV/anchor 31-Dic",
   "_stats_removed": "2026-08-25: se elimino el bloque 'stats' (latest_month 2026-05 + returns 1M/3M/6M/YTD/SI + annualized). Lo generaba equity_race.py, borrado el 2026-08-20 (commit 8a064d9) por estar dormido desde mayo. No lo leia NADIE: los returns del sleeve que muestra el dashboard salen de benchmark_comparison.json (canonical v2, regenerado a diario). El bloque quedaba con refreshedAt de hoy y numeros de mayo, invitando a concluir que el dashboard mostraba data vieja. Este JSON hoy se usa solo para holdings[] (clasificacion de sleeve + YTD override) y las series mensuales.",
-  "_weights_source": "canonical/2026-09-30/holdings_returns.json",
+  "_weights_source": "canonical/2026-10-02/holdings_returns.json",
   "_holdings_cerrados": [
     {
       "ticker": "LGLI",

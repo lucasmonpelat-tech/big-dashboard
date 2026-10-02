@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-10-01T11:05:25.966867",
+  "refreshedAt": "2026-10-02T13:14:25.218002",
   "inception": "2025-06-30",
   "benchmark_primary": "60/40 blend (60% ACWI + 40% AGG)",
   "benchmark_secondary": "HFRX Global HF proxy (QAI ETF)",
@@ -169,7 +169,7 @@
       "assumed_annual_pct": 12.0,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
       "valuation_date": "2026-07-31",
-      "days_since_valuation": 62,
+      "days_since_valuation": 63,
       "isin_maximus": "LU2837777825",
       "_isin_note": "CALP tiene dos ISIN dando vueltas: LU2827810776 es el del statement oficial de Carlyle y el que usan el canonical y funds_metadata.js; LU2837777825 es con el que lo dio de alta Maximus. Se unifica en el oficial. Se guarda el de Maximus para poder cruzar contra sus reportes.",
       "ytd_as_of": "2026-07-31",
@@ -189,9 +189,9 @@
       "assumed_annual_pct": null,
       "source": "Pershing T-1 (2026-09-29)",
       "valuation_date": "2026-09-29",
-      "days_since_valuation": 2,
-      "ytd_as_of": "2026-09-29",
-      "ytd_metodo": "precio vs anchor 31-Dic"
+      "days_since_valuation": 3,
+      "ytd_as_of": null,
+      "ytd_metodo": "Pershing UGL (MV vs costo, NO es YTD de calendario)"
     },
     {
       "isin": "US78463V1070",
@@ -207,9 +207,9 @@
       "assumed_annual_pct": null,
       "source": "Pershing T-1 (2026-09-29)",
       "valuation_date": "2026-09-29",
-      "days_since_valuation": 2,
-      "ytd_as_of": "2026-09-29",
-      "ytd_metodo": "precio vs anchor 31-Dic"
+      "days_since_valuation": 3,
+      "ytd_as_of": null,
+      "ytd_metodo": "Pershing UGL (MV vs costo, NO es YTD de calendario)"
     },
     {
       "isin": "KYG4737U1085",
@@ -219,13 +219,13 @@
       "value_usd": 767778.35,
       "weight_pct": 8.82,
       "si_return_pct": 4.45,
-      "ytd_return_pct": 2.49,
+      "ytd_return_pct": 0.62,
       "contribution_pct": 0.39,
-      "ytd_contribution_pct": 0.22,
+      "ytd_contribution_pct": 0.05,
       "assumed_annual_pct": 9.5,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
-      "valuation_date": "2026-04-30",
-      "days_since_valuation": 154,
+      "valuation_date": "2026-03-31",
+      "days_since_valuation": 185,
       "ytd_as_of": "2026-03-31",
       "ytd_metodo": "statement del gestor"
     },
@@ -237,15 +237,15 @@
       "value_usd": 609599.26,
       "weight_pct": 7.01,
       "si_return_pct": 9.94,
-      "ytd_return_pct": 3.07,
+      "ytd_return_pct": null,
       "contribution_pct": 0.7,
-      "ytd_contribution_pct": 0.22,
+      "ytd_contribution_pct": null,
       "assumed_annual_pct": 9.5,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
       "valuation_date": "2026-06-30",
-      "days_since_valuation": 93,
-      "ytd_as_of": "2026-09-29",
-      "ytd_metodo": "precio vs anchor 31-Dic"
+      "days_since_valuation": 94,
+      "ytd_as_of": null,
+      "ytd_metodo": "Pershing UGL (MV vs costo, NO es YTD de calendario)"
     },
     {
       "isin": "LU2966298809",
@@ -255,16 +255,16 @@
       "value_usd": 661551.95,
       "weight_pct": 7.6,
       "si_return_pct": 5.01,
-      "ytd_return_pct": 0.0,
+      "ytd_return_pct": 6.1,
       "contribution_pct": 0.38,
-      "ytd_contribution_pct": 0.0,
+      "ytd_contribution_pct": 0.46,
       "assumed_annual_pct": 12.0,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
-      "valuation_date": "2026-08-31",
-      "days_since_valuation": 31,
+      "valuation_date": "2026-05-31",
+      "days_since_valuation": 124,
       "_isin_note": "FLEX-LEX era un ISIN placeholder de cuando entro el fondo sin ISIN cargado. El real es LU2966298809 y ya es el que usan el canonical, positions_latest y funds_metadata.js. Unificado el 2026-09-08.",
-      "ytd_as_of": "2026-08-31",
-      "ytd_metodo": "precio vs anchor 31-Dic"
+      "ytd_as_of": "2026-05-31",
+      "ytd_metodo": "statement del gestor"
     },
     {
       "isin": "LU2847068389",
@@ -274,15 +274,15 @@
       "value_usd": 1452633.38,
       "weight_pct": 16.7,
       "si_return_pct": 3.76,
-      "ytd_return_pct": 0.0,
+      "ytd_return_pct": 5.33,
       "contribution_pct": 0.63,
-      "ytd_contribution_pct": 0.0,
+      "ytd_contribution_pct": 0.89,
       "assumed_annual_pct": 11.0,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
-      "valuation_date": "2026-08-31",
-      "days_since_valuation": 31,
-      "ytd_as_of": "2026-08-31",
-      "ytd_metodo": "precio vs anchor 31-Dic"
+      "valuation_date": "2026-04-30",
+      "days_since_valuation": 155,
+      "ytd_as_of": "2026-04-30",
+      "ytd_metodo": "statement del gestor"
     },
     {
       "isin": "GCRED-I",
@@ -292,18 +292,18 @@
       "value_usd": 500276.97,
       "weight_pct": 5.75,
       "si_return_pct": 2.09,
-      "ytd_return_pct": 1.12,
+      "ytd_return_pct": -1.92,
       "contribution_pct": 0.12,
-      "ytd_contribution_pct": 0.06,
+      "ytd_contribution_pct": -0.11,
       "assumed_annual_pct": 9.5,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
-      "valuation_date": "2026-04-30",
-      "days_since_valuation": 154,
+      "valuation_date": "2026-03-31",
+      "days_since_valuation": 185,
       "ytd_as_of": "2026-03-31",
       "ytd_metodo": "statement del gestor"
     }
   ],
-  "_daily_refresh_note": "Refresh diario 2026-10-01: 2 liquidos via Pershing T-1, 2 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $8,676,685.",
-  "_sync_alts_ugl_at": "2026-10-01T11:05:30.444472",
+  "_daily_refresh_note": "Refresh diario 2026-10-02: 2 liquidos via Pershing T-1, 2 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $8,676,685.",
+  "_sync_alts_ugl_at": "2026-10-02T13:14:26.637224",
   "_sync_alts_ugl_note": "Por holding: MV y SI (desde la compra) de Pershing UGL; YTD de calendario del canonical (anchor 31-Dic o statement del gestor). Sleeve SI/YTD: TWR de alts_sleeve_real.json."
 }
