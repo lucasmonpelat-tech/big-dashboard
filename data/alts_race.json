@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-10-02T13:14:25.218002",
+  "refreshedAt": "2026-10-03T13:13:20.793704",
   "inception": "2025-06-30",
   "benchmark_primary": "60/40 blend (60% ACWI + 40% AGG)",
   "benchmark_secondary": "HFRX Global HF proxy (QAI ETF)",
@@ -169,7 +169,7 @@
       "assumed_annual_pct": 12.0,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
       "valuation_date": "2026-07-31",
-      "days_since_valuation": 63,
+      "days_since_valuation": 64,
       "isin_maximus": "LU2837777825",
       "_isin_note": "CALP tiene dos ISIN dando vueltas: LU2827810776 es el del statement oficial de Carlyle y el que usan el canonical y funds_metadata.js; LU2837777825 es con el que lo dio de alta Maximus. Se unifica en el oficial. Se guarda el de Maximus para poder cruzar contra sus reportes.",
       "ytd_as_of": "2026-07-31",
@@ -189,9 +189,9 @@
       "assumed_annual_pct": null,
       "source": "Pershing T-1 (2026-09-29)",
       "valuation_date": "2026-09-29",
-      "days_since_valuation": 3,
+      "days_since_valuation": 4,
       "ytd_as_of": null,
-      "ytd_metodo": "Pershing UGL (MV vs costo, NO es YTD de calendario)"
+      "ytd_metodo": null
     },
     {
       "isin": "US78463V1070",
@@ -207,9 +207,9 @@
       "assumed_annual_pct": null,
       "source": "Pershing T-1 (2026-09-29)",
       "valuation_date": "2026-09-29",
-      "days_since_valuation": 3,
+      "days_since_valuation": 4,
       "ytd_as_of": null,
-      "ytd_metodo": "Pershing UGL (MV vs costo, NO es YTD de calendario)"
+      "ytd_metodo": null
     },
     {
       "isin": "KYG4737U1085",
@@ -225,7 +225,7 @@
       "assumed_annual_pct": 9.5,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
       "valuation_date": "2026-03-31",
-      "days_since_valuation": 185,
+      "days_since_valuation": 186,
       "ytd_as_of": "2026-03-31",
       "ytd_metodo": "statement del gestor"
     },
@@ -243,7 +243,7 @@
       "assumed_annual_pct": 9.5,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
       "valuation_date": "2026-06-30",
-      "days_since_valuation": 94,
+      "days_since_valuation": 95,
       "ytd_as_of": null,
       "ytd_metodo": "Pershing UGL (MV vs costo, NO es YTD de calendario)"
     },
@@ -261,7 +261,7 @@
       "assumed_annual_pct": 12.0,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
       "valuation_date": "2026-05-31",
-      "days_since_valuation": 124,
+      "days_since_valuation": 125,
       "_isin_note": "FLEX-LEX era un ISIN placeholder de cuando entro el fondo sin ISIN cargado. El real es LU2966298809 y ya es el que usan el canonical, positions_latest y funds_metadata.js. Unificado el 2026-09-08.",
       "ytd_as_of": "2026-05-31",
       "ytd_metodo": "statement del gestor"
@@ -280,7 +280,7 @@
       "assumed_annual_pct": 11.0,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
       "valuation_date": "2026-04-30",
-      "days_since_valuation": 155,
+      "days_since_valuation": 156,
       "ytd_as_of": "2026-04-30",
       "ytd_metodo": "statement del gestor"
     },
@@ -298,12 +298,12 @@
       "assumed_annual_pct": 9.5,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
       "valuation_date": "2026-03-31",
-      "days_since_valuation": 185,
+      "days_since_valuation": 186,
       "ytd_as_of": "2026-03-31",
       "ytd_metodo": "statement del gestor"
     }
   ],
-  "_daily_refresh_note": "Refresh diario 2026-10-02: 2 liquidos via Pershing T-1, 2 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $8,676,685.",
-  "_sync_alts_ugl_at": "2026-10-02T13:14:26.637224",
+  "_daily_refresh_note": "Refresh diario 2026-10-03: 2 liquidos via Pershing T-1, 2 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $8,676,685.",
+  "_sync_alts_ugl_at": "2026-10-03T13:13:22.197714",
   "_sync_alts_ugl_note": "Por holding: MV y SI (desde la compra) de Pershing UGL; YTD de calendario del canonical (anchor 31-Dic o statement del gestor). Sleeve SI/YTD: TWR de alts_sleeve_real.json."
 }
