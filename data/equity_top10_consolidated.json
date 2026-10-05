@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-10-03",
+  "refreshedAt": "2026-10-05",
   "generatedBy": "scripts/build_equity_lookthrough.py",
   "method": "Look-through: para cada fondo, peso_sleeve x peso_holding_en_fondo. Companies con el mismo nombre canonico se suman across fondos. Pesos del sleeve tomados de holdings_returns_equity.json (data del dia), holdings de _factsheet_top10 en fund_holdings_top10.json.",
   "sleeve_mv_usd": 8582702.68,
