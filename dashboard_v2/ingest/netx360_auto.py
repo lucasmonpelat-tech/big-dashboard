@@ -1351,6 +1351,27 @@ def download_from_tab(page, tab_config, out_dir: Path) -> bool:
         download.save_as(str(target))
         size = target.stat().st_size
         print(f"  [{name}] Descargado: {fn} ({size} bytes)")
+        # 2026-10-05: desde el 01-Oct el XLSX de Positions viene SIN FILAS de
+        # datos (los otros 3 vienen bien) y no sabemos por que: los XLSX y los
+        # screenshots no se commitean. Si el export trae menos de 2 filas de
+        # datos, se guarda un screenshot + HTML de la grilla tal como estaba al
+        # exportar, y el workflow los sube como artifact para poder mirarlos.
+        try:
+            import openpyxl
+            ws = openpyxl.load_workbook(target, read_only=True, data_only=True).active
+            n_rows = ws.max_row or 0
+            if n_rows < 12:   # ~9 filas de encabezado/metadata + header + datos
+                debug_dir = SESSION_DIR / "debug"
+                debug_dir.mkdir(parents=True, exist_ok=True)
+                stamp = date.today().isoformat()
+                page.screenshot(path=str(debug_dir / f"export_vacio_{name.lower()}_{stamp}.png"), full_page=True)
+                (debug_dir / f"export_vacio_{name.lower()}_{stamp}.html").write_text(page.content(), encoding="utf-8")
+                print(f"  [{name}] !! El XLSX tiene solo {n_rows} filas: guardado screenshot+HTML en {debug_dir}")
+                write_alert(f"export_vacio_{name.lower()}",
+                            f"El XLSX de {name} bajo con solo {n_rows} filas ({size} bytes). "
+                            f"Screenshot y HTML de la grilla en el artifact 'netx360-debug' del workflow.")
+        except Exception as e:  # noqa: BLE001
+            print(f"  [{name}] (chequeo de filas fallo: {e})")
         return True
     except Exception as e:
         print(f"  [{name}] Download fallo: {e}")

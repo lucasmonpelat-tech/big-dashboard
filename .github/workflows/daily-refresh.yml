@@ -223,6 +223,23 @@ jobs:
         run: python dashboard_v2/ingest/netx360_auto.py
         continue-on-error: true
 
+      # 2026-10-05: los XLSX crudos y los screenshots de debug no se commitean,
+      # asi que cuando un export viene roto (Positions sin filas desde el 01-Oct)
+      # no hay forma de ver que devolvio Pershing. Se suben como artifact del
+      # run (7 dias) para poder bajarlos desde la pestaña Actions.
+      - name: Subir XLSX crudos + debug de NetX360 como artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: netx360-debug-${{ github.run_id }}
+          path: |
+            data/raw/
+            data/netx360_session/*.png
+            data/netx360_session/*.html
+            data/netx360_session/debug/
+          retention-days: 7
+          if-no-files-found: ignore
+
       # Fix 2026-08-28: el canonical del dia se generaba recien al final del
       # workflow, pero sync_positions_latest_from_canonical corre mucho antes y
       # toma "el snapshot mas reciente" -- o sea el de AYER. En un dia normal no
