@@ -1,5 +1,5 @@
 """
-Genera hoja para Maximus con Fila 11 (Date) + Fila 36 (Gross NAV) desde el
+Genera hoja para Maximus con Fila 11 (Date) + la fila 'NAV' del template desde el
 cierre del mes anterior al cierre del mes actual.
 
 Uso mensual: al cierre de cada mes, correr este script con el mes de cierre.
@@ -44,12 +44,18 @@ def resolve_src(month, year, override):
             raise SystemExit(f"ERROR: --src no existe: {pth}")
         return pth
 
-    expected = LIQ_FOLDER / f"ProCapital_XS3037627794_LS104 - {MONTH_NAMES[month]} {year}.xlsx"
-    if expected.exists():
-        return expected
+    # rglob y no glob: desde Sep-2026 los ProCapital viven en la subcarpeta
+    # 'Pro Capital Desgloze Fees/' y en la raiz quedaron solo los dos Excels de
+    # BIG. Buscar recursivo hace que reordenar la carpeta no rompa el cierre.
+    nombre = f"ProCapital_XS3037627794_LS104 - {MONTH_NAMES[month]} {year}.xlsx"
+    expected = LIQ_FOLDER / nombre
+    for cand in LIQ_FOLDER.rglob(nombre):
+        if ".backups" not in cand.parts:
+            return cand
 
     candidates = sorted(
-        LIQ_FOLDER.glob("ProCapital*LS104*.xlsx"),
+        (f for f in LIQ_FOLDER.rglob("ProCapital*LS104*.xlsx")
+         if not f.name.startswith("~$") and ".backups" not in f.parts),
         key=lambda f: f.stat().st_mtime,
         reverse=True,
     )
@@ -57,8 +63,8 @@ def resolve_src(month, year, override):
         print("ERROR: no encontre el ProCapital de origen.")
         print(f"  Esperaba: {expected.name}")
         print(f"  En:       {LIQ_FOLDER}")
-        print("  xlsx disponibles en esa carpeta:")
-        for f in sorted(LIQ_FOLDER.glob("*.xlsx")):
+        print("  xlsx disponibles (carpeta y subcarpetas):")
+        for f in sorted(LIQ_FOLDER.rglob("*.xlsx")):
             print(f"     - {f.name}")
         raise SystemExit("  Pasa la ruta a mano con --src si el archivo se llama distinto.")
 
@@ -186,7 +192,7 @@ for i, (dt, nav) in enumerate(zip(all_dates, navs)):
     date_cell.font = bold
     date_cell.fill = date_fill
     date_cell.alignment = Alignment(horizontal="center")
-    # Row 36: NAV
+    # Fila 'NAV' del template (hoy la 57; se ubica por etiqueta, no por numero)
     nav_cell = ws.cell(row=57, column=col)
     if nav is not None:
         nav_cell.value = nav
@@ -256,7 +262,7 @@ wb.save(str(out))
 print(f"\nOK Excel guardado: {out}")
 print(f"   Hoja creada: '{sheet_name}'")
 print(f"   Fila 11 (Date): {len(all_dates)} fechas de {START} a {END}")
-print(f"   Fila 36 (Gross NAV): {sum(1 for n in navs if n is not None)} NAVs (con carry-forward para weekends)")
+print(f"   Fila NAV del template: {sum(1 for n in navs if n is not None)} NAVs (con carry-forward para weekends)")
 print()
 print("Preview:")
 for i in range(min(5, len(all_dates))):

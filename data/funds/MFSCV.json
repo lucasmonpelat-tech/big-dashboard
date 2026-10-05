@@ -3,9 +3,9 @@
   "isin": "LU1985812756",
   "name": "MFS Meridian Contrarian Value I1",
   "sleeve": "Equity",
-  "source_file": "MFSCV_20260331.pdf",
-  "parsed_at": "2026-05-12",
-  "as_of_factsheet": "2026-03-31",
+  "source_file": "Dropbox/2026/Research Fondos/Renta Variable/MFS Contrarian Value/1.MFS Contrarian Value Facsheet.pdf",
+  "parsed_at": "2026-10-01",
+  "as_of_factsheet": "2026-08-31",
   "top_holdings": {
     "United Kingdom": 22.3,
     "Germany": 14.9,
@@ -19,18 +19,25 @@
     "Financials": 12.7
   },
   "sectors": {
-    "Industrials": 24.0,
-    "Health Care": 16.3,
+    "Industrials": 23.7,
+    "Health Care": 14.7,
+    "Financials": 13.9,
     "Consumer Staples": 13.5,
-    "Consumer Discretionary": 13.3,
-    "Financials": 12.7,
-    "Materials": 10.0,
-    "Energy": 3.2,
-    "Utilities": 3.1
+    "Consumer Discretionary": 11.6,
+    "Materials": 10.4,
+    "Utilities": 4.5,
+    "Energy": 1.8,
+    "Communication Services": 0.0,
+    "Information Technology": 0.0,
+    "Real Estate": 0.0,
+    "Cash": 5.8
   },
   "regions": {
-    "United Kingdom": 22.3,
-    "United States": 14.8
+    "N. America": 25.5,
+    "Europe dev.": 42.6,
+    "UK": 21.0,
+    "Japan": 3.1,
+    "Otros": 7.8
   },
   "active_share": null,
   "ter": null,
@@ -43,17 +50,23 @@
     "de_factsheet": false
   },
   "countries": {
-    "US": 40,
-    "UK": 12,
-    "FR": 10,
-    "DE": 9,
-    "JP": 7,
-    "CH": 6,
-    "NL": 5,
-    "OTHER": 11
+    "US": 22.0,
+    "UK": 21.0,
+    "FR": 15.3,
+    "DE": 11.2,
+    "NL": 7.4,
+    "OTHER": 23.1
   },
   "countries_de_factsheet": false,
   "countries_as_of": "2026-05-14",
-  "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta.",
-  "factsheet_url": "https://www.mfs.com/content/dam/mfs-enterprise/mfscom/products/factsheet/meridian/gg/mer_cvf_fs_gg_en.pdf"
+  "countries_nota": "Top 5 paises del factsheet; OTHER = resto (incluye cash 5.8%).",
+  "factsheet_url": "https://www.mfs.com/content/dam/mfs-enterprise/mfscom/products/factsheet/meridian/gg/mer_cvf_fs_gg_en.pdf",
+  "currencies": {
+    "EUR": 42.6,
+    "USD": 29.8,
+    "GBP": 21.0,
+    "CAD": 3.5,
+    "JPY": 3.1
+  },
+  "regions_nota": "Derivado del factsheet 31-Ago-2026: N. America = US 22.0 + CAD 3.5; Europe dev. = EUR 42.6; UK = GBP 21.0 (= Reino Unido 21.0); Japan = JPY 3.1; Otros = 7.8 (cash 5.8 + 2.0 sin asignar)."
 }

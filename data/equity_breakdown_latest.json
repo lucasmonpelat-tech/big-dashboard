@@ -1,5 +1,5 @@
 {
-  "asOf": "2026-08-31",
+  "asOf": "2026-09-30",
   "source": "PRIMARY: FT.com fund/ETF tearsheets (Morningstar) por fondo x pesos del sleeve al 31-Ago-2026. ETFs de un solo pais/region (CSPX, MAGS, ILF, ARGT, 4BRZ, HEWJ) con region por construccion del indice — FT devuelve asset-type, no geografia, para ETFs. MAGS sectorial computado de nuestro fund_holdings_top10.json (7 posiciones equal-weight). 4BRZ via EWZ (mismo indice MSCI Brazil). ACWI/bmk SIN refresh — se preserva la carga previa.",
   "method": "Para cada equity holding: regional/sectorial extraído de FT.com fund tearsheet (que toma datos directo del fund manager), ponderado por peso BIG. NO usa Maximus.",
   "verification": {
@@ -69,66 +69,66 @@
   "sectorial": {
     "title": "Distribución Sectorial",
     "subtitle": "BIG vs ACWI — Computado PRIMARY (FT.com per fund × weights)",
-    "method": "Sumatoria por fondo: peso_sleeve × sector_pct_FT.com. Datos sectoriales extraídos directo del FT.com fund/ETF tearsheet 2026-05-27.",
+    "method": "Look-through de Maximus al cierre.",
     "rows": [
       {
         "category": "Technology",
-        "big": 23.9,
+        "big": 22.5,
         "acwi": 26
       },
       {
         "category": "Industrials",
-        "big": 13.0,
+        "big": 13.8,
         "acwi": 11
       },
       {
         "category": "Financial",
-        "big": 12.9,
+        "big": 14.0,
         "acwi": 17
       },
       {
         "category": "Cons. Cyc.",
-        "big": 12.7,
+        "big": 12.3,
         "acwi": 9
       },
       {
         "category": "Health",
-        "big": 9.1,
+        "big": 9.3,
         "acwi": 9
       },
       {
         "category": "Comm. Serv.",
-        "big": 8.4,
+        "big": 8.5,
         "acwi": 9
       },
       {
         "category": "Cons. Def.",
-        "big": 5.5,
+        "big": 5.2,
         "acwi": 5
       },
       {
         "category": "Basic Mat.",
-        "big": 5.3,
+        "big": 5.4,
         "acwi": 4
       },
       {
         "category": "Energy",
-        "big": 4.2,
+        "big": 4.4,
         "acwi": 5
       },
       {
         "category": "Utilities",
-        "big": 3.1,
+        "big": 3.6,
         "acwi": 3
       },
       {
         "category": "Other",
-        "big": 1.8,
+        "big": 0.0,
         "acwi": 0
       },
       {
         "category": "Real estate",
-        "big": 0.1,
+        "big": 1.0,
         "acwi": 2
       }
     ],
@@ -147,59 +147,106 @@
       "ARGT": "FT.com tearsheet — Cons. Cyc. 26.19% / Energy 22.11% / Financial 13.66% / Basic Mat. 13.21% / Industrials 8.31%",
       "4BRZ": "FT.com tearsheet — Financial 31.48% / Energy 18.51% / Basic Mat. 14.58% / Utilities 11.87% / Industrials 10.6%",
       "ILF": "FT.com tearsheet — Financial 33.75% / Basic Mat. 21.74% / Energy 13.3% / Industrials 9.08% / Cons. Def. 8.76%"
-    }
+    },
+    "as_of_big": "2026-09-30",
+    "_prev_2026-08-31": {
+      "Technology": 23.9,
+      "Industrials": 13.0,
+      "Financial": 12.9,
+      "Cons. Cyc.": 12.7,
+      "Health": 9.1,
+      "Comm. Serv.": 8.4,
+      "Cons. Def.": 5.5,
+      "Basic Mat.": 5.3,
+      "Energy": 4.2,
+      "Utilities": 3.1,
+      "Other": 1.8,
+      "Real estate": 0.1
+    },
+    "source": "PRIMARY 30-Sep-2026: Maximus factsheet deck 9.factsheet-strategy-14534, 'Sectores de renta variable' (imagen): Basic Mat 5.44 / Cons Cyc 12.31 / Financial 13.99 / Real estate 0.99 / Cons Def 5.21 / Health 9.32 / Utilities 3.57 / Comm Serv 8.51 / Energy 4.44 / Industrials 13.78 / Technology 22.45. Hasta Ago-2026 era FT.com por fondo x pesos (27-May); los vectores completos por fondo no estan guardados, por eso se pasa a Maximus."
   },
   "regional": {
     "title": "Distribución Regional",
     "subtitle": "BIG vs ACWI — Computado PRIMARY (FT.com per fund × weights)",
-    "method": "Sumatoria por fondo: peso_sleeve × region_pct_factsheet. Asia Developed asignado a Others (conservador). Japan = MFSCV 3.62% + JHGSC 13.16% × pesos.",
+    "method": "Look-through completo de Maximus al cierre; nuestro calculo por factsheets queda como contraste.",
     "rows": [
       {
         "category": "N. America",
-        "big": 63.7,
+        "big": 63.8,
         "acwi": 66
       },
       {
         "category": "Europe dev.",
-        "big": 11.7,
+        "big": 10.9,
         "acwi": 11
       },
       {
         "category": "LatAm",
-        "big": 11.6,
+        "big": 10.9,
         "acwi": 1
       },
       {
         "category": "UK",
-        "big": 5.9,
+        "big": 5.6,
         "acwi": 4
       },
       {
         "category": "Japan",
-        "big": 3.6,
+        "big": 3.8,
         "acwi": 5
       },
       {
         "category": "Otros",
-        "big": 3.5,
+        "big": 5.1,
         "acwi": 13
       }
     ],
     "totals": {
-      "big": 100.0,
+      "big": 100.1,
       "acwi": 100
     },
-    "footnote": "Otros incluye Asia EM (NBGMT 7%), Australasia (JHGSC 5%), Asia Dev (THOR/LGLI), Africa/ME, China, otros. Sanity check vs marzo: NA -5pp (BRK.B salió), Europe +2pp (THOR entró), Japan +0.5pp consistente.",
+    "footnote": "Otros incluye Asia EM y ME (NBGMT), Australasia (JHGSC), Asia Dev (THOR), cash de los activos. Datos por fondo: MFS al 31-Ago; Thornburg 31-May; NB y Janus 31-Mar (no publicaron nuevos).",
     "primary_sources": {
       "CSPX": "iShares Core S&P 500 - 100% US (definicion)",
-      "NBGMT": "NB factsheet 31-Mar-2026 (Jun-2026 regional no publicado) - US 78.4 / UK 4.8 / Asia EM 7.4 / ME 4.4 / Other 5.0",
-      "MFSCV": "MFS factsheet 31-May-2026 (PDF MFS) - Eurozone 46.8 (EUR cur) / UK 22.2 / US 16.5 / Canada 3.9 / Japan 3.4 / Cash 7.2",
-      "THOR": "Thornburg Equity Income Builder 31-May-2026 (thornburg.com) - US 24.9 / France 14.4 / Germany 8.7 / Netherlands 7.1 / UK 7.8 / Japan~5 / Asia Dev/Other ~25",
-      "JHGSC": "Janus Henderson 31-Mar-2026 (sin cambio) - US 60.9 / Japan 13.2 / Eurozone 7.4 / Australasia 4.6 / UK 4.4 / Other 9.5",
-      "LGLI": "L&G 31-Mar-2026 (sin cambio) - Eurozone 39.4 / US 23.7 / UK 20.2 / Canada 4.3 / Asia Dev 3.6 / Other 8.8",
-      "4BRZ": "iShares MSCI Brazil - 100% Brazil",
+      "NBGMT": "NB factsheet 31-Mar-2026 - US 78.4 / UK 4.8 / Asia EM 7.4 / ME 4.4 / Other 5.0",
+      "MFSCV": "MFS factsheet 31-Ago-2026 (Research Fondos) - US 22.0 / UK 21.0 / FR 15.3 / DE 11.2 / NL 7.4; divisas EUR 42.6 USD 29.8 GBP 21.0 CAD 3.5 JPY 3.1; cash 5.8",
+      "THOR": "Thornburg Equity Income Builder 31-May-2026 - US 24.9 / France 14.4 / Germany 8.7 / Netherlands 7.1 / UK 7.8 / Japan ~5 / Asia Dev-Other-cash ~32",
+      "JHGSC": "Janus Henderson 31-Mar-2026 - US 60.9 / Japan 13.2 / Eurozone 7.4 / Australasia 4.6 / UK 4.4 / Other 9.5",
+      "MAGS": "Roundhill Magnificent Seven - 100% US (7 acciones US)",
       "ARGT": "Global X MSCI Argentina - 100% Argentina",
-      "ILF": "iShares LatAm 40 - Brazil ~58 / Mexico ~22 / Chile ~7 / others 13"
-    }
+      "ILF": "iShares LatAm 40 - Brasil ~58 / Mexico ~22 / Chile ~7 / otros 13",
+      "4BRZ": "iShares MSCI Brazil - 100% Brasil",
+      "HEWJ": "iShares Currency Hedged MSCI Japan - 100% Japon"
+    },
+    "as_of_big": "2026-09-30",
+    "_prev_2026-08-31": {
+      "N. America": 63.7,
+      "Europe dev.": 11.7,
+      "LatAm": 11.6,
+      "UK": 5.9,
+      "Japan": 3.6,
+      "Otros": 3.5
+    },
+    "sleeve_weights_used": {
+      "CSPX": 32.9,
+      "NBGMT": 16.73,
+      "MFSCV": 14.58,
+      "THOR": 9.59,
+      "JHGSC": 6.5,
+      "MAGS": 5.75,
+      "ARGT": 4.02,
+      "ILF": 4.0,
+      "4BRZ": 3.58,
+      "HEWJ": 2.36
+    },
+    "_calc_propio_2026-09-30": {
+      "N. America": 61.8,
+      "Europe dev.": 9.6,
+      "LatAm": 11.6,
+      "UK": 4.9,
+      "Japan": 4.2,
+      "Otros": 7.9
+    },
+    "source": "PRIMARY 30-Sep-2026: look-through de Maximus (factsheet deck 9.factsheet-strategy-14534, 'Exposicion regional de renta variable'): North Am 63.75 / Latin Am 10.86 / Europe dev 10.89 + emrg 0.02 / UK 5.61 / Japan 3.78 / China 1.64 / Africa-ME 0.81 / Australasia 0.58 / Asia dev 0.49 / Asia emerg 0.76 / Others 0.81. Maximus corrigio en Sep el error de China (7.35 en Ago -> 1.64). Validado contra nuestro calculo por factsheets x pesos (en _calc_propio): dif max 2.8pp en Otros, por los vectores aproximados de THOR y NB."
   }
 }
