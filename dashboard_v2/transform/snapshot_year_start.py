@@ -123,7 +123,17 @@ def build_snapshot(anchor_year: int, today: str) -> dict:
         if ed < ytd_anchor:  # taxlot pre-YTD
             qty_pre_ytd_by_cusip[cusip] = qty_pre_ytd_by_cusip.get(cusip, 0) + qty
 
-    updates = {}
+    # FIX 2026-10-05: las anclas trabadas se conservan SIEMPRE, hayan o no una
+    # posicion hoy. El 01-Oct el export de Positions de NetX360 vino vacio, el loop
+    # de abajo no vio ningun holding, `updates` quedo en {} y el cron borro las 23
+    # anclas verificadas (FLEX, HLGPI, GAM, IBIT, GLD, NBGMT, MFSCV...). El dia
+    # siguiente las rehizo todas sin trabar y sin precio: el YTD por precio de
+    # media cartera quedo sin ancla durante 4 dias y NINGUN chequeo lo vio.
+    updates = {isin: v for isin, v in anchors.items() if v.get('anchor_locked')}
+    if not pos.get('holdings'):
+        print("  Positions vacio: se conservan las %d anclas trabadas y no se toca el resto." % len(updates))
+        ya[anchors_key] = {**anchors, **updates}
+        return ya
     for h in pos.get('holdings', []):
         isin = h.get('isin')
         sid = h.get('security_id')

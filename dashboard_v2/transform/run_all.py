@@ -66,50 +66,178 @@ def write_json(data: dict, out_path: Path):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 
-def _fallback_si_vacio(positions: dict, target_date: str) -> dict:
-    """Si el export de Positions de NetX360 vino VACIO (o con menos de la
-    mitad del valor del dia anterior), se usa el canonical anterior y se
-    escribe una alerta. Sin esto, el 2026-10-01 el dashboard salio con $0 en
-    Equity y FI y 100% en Alternatives: Pershing devolvio el Positions sin
-    filas (los otros 3 exports vinieron bien), el job termino "success" y se
-    publico una cartera vacia. Un export vacio no es una cartera vacia."""
+def _diagnostico_xlsx(path) -> dict:
+    """Que trae realmente el XLSX de Positions (hojas, dimensiones, primeras
+    filas). Va a la alerta: asi, cuando el export viene vacio, se ve POR QUE
+    sin tener que entrar al runner (los XLSX crudos no se commitean)."""
+    try:
+        import openpyxl
+        wb = openpyxl.load_workbook(path, data_only=True)
+        ws = wb[wb.sheetnames[0]]
+        filas = []
+        for r in range(1, min(ws.max_row, 14) + 1):
+            filas.append([str(ws.cell(row=r, column=c).value)[:30]
+                          for c in range(1, min(ws.max_column, 8) + 1)
+                          if ws.cell(row=r, column=c).value is not None])
+        return {"archivo": Path(path).name, "bytes": Path(path).stat().st_size,
+                "hojas": wb.sheetnames, "max_row": ws.max_row, "max_col": ws.max_column,
+                "primeras_filas": filas}
+    except Exception as e:  # noqa: BLE001
+        return {"error": str(e)}
+
+
+def _bday_anterior(iso: str) -> str:
+    from datetime import date as _d, timedelta as _td
+    d = _d.fromisoformat(iso) - _td(days=1)
+    while d.weekday() >= 5:
+        d -= _td(days=1)
+    return d.isoformat()
+
+
+def _ultimo_positions_real(target_date: str):
+    """(fecha, positions) del ultimo canonical ANTERIOR que sea un export real
+    (ni fallback ni reconstruido). Es la plantilla de metadatos (ISIN, simbolo,
+    descripcion, fecha de precio de los privados)."""
     import json as _json
-    from datetime import datetime as _dt
-    n = len(positions.get("holdings", []))
-    mv = sum((h.get("market_value_usd") or 0) for h in positions.get("holdings", []))
-    prev = None
     for d in sorted((p.name for p in CANONICAL_DIR.iterdir() if p.is_dir()), reverse=True):
         if d >= target_date:
             continue
         f = CANONICAL_DIR / d / "positions.json"
-        if f.exists():
-            try:
-                prev = (d, _json.load(open(f, encoding="utf-8")))
-            except Exception:
-                prev = None
-            if prev and prev[1].get("holdings"):
-                break
-            prev = None
-    if prev is None:
+        if not f.exists():
+            continue
+        try:
+            pos = _json.load(open(f, encoding="utf-8"))
+        except Exception:
+            continue
+        if pos.get("holdings") and not pos.get("_fallback_from"):
+            return d, pos
+    return None, None
+
+
+def _reconstruir_desde_ugl(plantilla: dict, d_plantilla: str, unrealized: list, target_date: str) -> dict:
+    """Positions del dia armado con el UGL (cantidad, valor y precio por
+    security_id, sumando los lotes) y los metadatos de la ultima plantilla real.
+
+    Verificado el 2026-09-30 (dia con los dos exports buenos): el UGL reproduce
+    cantidad y valor de las 26 posiciones al centavo; solo CSPX difiere 0.3% en
+    el precio (824.79 vs 827.29, cotiza en Londres). Es mucho mejor que repetir
+    el dia anterior: el UGL SI trae los precios del dia."""
+    from collections import defaultdict
+    from datetime import date as _d
+    agg = defaultdict(lambda: {"q": 0.0, "mv": 0.0, "px": None, "cusip": None, "desc": "", "type": ""})
+    for t in unrealized:
+        a = agg[t.get("security_id")]
+        a["q"] += t.get("quantity") or 0.0
+        a["mv"] += t.get("market_value") or 0.0
+        if t.get("last_price") is not None:
+            a["px"] = t["last_price"]
+        a["cusip"] = t.get("cusip") or a["cusip"]
+        a["desc"] = t.get("description") or a["desc"]
+        a["type"] = t.get("security_type") or a["type"]
+
+    por_clave = {}
+    for h in plantilla["holdings"]:
+        for k in (h.get("security_id"), h.get("cusip")):
+            if k:
+                por_clave[k] = h
+    fecha_precio = _bday_anterior(target_date)
+    try:
+        isins_conocidos = {k: v.get("isin") for k, v in
+                           json.load(open(ROOT / "data" / "isin_overrides.json", encoding="utf-8")).get("overrides", {}).items()}
+    except Exception:
+        isins_conocidos = {}
+
+    out_h, usados, nuevos = [], set(), []
+    for sid, a in agg.items():
+        h = por_clave.get(sid) or por_clave.get(a["cusip"])
+        if h is None:
+            nuevos.append(sid)
+            out_h.append({
+                "security_id": sid, "cusip": a["cusip"], "isin": isins_conocidos.get(sid), "sedol": None,
+                "symbol": sid if (sid and sid.isalpha() and len(sid) <= 5) else None,
+                "description": a["desc"], "security_type": a["type"], "account_type": "",
+                "position_ccy": "USD", "quantity": a["q"], "market_price_ccy": a["px"],
+                "market_value_ccy": a["mv"], "fx_rate_to_usd": 1.0, "market_value_usd": a["mv"],
+                "price_date": fecha_precio, "market_code": "",
+            })
+            continue
+        usados.add(id(h))
+        n = dict(h)
+        px_old = h.get("market_price_ccy")
+        n["quantity"] = a["q"]
+        n["market_value_usd"] = round(a["mv"], 2)
+        fx = h.get("fx_rate_to_usd") or 1.0
+        n["market_value_ccy"] = round(a["mv"] / fx, 2)
+        if px_old is not None:   # HLEND/GCRED: sin precio ni fecha, asi se quedan
+            px_new = a["px"] if a["px"] is not None else px_old
+            n["market_price_ccy"] = px_new
+            if abs(px_new - px_old) > 1e-9:
+                pd_old = h.get("price_date")
+                es_privado = bool(pd_old) and (_d.fromisoformat(target_date) - _d.fromisoformat(pd_old)).days > 7
+                # Privado re-marcado: no sabemos a que fecha corresponde el
+                # nuevo NAV -> sin fecha, antes que una inventada.
+                n["price_date"] = None if es_privado else fecha_precio
+        out_h.append(n)
+
+    cerradas = [h.get("symbol") or h.get("security_id") for h in plantilla["holdings"] if id(h) not in usados]
+    out = dict(plantilla)
+    out["holdings"] = out_h
+    out["as_of"] = target_date
+    out["_reconstruido_desde_ugl"] = True
+    out["_fallback_from"] = d_plantilla
+    out["_fallback_nuevos_sin_metadatos"] = nuevos
+    out["_fallback_posiciones_cerradas"] = cerradas
+    return out
+
+
+def _fallback_si_vacio(positions: dict, target_date: str, unrealized: list | None = None,
+                       xlsx_path=None) -> dict:
+    """Un export de Positions vacio NO es una cartera vacia.
+
+    El 2026-10-01 el XLSX de Positions de NetX360 vino sin filas (los otros 3
+    exports vinieron bien) y los dias siguientes tambien. Sin esto el dashboard
+    salia con $0 en Equity y FI. Orden de preferencia:
+      1. Reconstruir desde el UGL del dia (cantidad, valor y precio frescos) con
+         los metadatos de la ultima plantilla real.
+      2. Si no hay UGL, repetir el canonical anterior (precios viejos).
+    Escribe SIEMPRE la alerta positions_vacias_<fecha>.json, con el diagnostico
+    del XLSX para ver por que vino vacio."""
+    import json as _json
+    from datetime import datetime as _dt
+    n = len(positions.get("holdings", []))
+    mv = sum((h.get("market_value_usd") or 0) for h in positions.get("holdings", []))
+    d_plant, plant = _ultimo_positions_real(target_date)
+    if plant is None:
         return positions
-    d_prev, p_prev = prev
-    mv_prev = sum((h.get("market_value_usd") or 0) for h in p_prev.get("holdings", []))
+    mv_prev = sum((h.get("market_value_usd") or 0) for h in plant["holdings"])
     if n > 0 and (mv_prev <= 0 or mv >= 0.5 * mv_prev):
         return positions
-    motivo = ("sin filas" if n == 0 else f"{n} filas por ${mv:,.0f}, menos de la mitad del dia anterior (${mv_prev:,.0f})")
-    print(f"    !! Positions de NetX360 {motivo}. Se usa el canonical del {d_prev} ({len(p_prev['holdings'])} holdings).")
-    out = dict(p_prev)
-    out["as_of"] = target_date
-    out["_fallback_from"] = d_prev
-    out["_fallback_motivo"] = f"Export de Positions del {target_date} {motivo}. Cantidades y precios son los del {d_prev}."
+    motivo = ("sin filas" if n == 0 else f"{n} filas por ${mv:,.0f}, menos de la mitad de la ultima cartera real (${mv_prev:,.0f})")
+    if unrealized:
+        out = _reconstruir_desde_ugl(plant, d_plant, unrealized, target_date)
+        como = (f"reconstruido desde el UGL del {target_date} (cantidades, valores y precios del dia) "
+                f"con los metadatos del {d_plant}")
+    else:
+        out = dict(plant)
+        out["as_of"] = target_date
+        out["_fallback_from"] = d_plant
+        como = f"copia del canonical del {d_plant} (precios y cantidades de ese dia: SIN UGL para reconstruir)"
+    mv_out = sum((h.get("market_value_usd") or 0) for h in out["holdings"])
+    out["_fallback_motivo"] = f"Export de Positions del {target_date} {motivo}. Cartera {como}."
+    print(f"    !! Positions de NetX360 {motivo}. {como} ({len(out['holdings'])} holdings, ${mv_out:,.0f}).")
     alerts = ROOT / "data" / "_alerts"
     alerts.mkdir(parents=True, exist_ok=True)
     with open(alerts / f"positions_vacias_{target_date}.json", "w", encoding="utf-8") as f:
         _json.dump({
             "date": target_date, "tipo": "positions_vacias", "detected_at": _dt.now().isoformat(),
             "detalle": out["_fallback_motivo"],
-            "accion": "Revisar el XLSX de Positions de NetX360 de ese dia (data/raw). Si Pershing lo volvio a publicar bien, "
-                      "basta con que corra el cron siguiente. Mientras tanto el dashboard muestra la cartera del dia anterior.",
+            "valor_total_usd": round(mv_out, 2),
+            "nuevos_sin_metadatos": out.get("_fallback_nuevos_sin_metadatos"),
+            "posiciones_cerradas": out.get("_fallback_posiciones_cerradas"),
+            "diagnostico_xlsx": _diagnostico_xlsx(xlsx_path) if xlsx_path else None,
+            "accion": "Revisar el XLSX de Positions de NetX360 (netx360_auto.py, tab positions-account). Mientras tanto el "
+                      "dashboard muestra la cartera reconstruida con el UGL del dia. Si el export vuelve a venir bien, el "
+                      "cron lo toma solo.",
         }, f, indent=2, ensure_ascii=False)
     return out
 
@@ -131,7 +259,13 @@ def run(target_date: str) -> dict:
     # 1. Positions
     print(f"\n  [1/4] Positions...")
     positions = parse_positions.parse(files["positions"], as_of=target_date)
-    positions = _fallback_si_vacio(positions, target_date)
+    unrealized = None
+    if not positions.get("holdings"):
+        try:
+            unrealized = parse_pnl.parse(files["ugl"], files["rgl"], as_of=target_date).get("unrealized")
+        except Exception as e:  # noqa: BLE001
+            print(f"    (no pude leer el UGL para reconstruir: {e})")
+    positions = _fallback_si_vacio(positions, target_date, unrealized=unrealized, xlsx_path=files["positions"])
     errs = validators.validate_positions(positions)
     if errs:
         print(f"    VALIDATION ERRORS: {len(errs)}")

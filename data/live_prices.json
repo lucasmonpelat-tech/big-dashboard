@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-10-05T13:11:41.182478",
+  "refreshedAt": "2026-10-05T11:13:53.320668",
   "prices": {
     "ILF": {
       "price": 34.97999954223633,
@@ -100,12 +100,34 @@
       "source": "Yahoo Finance",
       "stale": false
     },
+    "DYNF": {
+      "price": 69.97000122070312,
+      "date": "2026-10-02",
+      "time": null,
+      "open": 70.08999633789062,
+      "high": 70.20500183105469,
+      "low": 69.7239990234375,
+      "volume": 2552700.0,
+      "source": "Yahoo Finance",
+      "stale": false
+    },
+    "CPER": {
+      "price": 39.52000045776367,
+      "date": "2026-10-02",
+      "time": null,
+      "open": 39.5,
+      "high": 39.79999923706055,
+      "low": 39.22999954223633,
+      "volume": 303000.0,
+      "source": "Yahoo Finance",
+      "stale": false
+    },
     "HLEND": null,
     "BPCC": null,
     "GCRED": null
   },
   "_meta": {
-    "fresh": 9,
+    "fresh": 11,
     "stale": 0,
     "guard_note": "Tickers con stale=true mantienen ultimo precio valido (yfinance retorno NaN)"
   }

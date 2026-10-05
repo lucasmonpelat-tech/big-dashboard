@@ -1616,7 +1616,7 @@
       if (h.security_type === "Corporate Bonds") return "Fixed Income";
       if (h.security_type === "Limited Partnerships") return "Alternatives";
       const desc = (h.description || "").toUpperCase();
-      if (/CARLYLE|HAMILTON LANE|GOLUB|HPS|BARINGS|FRANKLIN LEXINGTON|BLACKROCK PRIVATE|LEXINGTON|K-PEC|BXPE|CAPM|FLEX|PICKED|ALTERNAT|BITCOIN|GOLD SHS/.test(desc)) return "Alternatives";
+      if (/CARLYLE|HAMILTON LANE|GOLUB|HPS|BARINGS|FRANKLIN LEXINGTON|BLACKROCK PRIVATE|LEXINGTON|K-PEC|BXPE|CAPM|FLEX|PICKED|ALTERNAT|BITCOIN|GOLD SHS|COPPER|COMMODITY/.test(desc)) return "Alternatives";
       if (/BOND|CREDIT|CAT BOND|LOW DURATION|EMERGING LOCAL|TENAC|TGF|MEDIUM TERM NOTE|INVESTMENT GRADE|AGG|FIXED/.test(desc)) return "Fixed Income";
       // Default: Equity
       return "Equity";

@@ -3,7 +3,6 @@
   "_por_que": "Los dos son feeders offshore de iCapital. Pershing los identifica solo con su numero interno (379LP0083 / 449LP0055) y no publica ISIN. Hasta el 2026-09-09 cada script que necesitaba un identificador se armaba el suyo: sync_positions_latest_from_canonical.py tenia su propio mapa y el canonical directamente los dejaba en null, asi que classifyHolding() del dashboard tenia que adivinarlos por la descripcion.",
   "_como_usarlo": "Si aparece el ISIN real de alguno (statement de iCapital, ficha del fondo), reemplazar el valor aca y poner es_real en true. Es el unico lugar donde se toca: lo leen sync_positions_latest_from_canonical.py y dashboard_v2/transform/build_holdings_returns.py.",
   "_ojo": "Un valor con es_real=false NO es un ISIN. Es una etiqueta interna para poder cruzar. No mandarlo a un cliente ni a un proveedor como si fuera el ISIN del fondo.",
-
   "overrides": {
     "HLEND": {
       "isin": "KYG4737U1085",
@@ -18,6 +17,18 @@
       "nombre": "Golub Capital Private Credit iCapital Offshore Access Fund SP1",
       "pershing_id": "379LP0083",
       "fuente": "PLACEHOLDER. No se le conoce ISIN publico. Se eligio 'GCRED-I' porque ya era el que usaban funds_metadata.js, alts_liquidity.json, alts_race.json, factsheet_urls.json y live_prices.js: cambiarlo ahora obligaria a tocar los cinco. Si aparece el real, reemplazar aca y poner es_real en true."
+    },
+    "DYNF": {
+      "isin": "US09290C1036",
+      "es_real": true,
+      "nombre": "iShares U.S. Equity Factor Rotation Active ETF",
+      "fuente": "Yahoo Finance (yfinance .isin), 2026-10-05. ETF listado en EE.UU.; Pershing lo identifica por su ticker."
+    },
+    "CPER": {
+      "isin": "US9117181043",
+      "es_real": true,
+      "nombre": "United States Copper Index Fund",
+      "fuente": "Yahoo Finance (yfinance .isin), 2026-10-05. ETF listado en EE.UU.; Pershing lo identifica por su ticker."
     }
   }
 }

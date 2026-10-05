@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-10-05T13:14:16.164883",
+  "refreshedAt": "2026-10-05T11:16:55.323278",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -3597,55 +3597,13 @@
     },
     {
       "date": "2026-10-05",
-      "mv_usd": 11214745.381246,
+      "mv_usd": 11203187.85018,
       "holdings": [
-        {
-          "ticker": "PIMCO-EM",
-          "qty": 48651.139,
-          "price": 18.14,
-          "mv": 882531.6614600001,
-          "source": "daily_close"
-        },
-        {
-          "ticker": "MANIG",
-          "qty": 16621.485,
-          "price": 122.69,
-          "mv": 2039289.99465,
-          "source": "daily_close"
-        },
-        {
-          "ticker": "MANEM",
-          "qty": 4060.017,
-          "price": 115.42,
-          "mv": 468607.16214,
-          "source": "daily_close"
-        },
-        {
-          "ticker": "PIMCO-INC",
-          "qty": 159434.55,
-          "price": 19.46,
-          "mv": 3102596.343,
-          "source": "daily_close"
-        },
-        {
-          "ticker": "PIMCO-LD",
-          "qty": 224080.422,
-          "price": 13.85,
-          "mv": 3103513.8447,
-          "source": "daily_close"
-        },
         {
           "ticker": "GAMCB",
           "qty": 8100.48,
-          "price": 24.8227,
-          "mv": 201075.784896,
-          "source": "daily_close"
-        },
-        {
-          "ticker": "SGCB",
-          "qty": 269.44,
-          "price": 2226.56,
-          "mv": 599924.3264,
+          "price": 24.8385,
+          "mv": 201203.77247999999,
           "source": "daily_close"
         },
         {
@@ -3653,6 +3611,48 @@
           "qty": 532000.0,
           "price": 1.5361019999999999,
           "mv": 817206.264,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MANIG",
+          "qty": 16621.485,
+          "price": 122.59,
+          "mv": 2037627.84615,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MANEM",
+          "qty": 4060.017,
+          "price": 115.07,
+          "mv": 467186.15618999995,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "PIMCO-EM",
+          "qty": 48651.139,
+          "price": 18.12,
+          "mv": 881558.6386800001,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "PIMCO-INC",
+          "qty": 159434.55,
+          "price": 19.42,
+          "mv": 3096218.961,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "PIMCO-LD",
+          "qty": 224080.422,
+          "price": 13.84,
+          "mv": 3101273.04048,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "SGCB",
+          "qty": 269.44,
+          "price": 2230.23,
+          "mv": 600913.1712,
           "source": "daily_close"
         }
       ]
@@ -7268,32 +7268,37 @@
     },
     {
       "date": "2026-10-02",
-      "mv_usd": 11214745.381246,
+      "mv_usd": 11211856.0,
       "flow_in": 0.0,
-      "twr": -0.0010976806906790029,
-      "index": 104.2577
+      "twr": null,
+      "index": 104.2309,
+      "interpolated": true,
+      "_nota": "2026-10-05: punto calculado con el export de Positions vacio (precios viejos); interpolado entre el 01-Oct y el 05-Oct."
     },
     {
       "date": "2026-10-03",
-      "mv_usd": 11214745.381246,
+      "mv_usd": 11208966.62,
       "flow_in": 0.0,
-      "twr": -0.0010976806906790029,
-      "index": 104.2577
+      "twr": null,
+      "index": 104.204,
+      "interpolated": true,
+      "_nota": "2026-10-05: punto calculado con el export de Positions vacio (precios viejos); interpolado entre el 01-Oct y el 05-Oct."
     },
     {
       "date": "2026-10-04",
-      "index": 104.2577,
+      "index": 104.1771,
       "interpolated": true,
-      "mv_usd": 11214745.3812,
+      "mv_usd": 11206077.23,
       "flow_in": 0.0,
-      "twr": -0.0011
+      "twr": null,
+      "_nota": "2026-10-05: punto calculado con el export de Positions vacio (precios viejos); interpolado entre el 01-Oct y el 05-Oct."
     },
     {
       "date": "2026-10-05",
-      "mv_usd": 11214745.381246,
+      "mv_usd": 11203187.85018,
       "flow_in": 0.0,
-      "twr": -0.0010976806906790029,
-      "index": 104.2577
+      "twr": -0.002127115082174275,
+      "index": 104.1503
     }
   ],
   "agg_index_series": [

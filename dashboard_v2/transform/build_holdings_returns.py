@@ -585,7 +585,8 @@ def _classify_sleeve(pos: dict, equity_race: dict, fi_race: dict) -> str:
     # Alt keywords PRIMERO — BPCC (BARINGS) es "Corporate Bonds" en Pershing pero es alt
     if any(k in desc for k in ("CARLYLE","HAMILTON LANE","GOLUB","HPS","BARINGS",
                                 "FRANKLIN LEXINGTON","BLACKROCK PRIVATE","LEXINGTON",
-                                "K-PEC","BXPE","CAPM","FLEX","BITCOIN","GOLD SHS")):
+                                "K-PEC","BXPE","CAPM","FLEX","BITCOIN","GOLD SHS",
+                                "COPPER","COMMODITY")):   # CPER (2026-10-05): sin esto caia en Equity
         return "alternatives"
     stype = pos.get("security_type") or ""
     if stype == "Corporate Bonds": return "fixed_income"

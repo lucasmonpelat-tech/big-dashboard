@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-10-05T13:14:15.371936",
+  "refreshedAt": "2026-10-05T11:16:52.563441",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -4926,27 +4926,41 @@
     },
     {
       "date": "2026-10-05",
-      "mv_usd": 8582702.681127226,
+      "mv_usd": 8692453.858308936,
       "holdings": [
+        {
+          "ticker": "ARGT",
+          "qty": 4000.0,
+          "price": 84.52,
+          "mv": 338080.0,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "CSPX",
+          "qty": 3408.0,
+          "price": 836.2514,
+          "mv": 2849944.7712,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "DYNF",
+          "qty": 1435.0,
+          "price": 69.97000122070312,
+          "mv": 100406.95175170898,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "NBGMT",
+          "qty": 58050.998,
+          "price": 24.92,
+          "mv": 1446630.8701600002,
+          "source": "daily_close"
+        },
         {
           "ticker": "THOR",
           "qty": 18861.953,
-          "price": 43.55,
-          "mv": 821438.05315,
-          "source": "daily_close"
-        },
-        {
-          "ticker": "4BRZ",
-          "qty": 6000.0,
-          "price": 51.11,
-          "mv": 306660.0,
-          "source": "daily_close"
-        },
-        {
-          "ticker": "ILF",
-          "qty": 10000.0,
-          "price": 34.25,
-          "mv": 342500.0,
+          "price": 42.68,
+          "mv": 805028.15404,
           "source": "daily_close"
         },
         {
@@ -4957,17 +4971,31 @@
           "source": "daily_close"
         },
         {
-          "ticker": "CSPX",
-          "qty": 3408.0,
-          "price": 827.29,
-          "mv": 2819404.32,
+          "ticker": "4BRZ",
+          "qty": 6000.0,
+          "price": 52.43,
+          "mv": 314580.0,
           "source": "daily_close"
         },
         {
-          "ticker": "NBGMT",
-          "qty": 58050.998,
-          "price": 24.69,
-          "mv": 1433279.14062,
+          "ticker": "ILF",
+          "qty": 10000.0,
+          "price": 34.98,
+          "mv": 349799.99999999994,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "JHGSC",
+          "qty": 10410.46,
+          "price": 53.57,
+          "mv": 557688.3422,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MFSCV",
+          "qty": 4063.638,
+          "price": 300.6,
+          "mv": 1221529.5828,
           "source": "daily_close"
         },
         {
@@ -4975,27 +5003,6 @@
           "qty": 6905.0,
           "price": 72.58999633789062,
           "mv": 501233.92471313477,
-          "source": "daily_close"
-        },
-        {
-          "ticker": "JHGSC",
-          "qty": 10410.46,
-          "price": 53.47,
-          "mv": 556647.2962,
-          "source": "daily_close"
-        },
-        {
-          "ticker": "ARGT",
-          "qty": 4000.0,
-          "price": 86.11,
-          "mv": 344440.0,
-          "source": "daily_close"
-        },
-        {
-          "ticker": "MFSCV",
-          "qty": 4063.638,
-          "price": 307.5,
-          "mv": 1249568.685,
           "source": "daily_close"
         }
       ]
@@ -8611,32 +8618,37 @@
     },
     {
       "date": "2026-10-02",
-      "mv_usd": 8571918.21182791,
+      "mv_usd": 8602807.74,
       "flow_in": 0.0,
-      "twr": -0.0034706335446147447,
-      "index": 117.6032
+      "twr": null,
+      "index": 117.6829,
+      "interpolated": true,
+      "_nota": "2026-10-05: punto calculado con el export de Positions vacio (precios viejos); interpolado entre el 01-Oct y el 05-Oct."
     },
     {
       "date": "2026-10-03",
-      "mv_usd": 8582702.681127226,
+      "mv_usd": 8632689.78,
       "flow_in": 0.0,
-      "twr": -0.0022168837895627084,
-      "index": 117.7512
+      "twr": null,
+      "index": 117.7488,
+      "interpolated": true,
+      "_nota": "2026-10-05: punto calculado con el export de Positions vacio (precios viejos); interpolado entre el 01-Oct y el 05-Oct."
     },
     {
       "date": "2026-10-04",
-      "index": 117.7512,
+      "index": 117.8146,
       "interpolated": true,
-      "mv_usd": 8582702.6811,
+      "mv_usd": 8662571.82,
       "flow_in": 0.0,
-      "twr": -0.0022
+      "twr": null,
+      "_nota": "2026-10-05: punto calculado con el export de Positions vacio (precios viejos); interpolado entre el 01-Oct y el 05-Oct."
     },
     {
       "date": "2026-10-05",
-      "mv_usd": 8582702.681127226,
-      "flow_in": 0.0,
-      "twr": -0.0022168837895627084,
-      "index": 117.7512
+      "mv_usd": 8692453.858308936,
+      "flow_in": 100372.73,
+      "twr": -0.0011213573249357965,
+      "index": 117.8805
     }
   ],
   "acwi_index_series": [
@@ -10993,8 +11005,8 @@
     },
     {
       "date": "2026-10-05",
-      "price": 160.09,
-      "index": 126.4652
+      "price": 160.65,
+      "index": 126.9076
     }
   ],
   "equity_flows_by_month": {

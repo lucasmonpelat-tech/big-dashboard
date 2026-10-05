@@ -146,6 +146,30 @@
       "countries_as_of": "2026-05-14",
       "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
     },
+    "US9117181043": {
+      "ticker": "CPER",
+      "name": "UNITED STS COMMODITY INDEX FDS TR COM UNIT REPSTG U S COPPER INDEX FD",
+      "sleeve": "Alternatives",
+      "archivo": "CPER.json",
+      "as_of_factsheet": null,
+      "yield": {
+        "valor": 0,
+        "tipo": "N/A",
+        "as_of": "2026-10-05",
+        "fuente": "CPER — fondo de futuros de cobre, no paga dividendos (Yahoo Finance: 0). Sin factsheet en la carpeta.",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "GLOBAL",
+          "p": 100
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-10-05",
+      "countries_nota": "Commodity (futuros de cobre): sin exposicion por pais, igual que GLD. No sale de un factsheet."
+    },
     "IE00B5BMR087": {
       "ticker": "CSPX",
       "name": "iShares Core S&P 500 UCITS",
@@ -169,6 +193,30 @@
       "countries_de_factsheet": false,
       "countries_as_of": "2026-05-14",
       "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+    },
+    "US09290C1036": {
+      "ticker": "DYNF",
+      "name": "BLACKROCK ETF TR ISHARES U S EQUITY FACTOR ROTATION ACTIVE ETF",
+      "sleeve": "Equity",
+      "archivo": "DYNF.json",
+      "as_of_factsheet": null,
+      "yield": {
+        "valor": 0.78,
+        "tipo": "Dividend Yield",
+        "as_of": "2026-10-05",
+        "fuente": "Yahoo Finance (dividendYield), 2026-10-05. NO es de un factsheet: falta subir el de iShares a Research Fondos.",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 100
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-10-05",
+      "countries_nota": "ETF de renta variable de EE.UU. (US Equity Factor Rotation). No sale de un factsheet; reemplazar cuando se suba."
     },
     "LU2966298809": {
       "ticker": "FLEX",

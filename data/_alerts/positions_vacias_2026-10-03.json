@@ -1,7 +1,0 @@
-{
-  "date": "2026-10-03",
-  "tipo": "positions_vacias",
-  "detected_at": "2026-10-03T13:13:22.863748",
-  "detalle": "Export de Positions del 2026-10-03 sin filas. Cantidades y precios son los del 2026-10-02.",
-  "accion": "Revisar el XLSX de Positions de NetX360 de ese dia (data/raw). Si Pershing lo volvio a publicar bien, basta con que corra el cron siguiente. Mientras tanto el dashboard muestra la cartera del dia anterior."
-}

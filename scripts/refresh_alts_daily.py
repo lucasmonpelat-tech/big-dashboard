@@ -265,7 +265,7 @@ def main():
         # feed Pershing que todo lo demas + anchor real ya locked.
         pos = alts_qty.get(tk)
         isin = h.get("isin")
-        if tk in ("IBIT", "GLD") and isin and isin in pershing_liquid:
+        if tk in ("IBIT", "GLD", "CPER") and isin and isin in pershing_liquid:
             pl_rec = pershing_liquid[isin]
             h["value_usd"] = round(pl_rec["mv_usd"], 2)
             h["valuation_date"] = pl_rec["price_date"] or today_iso

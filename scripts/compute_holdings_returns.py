@@ -52,6 +52,10 @@ PERSHING_TO_MY = {
     'IDMBF':       ('4BRZ',     'Equity'),
     '4BRZ:DE':     ('4BRZ',     'Equity'),
     'ARGT':        ('ARGT',     'Equity'),
+    # 2026-10-05: compras del 02-Oct (~$100k c/u). DYNF = iShares U.S. Equity Factor
+    # Rotation (reemplazo parcial de CSPX); CPER = tesis cobre -> commodity, como GLD.
+    'DYNF':        ('DYNF',     'Equity'),
+    'CPER':        ('CPER',     'Alternatives'),
     'ILF':         ('ILF',      'Equity'),
     # Fixed Income
     'G7113P361':   ('PIMCO-INC', 'Fixed Income'),

@@ -625,6 +625,18 @@ def check_anchors_trabados(errors, warnings):
         else:
             sueltos.append((a.get("ticker", isin), isin, precio))
 
+    # PISO (2026-10-05): el 01-Oct el cron borro las 23 anclas trabadas y este
+    # check dio TODO OK, porque las entradas rehechas no tenian precio y "sin
+    # precio" se cuenta como "nada en riesgo". Las anclas verificadas solo
+    # pueden crecer: si bajan de este piso, algo las borro.
+    MIN_ANCLAS_TRABADAS = 20
+    if trabados < MIN_ANCLAS_TRABADAS:
+        errors.append(
+            "anchors: solo %d anclas trabadas (piso %d). Se perdieron anclas verificadas: "
+            "restaurarlas del ultimo commit bueno de data/year_start_anchors.json "
+            "(git log -- data/year_start_anchors.json) y revisar por que el cron las borro "
+            "(caso 01-Oct-2026: export de Positions vacio)." % (trabados, MIN_ANCLAS_TRABADAS))
+
     for tk, isin, precio in sueltos:
         errors.append(
             "anchors: %s (%s) tiene price_2025_dec_31=%s pero NO anchor_locked. "
