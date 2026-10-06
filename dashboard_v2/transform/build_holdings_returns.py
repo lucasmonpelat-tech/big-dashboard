@@ -330,18 +330,24 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
     px_anchor = px0_by_isin.get(isin) if isin else None
     px_hoy = (pos or {}).get("market_price_ccy")
 
-    if race_h is not None and race_h.get("ytd_return_pct") is not None:
-        ytd_pct = round(float(race_h["ytd_return_pct"]), 2)
-        ytd_metodo = "precio (race)"
-    elif px_anchor and px_hoy:
-        # YTD de PRECIO contra el anchor del 31-Dic. Es el retorno DEL FONDO en el
-        # año, no el nuestro desde que lo compramos. Para los ilíquidos el precio
-        # de Pershing es el NAV del gestor, y su price_date dice a qué cierre
-        # corresponde: se guarda, porque un YTD "al 31-Ago" no es al día de hoy y
-        # mostrarlo sin la fecha sería mentir.
+    if px_anchor and px_hoy:
+        # YTD de PRECIO contra el anchor del 31-Dic, con el MISMO precio de
+        # Pershing que valua la fila (2026-10-06: antes el race iba primero, y
+        # el race lee ucits_daily_nav, que podia ser un dia mas viejo que el MV
+        # de la fila: el 05-Oct ILF mostraba 16% de YTD con el precio del
+        # viernes y el MV del lunes, cuando el dia valia 26%). Es el retorno DEL
+        # FONDO en el año, no el nuestro desde que lo compramos. Para los
+        # ilíquidos el precio de Pershing es el NAV del gestor, y su price_date
+        # dice a qué cierre corresponde: se guarda, porque un YTD "al 31-Ago" no
+        # es al día de hoy y mostrarlo sin la fecha sería mentir.
         ytd_pct = round((float(px_hoy) / px_anchor - 1) * 100, 2)
         ytd_metodo = "precio vs anchor 31-Dic"
         ytd_as_of = (pos or {}).get("price_date")
+    elif race_h is not None and race_h.get("ytd_return_pct") is not None:
+        # Sin anchor propio: lo que calculo el race (misma formula, precio de
+        # ucits_daily_nav / live_prices).
+        ytd_pct = round(float(race_h["ytd_return_pct"]), 2)
+        ytd_metodo = "precio (race)"
     elif px_hoy is None and mv is not None and _anchor_valor_31dic(isin):
         # Fondos que Pershing valua SIN precio ni fecha (HLEND, GCRED: la
         # "cantidad" es el valor en dolares) pero que SI re-marca cada tanto.

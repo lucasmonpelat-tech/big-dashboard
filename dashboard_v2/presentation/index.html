@@ -1513,7 +1513,7 @@
           <td class="num ${glClass(h.return_pct)}">${_fmtPct(h.return_pct)}</td>
           <td class="num" style="color:var(--text-mute)">${_fmtPct(h.bench_dw_pct)}</td>
           <td class="num ${glClass(h.alpha_real_pp)}"><strong>${_fmtBp(h.alpha_real_pp * 100)}</strong></td>
-          <td class="num ${glClass(h.ytd_pct)}">${_fmtPct(h.ytd_pct)}</td>
+          <td class="num ${glClass(h.ytd_pct)}" title="${h.ytd_as_of ? `Precio de Pershing al ${h.ytd_as_of} / NAV al 31-Dic-25` : (h.ytd_metodo || "")}">${_fmtPct(h.ytd_pct)}</td>
           <td class="num" style="color:var(--text-mute)">${_fmtPct(h.bench_ytd_pct)}</td>
           <td class="num ${glClass(h.alpha_ytd_pp)}"><strong>${_fmtBp(h.alpha_ytd_pp * 100)}</strong></td>
         </tr>`;

@@ -189,10 +189,6 @@ jobs:
               --archivo data/lynk_nav_series.json
           fi
 
-      - name: Sync UCITS NAV desde Pershing/NetX360 (reemplaza baha, ver 2026-07-28)
-        run: python scripts/sync_ucits_nav_from_pershing.py
-        continue-on-error: true
-
       - name: Stooq prices (ETFs liquidos)
         run: python scripts/price_refresher.py
         continue-on-error: true
@@ -253,6 +249,15 @@ jobs:
       # sleeve ya recalculadas.
       - name: v2 — Transform temprano (canonical del dia, ANTES del sync)
         run: python -m dashboard_v2.transform.run_all
+        continue-on-error: true
+
+      # Movido aca el 2026-10-06 (antes corria ANTES de la descarga de NetX360):
+      # leia el canonical de AYER, asi que los NAV de los fondos -- y con ellos el
+      # YTD por fondo y los sleeves Equity/FI -- iban un dia atras del MV de la
+      # misma fila. El lunes 05-Oct (ILF +8%, 4BRZ +16%) la tabla mostraba el YTD
+      # con el precio del viernes y el MV con el del lunes.
+      - name: Sync UCITS NAV desde Pershing/NetX360 (del canonical de HOY)
+        run: python scripts/sync_ucits_nav_from_pershing.py
         continue-on-error: true
 
       # Reconstruye qty/cost_basis/buys_history desde el UGL+RGL+Transactions
