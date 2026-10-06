@@ -53,6 +53,10 @@ MAX_STALE_BDAYS = 5
 # habiles; se deja margen a 16 para no generar falsos positivos.
 MAX_STALE_BDAYS_OVERRIDE = {
     "SGCB": 16,
+    # TGF (nota LFEEDER/Tenac, cotiza por 100 de nominal): Pershing la marca cada
+    # 1-2 semanas, no a diario. 6 dias habiles sin precio nuevo es normal, no una
+    # falla del download (alerta falsa del 06-Oct-2026).
+    "TGF": 15,
 }
 
 # ISINs que antes scrapeaba baha_nav_refresher.py (equity sleeve UCITS + 4BRZ).

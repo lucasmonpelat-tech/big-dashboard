@@ -59,7 +59,8 @@ CANONICAL = ROOT / "data" / "canonical"
 
 # Liquidos: cotizan todos los dias. Si entraran, la alarma sonaria siempre.
 LIQUIDOS = {"IBIT": "ETF de Bitcoin, cotiza a diario",
-            "GLD": "ETF de oro, cotiza a diario"}
+            "GLD": "ETF de oro, cotiza a diario",
+            "CPER": "ETF de cobre, cotiza a diario (alta 2026-10-02)"}
 
 # Cuanto tiene que moverse para avisar. 0.01% filtra el ruido de redondeo sin
 # tapar una re-marca real: la de FLEX fue 1.08% y la de BPCC 0.70%.
