@@ -541,7 +541,17 @@ def login_flow(page, verbose=True):
     # Chequear si hay error de invalid password
     body_text = page.locator("body").inner_text()
     if "invalid User ID" in body_text or "invalid" in body_text.lower():
-        write_alert("invalid_credentials", "Pershing rechazo user/pass. Verificar en keyring.")
+        # 2026-10-05: guardar QUE dijo Pershing. Hasta ahora la alerta solo decia
+        # "rechazo user/pass" y el unico screenshot era el de ANTES del submit.
+        frases = [ln.strip() for ln in body_text.splitlines() if "invalid" in ln.lower()][:3]
+        try:
+            page.screenshot(path=str(SESSION_DIR / "login_rejected.png"), full_page=True)
+            (SESSION_DIR / "login_rejected.html").write_text(page.content(), encoding="utf-8")
+        except Exception:
+            pass
+        print(f"  [DEBUG] Pershing dijo: {frases} (screenshot: {SESSION_DIR / 'login_rejected.png'})")
+        write_alert("invalid_credentials",
+                    f"Pershing rechazo user/pass. Texto en pantalla: {' | '.join(frases)}. Verificar en keyring.")
         return False
 
     # Si redirige a otp page, procesar

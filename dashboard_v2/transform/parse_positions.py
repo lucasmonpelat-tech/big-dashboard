@@ -26,6 +26,34 @@ from dashboard_v2.transform._common import (
 )
 
 
+def _security_types_previos() -> dict:
+    """{security_id|cusip: security_type} del ultimo canonical positions.json
+    que traiga tipos (export real con layout viejo, o uno ya reparado)."""
+    import json
+    from dashboard_v2.transform._common import ROOT
+    canon = ROOT / "data" / "canonical"
+    if not canon.exists():
+        return {}
+    for d in sorted((p.name for p in canon.iterdir() if p.is_dir()), reverse=True):
+        f = canon / d / "positions.json"
+        if not f.exists():
+            continue
+        try:
+            hs = json.load(open(f, encoding="utf-8")).get("holdings", [])
+        except Exception:
+            continue
+        out = {}
+        for h in hs:
+            t = h.get("security_type")
+            if t:
+                for k in (h.get("security_id"), h.get("cusip")):
+                    if k:
+                        out[k] = t
+        if out:
+            return out
+    return {}
+
+
 def parse(xlsx_path: Path, as_of: str | None = None) -> dict:
     """
     xlsx_path: Positions_JXD101380.xlsx
@@ -43,13 +71,33 @@ def parse(xlsx_path: Path, as_of: str | None = None) -> dict:
         as_of_raw = metadata.get("as of", "")
         as_of = to_iso_date(as_of_raw) or date.today().isoformat()
 
+    # LAYOUT NUEVO (Pershing, 2026-10-01): el export dejo de traer "Security
+    # Type", "Transaction Type", "Change" y "Accrued Interest", y agrego columnas
+    # de margen (Margin Override Type, House/Fed Requirement). El filtro de
+    # disclaimers de abajo usaba "Security Type" vacio, asi que con el layout
+    # nuevo descartaba TODAS las filas: 4 dias de positions.json con 0 holdings
+    # (y el cron en "success"). Ahora los disclaimers se reconocen por lo que
+    # son -- filas sin identificador o sin cantidad -- y el tipo, si no viene,
+    # se hereda del ultimo canonical que lo tenia (lo usan la clasificacion por
+    # sleeve y el front: "Cash", "Corporate Bonds", "Limited Partnerships").
+    tiene_tipo = "Security Type" in columns
+    tipos_previos = {} if tiene_tipo else _security_types_previos()
+
     holdings = []
     for row in rows:
-        # Skip rows de disclaimers legales al final del XLSX (Positions_XXX.xlsx tiene ~8 al final)
-        # Se distinguen por security_type vacio Y quantity/MV cero.
-        sec_type_raw = row.get("Security Type")
-        if not sec_type_raw or not str(sec_type_raw).strip():
-            continue
+        sid = to_str(row.get("Security Identifier"), "")
+        qty_raw = row.get("Trade Date Quantity")
+        if not sid or qty_raw is None or qty_raw == "" or qty_raw == "-":
+            continue   # disclaimers / disclosures / filas vacias del final
+        if tiene_tipo:
+            sec_type_raw = row.get("Security Type")
+            if not sec_type_raw or not str(sec_type_raw).strip():
+                continue
+            sec_type = to_str(sec_type_raw, "")
+        else:
+            desc_up = (to_str(row.get("Description"), "") or "").upper()
+            sec_type = tipos_previos.get(sid) or tipos_previos.get(to_str(row.get("CUSIP")) or "") \
+                or ("Cash" if "CURRENCY" in desc_up else "")
 
         holding = {
             "security_id": to_str(row.get("Security Identifier"), ""),
@@ -58,7 +106,7 @@ def parse(xlsx_path: Path, as_of: str | None = None) -> dict:
             "sedol": to_str(row.get("Sedol")),
             "symbol": to_str(row.get("Symbol")),
             "description": to_str(row.get("Description"), ""),
-            "security_type": to_str(row.get("Security Type"), ""),
+            "security_type": sec_type,
             "account_type": to_str(row.get("Account Type"), ""),
             "position_ccy": to_str(row.get("Position CCY"), base_currency),
             "quantity": to_float(row.get("Trade Date Quantity"), 0.0),
