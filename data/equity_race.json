@@ -3,18 +3,22 @@
   "inception": "2025-06-30",
   "benchmark": "MSCI ACWI (via ACWI ETF - Yahoo)",
   "sleeve_index": {
-    "2025-06": 100.0,
-    "2025-07": 100.9605,
-    "2025-08": 103.8166,
-    "2025-09": 105.6691,
-    "2025-10": 108.7766,
-    "2025-11": 109.8011,
-    "2025-12": 110.8375,
-    "2026-01": 115.8536,
-    "2026-02": 117.6671,
-    "2026-03": 110.2959,
-    "2026-04": 119.2514,
-    "2026-05": 121.3499
+    "2025-07": 101.2374,
+    "2025-08": 107.9765,
+    "2025-09": 109.5581,
+    "2025-10": 109.1298,
+    "2025-11": 110.0226,
+    "2025-12": 110.9227,
+    "2026-01": 112.3288,
+    "2026-02": 113.9325,
+    "2026-03": 105.809,
+    "2026-04": 112.7557,
+    "2026-05": 116.5209,
+    "2026-06": 115.6279,
+    "2026-07": 117.1219,
+    "2026-08": 121.4002,
+    "2026-09": 118.4276,
+    "2026-10": 118.4047
   },
   "acwi_index": {
     "2025-06": 100.0,
@@ -32,19 +36,21 @@
     "2026-06": 124.541
   },
   "sleeve_monthly_returns": {
-    "2025-06": 0.046115,
-    "2025-07": 0.009605,
-    "2025-08": 0.02829,
-    "2025-09": 0.017844,
-    "2025-10": 0.029408,
-    "2025-11": 0.009419,
-    "2025-12": 0.009438,
-    "2026-01": 0.045256,
-    "2026-02": 0.015654,
-    "2026-03": -0.062644,
-    "2026-04": 0.081194,
-    "2026-05": 0.017598,
-    "2026-06": null
+    "2025-08": 0.066567,
+    "2025-09": 0.014648,
+    "2025-10": -0.003909,
+    "2025-11": 0.008181,
+    "2025-12": 0.008181,
+    "2026-01": 0.012676,
+    "2026-02": 0.014277,
+    "2026-03": -0.071301,
+    "2026-04": 0.065653,
+    "2026-05": 0.033393,
+    "2026-06": -0.007664,
+    "2026-07": 0.012921,
+    "2026-08": 0.036529,
+    "2026-09": -0.024486,
+    "2026-10": -0.000193
   },
   "acwi_monthly_returns": {
     "2025-06": 0.04806481875471125,
@@ -236,5 +242,6 @@
       "ojo": "Su historia NO se pierde: los 27 puntos de la serie TWR del sleeve (equity_sleeve_real.json, 28-Feb a 26-Ago-2026) siguen intactos, y el retorno del sleeve se calcula de ahi, no de este archivo."
     }
   ],
-  "_nota_si_return_pct": "MAGS y HEWJ entran con si_return_pct en null A PROPOSITO. El si_return_pct de los otros 8 esta CONGELADO desde el 2026-07-28: lo escribia el rebuild completo (equity_race.py, borrado el 2026-08-20) encadenando retornos mensuales de baha/yfinance, y el refresh diario solo toca ytd_return_pct. Poner un si calculado hoy al lado de ocho de hace seis semanas seria mezclar dos bases en la misma columna -- exactamente el error silencioso que estamos persiguiendo. Preferible un null visible. Nadie lo consume: build_holdings_returns.py lee de este archivo solo ytd_return_pct."
+  "_nota_si_return_pct": "MAGS y HEWJ entran con si_return_pct en null A PROPOSITO. El si_return_pct de los otros 8 esta CONGELADO desde el 2026-07-28: lo escribia el rebuild completo (equity_race.py, borrado el 2026-08-20) encadenando retornos mensuales de baha/yfinance, y el refresh diario solo toca ytd_return_pct. Poner un si calculado hoy al lado de ocho de hace seis semanas seria mezclar dos bases en la misma columna -- exactamente el error silencioso que estamos persiguiendo. Preferible un null visible. Nadie lo consume: build_holdings_returns.py lee de este archivo solo ytd_return_pct.",
+  "_sleeve_index_note": "2026-10-06: sleeve_index / sleeve_monthly_returns se toman de los cierres de mes de equity_sleeve_real.json (TWR real). Antes eran una serie legacy distinta (ene-2026 +4.5% vs TWR real +1.3%)."
 }
