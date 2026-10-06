@@ -7,15 +7,30 @@
     "valor": 0.78,
     "tipo": "Dividend Yield",
     "as_of": "2026-10-05",
-    "fuente": "Yahoo Finance (dividendYield), 2026-10-05. NO es de un factsheet: falta subir el de iShares a Research Fondos.",
+    "fuente": "Yahoo Finance (dividendYield). El deep dive de iShares NO publica yield del fondo (solo describe 'dividend yield' como senal del factor Value). Si aparece un factsheet mensual con 30-day SEC yield, reemplazar.",
     "de_factsheet": false
   },
   "countries": {
     "US": 100
   },
-  "countries_de_factsheet": false,
-  "countries_as_of": "2026-10-05",
-  "countries_nota": "ETF de renta variable de EE.UU. (US Equity Factor Rotation). No sale de un factsheet; reemplazar cuando se suba.",
+  "countries_de_factsheet": true,
+  "countries_as_of": "2026-06-30",
+  "countries_nota": "Mandato: renta variable de EE.UU. (universo S&P 500, 205 posiciones al 30-Jun-2026). El deck no trae desglose por pais porque es 100% EE.UU. por definicion.",
   "factsheet_url": "https://www.ishares.com/us/products/337003/ishares-us-equity-factor-rotation-active-etf",
-  "nombre_corto": "iShares US Equity Factor Rotation"
+  "nombre_corto": "iShares US Equity Factor Rotation",
+  "source": "iShares 'U.S. & International Equity Factor Rotation Active ETFs' deep dive Q2-2026 (DYNF / IDYN), datos al 30-Jun-2026",
+  "source_file": "Dropbox/2026/Research Fondos/Renta Variable/DNYF/DYNF-IDYN-deep-dive-Q2-2026 LATAM.PDF",
+  "parsed_at": "2026-10-06",
+  "as_of_factsheet": "2026-06-30",
+  "fund_facts": {
+    "aum_usd_bn": 38.0,
+    "inception": "2019-03-19",
+    "expense_ratio_pct": 0.26,
+    "n_positions": 205,
+    "turnover_anual_esperado": ">100%",
+    "tracking_error_objetivo": "3-5% ex-ante",
+    "morningstar_categoria": "Large Blend",
+    "morningstar_rating": "5 estrellas (3 y 5 anos, al 31-May-2026)",
+    "as_of": "2026-06-30"
+  }
 }

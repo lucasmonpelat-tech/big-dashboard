@@ -1,7 +1,7 @@
 {
   "_description": "Top 10 holdings per BIG equity fund. Used for lookthrough analysis vs ACWI top 10.",
-  "_lastUpdate": "2026-08-25",
-  "_status": "VERIFICADO: 11 fondos del sleeve equity. Refrescados 25-Ago-2026: CSPX/MFSCV/JHGSC/NBGMT (31-Jul), THOR (30-Jun), ARGT (14-Ago), ILF (20-Ago), 4BRZ (31-Jul). MAGS/HEWJ en Jul-2026. Unico pendiente: LGLI (30-Abr-2026).",
+  "_lastUpdate": "2026-10-06",
+  "_status": "VERIFICADO: 11 fondos del sleeve equity. Refrescados 25-Ago-2026: CSPX/MFSCV/JHGSC/NBGMT (31-Jul), THOR (30-Jun), ARGT (14-Ago), ILF (20-Ago), 4BRZ (31-Jul). MAGS/HEWJ en Jul-2026. Unico pendiente: LGLI (30-Abr-2026). | 06-Oct-2026: alta de DYNF (deck Q2-2026, 30-Jun).",
   "CSPX": {
     "name": "iShares Core S&P 500 UCITS",
     "source": "VERIFICADO: factsheet oficial iShares Core S&P 500 UCITS ETF (BlackRock americas-offshore), seccion Top 10 Holdings al 31-Jul-2026. Total top 10 = 37.56% del portfolio. Reemplaza los pesos del indice S&P 500 publicos (~May-2026) que habia antes. + TSLA 1.42% desde iShares IVV al 13-Ago-2026 (ver _note).",
@@ -236,5 +236,24 @@
       "_note": "Holdings desde EWJ (que HEWJ replica 99.81%). Top 10 aprox = 27.4% del NAV."
     },
     "name": "iShares Currency Hedged MSCI Japan ETF"
+  },
+  "DYNF": {
+    "name": "iShares U.S. Equity Factor Rotation Active ETF",
+    "isin": "US09290C1036",
+    "source": "VERIFICADO: deck iShares 'DYNF/IDYN deep dive Q2-2026', pag. 22 'Top 10 Holdings' (BlackRock y Morningstar al 30-Jun-2026). Total top 10 = 40.7%. 205 posiciones. Es activo con rotacion de factores (turnover >100%/ano): refrescar con cada deck trimestral.",
+    "_as_of": "2026-06-30",
+    "_factsheet_top10": {
+      "NVIDIA CORP": 8.1,
+      "APPLE INC": 7.3,
+      "MICROSOFT CORP": 3.9,
+      "AMAZON.COM INC": 3.7,
+      "LAM RESEARCH CORP": 3.6,
+      "JPMORGAN CHASE & CO": 3.6,
+      "BROADCOM INC": 2.8,
+      "ALPHABET INC CLASS A": 2.6,
+      "EXXON MOBIL CORP": 2.6,
+      "MICRON TECHNOLOGY INC": 2.5,
+      "_note": "Top 10 = 40.7%. Sobrepondera NVDA/AAPL vs S&P 500 (8.1/7.3 vs 7.5/6.6) y tiene Lam Research, JPM y Exxon fuera del top 10 del indice. Al 30-Jun-2026."
+    }
   }
 }

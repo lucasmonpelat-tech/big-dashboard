@@ -4,6 +4,7 @@
     "4BRZ": "2026-07-31",
     "ARGT": "2026-08-14",
     "CSPX": "2026-09-22",
+    "DYNF": "2026-06-30",
     "HEWJ": "2026-07-17",
     "ILF": "2026-08-20",
     "JHGSC": "2026-07-31",
@@ -16,8 +17,8 @@
   "method": "BIG_exposure[stock] = \u03a3 (fund_weight_in_BIG \u00d7 stock_weight_in_fund / 100)",
   "summary": {
     "total_acwi_top10": 25.18,
-    "total_big_top10_exposure": 17.63,
-    "diff_pp": -7.55
+    "total_big_top10_exposure": 17.92,
+    "diff_pp": -7.26
   },
   "overlap": [
     {
@@ -26,14 +27,20 @@
       "sector": "Information Technology",
       "location": "United States",
       "weight_acwi": 5.0,
-      "weight_big": 3.475,
-      "diff_pp": -1.525,
+      "weight_big": 3.568,
+      "diff_pp": -1.432,
       "contributors": [
         {
           "fund": "CSPX",
           "fund_weight_in_equity_sleeve": 32.33,
           "stock_weight_in_fund": 8.25713,
           "contribution": 2.67
+        },
+        {
+          "fund": "DYNF",
+          "fund_weight_in_equity_sleeve": 1.14,
+          "stock_weight_in_fund": 8.1,
+          "contribution": 0.093
         },
         {
           "fund": "MAGS",
@@ -49,14 +56,20 @@
       "sector": "Information Technology",
       "location": "United States",
       "weight_acwi": 4.76,
-      "weight_big": 3.259,
-      "diff_pp": -1.501,
+      "weight_big": 3.342,
+      "diff_pp": -1.418,
       "contributors": [
         {
           "fund": "CSPX",
           "fund_weight_in_equity_sleeve": 32.33,
           "stock_weight_in_fund": 7.39261,
           "contribution": 2.39
+        },
+        {
+          "fund": "DYNF",
+          "fund_weight_in_equity_sleeve": 1.14,
+          "stock_weight_in_fund": 7.3,
+          "contribution": 0.084
         },
         {
           "fund": "MAGS",
@@ -72,14 +85,20 @@
       "sector": "Information Technology",
       "location": "United States",
       "weight_acwi": 3.38,
-      "weight_big": 2.599,
-      "diff_pp": -0.781,
+      "weight_big": 2.644,
+      "diff_pp": -0.736,
       "contributors": [
         {
           "fund": "CSPX",
           "fund_weight_in_equity_sleeve": 32.33,
           "stock_weight_in_fund": 5.51351,
           "contribution": 1.783
+        },
+        {
+          "fund": "DYNF",
+          "fund_weight_in_equity_sleeve": 1.14,
+          "stock_weight_in_fund": 3.9,
+          "contribution": 0.045
         },
         {
           "fund": "MAGS",
@@ -95,14 +114,20 @@
       "sector": "Consumer Discretionary",
       "location": "United States",
       "weight_acwi": 2.39,
-      "weight_big": 2.023,
-      "diff_pp": -0.367,
+      "weight_big": 2.065,
+      "diff_pp": -0.325,
       "contributors": [
         {
           "fund": "CSPX",
           "fund_weight_in_equity_sleeve": 32.33,
           "stock_weight_in_fund": 3.73104,
           "contribution": 1.206
+        },
+        {
+          "fund": "DYNF",
+          "fund_weight_in_equity_sleeve": 1.14,
+          "stock_weight_in_fund": 3.7,
+          "contribution": 0.042
         },
         {
           "fund": "MAGS",
@@ -118,14 +143,20 @@
       "sector": "Communication",
       "location": "United States",
       "weight_acwi": 1.99,
-      "weight_big": 1.787,
-      "diff_pp": -0.203,
+      "weight_big": 1.817,
+      "diff_pp": -0.173,
       "contributors": [
         {
           "fund": "CSPX",
           "fund_weight_in_equity_sleeve": 32.33,
           "stock_weight_in_fund": 3.07217,
           "contribution": 0.993
+        },
+        {
+          "fund": "DYNF",
+          "fund_weight_in_equity_sleeve": 1.14,
+          "stock_weight_in_fund": 2.6,
+          "contribution": 0.03
         },
         {
           "fund": "MAGS",

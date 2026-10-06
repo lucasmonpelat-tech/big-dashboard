@@ -6,16 +6,37 @@
   "yield": {
     "valor": 0,
     "tipo": "N/A",
-    "as_of": "2026-10-05",
-    "fuente": "CPER — fondo de futuros de cobre, no paga dividendos (Yahoo Finance: 0). Sin factsheet en la carpeta.",
-    "de_factsheet": false
+    "as_of": "2026-06-30",
+    "fuente": "Factsheet USCF 30-Jun-2026: fondo de futuros de cobre (SummerHaven Copper Index TR) colateralizado con cash y Treasuries; no paga distribuciones (emite K-1).",
+    "de_factsheet": true
   },
   "countries": {
     "GLOBAL": 100
   },
-  "countries_de_factsheet": false,
-  "countries_as_of": "2026-10-05",
-  "countries_nota": "Commodity (futuros de cobre): sin exposicion por pais, igual que GLD. No sale de un factsheet.",
+  "countries_de_factsheet": true,
+  "countries_as_of": "2026-06-30",
+  "countries_nota": "Commodity: futuros de cobre COMEX (1 o 3 contratos elegibles, rebalanceo mensual). Sin exposicion por pais, igual que GLD.",
   "factsheet_url": "https://www.uscfinvestments.com/cper",
-  "nombre_corto": "US Copper Index Fund"
+  "nombre_corto": "US Copper Index Fund",
+  "source": "Factsheet USCF 'United States Copper Index Fund (CPER)', datos al 30-Jun-2026",
+  "source_file": "Dropbox/2026/Research Fondos/Alternativos/Commodities-Crypto/CPER (Copper)/united-states-copper-index-fund-fs-20260630.pdf",
+  "parsed_at": "2026-10-06",
+  "as_of_factsheet": "2026-06-30",
+  "fund_facts": {
+    "nav_usd": 37.75,
+    "total_net_assets_usd": 737944734.12,
+    "shares_outstanding": 19200000,
+    "listing": "NYSE Arca",
+    "indice": "SummerHaven Copper Index Total Return (SCITR)",
+    "inception": "2011-11-15",
+    "performance_30jun2026": {
+      "ytd_nav_pct": 8.35,
+      "1y_nav_pct": 19.99,
+      "5y_ann_pct": 7.5,
+      "10y_ann_pct": 10.03
+    },
+    "expense_ratio_pct": 0.88,
+    "expense_fuente": "Yahoo Finance (netExpenseRatio); el factsheet no lo muestra en el texto extraido",
+    "as_of": "2026-06-30"
+  }
 }

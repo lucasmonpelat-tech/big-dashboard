@@ -151,13 +151,13 @@
       "name": "UNITED STS COMMODITY INDEX FDS TR COM UNIT REPSTG U S COPPER INDEX FD",
       "sleeve": "Alternatives",
       "archivo": "CPER.json",
-      "as_of_factsheet": null,
+      "as_of_factsheet": "2026-06-30",
       "yield": {
         "valor": 0,
         "tipo": "N/A",
-        "as_of": "2026-10-05",
-        "fuente": "CPER — fondo de futuros de cobre, no paga dividendos (Yahoo Finance: 0). Sin factsheet en la carpeta.",
-        "de_factsheet": false,
+        "as_of": "2026-06-30",
+        "fuente": "Factsheet USCF 30-Jun-2026: fondo de futuros de cobre (SummerHaven Copper Index TR) colateralizado con cash y Treasuries; no paga distribuciones (emite K-1).",
+        "de_factsheet": true,
         "nota": null
       },
       "countries": [
@@ -166,9 +166,9 @@
           "p": 100
         }
       ],
-      "countries_de_factsheet": false,
-      "countries_as_of": "2026-10-05",
-      "countries_nota": "Commodity (futuros de cobre): sin exposicion por pais, igual que GLD. No sale de un factsheet."
+      "countries_de_factsheet": true,
+      "countries_as_of": "2026-06-30",
+      "countries_nota": "Commodity: futuros de cobre COMEX (1 o 3 contratos elegibles, rebalanceo mensual). Sin exposicion por pais, igual que GLD."
     },
     "IE00B5BMR087": {
       "ticker": "CSPX",
@@ -199,12 +199,12 @@
       "name": "BLACKROCK ETF TR ISHARES U S EQUITY FACTOR ROTATION ACTIVE ETF",
       "sleeve": "Equity",
       "archivo": "DYNF.json",
-      "as_of_factsheet": null,
+      "as_of_factsheet": "2026-06-30",
       "yield": {
         "valor": 0.78,
         "tipo": "Dividend Yield",
         "as_of": "2026-10-05",
-        "fuente": "Yahoo Finance (dividendYield), 2026-10-05. NO es de un factsheet: falta subir el de iShares a Research Fondos.",
+        "fuente": "Yahoo Finance (dividendYield). El deep dive de iShares NO publica yield del fondo (solo describe 'dividend yield' como senal del factor Value). Si aparece un factsheet mensual con 30-day SEC yield, reemplazar.",
         "de_factsheet": false,
         "nota": null
       },
@@ -214,9 +214,9 @@
           "p": 100
         }
       ],
-      "countries_de_factsheet": false,
-      "countries_as_of": "2026-10-05",
-      "countries_nota": "ETF de renta variable de EE.UU. (US Equity Factor Rotation). No sale de un factsheet; reemplazar cuando se suba."
+      "countries_de_factsheet": true,
+      "countries_as_of": "2026-06-30",
+      "countries_nota": "Mandato: renta variable de EE.UU. (universo S&P 500, 205 posiciones al 30-Jun-2026). El deck no trae desglose por pais porque es 100% EE.UU. por definicion."
     },
     "LU2966298809": {
       "ticker": "FLEX",
