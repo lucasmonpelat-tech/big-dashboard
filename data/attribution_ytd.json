@@ -1,54 +1,54 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-10-06T10:26:06.746222",
-  "as_of_date": "2026-10-06",
+  "refreshedAt": "2026-10-07T13:13:31.511259",
+  "as_of_date": "2026-10-07",
   "ytd_anchor": "2025-12-31",
-  "days_ytd": 279,
+  "days_ytd": 280,
   "sleeves": [
     {
       "name": "Equity",
-      "value_usd": 8823076.52,
-      "weight_pct": 30.31,
-      "ytd_pct": 6.75,
-      "contribution_pp": 2.045
+      "value_usd": 8895701.75,
+      "weight_pct": 30.45,
+      "ytd_pct": 9.15,
+      "contribution_pp": 2.787
     },
     {
       "name": "Fixed Income",
-      "value_usd": 11323522.91,
-      "weight_pct": 38.9,
-      "ytd_pct": -0.04,
-      "contribution_pp": -0.014
+      "value_usd": 11346220.75,
+      "weight_pct": 38.84,
+      "ytd_pct": 0.26,
+      "contribution_pp": 0.1
     },
     {
       "name": "Alternatives",
-      "value_usd": 8819553.18,
-      "weight_pct": 30.3,
-      "ytd_pct": 4.84,
-      "contribution_pp": 1.467
+      "value_usd": 8830568.59,
+      "weight_pct": 30.23,
+      "ytd_pct": 4.91,
+      "contribution_pp": 1.483
     },
     {
       "name": "Cash",
       "value_usd": 140036.09,
       "weight_pct": 0.48,
-      "ytd_pct": 4.05,
+      "ytd_pct": 4.07,
       "contribution_pp": 0.019
     }
   ],
-  "gross_reconstructed_pct": 3.517,
-  "mgmt_fee_pp": -1.376,
+  "gross_reconstructed_pct": 4.389,
+  "mgmt_fee_pp": -1.381,
   "mgmt_fee_rate_annual_pct": 1.8,
-  "net_reconstructed_pct": 2.141,
-  "lynk_ytd_pct": 3.1,
-  "lynk_refreshed_at": "2026-10-06T13:11:25.560780",
-  "residual_pp": -0.959,
+  "net_reconstructed_pct": 3.008,
+  "lynk_ytd_pct": 3.47,
+  "lynk_refreshed_at": "2026-10-07T13:11:27.783895",
+  "residual_pp": -0.462,
   "alts_detail": [
     {
       "ticker": "CALP",
       "name": "Carlyle AlpInvest Private Markets",
       "value_usd": 2796863.33,
-      "weight_pct": 31.71,
+      "weight_pct": 31.67,
       "ytd_pct": 6.17,
-      "contribution_pp": 1.957,
+      "contribution_pp": 1.954,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
       "valuation_date": "2026-07-31"
     },
@@ -56,37 +56,37 @@
       "ticker": "HLGPI",
       "name": "Hamilton Lane Global Private Infrastructure",
       "value_usd": 1452633.38,
-      "weight_pct": 16.47,
+      "weight_pct": 16.45,
       "ytd_pct": 11.65,
-      "contribution_pp": 1.919,
+      "contribution_pp": 1.916,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
       "valuation_date": "2026-08-31"
     },
     {
       "ticker": "IBIT",
       "name": "iShares Bitcoin Trust",
-      "value_usd": 1035104.96,
-      "weight_pct": 11.74,
-      "ytd_pct": -2.2,
-      "contribution_pp": -0.258,
-      "source": "Pershing T-1 (2026-10-05)",
-      "valuation_date": "2026-10-05"
+      "value_usd": 1033612.84,
+      "weight_pct": 11.7,
+      "ytd_pct": -2.34,
+      "contribution_pp": -0.274,
+      "source": "Pershing T-1 (2026-10-06)",
+      "valuation_date": "2026-10-06"
     },
     {
       "ticker": "GLD",
       "name": "SPDR Gold Shares",
-      "value_usd": 894978.9,
-      "weight_pct": 10.15,
-      "ytd_pct": -4.23,
-      "contribution_pp": -0.429,
-      "source": "Pershing T-1 (2026-10-05)",
-      "valuation_date": "2026-10-05"
+      "value_usd": 901392.66,
+      "weight_pct": 10.21,
+      "ytd_pct": -3.54,
+      "contribution_pp": -0.361,
+      "source": "Pershing T-1 (2026-10-06)",
+      "valuation_date": "2026-10-06"
     },
     {
       "ticker": "HLEND",
       "name": "HPS Corporate Lending Fund",
       "value_usd": 767778.35,
-      "weight_pct": 8.71,
+      "weight_pct": 8.69,
       "ytd_pct": 0.62,
       "contribution_pp": 0.054,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
@@ -96,9 +96,9 @@
       "ticker": "FLEX",
       "name": "Flex-Lexington Partners Secondaries",
       "value_usd": 661551.95,
-      "weight_pct": 7.5,
+      "weight_pct": 7.49,
       "ytd_pct": 9.5,
-      "contribution_pp": 0.713,
+      "contribution_pp": 0.712,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
       "valuation_date": "2026-08-31"
     },
@@ -106,7 +106,7 @@
       "ticker": "BPCC",
       "name": "Barings Private Credit Corporation",
       "value_usd": 609599.26,
-      "weight_pct": 6.91,
+      "weight_pct": 6.9,
       "ytd_pct": 4.85,
       "contribution_pp": 0.335,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
@@ -115,25 +115,25 @@
     {
       "ticker": "GCRED",
       "name": "Golub Capital Private Credit",
-      "value_usd": 500276.97,
-      "weight_pct": 5.67,
+      "value_usd": 505940.98,
+      "weight_pct": 5.73,
       "ytd_pct": -1.92,
-      "contribution_pp": -0.109,
+      "contribution_pp": -0.11,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
       "valuation_date": "2026-03-31"
     },
     {
       "ticker": "CPER",
       "name": "United States Copper Index Fund",
-      "value_usd": 100766.08,
-      "weight_pct": 1.14,
-      "ytd_pct": 14.02,
-      "contribution_pp": 0.16,
-      "source": "Pershing T-1 (2026-10-05)",
-      "valuation_date": "2026-10-05"
+      "value_usd": 101195.84,
+      "weight_pct": 1.15,
+      "ytd_pct": 14.5,
+      "contribution_pp": 0.166,
+      "source": "Pershing T-1 (2026-10-06)",
+      "valuation_date": "2026-10-06"
     }
   ],
-  "total_aum": 29106188.7,
+  "total_aum": 29212527.18,
   "alpha_attribution": {
     "_description": "Decomposicion del alpha YTD por asset class. Contribucion del bench con pesos fijos del mandato: 30% ACWI (Equity) + 40% AGG (FI) + 30% ACWI (Alts).",
     "bench_label": "60/40 (AOR)",
@@ -143,64 +143,64 @@
       "Alternatives": 0.3,
       "Cash": 0.0
     },
-    "bench_ytd_aor_etf": 7.66,
-    "acwi_ytd": 14.607,
-    "agg_ytd": -3.109,
-    "bench_eq_contrib_pp": 4.382,
-    "bench_fi_contrib_pp": -1.243,
-    "bench_alts_contrib_pp": 4.382,
-    "big_ytd": 3.1,
-    "alpha_ytd_total_pp": -4.56,
+    "bench_ytd_aor_etf": 7.97,
+    "acwi_ytd": 15.126,
+    "agg_ytd": -3.442,
+    "bench_eq_contrib_pp": 4.538,
+    "bench_fi_contrib_pp": -1.377,
+    "bench_alts_contrib_pp": 4.538,
+    "big_ytd": 3.47,
+    "alpha_ytd_total_pp": -4.5,
     "components": [
       {
         "name": "Equity",
-        "big_contrib_pp": 2.045,
-        "bench_contrib_pp": 4.382,
-        "alpha_pp": -2.337,
-        "comment": "BIG 30.3% @ +6.75% vs 30% ACWI @ +14.61%"
+        "big_contrib_pp": 2.787,
+        "bench_contrib_pp": 4.538,
+        "alpha_pp": -1.751,
+        "comment": "BIG 30.4% @ +9.15% vs 30% ACWI @ +15.13%"
       },
       {
         "name": "Fixed Income",
-        "big_contrib_pp": -0.014,
-        "bench_contrib_pp": -1.243,
-        "alpha_pp": 1.229,
-        "comment": "BIG 38.9% @ -0.04% vs 40% AGG @ -3.11%"
+        "big_contrib_pp": 0.1,
+        "bench_contrib_pp": -1.377,
+        "alpha_pp": 1.477,
+        "comment": "BIG 38.8% @ +0.26% vs 40% AGG @ -3.44%"
       },
       {
         "name": "Alternatives",
-        "big_contrib_pp": 1.467,
-        "bench_contrib_pp": 4.382,
-        "alpha_pp": -2.915,
-        "comment": "BIG 30.3% @ +4.84% vs 30% ACWI @ +14.61%"
+        "big_contrib_pp": 1.483,
+        "bench_contrib_pp": 4.538,
+        "alpha_pp": -3.055,
+        "comment": "BIG 30.2% @ +4.91% vs 30% ACWI @ +15.13%"
       },
       {
         "name": "Cash",
         "big_contrib_pp": 0.019,
         "bench_contrib_pp": 0,
         "alpha_pp": 0.019,
-        "comment": "BIG 0.5% @ +4.05% (el mandato no tiene Cash)"
+        "comment": "BIG 0.5% @ +4.07% (el mandato no tiene Cash)"
       },
       {
         "name": "Mgmt Fee",
-        "big_contrib_pp": -1.376,
+        "big_contrib_pp": -1.381,
         "bench_contrib_pp": 0,
-        "alpha_pp": -1.376,
+        "alpha_pp": -1.381,
         "comment": "Lynk mgmt fee 1.8%/yr (bench AOR fee 0.15% no incluido)"
       },
       {
         "name": "Nuestro Cálculo (NET)",
-        "big_contrib_pp": 2.141,
+        "big_contrib_pp": 3.008,
         "bench_contrib_pp": null,
         "alpha_pp": null,
         "is_subtotal": true,
-        "comment": "Suma Equity+FI+Alts+Cash+Fee = reconstruccion bottom-up (vs Lynk oficial +3.10%)"
+        "comment": "Suma Equity+FI+Alts+Cash+Fee = reconstruccion bottom-up (vs Lynk oficial +3.47%)"
       },
       {
         "name": "Residual",
-        "big_contrib_pp": -0.959,
+        "big_contrib_pp": -0.462,
         "bench_contrib_pp": null,
-        "alpha_pp": 0.819,
-        "comment": "Nuestro calculo (+2.14%) - Lynk oficial (+3.10%), mas la diferencia entre el bench por pesos del mandato (+7.52%) y el AOR (+7.66%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
+        "alpha_pp": 0.191,
+        "comment": "Nuestro calculo (+3.01%) - Lynk oficial (+3.47%), mas la diferencia entre el bench por pesos del mandato (+7.70%) y el AOR (+7.97%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
       }
     ]
   }
