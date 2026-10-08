@@ -60,9 +60,20 @@ def main():
     today_iso = now.strftime("%Y-%m-%d")
     dow_name = now.strftime("%A")  # Monday, Tuesday, ...
 
+    # Ultimo snapshot canonico completo, independiente del status del job:
+    # el front lo usa para elegir que carpeta cargar (nunca segun jobStatus).
+    canonical_date = None
+    canon = root / "data" / "canonical"
+    if canon.exists():
+        dirs = sorted(d.name for d in canon.iterdir()
+                      if d.is_dir() and (d / "benchmark_comparison.json").exists()
+                      and (d / "positions.json").exists())
+        canonical_date = dirs[-1] if dirs else None
+
     payload = {
         "ranAt": now.isoformat(),
         "date": today_iso,
+        "canonicalDate": canonical_date,
         "dayOfWeek": dow_name,
         "jobStatus": args.job_status,
         "modifiedFiles": get_modified_data_files(),

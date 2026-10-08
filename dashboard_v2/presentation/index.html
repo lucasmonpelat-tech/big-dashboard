@@ -777,19 +777,44 @@
     // ============================================================
     // Fecha del snapshot: se resuelve dinámicamente desde data/_alerts/last_run.json
     // (que el cron actualiza cada día). Fallback a la fecha hardcoded si falla el fetch.
-    let SNAPSHOT_DATE = "2026-07-23";
+    // Fecha del snapshot canonico que carga el front.
+    // Orden: last_run.canonicalDate -> last_run.date -> dias hacia atras (hasta 10) -> hardcoded.
+    // NUNCA depende de jobStatus: un run cancelado/fallido no debe mandar al front a un snapshot viejo
+    // (08-Oct-2026: el run de GitHub se cancelo, jobStatus="cancelled", y el front mostro datos de julio).
+    let SNAPSHOT_DATE = "2026-10-08";
     let CANONICAL_BASE = `../../data/canonical/${SNAPSHOT_DATE}`;
+    let LAST_RUN_STATUS = null;
+    async function _canonicalExists(date) {
+      try {
+        const r = await fetch(`../../data/canonical/${date}/benchmark_comparison.json?_=${Date.now()}`, { method: "HEAD" });
+        return r.ok;
+      } catch (e) { return false; }
+    }
     async function resolveSnapshotDate() {
+      const candidates = [];
       try {
         const r = await fetch(`../../data/_alerts/last_run.json?_=${Date.now()}`);
         if (r.ok) {
           const d = await r.json();
-          if (d.date && d.jobStatus === "success") {
-            SNAPSHOT_DATE = d.date;
-            CANONICAL_BASE = `../../data/canonical/${SNAPSHOT_DATE}`;
+          LAST_RUN_STATUS = d.jobStatus || null;
+          if (d.canonicalDate) candidates.push(d.canonicalDate);
+          if (d.date) {
+            const base = new Date(d.date + "T00:00:00Z");
+            for (let i = 0; i <= 10; i++) {
+              const dt = new Date(base); dt.setUTCDate(base.getUTCDate() - i);
+              candidates.push(dt.toISOString().slice(0, 10));
+            }
           }
+          if (d.jobStatus && d.jobStatus !== "success") console.warn("last_run jobStatus =", d.jobStatus);
         }
-      } catch (e) { console.warn("last_run.json no disponible, uso hardcoded", e); }
+      } catch (e) { console.warn("last_run.json no disponible", e); }
+      for (const c of candidates) {
+        if (!(await _canonicalExists(c))) continue;
+        SNAPSHOT_DATE = c;
+        CANONICAL_BASE = `../../data/canonical/${SNAPSHOT_DATE}`;
+        return;
+      }
+      console.warn("Ningun candidato de last_run.json tiene canonical; uso hardcoded", SNAPSHOT_DATE);
     }
 
     // ============================================================
