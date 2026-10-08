@@ -92,7 +92,7 @@ jobs:
     needs: guard
     if: needs.guard.outputs.correr == 'si'
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 40
 
     env:
       LYNK_EMAIL: ${{ secrets.LYNK_EMAIL || 'lucas.monpelat@pampa-capital.com' }}
@@ -117,11 +117,21 @@ jobs:
           python-version: '3.12'
           cache: 'pip'
 
+      # 2026-10-08: este step se colgo 25 minutos (pip/apt sin responder) y el job
+      # entero murio por timeout-minutes: el refresh del dia no corrio y el
+      # dashboard quedo con el YTD de anteayer. Ahora cada intento tiene su
+      # propio limite y se reintenta antes de rendirse.
       - name: Install deps
+        timeout-minutes: 12
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          playwright install --with-deps chromium
+          for intento in 1 2 3; do
+            if timeout 240 python -m pip install --upgrade pip                && timeout 240 pip install -r requirements.txt                && timeout 300 playwright install --with-deps chromium; then
+              exit 0
+            fi
+            echo "Install deps: intento $intento fallo o se colgo, reintentando en 20s..."
+            sleep 20
+          done
+          echo "Install deps: 3 intentos fallidos"; exit 1
 
       - name: Detect day of week (set outputs)
         id: dow

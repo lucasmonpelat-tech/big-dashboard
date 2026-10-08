@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-10-07T13:13:27.642909",
+  "refreshedAt": "2026-10-08T10:56:31.987290",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -5172,6 +5172,89 @@
           "source": "daily_close"
         }
       ]
+    },
+    {
+      "date": "2026-10-08",
+      "mv_usd": 8762785.574561058,
+      "holdings": [
+        {
+          "ticker": "CSPX",
+          "qty": 3048.0,
+          "price": 839.36,
+          "mv": 2558369.2800000003,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "DYNF",
+          "qty": 4290.0,
+          "price": 70.41999816894531,
+          "mv": 302101.7921447754,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "THOR",
+          "qty": 18861.953,
+          "price": 43.49,
+          "mv": 820306.3359700001,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "4BRZ",
+          "qty": 6000.0,
+          "price": 60.5803,
+          "mv": 363481.8,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "ILF",
+          "qty": 10000.0,
+          "price": 37.505,
+          "mv": 375050.0,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "HEWJ",
+          "qty": 3125.0,
+          "price": 66.1500015258789,
+          "mv": 206718.75476837158,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "NBGMT",
+          "qty": 58050.998,
+          "price": 25.51,
+          "mv": 1480880.95898,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MAGS",
+          "qty": 6905.0,
+          "price": 73.69000244140625,
+          "mv": 508829.46685791016,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "JHGSC",
+          "qty": 10410.46,
+          "price": 53.29,
+          "mv": 554773.4134,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "ARGT",
+          "qty": 4000.0,
+          "price": 87.83,
+          "mv": 351320.0,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MFSCV",
+          "qty": 4063.638,
+          "price": 305.38,
+          "mv": 1240953.77244,
+          "source": "daily_close"
+        }
+      ]
     }
   ],
   "twr_series": [
@@ -8831,6 +8914,13 @@
       "flow_in": 100372.73,
       "twr": 0.02235296996434514,
       "index": 121.0748
+    },
+    {
+      "date": "2026-10-08",
+      "mv_usd": 8762785.574561058,
+      "flow_in": -1152.05,
+      "twr": 0.018716108921364428,
+      "index": 120.6441
     }
   ],
   "acwi_index_series": [
@@ -11199,8 +11289,14 @@
     },
     {
       "date": "2026-10-07",
-      "price": 161.84,
-      "index": 127.8476
+      "index": 126.8439,
+      "interpolated": true,
+      "price": 160.5694
+    },
+    {
+      "date": "2026-10-08",
+      "price": 159.96,
+      "index": 126.3625
     }
   ],
   "equity_flows_by_month": {
@@ -11391,7 +11487,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-10-07 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing 2026-10-07.",
+  "_daily_refresh_note": "Punto 2026-10-08 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing 2026-10-08.",
   "_rebuild_note": "Reconstruccion completa 2026-07-31: reemplaza integramente el pipeline legacy (portfolio_reconstructor.py / sleeve_series desincronizado). Los 12 checkpoints mensuales estan verificados al centavo contra los statements oficiales de Pershing. Flujos calculados como -sum(Net Amount) de las transacciones reales del sleeve en cada periodo (auto-neutraliza fund exchanges internos). Excepcion: 3 transacciones de ene-2026 (venta WELLCRED + compras PIMCO-INC/PIMCO-EM) reclasificadas a feb-2026 tras verificar contra el statement oficial de febrero que asi procesaron realmente (Pershing las emitio como Cancel/Correct). Periodo oct-dic-2025 combinado en un solo calculo por el retiro grande de capital que distorsionaba el corte de fin de mes. | FIX 2026-08-07: se truncaron los puntos 01-ago a 07-ago (calculados con un anchor que iba driftando dia a dia por un bug en refresh_equity_daily.py/refresh_fi_daily.py, ya corregido -- ver _find_last_real_month_end). El proximo refresh diario recalcula bien desde el anchor real de 31-jul.",
   "twr_series_original": [
     {
@@ -15050,6 +15146,13 @@
       "flow_in": 100372.73,
       "twr": 0.02235296996434514,
       "index": 121.0748
+    },
+    {
+      "date": "2026-10-08",
+      "mv_usd": 8762785.574561058,
+      "flow_in": -1152.05,
+      "twr": 0.018716108921364428,
+      "index": 120.6441
     }
   ],
   "acwi_index_series_original": [
@@ -17411,9 +17514,15 @@
       "price": 160.5175
     },
     {
-      "date": "2026-10-07",
-      "price": 161.84,
-      "index": 127.8476
+      "date": "2026-10-06",
+      "index": 127.3252,
+      "interpolated": true,
+      "price": 161.1788
+    },
+    {
+      "date": "2026-10-08",
+      "price": 159.96,
+      "index": 126.3625
     }
   ],
   "_july_ramp_note": "FIX 2026-08-14: se prepende el mes de rampa de capital (1-jul a 31-jul-2025). Antes la serie arrancaba el 31-jul (primer statement oficial) tratandolo como inception (index=100) -- pero la inception real de BIG es 30-jun-2025 (Lynk) y la primera plata entro el 2-jul-2025 (ver transacciones: BRK B, GLD, IBIT 2-jul; CSPX, JHGSC 3-jul; MANIG, NBGMT, PIMCO-INC, MFSCV, WELLCRED 7-jul; NBRE 9-jul; MFSCV 15-jul; TGF 16-jul; BPCC 25-jul; BRK B, IBIT, GLD 30-jul). Modified Dietz 1-jul->31-jul con mv_start=0, mv_end=$6,016,105.03 (statement oficial verificado), flows=transacciones reales: twr=+1.2374%. Toda la serie posterior a esta fecha se reescalo multiplicando el indice por (1+1.2374%) para que el nuevo 1-jul sea la base 100 real. Verificado contra el SI oficial de Lynk (409 dias): residual bajo de +0.72pp a +0.12pp con este fix.",
