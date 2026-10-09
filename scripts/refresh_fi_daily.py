@@ -99,18 +99,33 @@ def load_daily_prices():
 
 
 def fetch_agg_close():
-    """Ultimo cierre del bench FI (UCITS USD Acc, alineado con baha).
+    """Ultimo cierre VALIDO del bench FI (UCITS USD Acc, alineado con baha).
 
     2026-06-18: cambiado de AGG (NYSE) a IUAG.L (UCITS London) por decision
     de Lucas para alinearse con lo que ve en baha. UCITS tiene TER mayor y
     cierre Europa, da YTD distinto.
+
+    Guard NaN (2026-10-09): yfinance devolvia NaN como ultimo close de IUAG.L
+    (dia parcial / feriado LSE) y eso entraba como punto real; despues
+    interpolate_equity_series.py conservaba el punto y propagaba NaN a todos
+    los dias vecinos (85 puntos NaN entre 21-Ago y 08-Oct-2026). Ahora se
+    itera hacia atras hasta el ultimo close valido, igual que fetch_acwi_close
+    en refresh_equity_daily.py. Devuelve (price, None) o (None, error).
     """
     try:
         import yfinance as yf
-        hist = yf.Ticker("IUAG.L").history(period="5d")
-        if len(hist):
-            return float(hist["Close"].iloc[-1]), None
-        return None, "sin datos"
+        hist = yf.Ticker("IUAG.L").history(period="10d")
+        if not len(hist):
+            return None, "sin datos"
+        for i in range(len(hist) - 1, -1, -1):
+            close = hist["Close"].iloc[i]
+            try:
+                close = float(close)
+            except (TypeError, ValueError):
+                continue
+            if _is_valid_price(close):
+                return close, None
+        return None, "sin close valido en 10d"
     except Exception as e:
         return None, str(e)[:60]
 

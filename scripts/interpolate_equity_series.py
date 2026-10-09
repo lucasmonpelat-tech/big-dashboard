@@ -15,6 +15,7 @@ Usage:
     python scripts/interpolate_equity_series.py
 """
 import json
+import math
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -30,8 +31,16 @@ def interpolate_series(series: list[dict], value_key: str = "index") -> list[dic
     if len(series) < 2:
         return series
 
-    # Indexar la serie original por fecha
-    by_date = {p["date"]: p for p in series}
+    # Indexar la serie original por fecha.
+    # FIX 2026-10-09: un punto cuyo valor es NaN/None NO cuenta como original:
+    # se descarta y se vuelve a interpolar entre vecinos validos. Antes un NaN
+    # (close NaN de yfinance) quedaba fijo para siempre y contagiaba a los
+    # dias interpolados de alrededor (agg_index_series, Ago-Oct 2026).
+    def _ok(v):
+        return isinstance(v, (int, float)) and not (isinstance(v, float) and (math.isnan(v) or math.isinf(v)))
+    by_date = {p["date"]: p for p in series if _ok(p.get(value_key))}
+    if len(by_date) < 2:
+        return series
     sorted_dates = sorted(by_date.keys())
     first = date.fromisoformat(sorted_dates[0])
     last = date.fromisoformat(sorted_dates[-1])

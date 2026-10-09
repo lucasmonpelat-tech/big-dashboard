@@ -25,6 +25,7 @@ Usage:
 """
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -408,6 +409,34 @@ def check_pesos_race(errors, warnings):
                 extra = f"  (faltan: {r['faltan'] or '-'}, sobran: {r['sobran'] or '-'})"
             print(f"  [OK]    {archivo:20} {len(r['filas'])} pesos coinciden "
                   f"con canonical {r['as_of']}{extra}")
+
+
+def check_sin_nan(errors, warnings):
+    """NaN/Infinity en un JSON: Python los escribe y lee sin quejarse, pero
+    JSON.parse del navegador explota y cualquier calculo que los toque
+    (benchmark_comparison, atribucion) arrastra basura. 2026-10-09: 85 puntos
+    NaN en fi_sleeve_real.json -> agg_index_series desde el 21-Ago."""
+    archivos = ["equity_sleeve_real.json", "fi_sleeve_real.json", "alts_sleeve_real.json",
+                "equity_race.json", "fi_race.json", "alts_race.json", "attribution_ytd.json",
+                "bmk_6040.json", "bmk_4060.json", "lynk_nav_series.json", "positions_latest.json",
+                "holdings_returns_equity.json", "holdings_returns_fixed_income.json",
+                "holdings_returns_alternatives.json"]
+    rutas = [ROOT / "data" / a for a in archivos]
+    canon_path, _ = latest_canonical()
+    if canon_path:
+        rutas += [Path(canon_path) / n for n in ("benchmark_comparison.json", "holdings_returns.json", "positions.json")]
+    token = re.compile(r':\s*(NaN|-?Infinity)\b')
+    for path in rutas:
+        if not path.exists():
+            continue
+        try:
+            txt = path.read_text(encoding="utf-8")
+        except Exception as e:
+            warnings.append(f"nan[{path.name}]: no pude leerlo ({e})")
+            continue
+        n = len(token.findall(txt))
+        if n:
+            errors.append(f"nan[{path.name}]: {n} valor(es) NaN/Infinity -- el navegador no puede parsear el archivo")
 
 
 def check_fi_stats_derivado(errors, warnings):
@@ -970,6 +999,7 @@ def main():
 
     # ---- 7: fi_stats DERIVADO (misma regla que el dashboard) ----
     check_fi_stats_derivado(errors, warnings)
+    check_sin_nan(errors, warnings)
 
     # ---- 8: EL MAPA DE LOS REPORTES SIGUE APUNTANDO A ALGO ----
     check_mapa_reportes(errors, warnings)
