@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "as_of": "2026-10-08",
-  "generated_at": "2026-10-08T13:56:44Z",
+  "generated_at": "2026-10-09T21:13:32Z",
   "note": "Holdings con MV/return DIRECTO de Pershing UGL (canonical v2 pnl.json). Bench DW calculado desde buys_history + bench indices. Fixes bug de precio staleado del compute_holdings_returns.py viejo.",
   "sources": {
     "positions": "data/canonical/2026-10-08/positions.json",
@@ -835,12 +835,12 @@
           "bench_label": "ACWI",
           "bench_dw_pct": 22.28,
           "alpha_real_pp": -10.41,
-          "ytd_pct": 6.17,
+          "ytd_pct": 11.87,
           "ytd_metodo": "statement del gestor",
           "ytd_as_of": "2026-07-31",
-          "ytd_fuente": "Carlyle AlpInvest Statement Julio 2026 (Pro Capital, TVS_P122202_2026-07-31)",
+          "ytd_fuente": "TVS_P122202_2026-07-31.pdf",
           "bench_ytd_pct": 14.32,
-          "alpha_ytd_pp": -8.15,
+          "alpha_ytd_pp": -2.45,
           "first_buy_date": "2025-08-29",
           "buys_history": [
             {
@@ -849,7 +849,7 @@
             }
           ],
           "_mv_source": "external_statement",
-          "_source_note": "Carlyle AlpInvest Statement Julio 2026 (Pro Capital, TVS_P122202_2026-07-31)",
+          "_source_note": "TVS_P122202_2026-07-31.pdf",
           "_as_of": "2026-07-31"
         },
         {

@@ -1,9 +1,9 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-10-08T10:56:43.871071",
-  "as_of_date": "2026-10-08",
+  "refreshedAt": "2026-10-09T18:13:33.338727",
+  "as_of_date": "2026-10-09",
   "ytd_anchor": "2025-12-31",
-  "days_ytd": 281,
+  "days_ytd": 282,
   "sleeves": [
     {
       "name": "Equity",
@@ -23,32 +23,32 @@
       "name": "Alternatives",
       "value_usd": 8774740.03,
       "weight_pct": 30.14,
-      "ytd_pct": 4.24,
-      "contribution_pp": 1.277
+      "ytd_pct": 6.26,
+      "contribution_pp": 1.888
     },
     {
       "name": "Cash",
       "value_usd": 241560.87,
       "weight_pct": 0.83,
-      "ytd_pct": 4.08,
-      "contribution_pp": 0.034
+      "ytd_pct": 0.0,
+      "contribution_pp": 0.0
     }
   ],
-  "gross_reconstructed_pct": 4.031,
-  "mgmt_fee_pp": -1.386,
+  "gross_reconstructed_pct": 4.608,
+  "mgmt_fee_pp": -1.391,
   "mgmt_fee_rate_annual_pct": 1.8,
-  "net_reconstructed_pct": 2.645,
+  "net_reconstructed_pct": 3.217,
   "lynk_ytd_pct": 3.18,
   "lynk_refreshed_at": "2026-10-08T10:54:01.026109",
-  "residual_pp": -0.535,
+  "residual_pp": 0.037,
   "alts_detail": [
     {
       "ticker": "CALP",
       "name": "Carlyle AlpInvest Private Markets",
       "value_usd": 2796863.33,
       "weight_pct": 31.87,
-      "ytd_pct": 6.17,
-      "contribution_pp": 1.967,
+      "ytd_pct": 11.87,
+      "contribution_pp": 3.783,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
       "valuation_date": "2026-07-31"
     },
@@ -168,28 +168,28 @@
       },
       {
         "name": "Alternatives",
-        "big_contrib_pp": 1.277,
+        "big_contrib_pp": 1.888,
         "bench_contrib_pp": 4.297,
-        "alpha_pp": -3.02,
-        "comment": "BIG 30.1% @ +4.24% vs 30% ACWI @ +14.32%"
+        "alpha_pp": -2.409,
+        "comment": "BIG 30.1% @ +6.26% vs 30% ACWI @ +14.32%"
       },
       {
         "name": "Cash",
-        "big_contrib_pp": 0.034,
+        "big_contrib_pp": 0.0,
         "bench_contrib_pp": 0,
-        "alpha_pp": 0.034,
-        "comment": "BIG 0.8% @ +4.08% (el mandato no tiene Cash)"
+        "alpha_pp": 0.0,
+        "comment": "BIG 0.8% @ +0.00% (el mandato no tiene Cash)"
       },
       {
         "name": "Mgmt Fee",
-        "big_contrib_pp": -1.386,
+        "big_contrib_pp": -1.391,
         "bench_contrib_pp": 0,
-        "alpha_pp": -1.386,
+        "alpha_pp": -1.391,
         "comment": "Lynk mgmt fee 1.8%/yr (bench AOR fee 0.15% no incluido)"
       },
       {
         "name": "Nuestro Cálculo (NET)",
-        "big_contrib_pp": 2.645,
+        "big_contrib_pp": 3.217,
         "bench_contrib_pp": null,
         "alpha_pp": null,
         "is_subtotal": true,
@@ -197,10 +197,10 @@
       },
       {
         "name": "Residual",
-        "big_contrib_pp": -0.535,
+        "big_contrib_pp": 0.037,
         "bench_contrib_pp": null,
-        "alpha_pp": 0.35,
-        "comment": "Nuestro calculo (+2.65%) - Lynk oficial (+3.18%), mas la diferencia entre el bench por pesos del mandato (+7.32%) y el AOR (+7.50%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
+        "alpha_pp": -0.222,
+        "comment": "Nuestro calculo (+3.22%) - Lynk oficial (+3.18%), mas la diferencia entre el bench por pesos del mandato (+7.32%) y el AOR (+7.50%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
       }
     ]
   }

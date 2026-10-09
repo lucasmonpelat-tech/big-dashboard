@@ -34,7 +34,7 @@ ROOT = Path(__file__).parent.parent
 OUTPUT = ROOT / "data" / "attribution_ytd.json"
 
 YTD_ANCHOR = "2025-12-31"
-SOFR_RATE_ANNUAL = 5.3        # cash yield approx (SOFR-ish)
+SOFR_RATE_ANNUAL = 0.0        # 2026-10-09: el cash en Pershing NO rinde (interes real $14-17/mes, ver transacciones 'INTEREST ON FREE CREDIT BALANCES'). Antes 5.3 (SOFR) sumaba +0.03pp ficticios.
 MGMT_FEE_ANNUAL = 1.8         # Lynk management fee (Lucas confirmed)
 
 # Pesos FIJOS del mandato BIG (target 30/40/30), usados para la contribucion del

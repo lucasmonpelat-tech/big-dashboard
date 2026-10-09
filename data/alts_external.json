@@ -1,23 +1,15 @@
 {
-  "_description": "Holdings alternativos EXTERNOS a Pershing UGL. Data manual desde statements de los managers directamente. Actualizar cuando Lucas envía nuevo statement.",
-  "_updated": "2026-08-26",
+  "_description": "GENERADO por scripts/build_alts_external.py desde alts_carlyle_statement.json. NO editar a mano: los cambios se pisan. Para actualizar un holding externo, agregar el statement nuevo en alts_carlyle_statement.json y correr el script.",
+  "_updated": "2026-07-31",
   "holdings": [
     {
       "ticker": "CALP",
       "name": "Carlyle AlpInvest PM Sub-Fund - I - Class B1",
       "isin": "LU2827810776",
       "cusip": null,
-      "qty": 186706.497,
       "unit_cost_usd": 13.39,
       "cost_basis_usd": 2500000.0,
-      "last_price_usd": 14.98,
-      "mv_usd": 2796863.33,
-      "unrealized_gl_usd": 296863.33,
-      "return_pct": 11.87,
-      "ytd_pct": 6.17,
       "first_buy_date": "2025-08-29",
-      "as_of": "2026-07-31",
-      "source": "Carlyle AlpInvest Statement Julio 2026 (Pro Capital, TVS_P122202_2026-07-31)",
       "source_file": "C:/Users/lmonp/Dropbox/2026/Research Fondos/Alternativos/Private Equity/Carlyle AlpInvest/Statements/TVS_P122202_2026-07-31.pdf",
       "sleeve": "alternatives",
       "buys_history": [
@@ -25,7 +17,16 @@
           "date": "2025-08-29",
           "cost": 2500000.0
         }
-      ]
+      ],
+      "qty": 186706.497,
+      "last_price_usd": 14.98,
+      "mv_usd": 2796863.33,
+      "unrealized_gl_usd": 296863.33,
+      "return_pct": 11.87,
+      "ytd_pct": 11.87,
+      "as_of": "2026-07-31",
+      "source": "TVS_P122202_2026-07-31.pdf"
     }
-  ]
+  ],
+  "_generated_from": "alts_carlyle_statement.json"
 }
