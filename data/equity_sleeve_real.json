@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-10-12T13:14:31.165112",
+  "refreshedAt": "2026-10-12T21:25:47.235321",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -5424,7 +5424,7 @@
     },
     {
       "date": "2026-10-12",
-      "mv_usd": 8749522.099685485,
+      "mv_usd": 8752682.099685485,
       "holdings": [
         {
           "ticker": "CSPX",
@@ -5450,8 +5450,8 @@
         {
           "ticker": "ILF",
           "qty": 10000.0,
-          "price": 38.15,
-          "mv": 381500.0,
+          "price": 38.21,
+          "mv": 382100.0,
           "source": "daily_close"
         },
         {
@@ -5492,8 +5492,8 @@
         {
           "ticker": "ARGT",
           "qty": 4000.0,
-          "price": 88.56,
-          "mv": 354240.0,
+          "price": 89.2,
+          "mv": 356800.0,
           "source": "daily_close"
         },
         {
@@ -9195,10 +9195,10 @@
     },
     {
       "date": "2026-10-12",
-      "mv_usd": 8749522.099685485,
+      "mv_usd": 8752682.099685485,
       "flow_in": -1152.07,
-      "twr": 0.017029299724142733,
-      "index": 120.4443
+      "twr": 0.017390694849795996,
+      "index": 120.4871
     }
   ],
   "acwi_index_series": [
@@ -11597,8 +11597,8 @@
     },
     {
       "date": "2026-10-12",
-      "price": 160.9,
-      "index": 127.105
+      "price": 160.63,
+      "index": 126.8918
     }
   ],
   "equity_flows_by_month": {
@@ -15471,11 +15471,19 @@
       "index": 120.4517
     },
     {
-      "date": "2026-10-12",
-      "mv_usd": 8749522.099685485,
+      "date": "2026-10-11",
+      "index": 120.448,
+      "interpolated": true,
+      "mv_usd": 8749522.0997,
       "flow_in": -1152.07,
-      "twr": 0.017029299724142733,
-      "index": 120.4443
+      "twr": 0.0171
+    },
+    {
+      "date": "2026-10-12",
+      "mv_usd": 8752682.099685485,
+      "flow_in": -1152.07,
+      "twr": 0.017390694849795996,
+      "index": 120.4871
     }
   ],
   "acwi_index_series_original": [
@@ -17861,9 +17869,21 @@
       "price": 160.5399
     },
     {
+      "date": "2026-10-10",
+      "index": 126.9153,
+      "interpolated": true,
+      "price": 160.6599
+    },
+    {
+      "date": "2026-10-11",
+      "index": 127.0102,
+      "interpolated": true,
+      "price": 160.78
+    },
+    {
       "date": "2026-10-12",
-      "price": 160.9,
-      "index": 127.105
+      "price": 160.63,
+      "index": 126.8918
     }
   ],
   "_july_ramp_note": "FIX 2026-08-14: se prepende el mes de rampa de capital (1-jul a 31-jul-2025). Antes la serie arrancaba el 31-jul (primer statement oficial) tratandolo como inception (index=100) -- pero la inception real de BIG es 30-jun-2025 (Lynk) y la primera plata entro el 2-jul-2025 (ver transacciones: BRK B, GLD, IBIT 2-jul; CSPX, JHGSC 3-jul; MANIG, NBGMT, PIMCO-INC, MFSCV, WELLCRED 7-jul; NBRE 9-jul; MFSCV 15-jul; TGF 16-jul; BPCC 25-jul; BRK B, IBIT, GLD 30-jul). Modified Dietz 1-jul->31-jul con mv_start=0, mv_end=$6,016,105.03 (statement oficial verificado), flows=transacciones reales: twr=+1.2374%. Toda la serie posterior a esta fecha se reescalo multiplicando el indice por (1+1.2374%) para que el nuevo 1-jul sea la base 100 real. Verificado contra el SI oficial de Lynk (409 dias): residual bajo de +0.72pp a +0.12pp con este fix.",

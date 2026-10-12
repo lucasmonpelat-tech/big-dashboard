@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-10-12T13:14:32.094011",
+  "refreshedAt": "2026-10-12T21:25:48.232536",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -3969,8 +3969,15 @@
     },
     {
       "date": "2026-10-12",
-      "mv_usd": 11360439.87266,
+      "mv_usd": 11600329.946804,
       "holdings": [
+        {
+          "ticker": "GAMCB",
+          "qty": 22165.72,
+          "price": 24.8892,
+          "mv": 551687.038224,
+          "source": "daily_close"
+        },
         {
           "ticker": "PIMCO-EM",
           "qty": 48651.139,
@@ -4004,13 +4011,6 @@
           "qty": 224080.422,
           "price": 13.91,
           "mv": 3116958.67002,
-          "source": "daily_close"
-        },
-        {
-          "ticker": "GAMCB",
-          "qty": 12527.4,
-          "price": 24.8892,
-          "mv": 311796.96408,
           "source": "daily_close"
         },
         {
@@ -7717,10 +7717,10 @@
     },
     {
       "date": "2026-10-12",
-      "mv_usd": 11360439.87266,
-      "flow_in": 110000.11,
-      "twr": 0.002071485653132974,
-      "index": 104.5885
+      "mv_usd": 11600329.946804,
+      "flow_in": 350000.06,
+      "twr": 0.0020617466722498818,
+      "index": 104.5875
     }
   ],
   "agg_index_series": [
@@ -10091,8 +10091,8 @@
     },
     {
       "date": "2026-10-12",
-      "price": 90.34,
-      "index": 100.3683
+      "price": 90.375,
+      "index": 100.4072
     }
   ],
   "fi_flows_by_month": {
@@ -13963,11 +13963,19 @@
       "index": 104.5887
     },
     {
-      "date": "2026-10-12",
-      "mv_usd": 11360439.87266,
+      "date": "2026-10-11",
+      "index": 104.5886,
+      "interpolated": true,
+      "mv_usd": 11360439.8727,
       "flow_in": 110000.11,
-      "twr": 0.002071485653132974,
-      "index": 104.5885
+      "twr": 0.0021
+    },
+    {
+      "date": "2026-10-12",
+      "mv_usd": 11600329.946804,
+      "flow_in": 350000.06,
+      "twr": 0.0020617466722498818,
+      "index": 104.5875
     }
   ],
   "_july_ramp_note": "FIX 2026-08-14: se prepende el mes de rampa de capital (1-jul a 31-jul-2025). Ver equity_sleeve_real.json para el detalle completo -- mismo fix, misma logica. FI Modified Dietz 1-jul->31-jul: mv_start=0, mv_end=$6,818,058.18 (statement oficial verificado), flows=MANIG/PIMCO-INC/WELLCRED (7-jul) + TGF (16-jul): twr=+0.3344%. Serie reescalada por (1+0.3344%).",
@@ -16328,9 +16336,21 @@
       "price": 90.0975
     },
     {
+      "date": "2026-10-10",
+      "index": 100.1886,
+      "interpolated": true,
+      "price": 90.1783
+    },
+    {
+      "date": "2026-10-11",
+      "index": 100.2785,
+      "interpolated": true,
+      "price": 90.2592
+    },
+    {
       "date": "2026-10-12",
-      "price": 90.34,
-      "index": 100.3683
+      "price": 90.375,
+      "index": 100.4072
     }
   ]
 }
