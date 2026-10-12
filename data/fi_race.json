@@ -1,11 +1,11 @@
 {
-  "refreshedAt": "2026-10-10T13:14:11.255881",
+  "refreshedAt": "2026-10-12T13:14:32.954130",
   "inception": "2025-06-30",
   "benchmark": "Bloomberg US Aggregate (via AGG ETF)",
   "ust_reference": {
     "label": "10Y US Treasury (^TNX)",
-    "value": 5.244,
-    "date": "2026-10-09",
+    "value": 5.24,
+    "date": "2026-10-12",
     "source": "Yahoo ^TNX"
   },
   "portfolio_metrics": {
@@ -277,7 +277,7 @@
       "nav_anchor_si": 1.4233710155670867
     }
   },
-  "_daily_race_note": "Pesos y MV releidos de canonical/2026-10-10/holdings_returns.json; metricas (ytw/duration/maturity/rating) de data/funds/<TICKER>.json. Retornos por fondo recalculados 2026-10-10 con NAV vivo T-1 (baha). YTD exacto (ancla NAV 31-dic): ['PIMCO-LD', 'PIMCO-INC', 'MANIG', 'PIMCO-EM', 'SGCB', 'MANEM']. YTD calibrado desde mensual 2026-04: ['TGF']. Sin NAV vivo (carry/scrape): —.",
-  "_weights_source": "canonical/2026-10-10/holdings_returns.json",
+  "_daily_race_note": "Pesos y MV releidos de canonical/2026-10-12/holdings_returns.json; metricas (ytw/duration/maturity/rating) de data/funds/<TICKER>.json. Retornos por fondo recalculados 2026-10-12 con NAV vivo T-1 (baha). YTD exacto (ancla NAV 31-dic): ['PIMCO-LD', 'PIMCO-INC', 'MANIG', 'PIMCO-EM', 'SGCB', 'MANEM']. YTD calibrado desde mensual 2026-04: ['TGF']. Sin NAV vivo (carry/scrape): —.",
+  "_weights_source": "canonical/2026-10-12/holdings_returns.json",
   "_metrics_source": "data/funds/<TICKER>.json (fi_metrics)"
 }
