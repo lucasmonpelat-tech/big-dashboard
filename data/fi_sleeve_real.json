@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-10-13T13:14:39.809112",
+  "refreshedAt": "2026-10-13T19:32:17.669903",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -10166,8 +10166,8 @@
     },
     {
       "date": "2026-10-13",
-      "price": 90.75,
-      "index": 100.8238
+      "price": 90.58,
+      "index": 100.6349
     }
   ],
   "fi_flows_by_month": {
@@ -16430,9 +16430,15 @@
       "price": 90.2592
     },
     {
+      "date": "2026-10-12",
+      "index": 100.5512,
+      "interpolated": true,
+      "price": 90.5046
+    },
+    {
       "date": "2026-10-13",
-      "price": 90.75,
-      "index": 100.8238
+      "price": 90.58,
+      "index": 100.6349
     }
   ]
 }
