@@ -27,6 +27,9 @@ import json
 import math
 from datetime import date, datetime
 from pathlib import Path
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).parent))
+from bench_series import fetch_closes, upsert_bench_series
 
 ROOT = Path(__file__).parent.parent
 SLEEVE_FILE = ROOT / "data" / "fi_sleeve_real.json"
@@ -331,19 +334,15 @@ def main():
         twr.append(new_twr_point)
         sleeve.append(new_sleeve_point)
 
-    # AGG today (Yahoo, rebaseado al primer punto)
-    agg_price, err = fetch_agg_close()
-    base_price = agg[0]["price"]
-    if agg_price and base_price:
-        agg_index = round(agg_price / base_price * 100, 4)
-        new_agg = {"date": today_iso, "price": round(agg_price, 4), "index": agg_index}
-        if _is_month_end(agg[-1]["date"]):
-            agg.append(new_agg)
-        else:
-            agg[-1] = new_agg
-        print(f"  AGG cierre: ${agg_price:.2f} -> index {agg_index}")
+    # AGG (IUAG.L): un punto REAL por dia de mercado (upsert de ~1 mes de
+    # cierres), no solo "ultimo cierre sobre agg[-1]". Ver scripts/bench_series.py (2026-10-14).
+    closes, err = fetch_closes("IUAG.L", period="1mo")
+    if closes:
+        res = upsert_bench_series(agg, closes, today_iso)
+        print(f"  AGG: {len(closes)} cierres bajados, {res['upserted']} puntos reales nuevos/corregidos, "
+              f"{res['reinterpolated']} reinterpolados -> hoy ${res['last']['price']:.2f} index {res['last']['index']}")
     else:
-        print(f"  AGG no actualizado ({err}) — se mantiene el ultimo punto")
+        print(f"  AGG no actualizado ({err}) -- se mantiene la serie")
 
     data["refreshedAt"] = datetime.now().isoformat()
     data["_daily_refresh_note"] = f"Punto {today_iso} recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing {pl.get('as_of','?')}."

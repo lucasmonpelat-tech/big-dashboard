@@ -24,6 +24,9 @@ import json
 import math
 from datetime import date, datetime
 from pathlib import Path
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).parent))
+from bench_series import fetch_closes, upsert_bench_series
 
 ROOT = Path(__file__).parent.parent
 SLEEVE_FILE = ROOT / "data" / "equity_sleeve_real.json"
@@ -445,20 +448,15 @@ def main():
         twr.append(new_twr_point)
         sleeve.append(new_sleeve_point)
 
-    # ACWI today (Yahoo, rebaseado al primer punto)
-    acwi_price, err = fetch_acwi_close()
-    base_price = acwi[0]["price"]
-    # Guard: tanto acwi_price como base_price deben ser validos (no NaN)
-    if _is_valid_price(acwi_price) and _is_valid_price(base_price):
-        acwi_index = round(acwi_price / base_price * 100, 4)
-        new_acwi = {"date": today_iso, "price": round(acwi_price, 4), "index": acwi_index}
-        if _is_month_end(acwi[-1]["date"]):
-            acwi.append(new_acwi)
-        else:
-            acwi[-1] = new_acwi
-        print(f"  ACWI cierre: ${acwi_price:.2f} -> index {acwi_index}")
+    # ACWI: un punto REAL por dia de mercado (upsert de ~1 mes de cierres), no
+    # solo "ultimo cierre sobre acwi[-1]". Ver scripts/bench_series.py (2026-10-14).
+    closes, err = fetch_closes("ACWI", period="1mo")
+    if closes:
+        res = upsert_bench_series(acwi, closes, today_iso)
+        print(f"  ACWI: {len(closes)} cierres bajados, {res['upserted']} puntos reales nuevos/corregidos, "
+              f"{res['reinterpolated']} reinterpolados -> hoy ${res['last']['price']:.2f} index {res['last']['index']}")
     else:
-        print(f"  ACWI no actualizado ({err}) — se mantiene el ultimo punto")
+        print(f"  ACWI no actualizado ({err}) -- se mantiene la serie")
 
     data["refreshedAt"] = datetime.now().isoformat()
     data["_daily_refresh_note"] = f"Punto {today_iso} recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing {pl.get('as_of','?')}."
