@@ -4,25 +4,25 @@
   "isin": "IE00B5BMR087",
   "name": "iShares Core S&P 500 UCITS ETF",
   "moneda": "USD",
-  "as_of": "2026-09-22",
-  "generado": "2026-09-23",
+  "as_of": "2026-10-14",
+  "generado": "2026-10-15",
   "source": "iShares product-data API (holdings.all), portfolioId 253743",
   "source_url": "https://www.ishares.com/uk/individual/en/products/253743/ishares-sp-500-b-ucits-etf-acc-fund",
   "n_holdings_guardados": 10,
-  "cobertura_pct": 38.87,
-  "n_holdings_en_el_fondo": 504,
-  "suma_pesos_fondo": 99.75,
+  "cobertura_pct": 38.82,
+  "n_holdings_en_el_fondo": 505,
+  "suma_pesos_fondo": 99.88,
   "holdings": {
-    "NVDA": 8.25713,
-    "AAPL": 7.39261,
-    "MSFT": 5.51351,
-    "AMZN": 3.73104,
-    "GOOGL": 3.07217,
-    "AVGO": 2.58572,
-    "GOOG": 2.46196,
-    "META": 2.4212,
-    "MU": 1.84535,
-    "TSLA": 1.59171
+    "NVDA": 8.04725,
+    "AAPL": 7.52097,
+    "MSFT": 5.95482,
+    "AMZN": 3.74745,
+    "GOOGL": 3.06528,
+    "AVGO": 2.47529,
+    "GOOG": 2.45446,
+    "META": 2.44382,
+    "TSLA": 1.55484,
+    "MU": 1.55134
   },
   "detalle": {
     "NVDA": {
@@ -57,13 +57,13 @@
       "name": "META PLATFORMS CLASS A",
       "sector": "Communication"
     },
-    "MU": {
-      "name": "MICRON TECHNOLOGY",
-      "sector": "Information Technology"
-    },
     "TSLA": {
       "name": "TESLA INC",
       "sector": "Consumer Discretionary"
+    },
+    "MU": {
+      "name": "MICRON TECHNOLOGY",
+      "sector": "Information Technology"
     }
   }
 }
