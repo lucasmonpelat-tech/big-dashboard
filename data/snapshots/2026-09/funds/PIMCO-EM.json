@@ -1,0 +1,40 @@
+{
+  "ticker": "PIMCO-EM",
+  "isin": "IE00B29K0P99",
+  "name": "PIMCO GIS EM Local Bond I",
+  "sleeve": "Fixed Income",
+  "source": "PIMCO website via Chrome MCP",
+  "parsed_at": "2026-05-12",
+  "as_of_factsheet": "2026-04-30",
+  "fi_metrics": {
+    "ytw": 8.51,
+    "duration": 5.31,
+    "maturity": 7.32,
+    "rating": "BBB"
+  },
+  "countries": {
+    "Mexico": 10.44,
+    "Malaysia": 10.08,
+    "India": 9.96,
+    "China": 9.87,
+    "Indonesia": 9.31,
+    "Brazil": 8.54,
+    "Poland": 8.29,
+    "South Africa": 7.69,
+    "Thailand": 6.56,
+    "Czech Republic": 4.69
+  },
+  "fi_stats_include": false,
+  "fi_stats_exclude_reason": "moneda local emergente sin hedge por diseno del mandato: su duracion no es homogenea con la del resto",
+  "countries_de_factsheet": true,
+  "countries_as_of": "2026-04-30",
+  "factsheet_url": "https://www.pimco.com/gb/en/investments/gis/emerging-local-bond-fund/inst-usd-accumulation",
+  "fi_metrics_de_factsheet": false,
+  "current_yield_ref": {
+    "valor": 5.96,
+    "as_of": "2026-04-30",
+    "fuente": "web de PIMCO (Abr-2026), no un factsheet de la carpeta",
+    "de_factsheet": false,
+    "nota": "Solo referencia, no se muestra (Lucas 2026-09-18: YTM solo)."
+  }
+}
