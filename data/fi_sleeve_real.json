@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-10-14T13:14:19.340070",
+  "refreshedAt": "2026-10-15T13:13:56.653544",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -4152,6 +4152,68 @@
           "source": "daily_close"
         }
       ]
+    },
+    {
+      "date": "2026-10-15",
+      "mv_usd": 11619501.784060001,
+      "holdings": [
+        {
+          "ticker": "PIMCO-INC",
+          "qty": 235926.136,
+          "price": 19.61,
+          "mv": 4626511.526959999,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "PIMCO-LD",
+          "qty": 116321.801,
+          "price": 13.92,
+          "mv": 1619199.46992,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "GAMCB",
+          "qty": 22165.72,
+          "price": 24.9245,
+          "mv": 552469.48814,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "PIMCO-EM",
+          "qty": 48651.139,
+          "price": 18.32,
+          "mv": 891288.8664800001,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MANIG",
+          "qty": 16621.485,
+          "price": 122.86,
+          "mv": 2042115.6471000002,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MANEM",
+          "qty": 4060.017,
+          "price": 115.38,
+          "mv": 468444.76145999995,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "SGCB",
+          "qty": 269.44,
+          "price": 2235.25,
+          "mv": 602265.76,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "TGF",
+          "qty": 532000.0,
+          "price": 1.5361019999999999,
+          "mv": 817206.264,
+          "source": "daily_close"
+        }
+      ]
     }
   ],
   "twr_series": [
@@ -7859,6 +7921,13 @@
       "flow_in": 350000.06,
       "twr": 0.004079651209565389,
       "index": 104.7981
+    },
+    {
+      "date": "2026-10-15",
+      "mv_usd": 11619501.784060001,
+      "flow_in": 350000.06,
+      "twr": 0.003741499604501107,
+      "index": 104.7628
     }
   ],
   "agg_index_series": [
@@ -10249,8 +10318,13 @@
     },
     {
       "date": "2026-10-14",
-      "price": 90.375,
-      "index": 100.4072
+      "price": 90.58,
+      "index": 100.6349
+    },
+    {
+      "date": "2026-10-15",
+      "price": 90.58,
+      "index": 100.6349
     }
   ],
   "fi_flows_by_month": {
@@ -10440,7 +10514,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-10-14 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-10-14.",
+  "_daily_refresh_note": "Punto 2026-10-15 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-10-15.",
   "_bench_fix_note": "2026-06-23: agg_index_series reconstruida con IUAG.L (UCITS Acc, total return). Antes era AGG NYSE price-only sin reinvertir dividendos, daba YTD -5.78% falso.",
   "_rebuild_note": "Reconstruccion completa 2026-07-31: reemplaza integramente el pipeline legacy (portfolio_reconstructor.py / sleeve_series desincronizado). Los 12 checkpoints mensuales estan verificados al centavo contra los statements oficiales de Pershing. Flujos calculados como -sum(Net Amount) de las transacciones reales del sleeve en cada periodo (auto-neutraliza fund exchanges internos). Excepcion: 3 transacciones de ene-2026 (venta WELLCRED + compras PIMCO-INC/PIMCO-EM) reclasificadas a feb-2026 tras verificar contra el statement oficial de febrero que asi procesaron realmente (Pershing las emitio como Cancel/Correct). Periodo oct-dic-2025 combinado en un solo calculo por el retiro grande de capital que distorsionaba el corte de fin de mes. | FIX 2026-08-07: se truncaron los puntos 01-ago a 07-ago (calculados con un anchor que iba driftando dia a dia por un bug en refresh_equity_daily.py/refresh_fi_daily.py, ya corregido -- ver _find_last_real_month_end). El proximo refresh diario recalcula bien desde el anchor real de 31-jul.",
   "twr_series_original": [
@@ -14148,6 +14222,13 @@
       "flow_in": 350000.06,
       "twr": 0.004079651209565389,
       "index": 104.7981
+    },
+    {
+      "date": "2026-10-15",
+      "mv_usd": 11619501.784060001,
+      "flow_in": 350000.06,
+      "twr": 0.003741499604501107,
+      "index": 104.7628
     }
   ],
   "_july_ramp_note": "FIX 2026-08-14: se prepende el mes de rampa de capital (1-jul a 31-jul-2025). Ver equity_sleeve_real.json para el detalle completo -- mismo fix, misma logica. FI Modified Dietz 1-jul->31-jul: mv_start=0, mv_end=$6,818,058.18 (statement oficial verificado), flows=MANIG/PIMCO-INC/WELLCRED (7-jul) + TGF (16-jul): twr=+0.3344%. Serie reescalada por (1+0.3344%).",
@@ -15906,23 +15987,23 @@
     },
     {
       "date": "2026-06-16",
+      "price": 93.31,
+      "index": 103.668
+    },
+    {
+      "date": "2026-06-17",
       "price": 93.41,
       "index": 103.7791
     },
     {
-      "date": "2026-06-17",
+      "date": "2026-06-18",
       "price": 93.45,
       "index": 103.8235
     },
     {
-      "date": "2026-06-18",
+      "date": "2026-06-19",
       "price": 93.34,
       "index": 103.7013
-    },
-    {
-      "date": "2026-06-19",
-      "price": 93.12,
-      "index": 103.4569
     },
     {
       "date": "2026-06-20",
@@ -15931,33 +16012,35 @@
     },
     {
       "date": "2026-06-21",
-      "price": 93.12,
-      "index": 103.4569
+      "price": 93.0883,
+      "index": 103.4217,
+      "interpolated": true
     },
     {
       "date": "2026-06-22",
-      "price": 93.025,
-      "index": 103.3513
+      "price": 93.0567,
+      "index": 103.3866,
+      "interpolated": true
     },
     {
       "date": "2026-06-23",
+      "price": 93.025,
+      "index": 103.3514
+    },
+    {
+      "date": "2026-06-24",
       "price": 93.14,
       "index": 103.4791
     },
     {
-      "date": "2026-06-24",
-      "price": 93.7,
-      "index": 104.1012
-    },
-    {
       "date": "2026-06-25",
-      "price": 93.83,
-      "index": 104.2457
+      "price": 93.7,
+      "index": 104.1013
     },
     {
       "date": "2026-06-26",
-      "price": 93.75,
-      "index": 104.1568
+      "price": 93.83,
+      "index": 104.2457
     },
     {
       "date": "2026-06-27",
@@ -15966,103 +16049,109 @@
     },
     {
       "date": "2026-06-28",
-      "price": 93.75,
-      "index": 104.1568
+      "price": 93.7167,
+      "index": 104.1198,
+      "interpolated": true
     },
     {
       "date": "2026-06-29",
+      "price": 93.6833,
+      "index": 104.0827,
+      "interpolated": true
+    },
+    {
+      "date": "2026-06-30",
       "price": 93.65,
       "index": 104.0457
     },
     {
-      "date": "2026-06-30",
+      "date": "2026-07-01",
       "price": 93.51,
       "index": 103.8902
     },
     {
-      "date": "2026-07-01",
+      "date": "2026-07-02",
       "price": 93.26,
       "index": 103.6124
     },
     {
-      "date": "2026-07-02",
+      "date": "2026-07-03",
       "price": 93.35,
       "index": 103.7124
     },
     {
-      "date": "2026-07-03",
-      "price": 93.4,
-      "index": 103.7679
-    },
-    {
       "date": "2026-07-04",
       "price": 93.4,
-      "index": 103.7679
+      "index": 103.768
     },
     {
       "date": "2026-07-05",
-      "price": 93.4,
-      "index": 103.7679
+      "price": 93.3467,
+      "index": 103.7087,
+      "interpolated": true
     },
     {
       "date": "2026-07-06",
+      "price": 93.2933,
+      "index": 103.6495,
+      "interpolated": true
+    },
+    {
+      "date": "2026-07-07",
       "price": 93.24,
       "index": 103.5902
     },
     {
-      "date": "2026-07-07",
+      "date": "2026-07-08",
       "price": 93.06,
       "index": 103.3902
     },
     {
-      "date": "2026-07-08",
+      "date": "2026-07-09",
       "price": 92.63,
       "index": 102.9125
     },
     {
-      "date": "2026-07-09",
-      "price": 92.89,
-      "index": 103.2013
-    },
-    {
       "date": "2026-07-10",
-      "price": 92.945,
-      "index": 103.2624
+      "price": 92.89,
+      "index": 103.2014
     },
     {
       "date": "2026-07-11",
       "price": 92.945,
-      "index": 103.2624
+      "index": 103.2625
     },
     {
       "date": "2026-07-12",
-      "price": 92.945,
-      "index": 103.2624
+      "price": 92.8133,
+      "index": 103.1162,
+      "interpolated": true
     },
     {
       "date": "2026-07-13",
+      "price": 92.6817,
+      "index": 102.9699,
+      "interpolated": true
+    },
+    {
+      "date": "2026-07-14",
       "price": 92.55,
       "index": 102.8236
     },
     {
-      "date": "2026-07-14",
+      "date": "2026-07-15",
       "price": 92.86,
       "index": 103.168
     },
     {
-      "date": "2026-07-15",
+      "date": "2026-07-16",
       "price": 92.85,
       "index": 103.1569
     },
     {
-      "date": "2026-07-16",
-      "price": 92.69,
-      "index": 102.9791
-    },
-    {
       "date": "2026-07-17",
-      "price": 92.985,
-      "index": 103.3069
+      "price": 92.69,
+      "index": 102.9792
     },
     {
       "date": "2026-07-18",
@@ -16071,33 +16160,35 @@
     },
     {
       "date": "2026-07-19",
-      "price": 92.985,
-      "index": 103.3069
+      "price": 92.87,
+      "index": 103.1791,
+      "interpolated": true
     },
     {
       "date": "2026-07-20",
+      "price": 92.755,
+      "index": 103.0514,
+      "interpolated": true
+    },
+    {
+      "date": "2026-07-21",
       "price": 92.64,
       "index": 102.9236
     },
     {
-      "date": "2026-07-21",
+      "date": "2026-07-22",
       "price": 92.49,
-      "index": 102.7569
+      "index": 102.757
     },
     {
-      "date": "2026-07-22",
+      "date": "2026-07-23",
       "price": 92.42,
       "index": 102.6792
     },
     {
-      "date": "2026-07-23",
+      "date": "2026-07-24",
       "price": 91.96,
       "index": 102.1681
-    },
-    {
-      "date": "2026-07-24",
-      "price": 92.47,
-      "index": 102.7347
     },
     {
       "date": "2026-07-25",
@@ -16106,429 +16197,438 @@
     },
     {
       "date": "2026-07-26",
-      "price": 92.47,
-      "index": 102.7347
+      "price": 92.4567,
+      "index": 102.7199,
+      "interpolated": true
     },
     {
       "date": "2026-07-27",
+      "price": 92.4433,
+      "index": 102.7051,
+      "interpolated": true
+    },
+    {
+      "date": "2026-07-28",
       "price": 92.43,
       "index": 102.6903
     },
     {
-      "date": "2026-07-28",
+      "date": "2026-07-29",
       "price": 92.63,
       "index": 102.9125
     },
     {
-      "date": "2026-07-29",
+      "date": "2026-07-30",
       "price": 92.34,
       "index": 102.5903
     },
     {
-      "date": "2026-07-30",
+      "date": "2026-07-31",
       "price": 92.32,
       "index": 102.5681
     },
     {
-      "date": "2026-07-31",
+      "date": "2026-08-01",
       "price": 92.09,
-      "index": 102.3125
+      "index": 102.3126
     },
     {
-      "date": "2026-08-01",
+      "date": "2026-08-02",
       "price": 92.1267,
       "index": 102.3533,
       "interpolated": true
     },
     {
-      "date": "2026-08-02",
+      "date": "2026-08-03",
       "price": 92.1633,
-      "index": 102.394,
+      "index": 102.3941,
       "interpolated": true
     },
     {
-      "date": "2026-08-03",
+      "date": "2026-08-04",
       "price": 92.2,
       "index": 102.4348
     },
     {
-      "date": "2026-08-04",
+      "date": "2026-08-05",
       "price": 92.68,
       "index": 102.9681
     },
     {
-      "date": "2026-08-05",
+      "date": "2026-08-06",
       "price": 92.65,
       "index": 102.9347
     },
     {
-      "date": "2026-08-06",
+      "date": "2026-08-07",
       "price": 92.44,
       "index": 102.7014
     },
     {
-      "date": "2026-08-07",
+      "date": "2026-08-08",
       "price": 92.77,
       "index": 103.068
     },
     {
-      "date": "2026-08-08",
+      "date": "2026-08-09",
       "price": 92.7,
       "index": 102.9902,
       "interpolated": true
     },
     {
-      "date": "2026-08-09",
+      "date": "2026-08-10",
       "price": 92.63,
       "index": 102.9125,
       "interpolated": true
     },
     {
-      "date": "2026-08-10",
+      "date": "2026-08-11",
       "price": 92.56,
       "index": 102.8347
     },
     {
-      "date": "2026-08-11",
+      "date": "2026-08-12",
       "price": 92.31,
       "index": 102.557
     },
     {
-      "date": "2026-08-12",
+      "date": "2026-08-13",
       "price": 92.45,
       "index": 102.7125
     },
     {
-      "date": "2026-08-13",
+      "date": "2026-08-14",
       "price": 92.74,
       "index": 103.0347
     },
     {
-      "date": "2026-08-14",
+      "date": "2026-08-15",
       "price": 92.68,
       "index": 102.9681
     },
     {
-      "date": "2026-08-15",
+      "date": "2026-08-16",
       "price": 92.6,
       "index": 102.8792,
       "interpolated": true
     },
     {
-      "date": "2026-08-16",
+      "date": "2026-08-17",
       "price": 92.52,
       "index": 102.7903,
       "interpolated": true
     },
     {
-      "date": "2026-08-17",
+      "date": "2026-08-18",
       "price": 92.44,
       "index": 102.7014
     },
     {
-      "date": "2026-08-18",
-      "price": 92.53,
-      "index": 102.8014
+      "date": "2026-08-19",
+      "index": 102.8014,
+      "price": 92.53
     },
     {
-      "date": "2026-08-19",
+      "date": "2026-08-20",
       "index": 102.9681,
       "price": 92.68
     },
     {
-      "date": "2026-08-20",
+      "date": "2026-08-21",
       "index": 102.9069,
       "price": 92.625
     },
     {
-      "date": "2026-08-21",
+      "date": "2026-08-22",
       "index": 102.6792,
       "price": 92.42
     },
     {
-      "date": "2026-08-22",
+      "date": "2026-08-23",
       "index": 102.7125,
       "interpolated": true,
       "price": 92.45
     },
     {
-      "date": "2026-08-23",
+      "date": "2026-08-24",
       "index": 102.7459,
-      "interpolated": true,
-      "price": 92.48
+      "price": 92.48,
+      "interpolated": true
     },
     {
-      "date": "2026-08-24",
+      "date": "2026-08-25",
       "index": 102.7792,
       "price": 92.51
     },
     {
-      "date": "2026-08-25",
+      "date": "2026-08-26",
       "index": 103.1791,
       "price": 92.87
     },
     {
-      "date": "2026-08-26",
+      "date": "2026-08-27",
       "index": 103.1125,
       "price": 92.81
     },
     {
-      "date": "2026-08-27",
+      "date": "2026-08-28",
       "index": 103.3014,
       "price": 92.98
     },
     {
-      "date": "2026-08-28",
+      "date": "2026-08-29",
       "index": 103.0014,
       "price": 92.71
     },
     {
-      "date": "2026-08-29",
+      "date": "2026-08-30",
       "index": 102.932,
       "interpolated": true,
       "price": 92.6475
     },
     {
-      "date": "2026-08-30",
-      "index": 102.8625,
-      "interpolated": true,
-      "price": 92.585
-    },
-    {
       "date": "2026-08-31",
-      "price": 92.5225,
-      "index": 102.7931,
+      "price": 92.585,
+      "index": 102.8625,
       "interpolated": true
     },
     {
       "date": "2026-09-01",
+      "index": 102.7931,
+      "price": 92.5225,
+      "interpolated": true
+    },
+    {
+      "date": "2026-09-02",
       "index": 102.7236,
       "price": 92.46
     },
     {
-      "date": "2026-09-02",
+      "date": "2026-09-03",
       "index": 102.4237,
       "price": 92.19
     },
     {
-      "date": "2026-09-03",
+      "date": "2026-09-04",
       "index": 102.7236,
       "price": 92.46
     },
     {
-      "date": "2026-09-04",
+      "date": "2026-09-05",
       "index": 102.6236,
       "price": 92.37
     },
     {
-      "date": "2026-09-05",
+      "date": "2026-09-06",
       "index": 102.6125,
       "interpolated": true,
       "price": 92.36
     },
     {
-      "date": "2026-09-06",
+      "date": "2026-09-07",
       "index": 102.6014,
-      "interpolated": true,
-      "price": 92.35
+      "price": 92.35,
+      "interpolated": true
     },
     {
-      "date": "2026-09-07",
+      "date": "2026-09-08",
       "index": 102.5903,
       "price": 92.34
     },
     {
-      "date": "2026-09-08",
+      "date": "2026-09-09",
       "index": 102.5348,
       "price": 92.29
     },
     {
-      "date": "2026-09-09",
+      "date": "2026-09-10",
       "index": 102.2237,
       "price": 92.01
     },
     {
-      "date": "2026-09-10",
+      "date": "2026-09-11",
       "index": 101.7682,
       "price": 91.6
     },
     {
-      "date": "2026-09-11",
+      "date": "2026-09-12",
       "index": 101.8293,
       "price": 91.655
     },
     {
-      "date": "2026-09-12",
+      "date": "2026-09-13",
       "index": 101.7608,
       "interpolated": true,
       "price": 91.5933
     },
     {
-      "date": "2026-09-13",
+      "date": "2026-09-14",
       "index": 101.6922,
-      "interpolated": true,
-      "price": 91.5317
+      "price": 91.5317,
+      "interpolated": true
     },
     {
-      "date": "2026-09-14",
+      "date": "2026-09-15",
       "index": 101.6237,
       "price": 91.47
     },
     {
-      "date": "2026-09-15",
+      "date": "2026-09-16",
       "index": 101.4571,
       "price": 91.32
     },
     {
-      "date": "2026-09-16",
+      "date": "2026-09-17",
       "index": 101.6348,
       "price": 91.48
     },
     {
-      "date": "2026-09-17",
+      "date": "2026-09-18",
       "index": 101.8237,
       "price": 91.65
     },
     {
-      "date": "2026-09-18",
+      "date": "2026-09-19",
       "index": 101.446,
       "price": 91.31
     },
     {
-      "date": "2026-09-19",
+      "date": "2026-09-20",
       "index": 101.5386,
       "interpolated": true,
       "price": 91.3933
     },
     {
-      "date": "2026-09-20",
+      "date": "2026-09-21",
       "index": 101.6311,
-      "interpolated": true,
-      "price": 91.4767
+      "price": 91.4767,
+      "interpolated": true
     },
     {
-      "date": "2026-09-21",
+      "date": "2026-09-22",
       "index": 101.7237,
       "price": 91.56
     },
     {
-      "date": "2026-09-22",
+      "date": "2026-09-23",
       "index": 101.6682,
       "price": 91.51
     },
     {
-      "date": "2026-09-23",
+      "date": "2026-09-24",
       "index": 101.1405,
       "price": 91.035
     },
     {
-      "date": "2026-09-24",
+      "date": "2026-09-25",
       "index": 100.5905,
       "price": 90.54
     },
     {
-      "date": "2026-09-25",
+      "date": "2026-09-26",
       "index": 100.5683,
       "price": 90.52
     },
     {
-      "date": "2026-09-26",
+      "date": "2026-09-27",
       "index": 100.3868,
       "interpolated": true,
       "price": 90.3567
     },
     {
-      "date": "2026-09-27",
+      "date": "2026-09-28",
       "index": 100.2054,
-      "interpolated": true,
-      "price": 90.1933
+      "price": 90.1933,
+      "interpolated": true
     },
     {
-      "date": "2026-09-28",
+      "date": "2026-09-29",
       "index": 100.0239,
       "price": 90.03
     },
     {
-      "date": "2026-09-29",
-      "index": 99.9906,
-      "price": 90.0
-    },
-    {
       "date": "2026-09-30",
-      "price": 90.13,
-      "index": 100.135
+      "price": 90.0,
+      "index": 99.9906
     },
     {
       "date": "2026-10-01",
+      "index": 100.135,
+      "price": 90.13
+    },
+    {
+      "date": "2026-10-02",
       "index": 99.9906,
       "price": 90.0
     },
     {
-      "date": "2026-10-02",
+      "date": "2026-10-03",
       "index": 100.0461,
       "price": 90.05
     },
     {
-      "date": "2026-10-03",
+      "date": "2026-10-04",
       "index": 99.9757,
       "interpolated": true,
       "price": 89.9867
     },
     {
-      "date": "2026-10-04",
+      "date": "2026-10-05",
       "index": 99.9054,
-      "interpolated": true,
-      "price": 89.9233
+      "price": 89.9233,
+      "interpolated": true
     },
     {
-      "date": "2026-10-05",
+      "date": "2026-10-06",
       "index": 99.835,
       "price": 89.86
     },
     {
-      "date": "2026-10-06",
+      "date": "2026-10-07",
       "index": 100.1239,
       "price": 90.12
     },
     {
-      "date": "2026-10-07",
+      "date": "2026-10-08",
       "index": 100.035,
       "price": 90.04
     },
     {
-      "date": "2026-10-08",
-      "index": 100.1294,
-      "interpolated": true,
-      "price": 90.125
-    },
-    {
       "date": "2026-10-09",
-      "index": 100.0988,
-      "interpolated": true,
-      "price": 90.0975
+      "index": 100.0683,
+      "price": 90.07
     },
     {
       "date": "2026-10-10",
-      "index": 100.1886,
-      "interpolated": true,
-      "price": 90.1783
+      "index": 100.2239,
+      "price": 90.21
     },
     {
       "date": "2026-10-11",
-      "index": 100.2785,
+      "index": 100.285,
       "interpolated": true,
-      "price": 90.2592
+      "price": 90.265
     },
     {
       "date": "2026-10-12",
-      "index": 100.5512,
+      "index": 100.3461,
       "interpolated": true,
-      "price": 90.5046
+      "price": 90.32
+    },
+    {
+      "date": "2026-10-13",
+      "index": 100.4072,
+      "price": 90.375
     },
     {
       "date": "2026-10-14",
-      "price": 90.12,
-      "index": 100.1239
+      "price": 90.58,
+      "index": 100.6349
+    },
+    {
+      "date": "2026-10-15",
+      "price": 90.58,
+      "index": 100.6349
     }
   ],
   "_agg_index_series_note": "2026-10-14: un punto real por dia de mercado (yfinance IUAG.L, cierre X etiquetado X+1), ver scripts/bench_series.py. Re-derivado desde 2026-06-15."
