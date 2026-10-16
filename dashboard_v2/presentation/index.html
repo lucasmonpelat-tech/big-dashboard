@@ -1661,9 +1661,11 @@
       // muy abajo: la tabla va ARRIBA de los KPIs, como se ve en los otros
       // sleeves (pedido de Lucas 2026-10-16). En Equity/FI vuelve a su lugar.
       const kpis = document.getElementById("sleeveKpis");
-      if (isAlts) kpis.parentNode.insertBefore(mpBlock, kpis);
-      else kpis.parentNode.insertBefore(mpBlock, kpis.nextSibling);
-      document.getElementById("sleeve-chart-block").style.display = isAlts ? "none" : "";
+      const chartBlock = document.getElementById("sleeve-chart-block");
+      if (isAlts) { kpis.parentNode.insertBefore(mpBlock, kpis); kpis.parentNode.insertBefore(chartBlock, kpis); }
+      else { kpis.parentNode.insertBefore(mpBlock, kpis.nextSibling); kpis.parentNode.insertBefore(chartBlock, mpBlock.nextSibling); }
+      // 2026-10-16: Alts tambien muestra el chart base 100 vs ACWI (pedido de Lucas).
+      document.getElementById("sleeve-chart-block").style.display = (isAlts && !altsComp) ? "none" : "";
       document.getElementById("alts-pie-block").style.display = isAlts ? "" : "none";
       document.getElementById("alts-conc-liq-block").style.display = isAlts ? "" : "none";
       document.getElementById("equity-lookthrough-block").style.display = isEquity ? "" : "none";
@@ -1941,7 +1943,7 @@
         const holdings = (window.__hRets?.alts?.holdings || []).filter(h => (h.status || "OPEN") === "OPEN");
         renderAltsKpis(holdings);
         const altsComp = window.__bmComp?.comparisons?.alts_vs_acwi;
-        if (altsComp) renderSleeveReturns(altsComp);
+        if (altsComp) { renderSleeveReturns(altsComp); renderSleeveChart(altsComp); }
         renderAltsPie(holdings);
         renderAltsCategoryPie(holdings);
         renderAltsConcentration(holdings);
