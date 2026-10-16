@@ -1,9 +1,9 @@
 {
-  "refreshedAt": "2026-10-15",
+  "refreshedAt": "2026-10-16",
   "fund_asof": {
     "4BRZ": "2026-07-31",
     "ARGT": "2026-08-14",
-    "CSPX": "2026-09-22",
+    "CSPX": "2026-10-14",
     "DYNF": "2026-06-30",
     "HEWJ": "2026-07-17",
     "ILF": "2026-08-20",
@@ -16,9 +16,9 @@
   "source": "ACWI holdings (iShares ACWI factsheet 24-Apr) + fund_holdings_top10.json (CSPX exact, UCITS estimates)",
   "method": "BIG_exposure[stock] = \u03a3 (fund_weight_in_BIG \u00d7 stock_weight_in_fund / 100)",
   "summary": {
-    "total_acwi_top10": 25.18,
-    "total_big_top10_exposure": 16.91,
-    "diff_pp": -8.27
+    "total_acwi_top10": 25.6,
+    "total_big_top10_exposure": 16.16,
+    "diff_pp": -9.44
   },
   "overlap": [
     {
@@ -26,27 +26,27 @@
       "name": "NVIDIA",
       "sector": "Information Technology",
       "location": "United States",
-      "weight_acwi": 5.0,
-      "weight_big": 3.48,
-      "diff_pp": -1.52,
+      "weight_acwi": 5.06,
+      "weight_big": 3.257,
+      "diff_pp": -1.803,
       "contributors": [
         {
-          "fund": "DYNF",
-          "fund_weight_in_equity_sleeve": 6.8,
-          "stock_weight_in_fund": 8.1,
-          "contribution": 0.551
+          "fund": "CSPX",
+          "fund_weight_in_equity_sleeve": 23.02,
+          "stock_weight_in_fund": 8.04725,
+          "contribution": 1.852
         },
         {
-          "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 25.71,
-          "stock_weight_in_fund": 8.25713,
-          "contribution": 2.123
+          "fund": "DYNF",
+          "fund_weight_in_equity_sleeve": 7.04,
+          "stock_weight_in_fund": 8.1,
+          "contribution": 0.571
         },
         {
           "fund": "MAGS",
-          "fund_weight_in_equity_sleeve": 5.76,
+          "fund_weight_in_equity_sleeve": 5.96,
           "stock_weight_in_fund": 14.0,
-          "contribution": 0.806
+          "contribution": 0.834
         }
       ]
     },
@@ -55,27 +55,27 @@
       "name": "APPLE",
       "sector": "Information Technology",
       "location": "United States",
-      "weight_acwi": 4.76,
-      "weight_big": 3.267,
-      "diff_pp": -1.493,
+      "weight_acwi": 4.83,
+      "weight_big": 3.145,
+      "diff_pp": -1.685,
       "contributors": [
         {
-          "fund": "DYNF",
-          "fund_weight_in_equity_sleeve": 6.8,
-          "stock_weight_in_fund": 7.3,
-          "contribution": 0.496
+          "fund": "CSPX",
+          "fund_weight_in_equity_sleeve": 23.02,
+          "stock_weight_in_fund": 7.52097,
+          "contribution": 1.731
         },
         {
-          "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 25.71,
-          "stock_weight_in_fund": 7.39261,
-          "contribution": 1.901
+          "fund": "DYNF",
+          "fund_weight_in_equity_sleeve": 7.04,
+          "stock_weight_in_fund": 7.3,
+          "contribution": 0.514
         },
         {
           "fund": "MAGS",
-          "fund_weight_in_equity_sleeve": 5.76,
+          "fund_weight_in_equity_sleeve": 5.96,
           "stock_weight_in_fund": 15.1,
-          "contribution": 0.87
+          "contribution": 0.899
         }
       ]
     },
@@ -84,27 +84,27 @@
       "name": "MICROSOFT",
       "sector": "Information Technology",
       "location": "United States",
-      "weight_acwi": 3.38,
-      "weight_big": 2.501,
-      "diff_pp": -0.879,
+      "weight_acwi": 3.69,
+      "weight_big": 2.491,
+      "diff_pp": -1.199,
       "contributors": [
         {
-          "fund": "DYNF",
-          "fund_weight_in_equity_sleeve": 6.8,
-          "stock_weight_in_fund": 3.9,
-          "contribution": 0.265
+          "fund": "CSPX",
+          "fund_weight_in_equity_sleeve": 23.02,
+          "stock_weight_in_fund": 5.95482,
+          "contribution": 1.371
         },
         {
-          "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 25.71,
-          "stock_weight_in_fund": 5.51351,
-          "contribution": 1.418
+          "fund": "DYNF",
+          "fund_weight_in_equity_sleeve": 7.04,
+          "stock_weight_in_fund": 3.9,
+          "contribution": 0.275
         },
         {
           "fund": "MAGS",
-          "fund_weight_in_equity_sleeve": 5.76,
+          "fund_weight_in_equity_sleeve": 5.96,
           "stock_weight_in_fund": 14.2,
-          "contribution": 0.818
+          "contribution": 0.846
         }
       ]
     },
@@ -113,27 +113,27 @@
       "name": "AMAZON.COM INC",
       "sector": "Consumer Discretionary",
       "location": "United States",
-      "weight_acwi": 2.39,
-      "weight_big": 2.029,
-      "diff_pp": -0.361,
+      "weight_acwi": 2.41,
+      "weight_big": 1.969,
+      "diff_pp": -0.441,
       "contributors": [
         {
-          "fund": "DYNF",
-          "fund_weight_in_equity_sleeve": 6.8,
-          "stock_weight_in_fund": 3.7,
-          "contribution": 0.251
+          "fund": "CSPX",
+          "fund_weight_in_equity_sleeve": 23.02,
+          "stock_weight_in_fund": 3.74745,
+          "contribution": 0.863
         },
         {
-          "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 25.71,
-          "stock_weight_in_fund": 3.73104,
-          "contribution": 0.959
+          "fund": "DYNF",
+          "fund_weight_in_equity_sleeve": 7.04,
+          "stock_weight_in_fund": 3.7,
+          "contribution": 0.261
         },
         {
           "fund": "MAGS",
-          "fund_weight_in_equity_sleeve": 5.76,
+          "fund_weight_in_equity_sleeve": 5.96,
           "stock_weight_in_fund": 14.2,
-          "contribution": 0.818
+          "contribution": 0.846
         }
       ]
     },
@@ -142,27 +142,27 @@
       "name": "ALPHABET CLASS A",
       "sector": "Communication",
       "location": "United States",
-      "weight_acwi": 1.99,
-      "weight_big": 1.761,
-      "diff_pp": -0.229,
+      "weight_acwi": 2.0,
+      "weight_big": 1.711,
+      "diff_pp": -0.289,
       "contributors": [
         {
-          "fund": "DYNF",
-          "fund_weight_in_equity_sleeve": 6.8,
-          "stock_weight_in_fund": 2.6,
-          "contribution": 0.177
+          "fund": "CSPX",
+          "fund_weight_in_equity_sleeve": 23.02,
+          "stock_weight_in_fund": 3.06528,
+          "contribution": 0.706
         },
         {
-          "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 25.71,
-          "stock_weight_in_fund": 3.07217,
-          "contribution": 0.79
+          "fund": "DYNF",
+          "fund_weight_in_equity_sleeve": 7.04,
+          "stock_weight_in_fund": 2.6,
+          "contribution": 0.183
         },
         {
           "fund": "MAGS",
-          "fund_weight_in_equity_sleeve": 5.76,
+          "fund_weight_in_equity_sleeve": 5.96,
           "stock_weight_in_fund": 13.8,
-          "contribution": 0.795
+          "contribution": 0.822
         }
       ]
     },
@@ -171,38 +171,38 @@
       "name": "TAIWAN SEMICONDUCTOR MANUFACTURING",
       "sector": "Information Technology",
       "location": "Taiwan",
-      "weight_acwi": 1.84,
-      "weight_big": 0.307,
-      "diff_pp": -1.533,
+      "weight_acwi": 1.83,
+      "weight_big": 0.318,
+      "diff_pp": -1.512,
       "contributors": [
         {
           "fund": "THOR",
-          "fund_weight_in_equity_sleeve": 9.29,
+          "fund_weight_in_equity_sleeve": 9.65,
           "stock_weight_in_fund": 3.3,
-          "contribution": 0.307
+          "contribution": 0.318
         }
       ]
     },
     {
-      "ticker": "AVGO",
-      "name": "BROADCOM INC",
-      "sector": "Information Technology",
+      "ticker": "META",
+      "name": "META PLATFORMS CLASS A",
+      "sector": "Communication",
       "location": "United States",
-      "weight_acwi": 1.57,
-      "weight_big": 0.953,
-      "diff_pp": -0.617,
+      "weight_acwi": 1.61,
+      "weight_big": 1.48,
+      "diff_pp": -0.13,
       "contributors": [
         {
-          "fund": "THOR",
-          "fund_weight_in_equity_sleeve": 9.29,
-          "stock_weight_in_fund": 3.1,
-          "contribution": 0.288
+          "fund": "CSPX",
+          "fund_weight_in_equity_sleeve": 23.02,
+          "stock_weight_in_fund": 2.44382,
+          "contribution": 0.563
         },
         {
-          "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 25.71,
-          "stock_weight_in_fund": 2.58572,
-          "contribution": 0.665
+          "fund": "MAGS",
+          "fund_weight_in_equity_sleeve": 5.96,
+          "stock_weight_in_fund": 15.4,
+          "contribution": 0.917
         }
       ]
     },
@@ -212,37 +212,37 @@
       "sector": "Communication",
       "location": "United States",
       "weight_acwi": 1.57,
-      "weight_big": 0.633,
-      "diff_pp": -0.937,
+      "weight_big": 0.565,
+      "diff_pp": -1.005,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 25.71,
-          "stock_weight_in_fund": 2.46196,
-          "contribution": 0.633
+          "fund_weight_in_equity_sleeve": 23.02,
+          "stock_weight_in_fund": 2.45446,
+          "contribution": 0.565
         }
       ]
     },
     {
-      "ticker": "META",
-      "name": "META PLATFORMS CLASS A",
-      "sector": "Communication",
+      "ticker": "AVGO",
+      "name": "BROADCOM INC",
+      "sector": "Information Technology",
       "location": "United States",
-      "weight_acwi": 1.55,
-      "weight_big": 1.51,
-      "diff_pp": -0.04,
+      "weight_acwi": 1.56,
+      "weight_big": 0.869,
+      "diff_pp": -0.691,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 25.71,
-          "stock_weight_in_fund": 2.4212,
-          "contribution": 0.623
+          "fund_weight_in_equity_sleeve": 23.02,
+          "stock_weight_in_fund": 2.47529,
+          "contribution": 0.57
         },
         {
-          "fund": "MAGS",
-          "fund_weight_in_equity_sleeve": 5.76,
-          "stock_weight_in_fund": 15.4,
-          "contribution": 0.887
+          "fund": "THOR",
+          "fund_weight_in_equity_sleeve": 9.65,
+          "stock_weight_in_fund": 3.1,
+          "contribution": 0.299
         }
       ]
     },
@@ -251,15 +251,15 @@
       "name": "MICRON TECHNOLOGY",
       "sector": "Information Technology",
       "location": "United States",
-      "weight_acwi": 1.13,
-      "weight_big": 0.474,
-      "diff_pp": -0.656,
+      "weight_acwi": 1.04,
+      "weight_big": 0.357,
+      "diff_pp": -0.683,
       "contributors": [
         {
           "fund": "CSPX",
-          "fund_weight_in_equity_sleeve": 25.71,
-          "stock_weight_in_fund": 1.84535,
-          "contribution": 0.474
+          "fund_weight_in_equity_sleeve": 23.02,
+          "stock_weight_in_fund": 1.55134,
+          "contribution": 0.357
         }
       ]
     }
