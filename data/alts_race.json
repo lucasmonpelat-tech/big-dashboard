@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-10-16T13:14:31.005046",
+  "refreshedAt": "2026-10-16T14:53:27.957348",
   "inception": "2025-06-30",
   "benchmark_primary": "60/40 blend (60% ACWI + 40% AGG)",
   "benchmark_secondary": "HFRX Global HF proxy (QAI ETF)",
@@ -163,9 +163,9 @@
       "value_usd": 2796863.33,
       "weight_pct": 31.82,
       "si_return_pct": 11.87,
-      "ytd_return_pct": 11.87,
+      "ytd_return_pct": 6.17,
       "contribution_pct": 3.78,
-      "ytd_contribution_pct": 3.78,
+      "ytd_contribution_pct": 1.96,
       "assumed_annual_pct": 12.0,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
       "valuation_date": "2026-07-31",
@@ -323,6 +323,6 @@
     }
   ],
   "_daily_refresh_note": "Refresh diario 2026-10-16: 3 liquidos via Pershing T-1, 2 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $8,760,216.",
-  "_sync_alts_ugl_at": "2026-10-16T13:14:32.789156",
+  "_sync_alts_ugl_at": "2026-10-16T14:53:28.186377",
   "_sync_alts_ugl_note": "Por holding: MV y SI (desde la compra) de Pershing UGL; YTD de calendario del canonical (anchor 31-Dic o statement del gestor). Sleeve SI/YTD: TWR de alts_sleeve_real.json."
 }
