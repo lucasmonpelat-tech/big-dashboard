@@ -336,6 +336,15 @@ def build(as_of: str | None = None) -> dict:
         eq = json.load(f)
     with open(DATA_DIR / "fi_sleeve_real.json", encoding="utf-8") as f:
         fi = json.load(f)
+    # 2026-10-16: el benchmark del sleeve Alternatives es el MISMO que el de
+    # Equity (ACWI), decision de Lucas (misma regla que la atribucion: 30%
+    # ACWI). La serie ACWI vive en equity_sleeve_real.json; el TWR de Alts en
+    # alts_sleeve_real.json (reconstruido con statements, con dias
+    # interpolados). Opcional: si falta el archivo, no tira el transform.
+    alts = None
+    if (DATA_DIR / "alts_sleeve_real.json").exists():
+        with open(DATA_DIR / "alts_sleeve_real.json", encoding="utf-8") as f:
+            alts = json.load(f)
 
     comparisons = {
         "total_vs_6040": _build_comparison(
@@ -370,6 +379,16 @@ def build(as_of: str | None = None) -> dict:
             port_source="data/equity_sleeve_real.json -> twr_series",
             bench_source="data/equity_sleeve_real.json -> acwi_index_series",
         ),
+        "alts_vs_acwi": _build_comparison(
+            port_series=alts["twr_series"],
+            port_value_key="index",
+            bench_series=eq["acwi_index_series"],
+            bench_value_key="index",
+            port_name="Alternatives Sleeve TWR",
+            bench_name="ACWI",
+            port_source="data/alts_sleeve_real.json -> twr_series",
+            bench_source="data/equity_sleeve_real.json -> acwi_index_series",
+        ) if alts else None,
         "fi_vs_agg": _build_comparison(
             port_series=fi["twr_series"],
             port_value_key="index",

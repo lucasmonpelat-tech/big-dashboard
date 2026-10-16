@@ -1651,7 +1651,11 @@
     function _toggleSleeveBlocks(sleeveKey) {
       const isAlts = sleeveKey === "alts";
       const isEquity = sleeveKey === "equity";
-      document.getElementById("sleeve-multi-period-block").style.display = isAlts ? "none" : "";
+      // 2026-10-16: Alts tambien muestra la tabla Multi-Period (vs ACWI, mismo
+      // bench que Equity, pedido de Lucas); solo se oculta si el canonical no
+      // trae alts_vs_acwi (transform viejo).
+      const altsComp = window.__bmComp?.comparisons?.alts_vs_acwi;
+      document.getElementById("sleeve-multi-period-block").style.display = (isAlts && !altsComp) ? "none" : "";
       document.getElementById("sleeve-chart-block").style.display = isAlts ? "none" : "";
       document.getElementById("alts-pie-block").style.display = isAlts ? "" : "none";
       document.getElementById("alts-conc-liq-block").style.display = isAlts ? "" : "none";
@@ -1929,6 +1933,8 @@
       if (sleeveKey === "alts") {
         const holdings = (window.__hRets?.alts?.holdings || []).filter(h => (h.status || "OPEN") === "OPEN");
         renderAltsKpis(holdings);
+        const altsComp = window.__bmComp?.comparisons?.alts_vs_acwi;
+        if (altsComp) renderSleeveReturns(altsComp);
         renderAltsPie(holdings);
         renderAltsCategoryPie(holdings);
         renderAltsConcentration(holdings);
