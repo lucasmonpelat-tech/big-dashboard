@@ -9,17 +9,17 @@
       {
         "metric": "YTW (%)",
         "big": 7.03,
-        "bmk": 4.32
+        "bmk": 5.66
       },
       {
         "metric": "Duración",
         "big": 3.98,
-        "bmk": 6.01
+        "bmk": 5.70
       },
       {
         "metric": "Vencimiento",
         "big": 6.67,
-        "bmk": 8.01
+        "bmk": 8.21
       }
     ],
     "_regla_inclusion": {
@@ -48,9 +48,9 @@
     },
     "_generated_at": "2026-10-01T18:34:19.507987",
     "_generated_from": "canonical/2026-09-30/holdings_returns.json",
-    "bmk_as_of": "2026-06-30",
-    "bmk_fuente": "Factsheet oficial iShares AGG",
-    "_bmk_source": "bmk 30-Sep-2026 tomado del deck de Maximus (fila 'ACWI 60%/40% AGG' de la tabla de stats de renta fija, que son estadisticas de AGG puro: YTW 4.32 / dur 6.01 / venc 8.01). Hasta Ago-2026 salia del factsheet iShares AGG 30-Jun (3.71 / 6.21 / 8.36). Se etiqueta 'Bloomberg US Agg' en los decks."
+    "bmk_as_of": "2026-10-06",
+    "bmk_fuente": "iShares US Aggregate Bond UCITS ETF (IUAA) - pagina oficial BlackRock, YTM / duracion efectiva / vencimiento promedio ponderado al 06-Oct-2026 (indice Bloomberg US Aggregate). Es YTM, no YTW.",
+    "_bmk_source_anterior": "bmk 30-Sep-2026 tomado del deck de Maximus (fila 'ACWI 60%/40% AGG' de la tabla de stats de renta fija, que son estadisticas de AGG puro: YTW 4.32 / dur 6.01 / venc 8.01). Hasta Ago-2026 salia del factsheet iShares AGG 30-Jun (3.71 / 6.21 / 8.36). Se etiqueta 'Bloomberg US Agg' en los decks."
   },
   "sub_asset_class": {
     "title": "Distribución por Sub-asset Class (Sectorial FI)",
