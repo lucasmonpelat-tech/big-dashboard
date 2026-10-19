@@ -714,7 +714,7 @@
       <div class="info-box-perf">
         <strong>Geography & Yield del portfolio total.</strong>
         Exposición por país del subyacente (ponderada por peso portfolio) + yield ponderado del portafolio vs benchmark 60/40.
-        Data por ISIN: factsheets oficiales (última review 10-Jun-2026). Weights: <strong>positions.json live</strong> (T-1).
+        Data por fondo: fichas en <code>data/funds/</code> (factsheet oficial de cada uno; la fecha está en cada ficha). Weights: <strong>holdings_returns canonical</strong> (T-1, incluye CALP).
       </div>
 
       <div class="section">
@@ -2618,7 +2618,7 @@
     // ============================================================
     // GEOGRAPHY + YIELD (widget del tab "Geography · Yield")
     // Consume data/funds_index.json (window.__fondos: yield + paises por ISIN)
-    // y positions.json live (window.__positions) para weights.
+    // y holdings_returns canonical (window.__hRets) para weights (positions.json NO incluye CALP, ver fix 2026-09-17).
     // ============================================================
     let _geoyieldLoaded = false;
     function renderGeoyield() {
