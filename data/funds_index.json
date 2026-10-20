@@ -265,12 +265,11 @@
       "archivo": "GAMCB.json",
       "as_of_factsheet": "2026-08-31",
       "yield": {
-        "valor": null,
-        "tipo": "Ref. Rate + 4.88%",
+        "valor": 8.2,
+        "tipo": "YTM",
         "as_of": "2026-08-31",
-        "fuente": "Factsheet GAM Ago-2026: 'Portfolio yield to maturity (%): Reference Rate + 4.88%'",
-        "de_factsheet": true,
-        "nota": "El factsheet no publica un yield absoluto, solo el spread sobre la tasa de referencia (el yield del colateral money market), y esa tasa no esta en el factsheet. No se inventa: para tener un numero habria que sacar la tasa de otra fuente, y el criterio es que todo salga del factsheet. Por eso no suma al Weighted Yield del tab."
+        "fuente": "Factsheet GAM Swiss Re Cat Bond, clase Ordinary USD Acc (IE00B4VZPG27)",
+        "de_factsheet": false
       },
       "countries": [
         {

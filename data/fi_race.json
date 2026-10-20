@@ -236,6 +236,30 @@
       "return_source": "baha_nav_dec31",
       "fi_stats_include": true,
       "metrics_as_of": "2026-06-30"
+    },
+    {
+      "isin": "IE00B6WYL972",
+      "ticker": "GAMCB",
+      "name": "GAM Swiss Re Cat Bond Institutional USD Acc",
+      "value_usd": 553493.54,
+      "weight_pct": 4.76,
+      "si_return_pct": null,
+      "ytd_return_pct": 7.84,
+      "contribution_pct": null,
+      "ytd_contribution_pct": null,
+      "ytw": 8.2,
+      "duration": 0.2,
+      "maturity": 1.96,
+      "rating": "NR",
+      "spread_vs_ust": null,
+      "source": "alta 2026-10-20: metricas del mail del gestor via Lucas; peso/MV del canonical 2026-10-20",
+      "nav_t1": null,
+      "nav_currency": null,
+      "nav_date": null,
+      "return_source": null,
+      "fi_stats_include": null,
+      "metrics_as_of": null,
+      "status": "OPEN"
     }
   ],
   "_daily_anchors": {
@@ -279,5 +303,6 @@
   },
   "_daily_race_note": "Pesos y MV releidos de canonical/2026-10-20/holdings_returns.json; metricas (ytw/duration/maturity/rating) de data/funds/<TICKER>.json. Retornos por fondo recalculados 2026-10-20 con NAV vivo T-1 (baha). YTD exacto (ancla NAV 31-dic): ['PIMCO-LD', 'PIMCO-INC', 'MANIG', 'PIMCO-EM', 'SGCB', 'MANEM']. YTD calibrado desde mensual 2026-04: ['TGF']. Sin NAV vivo (carry/scrape): —.",
   "_weights_source": "canonical/2026-10-20/holdings_returns.json",
-  "_metrics_source": "data/funds/<TICKER>.json (fi_metrics)"
+  "_metrics_source": "data/funds/<TICKER>.json (fi_metrics)",
+  "_nota_gamcb": "2026-10-20: GAMCB agregado a mano (el rebuild completo fi_race.py ya no corre). YTW/duration del mail del gestor."
 }
