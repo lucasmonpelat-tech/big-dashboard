@@ -225,11 +225,25 @@ Pampa Capital · Routine automatizada · Generado por GitHub Actions
     return html_body, text_body
 
 
+def destinatarios_cc(payloads: list[dict]) -> list[str]:
+    """Copias ADEMAS de Lucas. Solo para el mail de 'Actualizacion de precios'
+    (re-marca de un alternativo), pedido de Lucas 2026-10-22: a Fer y Segundo
+    les sirve ese dato; las alertas tecnicas siguen yendo solo a Lucas
+    (regla 2026-09-10). Las direcciones viven en el secret MAIL_ALTS_CC
+    (separadas por coma); si no esta seteado, no cambia nada."""
+    tipos = {p.get("tipo") for p in payloads}
+    if tipos != {"alts_nav_remarcado"}:
+        return []
+    raw = os.environ.get("MAIL_ALTS_CC", "") or ""
+    return [a.strip() for a in raw.replace(";", ",").split(",") if a.strip()]
+
+
 def send_mail(html_body: str, text_body: str, today_iso: str, n_alerts: int,
-              asunto: str | None = None):
+              asunto: str | None = None, cc: list[str] | None = None):
     user = os.environ["GMAIL_USER"]
     pwd = os.environ["GMAIL_APP_PASSWORD"]
     to_lucas = os.environ["MAIL_LUCAS"]
+    cc = [a for a in (cc or []) if a and a.lower() != to_lucas.lower()]
 
     # SOLO LUCAS. Pedido suyo el 2026-08-28 para las alertas, y confirmado el
     # 2026-09-10 para TODO lo que sale automatico de este repo.
@@ -243,15 +257,17 @@ def send_mail(html_body: str, text_body: str, today_iso: str, n_alerts: int,
     msg["Subject"] = asunto or f"🚨 BIG · Alerta cron ({n_alerts}) · {today_iso}"
     msg["From"] = f"Pampa BIG Bot <{user}>"
     msg["To"] = to_lucas
+    if cc:
+        msg["Cc"] = ", ".join(cc)
 
     msg.attach(MIMEText(text_body, "plain", "utf-8"))
     msg.attach(MIMEText(html_body, "html", "utf-8"))
 
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=20) as smtp:
         smtp.login(user, pwd)
-        smtp.sendmail(user, [to_lucas], msg.as_string())
+        smtp.sendmail(user, [to_lucas] + cc, msg.as_string())
 
-    print(f"OK: alerta mandada a {to_lucas}")
+    print(f"OK: alerta mandada a {to_lucas}" + (f" (cc: {', '.join(cc)})" if cc else ""))
 
 
 def main():
@@ -285,7 +301,7 @@ def main():
     faltan = [k for k in ("GMAIL_USER", "GMAIL_APP_PASSWORD", "MAIL_LUCAS")
               if not os.environ.get(k)]
     if not faltan:
-        send_mail(html, text, today_iso, len(alert_files), asunto)
+        send_mail(html, text, today_iso, len(alert_files), asunto, cc=destinatarios_cc(payloads))
     else:
         print("WARN: faltan secrets de SMTP (%s), mail no enviado." % ", ".join(faltan))
 

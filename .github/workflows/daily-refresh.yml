@@ -101,6 +101,7 @@ jobs:
       GMAIL_USER: ${{ secrets.GMAIL_USER }}
       GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
       MAIL_LUCAS: ${{ secrets.MAIL_LUCAS }}
+      MAIL_ALTS_CC: ${{ secrets.MAIL_ALTS_CC }}  # 2026-10-22: Fer + Segundo, SOLO para el mail de 'Actualizacion de precios' de alternativos
       # MAIL_FER se saco el 2026-09-10: TODO lo automatico va solo a Lucas.
       # El secret puede seguir existiendo en GitHub, ya no lo lee nadie.
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
