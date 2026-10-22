@@ -342,7 +342,13 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
         # es al día de hoy y mostrarlo sin la fecha sería mentir.
         ytd_pct = round((float(px_hoy) / px_anchor - 1) * 100, 2)
         ytd_metodo = "precio vs anchor 31-Dic"
-        ytd_as_of = (pos or {}).get("price_date")
+        # FIX 2026-10-22: la fecha es la del ULTIMO CAMBIO de precio, no la
+        # price_date de hoy. Para BPCC (ETN marcado mensual) Pershing avanza la
+        # price_date todos los dias con el mismo precio: decia "al 21-Oct" con
+        # la marca del 30-Sep. Para un ETF liquido da la misma fecha de siempre.
+        ytd_as_of = (_fecha_ultimo_cambio_precio((pos or {}).get("security_id"), px_hoy)
+                     or (pos or {}).get("price_date")
+                     or _dia_habil_anterior((positions_data or {}).get("as_of")))
     elif race_h is not None and race_h.get("ytd_return_pct") is not None:
         # Sin anchor propio: lo que calculo el race (misma formula, precio de
         # ucits_daily_nav / live_prices).
@@ -469,6 +475,49 @@ def _anchor_valor_31dic(isin: str | None) -> dict | None:
                 if v.get("anchor_locked") and not v.get("price_2025_dec_31") and (v.get("mv_2025_dec_31") or 0) > 0:
                     _ANCHOR_VALOR_CACHE[k] = v
     return _ANCHOR_VALOR_CACHE.get(isin or "")
+
+
+def _dia_habil_anterior(iso: str | None) -> str | None:
+    """Fallback de fecha: el export de Pershing es T-1 (cierre del dia habil
+    anterior a la corrida). Pershing a veces no trae price_date (CSPX el
+    2026-10-22, dia de una venta)."""
+    if not iso:
+        return None
+    from datetime import date as _d, timedelta as _td
+    d = _d.fromisoformat(iso) - _td(days=1)
+    while d.weekday() >= 5:
+        d -= _td(days=1)
+    return d.isoformat()
+
+
+def _fecha_ultimo_cambio_precio(security_id: str | None, px_hoy) -> str | None:
+    """price_date (de Pershing) del snapshot canonical mas viejo que ya traia el
+    precio de hoy, recorriendo hacia atras hasta que el precio cambia. Es la
+    fecha real de la ultima marca para los iliquidos que Pershing re-precia
+    mensualmente pero cuya price_date avanza a diario (BPCC)."""
+    if not security_id or px_hoy is None:
+        return None
+    try:
+        px_hoy = float(px_hoy)
+    except (TypeError, ValueError):
+        return None
+    dirs = sorted(p.name for p in CANONICAL_DIR.iterdir() if p.is_dir())
+    fecha = None
+    for d in reversed(dirs):
+        f = CANONICAL_DIR / d / "positions.json"
+        if not f.exists():
+            continue
+        try:
+            hs = json.load(open(f, encoding="utf-8")).get("holdings", [])
+        except Exception:
+            continue
+        h = next((x for x in hs if (x.get("security_id") or x.get("cusip")) == security_id), None)
+        if h is None or h.get("market_price_ccy") is None:
+            continue
+        if abs(float(h["market_price_ccy"]) - px_hoy) > 1e-6:
+            break
+        fecha = h.get("price_date") or fecha
+    return fecha
 
 
 def _ultimo_remarcado(security_id: str | None, mv_hoy: float) -> str | None:
