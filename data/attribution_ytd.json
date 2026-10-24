@@ -1,16 +1,16 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-10-23T13:14:33.116059",
-  "as_of_date": "2026-10-23",
+  "refreshedAt": "2026-10-24T13:12:23.152870",
+  "as_of_date": "2026-10-24",
   "ytd_anchor": "2025-12-31",
-  "days_ytd": 296,
+  "days_ytd": 297,
   "sleeves": [
     {
       "name": "Equity",
       "value_usd": 8730583.37,
       "weight_pct": 29.93,
-      "ytd_pct": 8.48,
-      "contribution_pp": 2.539
+      "ytd_pct": 8.36,
+      "contribution_pp": 2.501
     },
     {
       "name": "Fixed Income",
@@ -34,13 +34,13 @@
       "contribution_pp": 0.0
     }
   ],
-  "gross_reconstructed_pct": 4.77,
-  "mgmt_fee_pp": -1.46,
+  "gross_reconstructed_pct": 4.732,
+  "mgmt_fee_pp": -1.465,
   "mgmt_fee_rate_annual_pct": 1.8,
-  "net_reconstructed_pct": 3.31,
+  "net_reconstructed_pct": 3.267,
   "lynk_ytd_pct": 3.25,
-  "lynk_refreshed_at": "2026-10-23T13:11:34.827936",
-  "residual_pp": 0.06,
+  "lynk_refreshed_at": "2026-10-24T13:11:28.569451",
+  "residual_pp": 0.017,
   "alts_detail": [
     {
       "ticker": "CALP",
@@ -143,35 +143,35 @@
       "Alternatives": 0.3,
       "Cash": 0.0
     },
-    "bench_ytd_aor_etf": 6.95,
-    "acwi_ytd": 11.974,
-    "agg_ytd": -1.679,
-    "bench_eq_contrib_pp": 3.592,
-    "bench_fi_contrib_pp": -0.672,
-    "bench_alts_contrib_pp": 3.592,
+    "bench_ytd_aor_etf": 6.61,
+    "acwi_ytd": 11.541,
+    "agg_ytd": -1.432,
+    "bench_eq_contrib_pp": 3.462,
+    "bench_fi_contrib_pp": -0.573,
+    "bench_alts_contrib_pp": 3.462,
     "big_ytd": 3.25,
-    "alpha_ytd_total_pp": -3.7,
+    "alpha_ytd_total_pp": -3.36,
     "components": [
       {
         "name": "Equity",
-        "big_contrib_pp": 2.539,
-        "bench_contrib_pp": 3.592,
-        "alpha_pp": -1.053,
-        "comment": "BIG 29.9% @ +8.48% vs 30% ACWI @ +11.97%"
+        "big_contrib_pp": 2.501,
+        "bench_contrib_pp": 3.462,
+        "alpha_pp": -0.961,
+        "comment": "BIG 29.9% @ +8.36% vs 30% ACWI @ +11.54%"
       },
       {
         "name": "Fixed Income",
         "big_contrib_pp": 0.364,
-        "bench_contrib_pp": -0.672,
-        "alpha_pp": 1.036,
-        "comment": "BIG 40.0% @ +0.91% vs 40% AGG @ -1.68%"
+        "bench_contrib_pp": -0.573,
+        "alpha_pp": 0.937,
+        "comment": "BIG 40.0% @ +0.91% vs 40% AGG @ -1.43%"
       },
       {
         "name": "Alternatives",
         "big_contrib_pp": 1.867,
-        "bench_contrib_pp": 3.592,
-        "alpha_pp": -1.725,
-        "comment": "BIG 30.1% @ +6.21% vs 30% ACWI @ +11.97%"
+        "bench_contrib_pp": 3.462,
+        "alpha_pp": -1.595,
+        "comment": "BIG 30.1% @ +6.21% vs 30% ACWI @ +11.54%"
       },
       {
         "name": "Cash",
@@ -182,14 +182,14 @@
       },
       {
         "name": "Mgmt Fee",
-        "big_contrib_pp": -1.46,
+        "big_contrib_pp": -1.465,
         "bench_contrib_pp": 0,
-        "alpha_pp": -1.46,
+        "alpha_pp": -1.465,
         "comment": "Lynk mgmt fee 1.8%/yr (bench AOR fee 0.15% no incluido)"
       },
       {
         "name": "Nuestro Cálculo (NET)",
-        "big_contrib_pp": 3.31,
+        "big_contrib_pp": 3.267,
         "bench_contrib_pp": null,
         "alpha_pp": null,
         "is_subtotal": true,
@@ -197,10 +197,10 @@
       },
       {
         "name": "Residual",
-        "big_contrib_pp": 0.06,
+        "big_contrib_pp": 0.017,
         "bench_contrib_pp": null,
-        "alpha_pp": -0.497,
-        "comment": "Nuestro calculo (+3.31%) - Lynk oficial (+3.25%), mas la diferencia entre el bench por pesos del mandato (+6.51%) y el AOR (+6.95%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
+        "alpha_pp": -0.276,
+        "comment": "Nuestro calculo (+3.27%) - Lynk oficial (+3.25%), mas la diferencia entre el bench por pesos del mandato (+6.35%) y el AOR (+6.61%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
       }
     ]
   }
