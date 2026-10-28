@@ -1,25 +1,25 @@
 {
-  "refreshedAt": "2026-10-27T13:11:41.301291",
+  "refreshedAt": "2026-10-28T13:11:46.851769",
   "source": "Yahoo Finance AOM (iShares Core Moderate Allocation 40/60)",
   "note": "Single ETF que replica 40% stocks / 60% bonds (60% bonos AGG-like / 40% acciones globales). Misma familia y bloques que AOR. Agregado 2026-09-30 como benchmark conservador.",
   "ticker": "AOM",
   "inception": "2025-06-27",
   "periods": {
-    "latest_date": "2026-10-26",
-    "latest_value": 111.3049,
+    "latest_date": "2026-10-27",
+    "latest_value": 111.67,
     "returns": {
-      "1W": 0.37,
-      "1M": -0.24,
-      "3M": 0.27,
-      "6M": 1.3,
-      "YTD": 4.36,
-      "SI": 11.3,
-      "Annualized": 8.38
+      "1W": 0.43,
+      "1M": 0.09,
+      "3M": 0.53,
+      "6M": 1.93,
+      "YTD": 4.7,
+      "SI": 11.67,
+      "Annualized": 8.63
     },
     "volatility": 6.77,
-    "sharpe_approx": 0.6
+    "sharpe_approx": 0.64
   },
-  "series_length": 335,
+  "series_length": 336,
   "series": [
     {
       "date": "2025-06-27",
@@ -31,7 +31,7 @@
     },
     {
       "date": "2025-07-01",
-      "value": 100.2398
+      "value": 100.2397
     },
     {
       "date": "2025-07-02",
@@ -95,7 +95,7 @@
     },
     {
       "date": "2025-07-24",
-      "value": 101.1055
+      "value": 101.1056
     },
     {
       "date": "2025-07-25",
@@ -239,7 +239,7 @@
     },
     {
       "date": "2025-09-15",
-      "value": 104.4897
+      "value": 104.4896
     },
     {
       "date": "2025-09-16",
@@ -291,7 +291,7 @@
     },
     {
       "date": "2025-10-02",
-      "value": 105.0353
+      "value": 105.0354
     },
     {
       "date": "2025-10-03",
@@ -539,7 +539,7 @@
     },
     {
       "date": "2025-12-31",
-      "value": 106.6557
+      "value": 106.6558
     },
     {
       "date": "2026-01-02",
@@ -575,7 +575,7 @@
     },
     {
       "date": "2026-01-14",
-      "value": 107.9295
+      "value": 107.9294
     },
     {
       "date": "2026-01-15",
@@ -607,7 +607,7 @@
     },
     {
       "date": "2026-01-27",
-      "value": 108.7115
+      "value": 108.7116
     },
     {
       "date": "2026-01-28",
@@ -699,7 +699,7 @@
     },
     {
       "date": "2026-03-02",
-      "value": 109.2479
+      "value": 109.2478
     },
     {
       "date": "2026-03-03",
@@ -719,7 +719,7 @@
     },
     {
       "date": "2026-03-09",
-      "value": 107.9295
+      "value": 107.9294
     },
     {
       "date": "2026-03-10",
@@ -731,7 +731,7 @@
     },
     {
       "date": "2026-03-12",
-      "value": 106.4546
+      "value": 106.4547
     },
     {
       "date": "2026-03-13",
@@ -1360,6 +1360,10 @@
     {
       "date": "2026-10-26",
       "value": 111.3049
+    },
+    {
+      "date": "2026-10-27",
+      "value": 111.67
     }
   ]
 }
