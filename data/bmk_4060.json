@@ -1,25 +1,25 @@
 {
-  "refreshedAt": "2026-10-28T13:11:46.851769",
+  "refreshedAt": "2026-10-29T13:11:34.670749",
   "source": "Yahoo Finance AOM (iShares Core Moderate Allocation 40/60)",
   "note": "Single ETF que replica 40% stocks / 60% bonds (60% bonos AGG-like / 40% acciones globales). Misma familia y bloques que AOR. Agregado 2026-09-30 como benchmark conservador.",
   "ticker": "AOM",
   "inception": "2025-06-27",
   "periods": {
-    "latest_date": "2026-10-27",
-    "latest_value": 111.67,
+    "latest_date": "2026-10-28",
+    "latest_value": 111.7156,
     "returns": {
-      "1W": 0.43,
-      "1M": 0.09,
-      "3M": 0.53,
-      "6M": 1.93,
-      "YTD": 4.7,
-      "SI": 11.67,
-      "Annualized": 8.63
+      "1W": 0.23,
+      "1M": 0.72,
+      "3M": 1.3,
+      "6M": 2.3,
+      "YTD": 4.74,
+      "SI": 11.72,
+      "Annualized": 8.65
     },
-    "volatility": 6.77,
+    "volatility": 6.76,
     "sharpe_approx": 0.64
   },
-  "series_length": 336,
+  "series_length": 337,
   "series": [
     {
       "date": "2025-06-27",
@@ -31,7 +31,7 @@
     },
     {
       "date": "2025-07-01",
-      "value": 100.2397
+      "value": 100.2398
     },
     {
       "date": "2025-07-02",
@@ -47,7 +47,7 @@
     },
     {
       "date": "2025-07-08",
-      "value": 100.0727
+      "value": 100.0728
     },
     {
       "date": "2025-07-09",
@@ -71,7 +71,7 @@
     },
     {
       "date": "2025-07-16",
-      "value": 99.9848
+      "value": 99.9849
     },
     {
       "date": "2025-07-17",
@@ -95,7 +95,7 @@
     },
     {
       "date": "2025-07-24",
-      "value": 101.1056
+      "value": 101.1055
     },
     {
       "date": "2025-07-25",
@@ -139,7 +139,7 @@
     },
     {
       "date": "2025-08-08",
-      "value": 101.7208
+      "value": 101.7209
     },
     {
       "date": "2025-08-11",
@@ -1364,6 +1364,10 @@
     {
       "date": "2026-10-27",
       "value": 111.67
+    },
+    {
+      "date": "2026-10-28",
+      "value": 111.7156
     }
   ]
 }
