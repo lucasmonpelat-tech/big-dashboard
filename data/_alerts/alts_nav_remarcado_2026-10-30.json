@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-30",
+  "tipo": "alts_nav_remarcado",
+  "issues": [
+    "BPCC: precio 131.32 -> 132.25 (+0.71%). MV $609,599.26 -> $613,916.40. Detectado el 2026-10-30.",
+    "FLEX: precio 32.26 -> 32.63 (+1.15%). MV $661,551.95 -> $669,139.49. Detectado el 2026-10-30."
+  ],
+  "accion": "Pershing re-marco el NAV de un alternativo iliquido. Revisar que el movimiento sea razonable y, si corresponde, avisarle al equipo.",
+  "detalle": [
+    {
+      "ticker": "BPCC",
+      "senal": "precio",
+      "antes": 131.32,
+      "ahora": 132.25,
+      "var_pct": 0.71,
+      "price_date_antes": "2026-10-28",
+      "price_date_ahora": "2026-10-29",
+      "mv_antes": 609599.26,
+      "mv_ahora": 613916.4,
+      "detectado_en": "2026-10-30",
+      "contra": "2026-10-29"
+    },
+    {
+      "ticker": "FLEX",
+      "senal": "precio",
+      "antes": 32.26,
+      "ahora": 32.63,
+      "var_pct": 1.15,
+      "price_date_antes": "2026-08-31",
+      "price_date_ahora": "2026-09-30",
+      "mv_antes": 661551.95,
+      "mv_ahora": 669139.49,
+      "detectado_en": "2026-10-30",
+      "contra": "2026-10-29"
+    }
+  ]
+}
