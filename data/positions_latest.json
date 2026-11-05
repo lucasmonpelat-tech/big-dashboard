@@ -1,19 +1,37 @@
 {
-  "as_of": "2026-11-04",
-  "as_of_date": "2026-11-04",
-  "refreshedAt": "2026-11-04T13:13:58.751459",
-  "source": "canonical/2026-11-04/positions.json (Pershing via NetX360)",
-  "total_aum": 25843302.91,
+  "as_of": "2026-11-05",
+  "as_of_date": "2026-11-05",
+  "refreshedAt": "2026-11-05T13:14:24.993274",
+  "source": "canonical/2026-11-05/positions.json (Pershing via NetX360)",
+  "total_aum": 25970395.33,
   "n_positions": 27,
   "positions": [
+    {
+      "ticker": "GLD",
+      "isin": "US78463V1070",
+      "sleeve": "Alternatives",
+      "qty": 2440.0,
+      "price": 372.49,
+      "value": 908875.6,
+      "price_as_of": "2026-11-04"
+    },
+    {
+      "ticker": "IBIT",
+      "isin": "US46438F1012",
+      "sleeve": "Alternatives",
+      "qty": 19797.0,
+      "price": 45.33,
+      "value": 897398.01,
+      "price_as_of": "2026-11-04"
+    },
     {
       "ticker": "PIMCO-EM",
       "isin": "IE00B29K0P99",
       "sleeve": "Fixed Income",
       "qty": 31928.731,
-      "price": 17.94,
-      "value": 572801.43,
-      "price_as_of": "2026-11-04"
+      "price": 18.07,
+      "value": 576952.17,
+      "price_as_of": "2026-11-05"
     },
     {
       "ticker": "GCRED",
@@ -22,33 +40,24 @@
       "qty": 505940.98,
       "price": null,
       "value": 505940.98,
-      "price_as_of": "2026-11-04"
+      "price_as_of": "2026-11-05"
     },
     {
       "ticker": "CPER",
       "isin": "US9117181043",
       "sleeve": "Alternatives",
       "qty": 2528.0,
-      "price": 38.51,
-      "value": 97353.28,
-      "price_as_of": "2026-11-03"
+      "price": 38.59,
+      "value": 97555.52,
+      "price_as_of": "2026-11-04"
     },
     {
       "ticker": "THOR",
       "isin": "IE00B6YCBF59",
       "sleeve": "Equity",
       "qty": 18861.953,
-      "price": 44.01,
-      "value": 830114.55,
-      "price_as_of": "2026-11-02"
-    },
-    {
-      "ticker": "IBIT",
-      "isin": "US46438F1012",
-      "sleeve": "Alternatives",
-      "qty": 20235.0,
-      "price": 44.05,
-      "value": 891351.75,
+      "price": 43.89,
+      "value": 827851.12,
       "price_as_of": "2026-11-03"
     },
     {
@@ -56,9 +65,9 @@
       "isin": "DE000A0Q4R85",
       "sleeve": "Equity",
       "qty": 6000.0,
-      "price": 44.9275,
-      "value": 269565.0,
-      "price_as_of": "2026-11-03"
+      "price": 45.6821,
+      "value": 274092.6,
+      "price_as_of": "2026-11-04"
     },
     {
       "ticker": "BPCC",
@@ -74,9 +83,9 @@
       "isin": "IE000OE87WX6",
       "sleeve": "Fixed Income",
       "qty": 16621.485,
-      "price": 124.64,
-      "value": 2071701.89,
-      "price_as_of": "2026-11-02"
+      "price": 124.16,
+      "value": 2063723.58,
+      "price_as_of": "2026-11-03"
     },
     {
       "ticker": "HLEND",
@@ -85,43 +94,43 @@
       "qty": 767778.35,
       "price": null,
       "value": 767778.35,
-      "price_as_of": "2026-11-04"
+      "price_as_of": "2026-11-05"
     },
     {
       "ticker": "MANEM",
       "isin": "IE00089T5MA6",
       "sleeve": "Fixed Income",
       "qty": 4060.017,
-      "price": 114.75,
-      "value": 465886.95,
-      "price_as_of": "2026-11-02"
+      "price": 114.77,
+      "value": 465968.15,
+      "price_as_of": "2026-11-03"
     },
     {
       "ticker": "ILF",
       "isin": "US4642873909",
       "sleeve": "Equity",
       "qty": 10000.0,
-      "price": 31.84,
-      "value": 318400.0,
-      "price_as_of": "2026-11-03"
+      "price": 32.35,
+      "value": 323500.0,
+      "price_as_of": "2026-11-04"
     },
     {
       "ticker": "HEWJ",
       "isin": "US46434V8862",
       "sleeve": "Equity",
       "qty": 3125.0,
-      "price": 62.67,
-      "value": 195843.75,
-      "price_as_of": "2026-11-03"
+      "price": 63.53,
+      "value": 198531.25,
+      "price_as_of": "2026-11-04"
     },
     {
       "ticker": "PIMCO-INC",
       "isin": "IE00B87KCF77",
       "sleeve": "Fixed Income",
       "qty": 235926.136,
-      "price": 19.86,
-      "value": 4685493.06,
-      "price_as_of": "2026-11-03"
+      "price": 19.98,
+      "value": 4713804.2,
+      "price_as_of": "2026-11-04"
     },
     {
       "ticker": "HLGPI",
@@ -137,54 +146,54 @@
       "isin": "IE00B5BMR087",
       "sleeve": "Equity",
       "qty": 1968.0,
-      "price": 817.05,
-      "value": 1607954.4,
-      "price_as_of": "2026-11-03"
+      "price": 828.87,
+      "value": 1631216.16,
+      "price_as_of": "2026-11-04"
     },
     {
       "ticker": "PIMCO-LD",
       "isin": "IE00BDT57R20",
       "sleeve": "Fixed Income",
       "qty": 116321.801,
-      "price": 14.0,
-      "value": 1628505.21,
-      "price_as_of": "2026-11-03"
+      "price": 14.04,
+      "value": 1633158.09,
+      "price_as_of": "2026-11-04"
     },
     {
       "ticker": "GAMCB",
       "isin": "IE00B6WYL972",
       "sleeve": "Fixed Income",
       "qty": 22165.72,
-      "price": 25.0453,
-      "value": 555147.11,
-      "price_as_of": "2026-11-02"
+      "price": 25.0508,
+      "value": 555269.02,
+      "price_as_of": "2026-11-03"
     },
     {
       "ticker": "DYNF",
       "isin": "US09290C1036",
       "sleeve": "Equity",
       "qty": 17191.0,
-      "price": 67.12,
-      "value": 1153859.92,
-      "price_as_of": "2026-11-03"
+      "price": 67.85,
+      "value": 1166409.35,
+      "price_as_of": "2026-11-04"
     },
     {
       "ticker": "NBGMT",
       "isin": "IE00BFMHRK20",
       "sleeve": "Equity",
       "qty": 58050.998,
-      "price": 25.63,
-      "value": 1487847.08,
-      "price_as_of": "2026-11-02"
+      "price": 25.61,
+      "value": 1486686.06,
+      "price_as_of": "2026-11-03"
     },
     {
       "ticker": "MAGS",
       "isin": "US53656G4982",
       "sleeve": "Equity",
       "qty": 6905.0,
-      "price": 68.74,
-      "value": 474649.7,
-      "price_as_of": "2026-11-03"
+      "price": 70.28,
+      "value": 485283.4,
+      "price_as_of": "2026-11-04"
     },
     {
       "ticker": "SGCB",
@@ -200,27 +209,27 @@
       "isin": "LU2940405447",
       "sleeve": "Equity",
       "qty": 10410.46,
-      "price": 54.17,
-      "value": 563934.62,
-      "price_as_of": "2026-11-03"
+      "price": 53.98,
+      "value": 561956.63,
+      "price_as_of": "2026-11-04"
     },
     {
       "ticker": "ARGT",
       "isin": "US37950E2596",
       "sleeve": "Equity",
       "qty": 4000.0,
-      "price": 78.29,
-      "value": 313160.0,
-      "price_as_of": "2026-11-03"
+      "price": 78.45,
+      "value": 313800.0,
+      "price_as_of": "2026-11-04"
     },
     {
       "ticker": "MFSCV",
       "isin": "LU1985812756",
       "sleeve": "Equity",
       "qty": 4063.638,
-      "price": 326.48,
-      "value": 1326696.53,
-      "price_as_of": "2026-11-02"
+      "price": 332.54,
+      "value": 1351322.18,
+      "price_as_of": "2026-11-04"
     },
     {
       "ticker": "FLEX",
@@ -232,22 +241,13 @@
       "price_as_of": "2026-09-30"
     },
     {
-      "ticker": "GLD",
-      "isin": "US78463V1070",
-      "sleeve": "Alternatives",
-      "qty": 2494.0,
-      "price": 359.26,
-      "value": 895994.44,
-      "price_as_of": "2026-11-03"
-    },
-    {
       "ticker": "TGF",
       "isin": "XS2324777171",
       "sleeve": "Fixed Income",
       "qty": 532000.0,
       "price": 1.4939959999999999,
       "value": 794805.78,
-      "price_as_of": "2026-11-02"
+      "price_as_of": "2026-11-03"
     }
   ]
 }
