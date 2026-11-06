@@ -749,27 +749,30 @@
     },
     "IE00BF4NG566": {
       "ticker": "NBCLO",
-      "name": "Neuberger Berman CLO Income Fund USD I Accumulating",
+      "name": "Neuberger CLO Income Fund USD I Accumulating Class",
       "sleeve": "Fixed Income",
       "archivo": "NBCLO.json",
-      "as_of_factsheet": null,
+      "as_of_factsheet": "2026-09-30",
       "yield": {
-        "valor": null,
-        "tipo": "pendiente factsheet (CLO mezzanine a tasa flotante)",
-        "as_of": null,
-        "fuente": "Sin factsheet en Research Fondos al 2026-11-06. Cargar YTM/yield del factsheet de Neuberger cuando este.",
-        "de_factsheet": false,
-        "nota": null
+        "valor": 9.54,
+        "tipo": "YTM",
+        "as_of": "2026-09-30",
+        "fuente": "Factsheet Neuberger 'CLO Income Fund USD I Accumulating Class' al 30-Sep-2026 (pasado por Lucas 2026-11-06). Clase correcta: ISIN IE00BF4NG566 / CUSIP G6430U178 = la que tenemos en Pershing.",
+        "de_factsheet": true
       },
       "countries": [
         {
+          "c": "EU",
+          "p": 54.85
+        },
+        {
           "c": "US",
-          "p": 100
+          "p": 45.15
         }
       ],
-      "countries_de_factsheet": false,
-      "countries_as_of": "2026-11-06",
-      "countries_nota": "PROVISIONAL: CLOs sobre prestamos apalancados de EE.UU. (mandato del fondo). Confirmar con el factsheet."
+      "countries_de_factsheet": true,
+      "countries_as_of": "2026-09-30",
+      "countries_nota": "El factsheet no publica desglose por pais; se usa 'Currency Allocations' (USD 45.15% / EUR 54.85%) como proxy del origen del colateral (CLOs de EE.UU. y Europa)."
     },
     "IE00BFMHRK20": {
       "ticker": "NBGMT",

@@ -1,33 +1,90 @@
 {
   "ticker": "NBCLO",
   "isin": "IE00BF4NG566",
-  "name": "Neuberger Berman CLO Income Fund USD I Accumulating",
+  "name": "Neuberger CLO Income Fund USD I Accumulating Class",
   "sleeve": "Fixed Income",
-  "source": "PENDIENTE factsheet en Research Fondos (alta 2026-11-06, comprado 05-Nov-2026)",
-  "source_file": null,
+  "source": "Factsheet Neuberger 'CLO Income Fund USD I Accumulating Class' al 30-Sep-2026 (pasado por Lucas 2026-11-06). Clase correcta: ISIN IE00BF4NG566 / CUSIP G6430U178 = la que tenemos en Pershing.",
+  "source_file": "Dropbox/2026/Research Fondos/Renta Fija/NB CLO Income/NB_CLO_Income_USD_I_Acc_factsheet_2026-09-30.pdf",
   "parsed_at": "2026-11-06",
-  "as_of_factsheet": null,
+  "as_of_factsheet": "2026-09-30",
   "countries": {
-    "US": 100
+    "US": 45.15,
+    "EU": 54.85
   },
-  "countries_de_factsheet": false,
-  "countries_as_of": "2026-11-06",
+  "countries_de_factsheet": true,
+  "countries_as_of": "2026-09-30",
   "yield": {
-    "valor": null,
-    "tipo": "pendiente factsheet (CLO mezzanine a tasa flotante)",
-    "as_of": null,
-    "de_factsheet": false,
-    "fuente": "Sin factsheet en Research Fondos al 2026-11-06. Cargar YTM/yield del factsheet de Neuberger cuando este."
+    "valor": 9.54,
+    "tipo": "YTM (sin forward curve)",
+    "as_of": "2026-09-30",
+    "de_factsheet": true,
+    "fuente": "Factsheet 30-Sep-2026. Average YTM without forward curve 9.54% (with forward curve 10.38%; average current yield 9.20%; coupon 9.17% = indice 3.90% + margen 5.40%)."
   },
   "fi_metrics": {
-    "ytw": null,
-    "duration": null,
-    "maturity": null,
-    "rating": null
+    "ytw": 9.54,
+    "duration": 0.13,
+    "maturity": 5.65,
+    "rating": "BB-"
   },
-  "fi_stats_include": false,
-  "fi_stats_exclude_reason": "Sin factsheet todavia (alta 2026-11-06): no hay YTW ni duracion. Cargar del factsheet y pasar fi_stats_include a true.",
-  "fi_metrics_de_factsheet": false,
-  "countries_nota": "PROVISIONAL: CLOs sobre prestamos apalancados de EE.UU. (mandato del fondo). Confirmar con el factsheet.",
-  "nombre_corto": "NB CLO Income"
+  "fi_stats_include": true,
+  "fi_stats_exclude_reason": null,
+  "fi_metrics_de_factsheet": true,
+  "countries_nota": "El factsheet no publica desglose por pais; se usa 'Currency Allocations' (USD 45.15% / EUR 54.85%) como proxy del origen del colateral (CLOs de EE.UU. y Europa).",
+  "nombre_corto": "NB CLO Income",
+  "fi_metrics_fuente": "Factsheet 30-Sep-2026: 'Average YTM (without Forward Curve) 9.54%' (con forward curve 10.38%; current yield 9.20%), 'Duration 0.13 years', 'Average Credit Quality BB-'. MATURITY = proxy: 'Spread Duration 5.65 years' (el factsheet no publica vencimiento promedio; los CLO mezz tienen vida media de ~5-6 anos).",
+  "fi_stats_nota": "Clase USD I de un fondo con base USD. El colateral es 45% USD / 55% EUR; SUPUESTO: la exposicion EUR esta cubierta a USD a nivel fondo (el factsheet no lo dice explicito). Si Lucas confirma que no esta cubierta, pasar fi_stats_include a false como PIMCO-EM.",
+  "liquidez": "quincenal (dealing fortnightly), suscripcion T+3",
+  "fund_facts": {
+    "aum_usd_mm": 1930.35,
+    "nav": 18.24,
+    "inception": "2018-07-12",
+    "management_fee_pct": 0.75,
+    "ongoing_charge_pct": 0.82,
+    "benchmark": "ICE BofA US Dollar 3-Month Deposit Offered Rate Constant Maturity Index",
+    "bloomberg": "NBCIUIA",
+    "asset_summary": {
+      "CLO": 95.38,
+      "Other Corporate Credit": 3.49,
+      "Cash": 1.13
+    },
+    "credit_quality": {
+      "BBB and above": 0.32,
+      "BB": 93.05,
+      "B": 6.63
+    },
+    "n_issuers": 302,
+    "n_securities": 334,
+    "spread_duration_yrs": 5.65,
+    "performance_2026-09-30_pct": {
+      "1m": 0.61,
+      "3m": 2.13,
+      "ytd": 4.71,
+      "1y": 6.36,
+      "3y_ann": 12.47,
+      "5y_ann": 8.94,
+      "si_ann": 7.58
+    },
+    "calendar_pct": {
+      "2019": 11.83,
+      "2020": 7.5,
+      "2021": 7.51,
+      "2022": -6.91,
+      "2023": 21.72,
+      "2024": 17.4,
+      "2025": 8.94
+    },
+    "top10_issuers": {
+      "SNDPE 14": 1.02,
+      "PENTA 21-10": 0.85,
+      "OCPE 25-12": 0.84,
+      "CORDA 34": 0.82,
+      "PLMER 25-1": 0.79,
+      "CFOUR 12": 0.75,
+      "OCPE 26-16": 0.74,
+      "ARINI_8X": 0.68,
+      "AQUE 25-9": 0.66,
+      "SEBPK 1": 0.64
+    },
+    "as_of": "2026-09-30"
+  }
 }
