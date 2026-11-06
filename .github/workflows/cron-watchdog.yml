@@ -49,7 +49,13 @@ jobs:
       - name: ¿Corrió el refresh de hoy Y con data fresca?
         id: check
         run: |
-          R=$(python scripts/should_run_refresh.py)
+          # El motivo va por stderr (should_run_refresh.py): se guarda para la alerta,
+          # que antes decia siempre "no habia corrido" aunque la causa fuera que el
+          # NAV de Lynk todavia no estaba fresco (2026-10-12/13, 2026-11-06).
+          R=$(python scripts/should_run_refresh.py 2> motivo.txt)
+          MOTIVO=$(tr -d '\r' < motivo.txt | tail -n 1)
+          echo "motivo=$MOTIVO" >> $GITHUB_OUTPUT
+          echo "$MOTIVO"
           if [ "$R" = "si" ]; then
             echo "corrio=no" >> $GITHUB_OUTPUT
           else
@@ -72,16 +78,20 @@ jobs:
           python - <<'PY'
           import json, os, datetime
           hoy = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+          motivo = os.environ.get("MOTIVO", "").strip() or "sin motivo (should_run_refresh no lo informo)"
+          if "todavia no corrio" in motivo:
+              texto = (f"El daily-refresh de {hoy} no habia corrido cuando paso el watchdog "
+                       f"(agendado 12:30 UTC). Lo disparo. Si se repite seguido, GitHub esta "
+                       f"postergando los schedules y conviene revisar el horario.")
+          else:
+              texto = (f"El daily-refresh de {hoy} SI habia corrido, pero sin data fresca: {motivo}. "
+                       f"El watchdog lo volvio a disparar para tomar el NAV nuevo. No es una falla.")
           alerta = {
               "detected_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
               "date": hoy,
               "tipo": "cron_no_corrio",
-              "issues": [
-                  f"El daily-refresh de {hoy} no habia corrido a las 16:07 UTC "
-                  f"(agendado 12:30 UTC). El watchdog lo disparo. Si esto se "
-                  f"repite seguido, GitHub esta postergando los schedules y "
-                  f"conviene revisar el horario."
-              ],
+              "motivo": motivo,
+              "issues": [texto],
           }
           with open(f"data/_alerts/cron_no_corrio_{hoy}.json", "w", encoding="utf-8") as f:
               json.dump(alerta, f, indent=2, ensure_ascii=False)
@@ -89,6 +99,7 @@ jobs:
           PY
           python scripts/send_failure_alert.py || echo "mail fallo, la alerta igual quedo en data/_alerts/"
         env:
+          MOTIVO: ${{ steps.check.outputs.motivo }}
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           MAIL_LUCAS: ${{ secrets.MAIL_LUCAS }}

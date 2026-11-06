@@ -744,7 +744,7 @@
         </div>
         <table>
           <thead><tr>
-            <th style="text-align:left">Instrument</th>
+            <th style="text-align:left">Instrument <span style="font-weight:400;font-size:10px;color:var(--text-mute)">· punto = antigüedad del dato: <span style="color:#4caf50">●</span> &lt;90d <span style="color:#e6a532">●</span> 90–180d <span style="color:#e05252">●</span> &gt;180d o sin fecha</span></th>
             <th style="text-align:right">% Port</th>
             <th style="text-align:left">Country Breakdown</th>
             <th style="text-align:right">Yield</th>
@@ -2793,9 +2793,19 @@
             ttxt = `<span style="color:var(--text-mute);font-size:11px;font-style:italic">—</span>`;
           }
 
+          // Semaforo de antiguedad del factsheet (2026-11-06): verde < 90 dias,
+          // ambar 90-180, rojo > 180 o sin fecha. Se mira la fecha mas nueva que
+          // tenga la ficha (factsheet, paises o yield). Un dato "provisional"
+          // (sin factsheet) va con el ⚠ de siempre ademas del color.
+          const fechas = [ficha?.as_of_factsheet, ficha?.countries_as_of, yd?.as_of].filter(Boolean).map(x => new Date(x)).filter(d => !isNaN(d));
+          const masNueva = fechas.length ? new Date(Math.max(...fechas)) : null;
+          const dias = masNueva ? Math.floor((Date.now() - masNueva) / 86400000) : null;
+          const semColor = dias === null ? "#e05252" : dias < 90 ? "#4caf50" : dias <= 180 ? "#e6a532" : "#e05252";
+          const semTxt = dias === null ? "sin fecha" : `${masNueva.toISOString().slice(0, 10)} · ${dias}d`;
+          const semaforo = `<div style="font-size:10px;margin-top:2px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${semColor};margin-right:4px;vertical-align:middle"></span><span style="color:var(--text-mute)">${semTxt}</span></div>`;
           combined += `
             <tr>
-              <td style="text-align:left"><strong>${name.slice(0, 55)}</strong><div style="font-size:10px;color:var(--text-mute);font-family:monospace">${isin || ""}</div></td>
+              <td style="text-align:left"><strong>${name.slice(0, 55)}</strong><div style="font-size:10px;color:var(--text-mute);font-family:monospace">${isin || ""}</div>${semaforo}</td>
               <td class="num" style="font-weight:600">${pct.toFixed(2)}%</td>
               <td style="text-align:left">${pills}</td>
               <td class="num">${ytxt}</td>

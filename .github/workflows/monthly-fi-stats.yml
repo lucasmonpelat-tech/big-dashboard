@@ -60,6 +60,12 @@ jobs:
             python scripts/build_fi_stats.py --cierre-anterior
           fi
 
+      - name: Fichas de fondos desactualizadas (alerta mensual)
+        # 2026-11-06: lista las fichas con factsheet viejo (>120 dias) o provisional y
+        # deja data/_alerts/fichas_desactualizadas_<hoy>.json; el daily-refresh del
+        # mismo dia la manda por mail y Claude la muestra al inicio de sesion.
+        run: python scripts/check_fichas_staleness.py --alerta
+
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
@@ -68,7 +74,7 @@ jobs:
           # add ANTES del diff: git diff no ve archivos nuevos. Aca el archivo ya
           # existe, pero se mantiene el orden por consistencia con el resto --
           # el orden invertido tiro tres meses de snapshots (ver monthly-snapshot.yml).
-          git add data/fi_breakdown_latest.json
+          git add data/fi_breakdown_latest.json data/_alerts/fichas_desactualizadas_*.json 2>/dev/null || git add data/fi_breakdown_latest.json
 
           if git diff --cached --quiet; then
             echo "fi_stats sin cambios respecto del mes pasado."

@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-11-06T14:43:15.976535",
+  "refreshedAt": "2026-11-06T16:07:56.973261",
   "inception": "2025-06-30",
   "benchmark": "MSCI ACWI (via ACWI ETF - Yahoo)",
   "sleeve_index": {
@@ -221,6 +221,22 @@
       "si_return_pct": null,
       "contribution_pct": null,
       "_alta": "Agregado 2026-10-05. Comprado el 02-Oct-2026 (~$100k)."
+    },
+    {
+      "isin": "US46434G7640",
+      "ticker": "EMXC",
+      "name": "ISHARES INC MSCI EMERGING MKTS EX CHINA ETF",
+      "value_usd": 98508.96,
+      "weight_pct": 1.14,
+      "si_return_pct": -1.16,
+      "ytd_return_pct": null,
+      "contribution_pct": null,
+      "ytd_contribution_pct": null,
+      "source": "alta automatica 2026-11-06 desde canonical/holdings_returns.json (race_weights.dar_de_alta_faltantes)",
+      "months_counted": null,
+      "ytd_months_counted": null,
+      "status": "OPEN",
+      "return_source": "canonical"
     }
   ],
   "_ytd_spot_updated": "2026-11-06: 11 holdings YTD spot via Pershing NAV/anchor 31-Dic",

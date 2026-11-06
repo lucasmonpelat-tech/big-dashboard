@@ -121,6 +121,9 @@ def aplicar(race, sleeve_key, verbose=True):
         if verbose:
             print("  WARN: sin canonical — pesos sin tocar (mejor viejo que inventado).")
         return r
+    if r.get("faltan"):
+        dar_de_alta_faltantes(race, sleeve_key, verbose=verbose)
+        r = comparar(race, sleeve_key)
 
     por_isin, por_ticker, total, _ = pesos_canonical(sleeve_key)
     movidos = []
@@ -150,3 +153,54 @@ def aplicar(race, sleeve_key, verbose=True):
             print(f"  WARN: en el canonical pero NO en el race: {r['faltan']} "
                   f"(fondo nuevo — necesita el rebuild del sleeve, no este refresh)")
     return r
+
+
+def _holdings_canonical(sleeve_key):
+    """Holdings OPEN del ultimo canonical del sleeve, por ticker."""
+    snaps = sorted(CANONICAL_DIR.glob("*/holdings_returns.json"))
+    if not snaps:
+        return {}
+    doc = json.loads(snaps[-1].read_text(encoding="utf-8"))
+    sleeve = (doc.get("sleeves") or {}).get(sleeve_key) or {}
+    return {h["ticker"]: h for h in sleeve.get("holdings", [])
+            if (h.get("status") or "OPEN") == "OPEN" and h.get("mv_usd") and h.get("ticker")}
+
+
+def dar_de_alta_faltantes(race, sleeve_key, verbose=True):
+    """FIX 2026-11-06: los race legacy (equity_race.json / fi_race.json) no se
+    reconstruyen en el cron, asi que cada fondo nuevo (GAM en Sep, EMXC y NBCLO
+    en Nov) quedaba fuera hasta que alguien lo agregaba a mano -- y el widget
+    de metricas FI / el race lo ignoraban. Ahora, si el canonical trae un
+    ticker que el race no tiene, se crea la entrada con lo que el canonical
+    sabe (nombre, ISIN, MV, peso, YTD, SI). Las metricas FI (ytw/duration/
+    maturity/rating) las completa refrescar_pesos_y_metricas desde la ficha,
+    como para el resto. Devuelve la lista de tickers agregados."""
+    r = comparar(race, sleeve_key)
+    if not r.get("faltan"):
+        return []
+    canon = _holdings_canonical(sleeve_key)
+    total = r.get("total") or 0.0
+    plantilla = (race.get("holdings") or [{}])[0]
+    agregados = []
+    for tk in r["faltan"]:
+        h = canon.get(tk)
+        if not h:
+            continue
+        nuevo = {k: None for k in plantilla} if plantilla else {}
+        nuevo.update({
+            "ticker": tk,
+            "name": h.get("name") or tk,
+            "isin": h.get("isin"),
+            "status": "OPEN",
+            "value_usd": round(h["mv_usd"], 2),
+            "weight_pct": round(h["mv_usd"] / total * 100, 2) if total else None,
+            "ytd_return_pct": h.get("ytd_pct"),
+            "si_return_pct": h.get("return_pct"),
+            "return_source": "canonical",
+            "source": f"alta automatica {r['as_of']} desde canonical/holdings_returns.json (race_weights.dar_de_alta_faltantes)",
+        })
+        race.setdefault("holdings", []).append(nuevo)
+        agregados.append(tk)
+    if agregados and verbose:
+        print(f"  ALTA automatica en el race: {agregados} (desde canonical {r['as_of']})")
+    return agregados
