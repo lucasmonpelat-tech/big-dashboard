@@ -3,7 +3,7 @@
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Equity",
   "period_end": "2026-11-06",
-  "n_open": 11,
+  "n_open": 12,
   "n_closed": 6,
   "holdings": [
     {
@@ -474,6 +474,35 @@
           "cost": 49698.78
         }
       ]
+    },
+    {
+      "ticker": "EMXC",
+      "sleeve": "Equity",
+      "status": "OPEN",
+      "name": "ISHARES INC MSCI EMERGING MKTS EX CHINA ETF",
+      "isin": "US46434G7640",
+      "qty": 1188.0,
+      "mv_usd": 98508.96,
+      "cost_basis_usd": 99665.44,
+      "unrealized_gl_usd": -1156.48,
+      "return_pct": -1.16,
+      "last_price_pershing": 82.92,
+      "bench_label": "ACWI",
+      "bench_dw_pct": null,
+      "alpha_real_pp": null,
+      "ytd_pct": null,
+      "bench_ytd_pct": null,
+      "alpha_ytd_pp": null,
+      "first_buy_date": "2026-11-05",
+      "period_end": "2026-11-06",
+      "n_trades": 1,
+      "buys_history": [
+        {
+          "date": "2026-11-06",
+          "cost": 99665.44
+        }
+      ],
+      "_alta": "2026-11-06 a mano (trade 05-Nov, settlement 06-Nov); compute_holdings_returns lo reconcilia con el UGL en el proximo cron"
     },
     {
       "ticker": "CSPX",

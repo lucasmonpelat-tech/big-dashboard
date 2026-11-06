@@ -218,6 +218,58 @@
       "countries_as_of": "2026-06-30",
       "countries_nota": "Mandato: renta variable de EE.UU. (universo S&P 500, 205 posiciones al 30-Jun-2026). El deck no trae desglose por pais porque es 100% EE.UU. por definicion."
     },
+    "US46434G7640": {
+      "ticker": "EMXC",
+      "name": "iShares MSCI Emerging Markets ex China ETF",
+      "sleeve": "Equity",
+      "archivo": "EMXC.json",
+      "as_of_factsheet": null,
+      "yield": {
+        "valor": 2.14,
+        "tipo": "Dividend Yield",
+        "as_of": "2026-11-06",
+        "fuente": "Yahoo Finance (dividendYield), 2026-11-06. NO es de un factsheet: falta subir el de iShares a Research Fondos.",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "TW",
+          "p": 27
+        },
+        {
+          "c": "IN",
+          "p": 21
+        },
+        {
+          "c": "KR",
+          "p": 19
+        },
+        {
+          "c": "OTHER",
+          "p": 13.5
+        },
+        {
+          "c": "BR",
+          "p": 8
+        },
+        {
+          "c": "SA",
+          "p": 5
+        },
+        {
+          "c": "ZA",
+          "p": 4
+        },
+        {
+          "c": "MX",
+          "p": 2.5
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-11-06",
+      "countries_nota": "PROVISIONAL: pesos aproximados del indice MSCI EM ex China (de memoria, no de un factsheet). Reemplazar por el desglose del factsheet de iShares cuando este en Research Fondos."
+    },
     "LU2966298809": {
       "ticker": "FLEX",
       "name": "FRANKLIN LEXINGTON PE SECONDARIES FUND CLASS I (ACC)(USD) IS",
@@ -694,6 +746,30 @@
       "countries_de_factsheet": false,
       "countries_as_of": "2026-05-14",
       "countries_nota": "Top 5 paises del factsheet; OTHER = resto (incluye cash 5.8%)."
+    },
+    "IE00BF4NG566": {
+      "ticker": "NBCLO",
+      "name": "Neuberger Berman CLO Income Fund USD I Accumulating",
+      "sleeve": "Fixed Income",
+      "archivo": "NBCLO.json",
+      "as_of_factsheet": null,
+      "yield": {
+        "valor": null,
+        "tipo": "pendiente factsheet (CLO mezzanine a tasa flotante)",
+        "as_of": null,
+        "fuente": "Sin factsheet en Research Fondos al 2026-11-06. Cargar YTM/yield del factsheet de Neuberger cuando este.",
+        "de_factsheet": false,
+        "nota": null
+      },
+      "countries": [
+        {
+          "c": "US",
+          "p": 100
+        }
+      ],
+      "countries_de_factsheet": false,
+      "countries_as_of": "2026-11-06",
+      "countries_nota": "PROVISIONAL: CLOs sobre prestamos apalancados de EE.UU. (mandato del fondo). Confirmar con el factsheet."
     },
     "IE00BFMHRK20": {
       "ticker": "NBGMT",

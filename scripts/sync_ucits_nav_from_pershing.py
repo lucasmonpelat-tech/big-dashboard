@@ -84,6 +84,7 @@ INSTRUMENTS = {
     "IE00B29K0P99": {"ticker": "PIMCO-EM",  "name": "PIMCO GIS Emerging Local Bond Inst Acc USD"},
     "LU2049315265": {"ticker": "SGCB",      "name": "Schroder GAIA Cat Bond C Acc USD"},
     "IE00089T5MA6": {"ticker": "MANEM",     "name": "Man EM Corporate Credit Alternative IV USD"},
+    "IE00BF4NG566": {"ticker": "NBCLO",     "name": "Neuberger Berman CLO Income Fund I Acc USD"},  # alta 2026-11-06
     # 2026-09-25: alta en el sleeve FI (comprado 11-Sep-2026, $200k).
     "IE00B6WYL972": {"ticker": "GAMCB",     "name": "GAM Swiss Re Cat Bond Institutional USD Acc"},
     # 2026-09-25: TGF SI entra. La nota de arriba ("bonos ya resueltos via

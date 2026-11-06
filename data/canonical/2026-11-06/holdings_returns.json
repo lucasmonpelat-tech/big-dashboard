@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "as_of": "2026-11-06",
-  "generated_at": "2026-11-06T13:14:14Z",
+  "generated_at": "2026-11-06T17:43:17Z",
   "note": "Holdings con MV/return DIRECTO de Pershing UGL (canonical v2 pnl.json). Bench DW calculado desde buys_history + bench indices. Fixes bug de precio staleado del compute_holdings_returns.py viejo.",
   "sources": {
     "positions": "data/canonical/2026-11-06/positions.json",
@@ -890,19 +890,19 @@
           "isin": "LU2827810776",
           "status": "OPEN",
           "qty": 186706.497,
-          "mv_usd": 2796863.33,
+          "mv_usd": 2804331.58,
           "cost_basis_usd": 2500000.0,
-          "unrealized_gl_usd": 296863.33,
-          "return_pct": 11.87,
+          "unrealized_gl_usd": 304331.58,
+          "return_pct": 12.17,
           "bench_label": "ACWI",
           "bench_dw_pct": 15.98,
-          "alpha_real_pp": -4.11,
-          "ytd_pct": 6.17,
+          "alpha_real_pp": -3.81,
+          "ytd_pct": 6.45,
           "ytd_metodo": "statement del gestor",
-          "ytd_as_of": "2026-07-31",
-          "ytd_fuente": "TVS_P122202_2026-07-31.pdf",
+          "ytd_as_of": "2026-09-30",
+          "ytd_fuente": "TVS_P122202_2026-09-31.pdf",
           "bench_ytd_pct": 8.43,
-          "alpha_ytd_pp": -2.26,
+          "alpha_ytd_pp": -1.98,
           "first_buy_date": "2025-08-29",
           "buys_history": [
             {
@@ -911,8 +911,8 @@
             }
           ],
           "_mv_source": "external_statement",
-          "_source_note": "TVS_P122202_2026-07-31.pdf",
-          "_as_of": "2026-07-31"
+          "_source_note": "TVS_P122202_2026-09-31.pdf",
+          "_as_of": "2026-09-30"
         },
         {
           "ticker": "HLGPI",

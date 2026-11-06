@@ -45,6 +45,11 @@ PERSHING_TO_MY = {
     'CSTNL':       ('CSPX',     'Equity'),
     'CSPX:GB':     ('CSPX',     'Equity'),
     'G6430T809':   ('NBGMT',    'Equity'),
+    # 2026-11-06: EMXC (iShares MSCI EM ex China, comprado 05-Nov-2026). Sin esto,
+    # el flujo de la compra entraba al sleeve (via UGL) pero la posicion NO
+    # (sync_positions_latest la omitia): TWR Equity -0.66% falso el 06-Nov.
+    'EMXC':         ('EMXC',     'Equity'),
+    'US46434G7640': ('EMXC',     'Equity'),
     'L6366L196':   ('MFSCV',    'Equity'),
     'G8T49N214':   ('THOR',     'Equity'),
     'L468AA656':   ('JHGSC',    'Equity'),
@@ -61,6 +66,10 @@ PERSHING_TO_MY = {
     'G7113P361':   ('PIMCO-INC', 'Fixed Income'),
     'G7S11T150':   ('PIMCO-LD',  'Fixed Income'),
     'G7097Y503':   ('PIMCO-EM',  'Fixed Income'),
+    # 2026-11-06: Neuberger Berman CLO Income Fund I Acc USD ($300k, trade 05-Nov,
+    # reemplaza a parte de PIMCO-EM). ISIN + CUSIP juntos ("nunca a medias").
+    'IE00BF4NG566': ('NBCLO',    'Fixed Income'),
+    'G6430U178':    ('NBCLO',    'Fixed Income'),
     'G5896H580':   ('MANIG',     'Fixed Income'),
     'G594CD616':   ('MANEM',     'Fixed Income'),
     'G5478EAA2':   ('TGF',       'Fixed Income'),

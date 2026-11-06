@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-11-06T13:14:10.583394",
+  "refreshedAt": "2026-11-06T14:43:15.431560",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -7250,7 +7250,7 @@
     },
     {
       "date": "2026-11-06",
-      "mv_usd": 8572988.209521914,
+      "mv_usd": 8671497.167346621,
       "holdings": [
         {
           "ticker": "HEWJ",
@@ -7264,6 +7264,13 @@
           "qty": 4677.0,
           "price": 74.01,
           "mv": 346144.77,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "EMXC",
+          "qty": 1188.0,
+          "price": 82.91999816894531,
+          "mv": 98508.95782470703,
           "source": "daily_close"
         },
         {
@@ -11199,10 +11206,10 @@
     },
     {
       "date": "2026-11-06",
-      "mv_usd": 8572988.209521914,
-      "flow_in": 99535.14,
-      "twr": -0.0065965197598030585,
-      "index": 116.8312
+      "mv_usd": 8671497.167346621,
+      "flow_in": 199200.58,
+      "twr": -0.00673210243292886,
+      "index": 116.8153
     }
   ],
   "acwi_index_series": [

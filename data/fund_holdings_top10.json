@@ -1,7 +1,7 @@
 {
   "_description": "Top 10 holdings per BIG equity fund. Used for lookthrough analysis vs ACWI top 10.",
   "_lastUpdate": "2026-10-06",
-  "_status": "VERIFICADO: 11 fondos del sleeve equity. Refrescados 25-Ago-2026: CSPX/MFSCV/JHGSC/NBGMT (31-Jul), THOR (30-Jun), ARGT (14-Ago), ILF (20-Ago), 4BRZ (31-Jul). MAGS/HEWJ en Jul-2026. Unico pendiente: LGLI (30-Abr-2026). | 06-Oct-2026: alta de DYNF (deck Q2-2026, 30-Jun).",
+  "_status": "VERIFICADO: 11 fondos del sleeve equity. Refrescados 25-Ago-2026: CSPX/MFSCV/JHGSC/NBGMT (31-Jul), THOR (30-Jun), ARGT (14-Ago), ILF (20-Ago), 4BRZ (31-Jul). MAGS/HEWJ en Jul-2026. Unico pendiente: LGLI (30-Abr-2026). | 06-Oct-2026: alta de DYNF (deck Q2-2026, 30-Jun). | 06-Nov-2026: alta de EMXC (provisional Yahoo).",
   "CSPX": {
     "name": "iShares Core S&P 500 UCITS",
     "source": "VERIFICADO: factsheet oficial iShares Core S&P 500 UCITS ETF (BlackRock americas-offshore), seccion Top 10 Holdings al 31-Jul-2026. Total top 10 = 37.56% del portfolio. Reemplaza los pesos del indice S&P 500 publicos (~May-2026) que habia antes. + TSLA 1.42% desde iShares IVV al 13-Ago-2026 (ver _note).",
@@ -254,6 +254,24 @@
       "EXXON MOBIL CORP": 2.6,
       "MICRON TECHNOLOGY INC": 2.5,
       "_note": "Top 10 = 40.7%. Sobrepondera NVDA/AAPL vs S&P 500 (8.1/7.3 vs 7.5/6.6) y tiene Lam Research, JPM y Exxon fuera del top 10 del indice. Al 30-Jun-2026."
+    }
+  },
+  "EMXC": {
+    "name": "iShares MSCI Emerging Markets ex China ETF",
+    "isin": "US46434G7640",
+    "source": "PROVISIONAL 2026-11-06: top holdings segun Yahoo Finance (funds_data.top_holdings, 9 nombres). Reemplazar por el factsheet/holdings de iShares cuando Lucas lo suba a Research Fondos.",
+    "_as_of": "2026-11-05",
+    "_factsheet_top10": {
+      "TAIWAN SEMICONDUCTOR": 19.79,
+      "SAMSUNG ELECTRONICS": 8.71,
+      "SK HYNIX": 6.48,
+      "MEDIATEK": 1.91,
+      "HON HAI PRECISION": 1.02,
+      "HDFC BANK": 0.92,
+      "DELTA ELECTRONICS": 0.88,
+      "ICICI BANK": 0.86,
+      "RELIANCE INDUSTRIES": 0.78,
+      "_note": "Top 9 = 41.4%. Indice MSCI EM ex China: Taiwan ~27%, India ~21%, Corea ~19%. Fuente Yahoo, provisional."
     }
   }
 }

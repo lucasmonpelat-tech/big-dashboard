@@ -646,7 +646,7 @@ def _classify_sleeve(pos: dict, equity_race: dict, fi_race: dict) -> str:
     stype = pos.get("security_type") or ""
     if stype == "Corporate Bonds": return "fixed_income"
     if stype == "Limited Partnerships": return "alternatives"
-    if any(k in desc for k in ("BOND","CREDIT","CAT BOND","LOW DURATION","EMERGING LOCAL",
+    if any(k in desc for k in ("BOND","CREDIT","CAT BOND","LOW DURATION","EMERGING LOCAL","CLO INCOME",
                                 "TENAC","TGF","MEDIUM TERM NOTE","INVESTMENT GRADE","AGG","FIXED")):
         return "fixed_income"
     return "equity"

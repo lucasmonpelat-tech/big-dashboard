@@ -44,6 +44,7 @@ STOOQ_TICKERS = {
     "HEWJ":  {"symbol": "HEWJ",    "currency": "USD"},  # iShares Currency Hedged MSCI Japan (entrada 2026-07-02)
     "DYNF":  {"symbol": "DYNF",    "currency": "USD"},  # iShares U.S. Equity Factor Rotation (entrada 2026-10-02)
     "CPER":  {"symbol": "CPER",    "currency": "USD"},  # US Copper Index Fund (entrada 2026-10-02)
+    "EMXC":  {"symbol": "EMXC",    "currency": "USD"},  # iShares MSCI EM ex China (entrada 2026-11-05)
     # Privados (BDCs) — no listados en Yahoo. Se manejan via fallback "last known price"
     # en el script consumer (refresh_equity/alts_daily.py).
     "HLEND": {"symbol": None,      "currency": "USD"},

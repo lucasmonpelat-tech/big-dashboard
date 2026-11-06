@@ -1,0 +1,33 @@
+{
+  "ticker": "NBCLO",
+  "isin": "IE00BF4NG566",
+  "name": "Neuberger Berman CLO Income Fund USD I Accumulating",
+  "sleeve": "Fixed Income",
+  "source": "PENDIENTE factsheet en Research Fondos (alta 2026-11-06, comprado 05-Nov-2026)",
+  "source_file": null,
+  "parsed_at": "2026-11-06",
+  "as_of_factsheet": null,
+  "countries": {
+    "US": 100
+  },
+  "countries_de_factsheet": false,
+  "countries_as_of": "2026-11-06",
+  "yield": {
+    "valor": null,
+    "tipo": "pendiente factsheet (CLO mezzanine a tasa flotante)",
+    "as_of": null,
+    "de_factsheet": false,
+    "fuente": "Sin factsheet en Research Fondos al 2026-11-06. Cargar YTM/yield del factsheet de Neuberger cuando este."
+  },
+  "fi_metrics": {
+    "ytw": null,
+    "duration": null,
+    "maturity": null,
+    "rating": null
+  },
+  "fi_stats_include": false,
+  "fi_stats_exclude_reason": "Sin factsheet todavia (alta 2026-11-06): no hay YTW ni duracion. Cargar del factsheet y pasar fi_stats_include a true.",
+  "fi_metrics_de_factsheet": false,
+  "countries_nota": "PROVISIONAL: CLOs sobre prestamos apalancados de EE.UU. (mandato del fondo). Confirmar con el factsheet.",
+  "nombre_corto": "NB CLO Income"
+}
