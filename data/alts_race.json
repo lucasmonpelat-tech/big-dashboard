@@ -1,16 +1,16 @@
 {
-  "refreshedAt": "2026-11-06T13:14:12.469053",
+  "refreshedAt": "2026-11-06T15:56:23.348580",
   "inception": "2025-06-30",
   "benchmark_primary": "60/40 blend (60% ACWI + 40% AGG)",
   "benchmark_secondary": "HFRX Global HF proxy (QAI ETF)",
   "portfolio_metrics": {
-    "total_alts_usd": 8695163,
+    "total_alts_usd": 8702632,
     "sub_class_breakdown_pct": {
-      "private_equity": 39.86,
-      "crypto": 10.14,
-      "commodity": 11.28,
-      "private_credit": 21.71,
-      "private_infra": 17.01
+      "private_equity": 39.91,
+      "crypto": 10.13,
+      "commodity": 11.27,
+      "private_credit": 21.69,
+      "private_infra": 17.0
     },
     "n_holdings": 9
   },
@@ -18,35 +18,35 @@
     "latest_month": "2026-08",
     "returns": {
       "1M": {
-        "sleeve": 0.45,
+        "sleeve": 0.54,
         "bmk6040": 1.59,
-        "alpha": -1.14
+        "alpha": -1.05
       },
       "3M": {
-        "sleeve": -0.41,
+        "sleeve": -0.33,
         "bmk6040": 0.55,
-        "alpha": -0.96
+        "alpha": -0.88
       },
       "6M": {
-        "sleeve": 1.77,
+        "sleeve": 1.85,
         "bmk6040": 4.64,
-        "alpha": -2.87
+        "alpha": -2.79
       },
       "YTD": {
-        "sleeve": 5.74,
+        "sleeve": 5.83,
         "bmk6040": 8.03,
-        "alpha": -2.29
+        "alpha": -2.2
       },
       "SI": {
-        "sleeve": 10.58,
+        "sleeve": 10.68,
         "bmk6040": 15.79,
-        "alpha": -5.21
+        "alpha": -5.11
       }
     },
     "annualized": {
-      "sleeve": 7.83,
+      "sleeve": 7.9,
       "bmk6040": 15.05,
-      "alpha": -7.22
+      "alpha": -7.15
     }
   },
   "stats_vs_hfrx": {
@@ -101,7 +101,7 @@
     "2026-08": 111.0377,
     "2026-09": 111.5234,
     "2026-10": 110.0802,
-    "2026-11": 110.5807
+    "2026-11": 110.6757
   },
   "bmk6040_index": {
     "2025-06": 100.0,
@@ -154,7 +154,7 @@
     "2026-08": 0.036413,
     "2026-09": 0.004374,
     "2026-10": -0.012941,
-    "2026-11": 0.004547
+    "2026-11": 0.00541
   },
   "holdings": [
     {
@@ -162,19 +162,19 @@
       "ticker": "CALP",
       "name": "Carlyle AlpInvest Private Markets",
       "sub_class": "private_equity",
-      "value_usd": 2796863.33,
-      "weight_pct": 32.17,
-      "si_return_pct": 11.87,
-      "ytd_return_pct": 6.17,
-      "contribution_pct": 3.82,
-      "ytd_contribution_pct": 1.98,
+      "value_usd": 2804331.58,
+      "weight_pct": 32.22,
+      "si_return_pct": 12.17,
+      "ytd_return_pct": 6.45,
+      "contribution_pct": 3.92,
+      "ytd_contribution_pct": 2.08,
       "assumed_annual_pct": 12.0,
       "source": "MV y SI: Pershing UGL · YTD: canonical holdings_returns",
-      "valuation_date": "2026-07-31",
-      "days_since_valuation": 98,
+      "valuation_date": "2026-09-30",
+      "days_since_valuation": 37,
       "isin_maximus": "LU2837777825",
       "_isin_note": "CALP tiene dos ISIN dando vueltas: LU2827810776 es el del statement oficial de Carlyle y el que usan el canonical y funds_metadata.js; LU2837777825 es con el que lo dio de alta Maximus. Se unifica en el oficial. Se guarda el de Maximus para poder cruzar contra sus reportes.",
-      "ytd_as_of": "2026-07-31",
+      "ytd_as_of": "2026-09-30",
       "ytd_metodo": "statement del gestor"
     },
     {
@@ -183,7 +183,7 @@
       "name": "iShares Bitcoin Trust",
       "sub_class": "crypto",
       "value_usd": 881555.61,
-      "weight_pct": 10.14,
+      "weight_pct": 10.13,
       "si_return_pct": null,
       "ytd_return_pct": -13.33,
       "contribution_pct": null,
@@ -201,11 +201,11 @@
       "name": "SPDR Gold Shares",
       "sub_class": "commodity",
       "value_usd": 886156.4,
-      "weight_pct": 10.19,
+      "weight_pct": 10.18,
       "si_return_pct": null,
       "ytd_return_pct": -5.25,
       "contribution_pct": null,
-      "ytd_contribution_pct": -0.54,
+      "ytd_contribution_pct": -0.53,
       "assumed_annual_pct": null,
       "source": "Pershing T-1 (2026-11-05)",
       "valuation_date": "2026-11-05",
@@ -219,7 +219,7 @@
       "name": "HPS Corporate Lending Fund",
       "sub_class": "private_credit",
       "value_usd": 767778.35,
-      "weight_pct": 8.83,
+      "weight_pct": 8.82,
       "si_return_pct": 4.45,
       "ytd_return_pct": 2.3,
       "contribution_pct": 0.39,
@@ -237,7 +237,7 @@
       "name": "Barings Private Credit Corporation",
       "sub_class": "private_credit",
       "value_usd": 613916.41,
-      "weight_pct": 7.06,
+      "weight_pct": 7.05,
       "si_return_pct": 10.71,
       "ytd_return_pct": 5.59,
       "contribution_pct": 0.76,
@@ -255,7 +255,7 @@
       "name": "Flex-Lexington Partners Secondaries",
       "sub_class": "private_equity",
       "value_usd": 669139.49,
-      "weight_pct": 7.7,
+      "weight_pct": 7.69,
       "si_return_pct": 6.21,
       "ytd_return_pct": 10.76,
       "contribution_pct": 0.48,
@@ -274,7 +274,7 @@
       "name": "Hamilton Lane Global Private Infrastructure",
       "sub_class": "private_infra",
       "value_usd": 1479366.75,
-      "weight_pct": 17.01,
+      "weight_pct": 17.0,
       "si_return_pct": 5.67,
       "ytd_return_pct": 13.71,
       "contribution_pct": 0.96,
@@ -292,7 +292,7 @@
       "name": "Golub Capital Private Credit",
       "sub_class": "private_credit",
       "value_usd": 505940.98,
-      "weight_pct": 5.82,
+      "weight_pct": 5.81,
       "si_return_pct": 3.24,
       "ytd_return_pct": 1.15,
       "contribution_pct": 0.19,
@@ -324,7 +324,7 @@
       "ytd_metodo": "precio vs anchor 31-Dic"
     }
   ],
-  "_daily_refresh_note": "Refresh diario 2026-11-06: 3 liquidos via Pershing T-1, 2 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $8,661,423.",
-  "_sync_alts_ugl_at": "2026-11-06T13:14:13.932849",
+  "_daily_refresh_note": "Refresh diario 2026-11-06: 3 liquidos via Pershing T-1, 2 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $8,668,891.",
+  "_sync_alts_ugl_at": "2026-11-06T15:56:25.114067",
   "_sync_alts_ugl_note": "Por holding: MV y SI (desde la compra) de Pershing UGL; YTD de calendario del canonical (anchor 31-Dic o statement del gestor). Sleeve SI/YTD: TWR de alts_sleeve_real.json."
 }
