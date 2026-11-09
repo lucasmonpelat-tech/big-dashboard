@@ -1,11 +1,20 @@
 {
-  "as_of": "2026-11-07",
-  "as_of_date": "2026-11-07",
-  "refreshedAt": "2026-11-07T13:14:17.308141",
-  "source": "canonical/2026-11-07/positions.json (Pershing via NetX360)",
-  "total_aum": 25893886.0,
+  "as_of": "2026-11-09",
+  "as_of_date": "2026-11-09",
+  "refreshedAt": "2026-11-09T13:13:59.923527",
+  "source": "canonical/2026-11-09/positions.json (Pershing via NetX360)",
+  "total_aum": 25693886.0,
   "n_positions": 28,
   "positions": [
+    {
+      "ticker": "PIMCO-LD",
+      "isin": "IE00BDT57R20",
+      "sleeve": "Fixed Income",
+      "qty": 102086.926,
+      "price": 14.05,
+      "value": 1434321.3,
+      "price_as_of": "2026-11-09"
+    },
     {
       "ticker": "GCRED",
       "isin": "GCRED-I",
@@ -13,7 +22,7 @@
       "qty": 505940.98,
       "price": null,
       "value": 505940.98,
-      "price_as_of": "2026-11-07"
+      "price_as_of": "2026-11-09"
     },
     {
       "ticker": "CPER",
@@ -85,7 +94,16 @@
       "qty": 767778.35,
       "price": null,
       "value": 767778.35,
-      "price_as_of": "2026-11-07"
+      "price_as_of": "2026-11-09"
+    },
+    {
+      "ticker": "MANEM",
+      "isin": "IE00089T5MA6",
+      "sleeve": "Fixed Income",
+      "qty": 4060.017,
+      "price": 114.9,
+      "value": 466495.95,
+      "price_as_of": "2026-11-05"
     },
     {
       "ticker": "ILF",
@@ -124,15 +142,6 @@
       "price_as_of": "2026-09-30"
     },
     {
-      "ticker": "MANEM",
-      "isin": "IE00089T5MA6",
-      "sleeve": "Fixed Income",
-      "qty": 4060.017,
-      "price": 114.9,
-      "value": 466495.95,
-      "price_as_of": "2026-11-05"
-    },
-    {
       "ticker": "CSPX",
       "isin": "IE00B5BMR087",
       "sleeve": "Equity",
@@ -142,12 +151,12 @@
       "price_as_of": "2026-11-06"
     },
     {
-      "ticker": "PIMCO-LD",
-      "isin": "IE00BDT57R20",
-      "sleeve": "Fixed Income",
-      "qty": 116321.801,
-      "price": 14.05,
-      "value": 1634321.3,
+      "ticker": "DYNF",
+      "isin": "US09290C1036",
+      "sleeve": "Equity",
+      "qty": 17191.0,
+      "price": 64.98,
+      "value": 1117071.18,
       "price_as_of": "2026-11-06"
     },
     {
@@ -158,15 +167,6 @@
       "price": 25.063,
       "value": 555539.44,
       "price_as_of": "2026-11-05"
-    },
-    {
-      "ticker": "DYNF",
-      "isin": "US09290C1036",
-      "sleeve": "Equity",
-      "qty": 17191.0,
-      "price": 64.98,
-      "value": 1117071.18,
-      "price_as_of": "2026-11-06"
     },
     {
       "ticker": "NBGMT",
