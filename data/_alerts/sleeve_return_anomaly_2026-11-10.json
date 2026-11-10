@@ -1,8 +1,0 @@
-{
-  "detected_at": "2026-11-10T13:15:13.736468",
-  "date": "2026-11-10",
-  "issues": [
-    "EMXC: el mismo monto ($99,665) aparece en 2 dias CONSECUTIVOS en buys_history (2026-11-05, 2026-11-06) -- probable transaccion pendiente de confirmar contada mas de una vez.",
-    "alternatives: el flow_in del mes ($-340,471 desde 2026-10-31) no explica los cambios de posicion (Σ Δqty x precio = $-40,192, snapshot 2026-10-31 -> 2026-11-10; tolerancia $43,333). Movimientos: IBIT +252.00 x 42.32; GLD -134.00 x 379.53. Si hay un trade que el flujo no cuenta, el TWR lo esta tomando como retorno (caso FLEX 08-Sep-2026)."
-  ]
-}

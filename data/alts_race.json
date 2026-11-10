@@ -18,35 +18,35 @@
     "latest_month": "2026-08",
     "returns": {
       "1M": {
-        "sleeve": 4.04,
+        "sleeve": 0.91,
         "bmk6040": 1.59,
-        "alpha": 2.45
+        "alpha": -0.68
       },
       "3M": {
-        "sleeve": 3.15,
+        "sleeve": 0.04,
         "bmk6040": 0.55,
-        "alpha": 2.6
+        "alpha": -0.51
       },
       "6M": {
-        "sleeve": 5.4,
+        "sleeve": 2.22,
         "bmk6040": 4.64,
-        "alpha": 0.76
+        "alpha": -2.42
       },
       "YTD": {
-        "sleeve": 9.51,
+        "sleeve": 6.21,
         "bmk6040": 8.03,
-        "alpha": 1.48
+        "alpha": -1.82
       },
       "SI": {
-        "sleeve": 14.53,
+        "sleeve": 11.08,
         "bmk6040": 15.79,
-        "alpha": -1.26
+        "alpha": -4.71
       }
     },
     "annualized": {
-      "sleeve": 10.71,
+      "sleeve": 8.2,
       "bmk6040": 15.05,
-      "alpha": -4.34
+      "alpha": -6.85
     }
   },
   "stats_vs_hfrx": {
@@ -101,7 +101,7 @@
     "2026-08": 111.0377,
     "2026-09": 111.5234,
     "2026-10": 110.0802,
-    "2026-11": 114.5302
+    "2026-11": 111.077
   },
   "bmk6040_index": {
     "2025-06": 100.0,
@@ -154,7 +154,7 @@
     "2026-08": 0.036413,
     "2026-09": 0.004374,
     "2026-10": -0.012941,
-    "2026-11": 0.040425
+    "2026-11": 0.009055
   },
   "holdings": [
     {
@@ -325,6 +325,6 @@
     }
   ],
   "_daily_refresh_note": "Refresh diario 2026-11-10: 3 liquidos via Pershing T-1, 2 via Pershing T-1, 1 via Carlyle statement, 0 frozen statement. Total activo: $8,666,585.",
-  "_sync_alts_ugl_at": "2026-11-10T13:15:13.416582",
+  "_sync_alts_ugl_at": "2026-11-10T10:59:43.637148",
   "_sync_alts_ugl_note": "Por holding: MV y SI (desde la compra) de Pershing UGL; YTD de calendario del canonical (anchor 31-Dic o statement del gestor). Sleeve SI/YTD: TWR de alts_sleeve_real.json."
 }

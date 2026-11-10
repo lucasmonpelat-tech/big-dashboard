@@ -248,6 +248,27 @@ def _load_net_flows_since(anchor_date, sleeve="Equity"):
         return _load_buys_since(ROOT / "data" / "holdings_returns_equity.json",
                                 anchor_date)
 
+    # FIX 2026-11-10: "Correct Buy/Sell of <CUSIP> at <px>" es la RE-REGISTRACION de
+    # un trade que Pershing anula con una fila "Cancel Buy/Sell" (is_trade=True,
+    # is_cancel=True, qty negativa). La fila "Correct" viene con is_trade=False y
+    # sin security_id/quantity (estan en el texto), asi que antes solo se contaba
+    # la anulacion: el 06-Nov-2026 la correccion de la compra de HLGPI de agosto
+    # ($300,000.02 anulados, $299,999.88 re-registrados, posicion sin cambios)
+    # entro al sleeve Alts como un retiro de $300k y el TWR del mes salto +3.4pp.
+    # Se reconstruye cada "Correct" como un trade con el security_id y la
+    # cantidad parseados del texto, para que netee contra su anulacion.
+    import re as _re
+    correcciones = []
+    for t in txns:
+        tt = str(t.get("transaction_type") or "")
+        m = _re.match(r"Correct (Buy|Sell)\s+(-?[\d.]+)\s+of\s+(\S+)\s+at\s+([\d.]+)", tt)
+        if t.get("is_trade") or not m:
+            continue
+        q = float(m.group(2))
+        correcciones.append({**t, "is_trade": True, "security_id": m.group(3),
+                             "quantity": q if m.group(1) == "Buy" else -abs(q),
+                             "buy_sell": m.group(1).upper(), "_correccion": True})
+    trades = trades + correcciones
     flows, sin_mapear = [], []
     for t in trades:
         sd = t.get("settlement_date")
@@ -275,7 +296,13 @@ def _load_net_flows_since(anchor_date, sleeve="Equity"):
         # primer snapshot en que la cantidad cambio por la del trade. Si no se
         # encuentra (trades sin cantidad, dos lotes el mismo dia), queda la
         # regla de arriba.
-        sd = _fecha_movimiento(t, sd) or sd
+        # Las filas "Correct" son una re-registracion contable, no un movimiento de
+        # posicion: _fecha_movimiento las ubicaba en la fecha del trade ORIGINAL
+        # (HLGPI: 24-Ago, antes del anchor) mientras su anulacion cae el dia del
+        # asiento (06-Nov) y el par dejaba un flujo de $300k huerfano. Van
+        # siempre a la fecha del asiento, la misma que su "Cancel".
+        if not t.get("_correccion"):
+            sd = _fecha_movimiento(t, sd) or sd
         if sd <= anchor_date:
             continue          # anterior al anchor
         sec = t.get("security_id")

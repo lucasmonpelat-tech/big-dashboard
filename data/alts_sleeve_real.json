@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-11-10T13:15:13.330402",
+  "refreshedAt": "2026-11-10T10:59:43.034417",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual) + statements oficiales de Carlyle AlpInvest para CALP (externo, no Pershing).",
   "sleeve": "Alternatives",
   "first_trade_date": "2025-07-02",
@@ -3713,30 +3713,30 @@
     {
       "date": "2026-11-06",
       "mv_usd": 8668891.09,
-      "flow_in": -40471.45,
-      "twr": 0.005409762467944701,
+      "flow_in": -40471.59,
+      "twr": 0.005409778641957419,
       "index": 110.6757
     },
     {
       "date": "2026-11-07",
       "mv_usd": 8659592.37,
-      "flow_in": -340471.47,
-      "twr": 0.039210103076506055,
-      "index": 114.3965
+      "flow_in": -40471.59,
+      "twr": 0.004337929525282663,
+      "index": 110.5577
     },
     {
       "date": "2026-11-09",
       "mv_usd": 8659592.37,
-      "flow_in": -340471.47,
-      "twr": 0.039501864545602984,
-      "index": 114.4286
+      "flow_in": -40471.59,
+      "twr": 0.004341159816836774,
+      "index": 110.5581
     },
     {
       "date": "2026-11-10",
-      "mv_usd": 8666584.53,
-      "flow_in": -340471.47,
-      "twr": 0.0404254600262566,
-      "index": 114.5302
+      "mv_usd": 8700325.09,
+      "flow_in": -40471.59,
+      "twr": 0.009055449005056,
+      "index": 111.077
     }
   ],
   "_rebuild_note": "Reconstruccion completa 2026-07-31 (mismo dia y metodologia que Equity/FI). Reemplaza el sleeve_index proxy de alts_race.py (PSP 70%+carry 30% para PE, carry fijo para Private Credit) por un TWR real: 12 checkpoints mensuales verificados al centavo contra los statements oficiales de Pershing (BPCC, IBIT, GLD, GCRED, HLEND, NBPEA, HLGPI, FLEX) + CALP con 8 statements reales de Carlyle AlpInvest (unico holding externo a Pershing, flow de compra $2.5M el 29-ago-2025 agregado a mano ya que no aparece en las transacciones de Pershing). Sep-Oct-2025 de CALP siguen interpolados (proxy) por falta de statement esos 2 meses puntuales. Sin necesidad de combinar oct-dic-2025 (a diferencia de Equity/FI): el retiro grande de nov-2025 afecto proporcionalmente poco al sleeve Alts (solo NBPEA parcial), Modified Dietz mensual simple no muestra distorsion.",
