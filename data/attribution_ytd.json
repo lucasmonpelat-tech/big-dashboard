@@ -1,6 +1,6 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-11-10T10:59:45.537876",
+  "refreshedAt": "2026-11-10T15:45:39.618249",
   "as_of_date": "2026-11-10",
   "ytd_anchor": "2025-12-31",
   "days_ytd": 314,
@@ -38,9 +38,9 @@
   "mgmt_fee_pp": -1.548,
   "mgmt_fee_rate_annual_pct": 1.8,
   "net_reconstructed_pct": 2.384,
-  "lynk_ytd_pct": 2.03,
-  "lynk_refreshed_at": "2026-11-10T13:14:17.967207",
-  "residual_pp": 0.354,
+  "lynk_ytd_pct": 2.5,
+  "lynk_refreshed_at": "2026-11-10T15:34:25.916499",
+  "residual_pp": -0.116,
   "alts_detail": [
     {
       "ticker": "CALP",
@@ -149,8 +149,8 @@
     "bench_eq_contrib_pp": 3.366,
     "bench_fi_contrib_pp": -0.186,
     "bench_alts_contrib_pp": 3.366,
-    "big_ytd": 2.03,
-    "alpha_ytd_total_pp": -4.94,
+    "big_ytd": 2.5,
+    "alpha_ytd_total_pp": -4.47,
     "components": [
       {
         "name": "Equity",
@@ -193,14 +193,14 @@
         "bench_contrib_pp": null,
         "alpha_pp": null,
         "is_subtotal": true,
-        "comment": "Suma Equity+FI+Alts+Cash+Fee = reconstruccion bottom-up (vs Lynk oficial +2.03%)"
+        "comment": "Suma Equity+FI+Alts+Cash+Fee = reconstruccion bottom-up (vs Lynk oficial +2.50%)"
       },
       {
         "name": "Residual",
-        "big_contrib_pp": 0.354,
+        "big_contrib_pp": -0.116,
         "bench_contrib_pp": null,
-        "alpha_pp": -0.777,
-        "comment": "Nuestro calculo (+2.38%) - Lynk oficial (+2.03%), mas la diferencia entre el bench por pesos del mandato (+6.55%) y el AOR (+6.97%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
+        "alpha_pp": -0.307,
+        "comment": "Nuestro calculo (+2.38%) - Lynk oficial (+2.50%), mas la diferencia entre el bench por pesos del mandato (+6.55%) y el AOR (+6.97%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
       }
     ]
   }
