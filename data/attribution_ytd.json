@@ -1,6 +1,6 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-11-10T00:10:56.562225",
+  "refreshedAt": "2026-11-10T13:15:13.839159",
   "as_of_date": "2026-11-10",
   "ytd_anchor": "2025-12-31",
   "days_ytd": 314,
@@ -39,7 +39,7 @@
   "mgmt_fee_rate_annual_pct": 1.8,
   "net_reconstructed_pct": 3.379,
   "lynk_ytd_pct": 2.03,
-  "lynk_refreshed_at": "2026-11-10T00:08:51.800832",
+  "lynk_refreshed_at": "2026-11-10T13:14:17.967207",
   "residual_pp": 1.349,
   "alts_detail": [
     {
@@ -145,9 +145,9 @@
     },
     "bench_ytd_aor_etf": 6.97,
     "acwi_ytd": 11.22,
-    "agg_ytd": -0.626,
+    "agg_ytd": -0.465,
     "bench_eq_contrib_pp": 3.366,
-    "bench_fi_contrib_pp": -0.25,
+    "bench_fi_contrib_pp": -0.186,
     "bench_alts_contrib_pp": 3.366,
     "big_ytd": 2.03,
     "alpha_ytd_total_pp": -4.94,
@@ -162,9 +162,9 @@
       {
         "name": "Fixed Income",
         "big_contrib_pp": 0.593,
-        "bench_contrib_pp": -0.25,
-        "alpha_pp": 0.843,
-        "comment": "BIG 38.9% @ +1.52% vs 40% AGG @ -0.63%"
+        "bench_contrib_pp": -0.186,
+        "alpha_pp": 0.779,
+        "comment": "BIG 38.9% @ +1.52% vs 40% AGG @ -0.47%"
       },
       {
         "name": "Alternatives",
@@ -199,8 +199,8 @@
         "name": "Residual",
         "big_contrib_pp": 1.349,
         "bench_contrib_pp": null,
-        "alpha_pp": -1.837,
-        "comment": "Nuestro calculo (+3.38%) - Lynk oficial (+2.03%), mas la diferencia entre el bench por pesos del mandato (+6.48%) y el AOR (+6.97%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
+        "alpha_pp": -1.772,
+        "comment": "Nuestro calculo (+3.38%) - Lynk oficial (+2.03%), mas la diferencia entre el bench por pesos del mandato (+6.55%) y el AOR (+6.97%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
       }
     ]
   }
