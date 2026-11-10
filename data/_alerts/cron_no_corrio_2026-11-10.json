@@ -1,0 +1,9 @@
+{
+  "detected_at": "2026-11-10T00:07:56.227528+00:00",
+  "date": "2026-11-10",
+  "tipo": "cron_no_corrio",
+  "motivo": "[should_run_refresh] 2026-11-10 (Mar): CORRER -- todavia no corrio hoy (ultimo run: 2026-11-09)",
+  "issues": [
+    "El daily-refresh de 2026-11-10 no habia corrido cuando paso el watchdog (agendado 12:30 UTC). Lo disparo. Si se repite seguido, GitHub esta postergando los schedules y conviene revisar el horario."
+  ]
+}
