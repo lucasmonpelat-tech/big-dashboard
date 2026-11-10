@@ -763,7 +763,7 @@
       "name": "NB Global Equity Megatrends I",
       "sleeve": "Equity",
       "archivo": "NBGMT.json",
-      "as_of_factsheet": "2018-04-27",
+      "as_of_factsheet": "2026-09-30",
       "yield": {
         "valor": 0.8,
         "tipo": "Distribution Yield",
@@ -775,40 +775,20 @@
       "countries": [
         {
           "c": "US",
-          "p": 58
+          "p": 56
         },
         {
           "c": "OTHER",
-          "p": 10
+          "p": 27
         },
         {
-          "c": "DE",
-          "p": 8
-        },
-        {
-          "c": "TW",
-          "p": 6
-        },
-        {
-          "c": "UK",
-          "p": 5
-        },
-        {
-          "c": "JP",
-          "p": 5
-        },
-        {
-          "c": "KR",
-          "p": 4
-        },
-        {
-          "c": "FR",
-          "p": 4
+          "c": "EM",
+          "p": 17
         }
       ],
-      "countries_de_factsheet": false,
-      "countries_as_of": "2026-05-14",
-      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+      "countries_de_factsheet": true,
+      "countries_as_of": "2026-09-30",
+      "countries_nota": "Factsheet 30-Sep-2026, 'Revenue Distribution': US 56% / Non-US Developed 27% / Emerging Markets & Other 17%. OJO: es distribucion de INGRESOS de las companias, NO pais de domicilio de las posiciones. 'Non-US Developed' va a OTHER y 'Emerging Markets & Other' al agregado EM. El factsheet de Mar-2026 usaba otra medida (US 78,4 / UK 4,8 / Asia EM 7,4 / Oriente Medio 4,4): no son comparables entre si."
     },
     "IE00B29K0P99": {
       "ticker": "PIMCO-EM",
@@ -1070,7 +1050,7 @@
       "name": "Thornburg Equity Income Builder I",
       "sleeve": "Equity",
       "archivo": "THOR.json",
-      "as_of_factsheet": "2026-02-28",
+      "as_of_factsheet": "2026-09-30",
       "yield": {
         "valor": 4.2,
         "tipo": "Distribution Yield",
@@ -1081,45 +1061,33 @@
       },
       "countries": [
         {
-          "c": "US",
-          "p": 55
-        },
-        {
-          "c": "DE",
-          "p": 8
-        },
-        {
           "c": "OTHER",
-          "p": 8
+          "p": 36.7
         },
         {
-          "c": "UK",
-          "p": 7
-        },
-        {
-          "c": "TW",
-          "p": 6
-        },
-        {
-          "c": "CH",
-          "p": 5
-        },
-        {
-          "c": "NL",
-          "p": 4
-        },
-        {
-          "c": "JP",
-          "p": 4
+          "c": "US",
+          "p": 26.9
         },
         {
           "c": "FR",
-          "p": 3
+          "p": 13.6
+        },
+        {
+          "c": "UK",
+          "p": 12.6
+        },
+        {
+          "c": "NL",
+          "p": 6.7
+        },
+        {
+          "c": "DE",
+          "p": 3.5
         }
       ],
-      "countries_de_factsheet": false,
-      "countries_as_of": "2026-05-14",
-      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+      "countries_de_factsheet": true,
+      "countries_as_of": "2026-09-30",
+      "countries_nota": "Factsheet 30-Sep-2026 (TIBIX): top 5 paises por 'country of risk' (MSCI/Bloomberg): US 26,9 / Francia 13,6 / UK 12,6 / Paises Bajos 6,7 / Alemania 3,5 = 63,3%. El resto (36,7%) va a OTHER: incluye Taiwan y Corea (TSMC 6,1% y Samsung 4,1% entre las top 10), Japon y cash 7,4%. La estimacion previa (US 55%) estaba MUY lejos del dato real."
     }
   }
 }

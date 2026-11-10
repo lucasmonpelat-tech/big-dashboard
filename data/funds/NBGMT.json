@@ -3,9 +3,9 @@
   "isin": "IE00BFMHRK20",
   "name": "NB Global Equity Megatrends I",
   "sleeve": "Equity",
-  "source_file": "NBGMT_20260331.pdf",
-  "parsed_at": "2026-05-12",
-  "as_of_factsheet": "2018-04-27",
+  "source_file": "Dropbox/2026/Research Fondos/Renta Variable/NB Megatrends/fACSHEET SEPT.pdf",
+  "parsed_at": "2026-11-10",
+  "as_of_factsheet": "2026-09-30",
   "top_holdings": {
     "Amdocs Limited": 4.95,
     "Expedia Group, Inc.": 4.9,
@@ -31,17 +31,79 @@
     "de_factsheet": false
   },
   "countries": {
-    "US": 58,
-    "DE": 8,
-    "TW": 6,
-    "UK": 5,
-    "JP": 5,
-    "KR": 4,
-    "FR": 4,
-    "OTHER": 10
+    "US": 56,
+    "OTHER": 27,
+    "EM": 17
   },
-  "countries_de_factsheet": false,
-  "countries_as_of": "2026-05-14",
-  "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta.",
-  "factsheet_url": "https://www.nb.com/en/latam/products/ucits-funds/global-equity-megatrends-fund?section=documents"
+  "countries_de_factsheet": true,
+  "countries_as_of": "2026-09-30",
+  "countries_nota": "Factsheet 30-Sep-2026, 'Revenue Distribution': US 56% / Non-US Developed 27% / Emerging Markets & Other 17%. OJO: es distribucion de INGRESOS de las companias, NO pais de domicilio de las posiciones. 'Non-US Developed' va a OTHER y 'Emerging Markets & Other' al agregado EM. El factsheet de Mar-2026 usaba otra medida (US 78,4 / UK 4,8 / Asia EM 7,4 / Oriente Medio 4,4): no son comparables entre si.",
+  "factsheet_url": "https://www.nb.com/en/latam/products/ucits-funds/global-equity-megatrends-fund?section=documents",
+  "source": "Neuberger Global Equity Megatrends Fund, clase USD I Accumulating (IE00BFMHRK20 / CUSIP G6430T809) — factsheet 30-Sep-2026",
+  "countries_anterior": {
+    "countries": {
+      "US": 58,
+      "DE": 8,
+      "TW": 6,
+      "UK": 5,
+      "JP": 5,
+      "KR": 4,
+      "FR": 4,
+      "OTHER": 10
+    },
+    "countries_as_of": "2026-05-14",
+    "as_of_factsheet": "2018-04-27"
+  },
+  "fund_facts": {
+    "aum_usd_mm": 1201.97,
+    "nav": 24.89,
+    "n_holdings": 25,
+    "active_share": 96.84,
+    "top10_pct": 46.73,
+    "management_fee_pct": 0.8,
+    "ongoing_charge_pct": 0.93,
+    "benchmark": "MSCI World (TR, net, USD)",
+    "performance_2026-09-30_pct": {
+      "1m": -6.32,
+      "3m": 2.43,
+      "ytd": 8.45,
+      "1y": 7.7,
+      "3y_ann": 20.23,
+      "5y_ann": 10.19,
+      "si_ann": 11.42
+    },
+    "benchmark_perf_pct": {
+      "1m": -1.19,
+      "3m": 1.88,
+      "ytd": 11.75,
+      "1y": 15.24
+    },
+    "caracteristicas": {
+      "fwd_pe": 14.22,
+      "fwd_pe_bmk": 19.43,
+      "ev_ebitda_ntm": 11.24,
+      "wavg_mkt_cap_usd_mm": 179194,
+      "eps_growth_3_5y": 13.59,
+      "fcf_yield_1y": 7.08
+    },
+    "riesgo_3y": {
+      "tracking_error": 7.41,
+      "beta": 1.16,
+      "sharpe": 0.98,
+      "info_ratio": -0.16,
+      "std_dev": 15.47
+    },
+    "megatendencias_pct": {
+      "Evolving Global Consumer": 21.4,
+      "Smart Systems": 18.22,
+      "Energy Efficiency": 18.2,
+      "Health & Wellbeing": 14.01,
+      "Personalization of Media": 9.55,
+      "Humanization of Pets": 8.87,
+      "Rising Value of Water": 4.49,
+      "Energy Infrastructure": 4.14,
+      "Cash": 1.13
+    },
+    "as_of": "2026-09-30"
+  }
 }

@@ -3,9 +3,9 @@
   "isin": "IE00B6YCBF59",
   "name": "Thornburg Equity Income Builder I",
   "sleeve": "Equity",
-  "source_file": "THOR_20260331.pdf",
-  "parsed_at": "2026-05-12",
-  "as_of_factsheet": "2026-02-28",
+  "source_file": "Dropbox/2026/Research Fondos/Renta Variable/Thornburg - Fact Sheet - Investment Income Builder Fund.pdf",
+  "parsed_at": "2026-11-10",
+  "as_of_factsheet": "2026-09-30",
   "top_holdings": {
     "Orange S.A.": 4.6,
     "AT&T, Inc.": 4.5,
@@ -43,18 +43,69 @@
     "de_factsheet": false
   },
   "countries": {
-    "US": 55,
-    "DE": 8,
-    "UK": 7,
-    "TW": 6,
-    "CH": 5,
-    "NL": 4,
-    "FR": 3,
-    "JP": 4,
-    "OTHER": 8
+    "US": 26.9,
+    "FR": 13.6,
+    "UK": 12.6,
+    "NL": 6.7,
+    "DE": 3.5,
+    "OTHER": 36.7
   },
-  "countries_de_factsheet": false,
-  "countries_as_of": "2026-05-14",
-  "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta.",
-  "factsheet_url": "https://www.thornburg.com/funds/equity-income-builder-fund/"
+  "countries_de_factsheet": true,
+  "countries_as_of": "2026-09-30",
+  "countries_nota": "Factsheet 30-Sep-2026 (TIBIX): top 5 paises por 'country of risk' (MSCI/Bloomberg): US 26,9 / Francia 13,6 / UK 12,6 / Paises Bajos 6,7 / Alemania 3,5 = 63,3%. El resto (36,7%) va a OTHER: incluye Taiwan y Corea (TSMC 6,1% y Samsung 4,1% entre las top 10), Japon y cash 7,4%. La estimacion previa (US 55%) estaba MUY lejos del dato real.",
+  "factsheet_url": "https://www.thornburg.com/funds/equity-income-builder-fund/",
+  "source": "Thornburg Investment Income Builder Fund, clase I (TIBIX, US mutual fund) — Fact Sheet 30-Sep-2026. VEHICULO DISTINTO: nosotros tenemos el UCITS irlandes (IE00B6YCBF59); es la misma estrategia y equipo, pero el factsheet UCITS de Sep-26 no esta en la carpeta.",
+  "countries_anterior": {
+    "countries": {
+      "US": 55,
+      "DE": 8,
+      "UK": 7,
+      "TW": 6,
+      "CH": 5,
+      "NL": 4,
+      "FR": 3,
+      "JP": 4,
+      "OTHER": 8
+    },
+    "countries_as_of": "2026-05-14",
+    "as_of_factsheet": "2026-02-28"
+  },
+  "fund_facts": {
+    "total_net_assets_usd_mm": 22643.1,
+    "n_equity_holdings": 70,
+    "n_bond_holdings": 248,
+    "pe_ttm": 16.8,
+    "active_share_pct": 92.7,
+    "eff_duration_bonds_yrs": 3.9,
+    "composition_pct": {
+      "Foreign Equity": 64.3,
+      "Domestic Equity": 21.7,
+      "Domestic Other Bonds": 3.2,
+      "Domestic Corporate Bonds": 2.0,
+      "Foreign Bonds": 1.4,
+      "Cash": 7.4
+    },
+    "perf_I_shares_pct": {
+      "qtr": -0.04,
+      "ytd": 16.11,
+      "1y": 23.95,
+      "3y_ann": 25.01,
+      "5y_ann": 16.18,
+      "itd_ann": 10.73
+    },
+    "net_expense_ratio_pct": 0.91,
+    "sector_pct_equity": {
+      "Financials": 23.7,
+      "Communication Services": 23.2,
+      "Information Technology": 16.4,
+      "Health Care": 7.5,
+      "Energy": 7.3,
+      "Consumer Staples": 6.8,
+      "Utilities": 5.5,
+      "Industrials": 4.5,
+      "Materials": 2.8,
+      "Consumer Discretionary": 2.3
+    },
+    "as_of": "2026-09-30"
+  }
 }

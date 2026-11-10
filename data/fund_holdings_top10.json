@@ -1,7 +1,7 @@
 {
   "_description": "Top 10 holdings per BIG equity fund. Used for lookthrough analysis vs ACWI top 10.",
-  "_lastUpdate": "2026-10-06",
-  "_status": "VERIFICADO: 11 fondos del sleeve equity. Refrescados 25-Ago-2026: CSPX/MFSCV/JHGSC/NBGMT (31-Jul), THOR (30-Jun), ARGT (14-Ago), ILF (20-Ago), 4BRZ (31-Jul). MAGS/HEWJ en Jul-2026. Unico pendiente: LGLI (30-Abr-2026). | 06-Oct-2026: alta de DYNF (deck Q2-2026, 30-Jun). | 06-Nov-2026: alta de EMXC (provisional Yahoo).",
+  "_lastUpdate": "2026-11-10",
+  "_status": "VERIFICADO: 11 fondos del sleeve equity. Refrescados 25-Ago-2026: CSPX/MFSCV/JHGSC/NBGMT (31-Jul), THOR (30-Jun), ARGT (14-Ago), ILF (20-Ago), 4BRZ (31-Jul). MAGS/HEWJ en Jul-2026. Unico pendiente: LGLI (30-Abr-2026). | 06-Oct-2026: alta de DYNF (deck Q2-2026, 30-Jun). | 06-Nov-2026: alta de EMXC (provisional Yahoo). | 10-Nov-2026: NBGMT y THOR con factsheet 30-Sep-2026.",
   "CSPX": {
     "name": "iShares Core S&P 500 UCITS",
     "source": "VERIFICADO: factsheet oficial iShares Core S&P 500 UCITS ETF (BlackRock americas-offshore), seccion Top 10 Holdings al 31-Jul-2026. Total top 10 = 37.56% del portfolio. Reemplaza los pesos del indice S&P 500 publicos (~May-2026) que habia antes. + TSLA 1.42% desde iShares IVV al 13-Ago-2026 (ver _note).",
@@ -100,23 +100,23 @@
   },
   "NBGMT": {
     "name": "NB Global Equity Megatrends I",
-    "source": "VERIFICADO: factsheet oficial NB Global Equity Megatrends (swissfunddata, fsm-8350_84_01) al 31-Jul-2026, tabla \"Top 10 Fund Holdings vs Benchmark\". Assets in Top 10 = 47.26%. Reemplaza los datos de Endowus (18-Jun-2026).",
+    "source": "VERIFICADO: factsheet oficial Neuberger Global Equity Megatrends (clase USD I Acc) al 30-Sep-2026, tabla 'Top 10 Fund Holdings vs Benchmark'. Assets in Top 10 = 46.73%. 25 posiciones. Reemplaza el de 31-Jul-2026.",
     "isin": "IE00BFMHRK20",
-    "_as_of": "2026-07-31",
+    "_as_of": "2026-09-30",
     "top_holdings": {
-      "_note": "Top 10 = 47.26% (muy concentrado). NO tiene ningun ACWI top 10 — el propio factsheet muestra que el peso de estos nombres en el benchmark suma 0.07%. Rotacion Jun->Jul: salen ON Semiconductor, Cisco, Element Solutions y Perrigo; entran Expedia, Tetra Tech, Charles River y Pets At Home."
+      "_note": "Top 10 = 46.73%. El propio factsheet muestra que el peso de estos nombres en el benchmark (MSCI World) suma 0.07%. Rotacion Jul->Sep: salen Shift4, Charles River, Delta Air Lines, Gen Digital; entran Perrigo, Wuxi Biologics, NICE y ON Semiconductor."
     },
     "_factsheet_top10": {
-      "Expedia_Group_EXPE": 5.09,
-      "Shift4_Payments": 5.08,
-      "Tetra_Tech_TTEK": 5.04,
-      "Alibaba": 5.03,
-      "Charles_River_Labs_CRL": 4.95,
-      "Chewy": 4.7,
-      "Delta_Air_Lines": 4.58,
-      "Gen_Digital": 4.37,
-      "Pets_At_Home": 4.3,
-      "Zeta_Global": 4.12
+      "Perrigo": 5.03,
+      "Wuxi_Biologics": 5.01,
+      "Zeta_Global": 4.84,
+      "NICE_Ltd": 4.79,
+      "ON_Semiconductor": 4.69,
+      "Alibaba": 4.52,
+      "Pets_At_Home": 4.5,
+      "Expedia_Group_EXPE": 4.49,
+      "Tetra_Tech_TTEK": 4.49,
+      "Chewy": 4.36
     }
   },
   "MFSCV": {
@@ -142,24 +142,24 @@
   },
   "THOR": {
     "name": "Thornburg Equity Income Builder I",
-    "source": "VERIFICADO: Thornburg Equity Income Builder UCITS Class I Acc factsheet 31-Jul-2026 (thornburg.wmcubehk.com); seccion \"Ten Largest Holdings\" al 30-Jun-2026. Active Share 91.8%. 65 holdings. P/E 16.3x, P/B 2.2x. Div yield 3.7%. YTD I Acc +19.90%. Composicion: 65.3% non-US equity / 23.2% US equity / 11.6% cash.",
+    "source": "VERIFICADO: Thornburg Investment Income Builder Fund (TIBIX, US mutual fund, misma estrategia que nuestro UCITS) Fact Sheet 30-Sep-2026, 'Top Ten Equity Positions'. 70 posiciones de renta variable, 248 bonos, Active Share 92.7%. Composicion: 64.3% foreign equity / 21.7% US equity / 7.4% cash.",
     "isin": "IE00B6YCBF59",
-    "_as_of": "2026-06-30",
+    "_as_of": "2026-09-30",
     "top_holdings": {
-      "AVGO": 3.1,
-      "2330": 3.3
+      "AVGO": 2.7,
+      "2330": 6.1
     },
     "_factsheet_top10": {
-      "Kimberly_Clark_KMB": 3.8,
-      "Orange": 3.7,
-      "BNP_Paribas": 3.5,
-      "Taiwan_Semiconductor_TSM": 3.3,
-      "NN_Group": 3.3,
-      "Broadcom_AVGO": 3.1,
-      "ATT": 3.0,
-      "TotalEnergies_TTE": 2.7,
-      "Samsung_Electronics": 2.5,
-      "Merck_&_Co_MRK": 2.3
+      "Taiwan_Semiconductor_TSM": 6.1,
+      "Orange": 5.0,
+      "Samsung_Electronics": 4.1,
+      "BNP_Paribas": 4.1,
+      "NN_Group": 3.7,
+      "Citigroup": 3.7,
+      "ATT": 3.3,
+      "TotalEnergies_TTE": 3.0,
+      "Zegona_Communications": 2.7,
+      "Broadcom_AVGO": 2.7
     }
   },
   "JHGSC": {
