@@ -1,5 +1,5 @@
 {
-  "asOf": "2026-09-30",
+  "asOf": "2026-10-31",
   "source": "Sub-asset class y credit_quality.bmk: recalculados 2026-07-28 desde fi_subasset_lookup.json x pesos frescos Pershing (canonical/2026-07-28) + factsheet oficial iShares AGG (30-Jun-2026). fi_stats.big: ponderado desde fi_race.json (ytw/duration/maturity por fondo) x mismos pesos. credit_quality.big, fi_stats.bmk y regional: todavia sin refresh (ver notes por seccion).",
   "note": "Ver 'source' por seccion para saber que esta fresco y que sigue siendo la aprobacion de Abril-2026 (Lucas, 28-Abr-2026, fi_breakdown_mar26.json).",
   "fi_stats": {
@@ -8,17 +8,17 @@
     "rows": [
       {
         "metric": "YTW (%)",
-        "big": 7.18,
+        "big": 7.64,
         "bmk": 5.66
       },
       {
         "metric": "Duración",
-        "big": 4.45,
+        "big": 4.73,
         "bmk": 5.7
       },
       {
         "metric": "Vencimiento",
-        "big": 7.28,
+        "big": 7.7,
         "bmk": 8.21
       }
     ],
@@ -37,7 +37,7 @@
       },
       "cobertura_pct_sleeve": 92.53,
       "factsheets_usados": {
-        "PIMCO-INC": "2026-07-31",
+        "PIMCO-INC": "2026-09-30",
         "MANIG": "2026-06-30",
         "PIMCO-LD": "2026-06-30",
         "TGF": "2026-09-30",
@@ -47,7 +47,7 @@
       },
       "nota": "La calidad crediticia NO sigue esta regla: Maximus la publica agregada, con TGF y PIMCO-EM adentro, y no se puede desarmar."
     },
-    "_generated_at": "2026-11-10T11:02:29.578740",
+    "_generated_at": "2026-11-10T12:59:26.635051",
     "_generated_from": "canonical/2026-10-31/holdings_returns.json",
     "bmk_as_of": "2026-10-06",
     "bmk_fuente": "iShares US Aggregate Bond UCITS ETF (IUAA) - pagina oficial BlackRock, YTM / duracion efectiva / vencimiento promedio ponderado al 06-Oct-2026 (indice Bloomberg US Aggregate). Es YTM, no YTW.",
@@ -56,9 +56,66 @@
   "sub_asset_class": {
     "title": "Distribución por Sub-asset Class (Sectorial FI)",
     "subtitle": "BIG vs AGG (Bloomberg US Aggregate)",
-    "source": "big: fi_subasset_lookup.json x pesos REALES del canonical al 30-Sep-2026 (holdings_returns). 8 fondos: PIMCO-INC (factsheet UCITS 31-Jul), MANIG y MANEM (Man 30-Jun), PIMCO-EM y SGCB (Abr), GAMCB (GAM Ago-2026, alta 2026-10-01), PIMCO-LD proxy PFIIX (30-Jun), TGF estimado. agg: factsheet oficial iShares AGG, 30-Jun-2026 (el trimestral de Sep aun no publicado al 1-Oct).",
+    "source": "big: fi_subasset_lookup.json x pesos REALES del canonical al 31-Oct-2026 (holdings_returns, folder 2026-10-31 = cierre del 30-Oct). Mismo metodo que Sep (reproduce los numeros de Sep con los pesos de ese cierre). 8 fondos con lookup. agg: factsheet oficial iShares AGG, 30-Jun-2026 (sin cambios).",
     "note": "MANEM (0.18% del FI) sin factsheet propio todavia -- ver fi_subasset_lookup.json, estimado 'EM Local + Hard' ~90% por convencion del pitch book. Pendiente reemplazar cuando llegue el factsheet real.",
     "rows": [
+      {
+        "category": "Govt-related",
+        "big": 6.8,
+        "agg": 48.9
+      },
+      {
+        "category": "Govt Agency MBS",
+        "big": 19.3,
+        "agg": 23.4
+      },
+      {
+        "category": "Securitized Non-Agency",
+        "big": 11.3,
+        "agg": 1.4
+      },
+      {
+        "category": "Corporate IG",
+        "big": 19.0,
+        "agg": 24.7
+      },
+      {
+        "category": "Corporate HY",
+        "big": 5.3,
+        "agg": 0.0
+      },
+      {
+        "category": "EM Local + Hard",
+        "big": 20.8,
+        "agg": 0.0
+      },
+      {
+        "category": "Cat Bonds",
+        "big": 8.7,
+        "agg": 0.0
+      },
+      {
+        "category": "Bank Loans",
+        "big": 0.4,
+        "agg": 0.0
+      },
+      {
+        "category": "Other",
+        "big": 8.4,
+        "agg": 1.6
+      }
+    ],
+    "totals": {
+      "big": 100.0,
+      "agg": 100.0
+    },
+    "_confianza": "high 65.0% | medium 27.7% (PIMCO-LD, proxy US) | low 7.3% (TGF, sin factsheet publico)",
+    "_nota_us_treasury": "US Treasury queda en 0.00%. PIMCO no lo reporta por separado: su categoria \"Government Related\" engloba Treasuries, agencias y papel garantizado de varios paises. El 1.8% que se mostraba antes venia del proxy PIMIX americano, que usa otra taxonomia. El BIG no tiene ningun fondo de Treasuries.",
+    "_merge_us_treasury": "2026-09-08: 'US Treasury' se fundio dentro de 'Govt-related'. PIMCO -que es el 57.6% del sleeve entre Income y Low Duration- NO reporta Treasuries por separado: su 'Government Related' ya los engloba junto con agencias y papel garantizado de EE.UU., Japon, UK, Australia, Canada y UE (nota metodologica de su factsheet). Mostrar una barra en 0 afirmaba que el BIG no tiene Treasuries, y si tiene (el top-10 de PIMCO Income lista un TIPS al 1.2%). El AGG si los separa, asi que se sumaron sus 46.26% a Govt-related para que el benchmark siga cerrando en 100. Valores redondeados por resto mayor para que la suma de exactamente 100.0.",
+    "agg_as_of": "2026-06-30",
+    "agg_fuente": "Factsheet oficial iShares AGG",
+    "as_of_big": "2026-10-31",
+    "_prev_2026-09-30": [
       {
         "category": "Govt-related",
         "big": 5.9,
@@ -105,22 +162,73 @@
         "agg": 1.6
       }
     ],
-    "totals": {
-      "big": 100.0,
-      "agg": 100.0
-    },
-    "_confianza": "high 65.0% | medium 27.7% (PIMCO-LD, proxy US) | low 7.3% (TGF, sin factsheet publico)",
-    "_nota_us_treasury": "US Treasury queda en 0.00%. PIMCO no lo reporta por separado: su categoria \"Government Related\" engloba Treasuries, agencias y papel garantizado de varios paises. El 1.8% que se mostraba antes venia del proxy PIMIX americano, que usa otra taxonomia. El BIG no tiene ningun fondo de Treasuries.",
-    "_merge_us_treasury": "2026-09-08: 'US Treasury' se fundio dentro de 'Govt-related'. PIMCO -que es el 57.6% del sleeve entre Income y Low Duration- NO reporta Treasuries por separado: su 'Government Related' ya los engloba junto con agencias y papel garantizado de EE.UU., Japon, UK, Australia, Canada y UE (nota metodologica de su factsheet). Mostrar una barra en 0 afirmaba que el BIG no tiene Treasuries, y si tiene (el top-10 de PIMCO Income lista un TIPS al 1.2%). El AGG si los separa, asi que se sumaron sus 46.26% a Govt-related para que el benchmark siga cerrando en 100. Valores redondeados por resto mayor para que la suma de exactamente 100.0.",
-    "agg_as_of": "2026-06-30",
-    "agg_fuente": "Factsheet oficial iShares AGG",
-    "as_of_big": "2026-09-30"
+    "_nota_redondeo_2026-10-31": "Valores redondeados por resto mayor para que sumen exactamente 100.0 (Other exacto 8.46 -> 8.4)."
   },
   "credit_quality": {
     "title": "Calidad Crediticia",
     "subtitle": "BIG vs BMK (AGG)",
     "source": "big: Maximus, factsheet deck 9.factsheet-strategy-14534.pptx slide 2, grafico 'Calidad Crediticia' al 30-Sep-2026 (imagen, leida el 2026-10-05). bmk: factsheet oficial iShares AGG, 30-Jun-2026 - sin cambios (el trimestral de Sep no estaba publicado).",
     "rows": [
+      {
+        "rating": "AAA",
+        "big": 11.23,
+        "bmk": 2.21
+      },
+      {
+        "rating": "AA",
+        "big": 32.07,
+        "bmk": 73.6
+      },
+      {
+        "rating": "A",
+        "big": 6.38,
+        "bmk": 11.85
+      },
+      {
+        "rating": "BBB",
+        "big": 22.69,
+        "bmk": 11.63
+      },
+      {
+        "rating": "BB",
+        "big": 8.43,
+        "bmk": 0.0
+      },
+      {
+        "rating": "B",
+        "big": 3.56,
+        "bmk": 0.0
+      },
+      {
+        "rating": "CCC",
+        "big": 5.84,
+        "bmk": 0.0
+      },
+      {
+        "rating": "NR",
+        "big": 9.79,
+        "bmk": 0.71
+      }
+    ],
+    "totals": {
+      "big": 99.99,
+      "bmk": 100.0
+    },
+    "summary": {
+      "big_ig": 82.16,
+      "big_hy": 17.83,
+      "big_ig_ex_nr": 72.37,
+      "big_nr": 9.79,
+      "bmk_ig": 99.29,
+      "bmk_hy": 0.0,
+      "_convencion": "big_ig incluye NR, como venia desde Abril-2026 (80.6 + 0.5 = 81.1). En Agosto el NR pesa 5.81% (era 0.5%), asi que la eleccion ya no es cosmetica: sin NR el IG es 75.87%. Decision de presentacion pendiente."
+    },
+    "_refresh_2026-08-31": "Reemplaza los numeros de Abril-2026. El TODO decia que no se podia refrescar sin la distribucion de rating por fondo; Maximus la publica agregada, asi que se toma de ahi.",
+    "bmk_as_of": "2026-06-30",
+    "bmk_fuente": "Factsheet oficial iShares AGG",
+    "_refresh_2026-09-30": "Reemplaza los numeros de Agosto. IG con NR 82.0 / HY 18.0: el headline 82/18 no cambia.",
+    "_refresh_2026-10-31": "BIG de Maximus (factsheet-strategy-16020, grafico Calidad Crediticia, leido el 2026-11-10). IG con NR 82.16 / HY 17.83: el headline 82/18 no cambia. NR pasa de 7.44 a 9.79. bmk (AGG iShares 30-Jun) sin cambios.",
+    "_prev_2026-09-30": [
       {
         "rating": "AAA",
         "big": 10.55,
@@ -161,24 +269,7 @@
         "big": 7.44,
         "bmk": 0.71
       }
-    ],
-    "totals": {
-      "big": 99.98,
-      "bmk": 100.0
-    },
-    "summary": {
-      "big_ig": 81.99,
-      "big_hy": 17.99,
-      "big_ig_ex_nr": 74.55,
-      "big_nr": 7.44,
-      "bmk_ig": 99.29,
-      "bmk_hy": 0.0,
-      "_convencion": "big_ig incluye NR, como venia desde Abril-2026 (80.6 + 0.5 = 81.1). En Agosto el NR pesa 5.81% (era 0.5%), asi que la eleccion ya no es cosmetica: sin NR el IG es 75.87%. Decision de presentacion pendiente."
-    },
-    "_refresh_2026-08-31": "Reemplaza los numeros de Abril-2026. El TODO decia que no se podia refrescar sin la distribucion de rating por fondo; Maximus la publica agregada, asi que se toma de ahi.",
-    "bmk_as_of": "2026-06-30",
-    "bmk_fuente": "Factsheet oficial iShares AGG",
-    "_refresh_2026-09-30": "Reemplaza los numeros de Agosto. IG con NR 82.0 / HY 18.0: el headline 82/18 no cambia."
+    ]
   },
   "regional": {
     "title": "Distribución Regional FI",

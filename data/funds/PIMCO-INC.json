@@ -3,13 +3,13 @@
   "isin": "IE00B87KCF77",
   "name": "PIMCO GIS Income I",
   "sleeve": "Fixed Income",
-  "source": "Factsheet PIMCO GIS Income Fund, 31-Jul-2026",
-  "parsed_at": "2026-09-18",
-  "as_of_factsheet": "2026-07-31",
+  "source": "PIMCO GIS Income Fund, clase Institutional Acumulacion (IE00B87KCF77) — factsheet en espanol, datos al 30-Sep-2026",
+  "parsed_at": "2026-11-10",
+  "as_of_factsheet": "2026-09-30",
   "fi_metrics": {
-    "ytw": 7.32,
-    "duration": 6.73,
-    "maturity": 10.02,
+    "ytw": 8.37,
+    "duration": 7.36,
+    "maturity": 10.97,
     "rating": "AA-"
   },
   "countries": {
@@ -39,8 +39,14 @@
   "countries_de_factsheet": false,
   "countries_as_of": "2026-04-30",
   "factsheet_url": "https://www.pimco.com/sg/en/investments/gis/income-fund/inst-usd-accumulation",
-  "source_file": "Dropbox/2026/Research Fondos/Renta Fija/PIMCO Income/PIMCO GIS Income Fund INST USD ACC INC SG FS.pdf",
+  "source_file": "Dropbox/2026/Research Fondos/Renta Fija/PIMCO Income/PIMCO GIS Income Fund INST USD ACC INC ES es FS sept.pdf",
   "fi_metrics_de_factsheet": true,
-  "fi_metrics_nota": "ytw = Estimated Yield to Maturity (gross of fees, moneda base del fondo). duration = Effective Duration. maturity = Effective Maturity. El factsheet no publica current yield: el 6.12% 'Annualised Distribution Yield' es de la clase Income y la nuestra (IE00B87KCF77) es Acumulacion.",
-  "countries_nota": "Estos paises vienen de la web de PIMCO (Abr-2026), por valor de mercado, y NO de un factsheet de la carpeta. El factsheet de PIMCO solo publica 'Top 10 Countries by Contribution to Total Duration' (% duration weighted), que es una medida de RIESGO, no de asignacion: mezclarla en el grafico con fondos medidos por valor de mercado seria sumar peras con manzanas. Ademas PIMCO clasifica paises por moneda de liquidacion, no por emisor."
+  "fi_metrics_nota": "Factsheet 30-Sep-2026: 'Rendimiento estimado hasta el vencimiento' 8,37 (es YTM, no YTW), 'Duracion efectiva' 7,36 (indice 5,77), 'Vencimiento efectivo' 10,97, rendimiento anualizado de distribucion 6,38. La CALIDAD CREDITICIA promedio (AA-) se mantiene del factsheet de Jul-2026: la version en espanol no la publica. Antes (31-Jul-2026): YTM 7,32 / duracion 6,73 / vencimiento 10,02.",
+  "countries_nota": "Estos paises vienen de la web de PIMCO (Abr-2026), por valor de mercado, y NO de un factsheet de la carpeta. El factsheet de PIMCO solo publica 'Top 10 Countries by Contribution to Total Duration' (% duration weighted), que es una medida de RIESGO, no de asignacion: mezclarla en el grafico con fondos medidos por valor de mercado seria sumar peras con manzanas. Ademas PIMCO clasifica paises por moneda de liquidacion, no por emisor.",
+  "fi_metrics_anterior_2026-07-31": {
+    "ytw": 7.32,
+    "duration": 6.73,
+    "maturity": 10.02,
+    "rating": "AA-"
+  }
 }
