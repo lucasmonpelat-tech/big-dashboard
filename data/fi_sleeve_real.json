@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-11-10T13:15:10.872122",
+  "refreshedAt": "2026-11-10T15:36:25.250814",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -5519,55 +5519,55 @@
     },
     {
       "date": "2026-11-10",
-      "mv_usd": 11230882.778590001,
+      "mv_usd": 11235864.284823999,
       "holdings": [
         {
           "ticker": "PIMCO-LD",
           "qty": 102086.926,
-          "price": 14.05,
-          "mv": 1434321.3103000002,
+          "price": 14.06,
+          "mv": 1435342.17956,
           "source": "daily_close"
         },
         {
           "ticker": "PIMCO-EM",
           "qty": 31928.731,
-          "price": 18.12,
-          "mv": 578548.60572,
+          "price": 18.15,
+          "mv": 579506.46765,
           "source": "daily_close"
         },
         {
           "ticker": "MANIG",
           "qty": 16621.485,
-          "price": 124.79,
-          "mv": 2074195.11315,
+          "price": 124.67,
+          "mv": 2072200.53495,
           "source": "daily_close"
         },
         {
           "ticker": "MANEM",
           "qty": 4060.017,
-          "price": 114.9,
-          "mv": 466495.9533,
+          "price": 114.86,
+          "mv": 466333.55262,
           "source": "daily_close"
         },
         {
           "ticker": "PIMCO-INC",
           "qty": 235926.136,
-          "price": 20.01,
-          "mv": 4720881.981360001,
+          "price": 20.03,
+          "mv": 4725600.50408,
           "source": "daily_close"
         },
         {
           "ticker": "GAMCB",
           "qty": 22165.72,
-          "price": 25.063,
-          "mv": 555539.44036,
+          "price": 25.0637,
+          "mv": 555554.9563640001,
           "source": "daily_close"
         },
         {
           "ticker": "SGCB",
           "qty": 269.44,
-          "price": 2249.46,
-          "mv": 606094.5024,
+          "price": 2251.04,
+          "mv": 606520.2176,
           "source": "daily_close"
         },
         {
@@ -9474,10 +9474,10 @@
     },
     {
       "date": "2026-11-10",
-      "mv_usd": 11230882.778590001,
+      "mv_usd": 11235864.284823999,
       "flow_in": -499940.0,
-      "twr": 0.005034616578237621,
-      "index": 105.7762
+      "twr": 0.005468807371557009,
+      "index": 105.8219
     }
   ],
   "agg_index_series": [
@@ -16095,10 +16095,10 @@
     },
     {
       "date": "2026-11-10",
-      "mv_usd": 11230882.778590001,
+      "mv_usd": 11235864.284823999,
       "flow_in": -499940.0,
-      "twr": 0.005034616578237621,
-      "index": 105.7762
+      "twr": 0.005468807371557009,
+      "index": 105.8219
     }
   ],
   "_july_ramp_note": "FIX 2026-08-14: se prepende el mes de rampa de capital (1-jul a 31-jul-2025). Ver equity_sleeve_real.json para el detalle completo -- mismo fix, misma logica. FI Modified Dietz 1-jul->31-jul: mv_start=0, mv_end=$6,818,058.18 (statement oficial verificado), flows=MANIG/PIMCO-INC/WELLCRED (7-jul) + TGF (16-jul): twr=+0.3344%. Serie reescalada por (1+0.3344%).",
@@ -18631,8 +18631,8 @@
     },
     {
       "date": "2026-11-10",
-      "price": 92.48,
-      "index": 102.7459
+      "price": 92.63,
+      "index": 102.9125
     }
   ],
   "_agg_index_series_note": "2026-10-14: un punto real por dia de mercado (yfinance IUAG.L, cierre X etiquetado X+1), ver scripts/bench_series.py. Re-derivado desde 2026-06-15."
