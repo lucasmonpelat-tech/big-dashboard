@@ -275,7 +275,7 @@
       "name": "FRANKLIN LEXINGTON PE SECONDARIES FUND CLASS I (ACC)(USD) IS",
       "sleeve": "Alternatives",
       "archivo": "FLEX.json",
-      "as_of_factsheet": null,
+      "as_of_factsheet": "2026-07-31",
       "yield": {
         "valor": null,
         "tipo": "N/A — illiquid PE",
@@ -287,28 +287,24 @@
       "countries": [
         {
           "c": "US",
-          "p": 60
+          "p": 77
         },
         {
-          "c": "UK",
-          "p": 15
-        },
-        {
-          "c": "FR",
-          "p": 10
-        },
-        {
-          "c": "DE",
-          "p": 8
+          "c": "EU",
+          "p": 20
         },
         {
           "c": "OTHER",
-          "p": 7
+          "p": 2
+        },
+        {
+          "c": "LatAm",
+          "p": 1
         }
       ],
-      "countries_de_factsheet": false,
-      "countries_as_of": "2026-05-14",
-      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+      "countries_de_factsheet": true,
+      "countries_as_of": "2026-07-31",
+      "countries_nota": "Factsheet 31-Jul-2026: North America 77% / UK-Europe 20% / Asia-Pacific 2% / Latin America 1% (sobre activos privados). 'North America' se carga como US (incluye una pequena parte de Canada)."
     },
     "IE00B6WYL972": {
       "ticker": "GAMCB",
@@ -350,7 +346,7 @@
       "name": "GOLUB CAPITAL PRIVATE CREDIT ICAPITAL OFFSHORE ACCESS FUND S",
       "sleeve": "Alternatives",
       "archivo": "GCRED.json",
-      "as_of_factsheet": null,
+      "as_of_factsheet": "2026-06-30",
       "yield": {
         "valor": 10.5,
         "tipo": "Distribution Rate",
@@ -365,9 +361,9 @@
           "p": 100
         }
       ],
-      "countries_de_factsheet": false,
-      "countries_as_of": "2026-05-14",
-      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+      "countries_de_factsheet": true,
+      "countries_as_of": "2026-06-30",
+      "countries_nota": "Quarterly Update 30-Jun-2026: direct lending a empresas middle-market de EE.UU. (el documento no publica desglose por pais; US 100% por mandato)."
     },
     "US78463V1070": {
       "ticker": "GLD",
@@ -454,7 +450,7 @@
       "name": "HAMILTON LANE GLOBAL PRIVATE INFRASTRUCTURE FUND CLASS I (AC",
       "sleeve": "Alternatives",
       "archivo": "HLGPI.json",
-      "as_of_factsheet": null,
+      "as_of_factsheet": "2026-05-31",
       "yield": {
         "valor": 4.0,
         "tipo": "Distribution Yield",
@@ -466,32 +462,20 @@
       "countries": [
         {
           "c": "US",
-          "p": 55
+          "p": 74
+        },
+        {
+          "c": "EU",
+          "p": 21
         },
         {
           "c": "OTHER",
-          "p": 13
-        },
-        {
-          "c": "UK",
-          "p": 12
-        },
-        {
-          "c": "DE",
-          "p": 8
-        },
-        {
-          "c": "FR",
-          "p": 7
-        },
-        {
-          "c": "AU",
           "p": 5
         }
       ],
-      "countries_de_factsheet": false,
-      "countries_as_of": "2026-05-14",
-      "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta."
+      "countries_de_factsheet": true,
+      "countries_as_of": "2026-05-31",
+      "countries_nota": "Factsheet Mayo-2026: North America 74% / Western Europe 21% / APAC 5% / ROW <1%. 'North America' se carga como US. El YTD de la clase I-USD en ese factsheet (8,32% a Mayo) no es comparable con el nuestro, que sale del precio de Pershing contra el ancla del 31-Dic. Distribucion objetivo del factsheet: 2-5% anual (es un objetivo, no un yield realizado)."
     },
     "US46438F1012": {
       "ticker": "IBIT",

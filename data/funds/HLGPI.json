@@ -11,16 +11,25 @@
     "de_factsheet": false
   },
   "countries": {
+    "US": 74,
+    "EU": 21,
+    "OTHER": 5
+  },
+  "countries_de_factsheet": true,
+  "countries_as_of": "2026-05-31",
+  "countries_nota": "Factsheet Mayo-2026: North America 74% / Western Europe 21% / APAC 5% / ROW <1%. 'North America' se carga como US. El YTD de la clase I-USD en ese factsheet (8,32% a Mayo) no es comparable con el nuestro, que sale del precio de Pershing contra el ancla del 31-Dic. Distribucion objetivo del factsheet: 2-5% anual (es un objetivo, no un yield realizado).",
+  "factsheet_url": "https://www.hamiltonlane.com/en-us/strategies/private-markets-funds",
+  "nombre_corto": "Hamilton Lane Global Private Infrastructure",
+  "source": "Factsheet Hamilton Lane Global Private Infrastructure Fund, mayo 2026",
+  "source_file": "Dropbox/2026/Research Fondos/Alternativos/Infraestructura/Hamilton Lane/5.HL - GPI - Fact Sheet (Global).PDF",
+  "parsed_at": "2026-11-10",
+  "as_of_factsheet": "2026-05-31",
+  "countries_anterior_estimado": {
     "US": 55,
     "UK": 12,
     "DE": 8,
     "FR": 7,
     "AU": 5,
     "OTHER": 13
-  },
-  "countries_de_factsheet": false,
-  "countries_as_of": "2026-05-14",
-  "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta.",
-  "factsheet_url": "https://www.hamiltonlane.com/en-us/strategies/private-markets-funds",
-  "nombre_corto": "Hamilton Lane Global Private Infrastructure"
+  }
 }
