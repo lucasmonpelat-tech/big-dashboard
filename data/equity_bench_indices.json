@@ -1,6 +1,6 @@
 {
   "_description": "Series base-100 de indices de referencia alineadas a la grilla y fecha base del equity sleeve. Alimenta el grafico Normalized Performance.",
-  "refreshedAt": "2026-11-10T13:14:27.506709",
+  "refreshedAt": "2026-11-11T19:49:34.422707",
   "source": "Yahoo Finance via bench_indices_refresher.py",
   "base_date": "2025-07-01",
   "indices": {
@@ -2496,8 +2496,13 @@
         },
         {
           "date": "2026-11-10",
-          "price": 7549.9399,
-          "index": 121.8123
+          "price": 7520.9302,
+          "index": 121.3443
+        },
+        {
+          "date": "2026-11-11",
+          "price": 7629.9302,
+          "index": 123.1029
         }
       ]
     },
@@ -4993,8 +4998,13 @@
         },
         {
           "date": "2026-11-10",
-          "price": 156.35,
-          "index": 123.5108
+          "price": 155.62,
+          "index": 122.9341
+        },
+        {
+          "date": "2026-11-11",
+          "price": 157.605,
+          "index": 124.5022
         }
       ]
     },
@@ -7490,8 +7500,13 @@
         },
         {
           "date": "2026-11-10",
-          "price": 27907.6309,
-          "index": 124.1546
+          "price": 27740.7891,
+          "index": 123.4123
+        },
+        {
+          "date": "2026-11-11",
+          "price": 28471.2129,
+          "index": 126.6618
         }
       ]
     }
