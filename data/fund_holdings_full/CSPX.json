@@ -4,33 +4,33 @@
   "isin": "IE00B5BMR087",
   "name": "iShares Core S&P 500 UCITS ETF",
   "moneda": "USD",
-  "as_of": "2026-10-14",
-  "generado": "2026-10-15",
+  "as_of": "2026-11-10",
+  "generado": "2026-11-11",
   "source": "iShares product-data API (holdings.all), portfolioId 253743",
   "source_url": "https://www.ishares.com/uk/individual/en/products/253743/ishares-sp-500-b-ucits-etf-acc-fund",
   "n_holdings_guardados": 10,
-  "cobertura_pct": 38.82,
-  "n_holdings_en_el_fondo": 505,
-  "suma_pesos_fondo": 99.88,
+  "cobertura_pct": 37.09,
+  "n_holdings_en_el_fondo": 504,
+  "suma_pesos_fondo": 99.94,
   "holdings": {
-    "NVDA": 8.04725,
-    "AAPL": 7.52097,
-    "MSFT": 5.95482,
-    "AMZN": 3.74745,
-    "GOOGL": 3.06528,
-    "AVGO": 2.47529,
-    "GOOG": 2.45446,
-    "META": 2.44382,
-    "TSLA": 1.55484,
-    "MU": 1.55134
+    "AAPL": 7.84112,
+    "NVDA": 6.3009,
+    "MSFT": 6.10335,
+    "AMZN": 4.09882,
+    "GOOGL": 2.59964,
+    "AVGO": 2.43471,
+    "META": 2.18025,
+    "GOOG": 2.08815,
+    "LLY": 1.76704,
+    "BRK B": 1.6751
   },
   "detalle": {
-    "NVDA": {
-      "name": "NVIDIA",
-      "sector": "Information Technology"
-    },
     "AAPL": {
       "name": "APPLE",
+      "sector": "Information Technology"
+    },
+    "NVDA": {
+      "name": "NVIDIA",
       "sector": "Information Technology"
     },
     "MSFT": {
@@ -49,21 +49,21 @@
       "name": "BROADCOM INC",
       "sector": "Information Technology"
     },
-    "GOOG": {
-      "name": "ALPHABET CLASS C",
-      "sector": "Communication"
-    },
     "META": {
       "name": "META PLATFORMS CLASS A",
       "sector": "Communication"
     },
-    "TSLA": {
-      "name": "TESLA INC",
-      "sector": "Consumer Discretionary"
+    "GOOG": {
+      "name": "ALPHABET CLASS C",
+      "sector": "Communication"
     },
-    "MU": {
-      "name": "MICRON TECHNOLOGY",
-      "sector": "Information Technology"
+    "LLY": {
+      "name": "ELI LILLY",
+      "sector": "Health Care"
+    },
+    "BRK B": {
+      "name": "BERKSHIRE HATHAWAY INC CLASS B",
+      "sector": "Financials"
     }
   }
 }
