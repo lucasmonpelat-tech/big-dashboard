@@ -3,9 +3,9 @@
   "isin": "LU1985812756",
   "name": "MFS Meridian Contrarian Value I1",
   "sleeve": "Equity",
-  "source_file": "Dropbox/2026/Research Fondos/Renta Variable/MFS Contrarian Value/1.MFS Contrarian Value Facsheet.pdf",
-  "parsed_at": "2026-10-01",
-  "as_of_factsheet": "2026-08-31",
+  "source_file": "Dropbox/2026/Research Fondos/Renta Variable/MFS Contrarian Value/MFS Contrarian Value Factsheet - 2026-09-30.pdf",
+  "parsed_at": "2026-11-11",
+  "as_of_factsheet": "2026-09-30",
   "top_holdings": {
     "United Kingdom": 22.3,
     "Germany": 14.9,
@@ -19,18 +19,18 @@
     "Financials": 12.7
   },
   "sectors": {
-    "Industrials": 23.7,
-    "Health Care": 14.7,
-    "Financials": 13.9,
-    "Consumer Staples": 13.5,
+    "Industrials": 24.6,
+    "Health Care": 15.0,
+    "Financials": 14.5,
+    "Consumer Staples": 14.1,
     "Consumer Discretionary": 11.6,
-    "Materials": 10.4,
-    "Utilities": 4.5,
+    "Materials": 10.3,
+    "Utilities": 4.8,
     "Energy": 1.8,
     "Communication Services": 0.0,
     "Information Technology": 0.0,
     "Real Estate": 0.0,
-    "Cash": 5.8
+    "Cash": 3.3
   },
   "regions": {
     "N. America": 25.5,
@@ -50,23 +50,85 @@
     "de_factsheet": false
   },
   "countries": {
-    "US": 22.0,
-    "UK": 21.0,
-    "FR": 15.3,
-    "DE": 11.2,
-    "NL": 7.4,
-    "OTHER": 23.1
+    "US": 22.9,
+    "UK": 21.4,
+    "FR": 15.6,
+    "DE": 9.0,
+    "NL": 7.3,
+    "OTHER": 23.8
   },
-  "countries_de_factsheet": false,
-  "countries_as_of": "2026-05-14",
-  "countries_nota": "Top 5 paises del factsheet; OTHER = resto (incluye cash 5.8%).",
+  "countries_de_factsheet": true,
+  "countries_as_of": "2026-09-30",
+  "countries_nota": "Factsheet 30-Sep-2026, 'Primeros 5 paises': EE.UU. 22,9 / Reino Unido 21,4 / Francia 15,6 / Alemania 9,0 / Paises Bajos 7,3 = 76,2%. OTHER (23,8%) incluye el efectivo (3,3%) y todo lo que no es top 5; el documento NO desglosa Japon por pais: solo informa yen japones 3,2% como exposicion cambiaria. Agosto: 22,0 / 21,0 / 15,3 / 11,2 / 7,4.",
   "factsheet_url": "https://www.mfs.com/content/dam/mfs-enterprise/mfscom/products/factsheet/meridian/gg/mer_cvf_fs_gg_en.pdf",
   "currencies": {
-    "EUR": 42.6,
-    "USD": 29.8,
-    "GBP": 21.0,
+    "EUR": 41.4,
+    "USD": 28.2,
+    "GBP": 21.4,
     "CAD": 3.5,
-    "JPY": 3.1
+    "JPY": 3.2,
+    "DKK": 2.4
   },
-  "regions_nota": "Derivado del factsheet 31-Ago-2026: N. America = US 22.0 + CAD 3.5; Europe dev. = EUR 42.6; UK = GBP 21.0 (= Reino Unido 21.0); Japan = JPY 3.1; Otros = 7.8 (cash 5.8 + 2.0 sin asignar)."
+  "regions_nota": "Derivado del factsheet 31-Ago-2026: N. America = US 22.0 + CAD 3.5; Europe dev. = EUR 42.6; UK = GBP 21.0 (= Reino Unido 21.0); Japan = JPY 3.1; Otros = 7.8 (cash 5.8 + 2.0 sin asignar).",
+  "source": "MFS Meridian Contrarian Value Fund, factsheet en espanol al 30-Sep-2026 (subido por Lucas el 11-Nov-2026 como 'Octubre MFS.pdf' en la carpeta de NB Megatrends; copia en la carpeta de MFS)",
+  "fund_facts_2026-09-30": {
+    "net_assets_usd_bn": 3.6,
+    "n_issues": 41,
+    "top10_pct_of_net_assets": 34.7,
+    "top10_names": [
+      "Boston Scientific",
+      "Michelin",
+      "Davide Campari-Milano",
+      "Allegion",
+      "IMCD",
+      "Anheuser-Busch InBev",
+      "Howden Joinery",
+      "Medtronic",
+      "Croda International",
+      "Becton Dickinson"
+    ],
+    "top10_nota": "El factsheet da los NOMBRES (por orden de peso) y el total (34,7%), no el peso de cada posicion: los pesos individuales requieren los full holdings de mfs.com.",
+    "portfolio_structure_pct": {
+      "Acciones": 96.7,
+      "Efectivo": 3.3
+    },
+    "riesgo_3y_clase_A1USD": {
+      "beta": 1.12,
+      "desv_estandar": "14,67 vs 11,26 (indice)"
+    },
+    "benchmark": "MSCI World Value (net div.)",
+    "aviso_clase": "Rendimientos y riesgo del documento son de la clase A1USD (con comision de suscripcion de 6%), NO de nuestra I1USD (ISIN LU1985812756): no usar para performance. Las composiciones (paises, divisas, sectores, posiciones) son del fondo y valen para cualquier clase."
+  },
+  "_anterior_2026-08-31": {
+    "as_of_factsheet": "2026-08-31",
+    "countries": {
+      "US": 22.0,
+      "UK": 21.0,
+      "FR": 15.3,
+      "DE": 11.2,
+      "NL": 7.4,
+      "OTHER": 23.1
+    },
+    "currencies": {
+      "EUR": 42.6,
+      "USD": 29.8,
+      "GBP": 21.0,
+      "CAD": 3.5,
+      "JPY": 3.1
+    },
+    "sectors": {
+      "Industrials": 23.7,
+      "Health Care": 14.7,
+      "Financials": 13.9,
+      "Consumer Staples": 13.5,
+      "Consumer Discretionary": 11.6,
+      "Materials": 10.4,
+      "Utilities": 4.5,
+      "Energy": 1.8,
+      "Communication Services": 0.0,
+      "Information Technology": 0.0,
+      "Real Estate": 0.0,
+      "Cash": 5.8
+    }
+  }
 }
