@@ -1,6 +1,6 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-11-11T19:50:07.640414",
+  "refreshedAt": "2026-11-11T22:39:03.571290",
   "as_of_date": "2026-11-11",
   "ytd_anchor": "2025-12-31",
   "days_ytd": 315,
@@ -39,7 +39,7 @@
   "mgmt_fee_rate_annual_pct": 1.8,
   "net_reconstructed_pct": 2.339,
   "lynk_ytd_pct": 2.5,
-  "lynk_refreshed_at": "2026-11-11T19:49:25.038734",
+  "lynk_refreshed_at": "2026-11-11T22:38:23.885354",
   "residual_pp": -0.161,
   "alts_detail": [
     {
@@ -144,20 +144,20 @@
       "Cash": 0.0
     },
     "bench_ytd_aor_etf": 6.42,
-    "acwi_ytd": 12.113,
+    "acwi_ytd": 11.989,
     "agg_ytd": -1.26,
-    "bench_eq_contrib_pp": 3.634,
+    "bench_eq_contrib_pp": 3.597,
     "bench_fi_contrib_pp": -0.504,
-    "bench_alts_contrib_pp": 3.634,
+    "bench_alts_contrib_pp": 3.597,
     "big_ytd": 2.5,
     "alpha_ytd_total_pp": -3.92,
     "components": [
       {
         "name": "Equity",
         "big_contrib_pp": 1.839,
-        "bench_contrib_pp": 3.634,
-        "alpha_pp": -1.795,
-        "comment": "BIG 30.2% @ +6.09% vs 30% ACWI @ +12.11%"
+        "bench_contrib_pp": 3.597,
+        "alpha_pp": -1.758,
+        "comment": "BIG 30.2% @ +6.09% vs 30% ACWI @ +11.99%"
       },
       {
         "name": "Fixed Income",
@@ -169,9 +169,9 @@
       {
         "name": "Alternatives",
         "big_contrib_pp": 1.597,
-        "bench_contrib_pp": 3.634,
-        "alpha_pp": -2.037,
-        "comment": "BIG 30.0% @ +5.33% vs 30% ACWI @ +12.11%"
+        "bench_contrib_pp": 3.597,
+        "alpha_pp": -2.0,
+        "comment": "BIG 30.0% @ +5.33% vs 30% ACWI @ +11.99%"
       },
       {
         "name": "Cash",
@@ -199,8 +199,8 @@
         "name": "Residual",
         "big_contrib_pp": -0.161,
         "bench_contrib_pp": null,
-        "alpha_pp": 0.505,
-        "comment": "Nuestro calculo (+2.34%) - Lynk oficial (+2.50%), mas la diferencia entre el bench por pesos del mandato (+6.76%) y el AOR (+6.42%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
+        "alpha_pp": 0.431,
+        "comment": "Nuestro calculo (+2.34%) - Lynk oficial (+2.50%), mas la diferencia entre el bench por pesos del mandato (+6.69%) y el AOR (+6.42%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
       }
     ]
   }
