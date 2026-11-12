@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-11-11T22:39:01.859922",
+  "refreshedAt": "2026-11-12T13:12:05.026920",
   "inception": "2025-06-30",
   "benchmark": "Bloomberg US Aggregate (via AGG ETF)",
   "ust_reference": {
@@ -331,7 +331,7 @@
       "anchor_date": "2026-10-21"
     }
   },
-  "_daily_race_note": "Pesos y MV releidos de canonical/2026-11-11/holdings_returns.json; metricas (ytw/duration/maturity/rating) de data/funds/<TICKER>.json. Retornos por fondo recalculados 2026-11-11 con NAV vivo T-1 (baha). YTD exacto (ancla NAV 31-dic): ['PIMCO-LD', 'PIMCO-INC', 'MANIG', 'PIMCO-EM', 'SGCB', 'MANEM']. YTD calibrado desde mensual 2026-04: ['TGF', 'GAMCB']. Sin NAV vivo (carry/scrape): ['NBCLO'].",
+  "_daily_race_note": "Pesos y MV releidos de canonical/2026-11-11/holdings_returns.json; metricas (ytw/duration/maturity/rating) de data/funds/<TICKER>.json. Retornos por fondo recalculados 2026-11-12 con NAV vivo T-1 (baha). YTD exacto (ancla NAV 31-dic): ['PIMCO-LD', 'PIMCO-INC', 'MANIG', 'PIMCO-EM', 'SGCB', 'MANEM']. YTD calibrado desde mensual 2026-04: ['TGF', 'GAMCB']. Sin NAV vivo (carry/scrape): ['NBCLO'].",
   "_weights_source": "canonical/2026-11-11/holdings_returns.json",
   "_metrics_source": "data/funds/<TICKER>.json (fi_metrics)",
   "_nota_gamcb": "2026-10-20: GAMCB agregado a mano (el rebuild completo fi_race.py ya no corre). YTW/duration del mail del gestor."
