@@ -2,19 +2,19 @@
   "refreshedAt": "2026-11-12",
   "generatedBy": "scripts/build_equity_lookthrough.py",
   "method": "Look-through: para cada fondo, peso_sleeve x peso_holding_en_fondo. Companies con el mismo nombre canonico se suman across fondos. Pesos del sleeve tomados de holdings_returns_equity.json (data del dia), holdings de _factsheet_top10 en fund_holdings_top10.json.",
-  "sleeve_mv_usd": 8762282.03,
+  "sleeve_mv_usd": 8773008.72,
   "sleeve_weights": {
-    "CSPX": 18.18,
-    "NBGMT": 16.99,
-    "MFSCV": 15.4,
-    "DYNF": 13.22,
-    "THOR": 9.57,
-    "JHGSC": 6.4,
-    "MAGS": 5.43,
-    "ARGT": 3.93,
-    "ILF": 3.7,
-    "4BRZ": 3.12,
-    "HEWJ": 2.84,
+    "CSPX": 18.43,
+    "NBGMT": 16.87,
+    "MFSCV": 15.38,
+    "DYNF": 13.2,
+    "THOR": 9.58,
+    "JHGSC": 6.39,
+    "MAGS": 5.42,
+    "ARGT": 3.86,
+    "ILF": 3.64,
+    "4BRZ": 3.16,
+    "HEWJ": 2.83,
     "EMXC": 1.23
   },
   "fund_asof": {
@@ -34,62 +34,62 @@
   "consolidated_top10": [
     {
       "name": "Apple (AAPL)",
-      "weight_in_sleeve_pct": 3.21,
+      "weight_in_sleeve_pct": 3.228,
       "rank": 1,
       "funds": [
         {
           "fund": "CSPX",
           "weight_in_fund": 7.84,
-          "contribution": 1.426
+          "contribution": 1.445
         },
         {
           "fund": "DYNF",
           "weight_in_fund": 7.3,
-          "contribution": 0.965
+          "contribution": 0.964
         },
         {
           "fund": "MAGS",
           "weight_in_fund": 15.1,
-          "contribution": 0.82
+          "contribution": 0.819
         }
       ]
     },
     {
       "name": "NVIDIA (NVDA)",
-      "weight_in_sleeve_pct": 2.976,
+      "weight_in_sleeve_pct": 2.99,
       "rank": 2,
       "funds": [
         {
           "fund": "CSPX",
           "weight_in_fund": 6.3,
-          "contribution": 1.146
+          "contribution": 1.161
         },
         {
           "fund": "DYNF",
           "weight_in_fund": 8.1,
-          "contribution": 1.07
+          "contribution": 1.069
         },
         {
           "fund": "MAGS",
           "weight_in_fund": 14.0,
-          "contribution": 0.76
+          "contribution": 0.759
         }
       ]
     },
     {
       "name": "Microsoft (MSFT)",
-      "weight_in_sleeve_pct": 2.396,
+      "weight_in_sleeve_pct": 2.409,
       "rank": 3,
       "funds": [
         {
           "fund": "CSPX",
           "weight_in_fund": 6.1,
-          "contribution": 1.109
+          "contribution": 1.125
         },
         {
           "fund": "MAGS",
           "weight_in_fund": 14.2,
-          "contribution": 0.771
+          "contribution": 0.77
         },
         {
           "fund": "DYNF",
@@ -100,74 +100,74 @@
     },
     {
       "name": "Amazon (AMZN)",
-      "weight_in_sleeve_pct": 2.005,
+      "weight_in_sleeve_pct": 2.014,
       "rank": 4,
       "funds": [
         {
           "fund": "MAGS",
           "weight_in_fund": 14.2,
-          "contribution": 0.771
+          "contribution": 0.77
         },
         {
           "fund": "CSPX",
           "weight_in_fund": 4.1,
-          "contribution": 0.746
+          "contribution": 0.756
         },
         {
           "fund": "DYNF",
           "weight_in_fund": 3.7,
-          "contribution": 0.489
+          "contribution": 0.488
         }
       ]
     },
     {
       "name": "Alphabet (GOOGL)",
-      "weight_in_sleeve_pct": 1.946,
+      "weight_in_sleeve_pct": 1.956,
       "rank": 5,
       "funds": [
         {
           "fund": "CSPX",
           "weight_in_fund": 4.69,
-          "contribution": 0.853
+          "contribution": 0.865
         },
         {
           "fund": "MAGS",
           "weight_in_fund": 13.8,
-          "contribution": 0.749
+          "contribution": 0.748
         },
         {
           "fund": "DYNF",
           "weight_in_fund": 2.6,
-          "contribution": 0.344
+          "contribution": 0.343
         }
       ]
     },
     {
       "name": "Meta (META)",
-      "weight_in_sleeve_pct": 1.232,
+      "weight_in_sleeve_pct": 1.237,
       "rank": 6,
       "funds": [
         {
           "fund": "MAGS",
           "weight_in_fund": 15.4,
-          "contribution": 0.836
+          "contribution": 0.835
         },
         {
           "fund": "CSPX",
           "weight_in_fund": 2.18,
-          "contribution": 0.396
+          "contribution": 0.402
         }
       ]
     },
     {
       "name": "MercadoLibre (MELI)",
-      "weight_in_sleeve_pct": 0.987,
+      "weight_in_sleeve_pct": 0.969,
       "rank": 7,
       "funds": [
         {
           "fund": "ARGT",
           "weight_in_fund": 25.09,
-          "contribution": 0.987
+          "contribution": 0.969
         }
       ]
     },
@@ -179,96 +179,96 @@
         {
           "fund": "4BRZ",
           "weight_in_fund": 14.52,
-          "contribution": 0.452
+          "contribution": 0.458
         },
         {
           "fund": "ILF",
           "weight_in_fund": 11.68,
-          "contribution": 0.432
+          "contribution": 0.426
         }
       ]
     },
     {
       "name": "Perrigo",
-      "weight_in_sleeve_pct": 0.855,
+      "weight_in_sleeve_pct": 0.848,
       "rank": 9,
       "funds": [
         {
           "fund": "NBGMT",
           "weight_in_fund": 5.03,
-          "contribution": 0.855
+          "contribution": 0.848
         }
       ]
     },
     {
       "name": "Wuxi Biologics",
-      "weight_in_sleeve_pct": 0.851,
+      "weight_in_sleeve_pct": 0.845,
       "rank": 10,
       "funds": [
         {
           "fund": "NBGMT",
           "weight_in_fund": 5.01,
-          "contribution": 0.851
+          "contribution": 0.845
         }
       ]
     },
     {
       "name": "Zeta Global",
-      "weight_in_sleeve_pct": 0.822,
+      "weight_in_sleeve_pct": 0.816,
       "rank": 11,
       "funds": [
         {
           "fund": "NBGMT",
           "weight_in_fund": 4.84,
-          "contribution": 0.822
+          "contribution": 0.816
         }
       ]
     },
     {
       "name": "NICE Ltd",
-      "weight_in_sleeve_pct": 0.814,
+      "weight_in_sleeve_pct": 0.808,
       "rank": 12,
       "funds": [
         {
           "fund": "NBGMT",
           "weight_in_fund": 4.79,
-          "contribution": 0.814
+          "contribution": 0.808
         }
       ]
     },
     {
       "name": "ON Semiconductor",
-      "weight_in_sleeve_pct": 0.797,
+      "weight_in_sleeve_pct": 0.791,
       "rank": 13,
       "funds": [
         {
           "fund": "NBGMT",
           "weight_in_fund": 4.69,
-          "contribution": 0.797
+          "contribution": 0.791
         }
       ]
     },
     {
       "name": "Alibaba",
-      "weight_in_sleeve_pct": 0.768,
+      "weight_in_sleeve_pct": 0.762,
       "rank": 14,
       "funds": [
         {
           "fund": "NBGMT",
           "weight_in_fund": 4.52,
-          "contribution": 0.768
+          "contribution": 0.762
         }
       ]
     },
     {
       "name": "Pets At Home",
-      "weight_in_sleeve_pct": 0.765,
+      "weight_in_sleeve_pct": 0.759,
       "rank": 15,
       "funds": [
         {
           "fund": "NBGMT",
           "weight_in_fund": 4.5,
-          "contribution": 0.765
+          "contribution": 0.759
         }
       ]
     }
