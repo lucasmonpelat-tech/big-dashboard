@@ -2,17 +2,17 @@
   "refreshedAt": "2026-11-12",
   "generatedBy": "scripts/build_equity_lookthrough.py",
   "method": "Look-through: para cada fondo, peso_sleeve x peso_holding_en_fondo. Companies con el mismo nombre canonico se suman across fondos. Pesos del sleeve tomados de holdings_returns_equity.json (data del dia), holdings de _factsheet_top10 en fund_holdings_top10.json.",
-  "sleeve_mv_usd": 8773008.72,
+  "sleeve_mv_usd": 8774054.7,
   "sleeve_weights": {
     "CSPX": 18.43,
-    "NBGMT": 16.87,
+    "NBGMT": 16.86,
     "MFSCV": 15.38,
     "DYNF": 13.2,
     "THOR": 9.58,
     "JHGSC": 6.39,
     "MAGS": 5.42,
-    "ARGT": 3.86,
-    "ILF": 3.64,
+    "ARGT": 3.87,
+    "ILF": 3.65,
     "4BRZ": 3.16,
     "HEWJ": 2.83,
     "EMXC": 1.23
@@ -34,7 +34,7 @@
   "consolidated_top10": [
     {
       "name": "Apple (AAPL)",
-      "weight_in_sleeve_pct": 3.228,
+      "weight_in_sleeve_pct": 3.227,
       "rank": 1,
       "funds": [
         {
@@ -45,7 +45,7 @@
         {
           "fund": "DYNF",
           "weight_in_fund": 7.3,
-          "contribution": 0.964
+          "contribution": 0.963
         },
         {
           "fund": "MAGS",
@@ -56,7 +56,7 @@
     },
     {
       "name": "NVIDIA (NVDA)",
-      "weight_in_sleeve_pct": 2.99,
+      "weight_in_sleeve_pct": 2.989,
       "rank": 2,
       "funds": [
         {
@@ -84,7 +84,7 @@
         {
           "fund": "CSPX",
           "weight_in_fund": 6.1,
-          "contribution": 1.125
+          "contribution": 1.124
         },
         {
           "fund": "MAGS",
@@ -128,7 +128,7 @@
         {
           "fund": "CSPX",
           "weight_in_fund": 4.69,
-          "contribution": 0.865
+          "contribution": 0.864
         },
         {
           "fund": "MAGS",
@@ -161,13 +161,13 @@
     },
     {
       "name": "MercadoLibre (MELI)",
-      "weight_in_sleeve_pct": 0.969,
+      "weight_in_sleeve_pct": 0.971,
       "rank": 7,
       "funds": [
         {
           "fund": "ARGT",
           "weight_in_fund": 25.09,
-          "contribution": 0.969
+          "contribution": 0.971
         }
       ]
     },
