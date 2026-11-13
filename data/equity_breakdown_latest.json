@@ -198,19 +198,19 @@
       {
         "category": "Asia EM",
         "big": 2.65,
-        "acwi": 8.89
+        "acwi": 8.53
       },
       {
         "category": "Otros",
         "big": 2.11,
-        "acwi": 4.63
+        "acwi": 4.99
       }
     ],
     "totals": {
       "big": 100.0,
       "acwi": 100.0
     },
-    "footnote": "Otros incluye ME (NBGMT), Australasia (JHGSC), Asia Dev (THOR), cash de los activos. Datos por fondo: MFS al 31-Ago; Thornburg 31-May; NB y Janus 31-Mar (no publicaron nuevos). | Asia EM: BIG es un PISO (top 10 de NB y Thornburg + EMXC; no incluye Janus ni el resto de cada fondo activo); ACWI exacto de iShares al Oct 13, 2026. Se resta de Otros.",
+    "footnote": "Otros incluye ME (NBGMT), Australasia (JHGSC), Asia Dev (THOR), cash de los activos. Datos por fondo: MFS al 31-Ago; Thornburg 31-May; NB y Janus 31-Mar (no publicaron nuevos). | Asia EM: BIG es un PISO (top 10 de NB y Thornburg + EMXC; no incluye Janus ni el resto de cada fondo activo); ACWI exacto de iShares al Nov 12, 2026. Se resta de Otros.",
     "primary_sources": {
       "CSPX": "iShares Core S&P 500 - 100% US (definicion)",
       "NBGMT": "NB factsheet 31-Mar-2026 - US 78.4 / UK 4.8 / Asia EM 7.4 / ME 4.4 / Other 5.0",
@@ -256,9 +256,9 @@
     "asia_em": {
       "definicion": "China, Taiwan, Corea, India, Tailandia, Malasia, Indonesia y Filipinas (bloque Asia de MSCI EM). Se resta de 'Otros'.",
       "acwi": {
-        "valor": 8.89,
+        "valor": 8.53,
         "fuente": "iShares ACWI holdings (Location), equity normalizado",
-        "holdings_al": "Oct 13, 2026"
+        "holdings_al": "Nov 12, 2026"
       },
       "big": {
         "valor": 2.65,

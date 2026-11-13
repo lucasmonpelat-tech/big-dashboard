@@ -247,6 +247,21 @@ def compute_overlap():
     return overlap, summary
 
 
+
+def _acwi_fecha():
+    """Fecha de los holdings de ACWI, leida de la cabecera del CSV ('Fund Holdings as of,"Nov 12, 2026"')."""
+    import re
+    from datetime import datetime
+    head = (ROOT / "data" / "acwi_holdings" / "acwi_holdings.csv").read_text(encoding="utf-8-sig", errors="ignore").splitlines()[:6]
+    for l in head:
+        m = re.search(r'Fund Holdings as of,"([^"]+)"', l)
+        if m:
+            try:
+                return datetime.strptime(m.group(1), "%b %d, %Y").date().isoformat()
+            except ValueError:
+                return m.group(1)
+    return "fecha desconocida"
+
 def main():
     overlap, summary = compute_overlap()
 
@@ -283,7 +298,8 @@ def main():
     out = {
         "refreshedAt": date.today().isoformat(),
         "fund_asof": fund_asof,
-        "source": "ACWI holdings (iShares ACWI factsheet 24-Apr) + fund_holdings_top10.json (CSPX exact, UCITS estimates)",
+        "acwi_holdings_as_of": _acwi_fecha(),
+        "source": f"ACWI holdings (iShares ACWI ETF, al {_acwi_fecha()}) + fund_holdings_top10.json (CSPX exacto; el resto, el top 10 de cada fondo con su fecha en fund_asof)",
         "method": "BIG_exposure[stock] = Σ (fund_weight_in_BIG × stock_weight_in_fund / 100)",
         "summary": summary,
         "overlap": overlap,
