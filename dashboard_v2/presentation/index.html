@@ -587,8 +587,8 @@
         <div class="section" id="er-modelo-section">
           <h2>🧭 BIG vs Modelo Mikla Core Equities vs ACWI</h2>
           <div style="font-size:13px;color:var(--text-mute);margin-bottom:12px;line-height:1.5">
-            Qué tan lejos está el Equity sleeve de BIG del allocation modelo (4 ETFs), y cómo se compara el propio ACWI contra ese modelo.
-            Desvío = peso real − target, en pp.
+            Qué tan lejos está el Equity sleeve de BIG del allocation modelo (4 ETFs), con el ACWI como referencia.
+            Desvío = peso de BIG − target, en pp.
           </div>
           <div id="er-modelo-table" style="overflow-x:auto"></div>
           <div id="er-modelo-note" style="font-size:11px;color:var(--text-mute);margin-top:10px;line-height:1.5"></div>
@@ -2483,7 +2483,7 @@
               <thead><tr>
                 <th style="${th};text-align:left">Sleeve</th><th style="${th};text-align:left">ETF del modelo</th>
                 <th style="${th}">Target</th><th style="${th}">BIG</th><th style="${th}">BIG vs modelo</th>
-                <th style="${th}">ACWI</th><th style="${th}">ACWI vs modelo</th>
+                <th style="${th}">ACWI</th>
               </tr></thead>
               <tbody>${filas.map(f => `<tr style="${f.muted ? "opacity:.7" : ""}">
                 <td style="${td};text-align:left;font-weight:700">${f.sleeve}</td>
@@ -2491,12 +2491,11 @@
                 <td style="${td}">${f1(f.target)}%</td>
                 <td style="${td};color:var(--gold);font-weight:700">${f1(f.big)}%</td>
                 <td style="${td}">${dv(f.big - f.target)}</td>
-                <td style="${td};color:#4a7ab8;font-weight:700">${f1(f.acwi)}%</td>
-                <td style="${td}">${dv(f.acwi - f.target)}</td></tr>`).join("")}
+                <td style="${td};color:#4a7ab8;font-weight:700">${f1(f.acwi)}%</td></tr>`).join("")}
                 <tr><td style="${td};text-align:left;font-weight:700">Total</td><td style="${td}"></td>
                 <td style="${td};font-weight:700">${f1(tot("target"))}%</td>
                 <td style="${td};font-weight:700">${f1(tot("big"))}%</td><td style="${td}"></td>
-                <td style="${td};font-weight:700">${f1(tot("acwi"))}%</td><td style="${td}"></td></tr>
+                <td style="${td};font-weight:700">${f1(tot("acwi"))}%</td></tr>
               </tbody>
             </table>`;
           document.getElementById("er-modelo-note").innerHTML =
