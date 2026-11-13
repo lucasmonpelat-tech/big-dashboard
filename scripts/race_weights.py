@@ -114,7 +114,7 @@ def comparar(race, sleeve_key):
             "sobran": sobran, "faltan": faltan, "isines": isines}
 
 
-def aplicar(race, sleeve_key, verbose=True):
+def aplicar(race, sleeve_key, verbose=True, quitar_cerrados=False):
     """Reescribe weight_pct/value_usd en el race desde el canonical. Devuelve el reporte."""
     r = comparar(race, sleeve_key)
     if not r["total"]:
@@ -141,6 +141,21 @@ def aplicar(race, sleeve_key, verbose=True):
             movidos.append(f"{h.get('ticker')} {antes:.2f}%->{ahora:.2f}%")
 
     race["_weights_source"] = f"canonical/{r['as_of']}/holdings_returns.json"
+
+    # 2026-11-13: un fondo VENDIDO (esta en el race pero ya no en el canonical, que lo da por
+    # CLOSED apenas Positions lo pone en 0) se saca del race en vez de arrastrar un peso viejo
+    # (4BRZ quedo con 3.1% y los pesos sumaban 103%). Solo si el llamador lo pide.
+    if quitar_cerrados and r.get("sobran"):
+        sacados = [h for h in race.get("holdings", []) if h.get("ticker") in r["sobran"]]
+        race["holdings"] = [h for h in race.get("holdings", []) if h.get("ticker") not in r["sobran"]]
+        race.setdefault("_vendidos", [])
+        for h in sacados:
+            if h.get("ticker") not in [v.get("ticker") for v in race["_vendidos"]]:
+                race["_vendidos"].append({"ticker": h.get("ticker"), "isin": h.get("isin"),
+                                          "ultimo_peso_pct": h.get("weight_pct"), "sacado_en": r["as_of"]})
+        if verbose and sacados:
+            print(f"  VENDIDOS sacados del race: {[h.get('ticker') for h in sacados]}")
+        r = comparar(race, sleeve_key)
 
     if verbose:
         print(f"  Pesos desde canonical {r['as_of']}: sleeve ${total:,.2f}")

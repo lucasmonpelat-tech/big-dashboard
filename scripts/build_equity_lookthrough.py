@@ -148,7 +148,16 @@ def canonical(raw):
 
 def sleeve_weights():
     """Peso de cada fondo DENTRO del sleeve Equity (suma 100), con data de hoy."""
-    d = json.loads((DATA / "holdings_returns_equity.json").read_text(encoding="utf-8"))
+    # FIX 2026-11-13: los pesos salen del canonical mas nuevo (status/MV de Positions, ya
+    # sin los fondos vendidos), no del legacy holdings_returns_equity.json, que viene del
+    # UGL y mantiene a un fondo vendido como OPEN hasta que liquida (4BRZ, 13 a 17-Nov).
+    canon = sorted((DATA / "canonical").glob("*/holdings_returns.json"))
+    d = None
+    if canon:
+        c = json.loads(canon[-1].read_text(encoding="utf-8"))
+        d = {"holdings": (c.get("sleeves", {}).get("equity", {}) or {}).get("holdings", []), "period_end": c.get("as_of")}
+    if not d or not d["holdings"]:
+        d = json.loads((DATA / "holdings_returns_equity.json").read_text(encoding="utf-8"))
     open_h = [h for h in d["holdings"]
               if (h.get("status") or "OPEN") == "OPEN" and h.get("mv_usd")]
     total = sum(h["mv_usd"] for h in open_h)

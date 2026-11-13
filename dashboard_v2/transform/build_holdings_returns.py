@@ -272,12 +272,18 @@ def build_holding(h_legacy: dict, positions_data: dict, pnl_agg: dict,
         agg = pnl_agg.get(cusip, {}) if cusip else {}
         if not agg:
             agg = pnl_agg.get(sid, {})
-        mv = pos.get("market_value_usd") or agg.get("mv") or h_legacy.get("mv_usd")
+        # FIX 2026-11-13: una fila de Positions con quantity == 0 es un fondo VENDIDO.
+        # Pershing saca la posicion y acredita el cash el dia del trade, pero el UGL
+        # (agg) la sigue listando hasta la liquidacion: 4BRZ se vendio el 13-Nov
+        # (liquida el 17) y el `or` de abajo caia al UGL, dejandolo OPEN con $271.800
+        # en la tabla de holdings, en el lookthrough y con su tarjeta de top 10.
+        vendido = pos.get("quantity") is not None and float(pos.get("quantity") or 0) == 0.0
+        mv = 0.0 if vendido else (pos.get("market_value_usd") or agg.get("mv") or h_legacy.get("mv_usd"))
         cost = agg.get("cost") or h_legacy.get("cost_basis_usd")
         gl = agg.get("gl") or (mv - cost if (mv and cost) else h_legacy.get("unrealized_gl_usd"))
         return_pct = round((gl / cost) * 100, 2) if (gl is not None and cost and cost > 0) else h_legacy.get("return_pct")
-        qty = pos.get("quantity") or agg.get("qty") or h_legacy.get("qty")
-        source_note = "pershing_ugl"
+        qty = 0.0 if vendido else (pos.get("quantity") or agg.get("qty") or h_legacy.get("qty"))
+        source_note = "vendido (Positions qty 0; el UGL lo lista hasta la liquidacion)" if vendido else "pershing_ugl"
         # SI aparece en positions con MV > 0 -> OPEN (ignora status del legacy que puede estar mal)
         status = "OPEN" if (mv or 0) > 0 else "CLOSED"
         # Si legacy no tiene buys_history (viene CLOSED sin history), reconstruir desde taxlots UGL

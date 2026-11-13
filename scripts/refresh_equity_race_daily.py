@@ -174,7 +174,7 @@ def main():
             # (2026-08-20) y venian drifteando hasta ~1.8pp -- CSPX marcaba 33.86%
             # contra 32.04% real. Es el mismo fosil que ya rompio dos veces en FI;
             # aca se corta en el origen. Ver scripts/race_weights.py.
-            race_weights.aplicar(er, "equity")
+            race_weights.aplicar(er, "equity", quitar_cerrados=True)
 
             er['refreshedAt'] = datetime.now().isoformat()
             er['_ytd_spot_updated'] = f'{datetime.now().date()}: {n_updated} holdings YTD spot via Pershing NAV/anchor 31-Dic'
