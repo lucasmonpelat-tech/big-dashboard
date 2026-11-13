@@ -240,20 +240,20 @@
   "DYNF": {
     "name": "iShares U.S. Equity Factor Rotation Active ETF",
     "isin": "US09290C1036",
-    "source": "VERIFICADO: deck iShares 'DYNF/IDYN deep dive Q2-2026', pag. 22 'Top 10 Holdings' (BlackRock y Morningstar al 30-Jun-2026). Total top 10 = 40.7%. 205 posiciones. Es activo con rotacion de factores (turnover >100%/ano): refrescar con cada deck trimestral.",
-    "_as_of": "2026-06-30",
+    "source": "iShares latest-holdings.csv de DYNF al 2026-11-12 (top 10 = 37.92%, 272 posiciones de renta variable). Automatico mensual: scripts/fetch_dynf_holdings.py.",
+    "_as_of": "2026-11-12",
     "_factsheet_top10": {
-      "NVIDIA CORP": 8.1,
-      "APPLE INC": 7.3,
-      "MICROSOFT CORP": 3.9,
-      "AMAZON.COM INC": 3.7,
-      "LAM RESEARCH CORP": 3.6,
-      "JPMORGAN CHASE & CO": 3.6,
-      "BROADCOM INC": 2.8,
-      "ALPHABET INC CLASS A": 2.6,
-      "EXXON MOBIL CORP": 2.6,
-      "MICRON TECHNOLOGY INC": 2.5,
-      "_note": "Top 10 = 40.7%. Sobrepondera NVDA/AAPL vs S&P 500 (8.1/7.3 vs 7.5/6.6) y tiene Lam Research, JPM y Exxon fuera del top 10 del indice. Al 30-Jun-2026."
+      "AAPL": 8.16,
+      "NVDA": 6.09,
+      "MSFT": 4.8,
+      "AMZN": 4.4,
+      "JPM": 3.06,
+      "AVGO": 2.66,
+      "META": 2.36,
+      "XOM": 2.29,
+      "GOOGL": 2.21,
+      "BAC": 1.89,
+      "_note": "Derivado de data/fund_holdings_full/DYNF.json por scripts/fetch_dynf_holdings.py. No editar a mano."
     }
   },
   "EMXC": {

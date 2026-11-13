@@ -1,0 +1,77 @@
+{
+  "_doc": "Top 10 de DYNF desde el CSV de holdings de iShares. Generado por scripts/fetch_dynf_holdings.py, NO editar a mano.",
+  "ticker": "DYNF",
+  "isin": "US09290C1036",
+  "name": "iShares U.S. Equity Factor Rotation Active ETF",
+  "as_of": "2026-11-12",
+  "generado": "2026-11-13",
+  "source": "iShares latest-holdings.csv, producto 307283",
+  "source_url": "https://www.ishares.com/us/products/307283/ishares-u-s-equity-factor-rotation-active-etf",
+  "n_equities_en_el_fondo": 272,
+  "suma_pesos_fondo": 99.8,
+  "cobertura_pct": 37.92,
+  "holdings": {
+    "AAPL": 8.16,
+    "NVDA": 6.09,
+    "MSFT": 4.8,
+    "AMZN": 4.4,
+    "JPM": 3.06,
+    "AVGO": 2.66,
+    "META": 2.36,
+    "XOM": 2.29,
+    "GOOGL": 2.21,
+    "BAC": 1.89
+  },
+  "detalle": {
+    "AAPL": {
+      "name": "APPLE",
+      "sector": "Information Technology",
+      "location": "United States"
+    },
+    "NVDA": {
+      "name": "NVIDIA",
+      "sector": "Information Technology",
+      "location": "United States"
+    },
+    "MSFT": {
+      "name": "MICROSOFT",
+      "sector": "Information Technology",
+      "location": "United States"
+    },
+    "AMZN": {
+      "name": "AMAZON.COM INC",
+      "sector": "Consumer Discretionary",
+      "location": "United States"
+    },
+    "JPM": {
+      "name": "JPMORGAN CHASE & CO",
+      "sector": "Financials",
+      "location": "United States"
+    },
+    "AVGO": {
+      "name": "BROADCOM INC",
+      "sector": "Information Technology",
+      "location": "United States"
+    },
+    "META": {
+      "name": "META PLATFORMS CLASS A",
+      "sector": "Communication",
+      "location": "United States"
+    },
+    "XOM": {
+      "name": "EXXONMOBIL HOLDINGS CORP",
+      "sector": "Energy",
+      "location": "United States"
+    },
+    "GOOGL": {
+      "name": "ALPHABET CLASS A",
+      "sector": "Communication",
+      "location": "United States"
+    },
+    "BAC": {
+      "name": "BANK OF AMERICA",
+      "sector": "Financials",
+      "location": "United States"
+    }
+  }
+}

@@ -71,6 +71,10 @@ jobs:
         continue-on-error: true
         run: python scripts/fetch_cspx_holdings.py
 
+      - name: Fetch DYNF holdings (iShares, top 10 de la tarjeta/lookthrough)
+        continue-on-error: true
+        run: python scripts/fetch_dynf_holdings.py
+
       # === RECOMPUTE FI sub-asset (BIG-level) ===
       - name: Compute FI sub-asset BIG (if script exists)
         run: |
