@@ -583,6 +583,16 @@
             </div>
           </div>
         </div>
+
+        <div class="section" id="er-modelo-section">
+          <h2>🧭 BIG vs Modelo Mikla Core Equities vs ACWI</h2>
+          <div style="font-size:13px;color:var(--text-mute);margin-bottom:12px;line-height:1.5">
+            Qué tan lejos está el Equity sleeve de BIG del allocation modelo (4 ETFs), y cómo se compara el propio ACWI contra ese modelo.
+            Desvío = peso real − target, en pp.
+          </div>
+          <div id="er-modelo-table" style="overflow-x:auto"></div>
+          <div id="er-modelo-note" style="font-size:11px;color:var(--text-mute);margin-top:10px;line-height:1.5"></div>
+        </div>
       </div>
 
       <!-- FI-ONLY: métricas FI-específicas (YTW, Duration, Credit Quality, etc) -->
@@ -2444,6 +2454,56 @@
             <strong style="color:var(--gold)">Total BIG: ${reg.totals.big}%</strong> ·
             <strong style="color:#4a7ab8">Total ACWI: ${reg.totals.acwi}%</strong>
           </div>`;
+
+        // === Cuadro: BIG vs Modelo Mikla Core Equities vs ACWI ===
+        try {
+          const R = c => reg.rows.find(r => r.category === c) || {big: 0, acwi: 0};
+          const sum = (cats, k) => cats.reduce((a, c) => a + (R(c)[k] || 0), 0);
+          const MODELO = [
+            {sleeve: "US",       etf: "iShares Core S&P 500 UCITS",   target: 62.5, cats: ["N. America"]},
+            {sleeve: "Europa",   etf: "Xtrackers MSCI Europe UCITS",  target: 20.0, cats: ["Europe dev.", "UK"]},
+            {sleeve: "Japón",    etf: "iShares MSCI Japan UCITS",     target: 5.0,  cats: ["Japan"]},
+            {sleeve: "Emerging Markets", etf: "iShares Core MSCI EM IMI UCITS", target: 12.5, cats: ["LatAm", "Asia EM"]},
+          ];
+          const usados = MODELO.flatMap(m => m.cats);
+          const otrosBig = reg.rows.filter(r => !usados.includes(r.category)).reduce((a, r) => a + r.big, 0);
+          const otrosAcwi = reg.rows.filter(r => !usados.includes(r.category)).reduce((a, r) => a + r.acwi, 0);
+          const filas = MODELO.map(m => ({...m, big: sum(m.cats, "big"), acwi: sum(m.cats, "acwi")}));
+          filas.push({sleeve: "Otros (fuera del modelo)", etf: "—", target: 0, big: otrosBig, acwi: otrosAcwi, muted: true});
+          const f1 = v => v.toFixed(1);
+          const dv = v => {
+            const c = Math.abs(v) < 0.5 ? MUTE : (v > 0 ? "#2e9d5b" : "#c0392b");
+            return `<span style="color:${c};font-weight:700">${v > 0 ? "+" : ""}${v.toFixed(1)} pp</span>`;
+          };
+          const th = "padding:8px 10px;text-align:right;font-size:11px;color:var(--text-mute);border-bottom:1px solid #1f3864;white-space:nowrap";
+          const td = "padding:8px 10px;text-align:right;font-size:13px;border-bottom:1px solid #1f3864;white-space:nowrap";
+          const tot = k => filas.reduce((a, f) => a + f[k], 0);
+          document.getElementById("er-modelo-table").innerHTML = `
+            <table style="width:100%;border-collapse:collapse">
+              <thead><tr>
+                <th style="${th};text-align:left">Sleeve</th><th style="${th};text-align:left">ETF del modelo</th>
+                <th style="${th}">Target</th><th style="${th}">BIG</th><th style="${th}">BIG vs modelo</th>
+                <th style="${th}">ACWI</th><th style="${th}">ACWI vs modelo</th>
+              </tr></thead>
+              <tbody>${filas.map(f => `<tr style="${f.muted ? "opacity:.7" : ""}">
+                <td style="${td};text-align:left;font-weight:700">${f.sleeve}</td>
+                <td style="${td};text-align:left;color:var(--text-mute)">${f.etf}</td>
+                <td style="${td}">${f1(f.target)}%</td>
+                <td style="${td};color:var(--gold);font-weight:700">${f1(f.big)}%</td>
+                <td style="${td}">${dv(f.big - f.target)}</td>
+                <td style="${td};color:#4a7ab8;font-weight:700">${f1(f.acwi)}%</td>
+                <td style="${td}">${dv(f.acwi - f.target)}</td></tr>`).join("")}
+                <tr><td style="${td};text-align:left;font-weight:700">Total</td><td style="${td}"></td>
+                <td style="${td};font-weight:700">${f1(tot("target"))}%</td>
+                <td style="${td};font-weight:700">${f1(tot("big"))}%</td><td style="${td}"></td>
+                <td style="${td};font-weight:700">${f1(tot("acwi"))}%</td><td style="${td}"></td></tr>
+              </tbody>
+            </table>`;
+          document.getElementById("er-modelo-note").innerHTML =
+            "Mapeo del Regional de Maximus: US = N. America (incluye Canadá) · Europa = Europe dev. + UK · EM = LatAm + Asia EM. " +
+            "<strong>EM de BIG está subestimado en Asia:</strong> Asia EM es un piso (top 10 de NB y Thornburg + EMXC, sin Janus ni el resto de cada fondo activo) y Medio Oriente queda en Otros. " +
+            "Casi todo el EM de BIG hoy es LatAm. Datos al " + (bd.asOf || bd.as_of || "?") + " (mensual, Maximus).";
+        } catch (e) { console.warn("cuadro modelo", e); }
 
         const valueRow = st.rows.find(r => r.category === "Value");
         const latamRow = reg.rows.find(r => /(LatAm|Latin\s*Am)/i.test(r.category));
