@@ -282,6 +282,15 @@
       "qty_2025_dec_31": null,
       "mv_2025_dec_31": null,
       "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
+    "LU2631835845": {
+      "ticker": "L6487Q587",
+      "name": "MORGAN STANLEY EMERGING MARKETS DEBT OPP",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
     }
   },
   "_nota_restauracion": "2026-10-05: el cron del 01-Oct borro TODAS las anclas (export de Positions vacio => snapshot_year_start reconstruyo el archivo desde cero) y el 02-Oct las rehizo sin trabar. Restauradas desde el commit a360f88 (cron del 30-Sep, 23/23 trabadas). Ver bug_positions_export_vacio_2026-10-01."

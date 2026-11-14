@@ -1,0 +1,7 @@
+{
+  "detected_at": "2026-11-14T13:13:39.977001",
+  "date": "2026-11-14",
+  "issues": [
+    "equity: el flow_in del mes ($+195,069 desde 2026-10-31) no explica los cambios de posicion (Σ Δqty x precio = $+477,211, snapshot 2026-10-31 -> 2026-11-14; tolerancia $43,701). Movimientos: HEWJ +823.00 x 62.70; EMXC +4,206.00 x 89.32; ARGT +677.00 x 73.75. Si hay un trade que el flujo no cuenta, el TWR lo esta tomando como retorno (caso FLEX 08-Sep-2026)."
+  ]
+}
