@@ -1,0 +1,46 @@
+{
+  "ticker": "PIMCO-LD",
+  "isin": "IE00BDT57R20",
+  "name": "PIMCO GIS Low Duration Income I",
+  "sleeve": "Fixed Income",
+  "source": "PIMCO GIS Low Duration Income Fund, clase Institutional Accumulation (IE00BDT57R20) — factsheet GIS, datos al 30-Sep-2026",
+  "parsed_at": "2026-11-10",
+  "as_of_factsheet": "2026-09-30",
+  "fi_metrics": {
+    "ytw": 7.11,
+    "duration": 2.9,
+    "maturity": 4.08,
+    "rating": "AA-"
+  },
+  "countries": {
+    "United States": 94.09,
+    "Japan": 1.92,
+    "Brazil": 1.27,
+    "Mexico": 1.08,
+    "South Africa": 0.98,
+    "Turkey": 0.93,
+    "India": 0.54,
+    "Israel": -0.4,
+    "Canada": -0.41,
+    "Singapore": -0.61
+  },
+  "fi_stats_include": true,
+  "countries_de_factsheet": false,
+  "countries_as_of": "2026-04-30",
+  "factsheet_url": "https://www.pimco.com/sg/en/investments/gis/low-duration-income-fund/inst-usd-accumulation",
+  "source_file": "Dropbox/2026/Research Fondos/Renta Fija/PIMCO Low Duration/GIS PIMCO Low Duration Income Fund INST FS Sept.pdf",
+  "fi_metrics_de_factsheet": true,
+  "fi_metrics_nota": "Factsheet GIS 30-Sep-2026: 'Estimated Yield to Maturity' 7,11 (bruto de comisiones; es YTM, no YTW), 'Effective Duration' 2,90 (benchmark 1,85), 'Effective Maturity' 4,08, 'Average Credit Quality' AA-. Current yield 4,46 y distribucion anualizada 5,70 como referencia. Esta VEZ si viene el rating en el documento (el QIR de Jun no lo traia). En la misma carpeta hay un PDF 'PIMS ... FS Sept' que es PFIIX, el mutual fund de EE.UU.: NO se usa. Antes (30-Jun-2026): YTM 5,84 / duracion 2,62 / vencimiento 3,87 / rating AA (de una carga anterior).",
+  "countries_nota": "Estos paises vienen de la web de PIMCO (Abr-2026), por valor de mercado, y NO de un factsheet de la carpeta. El factsheet de PIMCO solo publica 'Top 10 Countries by Contribution to Total Duration' (% duration weighted), que es una medida de RIESGO, no de asignacion: mezclarla en el grafico con fondos medidos por valor de mercado seria sumar peras con manzanas. Ademas PIMCO clasifica paises por moneda de liquidacion, no por emisor.",
+  "current_yield_ref": {
+    "valor": 4.46,
+    "nota": "Solo referencia, no se muestra (Lucas 2026-09-18: YTM solo).",
+    "as_of": "2026-09-30"
+  },
+  "fi_metrics_anterior_2026-06-30": {
+    "ytw": 5.84,
+    "duration": 2.62,
+    "maturity": 3.87,
+    "rating": "AA"
+  }
+}

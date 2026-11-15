@@ -1,0 +1,39 @@
+{
+  "ticker": "4BRZ",
+  "isin": "DE000A0Q4R85",
+  "name": "iShares MSCI Brazil UCITS (DE)",
+  "sleeve": "Equity",
+  "source_file": "4BRZ_20260331.pdf",
+  "parsed_at": "2026-05-12",
+  "as_of_factsheet": "16 2017 2018",
+  "top_holdings": {
+    "CIA VALE DO RIO DOCE SH": 10.68,
+    "NU HOLDINGS CLASS A": 8.86,
+    "ITAU UNIBANCO HOLDING PREF SA": 8.46,
+    "PETROLEO BRASILEIRO PREF SA": 8.23,
+    "PETROLEO BRASILEIRO SA PETROBRAS": 7.38,
+    "BANCO BRADESCO PREF SA": 3.7,
+    "B3 BRASIL BOLSA BALCAO SA": 3.44,
+    "ITAUSA INVESTIMENTOS ITAU PREF SA": 2.97,
+    "COMPANHIA DE SANEAMENTO BASICO DE": 2.96,
+    "CENTRAIS ELETR BRAS-ELETROBRAS SA": 2.74
+  },
+  "sectors": null,
+  "regions": null,
+  "active_share": null,
+  "ter": 0.27,
+  "yield": {
+    "valor": 2.8,
+    "tipo": "Distribution Yield",
+    "as_of": "2026-05-14",
+    "fuente": "BlackRock 4BRZ factsheet",
+    "de_factsheet": false
+  },
+  "countries": {
+    "BR": 100
+  },
+  "countries_de_factsheet": false,
+  "countries_as_of": "2026-05-14",
+  "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta.",
+  "factsheet_url": "https://www.blackrock.com/es/profesionales/productos/304304/ishares-msci-brazil-ucits-etf-de-acc-fund"
+}
