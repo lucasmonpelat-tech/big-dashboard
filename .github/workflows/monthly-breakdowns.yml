@@ -104,15 +104,10 @@ jobs:
           done
           exit 1
 
-      # === RECORD STATUS (mismo patron que daily-refresh.yml) ===
-      - name: Record run status (alertas)
-        if: always()
-        run: |
-          if [ -f scripts/record_run_status.py ]; then
-            python scripts/record_run_status.py --job-status "${{ job.status }}"
-          else
-            echo "scripts/record_run_status.py no existe ΓÇö skipping"
-          fi
+      # FIX 2026-11-16: este workflow YA NO escribe data/_alerts/last_run.json. Ese archivo es
+      # el marcador del refresh DIARIO (lo leen check_previous_run.py y el front para elegir el
+      # snapshot). Al pisarlo el domingo 15-Nov con dayOfWeek=Sunday, el chequeo del lunes
+      # mando un mail falso "la ultima corrida fue sunday, no saturday".
 
       - name: Commit alertas si hubo cambios
         if: always()

@@ -214,7 +214,7 @@ def check_sleeve(sleeve_key, sleeve_file, holdings_file, today_iso):
 
     # 5) El flujo del mes explica los cambios de posicion (fix FLEX 2026-09-25)
     try:
-        issues.extend(check_flows_vs_positions(sleeve_key, twr, holdings_file))
+        issues.extend(check_flows_vs_positions(sleeve_key, twr, holdings_file, sleeve_doc=d))
     except Exception as e:
         issues.append(f"{sleeve_key}: no se pudo correr el chequeo flujo vs posiciones ({e})")
 
@@ -267,7 +267,7 @@ def _tracked_tickers(holdings_file, sleeve_doc=None):
         return set()
 
 
-def check_flows_vs_positions(sleeve_key, twr, holdings_file=None):
+def check_flows_vs_positions(sleeve_key, twr, holdings_file=None, sleeve_doc=None):
     """5) El flujo acumulado del mes tiene que explicar los cambios de cantidad
     de las posiciones del sleeve desde el anchor (fin de mes).
 
@@ -339,7 +339,19 @@ def check_flows_vs_positions(sleeve_key, twr, holdings_file=None):
                 f"(ni en MV ni en flujo): {', '.join(fuera)}. Su retorno no se esta midiendo -- hay que "
                 f"darlas de alta en holdings_returns/ucits_daily_nav como al resto."
             )
-        en_sleeve = {sid for sid in en_sleeve if M[sid][0] in tracked}
+        # FIX 2026-11-16: tambien cuentan los fondos que el sleeve tenia en el ANCLA y ya
+        # no tiene. 4BRZ se vendio el 13-Nov (sale CLOSED el dia del trade): sin esto, su
+        # venta de $270k quedaba fuera de la suma de posiciones pero SI dentro del flow_in
+        # (compra EMXC $266k - venta 4BRZ $271k) y el chequeo daba un falso positivo
+        # ($477k de posiciones vs $195k de flujo).
+        # (twr_series no trae holdings: se leen del punto del ancla en sleeve_series_*)
+        tracked_ancla = set()
+        for k, v in (sleeve_doc or {}).items():
+            if k.startswith("sleeve_series") and isinstance(v, list):
+                for pt in v:
+                    if isinstance(pt, dict) and pt.get("date") == anchor["date"]:
+                        tracked_ancla |= {h.get("ticker") for h in (pt.get("holdings") or []) if isinstance(h, dict)}
+        en_sleeve = {sid for sid in en_sleeve if M[sid][0] in (tracked | tracked_ancla)}
     candidatos = [c for c in (_canonical_positions(lambda d: d <= anchor["date"]),
                               _canonical_positions(lambda d: d > anchor["date"])) if c]
     if not candidatos:
