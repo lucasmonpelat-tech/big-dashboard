@@ -549,6 +549,13 @@ def check_fi_stats_derivado(errors, warnings):
             f"(true si esta en USD o hedgeado a USD)."
         )
     for m in r["faltantes"]:
+        tk, campo = m.split(".", 1)
+        try:
+            declarado = campo == "maturity" and json.loads((ROOT / "data" / "funds" / f"{tk}.json").read_text(encoding="utf-8")).get("maturity_no_publicado")
+        except Exception:
+            declarado = False
+        if declarado:
+            continue   # declarado como no publicado: el promedio se normaliza por los que SI tienen el dato
         errors.append(f"fi_stats: falta {m} en data/funds - entra en el promedio como cero")
     if r["sin_ficha"]:
         warnings.append(f"fi_stats: sin data/funds/<TICKER>.json: {r['sin_ficha']}")
@@ -952,6 +959,10 @@ def main():
             # exigirselos obligaria a inventarlos. Su yield del tab se chequea en
             # check_fichas().
             requeridos = ["ytw", "duration", "maturity"] if d.get("fi_stats_include") else []
+            # MSEMD (2026-11-17) no publica vencimiento promedio: se declara con
+            # `maturity_no_publicado` y build_fi_stats normaliza por el peso con dato.
+            if d.get("maturity_no_publicado") and "maturity" in requeridos:
+                requeridos.remove("maturity")
             if not d.get("fi_stats_include") and not d.get("fi_stats_exclude_reason"):
                 errors.append(f"{fpath.name}: fi_stats_include=false sin fi_stats_exclude_reason "
                               f"-- toda exclusion de la slide 10 tiene que decir por que")
