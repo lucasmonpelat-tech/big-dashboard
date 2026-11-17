@@ -2447,12 +2447,24 @@
         document.getElementById("er-sectorial-bars").innerHTML =
           sec.rows.map(r => renderBar(r.category, r.big, r.acwi, "BIG", "ACWI")).join("") + secFooter;
 
-        const reg = bd.regional;
+        let reg = bd.regional;
+        // Estimacion semanal (lunes, scripts/regional_rollforward.py): regional de Maximus al cierre
+        // + movimientos de cartera desde entonces. Solo se usa si parte del MISMO cierre que el
+        // archivo oficial (base_asOf == asOf); cuando se carga un cierre nuevo, vuelve al oficial.
+        let regEstAl = null, regEstNota = "";
+        try {
+          const est = await loadLegacyJson("regional_estimado");
+          if (est && est.base_asOf === (bd.asOf || bd.as_of) && Array.isArray(est.rows) && est.rows.length === reg.rows.length) {
+            reg = {...reg, rows: est.rows, totals: est.totals};
+            regEstAl = est.estimado_al;
+            regEstNota = `<div style="margin-top:6px;font-size:10px;color:var(--gold);font-style:italic">BIG ESTIMADO al ${est.estimado_al}: Maximus ${est.base_asOf} + movimientos de cartera desde entonces (se actualiza los lunes; el oficial de Maximus se carga al cierre de mes). ACWI sin cambios.</div>`;
+          }
+        } catch (e) { /* sin estimacion: se muestra el oficial */ }
         document.getElementById("er-regional-bars").innerHTML =
           reg.rows.map(r => renderBar(r.category, r.big, r.acwi, "BIG", "ACWI")).join("") +
           `<div style="margin-top:10px;padding-top:10px;border-top:1px solid #1f3864;font-size:11px;color:${MUTE}">
             <strong style="color:var(--gold)">Total BIG: ${reg.totals.big}%</strong> ·
-            <strong style="color:#4a7ab8">Total ACWI: ${reg.totals.acwi}%</strong>
+            <strong style="color:#4a7ab8">Total ACWI: ${reg.totals.acwi}%</strong>${regEstNota}
           </div>`;
 
         // === Cuadro: BIG vs Modelo Mikla Core Equities vs ACWI ===
@@ -2501,7 +2513,9 @@
           document.getElementById("er-modelo-note").innerHTML =
             "Mapeo del Regional de Maximus: US = N. America (incluye Canadá) · Europa = Europe dev. + UK · EM = LatAm + Asia EM. " +
             "<strong>EM de BIG está subestimado en Asia:</strong> Asia EM es un piso (top 10 de NB y Thornburg + EMXC, sin Janus ni el resto de cada fondo activo) y Medio Oriente queda en Otros. " +
-            "Casi todo el EM de BIG hoy es LatAm. Datos al " + (bd.asOf || bd.as_of || "?") + " (mensual, Maximus).";
+            "" + (regEstAl
+              ? "BIG ESTIMADO al " + regEstAl + " (Maximus " + (bd.asOf || bd.as_of) + " + movimientos de cartera; se actualiza los lunes). ACWI sin cambios."
+              : "Datos al " + (bd.asOf || bd.as_of || "?") + " (mensual, Maximus).");
         } catch (e) { console.warn("cuadro modelo", e); }
 
         const valueRow = st.rows.find(r => r.category === "Value");
