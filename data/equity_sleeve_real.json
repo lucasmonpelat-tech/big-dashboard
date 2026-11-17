@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-11-17T00:12:24.332539",
+  "refreshedAt": "2026-11-17T13:13:25.478745",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -8039,20 +8039,13 @@
     },
     {
       "date": "2026-11-17",
-      "mv_usd": 8658120.6169038,
+      "mv_usd": 8638425.1508138,
       "holdings": [
-        {
-          "ticker": "EMXC",
-          "qty": 4206.0,
-          "price": 85.86000061035156,
-          "mv": 361127.1625671387,
-          "source": "daily_close"
-        },
         {
           "ticker": "THOR",
           "qty": 18861.953,
-          "price": 44.84,
-          "mv": 845769.9725200001,
+          "price": 44.79,
+          "mv": 844826.87487,
           "source": "daily_close"
         },
         {
@@ -8072,8 +8065,8 @@
         {
           "ticker": "CSPX",
           "qty": 1968.0,
-          "price": 813.41,
-          "mv": 1600790.88,
+          "price": 808.41,
+          "mv": 1590950.88,
           "source": "daily_close"
         },
         {
@@ -8086,8 +8079,8 @@
         {
           "ticker": "NBGMT",
           "qty": 58050.998,
-          "price": 25.48,
-          "mv": 1479139.42904,
+          "price": 25.4,
+          "mv": 1474495.3491999998,
           "source": "daily_close"
         },
         {
@@ -8100,8 +8093,8 @@
         {
           "ticker": "JHGSC",
           "qty": 10410.46,
-          "price": 53.35,
-          "mv": 555398.041,
+          "price": 52.94,
+          "mv": 551129.7523999999,
           "source": "daily_close"
         },
         {
@@ -8116,6 +8109,13 @@
           "qty": 4063.638,
           "price": 330.77,
           "mv": 1344129.5412599999,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "EMXC",
+          "qty": 4206.0,
+          "price": 85.86000061035156,
+          "mv": 361127.1625671387,
           "source": "daily_close"
         }
       ]
@@ -12067,10 +12067,10 @@
     },
     {
       "date": "2026-11-17",
-      "mv_usd": 8658120.6169038,
+      "mv_usd": 8638425.1508138,
       "flow_in": 195069.44,
-      "twr": -0.00765807508664238,
-      "index": 116.7064
+      "twr": -0.00992045812847604,
+      "index": 116.4403
     }
   ],
   "acwi_index_series": [
@@ -18778,10 +18778,10 @@
     },
     {
       "date": "2026-11-17",
-      "mv_usd": 8658120.6169038,
+      "mv_usd": 8638425.1508138,
       "flow_in": 195069.44,
-      "twr": -0.00765807508664238,
-      "index": 116.7064
+      "twr": -0.00992045812847604,
+      "index": 116.4403
     }
   ],
   "acwi_index_series_original": [

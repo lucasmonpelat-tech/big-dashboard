@@ -6,12 +6,12 @@
     "transactions": "data/raw/2026-11-17/netx360/Transactions_JXD101380.xlsx",
     "ugl": "data/raw/2026-11-17/netx360/Unrealized+Gain+Loss_JXD101380.xlsx"
   },
-  "generated_at": "2026-11-17T00:12:28Z",
+  "generated_at": "2026-11-17T13:13:29Z",
   "totals": {
     "commissions_txn_30d": 0.0,
-    "fees_txn_30d": 314.5,
+    "fees_txn_30d": 298.5,
     "commissions_taxlots_current": 812.7,
-    "fees_taxlots_current": 2118.0
+    "fees_taxlots_current": 2058.0
   },
   "by_transaction": [
     {
@@ -133,14 +133,6 @@
       "commission": 0.0,
       "fees": 16.0,
       "principal": -296326.08
-    },
-    {
-      "process_date": "2026-10-16",
-      "security_id": null,
-      "description": "",
-      "commission": 0.0,
-      "fees": 16.0,
-      "principal": -300066.77
     }
   ],
   "by_taxlot": [
@@ -548,24 +540,6 @@
       "fees": 30.0,
       "current_cost": 144030.0,
       "entry_date": "2026-05-07"
-    },
-    {
-      "security_id": "G7097Y503",
-      "taxlot_id": "20260128AQXQX6",
-      "description": "PIMCO EMERGING LOCAL BOND FUND INSTITUTIONAL CLASS (ACC)(USD)",
-      "commission": 0.0,
-      "fees": 30.0,
-      "current_cost": 445238.58,
-      "entry_date": "2026-01-30"
-    },
-    {
-      "security_id": "G7097Y503",
-      "taxlot_id": "20260406AZDL0R",
-      "description": "PIMCO EMERGING LOCAL BOND FUND INSTITUTIONAL CLASS (ACC)(USD)",
-      "commission": 0.0,
-      "fees": 30.0,
-      "current_cost": 138030.0,
-      "entry_date": "2026-04-08"
     },
     {
       "security_id": "G7113P361",
