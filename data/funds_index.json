@@ -731,6 +731,49 @@
       "countries_as_of": "2026-09-30",
       "countries_nota": "Factsheet 30-Sep-2026, 'Primeros 5 paises': EE.UU. 22,9 / Reino Unido 21,4 / Francia 15,6 / Alemania 9,0 / Paises Bajos 7,3 = 76,2%. OTHER (23,8%) incluye el efectivo (3,3%) y todo lo que no es top 5; el documento NO desglosa Japon por pais: solo informa yen japones 3,2% como exposicion cambiaria. Agosto: 22,0 / 21,0 / 15,3 / 11,2 / 7,4."
     },
+    "LU2631835845": {
+      "ticker": "MSEMD",
+      "name": "Morgan Stanley INVF Emerging Markets Debt Opportunities Fund I (USD)",
+      "sleeve": "Fixed Income",
+      "archivo": "MSEMD.json",
+      "as_of_factsheet": "2026-04-30",
+      "yield": {
+        "valor": 9.51,
+        "tipo": "YTM",
+        "as_of": "2026-04-30",
+        "fuente": "Factsheet MS INVF Emerging Markets Debt Opportunities Fund al 30-Abr-2026 (clase A, ISIN LU2630425226) + presentacion Q1-2026 (31-Mar-2026). Nosotros tenemos la clase I (LU2631835845 / CUSIP L6487Q587): las metricas de CARTERA son del fondo (iguales entre clases); la PERFORMANCE del factsheet es de la clase A y NO se usa.",
+        "de_factsheet": true
+      },
+      "countries": [
+        {
+          "c": "OTHER",
+          "p": 79.14
+        },
+        {
+          "c": "NG",
+          "p": 5.78
+        },
+        {
+          "c": "HU",
+          "p": 5.5
+        },
+        {
+          "c": "TW",
+          "p": 3.52
+        },
+        {
+          "c": "BR",
+          "p": 3.41
+        },
+        {
+          "c": "EG",
+          "p": 2.65
+        }
+      ],
+      "countries_de_factsheet": true,
+      "countries_as_of": "2026-04-30",
+      "countries_nota": "PROXY: el factsheet (30-Abr-2026) NO publica peso por pais de riesgo; estos son los 10 mayores de 'Foreign Currency Exposure (%)' (exposicion cambiaria no-USD por pais, 39,96% del fondo en total). OTHER (60,04%) es todo lo demas: deuda en USD, resto de paises y cash. Sirve para ver donde esta la apuesta de divisas, NO el riesgo pais total (66 paises, 36% fuera del benchmark)."
+    },
     "IE00BF4NG566": {
       "ticker": "NBCLO",
       "name": "Neuberger CLO Income Fund USD I Accumulating Class",

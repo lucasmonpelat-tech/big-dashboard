@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-11-17T13:13:26.250506",
+  "refreshedAt": "2026-11-17T11:44:01.662162",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -5884,8 +5884,15 @@
     },
     {
       "date": "2026-11-17",
-      "mv_usd": 10504352.006799998,
+      "mv_usd": 11078578.637799999,
       "holdings": [
+        {
+          "ticker": "MSEMD",
+          "qty": 38668.46,
+          "price": 14.85,
+          "mv": 574226.6309999999,
+          "source": "daily_close"
+        },
         {
           "ticker": "MANIG",
           "qty": 16621.485,
@@ -9882,10 +9889,10 @@
     },
     {
       "date": "2026-11-17",
-      "mv_usd": 10504352.006799998,
-      "flow_in": -1071434.28,
-      "twr": -0.008596178153718362,
-      "index": 104.3416
+      "mv_usd": 11078578.637799999,
+      "flow_in": -496404.28,
+      "twr": -0.008590140386501731,
+      "index": 104.3422
     }
   ],
   "agg_index_series": [

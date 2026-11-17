@@ -69,6 +69,10 @@ PERSHING_TO_MY = {
     # 2026-11-06: Neuberger Berman CLO Income Fund I Acc USD ($300k, trade 05-Nov,
     # reemplaza a parte de PIMCO-EM). ISIN + CUSIP juntos ("nunca a medias").
     'IE00BF4NG566': ('NBCLO',    'Fixed Income'),
+    # 2026-11-17: Morgan Stanley INVF Emerging Markets Debt Opportunities (clase I USD), comprado 12-Nov
+    # ($575k, reemplaza a PIMCO-EM). ISIN + CUSIP juntos ("nunca a medias"): sin esto caia al sleeve Equity.
+    'LU2631835845': ('MSEMD',    'Fixed Income'),
+    'L6487Q587':    ('MSEMD',    'Fixed Income'),
     'G6430U178':    ('NBCLO',    'Fixed Income'),
     'G5896H580':   ('MANIG',     'Fixed Income'),
     'G594CD616':   ('MANEM',     'Fixed Income'),

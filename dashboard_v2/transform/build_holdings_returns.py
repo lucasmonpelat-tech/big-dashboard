@@ -653,7 +653,8 @@ def _classify_sleeve(pos: dict, equity_race: dict, fi_race: dict) -> str:
     if stype == "Corporate Bonds": return "fixed_income"
     if stype == "Limited Partnerships": return "alternatives"
     if any(k in desc for k in ("BOND","CREDIT","CAT BOND","LOW DURATION","EMERGING LOCAL","CLO INCOME",
-                                "TENAC","TGF","MEDIUM TERM NOTE","INVESTMENT GRADE","AGG","FIXED")):
+                                "TENAC","TGF","MEDIUM TERM NOTE","INVESTMENT GRADE","AGG","FIXED",
+               "DEBT OPPORTUNITIES")):   # MS EM Debt Opp. (2026-11-17): sin esto caia en Equity
         return "fixed_income"
     return "equity"
 

@@ -202,7 +202,7 @@ def _metricas_por_ticker():
 
 def refrescar_pesos_y_metricas(race):
     """Reescribe weight_pct/value_usd desde canonical y las metricas desde data/funds."""
-    race_weights.aplicar(race, "fixed_income")
+    race_weights.aplicar(race, "fixed_income", quitar_cerrados=True)   # 2026-11-17: PIMCO-EM vendido seguia con peso 5,2% en el race
 
     metricas = _metricas_por_ticker()
     faltan = []

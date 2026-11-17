@@ -1,0 +1,72 @@
+{
+ "ticker": "MSEMD",
+ "isin": "LU2631835845",
+ "name": "Morgan Stanley INVF Emerging Markets Debt Opportunities Fund I (USD)",
+ "nombre_corto": "MS EM Debt Opp.",
+ "sleeve": "Fixed Income",
+ "source": "Factsheet MS INVF Emerging Markets Debt Opportunities Fund al 30-Abr-2026 (clase A, ISIN LU2630425226) + presentacion Q1-2026 (31-Mar-2026). Nosotros tenemos la clase I (LU2631835845 / CUSIP L6487Q587): las metricas de CARTERA son del fondo (iguales entre clases); la PERFORMANCE del factsheet es de la clase A y NO se usa.",
+ "source_file": "Dropbox/2026/Research Fondos/Renta Fija/MS IN EM/",
+ "parsed_at": "2026-11-17",
+ "as_of_factsheet": "2026-04-30",
+ "countries": {
+  "Kazakhstan": 7.43,
+  "Nigeria": 5.78,
+  "Uzbekistan": 5.54,
+  "Hungary": 5.5,
+  "Taiwan": 3.52,
+  "Brazil": 3.41,
+  "Egypt": 2.65,
+  "Armenia": 2.51,
+  "Zambia": 2.01,
+  "Uganda": 1.61,
+  "OTHER": 60.04
+ },
+ "countries_de_factsheet": true,
+ "countries_nota": "PROXY: el factsheet (30-Abr-2026) NO publica peso por pais de riesgo; estos son los 10 mayores de 'Foreign Currency Exposure (%)' (exposicion cambiaria no-USD por pais, 39,96% del fondo en total). OTHER (60,04%) es todo lo demas: deuda en USD, resto de paises y cash. Sirve para ver donde esta la apuesta de divisas, NO el riesgo pais total (66 paises, 36% fuera del benchmark).",
+ "yield": {
+  "valor": 9.51,
+  "tipo": "YTM",
+  "as_of": "2026-04-30",
+  "de_factsheet": true,
+  "fuente": "Factsheet 30-Abr-2026: Yield to Maturity fondo 9.51% (benchmark 6.44%). Presentacion Q1-26 (31-Mar): YTW 9.79 / YTM 10.05."
+ },
+ "fi_metrics": {
+  "ytw": 9.51,
+  "duration": 2.43,
+  "maturity": null,
+  "rating": "BB"
+ },
+ "fi_metrics_de_factsheet": true,
+ "fi_metrics_fuente": "Factsheet 30-Abr-2026: YTM 9.51; 'Interest-Rate Duration' 2.43 anos (benchmark 5.34). Rating: 'Avg. S&P Rating BB' de la presentacion Q1-26 (31-Mar). Vencimiento promedio: no publicado (queda vacio, no se estima).",
+ "fi_stats_include": false,
+ "fi_stats_exclude_reason": "SUPUESTO: ~44% soberano en moneda local y ~47% de exposicion cambiaria no cubierta (como PIMCO-EM, al que reemplaza): su duracion y YTM no son homogeneos con el resto del sleeve. Si Lucas prefiere incluirlo, pasar a true.",
+ "liquidez": "diaria",
+ "fund_facts": {
+  "aum_usd_mm": 3100,
+  "nav_clase_A": 13.85,
+  "launch": "2019-09-25",
+  "structure": "SICAV Luxemburgo (UCITS), Articulo 8 SFDR",
+  "benchmark": "50% GBI-EM Global Div / 25% EMBI Global Div / 25% CEMBI Div",
+  "management_fee_pct_clase_A": 1.4,
+  "n_paises": 66,
+  "fuera_de_benchmark_pct": 36.16,
+  "composicion_pct": {
+   "Local Sovereign": 44.37,
+   "External Sovereign": 12.05,
+   "Corporate": 26.44
+  },
+  "exposicion_cambiaria_pct": 46.88,
+  "duration": {
+   "interest_rate_yrs": 2.43,
+   "credit_spread_yrs": 2.8,
+   "bmk_interest_rate_yrs": 5.34
+  },
+  "riesgo_3y_clase_A": {
+   "volatilidad": 4.68,
+   "sharpe": 1.95,
+   "beta": 0.51
+  },
+  "as_of": "2026-04-30"
+ },
+ "countries_as_of": "2026-04-30"
+}
