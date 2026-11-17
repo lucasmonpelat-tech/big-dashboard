@@ -38,8 +38,8 @@
  },
  "fi_metrics_de_factsheet": true,
  "fi_metrics_fuente": "Factsheet 30-Abr-2026: YTM 9.51; 'Interest-Rate Duration' 2.43 anos (benchmark 5.34). Rating: 'Avg. S&P Rating BB' de la presentacion Q1-26 (31-Mar). Vencimiento promedio: no publicado (queda vacio, no se estima).",
- "fi_stats_include": false,
- "fi_stats_exclude_reason": "SUPUESTO: ~44% soberano en moneda local y ~47% de exposicion cambiaria no cubierta (como PIMCO-EM, al que reemplaza): su duracion y YTM no son homogeneos con el resto del sleeve. Si Lucas prefiere incluirlo, pasar a true.",
+ "fi_stats_include": true,
+ "fi_stats_exclude_reason": null,
  "liquidez": "diaria",
  "fund_facts": {
   "aum_usd_mm": 3100,
@@ -68,5 +68,6 @@
   },
   "as_of": "2026-04-30"
  },
- "countries_as_of": "2026-04-30"
+ "countries_as_of": "2026-04-30",
+ "fi_stats_nota": "Incluido por decision de Lucas (2026-11-17). Ojo: ~44% soberano en moneda local y ~47% de exposicion cambiaria sin cubrir, asi que su duration (2,43) y YTM (9,51) no son 100% homogeneos con el resto del sleeve. Vencimiento promedio no publicado: queda fuera del promedio de vencimiento."
 }

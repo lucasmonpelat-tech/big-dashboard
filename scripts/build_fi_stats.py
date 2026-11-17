@@ -58,6 +58,10 @@ ROOT = Path(__file__).parent.parent
 CANONICAL_DIR = ROOT / "data" / "canonical"
 FUNDS_DIR = ROOT / "data" / "funds"
 BREAKDOWN = ROOT / "data" / "fi_breakdown_latest.json"
+MAXIMUS = ROOT / "data" / "fi_stats_maximus.json"
+# YTW y Vencimiento de BIG salen de Maximus (regla Lucas 2026-11-10). La duracion es propia.
+DE_MAXIMUS = {"YTW (%)": "ytw", "Vencimiento": "maturity"}
+MAXIMUS_MAX_DIAS = 45
 
 # El benchmark (AGG) no se deriva de ninguna fuente local: sale del factsheet
 # de iShares y se carga a mano. Se preserva tal cual.
@@ -148,14 +152,30 @@ def calcular(as_of):
     peso_incluido = sum(mv for _, mv, _ in incluidos)
     valores, faltantes = {}, []
     for etiqueta, campo in METRICAS:
-        acum = 0.0
+        acum, peso_con_dato = 0.0, 0.0
         for tk, mv, f in incluidos:
             v = f.get(campo)
             if v is None:
                 faltantes.append(f"{tk}.{campo}")
                 continue
             acum += mv * v
-        valores[etiqueta] = round(acum / peso_incluido, 2)
+            peso_con_dato += mv
+        # Se normaliza por el peso de los fondos que SI tienen el dato (antes: por el total, lo
+        # que subestimaba el promedio cuando faltaba un fondo; MSEMD no publica vencimiento).
+        valores[etiqueta] = round(acum / (peso_con_dato or peso_incluido), 2)
+
+    propios = dict(valores)
+    maximus = None
+    if MAXIMUS.exists():
+        snaps = json.loads(MAXIMUS.read_text(encoding="utf-8")).get("snapshots", {})
+        previas = sorted(k for k in snaps if k <= fecha)
+        if previas:
+            dias = (datetime.strptime(fecha, "%Y-%m-%d") - datetime.strptime(previas[-1], "%Y-%m-%d")).days
+            if dias <= MAXIMUS_MAX_DIAS:
+                maximus = (previas[-1], snaps[previas[-1]])
+    if maximus:
+        for etiqueta, campo in DE_MAXIMUS.items():
+            valores[etiqueta] = round(maximus[1][campo], 2)
 
     excluidos = {}
     for h in holdings:
@@ -167,6 +187,8 @@ def calcular(as_of):
     return {
         "as_of": fecha,
         "valores": valores,
+        "propios": propios,
+        "maximus": maximus,
         "incluidos": [tk for tk, _, _ in incluidos],
         "excluidos": excluidos,
         "cobertura_pct": round(peso_incluido / total * 100, 2),
@@ -196,6 +218,10 @@ def aplicar(r):
         f"guardada en fi_stats_include de cada archivo de fondo. "
         f"bmk (AGG): manual, no lo toca este script."
     )
+    if r.get("maximus"):
+        stats["source"] += (f" YTW y Vencimiento de BIG: de Maximus (data/fi_stats_maximus.json, "
+                            f"cierre {r['maximus'][0]}); la Duracion es el calculo propio.")
+        stats["_valores_propios_sin_maximus"] = {k: r["propios"][k] for k in DE_MAXIMUS}
     stats["_regla_inclusion"] = {
         "incluidos": r["incluidos"],
         "excluidos": r["excluidos"],
@@ -233,11 +259,21 @@ def main():
     for etiqueta, _ in METRICAS:
         print(f"  {etiqueta:14} {r['valores'][etiqueta]}")
 
+    if r["maximus"]:
+        print(f"  (YTW y Vencimiento = Maximus {r['maximus'][0]}; propios: "
+              + ", ".join(f"{k} {r['propios'][k]}" for k in DE_MAXIMUS) + ")")
+    else:
+        print("  WARN: sin dato de Maximus vigente en data/fi_stats_maximus.json -> YTW y Vencimiento "
+              "salen del calculo propio (la regla es usar Maximus). Cargar el cierre.")
     problemas = []
     if r["sin_ficha"]:
         problemas.append(f"sin data/funds/<TICKER>.json: {r['sin_ficha']}")
     if r["sin_flag"]:
         problemas.append(f"sin fi_stats_include (no se sabe si entran): {r['sin_flag']}")
+    # Los faltantes de YTW/Vencimiento no bloquean si esas dos salen de Maximus (el calculo propio
+    # queda solo como referencia): MSEMD no publica vencimiento promedio.
+    if r["maximus"]:
+        r["faltantes"] = [x for x in r["faltantes"] if x.split(".", 1)[1] not in DE_MAXIMUS.values()]
     if r["faltantes"]:
         problemas.append(f"metricas faltantes en fondos incluidos: {r['faltantes']}")
     for p in problemas:

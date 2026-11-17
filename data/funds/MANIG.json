@@ -5,10 +5,10 @@
   "sleeve": "Fixed Income",
   "source": "Man Global Investment Grade Opportunities, Monthly summary report 30-Jun-2026 (IYV USD)",
   "parsed_at": "2026-09-18",
-  "as_of_factsheet": "2026-06-30",
+  "as_of_factsheet": "2026-09-30",
   "fi_metrics": {
-    "ytw": 6.82,
-    "duration": 5.58,
+    "ytw": 8.15,
+    "duration": 5.76,
     "maturity": 5.5,
     "rating": "BBB"
   },
@@ -26,9 +26,9 @@
   "countries_as_of": "2026-06-30",
   "countries_nota": "'Geographical Breakdown' del factsheet, por REGION (no por pais). US = North America (incluye Canada). EU = Europe excl UK. OTHER = Middle East 2.97 + Asia excl Japan 2.17 + Supranational 0.84. Suma 92.5: el resto es cash/derivados y el indice lo completa como OTHER. Apareado por posicion en el grafico: la barra de arriba es el fondo; la de abajo (benchmark) da 59.44 North America, lo tipico del indice global.",
   "factsheet_url": "https://www.man.com/ucits/glg-global-investment-grade-opportunities",
-  "source_file": "Dropbox/2026/Research Fondos/Renta Fija/Man IG Opportunities/Man Global Investment Grade Opportunities IYV USD - Jun26.pdf",
+  "source_file": "Dropbox/2026/Research Fondos/Renta Fija/Man IG Opportunities/Man_Global_Investment_Grade_Opportunities_D_USD_Factsheet_English_(United_States)_30-09-2026.pdf",
   "fi_metrics_de_factsheet": true,
-  "fi_metrics_nota": "ytw = Yield to Worst hedged a USD (6.82, igual al YTM). duration = MODIFIED duration (5.58), que es la que usa el resto del sleeve -- NO la 'Spread Duration' 3.16 que aparece primero en el factsheet, ni la effective 5.51. maturity: el factsheet NO publica vencimiento promedio; queda el 5.5 de la carga de Mar-2026 hasta tener el dato. rating: se mantiene BBB (el factsheet trae breakdown por rating, no un promedio).",
+  "fi_metrics_nota": "2026-11-10: factsheet 30-Sep-2026 (clase D USD; mi tenencia es IYV, misma cartera: las estadisticas son de portafolio). ytw = Yield to Worst hedged a USD = 8.15 (YTM 8.46, running yield 6.70). duration = MODIFIED duration = 5.76 (effective 5.64; spread duration 4.09 NO se usa). maturity: el factsheet NO publica vencimiento promedio; queda 5.5 (carga Mar-2026). Antes (30-Jun): ytw 6.82 / dur 5.58. rating: BBB.",
   "current_yield_ref": {
     "valor": 5.84,
     "as_of": "2026-06-30",

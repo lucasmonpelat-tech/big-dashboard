@@ -1,0 +1,11 @@
+{
+  "_doc": "YTW y Vencimiento de BIG que publica Maximus. Regla de Lucas (2026-11-10): desde el cierre de Octubre-2026 el YTW y el Vencimiento del bloque fi_stats salen de Maximus; la DURACION sigue siendo nuestro calculo ponderado (ficha por fondo). Cargar una entrada por cierre de mes con los valores del deck de Maximus (factsheet-strategy-XXXXX, pagina 2, 'Estadisticas de renta fija', fila Balanced Income & Growth). scripts/build_fi_stats.py las usa.",
+  "snapshots": {
+    "2026-10-31": {
+      "ytw": 8.09,
+      "maturity": 8.37,
+      "duration_maximus_referencia": 5.66,
+      "fuente": "factsheet-strategy-16020.pptx pagina 2 / strategy-16020.pptx slide 9 (Maximus, al 31-Oct-2026)"
+    }
+  }
+}
