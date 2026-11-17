@@ -2457,7 +2457,7 @@
           if (est && est.base_asOf === (bd.asOf || bd.as_of) && Array.isArray(est.rows) && est.rows.length === reg.rows.length) {
             reg = {...reg, rows: est.rows, totals: est.totals};
             regEstAl = est.estimado_al;
-            regEstNota = `<div style="margin-top:6px;font-size:10px;color:var(--gold);font-style:italic">BIG ESTIMADO al ${est.estimado_al}: Maximus ${est.base_asOf} + movimientos de cartera desde entonces (se actualiza los lunes; el oficial de Maximus se carga al cierre de mes). ACWI sin cambios.</div>`;
+            regEstNota = `<div style="margin-top:6px;font-size:10px;color:var(--gold);font-style:italic">BIG ESTIMADO al ${est.estimado_al} (se actualiza los lunes): ${est.cobertura_exacta_pct}% del sleeve (ETFs pasivos) calculado EXACTO con los holdings de iShares; el resto (fondos activos) con la mezcla deducida de Maximus ${est.base_asOf}. El oficial de Maximus se carga al cierre de mes. ACWI sin cambios.</div>`;
           }
         } catch (e) { /* sin estimacion: se muestra el oficial */ }
         document.getElementById("er-regional-bars").innerHTML =
@@ -2514,7 +2514,7 @@
             "Mapeo del Regional de Maximus: US = N. America (incluye Canadá) · Europa = Europe dev. + UK · EM = LatAm + Asia EM. " +
             "<strong>EM de BIG está subestimado en Asia:</strong> Asia EM es un piso (top 10 de NB y Thornburg + EMXC, sin Janus ni el resto de cada fondo activo) y Medio Oriente queda en Otros. " +
             "" + (regEstAl
-              ? "BIG ESTIMADO al " + regEstAl + " (Maximus " + (bd.asOf || bd.as_of) + " + movimientos de cartera; se actualiza los lunes). ACWI sin cambios."
+              ? "BIG ESTIMADO al " + regEstAl + " (se actualiza los lunes): ETFs pasivos exactos con holdings de iShares; fondos activos con la mezcla deducida de Maximus " + (bd.asOf || bd.as_of) + ". ACWI sin cambios."
               : "Datos al " + (bd.asOf || bd.as_of || "?") + " (mensual, Maximus).");
         } catch (e) { console.warn("cuadro modelo", e); }
 

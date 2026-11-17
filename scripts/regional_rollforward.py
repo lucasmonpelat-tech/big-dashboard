@@ -13,16 +13,11 @@ vendio 4BRZ (Brasil) y se compro EMXC, y el widget siguio mostrando LatAm 10,1%.
 
 COMO SE CALCULA (roll-forward, NO un calculo nuevo por fondo)
 -------------------------------------------------------------
-Se parte del regional de Maximus al cierre (asOf del archivo) y se le aplica lo que
-cambio en la cartera desde esa fecha:
-
-    BIG_hoy[region] = BIG_cierre[region] + sum_fondos( (peso_hoy - peso_cierre) x geografia_fondo[region] )
-
-- Fondos PASIVOS con geografia exacta (CSPX, DYNF, MAGS, HEWJ, ILF, ARGT, 4BRZ, EMXC): se usa
-  el pais de su ficha (data/funds/<TICKER>.json -> countries).
-- Fondos ACTIVOS (NB, MFS, Thornburg, Janus) y cualquier otro: publican poco (distribucion de
-  ingresos, top 5 de paises...), asi que su cambio de peso se reparte con la MISMA mezcla que
-  tenia BIG en el cierre. No se inventa una geografia que el fondo no publico.
+PASIVOS (CSPX, DYNF, MAGS, HEWJ, ILF, ARGT, EMXC; ~51% del sleeve): regional EXACTO = peso del
+canonical x pais de la ficha (data/funds/<TICKER>.json -> countries, del CSV de holdings de iShares).
+ACTIVOS (NB, MFS, Thornburg, Janus; ~49%): publican poco (ingresos, top 5 de paises), asi que su
+mezcla se DEDUCE del oficial de Maximus al cierre: Maximus menos lo que aportan los pasivos a esa
+fecha. Esa mezcla se aplica al peso activo de hoy. No se inventa una geografia que no publicaron.
 Los pesos de cada fondo son los del canonical (MV Pershing) a la fecha del cierre y al
 ultimo canonical. Como ambos conjuntos de pesos suman 100%, el resultado suma 100%.
 
@@ -72,8 +67,16 @@ def region(code: str, tk: str) -> str:
     return "Otros"
 
 
+# Fondos cuya region es la misma por DEFINICION del indice (no se mira el pais de cada posicion):
+# ILF = S&P Latin America 40 (su CSV trae un "Sweden" suelto), ARGT, 4BRZ, HEWJ (= EWJ, el CSV dice
+# "United States" porque el fondo tiene el ETF listado en NYSE), MAGS (Magnificent 7).
+FORZAR_REGION = {"ILF": "LatAm", "ARGT": "LatAm", "4BRZ": "LatAm", "HEWJ": "Japan", "MAGS": "N. America"}
+
+
 def geografia(tk: str) -> dict[str, float]:
-    """{region: % del fondo} segun la ficha."""
+    """{region: % del fondo}: por definicion (FORZAR_REGION) o por el pais exacto de la ficha."""
+    if tk in FORZAR_REGION:
+        return {FORZAR_REGION[tk]: 100.0}
     f = json.loads((DATA / "funds" / f"{tk}.json").read_text(encoding="utf-8"))
     paises = f.get("countries") or {}
     tot = sum(paises.values()) or 100.0
@@ -112,19 +115,38 @@ def main():
     c_base, c_hoy = canonical_hasta(as_of), canonical_hasta()
     w0, w1 = pesos(c_base), pesos(c_hoy)
 
-    delta = {k: 0.0 for k in base}
+    # --- Enfoque residual -------------------------------------------------------------------
+    # PASIVOS: regional exacto = sum(peso x geografia del fondo), al cierre y hoy.
+    # ACTIVOS: no publican su cartera; su mezcla se DEDUCE del oficial: lo que Maximus dice al cierre
+    # menos lo que aportan los pasivos (exactos) a esa fecha. Hoy se aplica esa mezcla al peso activo.
+    regiones = list(base)
+    geo = {tk: geografia(tk) for tk in (set(w0) | set(w1)) if tk in PASIVOS}
+    def aporte(w):
+        out = {r: 0.0 for r in regiones}
+        for tk, wt in w.items():
+            if tk in PASIVOS:
+                for r, v in geo[tk].items():
+                    out[r] = out.get(r, 0.0) + wt * v / 100
+        return out
+    p0, p1 = aporte(w0), aporte(w1)
+    peso_act0 = sum(v for tk, v in w0.items() if tk not in PASIVOS)
+    peso_act1 = sum(v for tk, v in w1.items() if tk not in PASIVOS)
+    a0 = {r: base[r] - p0.get(r, 0.0) for r in regiones}
+    avisos = []
+    for r, v in a0.items():
+        if v < -0.3:
+            avisos.append(f"{r}: el oficial de Maximus ({base[r]}) es MENOR que lo que aportan solo los pasivos ({p0[r]:.2f}); mezcla activa recortada a 0")
+    a0 = {r: max(v, 0.0) for r, v in a0.items()}
+    tot_a0 = sum(a0.values())
+    mezcla_act = {r: v / tot_a0 for r, v in a0.items()}   # mezcla implicita de los fondos activos
+    delta = {}
     mov = []
     for tk in sorted(set(w0) | set(w1)):
         d = w1.get(tk, 0.0) - w0.get(tk, 0.0)
-        pasivo = tk in PASIVOS
-        if pasivo:
-            for r, v in geografia(tk).items():
-                delta[r] = delta.get(r, 0.0) + d * v / 100
-        else:
-            for r, m in mezcla_base.items():
-                delta[r] += d * m
         mov.append({"fondo": tk, "peso_cierre_pct": round(w0.get(tk, 0.0), 2), "peso_hoy_pct": round(w1.get(tk, 0.0), 2),
-                    "cambio_pp": round(d, 2), "tratamiento": "pasivo (ficha por pais)" if pasivo else "activo (mezcla del cierre)"})
+                    "cambio_pp": round(d, 2), "tratamiento": "pasivo (pais exacto de la ficha)" if tk in PASIVOS else "activo (mezcla deducida de Maximus)"})
+    hoy = {r: p1.get(r, 0.0) + peso_act1 * mezcla_act[r] for r in regiones}
+    delta = {r: hoy[r] - base[r] for r in regiones}
 
     nuevas = []
     for r in rows:
@@ -144,9 +166,13 @@ def main():
         "estimado_al": c_hoy.name,
         "base_asOf": as_of,
         "base_fuente": "equity_breakdown_latest.json (Maximus, cierre de mes). Esta estimacion deja de usarse cuando asOf cambia.",
-        "metodo": ("Roll-forward: regional de Maximus al cierre + (peso hoy - peso al cierre) x geografia del fondo. "
-                   "Pasivos con pais de su ficha; fondos activos con la mezcla que tenia BIG en el cierre. "
-                   "ACWI sin cambios. Es una ESTIMACION, no el dato oficial."),
+        "metodo": ("Pasivos (CSPX, DYNF, MAGS, HEWJ, ILF, ARGT, EMXC): regional EXACTO, peso del canonical x pais de la ficha "
+                   "(CSV de holdings de iShares, scripts/fetch_passive_geo.py). Activos (NB, MFS, Thornburg, Janus): mezcla deducida del "
+                   "oficial de Maximus al cierre (Maximus menos lo que aportan los pasivos) aplicada a su peso de hoy. "
+                   "ACWI sin cambios. Es una ESTIMACION: lo unico no exacto es la geografia de los fondos activos."),
+        "cobertura_exacta_pct": round(sum(v for tk, v in w1.items() if tk in PASIVOS), 2),
+        "mezcla_activos_deducida": {r: round(v * 100, 2) for r, v in mezcla_act.items()},
+        "avisos": avisos,
         "pesos_cierre_canonical": c_base.name,
         "rows": nuevas,
         "totals": {"big": round(sum(x["big"] for x in nuevas), 2), "acwi": bd["regional"]["totals"]["acwi"]},
@@ -155,7 +181,9 @@ def main():
     print(f"Regional estimado al {c_hoy.name} (base Maximus {as_of}, pesos del {c_base.name})")
     for x in nuevas:
         print(f"  {x['category']:12} cierre {x['big_cierre']:6.2f} -> hoy {x['big']:6.2f}  ({x['cambio_pp']:+.2f} pp)   ACWI {x['acwi']}")
-    print("  suma:", out["totals"]["big"])
+    print("  suma:", out["totals"]["big"], f"| exacto (pasivos): {out['cobertura_exacta_pct']}% del sleeve | mezcla activos:", out["mezcla_activos_deducida"])
+    for av in avisos:
+        print("  AVISO:", av)
     for m in out["movimientos"]:
         print(f"    {m['fondo']:7} {m['peso_cierre_pct']:5.2f}% -> {m['peso_hoy_pct']:5.2f}%  {m['cambio_pp']:+.2f}  [{m['tratamiento']}]")
     if a.dry_run:

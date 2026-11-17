@@ -6,7 +6,7 @@ name: Weekly Regional Equity (estimacion)
 #
 # Corre los LUNES a las 17:00 UTC (14:00 ART): despues del refresh diario (12:30 UTC, que GitHub
 # suele atrasar) y del watchdog (16:07 UTC), asi toma el canonical del dia.
-# Salida: data/regional_estimado.json. Si falla, el front sigue mostrando el dato anterior/oficial.
+# Salida: data/regional_estimado.json (+ fichas EMXC/ILF/DYNF/CSPX con pais exacto y funds_index). Si falla, el front sigue mostrando el dato anterior/oficial.
 
 on:
   schedule:
@@ -28,14 +28,21 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Regional estimado (roll-forward desde Maximus)
+      - name: Pais exacto de los ETFs pasivos (CSV de holdings de iShares -> fichas)
+        continue-on-error: true
+        run: |
+          pip install requests
+          python scripts/fetch_passive_geo.py
+          python scripts/build_funds_index.py
+
+      - name: Regional estimado (pasivos exactos + activos deducidos de Maximus)
         run: python scripts/regional_rollforward.py
 
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/regional_estimado.json
+          git add data/regional_estimado.json data/funds/ data/funds_index.json
           if git diff --cached --quiet; then echo "sin cambios"; exit 0; fi
           git commit -m "chore(regional): estimacion semanal ($(date -u +%Y-%m-%d))"
           for attempt in 1 2 3; do

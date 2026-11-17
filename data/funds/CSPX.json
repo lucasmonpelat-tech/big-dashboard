@@ -30,10 +30,10 @@
     "de_factsheet": false
   },
   "countries": {
-    "US": 100
+    "US": 100.0
   },
-  "countries_de_factsheet": false,
-  "countries_as_of": "2026-05-14",
-  "countries_nota": "Estimacion previa (funds_metadata.js), no sale de un factsheet. Reemplazar cuando haya factsheet en la carpeta.",
+  "countries_de_factsheet": true,
+  "countries_as_of": "2026-11-16",
+  "countries_nota": "EXACTO: suma posicion por posicion del CSV de holdings de iShares (campo Location) al 2026-11-16, 505 acciones, normalizado a 100. Generado por scripts/fetch_passive_geo.py. PROXY: CSV de IVV (iShares Core S&P 500 ETF), mismo indice que CSPX (UCITS); el UCITS no publica Location.",
   "factsheet_url": "https://www.blackrock.com/americas-offshore/en/literature/fact-sheet/cspx-ishares-core-s-p-500-ucits-etf-fund-fact-sheet-en-lm.pdf"
 }
