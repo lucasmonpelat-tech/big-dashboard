@@ -274,6 +274,15 @@
       "ytd_source": "statement_icapital_valor_31dic",
       "note": "VALOR real al 31-Dic-2025 segun el statement de iCapital (shares x NAV del statement de Marzo-2026, que trae el NAV al 31-Dic): 432.1639 x 1157.3905 = $500,182.39. Pershing NO publica precio ni fecha para este fondo (la 'cantidad' ES el valor en dolares) pero SI lo re-marca cada tanto, asi que el YTD se calcula valor en Pershing / este valor - 1, con fecha = ultimo re-marcado de Pershing. El statement (alts_factsheet_ytd.json) queda como verificacion. Ojo vintage: el statement de Pershing del 31-Dic mostraba $490,000.00 (a costo) (marca vieja); para el YTD del FONDO vale el valor real de iCapital. Cargado 2026-09-25. RESTAURADO 2026-10-22: el cron del 26-Sep lo borro (snapshot_year_start solo conservaba ISIN presentes en Positions, y Pershing no publica ISIN para estos dos); desde el fix del 05-Oct las anclas trabadas se conservan siempre."
     },
+    "IE00BF4NG566": {
+      "ticker": "IE00BF4NG566",
+      "name": "NEUBERGER CLO INCOME FUND CLASS I (ACC)(",
+      "ytd_source_pct": null,
+      "price_2025_dec_31": null,
+      "qty_2025_dec_31": null,
+      "mv_2025_dec_31": null,
+      "note": "no_anchor_data: ytd_source=no_source, qty_pre=0"
+    },
     "LU2631835845": {
       "ticker": "L6487Q587",
       "name": "MORGAN STANLEY EMERGING MARKETS DEBT OPP",

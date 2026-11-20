@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-11-19T13:14:36.735530",
+  "refreshedAt": "2026-11-20T13:14:20.468733",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -6067,6 +6067,68 @@
           "source": "daily_close"
         }
       ]
+    },
+    {
+      "date": "2026-11-20",
+      "mv_usd": 11087259.344436001,
+      "holdings": [
+        {
+          "ticker": "MANIG",
+          "qty": 16621.485,
+          "price": 123.51,
+          "mv": 2052919.61235,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MANEM",
+          "qty": 4060.017,
+          "price": 114.51,
+          "mv": 464912.54667,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "PIMCO-INC",
+          "qty": 235926.136,
+          "price": 19.69,
+          "mv": 4645385.61784,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "PIMCO-LD",
+          "qty": 102086.926,
+          "price": 13.95,
+          "mv": 1424112.6177,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "GAMCB",
+          "qty": 22165.72,
+          "price": 25.1383,
+          "mv": 557208.5190760001,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "SGCB",
+          "qty": 269.44,
+          "price": 2254.06,
+          "mv": 607333.9264,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MSEMD",
+          "qty": 38668.46,
+          "price": 14.74,
+          "mv": 569973.1004,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "TGF",
+          "qty": 532000.0,
+          "price": 1.438747,
+          "mv": 765413.404,
+          "source": "daily_close"
+        }
+      ]
     }
   ],
   "twr_series": [
@@ -10031,6 +10093,13 @@
       "flow_in": -496404.28,
       "twr": -0.007430263604017998,
       "index": 104.4643
+    },
+    {
+      "date": "2026-11-20",
+      "mv_usd": 11087259.344436001,
+      "flow_in": -196404.29,
+      "twr": -0.0342136845342626,
+      "index": 101.6454
     }
   ],
   "agg_index_series": [
@@ -12457,29 +12526,29 @@
     },
     {
       "date": "2026-10-21",
-      "price": 91.06,
-      "index": 101.1682
+      "price": 89.228,
+      "index": 99.1328
     },
     {
       "date": "2026-10-22",
-      "price": 91.23,
-      "index": 101.3571
+      "price": 89.3945,
+      "index": 99.3179
     },
     {
       "date": "2026-10-23",
-      "price": 91.5,
-      "index": 101.6571
+      "price": 89.6591,
+      "index": 99.6118
     },
     {
       "date": "2026-10-24",
-      "price": 91.73,
-      "index": 101.9126
+      "price": 89.8845,
+      "index": 99.8622
     },
     {
       "date": "2026-10-25",
-      "index": 101.9126,
+      "index": 100.8874,
       "interpolated": true,
-      "price": 91.73
+      "price": 90.8073
     },
     {
       "date": "2026-10-26",
@@ -12488,34 +12557,34 @@
     },
     {
       "date": "2026-10-27",
-      "price": 91.98,
-      "index": 102.1904
+      "price": 90.1295,
+      "index": 100.1344
     },
     {
       "date": "2026-10-28",
-      "price": 91.87,
-      "index": 102.0681
+      "price": 90.0217,
+      "index": 100.0146
     },
     {
       "date": "2026-10-29",
-      "price": 91.53,
-      "index": 101.6904
+      "price": 89.6885,
+      "index": 99.6445
     },
     {
       "date": "2026-10-30",
-      "price": 91.865,
-      "index": 102.0626
+      "price": 90.0168,
+      "index": 100.0092
     },
     {
       "date": "2026-10-31",
-      "price": 92.05,
-      "index": 102.2681
+      "price": 90.1981,
+      "index": 100.2106
     },
     {
       "date": "2026-11-01",
-      "index": 102.2681,
+      "index": 101.2394,
       "interpolated": true,
-      "price": 92.05
+      "price": 91.124
     },
     {
       "date": "2026-11-02",
@@ -12524,34 +12593,34 @@
     },
     {
       "date": "2026-11-03",
-      "price": 92.3,
-      "index": 102.5459
+      "price": 90.443,
+      "index": 100.4828
     },
     {
       "date": "2026-11-04",
-      "price": 92.1,
-      "index": 102.3237
+      "price": 90.247,
+      "index": 100.265
     },
     {
       "date": "2026-11-05",
-      "price": 92.32,
-      "index": 102.5681
+      "price": 90.4626,
+      "index": 100.5045
     },
     {
       "date": "2026-11-06",
-      "price": 92.56,
-      "index": 102.8347
+      "price": 90.6978,
+      "index": 100.7658
     },
     {
       "date": "2026-11-07",
-      "price": 92.48,
-      "index": 102.7459
+      "price": 90.6194,
+      "index": 100.6787
     },
     {
       "date": "2026-11-08",
-      "index": 102.7459,
+      "index": 101.7123,
       "interpolated": true,
-      "price": 92.48
+      "price": 91.5497
     },
     {
       "date": "2026-11-09",
@@ -12560,34 +12629,34 @@
     },
     {
       "date": "2026-11-10",
-      "price": 92.63,
-      "index": 102.9125
+      "price": 90.7664,
+      "index": 100.842
     },
     {
       "date": "2026-11-11",
-      "price": 91.89,
-      "index": 102.0904
+      "price": 90.0413,
+      "index": 100.0364
     },
     {
       "date": "2026-11-12",
-      "price": 91.835,
-      "index": 102.0293
+      "price": 89.9874,
+      "index": 99.9765
     },
     {
       "date": "2026-11-13",
-      "price": 91.39,
-      "index": 101.5349
+      "price": 89.5513,
+      "index": 99.4921
     },
     {
       "date": "2026-11-14",
-      "price": 91.44,
-      "index": 101.5904
+      "price": 89.6003,
+      "index": 99.5465
     },
     {
       "date": "2026-11-15",
-      "index": 101.5904,
+      "index": 100.5684,
       "interpolated": true,
-      "price": 91.44
+      "price": 90.5202
     },
     {
       "date": "2026-11-16",
@@ -12596,18 +12665,23 @@
     },
     {
       "date": "2026-11-17",
-      "price": 91.13,
-      "index": 101.246
+      "price": 89.2966,
+      "index": 99.209
     },
     {
       "date": "2026-11-18",
-      "price": 91.26,
-      "index": 101.3904
+      "price": 89.4239,
+      "index": 99.3506
     },
     {
       "date": "2026-11-19",
-      "price": 91.57,
-      "index": 101.7348
+      "price": 89.7277,
+      "index": 99.688
+    },
+    {
+      "date": "2026-11-20",
+      "price": 89.63,
+      "index": 99.5795
     }
   ],
   "fi_flows_by_month": {
@@ -12797,7 +12871,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-11-19 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-11-19.",
+  "_daily_refresh_note": "Punto 2026-11-20 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-11-20.",
   "_bench_fix_note": "2026-06-23: agg_index_series reconstruida con IUAG.L (UCITS Acc, total return). Antes era AGG NYSE price-only sin reinvertir dividendos, daba YTD -5.78% falso.",
   "_rebuild_note": "Reconstruccion completa 2026-07-31: reemplaza integramente el pipeline legacy (portfolio_reconstructor.py / sleeve_series desincronizado). Los 12 checkpoints mensuales estan verificados al centavo contra los statements oficiales de Pershing. Flujos calculados como -sum(Net Amount) de las transacciones reales del sleeve en cada periodo (auto-neutraliza fund exchanges internos). Excepcion: 3 transacciones de ene-2026 (venta WELLCRED + compras PIMCO-INC/PIMCO-EM) reclasificadas a feb-2026 tras verificar contra el statement oficial de febrero que asi procesaron realmente (Pershing las emitio como Cancel/Correct). Periodo oct-dic-2025 combinado en un solo calculo por el retiro grande de capital que distorsionaba el corte de fin de mes. | FIX 2026-08-07: se truncaron los puntos 01-ago a 07-ago (calculados con un anchor que iba driftando dia a dia por un bug en refresh_equity_daily.py/refresh_fi_daily.py, ya corregido -- ver _find_last_real_month_end). El proximo refresh diario recalcula bien desde el anchor real de 31-jul.",
   "twr_series_original": [
@@ -16762,6 +16836,13 @@
       "flow_in": -496404.28,
       "twr": -0.007430263604017998,
       "index": 104.4643
+    },
+    {
+      "date": "2026-11-20",
+      "mv_usd": 11087259.344436001,
+      "flow_in": -196404.29,
+      "twr": -0.0342136845342626,
+      "index": 101.6454
     }
   ],
   "_july_ramp_note": "FIX 2026-08-14: se prepende el mes de rampa de capital (1-jul a 31-jul-2025). Ver equity_sleeve_real.json para el detalle completo -- mismo fix, misma logica. FI Modified Dietz 1-jul->31-jul: mv_start=0, mv_end=$6,818,058.18 (statement oficial verificado), flows=MANIG/PIMCO-INC/WELLCRED (7-jul) + TGF (16-jul): twr=+0.3344%. Serie reescalada por (1+0.3344%).",
@@ -19191,29 +19272,29 @@
     },
     {
       "date": "2026-10-21",
-      "price": 91.06,
-      "index": 101.1682
+      "price": 89.228,
+      "index": 99.1328
     },
     {
       "date": "2026-10-22",
-      "price": 91.23,
-      "index": 101.3571
+      "price": 89.3945,
+      "index": 99.3179
     },
     {
       "date": "2026-10-23",
-      "price": 91.5,
-      "index": 101.6571
+      "price": 89.6591,
+      "index": 99.6118
     },
     {
       "date": "2026-10-24",
-      "price": 91.73,
-      "index": 101.9126
+      "price": 89.8845,
+      "index": 99.8622
     },
     {
       "date": "2026-10-25",
-      "index": 101.9126,
+      "index": 100.8874,
       "interpolated": true,
-      "price": 91.73
+      "price": 90.8073
     },
     {
       "date": "2026-10-26",
@@ -19222,34 +19303,34 @@
     },
     {
       "date": "2026-10-27",
-      "price": 91.98,
-      "index": 102.1904
+      "price": 90.1295,
+      "index": 100.1344
     },
     {
       "date": "2026-10-28",
-      "price": 91.87,
-      "index": 102.0681
+      "price": 90.0217,
+      "index": 100.0146
     },
     {
       "date": "2026-10-29",
-      "price": 91.53,
-      "index": 101.6904
+      "price": 89.6885,
+      "index": 99.6445
     },
     {
       "date": "2026-10-30",
-      "price": 91.865,
-      "index": 102.0626
+      "price": 90.0168,
+      "index": 100.0092
     },
     {
       "date": "2026-10-31",
-      "price": 92.05,
-      "index": 102.2681
+      "price": 90.1981,
+      "index": 100.2106
     },
     {
       "date": "2026-11-01",
-      "index": 102.2681,
+      "index": 101.2394,
       "interpolated": true,
-      "price": 92.05
+      "price": 91.124
     },
     {
       "date": "2026-11-02",
@@ -19258,34 +19339,34 @@
     },
     {
       "date": "2026-11-03",
-      "price": 92.3,
-      "index": 102.5459
+      "price": 90.443,
+      "index": 100.4828
     },
     {
       "date": "2026-11-04",
-      "price": 92.1,
-      "index": 102.3237
+      "price": 90.247,
+      "index": 100.265
     },
     {
       "date": "2026-11-05",
-      "price": 92.32,
-      "index": 102.5681
+      "price": 90.4626,
+      "index": 100.5045
     },
     {
       "date": "2026-11-06",
-      "price": 92.56,
-      "index": 102.8347
+      "price": 90.6978,
+      "index": 100.7658
     },
     {
       "date": "2026-11-07",
-      "price": 92.48,
-      "index": 102.7459
+      "price": 90.6194,
+      "index": 100.6787
     },
     {
       "date": "2026-11-08",
-      "index": 102.7459,
+      "index": 101.7123,
       "interpolated": true,
-      "price": 92.48
+      "price": 91.5497
     },
     {
       "date": "2026-11-09",
@@ -19294,34 +19375,34 @@
     },
     {
       "date": "2026-11-10",
-      "price": 92.63,
-      "index": 102.9125
+      "price": 90.7664,
+      "index": 100.842
     },
     {
       "date": "2026-11-11",
-      "price": 91.89,
-      "index": 102.0904
+      "price": 90.0413,
+      "index": 100.0364
     },
     {
       "date": "2026-11-12",
-      "price": 91.835,
-      "index": 102.0293
+      "price": 89.9874,
+      "index": 99.9765
     },
     {
       "date": "2026-11-13",
-      "price": 91.39,
-      "index": 101.5349
+      "price": 89.5513,
+      "index": 99.4921
     },
     {
       "date": "2026-11-14",
-      "price": 91.44,
-      "index": 101.5904
+      "price": 89.6003,
+      "index": 99.5465
     },
     {
       "date": "2026-11-15",
-      "index": 101.5904,
+      "index": 100.5684,
       "interpolated": true,
-      "price": 91.44
+      "price": 90.5202
     },
     {
       "date": "2026-11-16",
@@ -19330,18 +19411,23 @@
     },
     {
       "date": "2026-11-17",
-      "price": 91.13,
-      "index": 101.246
+      "price": 89.2966,
+      "index": 99.209
     },
     {
       "date": "2026-11-18",
-      "price": 91.26,
-      "index": 101.3904
+      "price": 89.4239,
+      "index": 99.3506
     },
     {
       "date": "2026-11-19",
-      "price": 91.57,
-      "index": 101.7348
+      "price": 89.7277,
+      "index": 99.688
+    },
+    {
+      "date": "2026-11-20",
+      "price": 89.63,
+      "index": 99.5795
     }
   ],
   "_agg_index_series_note": "2026-10-14: un punto real por dia de mercado (yfinance IUAG.L, cierre X etiquetado X+1), ver scripts/bench_series.py. Re-derivado desde 2026-06-15."
