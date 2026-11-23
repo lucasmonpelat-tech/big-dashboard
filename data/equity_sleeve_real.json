@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-11-21T13:12:44.621794",
+  "refreshedAt": "2026-11-23T13:12:45.321233",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Equity",
   "benchmark": "ACWI",
@@ -8451,6 +8451,89 @@
           "source": "daily_close"
         }
       ]
+    },
+    {
+      "date": "2026-11-23",
+      "mv_usd": 8274689.370406455,
+      "holdings": [
+        {
+          "ticker": "THOR",
+          "qty": 18861.953,
+          "price": 43.67,
+          "mv": 823701.4875100001,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "ILF",
+          "qty": 10000.0,
+          "price": 29.66,
+          "mv": 296600.0,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "HEWJ",
+          "qty": 3948.0,
+          "price": 56.65999984741211,
+          "mv": 223693.679397583,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "CSPX",
+          "qty": 1968.0,
+          "price": 789.16,
+          "mv": 1553066.88,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "DYNF",
+          "qty": 17191.0,
+          "price": 60.939998626708984,
+          "mv": 1047619.5163917542,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "NBGMT",
+          "qty": 58050.998,
+          "price": 24.58,
+          "mv": 1426893.53084,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MAGS",
+          "qty": 6905.0,
+          "price": 61.65999984741211,
+          "mv": 425762.2989463806,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "JHGSC",
+          "qty": 10410.46,
+          "price": 51.86,
+          "mv": 539886.4556,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "ARGT",
+          "qty": 4677.0,
+          "price": 66.56,
+          "mv": 311301.12,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MFSCV",
+          "qty": 4063.638,
+          "price": 319.68,
+          "mv": 1299063.79584,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "EMXC",
+          "qty": 4206.0,
+          "price": 77.7699966430664,
+          "mv": 327100.6058807373,
+          "source": "daily_close"
+        }
+      ]
     }
   ],
   "twr_series": [
@@ -12431,6 +12514,13 @@
       "flow_in": 195069.44,
       "twr": -0.05168047228657784,
       "index": 111.529
+    },
+    {
+      "date": "2026-11-23",
+      "mv_usd": 8274689.370406455,
+      "flow_in": 195069.44,
+      "twr": -0.0516724699456495,
+      "index": 111.53
     }
   ],
   "acwi_index_series": [
@@ -15020,6 +15110,11 @@
       "date": "2026-11-21",
       "price": 142.59,
       "index": 112.6408
+    },
+    {
+      "date": "2026-11-23",
+      "price": 142.59,
+      "index": 112.6408
     }
   ],
   "equity_flows_by_month": {
@@ -15210,7 +15305,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-11-21 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing 2026-11-20.",
+  "_daily_refresh_note": "Punto 2026-11-23 recalculado con precios cierre anterior (baha+Stooq+Yahoo). qty de Pershing 2026-11-20.",
   "_rebuild_note": "Reconstruccion completa 2026-07-31: reemplaza integramente el pipeline legacy (portfolio_reconstructor.py / sleeve_series desincronizado). Los 12 checkpoints mensuales estan verificados al centavo contra los statements oficiales de Pershing. Flujos calculados como -sum(Net Amount) de las transacciones reales del sleeve en cada periodo (auto-neutraliza fund exchanges internos). Excepcion: 3 transacciones de ene-2026 (venta WELLCRED + compras PIMCO-INC/PIMCO-EM) reclasificadas a feb-2026 tras verificar contra el statement oficial de febrero que asi procesaron realmente (Pershing las emitio como Cancel/Correct). Periodo oct-dic-2025 combinado en un solo calculo por el retiro grande de capital que distorsionaba el corte de fin de mes. | FIX 2026-08-07: se truncaron los puntos 01-ago a 07-ago (calculados con un anchor que iba driftando dia a dia por un bug en refresh_equity_daily.py/refresh_fi_daily.py, ya corregido -- ver _find_last_real_month_end). El proximo refresh diario recalcula bien desde el anchor real de 31-jul.",
   "twr_series_original": [
     {
