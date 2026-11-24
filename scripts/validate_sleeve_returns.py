@@ -247,7 +247,12 @@ def _canonical_positions(pred):
         for h in json.load(open(f, encoding="utf-8")).get("holdings", []):
             sid = h.get("security_id") or h.get("cusip")
             if sid:
-                out[sid] = (h.get("quantity") or 0.0, h.get("market_price_ccy"))
+                qty = h.get("quantity") or 0.0
+                px = h.get("market_price_ccy")
+                # FIX 2026-11-24: NB CLO llega con precio 0.0 y MV correcto -> precio = MV / cantidad
+                if not px and qty and h.get("market_value_ccy"):
+                    px = h["market_value_ccy"] / qty
+                out[sid] = (qty, px)
         return d, out
     return None
 

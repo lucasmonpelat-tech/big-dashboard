@@ -1,9 +1,0 @@
-{
-  "detected_at": "2026-11-24T02:51:11.969692+00:00",
-  "date": "2026-11-24",
-  "tipo": "cron_no_corrio",
-  "motivo": "[should_run_refresh] 2026-11-24 (Mar): CORRER -- ya corrio hoy PERO el NAV quedo viejo (tiene 2026-11-20, se esperaba 2026-11-23): Lynk debe haber publicado tarde, se reintenta",
-  "issues": [
-    "El daily-refresh de 2026-11-24 SI habia corrido, pero sin data fresca: [should_run_refresh] 2026-11-24 (Mar): CORRER -- ya corrio hoy PERO el NAV quedo viejo (tiene 2026-11-20, se esperaba 2026-11-23): Lynk debe haber publicado tarde, se reintenta. El watchdog lo volvio a disparar para tomar el NAV nuevo. No es una falla."
-  ]
-}

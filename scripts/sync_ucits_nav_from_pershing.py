@@ -145,6 +145,12 @@ def main():
     today = date.today()
     for isin, meta in INSTRUMENTS.items():
         h = by_isin.get(isin)
+        # FIX 2026-11-24: NB CLO llego a Positions con precio 0.0 (market_price_ccy) pero con MV y
+        # cantidad correctos ($300.165 / 16.556 cuotas). Si el precio es vacio/0 se deriva el NAV
+        # del MV: nav = MV / cantidad (misma convencion per_100 aparte).
+        if h and not h.get("market_price_ccy") and h.get("market_value_ccy") and h.get("quantity"):
+            h = {**h, "market_price_ccy": h["market_value_ccy"] / h["quantity"] * (100.0 if meta.get("per_100") else 1.0)}
+            print(f"  {meta['ticker']:<8} precio de Pershing vacio/0 -> NAV derivado de MV/cantidad = {h['market_price_ccy']:.4f}")
         if not h or not h.get("market_price_ccy"):
             print(f"  {meta['ticker']:<8} sin posicion/precio en el snapshot -- se omite")
             continue

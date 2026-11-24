@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-11-24T13:12:47.895680",
+  "refreshedAt": "2026-11-24T10:29:10.699187",
   "inception": "2025-06-30",
   "benchmark": "Bloomberg US Aggregate (via AGG ETF)",
   "ust_reference": {
@@ -264,25 +264,26 @@
     },
     {
       "isin": "IE00BF4NG566",
-      "ticker": "IE00BF4NG566",
-      "name": "NEUBERGER CLO INCOME FUND CLASS I (ACC)(USD) ISIN IE00BF4NG566",
+      "ticker": "NBCLO",
+      "name": "NEUBERGER CLO INCOME FUND CLASS I USD ACC",
       "value_usd": 300165.55,
       "weight_pct": 2.64,
-      "si_return_pct": null,
+      "si_return_pct": 0.06,
       "ytd_return_pct": null,
       "contribution_pct": null,
       "ytd_contribution_pct": null,
-      "ytw": null,
-      "duration": null,
-      "maturity": null,
-      "rating": null,
+      "ytw": 9.54,
+      "duration": 0.13,
+      "maturity": 5.65,
+      "rating": "BB-",
+      "spread_vs_ust": 4.62,
       "source": "alta automatica 2026-11-20 desde canonical/holdings_returns.json (race_weights.dar_de_alta_faltantes)",
       "nav_t1": null,
       "nav_currency": null,
       "nav_date": null,
       "return_source": "canonical",
-      "fi_stats_include": null,
-      "metrics_as_of": null,
+      "fi_stats_include": true,
+      "metrics_as_of": "2026-09-30",
       "status": "OPEN"
     }
   ],
@@ -335,9 +336,15 @@
       "basis_month": "2026-04",
       "currency": "USD",
       "anchor_date": "2026-11-17"
+    },
+    "IE00BF4NG566": {
+      "nav_anchor_si": 18.11912817096541,
+      "basis_month": "2026-04",
+      "currency": "USD",
+      "anchor_date": "2026-11-24"
     }
   },
-  "_daily_race_note": "Pesos y MV releidos de canonical/2026-11-20/holdings_returns.json; metricas (ytw/duration/maturity/rating) de data/funds/<TICKER>.json. Retornos por fondo recalculados 2026-11-24 con NAV vivo T-1 (baha). YTD exacto (ancla NAV 31-dic): ['PIMCO-LD', 'PIMCO-INC', 'MANIG', 'SGCB', 'MANEM']. YTD calibrado desde mensual 2026-04: ['TGF', 'GAMCB']. Sin NAV vivo (carry/scrape): ['MSEMD', 'IE00BF4NG566'].",
+  "_daily_race_note": "Pesos y MV releidos de canonical/2026-11-20/holdings_returns.json; metricas (ytw/duration/maturity/rating) de data/funds/<TICKER>.json. Retornos por fondo recalculados 2026-11-24 con NAV vivo T-1 (baha). YTD exacto (ancla NAV 31-dic): ['PIMCO-LD', 'PIMCO-INC', 'MANIG', 'SGCB', 'MANEM']. YTD calibrado desde mensual 2026-04: ['TGF', 'GAMCB']. Sin NAV vivo (carry/scrape): ['MSEMD', 'NBCLO'].",
   "_weights_source": "canonical/2026-11-20/holdings_returns.json",
   "_metrics_source": "data/funds/<TICKER>.json (fi_metrics)",
   "_nota_gamcb": "2026-10-20: GAMCB agregado a mano (el rebuild completo fi_race.py ya no corre). YTW/duration del mail del gestor.",

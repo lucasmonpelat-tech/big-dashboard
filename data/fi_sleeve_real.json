@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-11-24T13:12:46.914419",
+  "refreshedAt": "2026-11-24T10:28:47.917539",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -6256,8 +6256,15 @@
     },
     {
       "date": "2026-11-24",
-      "mv_usd": 11087259.344436001,
+      "mv_usd": 11387424.894436002,
       "holdings": [
+        {
+          "ticker": "NBCLO",
+          "qty": 16556.291,
+          "price": 18.12999964786799,
+          "mv": 300165.55,
+          "source": "daily_close"
+        },
         {
           "ticker": "MANIG",
           "qty": 16621.485,
@@ -10303,10 +10310,10 @@
     },
     {
       "date": "2026-11-24",
-      "mv_usd": 11087259.344436001,
+      "mv_usd": 11387424.894436002,
       "flow_in": -196404.29,
-      "twr": -0.034165981216446754,
-      "index": 101.6505
+      "twr": -0.007829205063205684,
+      "index": 104.4223
     }
   ],
   "agg_index_series": [

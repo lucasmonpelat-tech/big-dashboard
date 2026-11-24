@@ -1,9 +1,9 @@
 {
-  "refreshedAt": "2026-11-24T13:12:49.104670",
+  "refreshedAt": "2026-11-24T10:29:15.905944",
   "method": "Cost basis ponderado (UGL Pershing) + Bench Dollar-Weighted (transactions). Alpha Real = Return - Bench DW.",
   "sleeve": "Fixed Income",
   "period_end": "2026-11-24",
-  "n_open": 8,
+  "n_open": 9,
   "n_closed": 4,
   "holdings": [
     {
@@ -305,6 +305,34 @@
           "cost": 200030.0
         }
       ]
+    },
+    {
+      "ticker": "NBCLO",
+      "sleeve": "Fixed Income",
+      "status": "OPEN",
+      "isin": "IE00BF4NG566",
+      "name": "NEUBERGER CLO INCOME FUND CLASS I USD ACC",
+      "qty": 16556.291,
+      "mv_usd": 300165.55,
+      "cost_basis_usd": 299999.99,
+      "unrealized_gl_usd": 165.56,
+      "return_pct": 0.06,
+      "last_price_pershing": 18.13,
+      "bench_label": "AGG",
+      "first_buy_date": "2026-11-20",
+      "period_end": "2026-11-24",
+      "n_trades": 1,
+      "buys_history": [
+        {
+          "date": "2026-11-20",
+          "cost": 299999.99
+        }
+      ],
+      "bench_dw_pct": 0.26,
+      "alpha_real_pp": -0.2,
+      "ytd_pct": 0.06,
+      "bench_ytd_pct": -0.88,
+      "alpha_ytd_pp": 0.94
     },
     {
       "ticker": "PIMCO-INC",
