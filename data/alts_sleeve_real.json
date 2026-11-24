@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-11-24T13:12:49.567545",
+  "refreshedAt": "2026-11-24T15:04:16.513755",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual) + statements oficiales de Carlyle AlpInvest para CALP (externo, no Pershing).",
   "sleeve": "Alternatives",
   "first_trade_date": "2025-07-02",
@@ -3817,10 +3817,10 @@
     },
     {
       "date": "2026-11-24",
-      "mv_usd": 8401787.18,
+      "mv_usd": 8388039.43,
       "flow_in": -40471.31,
-      "twr": -0.02552315014586336,
-      "index": 107.2706
+      "twr": -0.027116073845507273,
+      "index": 107.0953
     }
   ],
   "_rebuild_note": "Reconstruccion completa 2026-07-31 (mismo dia y metodologia que Equity/FI). Reemplaza el sleeve_index proxy de alts_race.py (PSP 70%+carry 30% para PE, carry fijo para Private Credit) por un TWR real: 12 checkpoints mensuales verificados al centavo contra los statements oficiales de Pershing (BPCC, IBIT, GLD, GCRED, HLEND, NBPEA, HLGPI, FLEX) + CALP con 8 statements reales de Carlyle AlpInvest (unico holding externo a Pershing, flow de compra $2.5M el 29-ago-2025 agregado a mano ya que no aparece en las transacciones de Pershing). Sep-Oct-2025 de CALP siguen interpolados (proxy) por falta de statement esos 2 meses puntuales. Sin necesidad de combinar oct-dic-2025 (a diferencia de Equity/FI): el retiro grande de nov-2025 afecto proporcionalmente poco al sleeve Alts (solo NBPEA parcial), Modified Dietz mensual simple no muestra distorsion.",
