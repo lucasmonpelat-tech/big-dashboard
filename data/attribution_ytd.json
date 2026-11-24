@@ -1,23 +1,23 @@
 {
   "_description": "Atribucion YTD del fondo BIG: peso x retorno por sleeve. Compara contra Lynk oficial. Residuo = inputs imperfectos (otros fees Lynk, alts data lag, cash approx).",
-  "refreshedAt": "2026-11-23T13:12:49.123051",
-  "as_of_date": "2026-11-23",
+  "refreshedAt": "2026-11-24T00:16:13.074597",
+  "as_of_date": "2026-11-24",
   "ytd_anchor": "2025-12-31",
-  "days_ytd": 327,
+  "days_ytd": 328,
   "sleeves": [
     {
       "name": "Equity",
       "value_usd": 8371232.43,
       "weight_pct": 29.68,
-      "ytd_pct": 0.55,
-      "contribution_pp": 0.163
+      "ytd_pct": 2.01,
+      "contribution_pp": 0.597
     },
     {
       "name": "Fixed Income",
       "value_usd": 11387424.67,
       "weight_pct": 40.38,
       "ytd_pct": -2.44,
-      "contribution_pp": -0.984
+      "contribution_pp": -0.983
     },
     {
       "name": "Alternatives",
@@ -34,13 +34,13 @@
       "contribution_pp": 0.0
     }
   ],
-  "gross_reconstructed_pct": -0.052,
-  "mgmt_fee_pp": -1.613,
+  "gross_reconstructed_pct": 0.383,
+  "mgmt_fee_pp": -1.618,
   "mgmt_fee_rate_annual_pct": 1.8,
-  "net_reconstructed_pct": -1.665,
+  "net_reconstructed_pct": -1.235,
   "lynk_ytd_pct": -1.09,
-  "lynk_refreshed_at": "2026-11-23T13:11:33.750058",
-  "residual_pp": -0.575,
+  "lynk_refreshed_at": "2026-11-24T00:14:51.793174",
+  "residual_pp": -0.145,
   "alts_detail": [
     {
       "ticker": "CALP",
@@ -143,35 +143,35 @@
       "Alternatives": 0.3,
       "Cash": 0.0
     },
-    "bench_ytd_aor_etf": 1.18,
-    "acwi_ytd": 1.432,
+    "bench_ytd_aor_etf": 3.74,
+    "acwi_ytd": 5.949,
     "agg_ytd": -3.13,
-    "bench_eq_contrib_pp": 0.43,
+    "bench_eq_contrib_pp": 1.785,
     "bench_fi_contrib_pp": -1.252,
-    "bench_alts_contrib_pp": 0.43,
+    "bench_alts_contrib_pp": 1.785,
     "big_ytd": -1.09,
-    "alpha_ytd_total_pp": -2.27,
+    "alpha_ytd_total_pp": -4.83,
     "components": [
       {
         "name": "Equity",
-        "big_contrib_pp": 0.163,
-        "bench_contrib_pp": 0.43,
-        "alpha_pp": -0.267,
-        "comment": "BIG 29.7% @ +0.55% vs 30% ACWI @ +1.43%"
+        "big_contrib_pp": 0.597,
+        "bench_contrib_pp": 1.785,
+        "alpha_pp": -1.188,
+        "comment": "BIG 29.7% @ +2.01% vs 30% ACWI @ +5.95%"
       },
       {
         "name": "Fixed Income",
-        "big_contrib_pp": -0.984,
+        "big_contrib_pp": -0.983,
         "bench_contrib_pp": -1.252,
-        "alpha_pp": 0.268,
+        "alpha_pp": 0.269,
         "comment": "BIG 40.4% @ -2.44% vs 40% AGG @ -3.13%"
       },
       {
         "name": "Alternatives",
         "big_contrib_pp": 0.769,
-        "bench_contrib_pp": 0.43,
-        "alpha_pp": 0.339,
-        "comment": "BIG 29.9% @ +2.57% vs 30% ACWI @ +1.43%"
+        "bench_contrib_pp": 1.785,
+        "alpha_pp": -1.016,
+        "comment": "BIG 29.9% @ +2.57% vs 30% ACWI @ +5.95%"
       },
       {
         "name": "Cash",
@@ -182,14 +182,14 @@
       },
       {
         "name": "Mgmt Fee",
-        "big_contrib_pp": -1.613,
+        "big_contrib_pp": -1.618,
         "bench_contrib_pp": 0,
-        "alpha_pp": -1.613,
+        "alpha_pp": -1.618,
         "comment": "Lynk mgmt fee 1.8%/yr (bench AOR fee 0.15% no incluido)"
       },
       {
         "name": "Nuestro Cálculo (NET)",
-        "big_contrib_pp": -1.665,
+        "big_contrib_pp": -1.235,
         "bench_contrib_pp": null,
         "alpha_pp": null,
         "is_subtotal": true,
@@ -197,10 +197,10 @@
       },
       {
         "name": "Residual",
-        "big_contrib_pp": -0.575,
+        "big_contrib_pp": -0.145,
         "bench_contrib_pp": null,
-        "alpha_pp": -0.998,
-        "comment": "Nuestro calculo (-1.66%) - Lynk oficial (-1.09%), mas la diferencia entre el bench por pesos del mandato (-0.39%) y el AOR (+1.18%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
+        "alpha_pp": -1.278,
+        "comment": "Nuestro calculo (-1.23%) - Lynk oficial (-1.09%), mas la diferencia entre el bench por pesos del mandato (+2.32%) y el AOR (+3.74%). Explicado por: timing corte NAV, aprox yield cash, alts statement lag."
       }
     ]
   }

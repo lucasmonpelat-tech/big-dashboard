@@ -1,5 +1,5 @@
 {
-  "refreshedAt": "2026-11-23T13:12:46.267897",
+  "refreshedAt": "2026-11-24T00:16:09.991813",
   "source": "Reconstruido desde 12 statements oficiales de Pershing (jul-2025 a jun-2026) + transacciones reales NetX360/Pershing (Modified Dietz mensual). Jul-2026 en adelante: pipeline V2 diario.",
   "sleeve": "Fixed Income",
   "benchmark": "AGG (IUAG.L UCITS Acc)",
@@ -6253,6 +6253,68 @@
           "source": "daily_close"
         }
       ]
+    },
+    {
+      "date": "2026-11-24",
+      "mv_usd": 11087259.344436001,
+      "holdings": [
+        {
+          "ticker": "MANIG",
+          "qty": 16621.485,
+          "price": 123.51,
+          "mv": 2052919.61235,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MANEM",
+          "qty": 4060.017,
+          "price": 114.51,
+          "mv": 464912.54667,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "PIMCO-INC",
+          "qty": 235926.136,
+          "price": 19.69,
+          "mv": 4645385.61784,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "PIMCO-LD",
+          "qty": 102086.926,
+          "price": 13.95,
+          "mv": 1424112.6177,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "GAMCB",
+          "qty": 22165.72,
+          "price": 25.1383,
+          "mv": 557208.5190760001,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "SGCB",
+          "qty": 269.44,
+          "price": 2254.06,
+          "mv": 607333.9264,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "MSEMD",
+          "qty": 38668.46,
+          "price": 14.74,
+          "mv": 569973.1004,
+          "source": "daily_close"
+        },
+        {
+          "ticker": "TGF",
+          "qty": 532000.0,
+          "price": 1.438747,
+          "mv": 765413.404,
+          "source": "daily_close"
+        }
+      ]
     }
   ],
   "twr_series": [
@@ -10238,6 +10300,13 @@
       "flow_in": -196404.29,
       "twr": -0.03417634018372625,
       "index": 101.6494
+    },
+    {
+      "date": "2026-11-24",
+      "mv_usd": 11087259.344436001,
+      "flow_in": -196404.29,
+      "twr": -0.034165981216446754,
+      "index": 101.6505
     }
   ],
   "agg_index_series": [
@@ -12830,6 +12899,11 @@
       "date": "2026-11-23",
       "price": 90.15,
       "index": 100.1572
+    },
+    {
+      "date": "2026-11-24",
+      "price": 90.15,
+      "index": 100.1572
     }
   ],
   "fi_flows_by_month": {
@@ -13019,7 +13093,7 @@
       "n_trades": 2
     }
   },
-  "_daily_refresh_note": "Punto 2026-11-23 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-11-20.",
+  "_daily_refresh_note": "Punto 2026-11-24 recalculado con precios cierre anterior (baha+Stooq+Yahoo, fallback pershing_frozen). qty de Pershing 2026-11-20.",
   "_bench_fix_note": "2026-06-23: agg_index_series reconstruida con IUAG.L (UCITS Acc, total return). Antes era AGG NYSE price-only sin reinvertir dividendos, daba YTD -5.78% falso.",
   "_rebuild_note": "Reconstruccion completa 2026-07-31: reemplaza integramente el pipeline legacy (portfolio_reconstructor.py / sleeve_series desincronizado). Los 12 checkpoints mensuales estan verificados al centavo contra los statements oficiales de Pershing. Flujos calculados como -sum(Net Amount) de las transacciones reales del sleeve en cada periodo (auto-neutraliza fund exchanges internos). Excepcion: 3 transacciones de ene-2026 (venta WELLCRED + compras PIMCO-INC/PIMCO-EM) reclasificadas a feb-2026 tras verificar contra el statement oficial de febrero que asi procesaron realmente (Pershing las emitio como Cancel/Correct). Periodo oct-dic-2025 combinado en un solo calculo por el retiro grande de capital que distorsionaba el corte de fin de mes. | FIX 2026-08-07: se truncaron los puntos 01-ago a 07-ago (calculados con un anchor que iba driftando dia a dia por un bug en refresh_equity_daily.py/refresh_fi_daily.py, ya corregido -- ver _find_last_real_month_end). El proximo refresh diario recalcula bien desde el anchor real de 31-jul.",
   "twr_series_original": [
