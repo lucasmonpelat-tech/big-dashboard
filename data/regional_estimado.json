@@ -1,10 +1,10 @@
 {
-  "generado": "2026-11-24T03:13:17+00:00",
-  "estimado_al": "2026-11-20",
+  "generado": "2026-11-24T18:07:30+00:00",
+  "estimado_al": "2026-11-24",
   "base_asOf": "2026-10-31",
   "base_fuente": "equity_breakdown_latest.json (Maximus, cierre de mes). Esta estimacion deja de usarse cuando asOf cambia.",
   "metodo": "Pasivos (CSPX, DYNF, MAGS, HEWJ, ILF, ARGT, EMXC): regional EXACTO, peso del canonical x pais de la ficha (CSV de holdings de iShares, scripts/fetch_passive_geo.py). Activos (NB, MFS, Thornburg, Janus): mezcla deducida del oficial de Maximus al cierre (Maximus menos lo que aportan los pasivos) aplicada a su peso de hoy. ACWI sin cambios. Es una ESTIMACION: lo unico no exacto es la geografia de los fondos activos.",
-  "cobertura_exacta_pct": 51.15,
+  "cobertura_exacta_pct": 52.08,
   "mezcla_activos_deducida": {
     "N. America": 51.99,
     "Europe dev.": 23.53,
@@ -21,31 +21,31 @@
   "rows": [
     {
       "category": "N. America",
-      "big": 62.32,
+      "big": 62.42,
       "acwi": 67.13,
       "big_cierre": 63.83,
-      "cambio_pp": -1.51
+      "cambio_pp": -1.42
     },
     {
       "category": "Europe dev.",
-      "big": 11.49,
+      "big": 11.27,
       "acwi": 10.33,
       "big_cierre": 11.67,
-      "cambio_pp": -0.18
+      "cambio_pp": -0.4
     },
     {
       "category": "LatAm",
-      "big": 7.62,
+      "big": 6.73,
       "acwi": 0.79,
       "big_cierre": 10.07,
-      "cambio_pp": -2.45
+      "cambio_pp": -3.34
     },
     {
       "category": "UK",
-      "big": 5.78,
+      "big": 5.67,
       "acwi": 3.02,
       "big_cierre": 5.87,
-      "cambio_pp": -0.09
+      "cambio_pp": -0.2
     },
     {
       "category": "Japan",
@@ -56,17 +56,17 @@
     },
     {
       "category": "Asia EM",
-      "big": 5.81,
+      "big": 6.78,
       "acwi": 8.53,
       "big_cierre": 2.65,
-      "cambio_pp": 3.16
+      "cambio_pp": 4.13
     },
     {
       "category": "Otros",
-      "big": 2.68,
+      "big": 2.83,
       "acwi": 4.99,
       "big_cierre": 2.11,
-      "cambio_pp": 0.57
+      "cambio_pp": 0.72
     }
   ],
   "totals": {
@@ -82,73 +82,66 @@
       "tratamiento": "pasivo (pais exacto de la ficha)"
     },
     {
+      "fondo": "ARGT",
+      "peso_cierre_pct": 3.71,
+      "peso_hoy_pct": 3.84,
+      "cambio_pp": 0.13,
+      "tratamiento": "pasivo (pais exacto de la ficha)"
+    },
+    {
       "fondo": "CSPX",
       "peso_cierre_pct": 18.92,
-      "peso_hoy_pct": 18.55,
-      "cambio_pp": -0.37,
+      "peso_hoy_pct": 18.72,
+      "cambio_pp": -0.21,
       "tratamiento": "pasivo (pais exacto de la ficha)"
     },
     {
       "fondo": "DYNF",
       "peso_cierre_pct": 13.57,
-      "peso_hoy_pct": 13.0,
-      "cambio_pp": -0.57,
+      "peso_hoy_pct": 13.25,
+      "cambio_pp": -0.33,
       "tratamiento": "pasivo (pais exacto de la ficha)"
     },
     {
       "fondo": "EMXC",
       "peso_cierre_pct": 0.0,
-      "peso_hoy_pct": 4.16,
-      "cambio_pp": 4.16,
+      "peso_hoy_pct": 5.48,
+      "cambio_pp": 5.48,
       "tratamiento": "pasivo (pais exacto de la ficha)"
     },
     {
       "fondo": "HEWJ",
       "peso_cierre_pct": 2.29,
-      "peso_hoy_pct": 2.81,
-      "cambio_pp": 0.52,
+      "peso_hoy_pct": 2.84,
+      "cambio_pp": 0.55,
       "tratamiento": "pasivo (pais exacto de la ficha)"
     },
     {
       "fondo": "ILF",
       "peso_cierre_pct": 3.77,
-      "peso_hoy_pct": 3.54,
-      "cambio_pp": -0.22,
+      "peso_hoy_pct": 2.42,
+      "cambio_pp": -1.35,
       "tratamiento": "pasivo (pais exacto de la ficha)"
     },
     {
       "fondo": "JHGSC",
       "peso_cierre_pct": 6.58,
-      "peso_hoy_pct": 6.45,
-      "cambio_pp": -0.13,
+      "peso_hoy_pct": 6.43,
+      "cambio_pp": -0.15,
       "tratamiento": "activo (mezcla deducida de Maximus)"
-    },
-    {
-      "fondo": "MAGS",
-      "peso_cierre_pct": 5.54,
-      "peso_hoy_pct": 5.36,
-      "cambio_pp": -0.18,
-      "tratamiento": "pasivo (pais exacto de la ficha)"
     },
     {
       "fondo": "MFSCV",
       "peso_cierre_pct": 15.18,
-      "peso_hoy_pct": 15.52,
-      "cambio_pp": 0.34,
+      "peso_hoy_pct": 15.49,
+      "cambio_pp": 0.3,
       "tratamiento": "activo (mezcla deducida de Maximus)"
     },
     {
       "fondo": "NBGMT",
       "peso_cierre_pct": 17.43,
-      "peso_hoy_pct": 17.05,
-      "cambio_pp": -0.38,
-      "tratamiento": "activo (mezcla deducida de Maximus)"
-    },
-    {
-      "fondo": "THOR",
-      "peso_cierre_pct": 9.73,
-      "peso_hoy_pct": 9.84,
-      "cambio_pp": 0.11,
+      "peso_hoy_pct": 16.25,
+      "cambio_pp": -1.18,
       "tratamiento": "activo (mezcla deducida de Maximus)"
     }
   ]
