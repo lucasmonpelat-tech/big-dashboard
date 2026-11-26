@@ -49,6 +49,19 @@ jobs:
       - name: ¿Corrió el refresh de hoy Y con data fresca?
         id: check
         run: |
+          # FIX 2026-11-26: GitHub atrasa este schedule (16:07 UTC) hasta pasada la medianoche
+          # UTC (24, 25 y 26-Nov: corrio a las 00:10-00:36 UTC). A esa hora "hoy" ya es el dia
+          # SIGUIENTE, el refresh de ese dia todavia no tuvo su turno (12:30 UTC) y el watchdog
+          # concluia "no corrio", disparaba un refresh de mas y mandaba el mail "cron no corrio".
+          # Antes de las 12:00 UTC es siempre una corrida atrasada del ciclo anterior: se saltea.
+          HORA=$(date -u +%H)
+          if [ "$((10#$HORA))" -lt 12 ]; then
+            MOTIVO="[watchdog] corrida atrasada (arranco a las ${HORA}h UTC, antes de las 12:00): el refresh de hoy todavia no tuvo su turno. No se hace nada."
+            echo "motivo=$MOTIVO" >> $GITHUB_OUTPUT
+            echo "corrio=si" >> $GITHUB_OUTPUT
+            echo "$MOTIVO"
+            exit 0
+          fi
           # El motivo va por stderr (should_run_refresh.py): se guarda para la alerta,
           # que antes decia siempre "no habia corrido" aunque la causa fuera que el
           # NAV de Lynk todavia no estaba fresco (2026-10-12/13, 2026-11-06).
